@@ -1,0 +1,24 @@
+# Secretos y material sensible
+private/
+*.local.md
+secrets/
+*.ovpn
+*.key
+*.pem
+*.pcap
+*.hprof
+
+# Evidencia pesada
+evidence/*.zip
+evidence/*.tar.gz
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# writeups de maquinas activas: no se publican
+machines/active/
+
+# claves y scripts locales del laboratorio
+id_ed25519*
+htb/
