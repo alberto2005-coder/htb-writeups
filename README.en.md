@@ -20,14 +20,16 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 | Machine | OS | Difficulty | Category | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|---|
-| Meow | Linux | Very Easy | Starting Point | Retired | Unauthenticated FTP/Telnet | [ES](machines/starting-point/meow/README.md) | [Ver](machines/starting-point/meow/README.en.md) |
-| Fawn | Linux | Very Easy | Starting Point | Retired | Anonymous FTP | [ES](machines/starting-point/fawn/README.md) | [Ver](machines/starting-point/fawn/README.en.md) |
-| Dancing | Windows | Very Easy | Starting Point | Retired | SMB null session | [ES](machines/starting-point/dancing/README.md) | [Ver](machines/starting-point/dancing/README.en.md) |
-| Redeemer | Linux | Very Easy | Starting Point | Retired | Unauthenticated Redis | [ES](machines/starting-point/redeemer/README.md) | [Ver](machines/starting-point/redeemer/README.en.md) |
+| Meow | Linux | Very Easy | Starting Point | Available | Unauthenticated FTP/Telnet | [ES](machines/starting-point/meow/README.md) | [Ver](machines/starting-point/meow/README.en.md) |
+| Fawn | Linux | Very Easy | Starting Point | Available | Anonymous FTP | [ES](machines/starting-point/fawn/README.md) | [Ver](machines/starting-point/fawn/README.en.md) |
+| Dancing | Windows | Very Easy | Starting Point | Available | SMB null session | [ES](machines/starting-point/dancing/README.md) | [Ver](machines/starting-point/dancing/README.en.md) |
+| Redeemer | Linux | Very Easy | Starting Point | Available | Unauthenticated Redis | [ES](machines/starting-point/redeemer/README.md) | [Ver](machines/starting-point/redeemer/README.en.md) |
 | Cap | Linux | Easy | Machines | Retired | IDOR, pcap analysis, `cap_setuid` | [ES](machines/linux/cap/README.md) | [Ver](machines/linux/cap/README.en.md) |
 | MakeSense | Linux | Medium | Season 11 | Retired | Admin-bot XSS, forged AES-GCM, malicious plugin, OCR as root | [ES](machines/linux/makesense/README.md) | [Ver](machines/linux/makesense/README.en.md) |
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, PostgreSQL SQLi, `COPY TO PROGRAM`, X11/XTEST, path unit with `eval` | [ES](machines/active/dutybound/README.md) | [Draft](machines/active/dutybound/README.en.md) |
 | Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, root timer | [ES](machines/active/stream/README.md) | [Draft](machines/active/stream/README.en.md) |
+
+> **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it.
 
 ### 🏅 Verifiable achievements
 
@@ -43,8 +45,6 @@ Every row in the table above maps to a machine completed on the profile. These l
 | MakeSense | https://labs.hackthebox.com/achievement/machine/4187928/918 |
 | DutyBound | https://labs.hackthebox.com/achievement/machine/4187928/999 |
 | Stream | https://labs.hackthebox.com/achievement/machine/4187928/990 |
-
-### State legend
 
 - **Retired:** publishable writeup.
 - **Active:** private draft only; published once HTB retires the machine.

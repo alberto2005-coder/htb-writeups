@@ -5,7 +5,7 @@ difficulty: Very Easy
 platform: Hack The Box
 achievement: https://labs.hackthebox.com/achievement/machine/4187928/394
 category: Starting Point
-state: Retired
+state: Available
 pwned: 2026-11-05
 tags: [telnet, ftp, misconfiguration]
 ---
@@ -14,7 +14,7 @@ tags: [telnet, ftp, misconfiguration]
 
 [🇬🇧 English](README.en.md) | **Español**
 
-> **Estado:** Retired · Starting Point · Linux · Very Easy
+> **Estado:** Available · Starting Point · Linux · Very Easy
 
 ## TL;DR
 

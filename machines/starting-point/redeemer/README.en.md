@@ -5,7 +5,7 @@ difficulty: Very Easy
 platform: Hack The Box
 achievement: https://labs.hackthebox.com/achievement/machine/4187928/472
 category: Starting Point
-state: Retired
+state: Available
 pwned: 2026-11-02
 tags: [linux, redis, no-auth]
 ---
@@ -14,7 +14,7 @@ tags: [linux, redis, no-auth]
 
 **English** | [🇪🇸 Español](README.md)
 
-> **Retired** Starting Point machine (Tier 0). No flags in this document.
+> **Available** Starting Point machine (Tier 0). No flags in this document.
 
 ## TL;DR
 

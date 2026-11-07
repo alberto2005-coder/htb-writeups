@@ -5,7 +5,7 @@ difficulty: Very Easy
 platform: Hack The Box
 achievement: https://labs.hackthebox.com/achievement/machine/4187928/395
 category: Starting Point
-state: Retired
+state: Available
 pwned: 2026-11-01
 tags: [windows, smb, null-session]
 ---
@@ -14,7 +14,7 @@ tags: [windows, smb, null-session]
 
 [🇬🇧 English](README.en.md) | **Español**
 
-> Máquina **Retired** de Starting Point (Tier 0). Sin flags en este documento.
+> Máquina **disponible** de Starting Point (Tier 0). Sin flags en este documento.
 
 ## TL;DR
 
