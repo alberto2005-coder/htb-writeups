@@ -30,6 +30,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, root timer | [ES](machines/active/stream/README.md) | [Draft](machines/active/stream/README.en.md) |
 | Layover | Linux | Medium | Season 12 | **Active** | Cleartext WiFi credentials, Craft CP utilities (DB backup + phpinfo), Yii decryption, CUPS 2.4.16 CVE-2026-34990 | [ES](machines/active/layover/README.md) | [Draft](machines/active/layover/README.en.md) |
 | Connected | Linux | Easy | Season 11 | **Active** | FreePBX 16: stacked SQLi CVE-2025-57819 + path traversal CVE-2025-61678 to webshell, then incron with a root-sourced `init.conf` | [ES](machines/active/connected/README.md) | [Draft](machines/active/connected/README.en.md) |
+| Unclaimed | Windows | Medium | Season 12 | **Active** | Chatbot over SQL: `IMPERSONATE` to sysadmin, `xp_cmdshell`, DPAPI decryption of a credential, and `SeBackupPrivilege` with `robocopy /B` | [ES](machines/active/unclaimed/README.md) | [Draft](machines/active/unclaimed/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it.
 
@@ -49,6 +50,7 @@ Every row in the table above maps to a machine completed on the profile. These l
 | Stream | https://labs.hackthebox.com/achievement/machine/4187928/990 |
 | Layover | https://labs.hackthebox.com/achievement/machine/4187928/984 |
 | Connected | https://labs.hackthebox.com/achievement/machine/4187928/906 |
+| Unclaimed | https://labs.hackthebox.com/achievement/machine/4187928/1012 |
 
 - **Retired:** publishable writeup.
 - **Active:** private draft only; published once HTB retires the machine.
@@ -66,6 +68,7 @@ Reusable notes (each available in Spanish and English):
 - [Credential capture via `/proc`](knowledge/linux/proc-credential-capture.en.md) · [ES](knowledge/linux/proc-credential-capture.md)
 - [systemd timers and privesc](knowledge/privesc/systemd-timers.en.md) · [ES](knowledge/privesc/systemd-timers.md)
 - [Craft CMS: CP utilities and environment secrets](knowledge/web/craft-cms-cp-utilities.en.md) · [ES](knowledge/web/craft-cms-cp-utilities.md)
+- [MSSQL: decrypting credentials and abusing SeBackupPrivilege](knowledge/windows/mssql-credentials-sebackup.en.md) · [ES](knowledge/windows/mssql-credentials-sebackup.md)
 - [Getting in: SSH, RDP, WinRM, SMB and BitLocker keys](knowledge/general/remote-access.en.md) · [ES](knowledge/general/remote-access.md)
 - [Attack channel: Kali VM, VPN and preflight check](knowledge/general/lab-setup.en.md) · [ES](knowledge/general/lab-setup.md)
 
@@ -116,13 +119,15 @@ htb-writeups/
 │       ├── dutybound/
 │       ├── stream/
 │       ├── layover/
-│       └── connected/
+│       ├── connected/
+│       └── unclaimed/
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/
 │   ├── linux/
 │   ├── general/
-│   └── privesc/
+│   ├── privesc/
+│   └── windows/
 └── private/             # git-ignored: real credentials and flags
 ```
 

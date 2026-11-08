@@ -30,6 +30,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, timer root | [Borrador](machines/active/stream/README.md) | [EN](machines/active/stream/README.en.md) |
 | Layover | Linux | Medium | Season 12 | **Active** | Credenciales WiFi en texto claro, utilidades del CP de Craft (backup de BD + phpinfo), descifrado Yii, CUPS 2.4.16 CVE-2026-34990 | [Borrador](machines/active/layover/README.md) | [EN](machines/active/layover/README.en.md) |
 | Connected | Linux | Easy | Season 11 | **Active** | FreePBX 16: SQLi apilada CVE-2025-57819 + path traversal CVE-2025-61678 hasta webshell, e incron con `init.conf` sourced como root | [Borrador](machines/active/connected/README.md) | [EN](machines/active/connected/README.en.md) |
+| Unclaimed | Windows | Medium | Season 12 | **Active** | Chatbot con SQL: `IMPERSONATE` a sysadmin, `xp_cmdshell`, descifrado DPAPI de un credential, y `SeBackupPrivilege` con `robocopy /B` | [Borrador](machines/active/unclaimed/README.md) | [EN](machines/active/unclaimed/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire.
 
@@ -49,6 +50,7 @@ Cada fila de la tabla anterior corresponde a una máquina completada en el perfi
 | Stream | https://labs.hackthebox.com/achievement/machine/4187928/990 |
 | Layover | https://labs.hackthebox.com/achievement/machine/4187928/984 |
 | Connected | https://labs.hackthebox.com/achievement/machine/4187928/906 |
+| Unclaimed | https://labs.hackthebox.com/achievement/machine/4187928/1012 |
 
 - **Retired:** writeup publicable.
 - **Active:** solo borrador privado; se publica cuando HTB retire la máquina.
@@ -66,6 +68,7 @@ Notas reutilizables (cada una en español e inglés):
 - [Captura de credenciales en `/proc`](knowledge/linux/proc-credential-capture.md) · [EN](knowledge/linux/proc-credential-capture.en.md)
 - [systemd timers y privesc](knowledge/privesc/systemd-timers.md) · [EN](knowledge/privesc/systemd-timers.en.md)
 - [Craft CMS: utilidades del panel y secretos del entorno](knowledge/web/craft-cms-cp-utilities.md) · [EN](knowledge/web/craft-cms-cp-utilities.en.md)
+- [MSSQL: descifrar credenciales y abusar de SeBackupPrivilege](knowledge/windows/mssql-credentials-sebackup.md) · [EN](knowledge/windows/mssql-credentials-sebackup.en.md)
 - [Cómo entrar: SSH, RDP, WinRM, SMB y claves BitLocker](knowledge/general/remote-access.md) · [EN](knowledge/general/remote-access.en.md)
 - [Canal de ataque: VM de Kali, VPN y comprobación previa](knowledge/general/lab-setup.md) · [EN](knowledge/general/lab-setup.en.md)
 
@@ -116,13 +119,15 @@ htb-writeups/
 │       ├── dutybound/
 │       ├── stream/
 │       ├── layover/
-│       └── connected/
+│       ├── connected/
+│       └── unclaimed/
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/
 │   ├── linux/
 │   ├── general/
-│   └── privesc/
+│   ├── privesc/
+│   └── windows/
 └── private/             # ignorado por git: credenciales y flags reales
 ```
 
