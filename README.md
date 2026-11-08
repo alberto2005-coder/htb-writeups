@@ -28,6 +28,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | MakeSense | Linux | Medium | Season 11 | **Retired** | XSS al bot admin, AES-GCM forjado, plugin malicioso, OCR como root | [Ver](machines/linux/makesense/README.md) | [EN](machines/linux/makesense/README.en.md) |
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, SQLi en PostgreSQL, `COPY TO PROGRAM`, X11/XTEST, path unit con `eval` | [Borrador](machines/active/dutybound/README.md) | [EN](machines/active/dutybound/README.en.md) |
 | Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, timer root | [Borrador](machines/active/stream/README.md) | [EN](machines/active/stream/README.en.md) |
+| Layover | Linux | Medium | Season 12 | **Active** | Credenciales WiFi en texto claro, utilidades del CP de Craft (backup de BD + phpinfo), descifrado Yii, CUPS 2.4.16 CVE-2026-34990 | [Borrador](machines/active/layover/README.md) | [EN](machines/active/layover/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire.
 
@@ -45,6 +46,7 @@ Cada fila de la tabla anterior corresponde a una máquina completada en el perfi
 | MakeSense | https://labs.hackthebox.com/achievement/machine/4187928/918 |
 | DutyBound | https://labs.hackthebox.com/achievement/machine/4187928/999 |
 | Stream | https://labs.hackthebox.com/achievement/machine/4187928/990 |
+| Layover | https://labs.hackthebox.com/achievement/machine/4187928/984 |
 
 - **Retired:** writeup publicable.
 - **Active:** solo borrador privado; se publica cuando HTB retire la máquina.
@@ -61,6 +63,7 @@ Notas reutilizables (cada una en español e inglés):
 - [ClickHouse cheatsheet](knowledge/clickhouse/cheatsheet.md) · [EN](knowledge/clickhouse/cheatsheet.en.md)
 - [Captura de credenciales en `/proc`](knowledge/linux/proc-credential-capture.md) · [EN](knowledge/linux/proc-credential-capture.en.md)
 - [systemd timers y privesc](knowledge/privesc/systemd-timers.md) · [EN](knowledge/privesc/systemd-timers.en.md)
+- [Craft CMS: utilidades del panel y secretos del entorno](knowledge/web/craft-cms-cp-utilities.md) · [EN](knowledge/web/craft-cms-cp-utilities.en.md)
 - [Cómo entrar: SSH, RDP, WinRM, SMB y claves BitLocker](knowledge/general/remote-access.md) · [EN](knowledge/general/remote-access.en.md)
 - [Canal de ataque: VM de Kali, VPN y comprobación previa](knowledge/general/lab-setup.md) · [EN](knowledge/general/lab-setup.en.md)
 
@@ -109,7 +112,8 @@ htb-writeups/
 │   │   └── makesense/
 │   └── active/          # máquinas activas: gitignored, no se publican
 │       ├── dutybound/
-│       └── stream/
+│       ├── stream/
+│       └── layover/
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/
