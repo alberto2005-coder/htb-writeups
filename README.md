@@ -29,6 +29,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, SQLi en PostgreSQL, `COPY TO PROGRAM`, X11/XTEST, path unit con `eval` | [Borrador](machines/active/dutybound/README.md) | [EN](machines/active/dutybound/README.en.md) |
 | Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, timer root | [Borrador](machines/active/stream/README.md) | [EN](machines/active/stream/README.en.md) |
 | Layover | Linux | Medium | Season 12 | **Active** | Credenciales WiFi en texto claro, utilidades del CP de Craft (backup de BD + phpinfo), descifrado Yii, CUPS 2.4.16 CVE-2026-34990 | [Borrador](machines/active/layover/README.md) | [EN](machines/active/layover/README.en.md) |
+| Connected | Linux | Easy | Season 11 | **Active** | FreePBX 16: SQLi apilada CVE-2025-57819 + path traversal CVE-2025-61678 hasta webshell, e incron con `init.conf` sourced como root | [Borrador](machines/active/connected/README.md) | [EN](machines/active/connected/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire.
 
@@ -47,6 +48,7 @@ Cada fila de la tabla anterior corresponde a una máquina completada en el perfi
 | DutyBound | https://labs.hackthebox.com/achievement/machine/4187928/999 |
 | Stream | https://labs.hackthebox.com/achievement/machine/4187928/990 |
 | Layover | https://labs.hackthebox.com/achievement/machine/4187928/984 |
+| Connected | https://labs.hackthebox.com/achievement/machine/4187928/906 |
 
 - **Retired:** writeup publicable.
 - **Active:** solo borrador privado; se publica cuando HTB retire la máquina.
@@ -113,7 +115,8 @@ htb-writeups/
 │   └── active/          # máquinas activas: gitignored, no se publican
 │       ├── dutybound/
 │       ├── stream/
-│       └── layover/
+│       ├── layover/
+│       └── connected/
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/

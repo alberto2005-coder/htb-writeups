@@ -29,6 +29,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, PostgreSQL SQLi, `COPY TO PROGRAM`, X11/XTEST, path unit with `eval` | [ES](machines/active/dutybound/README.md) | [Draft](machines/active/dutybound/README.en.md) |
 | Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, root timer | [ES](machines/active/stream/README.md) | [Draft](machines/active/stream/README.en.md) |
 | Layover | Linux | Medium | Season 12 | **Active** | Cleartext WiFi credentials, Craft CP utilities (DB backup + phpinfo), Yii decryption, CUPS 2.4.16 CVE-2026-34990 | [ES](machines/active/layover/README.md) | [Draft](machines/active/layover/README.en.md) |
+| Connected | Linux | Easy | Season 11 | **Active** | FreePBX 16: stacked SQLi CVE-2025-57819 + path traversal CVE-2025-61678 to webshell, then incron with a root-sourced `init.conf` | [ES](machines/active/connected/README.md) | [Draft](machines/active/connected/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it.
 
@@ -47,6 +48,7 @@ Every row in the table above maps to a machine completed on the profile. These l
 | DutyBound | https://labs.hackthebox.com/achievement/machine/4187928/999 |
 | Stream | https://labs.hackthebox.com/achievement/machine/4187928/990 |
 | Layover | https://labs.hackthebox.com/achievement/machine/4187928/984 |
+| Connected | https://labs.hackthebox.com/achievement/machine/4187928/906 |
 
 - **Retired:** publishable writeup.
 - **Active:** private draft only; published once HTB retires the machine.
@@ -113,7 +115,8 @@ htb-writeups/
 │   └── active/          # active machines: gitignored, not published
 │       ├── dutybound/
 │       ├── stream/
-│       └── layover/
+│       ├── layover/
+│       └── connected/
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/
