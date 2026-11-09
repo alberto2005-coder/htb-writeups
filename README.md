@@ -31,12 +31,26 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Layover | Linux | Medium | Season 12 | **Active** | Credenciales WiFi en texto claro, utilidades del CP de Craft (backup de BD + phpinfo), descifrado Yii, CUPS 2.4.16 CVE-2026-34990 | [Borrador](machines/active/layover/README.md) | [EN](machines/active/layover/README.en.md) |
 | Connected | Linux | Easy | Season 11 | **Active** | FreePBX 16: SQLi apilada CVE-2025-57819 + path traversal CVE-2025-61678 hasta webshell, e incron con `init.conf` sourced como root | [Borrador](machines/active/connected/README.md) | [EN](machines/active/connected/README.en.md) |
 | Unclaimed | Windows | Medium | Season 12 | **Active** | Chatbot con SQL: `IMPERSONATE` a sysadmin, `xp_cmdshell`, descifrado DPAPI de un credential, y `SeBackupPrivilege` con `robocopy /B` | [Borrador](machines/active/unclaimed/README.md) | [EN](machines/active/unclaimed/README.en.md) |
+| Active | Windows | Easy | Machines | **Retired** (ref.) | GPP en SYSVOL, Kerberoasting a `Administrator` | [Ver](machines/windows/active/README.md) | [EN](machines/windows/active/README.en.md) |
+| Armageddon | Linux | Easy | Machines | **Retired** (ref.) | Drupal 7.56, Drupalgeddon2, hook de snap con `sudo` | [Ver](machines/linux/armageddon/README.md) | [EN](machines/linux/armageddon/README.en.md) |
+| Bashed | Linux | Easy | Machines | **Retired** (ref.) | webshell `phpbash`, `sudo -u scriptmanager`, cron de root | [Ver](machines/linux/bashed/README.md) | [EN](machines/linux/bashed/README.en.md) |
+| Bastion | Windows | Easy | Machines | **Retired** (ref.) | backup SMB con VHDX, SAM/SYSTEM, mRemoteNG | [Ver](machines/windows/bastion/README.md) | [EN](machines/windows/bastion/README.en.md) |
+| Beep | Linux | Easy | Machines | **Retired** (ref.) | LFI en Elastix, CVE-2012-4869, `nmap` interactivo | [Ver](machines/linux/beep/README.md) | [EN](machines/linux/beep/README.en.md) |
+| Blocky | Linux | Easy | Machines | **Retired** (ref.) | credenciales en un JAR, reutilización, `sudo ALL` | [Ver](machines/linux/blocky/README.md) | [EN](machines/linux/blocky/README.en.md) |
+| Blunder | Linux | Easy | Machines | **Retired** (ref.) | Bludit, bypass de fuerza bruta, `sudo -u#-1` | [Ver](machines/linux/blunder/README.md) | [EN](machines/linux/blunder/README.en.md) |
+| Bounty | Windows | Easy | Machines | **Retired** (ref.) | `web.config` en IIS, `SeImpersonate`, JuicyPotato | [Ver](machines/windows/bounty/README.md) | [EN](machines/windows/bounty/README.en.md) |
+| Delivery | Linux | Easy | Machines | **Retired** (ref.) | osTicket + Mattermost, bcrypt con reglas | [Ver](machines/linux/delivery/README.md) | [EN](machines/linux/delivery/README.en.md) |
+| Facts | Linux | Easy | Machines | **Retired** (ref.) | Camaleon CMS, MinIO, clave SSH, `facter` | [Ver](machines/linux/facts/README.md) | [EN](machines/linux/facts/README.en.md) |
+| Forest | Windows | Easy | Machines | **Retired** (ref.) | AS-REP, `Account Operators` a Exchange, DCSync | [Ver](machines/windows/forest/README.md) | [EN](machines/windows/forest/README.en.md) |
+| FriendZone | Linux | Easy | Machines | **Retired** (ref.) | AXFR, LFI + SMB, hijack de `os.py` | [Ver](machines/linux/friendzone/README.md) | [EN](machines/linux/friendzone/README.en.md) |
 
-> **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire.
+> **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
+>
+> Catálogo de fichas de referencia: [machines/catalog.md](machines/catalog.md) · [EN](machines/catalog.en.md).
 
 ### 🏅 Logros verificables
 
-Cada fila de la tabla anterior corresponde a una máquina completada en el perfil. Los enlaces son la prueba pública del logro:
+Las máquinas completadas en este perfil tienen aquí su enlace público. Las fichas marcadas como `ref.` no aparecen: son material de estudio y no hay un logro propio que enlazar.
 
 | Máquina | Logro |
 |---|---|
@@ -66,6 +80,7 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress` → use-after-free (CVE-2026-109618/109619), leak de ASLR por `Set-Cookie` y `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
+- Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
 
 ---
 
@@ -121,8 +136,12 @@ htb-writeups/
 │   ├── challenge-template.md    # Plantilla de retos ES
 │   └── challenge-template.en.md # Plantilla de retos EN
 ├── challenges/
+│   ├── README.md        # Índice de retos ES/EN
+│   ├── README.en.md
 │   └── Dark Embargo/    # README.md + README.en.md + exploit.py
 ├── machines/
+│   ├── catalog.md       # Catálogo de máquinas de referencia ES/EN
+│   ├── catalog.en.md
 │   ├── starting-point/
 │   │   ├── meow/        # README.md + README.en.md
 │   │   ├── fawn/
@@ -130,7 +149,20 @@ htb-writeups/
 │   │   └── redeemer/
 │   ├── linux/
 │   │   ├── cap/
-│   │   └── makesense/
+│   │   ├── makesense/
+│   │   ├── armageddon/
+│   │   ├── bashed/
+│   │   ├── beep/
+│   │   ├── blocky/
+│   │   ├── blunder/
+│   │   ├── delivery/
+│   │   ├── facts/
+│   │   └── friendzone/
+│   ├── windows/
+│   │   ├── active/
+│   │   ├── bastion/
+│   │   ├── bounty/
+│   │   └── forest/
 │   └── active/          # máquinas activas: gitignored, no se publican
 │       ├── dutybound/
 │       ├── stream/
