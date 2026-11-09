@@ -23,6 +23,26 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Weather App | Web | Easy | SSRF with *response splitting* and SQLi in the internal service up to admin account takeover | **Retired** | [ES](Weather%20App/README.md) | [Ver](Weather%20App/README.en.md) |
 | Freelancer | Web | Easy | SQLi en el login y `UNION SELECT` para extraer la flag | Retired | [ES](Freelancer/README.md) | [Ver](Freelancer/README.en.md) |
 | Passman | Web | Easy | GraphQL IDOR in `UpdatePassword`: changing the admin password | **Retired** | [ES](Passman/README.md) | [Ver](Passman/README.en.md) |
+| Cartographer | Web | Easy | SQLi in the login form and `panel.php?info=flag` | **Retired** | [ES](Cartographer/README.md) | [Ver](Cartographer/README.en.md) |
+| Dynastic | Crypto | Very Easy | Trithemius cipher: the shift is the index | **Retired** | [ES](Dynastic/README.md) | [Ver](Dynastic/README.en.md) |
+| Makeshift | Crypto | Very Easy | Reversal plus permutation of three-byte blocks | **Retired** | [ES](Makeshift/README.md) | [Ver](Makeshift/README.en.md) |
+| Primary Knowledge | Crypto | Very Easy | RSA with a prime `n` → φ = n − 1 | **Retired** | [ES](Primary%20Knowledge/README.md) | [Ver](Primary%20Knowledge/README.en.md) |
+| Iced Tea | Crypto | Easy | 32-round TEA with `delta` and a 32-bit mask | **Retired** | [ES](Iced%20Tea/README.md) | [Ver](Iced%20Tea/README.en.md) |
+| Illumination | Forensics | Easy | Leaked `.git`: the token survives in history, base64-encoded | **Retired** | [ES](Illumination/README.md) | [Ver](Illumination/README.en.md) |
+| MarketDump | Forensics | Easy | Export HTTP objects and decode the outlier as base58 | **Retired** | [ES](MarketDump/README.md) | [Ver](MarketDump/README.en.md) |
+| Took the Byte | Forensics | Easy | Single-byte XOR (`0xFF`) down to a ZIP holding the password file | **Retired** | [ES](Took%20the%20Byte/README.md) | [Ver](Took%20the%20Byte/README.en.md) |
+| Deadly Arthropod | Forensics | Easy | Rebuild keystrokes from USB keyboard HID reports | **Retired** | [ES](Deadly%20Arthropod/README.md) | [Ver](Deadly%20Arthropod/README.en.md) |
+| Obscure | Forensics | Easy | Obfuscated webshell, PCAP with commands and a `.kdbx` cracked with john | **Retired** | [ES](Obscure/README.md) | [Ver](Obscure/README.en.md) |
+| Keep Tryin' | Forensics | Medium | DNS exfiltration in base64url and RC4 with a weak key | **Retired** | [ES](Keep%20Tryin'/README.md) | [Ver](Keep%20Tryin'/README.en.md) |
+| Alien Cradle | Forensics | Very Easy | Deobfuscate a PowerShell download cradle built from string concatenation | **Retired** | [ES](Alien%20Cradle/README.md) | [Ver](Alien%20Cradle/README.en.md) |
+| Extraterrestrial Persistence | Forensics | Very Easy | base64-encoded systemd unit as the persistence mechanism | **Retired** | [ES](Extraterrestrial%20Persistence/README.md) | [Ver](Extraterrestrial%20Persistence/README.en.md) |
+| Plaintext Tleasure | Forensics | Very Easy | Cleartext HTTP: credentials and flag inside the stream | **Retired** | [ES](Plaintext%20Tleasure/README.md) | [Ver](Plaintext%20Tleasure/README.en.md) |
+| Urgent | Forensics | Very Easy | Phishing email: base64, URL encoding and a VBScript attachment | **Retired** | [ES](Urgent/README.md) | [Ver](Urgent/README.en.md) |
+| BabyEncryption | Crypto | Very Easy | Affine map modulo 256 and the modular inverse | **Retired** | [ES](BabyEncryption/README.md) | [Ver](BabyEncryption/README.en.md) |
+| Ancient Encodings | Crypto | Very Easy | Base64 inside hexadecimal, no key | **Retired** | [ES](Ancient%20Encodings/README.md) | [Ver](Ancient%20Encodings/README.en.md) |
+| SpookyPass | Reversing | Very Easy | Cleartext password in the ELF's strings | **Retired** | [ES](SpookyPass/README.md) | [Ver](SpookyPass/README.en.md) |
+| KORP Terminal | Web | Very Easy | Error-based SQLi and a cracked bcrypt hash | **Retired** | [ES](KORP%20Terminal/README.md) | [Ver](KORP%20Terminal/README.en.md) |
+| TimeKORP | Web | Very Easy | Command injection through the time format | **Retired** | [ES](TimeKORP/README.md) | [Ver](TimeKORP/README.en.md) |
 
 ## Categories
 

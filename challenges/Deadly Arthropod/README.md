@@ -1,0 +1,57 @@
+---
+challenge: Deadly Arthropod
+category: Forensics
+difficulty: Easy
+platform: Hack The Box
+state: Retired
+tags: [forensics, usb, hid, pcap, keystrokes]
+---
+
+# Deadly Arthropod — Hack The Box
+
+[🇬🇧 English](README.en.md) | **Español**
+
+> **Estado:** Retired. Ficha de método; sin flags reales.
+
+## TL;DR
+
+La captura contiene tráfico **USB de un teclado**. Cada pulsación viaja como un informe HID de 8 bytes; reconstruyendo la secuencia de *keycodes* se lee el texto que se tecleó, que es la flag. El detalle está en el mapa de teclas y en las mayúsculas.
+
+## Evidencia
+
+- Una captura de tráfico USB (`usb.pcapng`).
+
+## Método
+
+1. **Aislar el dispositivo**: identificar la dirección del teclado y el endpoint de interrupción.
+
+```bash
+tshark -r usb.pcapng -Y 'usb.transfer_type == 0x01' -T fields -e usb.src -e usb.dst | sort | uniq -c
+```
+
+2. **Extraer los informes HID**: el byte 0 es el modificador (Shift) y el byte 2 el *keycode* de la tecla pulsada.
+
+```bash
+tshark -r usb.pcapng -Y 'usb.capdata' -T fields -e usb.capdata
+```
+
+3. **Traducir**: con la tabla HID (USB HID Usage ID) cada keycode se convierte en carácter; los informes con `0000000000000000` son liberaciones (ignorar) y el modificador `02` o `20` indica Shift.
+
+```python
+# esqueleto: leer capdata, ignorar vacíos, mapear keycode -> char
+```
+
+4. **Leer el resultado**: la secuencia forma el texto tecleado con la flag. Conviene comprobar el orden y las mayúsculas carácter a carácter.
+
+## Tropiezos
+
+- **Informes vacíos**: si no se filtran, cada tecla aparece dos veces (pulsación y liberación).
+- **Shift**: sin aplicarlo, la flag sale en minúsculas y el validador la rechaza.
+- **Repeticiones**: dos informes iguales seguidos son la misma tecla mantenida; hay que decidir si cuenta una o dos.
+- **Distribución**: el mapa HID es US; si el texto esperado no cuadra, revisar el mapeo (`-`, `_`, `{`, `}`).
+
+## Lecciones
+
+- El tráfico USB sin cifrar expone lo que se escribe: teclados, mandos y lectores.
+- Los informes HID son un formato fijo y sencillo; un script de 20 líneas basta.
+- Un solo carácter mal mapeado invalida la flag: conviene validar la reconstrucción paso a paso.

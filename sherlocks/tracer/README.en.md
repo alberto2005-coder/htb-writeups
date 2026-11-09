@@ -69,6 +69,6 @@ MFTECmd.exe -f C:/triage/$MFT -o out/
 
 ## Lessons
 
-- PsExec leaves three independent traces (service, `.key`, pipe): they agree or the attribution is weak.
+- PsExec leaves three independent traces (service, `.key`, pipe): if they disagree the correlation is weak.
 - Prefetch and MFT give the "when"; the service log gives the "from where".
 - Mitigation: alert on `7045` with binaries in `ADMIN$`, block SMB between workstations, and detect `psexesvc.exe`.
