@@ -98,6 +98,11 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Sau | Linux | Easy | Web / SSRF | Retired (ref.) | Request Baskets SSRF into Maltrail, then `sudo systemctl` pager escape | [ES](machines/linux/sau/README.md) | [Ver](machines/linux/sau/README.en.md) |
 | Nineveh | Linux | Medium | Web / Enumeración | Retired (ref.) | phpLiteAdmin + LFI, port knocking and chkrootkit 0.49 as root | [ES](machines/linux/nineveh/README.md) | [Ver](machines/linux/nineveh/README.en.md) |
 | Jeeves | Windows | Medium | Windows / Credenciales | Retired (ref.) | Unauthenticated Jenkins, KeePass, pass-the-hash and a flag in an NTFS stream | [ES](machines/windows/jeeves/README.md) | [Ver](machines/windows/jeeves/README.en.md) |
+| CozyHosting | Linux | Easy | Web / Spring Boot | Retired (ref.) | Actuator session leak, panel command injection, PostgreSQL and `sudo ssh` | [ES](machines/linux/cozyhosting/README.md) | [Ver](machines/linux/cozyhosting/README.en.md) |
+| BoardLight | Linux | Easy | Web / CMS | Retired (ref.) | Dolibarr 17.0.0 with defaults, CVE-2023-30253 and an Enlightenment SUID | [ES](machines/linux/boardlight/README.md) | [Ver](machines/linux/boardlight/README.en.md) |
+| Busqueda | Linux | Easy | Web / Inyección | Retired (ref.) | Searchor `eval()`, a `.git` with credentials, Gitea and the relative `full-checkup.sh` | [ES](machines/linux/busqueda/README.md) | [Ver](machines/linux/busqueda/README.en.md) |
+| Soccer | Linux | Easy | Web / SQLi en WebSocket | Retired (ref.) | Default Tiny File Manager, blind WebSocket SQLi and `doas` with `dstat` | [ES](machines/linux/soccer/README.md) | [Ver](machines/linux/soccer/README.en.md) |
+| Timelapse | Windows | Easy | Active Directory / Certificados | Retired (ref.) | Anonymous SMB, PFX, PowerShell history and LAPS up to Administrator | [ES](machines/windows/timelapse/README.md) | [Ver](machines/windows/timelapse/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it · **ref.** = reference notes, not played on this profile.
 >

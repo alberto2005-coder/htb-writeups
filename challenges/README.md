@@ -43,6 +43,11 @@
 | SpookyPass | Reversing | Very Easy | Contraseña en claro en las cadenas del ELF | **Retired** | [Ver](SpookyPass/README.md) | [EN](SpookyPass/README.en.md) |
 | KORP Terminal | Web | Very Easy | SQLi con error visible y hash bcrypt crackeado | **Retired** | [Ver](KORP%20Terminal/README.md) | [EN](KORP%20Terminal/README.en.md) |
 | TimeKORP | Web | Very Easy | Inyección de comandos a través del formato de la hora | **Retired** | [Ver](TimeKORP/README.md) | [EN](TimeKORP/README.en.md) |
+| Behind the Scenes | Reversing | Very Easy | `UD2` como anti-descompilación y cuatro `strncmp` en GDB | **Retired** | [Ver](Behind%20the%20Scenes/README.md) | [EN](Behind%20the%20Scenes/README.en.md) |
+| OnlyHacks | Web | Very Easy | XSS almacenado contra un bot para robar la cookie de sesión | **Retired** | [Ver](OnlyHacks/README.md) | [EN](OnlyHacks/README.en.md) |
+| Perfect Synchronization | Crypto | Easy | AES-ECB y análisis de frecuencias por bloques | **Retired** | [Ver](Perfect%20Synchronization/README.md) | [EN](Perfect%20Synchronization/README.en.md) |
+| xorxorxor | Crypto | Easy | XOR con clave repetida y prefijo conocido | **Retired** | [Ver](xorxorxor/README.md) | [EN](xorxorxor/README.en.md) |
+| Baby Time Capsule | Crypto | Very Easy | RSA con módulos pequeños: factorizar y descifrar | **Retired** | [Ver](Baby%20Time%20Capsule/README.md) | [EN](Baby%20Time%20Capsule/README.en.md) |
 
 ## Categorías
 

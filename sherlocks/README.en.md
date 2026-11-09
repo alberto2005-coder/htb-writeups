@@ -51,6 +51,11 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Payload | Malware / Windows | Easy | Ejecutable MinGW con payload cifrado en runtime | x64dbg, PE-bear | [Ver](payload/README.en.md) |
 | Takedown | Red / DFIR | Easy | PCAP con SMB, VBS y PowerShell hacia un C2 | Wireshark, `tshark` | [Ver](takedown/README.en.md) |
 | Interceptor | SOC / Red | Easy | PCAP de una infección SSLoad con C2 en RC4 | Wireshark, CyberChef | [Ver](interceptor/README.en.md) |
+| Nubilum-1 | Cloud / AWS | Medium | CloudTrail, EC2 comprometida y copia de S3 | `jq`, AWS CLI | [Ver](nubilum-1/README.en.md) |
+| Nubilum-2 | Cloud / AWS | Medium | Bucket S3 con política pública y claves creadas | Splunk, `jq` | [Ver](nubilum-2/README.en.md) |
+| Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | MFTECmd, MFTExplorer | [Ver](hyperfiletable/README.en.md) |
+| WorkFromHome | DFIR / Windows | Medium | Robo de credenciales, RDP y secuestro de DLL en WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.en.md) |
+| Lockpick 3.0 | Malware / Linux | Medium | Binario con XOR, volcado de memoria y unidad systemd | Volatility 3, Ghidra | [Ver](lockpick-3/README.en.md) |
 
 ## Shared methodology
 

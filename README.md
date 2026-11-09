@@ -98,6 +98,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Sau | Linux | Easy | Web / SSRF | **Retired** (ref.) | SSRF en Request Baskets hacia Maltrail y `sudo systemctl` con escape del pager | [Ver](machines/linux/sau/README.md) | [EN](machines/linux/sau/README.en.md) |
 | Nineveh | Linux | Medium | Web / Enumeración | **Retired** (ref.) | phpLiteAdmin + LFI, port knocking y chkrootkit 0.49 como root | [Ver](machines/linux/nineveh/README.md) | [EN](machines/linux/nineveh/README.en.md) |
 | Jeeves | Windows | Medium | Windows / Credenciales | **Retired** (ref.) | Jenkins sin autenticación, KeePass, pass-the-hash y flag en un flujo NTFS | [Ver](machines/windows/jeeves/README.md) | [EN](machines/windows/jeeves/README.en.md) |
+| CozyHosting | Linux | Easy | Web / Spring Boot | **Retired** (ref.) | Actuator que filtra sesiones, inyección de comandos en el panel, PostgreSQL y `sudo ssh` | [Ver](machines/linux/cozyhosting/README.md) | [EN](machines/linux/cozyhosting/README.en.md) |
+| BoardLight | Linux | Easy | Web / CMS | **Retired** (ref.) | Dolibarr 17.0.0 con credenciales por defecto, CVE-2023-30253 y SUID de Enlightenment | [Ver](machines/linux/boardlight/README.md) | [EN](machines/linux/boardlight/README.en.md) |
+| Busqueda | Linux | Easy | Web / Inyección | **Retired** (ref.) | `eval()` de Searchor, `.git` con credenciales, Gitea y `full-checkup.sh` relativo | [Ver](machines/linux/busqueda/README.md) | [EN](machines/linux/busqueda/README.en.md) |
+| Soccer | Linux | Easy | Web / SQLi en WebSocket | **Retired** (ref.) | Tiny File Manager por defecto, SQLi ciega por WebSocket y `doas` con `dstat` | [Ver](machines/linux/soccer/README.md) | [EN](machines/linux/soccer/README.en.md) |
+| Timelapse | Windows | Easy | Active Directory / Certificados | **Retired** (ref.) | SMB anónimo, PFX, historial de PowerShell y LAPS hasta Administrator | [Ver](machines/windows/timelapse/README.md) | [EN](machines/windows/timelapse/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >

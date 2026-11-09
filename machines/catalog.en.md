@@ -71,6 +71,11 @@ Reference notes for **retired** machines, used to study techniques. Rows marked 
 | Sau | Linux | Easy | Request Baskets SSRF into Maltrail, then `sudo systemctl` pager escape | [ES](../machines/linux/sau/README.md) | [Ver](../machines/linux/sau/README.en.md) |
 | Nineveh | Linux | Medium | phpLiteAdmin + LFI, port knocking and chkrootkit 0.49 as root | [ES](../machines/linux/nineveh/README.md) | [Ver](../machines/linux/nineveh/README.en.md) |
 | Jeeves | Windows | Medium | Unauthenticated Jenkins, KeePass, pass-the-hash and a flag in an NTFS stream | [ES](../machines/windows/jeeves/README.md) | [Ver](../machines/windows/jeeves/README.en.md) |
+| CozyHosting | Linux | Easy | Actuator session leak, panel command injection, PostgreSQL and `sudo ssh` | [ES](../machines/linux/cozyhosting/README.md) | [Ver](../machines/linux/cozyhosting/README.en.md) |
+| BoardLight | Linux | Easy | Dolibarr 17.0.0 with defaults, CVE-2023-30253 and an Enlightenment SUID | [ES](../machines/linux/boardlight/README.md) | [Ver](../machines/linux/boardlight/README.en.md) |
+| Busqueda | Linux | Easy | Searchor `eval()`, a `.git` with credentials, Gitea and the relative `full-checkup.sh` | [ES](../machines/linux/busqueda/README.md) | [Ver](../machines/linux/busqueda/README.en.md) |
+| Soccer | Linux | Easy | Default Tiny File Manager, blind WebSocket SQLi and `doas` with `dstat` | [ES](../machines/linux/soccer/README.md) | [Ver](../machines/linux/soccer/README.en.md) |
+| Timelapse | Windows | Easy | Anonymous SMB, PFX, PowerShell history and LAPS up to Administrator | [ES](../machines/windows/timelapse/README.md) | [Ver](../machines/windows/timelapse/README.en.md) |
 
 ## Pending
 
