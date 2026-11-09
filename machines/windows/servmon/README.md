@@ -103,7 +103,6 @@ MITRE: T1190, T1059.001, T1572.
 ## Referencias
 
 - [CVE-2019-20085](https://nvd.nist.gov/vuln/detail/CVE-2019-20085)
-- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/)
+- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/001/)
 - [MITRE T1190](https://attack.mitre.org/techniques/T1190/)
 - [MITRE T1572](https://attack.mitre.org/techniques/T1572/)
-- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/001/)

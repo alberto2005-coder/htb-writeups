@@ -110,8 +110,6 @@ MITRE: T1190, T1059.001, T1134.001.
 ## Referencias
 
 - [CVE-2018-7600](https://nvd.nist.gov/vuln/detail/CVE-2018-7600)
-- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/)
-- [MITRE T1134.001](https://attack.mitre.org/techniques/T1134/)
-- [MITRE T1190](https://attack.mitre.org/techniques/T1190/)
 - [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/001/)
 - [MITRE T1134.001](https://attack.mitre.org/techniques/T1134/001/)
+- [MITRE T1190](https://attack.mitre.org/techniques/T1190/)

@@ -103,9 +103,7 @@ MITRE: T1558.004, T1098, T1003.006.
 
 ## Referencias
 
-- [MITRE T1003.006](https://attack.mitre.org/techniques/T1003/)
-- [MITRE T1098](https://attack.mitre.org/techniques/T1098/)
-- [MITRE T1558.004](https://attack.mitre.org/techniques/T1558/)
-- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
-- [MITRE T1558.004](https://attack.mitre.org/techniques/T1558/004/)
 - [MITRE T1003.006](https://attack.mitre.org/techniques/T1003/006/)
+- [MITRE T1098](https://attack.mitre.org/techniques/T1098/)
+- [MITRE T1558.004](https://attack.mitre.org/techniques/T1558/004/)
+- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)

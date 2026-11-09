@@ -104,6 +104,6 @@ MITRE: T1543.003, T1055, T1078.
 
 - [MITRE T1055](https://attack.mitre.org/techniques/T1055/)
 - [MITRE T1078](https://attack.mitre.org/techniques/T1078/)
-- [MITRE T1543.003](https://attack.mitre.org/techniques/T1543/)
+- [MITRE T1543.003](https://attack.mitre.org/techniques/T1543/003/)
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
 - [linux-sudo-suid](../../../knowledge/privesc/linux-sudo-suid.md)

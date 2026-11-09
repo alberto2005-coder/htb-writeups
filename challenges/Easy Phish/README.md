@@ -64,11 +64,9 @@ MITRE: T1583.001, T1566.002, T1596.
 
 ## Referencias
 
-- [MITRE T1566.002](https://attack.mitre.org/techniques/T1566/)
-- [MITRE T1583.001](https://attack.mitre.org/techniques/T1583/)
-- [MITRE T1596](https://attack.mitre.org/techniques/T1596/)
-- [MITRE T1583.001](https://attack.mitre.org/techniques/T1583/001/)
 - [MITRE T1566.002](https://attack.mitre.org/techniques/T1566/002/)
+- [MITRE T1583.001](https://attack.mitre.org/techniques/T1583/001/)
+- [MITRE T1596](https://attack.mitre.org/techniques/T1596/)
 - [phishing-infrastructure](../../knowledge/osint/phishing-infrastructure.md)
 ## Método
 

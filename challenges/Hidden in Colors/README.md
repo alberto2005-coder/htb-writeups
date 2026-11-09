@@ -65,7 +65,7 @@ MITRE: T1027.003 (steganografía).
 
 ## Referencias
 
-- [MITRE T1027.003](https://attack.mitre.org/techniques/T1027/)
+- [MITRE T1027.003](https://attack.mitre.org/techniques/T1027/003/)
 - [images-audio](../../knowledge/stego/images-audio.md)
 ## Triaje
 
