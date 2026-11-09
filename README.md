@@ -32,6 +32,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Pirate | Windows | Hard | Active Directory | **Retired** (ref.) | Pre-Windows 2000, gMSA, RBCD, S4U2Proxy | [Ver](machines/windows/pirate/README.md) | [EN](machines/windows/pirate/README.en.md) |
 | MonitorsFour | Windows | Easy | Web / Contenedores | **Retired** (ref.) | IDOR en la API, MD5 crackeado, CVE-2025-24367 en Cacti, escape por la API de Docker | [Ver](machines/windows/monitorsfour/README.md) | [EN](machines/windows/monitorsfour/README.en.md) |
 | Pterodactyl | Linux | Medium | Web / Linux | **Retired** (ref.) | CVE-2025-49132 en `/locales`, PEAR `pearcmd`, cadena CVE-2025-6018/6019 | [Ver](machines/linux/pterodactyl/README.md) | [EN](machines/linux/pterodactyl/README.en.md) |
+| Frolic | Linux | Easy | Web / Linux | **Retired** (ref.) | Login validado en JS, PlaySMS 1.4 con subida de CSV y SUID `rop` con ret2libc | [Ver](machines/linux/frolic/README.md) | [EN](machines/linux/frolic/README.en.md) |
+| Sea | Linux | Easy | Web / Linux | **Retired** (ref.) | WonderCMS CVE-2023-41425, hash bcrypt crackeado e inyección de comandos en el 8080 | [Ver](machines/linux/sea/README.md) | [EN](machines/linux/sea/README.en.md) |
+| Devel | Windows | Easy | Windows / Web | **Retired** (ref.) | FTP anónimo escribible sobre IIS, webshell ASPX y MS10-015 o `SeImpersonate` | [Ver](machines/windows/devel/README.md) | [EN](machines/windows/devel/README.en.md) |
+| Fluffy | Windows | Easy | Active Directory | **Retired** (ref.) | CVE-2025-24071 para robar NTLM, shadow credentials y ADCS ESC16 | [Ver](machines/windows/fluffy/README.md) | [EN](machines/windows/fluffy/README.en.md) |
+| Garfield | Windows | Hard | Active Directory | **Retired** (ref.) | RODC, ticket dorado con KeyList, volcado del DC y pass-the-hash | [Ver](machines/windows/garfield/README.md) | [EN](machines/windows/garfield/README.en.md) |
 | Buff | Windows | Easy | Web | **Retired** (ref.) | Subida sin autenticacion, CloudMe 1.11.2 | [Ver](machines/windows/buff/README.md) | [EN](machines/windows/buff/README.en.md) |
 | Blackfield | Windows | Hard | Active Directory | **Retired** (ref.) | AS-REP, volcado de lsass, SeBackupPrivilege, NTDS | [Ver](machines/windows/blackfield/README.md) | [EN](machines/windows/blackfield/README.en.md) |
 | Explosion | Windows | Very Easy | Starting Point | **Available** | RDP con la cuenta `Administrator` sin contraseña | [Ver](machines/starting-point/explosion/README.md) | [EN](machines/starting-point/explosion/README.en.md) |
@@ -109,7 +114,7 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|
 | Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress` → use-after-free (CVE-2026-109618/109619), leak de ASLR por `Set-Cookie` y `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
-| Emdee five for life | Web | Easy | **Retired** | MD5 contra reloj: sesión HTTP, regex y automatización | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
+| Emdee five for life | Misc | Very Easy | **Retired** | MD5 contra reloj: sesión HTTP, regex y automatización | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | **Retired** | Inyección LDAP en login y buscador (`*` como comodín) | [Ver](challenges/Phonebook/README.md) | [EN](challenges/Phonebook/README.en.md) |
 | Under Construction | Web | Easy | **Retired** | Confusión de algoritmos JWT: firmar HS256 con la clave pública | [Ver](challenges/Under%20Construction/README.md) | [EN](challenges/Under%20Construction/README.en.md) |
 

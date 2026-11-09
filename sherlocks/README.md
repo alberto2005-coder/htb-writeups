@@ -26,7 +26,11 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Campfire-1 | DFIR / Active Directory | Easy | Logs de eventos de un dominio | EvtxECmd, análisis de 4769 | [Ver](campfire-1/README.md) |
 | CrownJewel-1 | DFIR / Active Directory | Medium | Telemetría de DC tras un compromiso | Eventos 4662/4769, correlación | [Ver](crownjewel-1/README.md) |
 | Loggy | DFIR | Very Easy | Logs de un servidor web | `awk`, `grep`, línea de tiempo | [Ver](loggy/README.md) |
-| Bumblebee | Malware Analysis | Medium | Cargador en contenedor ISO con LNK | `strings`, análisis de LNK, `Amcache` | [Ver](bumblebee/README.md) |
+| Bumblebee | DFIR | Easy | Base SQLite de phpBB y `access.log` | `sqlite3`, `grep`, correlación de IPs | [Ver](bumblebee/README.md) |
+| Meerkat | SOC | Easy | PCAP y alertas de Suricata | Wireshark, `tshark`, `jq` | [Ver](meerkat/README.md) |
+| Tracer | DFIR | Easy | Logs de PSEXESVC y `Prefetch` | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.md) |
+| Noted | DFIR | Easy | Artefactos de Notepad++ | `config.xml`, copias de seguridad, OSINT | [Ver](noted/README.md) |
+| Logjammer | Log Analysis | Easy | Cinco canales EVTX de un host | EvtxECmd, Timeline Explorer | [Ver](logjammer/README.md) |
 
 ## Metodología común
 
@@ -41,4 +45,3 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 - Una carpeta por Sherlock con `README.md` y `README.en.md`.
 - Nunca se copian respuestas de la plataforma; se documenta el método y la evidencia.
 - Plantilla: `templates/sherlock-template.md` y `.en.md`.
-- El Sherlock **Rameh** todavía no está identificado en el catálogo de HTB; queda como pendiente de confirmar nombre y dominio antes de escribir su ficha.

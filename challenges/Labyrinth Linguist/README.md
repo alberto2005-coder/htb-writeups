@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, java, velocity, ssti, rce]
+tags: [web, java, velocity, ssti, rce, cve-2020-13936]
 ---
 
 # Labyrinth Linguist — Hack The Box
@@ -19,7 +19,7 @@ Aplicación Java (Spring) que «traduce» texto con **Apache Velocity**. La plan
 
 ## Enunciado
 
-Un formulario que devuelve el texto en otro idioma. Nada de Flask ni Jinja: aquí el motor es Velocity, y su sintaxis es `#set($var = ...)`.
+Un formulario que devuelve el texto en otro idioma. Nada de Flask ni Jinja: aquí el motor es **Velocity 1.7**, afectado por **CVE-2020-13936** (el `Uberspector` por defecto no bloquea la reflexión), y su sintaxis es `#set($var = ...)`.
 
 ## Análisis
 

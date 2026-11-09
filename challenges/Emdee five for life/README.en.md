@@ -1,10 +1,10 @@
 ---
 challenge: Emdee five for life
-type: Web
-difficulty: Easy
+type: Misc
+difficulty: Very Easy
 platform: Hack The Box
 state: Retired
-tags: [web, md5, automation, python]
+tags: [misc, md5, scripting, automation, python]
 ---
 
 # Emdee five for life — Hack The Box

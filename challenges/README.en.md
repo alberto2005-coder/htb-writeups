@@ -9,7 +9,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM in `session.upload_progress`, use-after-free, ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [ES](Dark%20Embargo/README.md) | [Ver](Dark%20Embargo/README.en.md) |
-| Emdee five for life | Web | Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
+| Emdee five for life | Misc | Very Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | LDAP injection: `*` as user and password, wildcards in search | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
 | Toxic | Web | Very Easy | Deserializacion PHP en cookie: `__destruct` escribe un webshell | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
@@ -20,8 +20,9 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Flag Command | Web | Very Easy | Bundle JS con endpoints ocultos; comando secreto por API | Retired | [ES](Flag%20Command/README.md) | [Ver](Flag%20Command/README.en.md) |
 | Labyrinth Linguist | Web | Easy | SSTI de Velocity: `#set` y reflexión de Java | Retired | [ES](Labyrinth%20Linguist/README.md) | [Ver](Labyrinth%20Linguist/README.en.md) |
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | Retired | [ES](breaking%20grad/README.md) | [Ver](breaking%20grad/README.en.md) |
-| Weather App | Web | Easy | SSRF contra un servicio interno en loopback | Retired | [ES](Weather%20App/README.md) | [Ver](Weather%20App/README.en.md) |
+| Weather App | Web | Easy | SSRF with *response splitting* and SQLi in the internal service up to admin account takeover | **Retired** | [ES](Weather%20App/README.md) | [Ver](Weather%20App/README.en.md) |
 | Freelancer | Web | Easy | SQLi en el login y `UNION SELECT` para extraer la flag | Retired | [ES](Freelancer/README.md) | [Ver](Freelancer/README.en.md) |
+| Passman | Web | Easy | GraphQL IDOR in `UpdatePassword`: changing the admin password | **Retired** | [ES](Passman/README.md) | [Ver](Passman/README.en.md) |
 
 ## Categories
 

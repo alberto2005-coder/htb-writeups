@@ -26,7 +26,11 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Campfire-1 | DFIR / Active Directory | Easy | Domain event logs | EvtxECmd, 4769 analysis | [Ver](campfire-1/README.md) |
 | CrownJewel-1 | DFIR / Active Directory | Medium | DC telemetry after a compromise | 4662/4769 events, correlation | [Ver](crownjewel-1/README.md) |
 | Loggy | DFIR | Very Easy | Web server logs | `awk`, `grep`, timeline | [Ver](loggy/README.md) |
-| Bumblebee | Malware Analysis | Medium | Loader in an ISO container with an LNK | `strings`, LNK analysis, `Amcache` | [Ver](bumblebee/README.md) |
+| Bumblebee | DFIR | Easy | phpBB SQLite database and `access.log` | `sqlite3`, `grep`, IP correlation | [Ver](bumblebee/README.en.md) |
+| Meerkat | SOC | Easy | PCAP and Suricata alerts | Wireshark, `tshark`, `jq` | [Ver](meerkat/README.en.md) |
+| Tracer | DFIR | Easy | PSEXESVC logs and `Prefetch` | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.en.md) |
+| Noted | DFIR | Easy | Notepad++ artefacts | `config.xml`, backups, OSINT | [Ver](noted/README.en.md) |
+| Logjammer | Log Analysis | Easy | Five EVTX channels from one host | EvtxECmd, Timeline Explorer | [Ver](logjammer/README.en.md) |
 
 ## Shared methodology
 
@@ -41,4 +45,3 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 - One folder per Sherlock with `README.md` and `README.en.md`.
 - Platform answers are never copied; the method and evidence are what gets documented.
 - Template: `templates/sherlock-template.md` and `.en.md`.
-- The **Rameh** Sherlock is not yet identified in the HTB catalogue; it stays pending until the name and domain are confirmed.
