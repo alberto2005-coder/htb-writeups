@@ -173,6 +173,13 @@ Notas reutilizables (cada una en español e inglés):
 - [systemd timers y privesc](knowledge/privesc/systemd-timers.md) · [EN](knowledge/privesc/systemd-timers.en.md)
 - [Craft CMS: utilidades del panel y secretos del entorno](knowledge/web/craft-cms-cp-utilities.md) · [EN](knowledge/web/craft-cms-cp-utilities.en.md)
 - [MSSQL: descifrar credenciales y abusar de SeBackupPrivilege](knowledge/windows/mssql-credentials-sebackup.md) · [EN](knowledge/windows/mssql-credentials-sebackup.en.md)
+- [AD CS: ESC13 (política de emisión enlazada a un grupo)](knowledge/windows/adcs-esc13.md) · [EN](knowledge/windows/adcs-esc13.en.md)
+- [AD CS: ESC4 → ESC1](knowledge/windows/adcs-esc4-esc1.md) · [EN](knowledge/windows/adcs-esc4-esc1.en.md)
+- [gMSA: leer la contraseña gestionada desde el grupo](knowledge/windows/gmsa-read-key.md) · [EN](knowledge/windows/gmsa-read-key.en.md)
+- [JEA: endpoints restringidos y PSReadLine](knowledge/windows/jea.md) · [EN](knowledge/windows/jea.en.md)
+- [RBCD y S4U2Proxy](knowledge/windows/rbcd-s4u2proxy.md) · [EN](knowledge/windows/rbcd-s4u2proxy.en.md)
+- [MSSQL: de sysadmin a SYSTEM y DCSync](knowledge/windows/mssql-exec.md) · [EN](knowledge/windows/mssql-exec.en.md)
+- [Reloj y Kerberos: desfase de 5 minutos](knowledge/general/kerberos-clock.md) · [EN](knowledge/general/kerberos-clock.en.md)
 - [Cómo entrar: SSH, RDP, WinRM, SMB y claves BitLocker](knowledge/general/remote-access.md) · [EN](knowledge/general/remote-access.en.md)
 - [Canal de ataque: VM de Kali, VPN y comprobación previa](knowledge/general/lab-setup.md) · [EN](knowledge/general/lab-setup.en.md)
 

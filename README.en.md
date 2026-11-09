@@ -173,6 +173,13 @@ Reusable notes (each available in Spanish and English):
 - [systemd timers and privesc](knowledge/privesc/systemd-timers.en.md) · [ES](knowledge/privesc/systemd-timers.md)
 - [Craft CMS: CP utilities and environment secrets](knowledge/web/craft-cms-cp-utilities.en.md) · [ES](knowledge/web/craft-cms-cp-utilities.md)
 - [MSSQL: decrypting credentials and abusing SeBackupPrivilege](knowledge/windows/mssql-credentials-sebackup.en.md) · [ES](knowledge/windows/mssql-credentials-sebackup.md)
+- [AD CS: ESC13 (issuance policy linked to a group)](knowledge/windows/adcs-esc13.en.md) · [ES](knowledge/windows/adcs-esc13.md)
+- [AD CS: ESC4 → ESC1](knowledge/windows/adcs-esc4-esc1.en.md) · [ES](knowledge/windows/adcs-esc4-esc1.md)
+- [gMSA: read the managed password through the group](knowledge/windows/gmsa-read-key.en.md) · [ES](knowledge/windows/gmsa-read-key.md)
+- [JEA: restricted endpoints and PSReadLine](knowledge/windows/jea.en.md) · [ES](knowledge/windows/jea.md)
+- [RBCD and S4U2Proxy](knowledge/windows/rbcd-s4u2proxy.en.md) · [ES](knowledge/windows/rbcd-s4u2proxy.md)
+- [MSSQL: from sysadmin to SYSTEM and DCSync](knowledge/windows/mssql-exec.en.md) · [ES](knowledge/windows/mssql-exec.md)
+- [Kerberos and the clock: the 5-minute skew](knowledge/general/kerberos-clock.en.md) · [ES](knowledge/general/kerberos-clock.md)
 - [Getting in: SSH, RDP, WinRM, SMB and BitLocker keys](knowledge/general/remote-access.en.md) · [ES](knowledge/general/remote-access.md)
 - [Attack channel: Kali VM, VPN and preflight check](knowledge/general/lab-setup.en.md) · [ES](knowledge/general/lab-setup.md)
 
