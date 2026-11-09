@@ -196,6 +196,11 @@ Notas reutilizables (cada una en español e inglés):
 - [Reloj y Kerberos: desfase de 5 minutos](knowledge/general/kerberos-clock.md) · [EN](knowledge/general/kerberos-clock.en.md)
 - [Cómo entrar: SSH, RDP, WinRM, SMB y claves BitLocker](knowledge/general/remote-access.md) · [EN](knowledge/general/remote-access.en.md)
 - [Canal de ataque: VM de Kali, VPN y comprobación previa](knowledge/general/lab-setup.md) · [EN](knowledge/general/lab-setup.en.md)
+- [Desbordamiento de pila y ROP en x86-64](knowledge/pwn/rop-stack.md) · [EN](knowledge/pwn/rop-stack.en.md)
+- [Infraestructura de phishing: del correo al dominio](knowledge/osint/phishing-infrastructure.md) · [EN](knowledge/osint/phishing-infrastructure.en.md)
+- [Esteganografía en imágenes y audio](knowledge/stego/images-audio.md) · [EN](knowledge/stego/images-audio.en.md)
+- [Análisis de APK: de `jadx` a Frida](knowledge/mobile/apk-analysis.md) · [EN](knowledge/mobile/apk-analysis.en.md)
+- [Hardware: UART, firmware y extracción](knowledge/hardware/uart-firmware.md) · [EN](knowledge/hardware/uart-firmware.en.md)
 
 ---
 

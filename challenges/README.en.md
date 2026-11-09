@@ -8,6 +8,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
+| ropme | Pwn | Easy | NX buffer overflow: `pop rdi`, `/bin/sh` and `system@plt` | **Retired** | [ES](ropme/README.md) | [Ver](ropme/README.en.md) |
+| Easy Phish | OSINT | Very Easy | Typosquatting and SPF/DMARC records of the decoy domain | **Retired** | [ES](Easy%20Phish/README.md) | [Ver](Easy%20Phish/README.en.md) |
+| Hidden in Colors | Stego | Easy | PNG LSB with `zsteg` and per-channel reading | **Retired** | [ES](Hidden%20in%20Colors/README.md) | [Ver](Hidden%20in%20Colors/README.en.md) |
+| Bare Metal | Hardware | Easy | 3.3 V UART, U-Boot and rootfs extraction with `binwalk` | **Retired** | [ES](Bare%20Metal/README.md) | [Ver](Bare%20Metal/README.en.md) |
+| Cryptohorrific | Mobile | Easy | AES inside the APK: key in the package, decrypt after `jadx` | **Retired** | [ES](Cryptohorrific/README.md) | [Ver](Cryptohorrific/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM in `session.upload_progress`, use-after-free, ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [ES](Dark%20Embargo/README.md) | [Ver](Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | LDAP injection: `*` as user and password, wildcards in search | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |

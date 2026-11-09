@@ -16,6 +16,11 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 
 | Sherlock | Dominio | Dificultad | Evidencia principal | Herramientas | Ficha |
 |---|---|---|---|---|---|
+| CrownJewel-2 | DFIR / Active Directory | Medium | Logs de DC con pass-the-hash y acceso a `C$` | EvtxECmd, Timeline Explorer | [Ver](crownjewel-2/README.md) |
+| Campfire-2 | DFIR / Active Directory | Easy | 4768 sin preautenticación (AS-REP) y uso posterior | EvtxECmd, 4768/4769 | [Ver](campfire-2/README.md) |
+| Safecracker | DFIR / Malware | Medium | Ransomware con extensión propia y clave embebida | Ghidra, `strings`, PE-bear | [Ver](safecracker/README.md) |
+| JenkreadD | DFIR / Web | Easy | Jenkins CVE-2024-23897: `POST /cli` con `@ruta` | `grep`, análisis de logs | [Ver](jenkreadd/README.md) |
+| Subatomic | Malware / DFIR | Medium | App Electron con robo del token de Discord y persistencia | `asar`, análisis JS | [Ver](subatomic/README.md) |
 | Litter | SOC | Easy | PCAP + ZIP de un host de pruebas | Wireshark, dnscat2-decoder | [Ver](litter/README.md) |
 | PhantomRing | Malware Analysis | Very Easy | Binario ELF de post-explotación | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
 | Opportunist | DFIR / Malware | Medium | Memoria + triaje de un equipo corporativo | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |

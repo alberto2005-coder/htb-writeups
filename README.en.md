@@ -196,6 +196,11 @@ Reusable notes (each available in Spanish and English):
 - [Kerberos and the clock: the 5-minute skew](knowledge/general/kerberos-clock.en.md) · [ES](knowledge/general/kerberos-clock.md)
 - [Getting in: SSH, RDP, WinRM, SMB and BitLocker keys](knowledge/general/remote-access.en.md) · [ES](knowledge/general/remote-access.md)
 - [Attack channel: Kali VM, VPN and preflight check](knowledge/general/lab-setup.en.md) · [ES](knowledge/general/lab-setup.md)
+- [Stack overflow and ROP on x86-64](knowledge/pwn/rop-stack.en.md) · [ES](knowledge/pwn/rop-stack.md)
+- [Phishing infrastructure: from email to domain](knowledge/osint/phishing-infrastructure.en.md) · [ES](knowledge/osint/phishing-infrastructure.md)
+- [Steganography in images and audio](knowledge/stego/images-audio.en.md) · [ES](knowledge/stego/images-audio.md)
+- [APK analysis: from `jadx` to Frida](knowledge/mobile/apk-analysis.en.md) · [ES](knowledge/mobile/apk-analysis.md)
+- [Hardware: UART, firmware and extraction](knowledge/hardware/uart-firmware.en.md) · [ES](knowledge/hardware/uart-firmware.md)
 
 ---
 

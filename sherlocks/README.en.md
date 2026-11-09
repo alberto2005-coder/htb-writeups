@@ -16,6 +16,11 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 
 | Sherlock | Domain | Difficulty | Main evidence | Tools | Note |
 |---|---|---|---|---|---|
+| CrownJewel-2 | DFIR / Active Directory | Medium | DC logs with pass-the-hash and `C$` access | EvtxECmd, Timeline Explorer | [Ver](crownjewel-2/README.en.md) |
+| Campfire-2 | DFIR / Active Directory | Easy | 4768 without pre-authentication (AS-REP) and later use | EvtxECmd, 4768/4769 | [Ver](campfire-2/README.en.md) |
+| Safecracker | DFIR / Malware | Medium | Ransomware with a custom extension and embedded key | Ghidra, `strings`, PE-bear | [Ver](safecracker/README.en.md) |
+| JenkreadD | DFIR / Web | Easy | Jenkins CVE-2024-23897: `POST /cli` with `@path` | `grep`, log analysis | [Ver](jenkreadd/README.en.md) |
+| Subatomic | Malware / DFIR | Medium | Electron app stealing the Discord token with persistence | `asar`, JS analysis | [Ver](subatomic/README.en.md) |
 | Litter | SOC | Easy | PCAP + ZIP from a test host | Wireshark, dnscat2-decoder | [Ver](litter/README.en.md) |
 | PhantomRing | Malware Analysis | Very Easy | Post-exploitation ELF binary | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
 | Opportunist | DFIR / Malware | Medium | Memory + triage from a corporate host | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |

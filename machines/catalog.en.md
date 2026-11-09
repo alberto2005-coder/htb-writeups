@@ -8,6 +8,11 @@ Reference notes for **retired** machines, used to study techniques. Rows marked 
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|
+| Sauna | Windows | Easy | AS-REP roasting, `GenericAll` over a service account and DCSync | [ES](../machines/windows/sauna/README.md) | [Ver](../machines/windows/sauna/README.en.md) |
+| Netmon | Windows | Easy | Anonymous FTP, PRTG and CVE-2018-9276 | [ES](../machines/windows/netmon/README.md) | [Ver](../machines/windows/netmon/README.en.md) |
+| Servmon | Windows | Easy | NVMS path traversal, NSClient++ and SSH tunnel | [ES](../machines/windows/servmon/README.md) | [Ver](../machines/windows/servmon/README.en.md) |
+| Resolute | Windows | Medium | Anonymous LDAP, password reuse and `DnsAdmins` | [ES](../machines/windows/resolute/README.md) | [Ver](../machines/windows/resolute/README.en.md) |
+| Bastard | Windows | Medium | Drupalgeddon2 and JuicyPotato | [ES](../machines/windows/bastard/README.md) | [Ver](../machines/windows/bastard/README.en.md) |
 | Cap | Linux | Easy | IDOR, pcap, `cap_setuid` | [ES](../machines/linux/cap/README.md) | [Ver](../machines/linux/cap/README.en.md) |
 | Active | Windows | Easy | GPP in SYSVOL, Kerberoasting `Administrator` | [ES](../machines/windows/active/README.md) | [Ver](../machines/windows/active/README.en.md) |
 | Armageddon | Linux | Easy | Drupal 7.56, Drupalgeddon2, snap hook | [ES](../machines/linux/armageddon/README.md) | [Ver](../machines/linux/armageddon/README.en.md) |
