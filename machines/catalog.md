@@ -26,16 +26,22 @@ Fichas de máquinas **retiradas** que sirven para estudiar técnicas. Las marcad
 | Bank | Linux | Easy | AXFR, `302` a `200`, subida `.htb`, SUID | [Ver](../machines/linux/bank/README.md) | [EN](../machines/linux/bank/README.en.md) |
 | Blue | Windows | Easy | MS17-010 EternalBlue | [Ver](../machines/windows/blue/README.md) | [EN](../machines/windows/blue/README.en.md) |
 | Cronos | Linux | Medium | AXFR, SQLi, inyección de comandos, cron de `artisan` | [Ver](../machines/linux/cronos/README.md) | [EN](../machines/linux/cronos/README.en.md) |
+| PingPong | Windows | Insane | Doble bosque AD, delegación cross-forest, AD CS ESC1 | [Ver](../machines/windows/pingpong/README.md) | [EN](../machines/windows/pingpong/README.en.md) |
+| AirTouch | Linux | Hard | WPA2, Evil Twin PEAP, pivote VPN | [Ver](../machines/linux/airtouch/README.md) | [EN](../machines/linux/airtouch/README.en.md) |
+| Eighteen | Windows | Hard | `IMPERSONATE`, Werkzeug, CVE-2025-53779 | [Ver](../machines/windows/eighteen/README.md) | [EN](../machines/windows/eighteen/README.en.md) |
+| Sink | Linux | Insane | Smuggling, Gitea, AWS KMS | [Ver](../machines/linux/sink/README.md) | [EN](../machines/linux/sink/README.en.md) |
+| Sorcery | Linux | Insane | Cypher, WebAuthn, Kafka, FreeIPA | [Ver](../machines/linux/sorcery/README.md) | [EN](../machines/linux/sorcery/README.en.md) |
+| Cobblestone | Linux | Insane | SQLi de segundo orden, Twig SSTI, Cobbler | [Ver](../machines/linux/cobblestone/README.md) | [EN](../machines/linux/cobblestone/README.en.md) |
 
 ## Pendientes
 
-19 máquinas retiradas con material localizado y todavía sin ficha propia. Se escriben en lotes:
+18 máquinas retiradas con material localizado y todavía sin ficha propia. Se escriben en lotes:
 
 **Linux:** Doctor, Frolic, Nibbles, Poison, SolidState, DevArea, Sea.
 
-**Windows:** Devel, Fluffy, Garfield, Interpreter, Kobold, VariaType, Eighteen, Active Directory de varios bosques.
+**Windows:** Devel, Fluffy, Garfield, Interpreter, Kobold, VariaType.
 
-**Sin clasificar todavía:** AirTouch, Cobblestone, Code, Helix, MonitorsFour, Pirate, Pterodactyl, Sink, Sorcery y **PingPong** (ver nota de clasificación).
+**Sin clasificar todavía:** Code, Helix, MonitorsFour, Pirate y Pterodactyl.
 
 ## Volcado en PDF
 

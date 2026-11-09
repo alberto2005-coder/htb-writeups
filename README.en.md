@@ -48,6 +48,12 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Bank | Linux | Easy | Machines | **Retired** (ref.) | AXFR, `302` to `200`, `.htb` whitelist, `emergency` SUID | [ES](machines/linux/bank/README.md) | [Ver](machines/linux/bank/README.en.md) |
 | Blue | Windows | Easy | Machines | **Retired** (ref.) | MS17-010 EternalBlue, `hashdump` | [ES](machines/windows/blue/README.md) | [Ver](machines/windows/blue/README.en.md) |
 | Cronos | Linux | Medium | Machines | **Retired** (ref.) | AXFR, SQLi, command injection, root cron over `artisan` | [ES](machines/linux/cronos/README.md) | [Ver](machines/linux/cronos/README.en.md) |
+| PingPong | Windows | Insane | Machines | **Retired** (ref.) | Dual AD forest, AES256 Kerberos, MSSQL delegation and AD CS ESC1 | [ES](machines/windows/pingpong/README.md) | [Ver](machines/windows/pingpong/README.en.md) |
+| AirTouch | Linux | Hard | Machines | **Retired** (ref.) | WPA2 handshake, PEAP-MSCHAPv2 Evil Twin and VPN pivot | [ES](machines/linux/airtouch/README.md) | [Ver](machines/linux/airtouch/README.en.md) |
+| Eighteen | Windows | Hard | Machines | **Retired** (ref.) | MSSQL `IMPERSONATE`, Werkzeug hash, CVE-2025-53779 (dMSA) | [ES](machines/windows/eighteen/README.md) | [Ver](machines/windows/eighteen/README.en.md) |
+| Sink | Linux | Insane | Machines | **Retired** (ref.) | CL.TE smuggling, Gitea with AWS keys, Secrets Manager and KMS | [ES](machines/linux/sink/README.md) | [Ver](machines/linux/sink/README.en.md) |
+| Sorcery | Linux | Insane | Machines | **Retired** (ref.) | Cypher injection, passkey XSS, Kafka and FreeIPA | [ES](machines/linux/sorcery/README.md) | [Ver](machines/linux/sorcery/README.en.md) |
+| Cobblestone | Linux | Insane | Machines | **Retired** (ref.) | Second-order SQLi, XSS, Twig SSTI and CVE-2024-47533 | [ES](machines/linux/cobblestone/README.md) | [Ver](machines/linux/cobblestone/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it · **ref.** = reference notes, not played on this profile.
 >
@@ -172,8 +178,10 @@ htb-writeups/
 │   │   ├── cap/
 │   │   ├── makesense/
 │   │   ├── admirer/
+│   │   ├── airtouch/
 │   │   ├── armageddon/
 │   │   ├── bank/
+│   │   ├── cobblestone/
 │   │   ├── bashed/
 │   │   ├── beep/
 │   │   ├── blocky/
@@ -181,14 +189,18 @@ htb-writeups/
 │   │   ├── delivery/
 │   │   ├── facts/
 │   │   ├── cronos/
+│   │   ├── sink/
+│   │   ├── sorcery/
 │   │   └── friendzone/
 │   ├── windows/
 │   │   ├── active/
 │   │   ├── arctic/
 │   │   ├── bastion/
 │   │   ├── blue/
+│   │   ├── eighteen/
 │   │   ├── bounty/
-│   │   └── forest/
+│   │   ├── forest/
+│   │   └── pingpong/
 │   └── active/          # active machines: gitignored, not published
 │       ├── dutybound/
 │       ├── stream/
