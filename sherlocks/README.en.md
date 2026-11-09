@@ -17,12 +17,16 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Sherlock | Domain | Difficulty | Main evidence | Tools | Note |
 |---|---|---|---|---|---|
 | Litter | SOC | Easy | PCAP + ZIP from a test host | Wireshark, dnscat2-decoder | [Ver](litter/README.en.md) |
-| PhantomRing | Malware Analysis | Very Easy | Post-exploitation ELF binary | Ghidra, `strings`, `file` | pending |
-| Opportunist | DFIR / Malware | Medium | Memory + triage from a corporate host | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | pending |
-| dOOMs Day | DFIR | Medium | Web logs from a compromised PHP server | access-log analysis, PHP2Shell | pending |
-| Brutus | DFIR | Very Easy | Authentication logs | `grep`, `awk`, timeline | pending |
-| MangoBleed | DFIR | Very Easy | Windows triage | EvtxECmd, timeline | pending |
-| NeuroSync-D | DFIR | Easy | Artifacts from a medical-device vendor | RegRipper, MFT | pending |
+| PhantomRing | Malware Analysis | Very Easy | Post-exploitation ELF binary | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
+| Opportunist | DFIR / Malware | Medium | Memory + triage from a corporate host | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |
+| dOOMs Day | DFIR | Medium | Web logs from a compromised PHP server | access-log analysis, PHP2Shell | [Ver](dooms-day/README.md) |
+| Brutus | DFIR | Very Easy | Authentication logs | `grep`, `awk`, timeline | [Ver](brutus/README.md) |
+| MangoBleed | DFIR | Very Easy | Windows triage | EvtxECmd, timeline | [Ver](mangobleed/README.md) |
+| NeuroSync-D | DFIR | Easy | Artifacts from a medical-device vendor | RegRipper, MFT | [Ver](neurosync-d/README.md) |
+| Campfire-1 | DFIR / Active Directory | Easy | Domain event logs | EvtxECmd, 4769 analysis | [Ver](campfire-1/README.md) |
+| CrownJewel-1 | DFIR / Active Directory | Medium | DC telemetry after a compromise | 4662/4769 events, correlation | [Ver](crownjewel-1/README.md) |
+| Loggy | DFIR | Very Easy | Web server logs | `awk`, `grep`, timeline | [Ver](loggy/README.md) |
+| Bumblebee | Malware Analysis | Medium | Loader in an ISO container with an LNK | `strings`, LNK analysis, `Amcache` | [Ver](bumblebee/README.md) |
 
 ## Shared methodology
 

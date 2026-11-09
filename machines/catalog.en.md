@@ -37,12 +37,22 @@ Reference notes for **retired** machines, used to study techniques. Rows marked 
 | Helix | Linux | Medium | NiFi + H2 `CREATE ALIAS`, OPC UA | [ES](../machines/linux/helix/README.md) | [Ver](../machines/linux/helix/README.en.md) |
 | Interpreter | Linux | Medium | Mirth CVE-2023-43208, PBKDF2, `eval()` | [ES](../machines/linux/interpreter/README.md) | [Ver](../machines/linux/interpreter/README.en.md) |
 | VariaType | Linux | Medium | fontTools, FontForge, setuptools | [ES](../machines/linux/variatype/README.md) | [Ver](../machines/linux/variatype/README.en.md) |
+| Pirate | Windows | Hard | Pre-Windows 2000, gMSA, RBCD, S4U2Proxy | [ES](../machines/windows/pirate/README.md) | [Ver](../machines/windows/pirate/README.en.md) |
+| MonitorsFour | Windows | Easy | IDOR en la API, MD5 crackeado, CVE-2025-24367 en Cacti, escape por la API de Docker | [ES](../machines/windows/monitorsfour/README.md) | [Ver](../machines/windows/monitorsfour/README.en.md) |
+| Pterodactyl | Linux | Medium | CVE-2025-49132 en `/locales`, PEAR `pearcmd`, cadena CVE-2025-6018/6019 | [ES](../machines/linux/pterodactyl/README.md) | [Ver](../machines/linux/pterodactyl/README.en.md) |
+| Buff | Windows | Easy | Subida sin autenticacion, CloudMe 1.11.2 | [ES](../machines/windows/buff/README.md) | [Ver](../machines/windows/buff/README.en.md) |
+| Blackfield | Windows | Hard | AS-REP, volcado de lsass, SeBackupPrivilege, NTDS | [ES](../machines/windows/blackfield/README.md) | [Ver](../machines/windows/blackfield/README.en.md) |
+| Nibbles | Linux | Easy | Nibbleblog 4.0.3, subida CVE-2015-6967, sudo | [ES](../machines/linux/nibbles/README.md) | [Ver](../machines/linux/nibbles/README.en.md) |
+| Doctor | Linux | Easy | SSTI con Jinja2 en un vhost, Splunk 8.0.x | [ES](../machines/linux/doctor/README.md) | [Ver](../machines/linux/doctor/README.en.md) |
+| Poison | Linux | Medium | LFI en `browse.php`, base64 en `pwdbackup.txt`, VNC como root con `secret.zip` | [ES](../machines/freebsd/poison/README.md) | [Ver](../machines/freebsd/poison/README.en.md) |
+| SolidState | Linux | Medium | Apache James con credenciales por defecto, cron escribible | [ES](../machines/linux/solidstate/README.md) | [Ver](../machines/linux/solidstate/README.en.md) |
+| DevOops | Linux | Medium | XXE en la subida de XML y clave de root en el historial de git | [ES](../machines/linux/devoops/README.md) | [Ver](../machines/linux/devoops/README.en.md) |
 
 ## Pending
 
-13 retired machines with material located but no writeup yet. They get written in batches:
+6 retired machines with material located but no writeup yet. They get written in batches:
 
-**Linux:** Doctor, Frolic, Nibbles, Poison, SolidState, DevArea, Sea.
+**Linux:** Frolic, DevArea, Sea.
 
 **Windows:** Devel, Fluffy, Garfield.
 

@@ -17,12 +17,16 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Sherlock | Dominio | Dificultad | Evidencia principal | Herramientas | Ficha |
 |---|---|---|---|---|---|
 | Litter | SOC | Easy | PCAP + ZIP de un host de pruebas | Wireshark, dnscat2-decoder | [Ver](litter/README.md) |
-| PhantomRing | Malware Analysis | Very Easy | Binario ELF de post-explotación | Ghidra, `strings`, `file` | pendiente |
-| Opportunist | DFIR / Malware | Medium | Memoria + triaje de un equipo corporativo | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | pendiente |
-| dOOMs Day | DFIR | Medium | Logs web de un servidor PHP comprometido | análisis de access logs, PHP2Shell | pendiente |
-| Brutus | DFIR | Very Easy | Logs de autenticación | `grep`, `awk`, timeline | pendiente |
-| MangoBleed | DFIR | Very Easy | Triaje de Windows | EvtxECmd, timeline | pendiente |
-| NeuroSync-D | DFIR | Easy | Artefactos de un fabricante de dispositivos médicos | RegRipper, MFT | pendiente |
+| PhantomRing | Malware Analysis | Very Easy | Binario ELF de post-explotación | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
+| Opportunist | DFIR / Malware | Medium | Memoria + triaje de un equipo corporativo | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |
+| dOOMs Day | DFIR | Medium | Logs web de un servidor PHP comprometido | análisis de access logs, PHP2Shell | [Ver](dooms-day/README.md) |
+| Brutus | DFIR | Very Easy | Logs de autenticación | `grep`, `awk`, timeline | [Ver](brutus/README.md) |
+| MangoBleed | DFIR | Very Easy | Triaje de Windows | EvtxECmd, timeline | [Ver](mangobleed/README.md) |
+| NeuroSync-D | DFIR | Easy | Artefactos de un fabricante de dispositivos médicos | RegRipper, MFT | [Ver](neurosync-d/README.md) |
+| Campfire-1 | DFIR / Active Directory | Easy | Logs de eventos de un dominio | EvtxECmd, análisis de 4769 | [Ver](campfire-1/README.md) |
+| CrownJewel-1 | DFIR / Active Directory | Medium | Telemetría de DC tras un compromiso | Eventos 4662/4769, correlación | [Ver](crownjewel-1/README.md) |
+| Loggy | DFIR | Very Easy | Logs de un servidor web | `awk`, `grep`, línea de tiempo | [Ver](loggy/README.md) |
+| Bumblebee | Malware Analysis | Medium | Cargador en contenedor ISO con LNK | `strings`, análisis de LNK, `Amcache` | [Ver](bumblebee/README.md) |
 
 ## Metodología común
 

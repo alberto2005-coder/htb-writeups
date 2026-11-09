@@ -12,6 +12,16 @@
 | Emdee five for life | Web | Easy | MD5 contra reloj: sesión, regex y cálculo del hash en un script | **Retired** | [Ver](Emdee%20five%20for%20life/README.md) | [EN](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | Inyección LDAP: `*` en usuario y contraseña, y buscador con comodines | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | Confusión de algoritmos JWT: HS256 firmado con la clave pública | **Retired** | [Ver](Under%20Construction/README.md) | [EN](Under%20Construction/README.en.md) |
+| Toxic | Web | Very Easy | Deserializacion PHP en cookie: `__destruct` escribe un webshell | **Retired** | [Ver](Toxic/README.md) | [EN](Toxic/README.en.md) |
+| LoveTok | Web | Easy | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | **Retired** | [Ver](LoveTok/README.md) | [EN](LoveTok/README.en.md) |
+| Templated | Web | Easy | SSTI de Jinja2 en `render_template_string` | **Retired** | [Ver](Templated/README.md) | [EN](Templated/README.en.md) |
+| baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | **Retired** | [Ver](baby%20ninja%20jinja/README.md) | [EN](baby%20ninja%20jinja/README.en.md) |
+| Spookifier | Web | Easy | SSTI de Mako: `self.module` hasta `os` | **Retired** | [Ver](Spookifier/README.md) | [EN](Spookifier/README.en.md) |
+| Flag Command | Web | Very Easy | Bundle JS con endpoints ocultos; comando secreto por API | **Retired** | [Ver](Flag%20Command/README.md) | [EN](Flag%20Command/README.en.md) |
+| Labyrinth Linguist | Web | Easy | SSTI de Velocity: `#set` y reflexión de Java | **Retired** | [Ver](Labyrinth%20Linguist/README.md) | [EN](Labyrinth%20Linguist/README.en.md) |
+| breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | **Retired** | [Ver](breaking%20grad/README.md) | [EN](breaking%20grad/README.en.md) |
+| Weather App | Web | Easy | SSRF contra un servicio interno en loopback | **Retired** | [Ver](Weather%20App/README.md) | [EN](Weather%20App/README.en.md) |
+| Freelancer | Web | Easy | SQLi en el login y `UNION SELECT` para extraer la flag | **Retired** | [Ver](Freelancer/README.md) | [EN](Freelancer/README.en.md) |
 
 ## Categorías
 

