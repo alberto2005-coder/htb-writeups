@@ -173,6 +173,20 @@ Notas reutilizables (cada una en español e inglés):
 - [systemd timers y privesc](knowledge/privesc/systemd-timers.md) · [EN](knowledge/privesc/systemd-timers.en.md)
 - [Craft CMS: utilidades del panel y secretos del entorno](knowledge/web/craft-cms-cp-utilities.md) · [EN](knowledge/web/craft-cms-cp-utilities.en.md)
 - [MSSQL: descifrar credenciales y abusar de SeBackupPrivilege](knowledge/windows/mssql-credentials-sebackup.md) · [EN](knowledge/windows/mssql-credentials-sebackup.en.md)
+- [XOR y cadenas de codificaciones](knowledge/crypto/xor-and-encodings.md) · [EN](knowledge/crypto/xor-and-encodings.en.md)
+- [RSA: módulo pequeño y RSA de libro](knowledge/crypto/rsa-small-modulus.md) · [EN](knowledge/crypto/rsa-small-modulus.en.md)
+- [Cifrados de bloque y cifrados propios](knowledge/crypto/block-ciphers.md) · [EN](knowledge/crypto/block-ciphers.en.md)
+- [SSTI: de la plantilla a la ejecución](knowledge/web/ssti.md) · [EN](knowledge/web/ssti.en.md)
+- [Deserialización PHP](knowledge/web/php-deserialization.md) · [EN](knowledge/web/php-deserialization.en.md)
+- [JWT y contaminación de prototipos](knowledge/web/node-jwt-prototype.md) · [EN](knowledge/web/node-jwt-prototype.en.md)
+- [Triaje de PCAP](knowledge/forensics/pcap-triage.md) · [EN](knowledge/forensics/pcap-triage.en.md)
+- [Artefactos Windows: EVTX, MFT y Prefetch](knowledge/forensics/windows-artifacts.md) · [EN](knowledge/forensics/windows-artifacts.en.md)
+- [Privesc Linux: sudo, SUID, capabilities y cron](knowledge/privesc/linux-sudo-suid.md) · [EN](knowledge/privesc/linux-sudo-suid.en.md)
+- [Kerberos: AS-REP, Kerberoast y GPP](knowledge/windows/kerberos-enum.md) · [EN](knowledge/windows/kerberos-enum.en.md)
+- [Pivoting: SSH, chisel y Ligolo-ng](knowledge/general/pivoting.md) · [EN](knowledge/general/pivoting.en.md)
+- [LFI: de leer ficheros a ejecutar código](knowledge/web/lfi-to-rce.md) · [EN](knowledge/web/lfi-to-rce.en.md)
+- [Privesc Windows: SeImpersonate, servicios y LAPS](knowledge/windows/privesc-windows.md) · [EN](knowledge/windows/privesc-windows.en.md)
+- [Explotar un CVE: versión, PoC y adaptación](knowledge/web/cve-workflow.md) · [EN](knowledge/web/cve-workflow.en.md)
 - [AD CS: ESC13 (política de emisión enlazada a un grupo)](knowledge/windows/adcs-esc13.md) · [EN](knowledge/windows/adcs-esc13.en.md)
 - [AD CS: ESC4 → ESC1](knowledge/windows/adcs-esc4-esc1.md) · [EN](knowledge/windows/adcs-esc4-esc1.en.md)
 - [gMSA: leer la contraseña gestionada desde el grupo](knowledge/windows/gmsa-read-key.md) · [EN](knowledge/windows/gmsa-read-key.en.md)
@@ -282,6 +296,8 @@ htb-writeups/
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/
+│   ├── crypto/
+│   ├── forensics/
 │   ├── linux/
 │   ├── general/
 │   ├── privesc/
