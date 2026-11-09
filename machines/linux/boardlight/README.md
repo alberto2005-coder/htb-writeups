@@ -93,4 +93,3 @@ find / -perm -4000 -type f 2>/dev/null | grep -i enlight
 
 - [CVE-2022-37706](https://nvd.nist.gov/vuln/detail/CVE-2022-37706)
 - [CVE-2023-30253](https://nvd.nist.gov/vuln/detail/CVE-2023-30253)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

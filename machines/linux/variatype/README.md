@@ -86,7 +86,6 @@ Aparece una contraseña en un commit revertido que da acceso al portal de fuente
 - [CVE-2025-47273](https://nvd.nist.gov/vuln/detail/CVE-2025-47273)
 - [CVE-2025-66034](https://nvd.nist.gov/vuln/detail/CVE-2025-66034)
 - [ssti](../../../knowledge/web/ssti.md)
-
 ## 2. CVE-2025-66034: escritura de fichero con fontTools
 
 El procesado de fuentes variables escribe en disco rutas derivadas del `.designspace`. Con CDATA se cuela contenido fuera del XML esperado:

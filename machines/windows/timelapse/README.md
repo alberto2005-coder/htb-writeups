@@ -104,4 +104,3 @@ impacket-GetLAPSPassword -dc-ip <IP> 'timelapse.htb/svc_deploy:<password>'
 ## Referencias
 
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

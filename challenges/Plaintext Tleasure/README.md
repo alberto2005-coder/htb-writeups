@@ -8,7 +8,6 @@ tags: [forensics, pcap, http, credenciales, strings]
 type: Forensics
 ---
 
-
 # Plaintext Tleasure — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -65,8 +64,6 @@ Una captura de tráfico con **HTTP sin cifrar**: en los flujos se ven credencial
 ## Referencias
 
 - [pcap-triage](../../knowledge/forensics/pcap-triage.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Atajo** (válido aquí, no siempre):

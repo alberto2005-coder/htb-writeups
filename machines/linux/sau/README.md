@@ -100,4 +100,3 @@ Es el comportamiento descrito en CVE-2023-26604.
 - [CVE-2023-26604](https://nvd.nist.gov/vuln/detail/CVE-2023-26604)
 - [CVE-2023-27148](https://nvd.nist.gov/vuln/detail/CVE-2023-27148)
 - [CVE-2023-27163](https://nvd.nist.gov/vuln/detail/CVE-2023-27163)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

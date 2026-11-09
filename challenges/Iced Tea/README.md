@@ -7,7 +7,6 @@ state: Retired
 tags: [crypto, tea, block-cipher, decryption]
 ---
 
-
 # Iced Tea — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -95,5 +94,4 @@ Comprobación: el resultado concatenado debe empezar por el prefijo de la flag.
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)

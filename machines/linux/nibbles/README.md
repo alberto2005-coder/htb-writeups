@@ -109,4 +109,3 @@ cat /tmp/root.txt
 ## Referencias
 
 - [CVE-2015-6967](https://nvd.nist.gov/vuln/detail/CVE-2015-6967)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

@@ -7,7 +7,6 @@ state: Retired
 tags: [web, sqli, login-bypass, enumeration, php]
 ---
 
-
 # Cartographer — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -96,7 +95,3 @@ Si `info` estuviera filtrando rutas, el mismo parámetro sirve para enumerar: `h
 ## Mitigaciones y detección
 
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

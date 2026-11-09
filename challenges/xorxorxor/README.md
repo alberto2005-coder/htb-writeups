@@ -8,7 +8,6 @@ tags: [crypto, xor, known-plaintext]
 type: Crypto
 ---
 
-
 # xorxorxor — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ El cifrado es un **XOR** del mensaje con una clave corta que se repite. Como el 
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-
 ## Método
 
 1. **Leer el script**: `bytes([a ^ b for a, b in zip(flag, key)])`, con `key` más corto que la flag y repetido.

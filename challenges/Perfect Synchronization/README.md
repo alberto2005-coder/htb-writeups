@@ -8,7 +8,6 @@ tags: [crypto, aes, ecb, frequency-analysis]
 type: Crypto
 ---
 
-
 # Perfect Synchronization — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ Se cifran con **AES** en modo **ECB** varios mensajes que comparten plantilla. E
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-
 ## Método
 
 1. **Confirmar ECB**: mismo bloque de 16 bytes en posiciones equivalentes → mismo ciphertext en varios mensajes.

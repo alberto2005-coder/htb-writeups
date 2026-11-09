@@ -7,7 +7,6 @@ state: Retired
 tags: [web, graphql, idor, broken-access-control, source-review]
 ---
 
-
 # Passman — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -122,4 +121,3 @@ Con el token de admin, la consulta de contraseñas guardadas devuelve la flag:
 ## Referencias
 
 - [node-jwt-prototype](../../knowledge/web/node-jwt-prototype.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

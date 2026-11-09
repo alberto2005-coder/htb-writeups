@@ -70,10 +70,6 @@ ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,302,401
 - Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
 - Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
 
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)
-
 ## 1. Inyección Cypher
 
 ```text

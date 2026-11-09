@@ -106,7 +106,3 @@ uid=0(root)
 ## Mitigaciones y detección
 
 - Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

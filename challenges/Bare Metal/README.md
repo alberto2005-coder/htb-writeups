@@ -7,7 +7,6 @@ state: Retired
 tags: [hardware, uart, firmware, binwalk, flash]
 ---
 
-
 # Bare Metal — Hack The Box (Challenge)
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -67,9 +66,9 @@ MITRE: T1542.001, T1552.001.
 
 - [MITRE T1542.001](https://attack.mitre.org/techniques/T1542/)
 - [MITRE T1552.001](https://attack.mitre.org/techniques/T1552/)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [MITRE T1542.001](https://attack.mitre.org/techniques/T1542/001/)
+- [MITRE T1552.001](https://attack.mitre.org/techniques/T1552/001/)
 - [uart-firmware](../../knowledge/hardware/uart-firmware.md)
-
 ## Triaje del firmware
 
 ```bash

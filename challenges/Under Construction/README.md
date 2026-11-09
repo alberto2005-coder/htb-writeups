@@ -7,7 +7,6 @@ state: Retired
 tags: [web, jwt, alg-confusion, rs256, hs256]
 ---
 
-
 # Under Construction — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -99,8 +98,6 @@ python3 jwt_tool.py <token> -X k -pk public.pem
 ## Referencias
 
 - [node-jwt-prototype](../../knowledge/web/node-jwt-prototype.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Variantes del mismo fallo
 
 - **`alg: none`** si la librería antigua acepta tokens sin firma y no se filtra el algoritmo.

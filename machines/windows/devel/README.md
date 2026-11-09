@@ -124,4 +124,3 @@ type C:\Users\Administrator\Desktop\root.txt
 
 - [CVE-2010-0232](https://nvd.nist.gov/vuln/detail/CVE-2010-0232)
 - [linux-sudo-suid](../../../knowledge/privesc/linux-sudo-suid.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

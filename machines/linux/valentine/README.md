@@ -112,4 +112,3 @@ root@Valentine:~#
 ## Referencias
 
 - [CVE-2014-0160](https://nvd.nist.gov/vuln/detail/CVE-2014-0160)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

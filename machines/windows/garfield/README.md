@@ -111,4 +111,3 @@ evil-winrm -i dc01.garfield.htb -u administrator -H <hash>
 ## Referencias
 
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

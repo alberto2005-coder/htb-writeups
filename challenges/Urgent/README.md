@@ -8,7 +8,6 @@ tags: [forensics, email, phishing, base64, vbscript]
 type: Forensics
 ---
 
-
 # Urgent — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ Un correo de **phishing** en formato de mensaje completo. Hay que abrir la cabec
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [phishing-infrastructure](../../knowledge/osint/phishing-infrastructure.md)
-
 ## Método
 
 1. **Cabecera**: remitente real, `Return-Path`, servidor de salida y asunto.

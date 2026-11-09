@@ -8,7 +8,6 @@ tags: [forensics, pcap, dns-exfil, base64url, rc4]
 type: Forensics
 ---
 
-
 # Keep Tryin' — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -65,8 +64,6 @@ Un PCAP de **26 paquetes** con tres cosas: un `POST /flag` con la palabra `TryHa
 ## Referencias
 
 - [pcap-triage](../../knowledge/forensics/pcap-triage.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Ver el conjunto**: es tan pequeño que se lee entero.

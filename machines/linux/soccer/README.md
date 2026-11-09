@@ -94,4 +94,3 @@ doas -u root /usr/bin/dstat --evil
 ## Referencias
 
 - [CVE-2021-45010](https://nvd.nist.gov/vuln/detail/CVE-2021-45010)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

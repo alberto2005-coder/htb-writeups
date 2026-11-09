@@ -7,7 +7,6 @@ state: Retired
 tags: [web, flask, jinja2, ssti, blacklist-bypass]
 ---
 
-
 # baby ninja jinja — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -97,4 +96,3 @@ HTB{<flag>}
 ## Referencias
 
 - [ssti](../../knowledge/web/ssti.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

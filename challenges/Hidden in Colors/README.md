@@ -67,7 +67,6 @@ MITRE: T1027.003 (steganografía).
 
 - [MITRE T1027.003](https://attack.mitre.org/techniques/T1027/)
 - [images-audio](../../knowledge/stego/images-audio.md)
-
 ## Triaje
 
 ```bash

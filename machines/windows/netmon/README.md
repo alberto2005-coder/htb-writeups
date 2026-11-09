@@ -97,4 +97,4 @@ MITRE: T1078, T1059.001, T1190.
 - [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/)
 - [MITRE T1078](https://attack.mitre.org/techniques/T1078/)
 - [MITRE T1190](https://attack.mitre.org/techniques/T1190/)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)
+- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/001/)

@@ -125,7 +125,6 @@ Con root se leen `/root/root.txt` y la flag de usuario ya obtenida.
 - [CVE-2025-6019](https://nvd.nist.gov/vuln/detail/CVE-2025-6019)
 - [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
 - [systemd-timers](../../../knowledge/privesc/systemd-timers.md)
-
 ## De wwwrun a usuario
 
 ```bash

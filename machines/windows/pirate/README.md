@@ -76,7 +76,6 @@ El DC se llama `DC01`, el dominio `pirate.htb` y el DC tiene **SMB signing activ
 
 - [adcs-esc13](../../../knowledge/windows/adcs-esc13.md)
 - [gmsa-read-key](../../../knowledge/windows/gmsa-read-key.md)
-
 ## Pre-Windows 2000
 
 ```bash

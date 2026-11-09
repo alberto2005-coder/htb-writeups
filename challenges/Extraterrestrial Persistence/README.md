@@ -8,7 +8,6 @@ tags: [forensics, linux, systemd, persistence, base64]
 type: Forensics
 ---
 
-
 # Extraterrestrial Persistence — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ Un script de shell instala persistencia en Linux: se descarga un binario a `/usr
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [systemd-timers](../../knowledge/privesc/systemd-timers.md)
-
 ## Método
 
 1. **Leer el script**: primero comprueba `whoami`/`hostname` para ejecutarse sólo en el host esperado; después descarga y prepara la unidad.

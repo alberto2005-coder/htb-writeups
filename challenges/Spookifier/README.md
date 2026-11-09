@@ -7,7 +7,6 @@ state: Retired
 tags: [web, flask, mako, ssti, rce]
 ---
 
-
 # Spookifier — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -94,4 +93,3 @@ HTB{<flag>}
 ## Referencias
 
 - [ssti](../../knowledge/web/ssti.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

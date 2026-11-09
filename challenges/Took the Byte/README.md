@@ -8,7 +8,6 @@ tags: [forensics, xor, zip, magic-bytes, cyberchef]
 type: Forensics
 ---
 
-
 # Took the Byte — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -60,10 +59,6 @@ Te dan un fichero llamado `password` que no abre con nada. Su contenido es casi 
 
 - Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 
 ## Método
 

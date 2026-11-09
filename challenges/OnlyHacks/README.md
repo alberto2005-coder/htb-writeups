@@ -8,7 +8,6 @@ tags: [web, xss, cookie-stealing, session-hijack, flask]
 type: Web
 ---
 
-
 # OnlyHacks — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -61,10 +60,6 @@ Una app de citas con chat. Los mensajes **no se sanean**: XSS almacenado. Un bot
 
 - Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 
 ## Método
 

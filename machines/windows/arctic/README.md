@@ -117,7 +117,3 @@ C:\Users\Administrator\Desktop\root.txt -> <root_flag>
 
 - Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
 - Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
-
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

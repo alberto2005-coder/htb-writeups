@@ -87,7 +87,6 @@ La vía es una unidad de systemd o un script de cron **escribible** por el usuar
 
 - [pcap-triage](../../../knowledge/forensics/pcap-triage.md)
 - [systemd-timers](../../../knowledge/privesc/systemd-timers.md)
-
 ## Handshake y crackeo
 
 ```bash

@@ -7,7 +7,6 @@ state: Retired
 tags: [crypto, custom-cipher, permutation, reverse-engineering]
 ---
 
-
 # Makeshift — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -95,5 +94,4 @@ Comprobación rápida: el resultado debe empezar por `HTB{`. Si sale desplazado 
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)

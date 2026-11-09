@@ -7,7 +7,6 @@ state: Retired
 tags: [mobile, android, apk, aes, jadx]
 ---
 
-
 # Cryptohorrific — Hack The Box (Challenge)
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -67,9 +66,7 @@ MITRE: T1409, T1521.
 
 - [MITRE T1409](https://attack.mitre.org/techniques/T1409/)
 - [MITRE T1521](https://attack.mitre.org/techniques/T1521/)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [apk-analysis](../../knowledge/mobile/apk-analysis.md)
-
 ## Triaje
 
 ```bash

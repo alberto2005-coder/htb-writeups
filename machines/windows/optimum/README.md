@@ -84,4 +84,3 @@ whoami /priv
 
 - [CVE-2014-6287](https://nvd.nist.gov/vuln/detail/CVE-2014-6287)
 - [CVE-2016-0099](https://nvd.nist.gov/vuln/detail/CVE-2016-0099)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

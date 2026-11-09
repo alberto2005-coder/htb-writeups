@@ -93,4 +93,3 @@ sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
 ## Referencias
 
 - [CVE-2023-43364](https://nvd.nist.gov/vuln/detail/CVE-2023-43364)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

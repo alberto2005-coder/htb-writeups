@@ -7,7 +7,6 @@ state: Retired
 tags: [crypto, classical, caesar, trithemius, reverse-engineering]
 ---
 
-
 # Dynastic — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -107,5 +106,4 @@ Alternativa sin código: en CyberChef, «ROT13 Brute Force» o un script de una 
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)

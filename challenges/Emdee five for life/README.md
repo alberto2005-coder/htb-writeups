@@ -7,7 +7,6 @@ state: Retired
 tags: [misc, md5, scripting, automation, python]
 ---
 
-
 # Emdee five for life — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -82,10 +81,6 @@ Con Burp también se resuelve: `Ctrl+R` sobre la petición, `Send to Repeater`, 
 
 - Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 
 ## Variantes y tropiezos
 

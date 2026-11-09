@@ -8,7 +8,6 @@ tags: [forensics, powershell, deobfuscation, download-cradle]
 type: Forensics
 ---
 
-
 # Alien Cradle — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -61,10 +60,6 @@ Te dan `cradle.ps1`, un **PowerShell download cradle** ofuscado. Comprueba la id
 
 - Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 
 ## Método
 

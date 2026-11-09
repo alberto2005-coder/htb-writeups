@@ -8,7 +8,6 @@ tags: [web, sqli, bcrypt, sqlmap, cyber-apocalypse-2024]
 type: Web
 ---
 
-
 # KORP Terminal — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -60,10 +59,6 @@ Un login de una terminal ficticia. Una comilla simple provoca un **error de MySQ
 ## Mitigaciones y detección
 
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 
 ## Método
 

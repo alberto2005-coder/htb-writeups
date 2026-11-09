@@ -7,7 +7,6 @@ state: Retired
 tags: [web, php, code-injection, eval, ssti]
 ---
 
-
 # LoveTok — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -101,4 +100,3 @@ ${include('/flag')}
 ## Referencias
 
 - [ssti](../../knowledge/web/ssti.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

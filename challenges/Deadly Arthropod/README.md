@@ -8,7 +8,6 @@ tags: [forensics, usb, hid, pcap, keystrokes]
 type: Forensics
 ---
 
-
 # Deadly Arthropod — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -66,8 +65,6 @@ La captura contiene tráfico **USB de un teclado**. Cada pulsación viaja como u
 ## Referencias
 
 - [pcap-triage](../../knowledge/forensics/pcap-triage.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Aislar el dispositivo**: identificar la dirección del teclado y el endpoint de interrupción.

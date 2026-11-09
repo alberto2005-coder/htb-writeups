@@ -8,7 +8,7 @@
 
 | Reto | Tipo | Dificultad | Técnica | Estado | ES | EN |
 |---|---|---|---|---|---|---|
-| ropme | Pwn | Easy | Buffer overflow con NX: `pop rdi`, `/bin/sh` y `system@plt` | **Retired** | [Ver](ropme/README.md) | [EN](ropme/README.en.md) |
+| ropme | Pwn | Easy | Ret2libc con leak de `puts@got`: base de libc y `system("/bin/sh")` | **Retired** | [Ver](ropme/README.md) | [EN](ropme/README.en.md) |
 | Easy Phish | OSINT | Very Easy | Typosquatting y registros SPF/DMARC del dominio señuelo | **Retired** | [Ver](Easy%20Phish/README.md) | [EN](Easy%20Phish/README.en.md) |
 | Hidden in Colors | Stego | Easy | LSB en PNG con `zsteg` y lectura por canales | **Retired** | [Ver](Hidden%20in%20Colors/README.md) | [EN](Hidden%20in%20Colors/README.en.md) |
 | Bare Metal | Hardware | Easy | UART a 3.3 V, U-Boot y extracción del rootfs con `binwalk` | **Retired** | [Ver](Bare%20Metal/README.md) | [EN](Bare%20Metal/README.en.md) |
@@ -17,7 +17,7 @@
 | Emdee five for life | Misc | Very Easy | MD5 contra reloj: sesión, regex y cálculo del hash en un script | **Retired** | [Ver](Emdee%20five%20for%20life/README.md) | [EN](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | Inyección LDAP: `*` en usuario y contraseña, y buscador con comodines | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | Confusión de algoritmos JWT: HS256 firmado con la clave pública | **Retired** | [Ver](Under%20Construction/README.md) | [EN](Under%20Construction/README.en.md) |
-| Toxic | Web | Very Easy | Deserializacion PHP en cookie: `__destruct` escribe un webshell | **Retired** | [Ver](Toxic/README.md) | [EN](Toxic/README.en.md) |
+| Toxic | Web | Very Easy | Inyeccion de objetos PHP: `PageModel::__destruct` incluye un fichero (LFI) y log poisoning en nginx | **Retired** | [Ver](Toxic/README.md) | [EN](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | **Retired** | [Ver](LoveTok/README.md) | [EN](LoveTok/README.en.md) |
 | Templated | Web | Easy | SSTI de Jinja2 en `render_template_string` | **Retired** | [Ver](Templated/README.md) | [EN](Templated/README.en.md) |
 | baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | **Retired** | [Ver](baby%20ninja%20jinja/README.md) | [EN](baby%20ninja%20jinja/README.en.md) |

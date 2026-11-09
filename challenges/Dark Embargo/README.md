@@ -137,7 +137,6 @@ Dos offsets estables para este build. El resto del trabajo es convencer al alloc
 - CVE-2026-109618 y CVE-2026-109619 (PHP 8.4, `session.upload_progress`).
 - Código de PHP: `main/rfc1867.c`, `ext/session/php_session.h`, `Zend/zend_alloc.c`.
 - MITRE ATT&CK: T1190, T1059.004.
-
 ## Entorno de depuración y offsets
 
 Nada de esto se ve desde fuera, así que se levanta una segunda copia de la misma imagen con GDB dentro. Hacen falta dos cosas: `CAP_SYS_PTRACE` (Docker lo quita por defecto) y un solo worker para tener un proceso predecible.

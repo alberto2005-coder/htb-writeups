@@ -7,7 +7,6 @@ state: Retired
 tags: [web, nodejs, ssrf, response-splitting, sqli, account-takeover]
 ---
 
-
 # Weather App — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -113,7 +112,3 @@ La sesión de administrador devuelve la flag en el panel.
 ## Mitigaciones y detección
 
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

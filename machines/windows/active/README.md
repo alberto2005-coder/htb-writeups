@@ -119,4 +119,3 @@ whoami
 ## Referencias
 
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

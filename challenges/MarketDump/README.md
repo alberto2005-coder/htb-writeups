@@ -8,7 +8,6 @@ tags: [forensics, pcap, http, base58, exfiltracion]
 type: Forensics
 ---
 
-
 # MarketDump — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,8 +63,6 @@ En el PCAP, un atacante que pivotó por la web se lleva la base de datos de clie
 ## Referencias
 
 - [pcap-triage](../../knowledge/forensics/pcap-triage.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Panorama del tráfico**: `Statistics → Protocol Hierarchy`. Además de HTTP aparece tráfico de base de datos, lo que confirma el pivote por la web.

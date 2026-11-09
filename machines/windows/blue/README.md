@@ -96,7 +96,6 @@ C:\Users\Administrator\Desktop\root.txt  -> <root_flag>
 ## Referencias
 
 - [rop-stack](../../../knowledge/pwn/rop-stack.md)
-
 ## Post-explotación
 
 ```text

@@ -8,7 +8,6 @@ tags: [forensics, pcap, webshell, keepass, john, ofuscacion]
 type: Forensics
 ---
 
-
 # Obscure — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -65,8 +64,6 @@ Un atacante sube un **webshell PHP ofuscado** (`support.php`) con base64 + zlib 
 ## Referencias
 
 - [pcap-triage](../../knowledge/forensics/pcap-triage.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Entender el webshell**: deshacer capas en orden — base64, descompresión zlib y XOR con la clave del propio código. Un `eval` al final indica que el parámetro POST ejecuta código.

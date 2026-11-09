@@ -1,10 +1,10 @@
 ---
 sherlock: CrownJewel-1
-domain: SOC
+domain: DFIR
 difficulty: Medium
 platform: Hack The Box
 state: Retired
-tags: [dfir, active-directory, dcsync, golden-ticket, domain-admin]
+tags: [dfir, active-directory, ntds, vss, credential-dumping, mft]
 ---
 
 
@@ -16,45 +16,56 @@ tags: [dfir, active-directory, dcsync, golden-ticket, domain-admin]
 
 ## Escenario
 
-Un dominio Windows aparece con actividad administrativa que nadie reconoce. Se entrega telemetría de los controladores y de un par de servidores; el objetivo es determinar cómo se obtuvo el control del dominio y qué cuentas quedaron comprometidas.
+Forela es una empresa que sospecha un compromiso de su Active Directory. El equipo de respuesta entrega una imagen del controlador de dominio y los artefactos de los hosts implicados. El objetivo es reconstruir qué hizo el intruso, cómo obtuvo las credenciales del dominio y qué evidencia lo demuestra.
 
 ## Evidencias
 
-- Logs de seguridad de DC y servidores miembros.
-- Eventos de replicación de directorio (4662) y de acceso a servicios.
-- Artefactos de endpoint de los hosts implicados.
+- `$MFT` del volumen del DC, con marcas de tiempo `$SI` y `$FN`.
+- `NTFS.evtx` (registro del sistema de ficheros) y `SECURITY.evtx` / `SYSTEM.evtx`.
+- Copia del directorio `NTDS` y del hive `SYSTEM`, si el atacante llegó a extraerlos.
 
 ## Investigación
 
-### 1. Replicación no autorizada
+### 1. Creación de una copia de sombra
 
-`4662` con el GUID de replicación (`1131f6aa-9c07-11d1-f79f-00c04fc2dcd2`) y una cuenta que no es de máquina apunta a **DCSync**:
+El primer indicio es la ejecución de utilidades de instantáneas de volumen en el DC:
 
-```bash
-grep "4662" Security.evtx | grep -i "1131f6aa" | head
+```powershell
+vssadmin create shadow /for=C:
+# o alternativas equivalentes
+diskshadow.exe
+wmic shadowcopy call create Volume='C:\'
 ```
 
-Se identifica la cuenta que pidió la replicación y el host desde el que se hizo.
+En `SECURITY.evtx`/`SYSTEM.evtx` se busca el servicio `VSS` (`vssvc.exe`) y, si hay auditoría de procesos, el `4688` con `vssadmin.exe` o `diskshadow.exe` como línea de comandos.
 
-### 2. Fase previa
+### 2. Extracción de NTDS.dit
 
-DCSync no es el primer paso. Se busca el otorgamiento de derechos (`DS-Replication-Get-Changes`) en los logs de cambios de ACL, y el compromiso de la cuenta que los tenía: phishing, contraseña reutilizada o un servicio expuesto.
-
-### 3. Persistencia
+Desde la copia de sombra se accede a `C:\Windows\NTDS\ntds.dit`, la base de datos del directorio, y se copia junto con el hive `SYSTEM` (necesario para la clave de arranque). El `$MFT` permite situar la creación y la copia: se comparan `$SI` (cambios de contenido) con `$FN` (metadatos del nombre) para detectar timestomping.
 
 ```bash
-grep "4769" Security.evtx | grep -i "krbtgt" | head
+# análisis del $MFT con las herramientas del caso
+MFTECmd.exe -f '$MFT' --csv out/
 ```
 
-Tickets para `krbtgt` desde hosts no-DC sugieren **golden ticket**. El `4768` sin `4624` previo y con `Ticket Options` atípicas refuerza la hipótesis.
+### 3. Qué se llevó el atacante
+
+La pareja `ntds.dit` + `SYSTEM` permite extraer todos los hashes del dominio con `secretsdump`/`impacket` y obtener `krbtgt`, lo que habilita persistencia con golden ticket. La evidencia clave es la **copia** de ambos ficheros, no un `4662` de replicación: aquí no hubo DCSync, hubo robo del fichero.
 
 ## Conclusiones
 
-- Escalada hasta control de dominio mediante replicación de directorio con una cuenta comprometida.
-- Persistencia probable con ticket dorado: rotar `krbtgt` dos veces es obligatorio.
+- El control del dominio se obtuvo copiando `NTDS.dit` y el hive `SYSTEM` desde una instantánea de volumen creada con `vssadmin`/`diskshadow`, no mediante replicación de directorio.
+- Con `krbtgt` en manos del atacante, la rotación doble de la cuenta es obligatoria aunque no se observe un golden ticket en los logs.
+- El alcance es todo el dominio: cualquier cuenta y equipo queda comprometido.
 
 ## Lecciones
 
-- `4662` + GUID de replicación es la evidencia más limpia de DCSync.
-- Un golden ticket no deja `4624`: por eso hay que mirar `4768`/`4769` en el DC.
-- La respuesta a un compromiso de dominio empieza por `krbtgt`, no por el endpoint.
+- Crear una copia de sombra en un DC es un paso de reconocimiento/exfiltración, no una tarea administrativa rutinaria: `vssadmin` y `diskshadow` deben alertar.
+- `ntds.dit` + `SYSTEM` es equivalente a un DCSync: el impacto se mide por el fichero, no solo por el evento `4662`.
+- El `$MFT` demuestra la copia y desmonta el timestomping comparando `$SI` con `$FN`.
+- La respuesta empieza por aislar el DC, rotar `krbtgt` dos veces y revisar cuentas con privilegios.
+
+## Referencias
+
+- [MITRE T1003.003 — OS Credential Dumping: NTDS](https://attack.mitre.org/techniques/T1003/003/)
+- [Microsoft Learn — vssadmin](https://learn.microsoft.com/windows-server/administration/windows-commands/vssadmin)

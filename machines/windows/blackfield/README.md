@@ -114,7 +114,6 @@ El hash de Administrator permite `wmiexec`/`psexec` y leer ambas flags.
 ## Referencias
 
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
-
 ## De support a audit2020
 
 `support` tiene permiso para cambiar la contraseña de `audit2020` por RPC:

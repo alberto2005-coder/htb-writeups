@@ -130,4 +130,3 @@ uid=0(root) gid=0(root) groups=0(root)
 ## Referencias
 
 - [CVE-2014-6271](https://nvd.nist.gov/vuln/detail/CVE-2014-6271)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

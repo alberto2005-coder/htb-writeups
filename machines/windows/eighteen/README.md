@@ -117,7 +117,6 @@ C:\Users\Administrator\root.txt   -> <root_flag>
 - [CVE-2025-53779](https://nvd.nist.gov/vuln/detail/CVE-2025-53779)
 - [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
 - [mssql-exec](../../../knowledge/windows/mssql-exec.md)
-
 ## Crackeo del hash Werkzeug
 
 ```bash

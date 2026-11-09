@@ -132,4 +132,3 @@ Si la conexión inversa se corta, encadenar `sleep` y lanzar el comando en segun
 ## Referencias
 
 - [CVE-2023-41425](https://nvd.nist.gov/vuln/detail/CVE-2023-41425)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

@@ -159,4 +159,3 @@ root.txt     -> <root_flag>
 ## Referencias
 
 - [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

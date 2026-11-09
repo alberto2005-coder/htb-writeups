@@ -7,7 +7,6 @@ state: Retired
 tags: [crypto, rsa, small-modulus, euler-phi, textbook-rsa]
 ---
 
-
 # Primary Knowledge — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -95,5 +94,4 @@ Comprobación: `e*d % (n-1) == 1`, y el resultado debe empezar por `HTB{`.
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)

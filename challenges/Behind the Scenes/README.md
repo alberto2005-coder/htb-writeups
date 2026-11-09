@@ -65,7 +65,6 @@ Un ELF `stripped` que pide una contraseña de 12 caracteres. El autor insertó i
 ## Referencias
 
 - [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Comprobar la pista**: al ejecutarlo pide `./challenge <password>`; `strings` no revela la contraseña.

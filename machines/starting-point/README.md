@@ -45,10 +45,6 @@ Máquinas del itinerario **Starting Point** de Hack The Box. Van en tres tiers l
 - Deshabilitar el FTP anónimo y sustituirlo por SFTP/FTPS con cuentas nominales.
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
 
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Fichas
 
 | Máquina | OS | Concepto | Estado | ES | EN |

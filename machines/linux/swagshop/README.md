@@ -110,4 +110,3 @@ uid=0(root)
 ## Referencias
 
 - [CVE-2015-1397](https://nvd.nist.gov/vuln/detail/CVE-2015-1397)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

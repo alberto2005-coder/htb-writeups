@@ -65,7 +65,6 @@ Un ELF de 64 bits pide una contraseña; si es correcta, imprime la flag. La cont
 ## Referencias
 
 - [rop-stack](../../knowledge/pwn/rop-stack.md)
-
 ## Método
 
 1. **Triage**:

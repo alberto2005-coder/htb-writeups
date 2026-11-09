@@ -7,7 +7,6 @@ state: Retired
 tags: [osint, phishing, dns, spf, dmarc]
 ---
 
-
 # Easy Phish — Hack The Box (Challenge)
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -68,9 +67,9 @@ MITRE: T1583.001, T1566.002, T1596.
 - [MITRE T1566.002](https://attack.mitre.org/techniques/T1566/)
 - [MITRE T1583.001](https://attack.mitre.org/techniques/T1583/)
 - [MITRE T1596](https://attack.mitre.org/techniques/T1596/)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [MITRE T1583.001](https://attack.mitre.org/techniques/T1583/001/)
+- [MITRE T1566.002](https://attack.mitre.org/techniques/T1566/002/)
 - [phishing-infrastructure](../../knowledge/osint/phishing-infrastructure.md)
-
 ## Método
 
 1. **Dominio señuelo**: comparar el legítimo con variantes (typosquatting, guion, TLD distinto). `dnstwist` genera y resuelve candidatos:

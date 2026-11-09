@@ -7,7 +7,6 @@ state: Retired
 tags: [web, java, velocity, ssti, rce, cve-2020-13936]
 ---
 
-
 # Labyrinth Linguist — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -88,4 +87,3 @@ La salida del comando se imprime en la respuesta; con `cat /flag*` aparece la fl
 
 - [CVE-2020-13936](https://nvd.nist.gov/vuln/detail/CVE-2020-13936)
 - [ssti](../../knowledge/web/ssti.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

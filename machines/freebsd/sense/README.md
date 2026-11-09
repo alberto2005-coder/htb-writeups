@@ -96,4 +96,3 @@ El payload se codifica en **octal** para esquivar el filtro de la aplicación. N
 ## Referencias
 
 - [CVE-2014-4688](https://nvd.nist.gov/vuln/detail/CVE-2014-4688)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

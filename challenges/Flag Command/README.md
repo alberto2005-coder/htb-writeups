@@ -7,7 +7,6 @@ state: Retired
 tags: [web, api, javascript, information-disclosure, client-side]
 ---
 
-
 # Flag Command — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -100,7 +99,3 @@ La flag también aparece en la respuesta de la petición `monitor` en la pestañ
 
 - Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

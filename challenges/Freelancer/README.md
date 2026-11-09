@@ -7,7 +7,6 @@ state: Retired
 tags: [web, sqli, login-bypass, union, database]
 ---
 
-
 # Freelancer — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -95,7 +94,3 @@ HTB{<flag>}
 ## Mitigaciones y detección
 
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

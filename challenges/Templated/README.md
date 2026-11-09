@@ -7,7 +7,6 @@ state: Retired
 tags: [web, flask, jinja2, ssti, rce]
 ---
 
-
 # Templated — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -98,4 +97,3 @@ Si el reto filtra `.` o `_`, `request|attr('application')|attr('__globals__')` p
 ## Referencias
 
 - [ssti](../../knowledge/web/ssti.md)
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

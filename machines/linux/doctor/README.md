@@ -108,7 +108,6 @@ La shell vuelve como root y se lee `/root/root.txt`.
 ## Referencias
 
 - [ssti](../../../knowledge/web/ssti.md)
-
 ## De web a shaun
 
 `adm` da lectura de logs. Buscando contraseñas en ellos aparece el reseteo de `shaun`:

@@ -102,7 +102,3 @@ more < hm.txt:root.txt
 - Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
 - Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
 - Actualizar Jenkins, deshabilitar la CLI remota y exigir autenticación en el panel.
-
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

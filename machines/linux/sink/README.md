@@ -96,7 +96,6 @@ Cookie: session=<sesión de admin>
 ## Referencias
 
 - Documentación de la plataforma y del servicio afectado.
-
 ## Gitea y secretos en el historial
 
 Con la sesión de admin se accede al panel, que enlaza un **Gitea** interno. En `http://<IP>:3000` hay un repo privado con un `.env` en un commit antiguo:

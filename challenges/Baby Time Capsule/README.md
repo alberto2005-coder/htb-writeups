@@ -8,7 +8,6 @@ tags: [crypto, rsa, small-modulus, factoring]
 type: Crypto
 ---
 
-
 # Baby Time Capsule — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ Tres "cápsulas del tiempo": tripletas `(n, e, ct)` de **RSA** con módulos **pe
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-
 ## Método
 
 1. **Mirar los números**: si `n` tiene menos de ~256 bits, está roto por diseño.

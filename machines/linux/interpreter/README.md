@@ -127,4 +127,3 @@ Si hay filtro de caracteres, se codifica la orden (`chr()` o base64) y se constr
 ## Referencias
 
 - [CVE-2023-43208](https://nvd.nist.gov/vuln/detail/CVE-2023-43208)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

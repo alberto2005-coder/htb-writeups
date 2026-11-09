@@ -95,4 +95,3 @@ id; uname -a; ls -la /home; find / -perm -4000 -type f 2>/dev/null
 
 - [CVE-2004-2687](https://nvd.nist.gov/vuln/detail/CVE-2004-2687)
 - [CVE-2007-2447](https://nvd.nist.gov/vuln/detail/CVE-2007-2447)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

@@ -118,4 +118,3 @@ evil-winrm -i dc01.fluffy.htb -u administrator -H <hash_admin>
 
 - [CVE-2025-24071](https://nvd.nist.gov/vuln/detail/CVE-2025-24071)
 - [adcs-esc13](../../../knowledge/windows/adcs-esc13.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

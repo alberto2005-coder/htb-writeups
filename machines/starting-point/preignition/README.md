@@ -83,7 +83,3 @@ Tras el login, la propia página muestra la flag:
 ## Mitigaciones y detección
 
 - Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

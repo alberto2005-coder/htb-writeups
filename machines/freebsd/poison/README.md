@@ -97,7 +97,6 @@ Dentro del escritorio se abre una terminal como root y se lee `/root/root.txt`.
 ## Referencias
 
 - [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
-
 ## LFI
 
 ```bash

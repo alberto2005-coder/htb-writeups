@@ -98,7 +98,6 @@ DC1: C:\Users\Administrator\Desktop\root.txt   -> <flag>
 - <https://learn.microsoft.com/defender-for-identity/security-assessment-edit-rbcd>
 - <https://posts.specterops.io/certified-pre-owned-d95910965cd2>
 - <https://www.rfc-editor.org/rfc/rfc4120>
-
 ## El reloj, antes que nada
 
 Con más de cinco minutos de desfase, Kerberos devuelve `KRB_AP_ERR_SKEW` y todo lo demás parece roto. Aquí el desfase era de **+8 h** y no lo causaba `systemd-timesyncd` (estaba inactivo), sino **VirtualBox Guest Additions** (`vboxservice`), que resincronizaba con el host cada pocos segundos.

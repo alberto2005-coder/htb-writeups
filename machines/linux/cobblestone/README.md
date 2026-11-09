@@ -72,8 +72,6 @@ deploy.cobblestone.htb   (panel de despliegues)
 
 - [CVE-2024-47533](https://nvd.nist.gov/vuln/detail/CVE-2024-47533)
 - [ssti](../../../knowledge/web/ssti.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)
-
 ## 1. SQLi de segundo orden
 
 El registro de `vote` acepta un comentario que se guarda y se inserta más tarde en la consulta de moderación:

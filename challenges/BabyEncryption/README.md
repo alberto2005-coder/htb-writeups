@@ -8,7 +8,6 @@ tags: [crypto, affine, modular-inverse, python]
 type: Crypto
 ---
 
-
 # BabyEncryption — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ Se entrega `chall.py` y `msg.enc`. El cifrado es aritmética escolar sobre cada 
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-
 ## Método
 
 1. **Leer el cifrado**:

@@ -8,7 +8,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
-| ropme | Pwn | Easy | NX buffer overflow: `pop rdi`, `/bin/sh` and `system@plt` | **Retired** | [ES](ropme/README.md) | [Ver](ropme/README.en.md) |
+| ropme | Pwn | Easy | Ret2libc with a `puts@got` leak: libc base and `system("/bin/sh")` | **Retired** | [ES](ropme/README.md) | [Ver](ropme/README.en.md) |
 | Easy Phish | OSINT | Very Easy | Typosquatting and SPF/DMARC records of the decoy domain | **Retired** | [ES](Easy%20Phish/README.md) | [Ver](Easy%20Phish/README.en.md) |
 | Hidden in Colors | Stego | Easy | PNG LSB with `zsteg` and per-channel reading | **Retired** | [ES](Hidden%20in%20Colors/README.md) | [Ver](Hidden%20in%20Colors/README.en.md) |
 | Bare Metal | Hardware | Easy | 3.3 V UART, U-Boot and rootfs extraction with `binwalk` | **Retired** | [ES](Bare%20Metal/README.md) | [Ver](Bare%20Metal/README.en.md) |
@@ -17,7 +17,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Emdee five for life | Misc | Very Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | LDAP injection: `*` as user and password, wildcards in search | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
-| Toxic | Web | Very Easy | Deserializacion PHP en cookie: `__destruct` escribe un webshell | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
+| Toxic | Web | Very Easy | PHP object injection: `PageModel::__destruct` includes a file (LFI) and nginx log poisoning | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | Retired | [ES](LoveTok/README.md) | [Ver](LoveTok/README.en.md) |
 | Templated | Web | Easy | SSTI de Jinja2 en `render_template_string` | Retired | [ES](Templated/README.md) | [Ver](Templated/README.en.md) |
 | baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | Retired | [ES](baby%20ninja%20jinja/README.md) | [Ver](baby%20ninja%20jinja/README.en.md) |

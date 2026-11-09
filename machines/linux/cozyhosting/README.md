@@ -101,7 +101,3 @@ sudo ssh -o ProxyCommand=';sh 0<&2 1>&2' x
 
 - Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
-
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

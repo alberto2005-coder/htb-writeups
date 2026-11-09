@@ -7,7 +7,6 @@ state: Retired
 tags: [web, ldap, ldap-injection, auth-bypass]
 ---
 
-
 # Phonebook — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -91,7 +90,3 @@ Encadenado, un filtro más preciso sirve para enumerar atributos:
 ## Mitigaciones y detección
 
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
-
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)

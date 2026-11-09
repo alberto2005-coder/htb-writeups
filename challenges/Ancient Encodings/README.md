@@ -8,7 +8,6 @@ tags: [crypto, base64, hex, encodings]
 type: Crypto
 ---
 
-
 # Ancient Encodings — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -64,9 +63,7 @@ type: Crypto
 
 ## Referencias
 
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-
 ## Método
 
 1. **Leer el cifrado**:

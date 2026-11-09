@@ -123,4 +123,3 @@ uid=0(root) gid=0(root)
 ## Referencias
 
 - [CVE-2018-15133](https://nvd.nist.gov/vuln/detail/CVE-2018-15133)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)
