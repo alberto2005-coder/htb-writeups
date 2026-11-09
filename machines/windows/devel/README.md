@@ -44,7 +44,11 @@ ftp> put cmdasp.aspx
 ftp> ls
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 Webshell de comandos y comprobación de identidad:
 
@@ -70,7 +74,12 @@ rlwrap nc -lvnp 4444
 
 Si la sesión se cae al enviar comandos (habitual con `shell_reverse_tcp` en este IIS), subir `nc.exe` y lanzarlo desde `cmdasp.aspx`, o usar la webshell de Antak.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 Recolección mínima:
 
@@ -91,15 +100,28 @@ whoami
 type C:\Users\Administrator\Desktop\root.txt
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Meterpreter se queda colgado en este host; una shell `shell_reverse_tcp` o `nc.exe` es más estable.
 - Al subir binarios, `ftp> binary` **antes** del `put`, o el ejecutable llega corrupto.
 - MS10-015 necesita arquitectura x86; en x64 no aplica.
 - `sysinfo` en Meterpreter confirma versión y arquitectura antes de elegir exploit.
 
-## Lecciones
-
 - FTP anónimo con escritura sobre el webroot es RCE sin exploit: es configuración.
 - Un servidor sin parches convierte un foothold de bajos privilegios en SYSTEM.
 - Mitigación: FTP sin escritura y fuera del webroot, cuentas anónimas deshabilitadas, parcheo y bloqueo de `SeImpersonate` donde no haga falta.
+
+## Mitigaciones y detección
+
+- Deshabilitar el FTP anónimo y sustituirlo por SFTP/FTPS con cuentas nominales.
+
+## Referencias
+
+- [CVE-2010-0232](https://nvd.nist.gov/vuln/detail/CVE-2010-0232)
+- [linux-sudo-suid](../../../knowledge/privesc/linux-sudo-suid.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

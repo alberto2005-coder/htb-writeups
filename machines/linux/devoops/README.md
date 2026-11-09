@@ -41,7 +41,11 @@ gobuster dir -u http://<IP>:5000/ -w /usr/share/wordlists/dirb/common.txt
 
 La web permite enviar un «post» en XML y verlo procesado. El mensaje de respuesta incluye los campos del XML, lo que ya sugiere un parser con entidades activas.
 
-## Acceso por XXE
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -73,7 +77,12 @@ cat ~/user.txt
 
 Vía alternativa (no la usada aquí): el endpoint `/feed` deserializa base64 con **`pickle`**, lo que da RCE como `roosa` directamente. El código está en `/home/roosa/deploy/src/feed.py`.
 
-## Escalada por el historial de git
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 cat ~/.bash_history
@@ -96,9 +105,23 @@ ssh -i /tmp/root.key root@<IP>
 cat /root/root.txt
 ```
 
-## Lecciones
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Un parser XML con entidades externas activas es lectura arbitraria de ficheros, y las claves SSH son el botín natural.
 - `pickle` en el mismo servicio es una segunda vía de RCE: dos fallos, un solo endpoint mal diseñado.
 - `git` no olvida: un secreto borrado en el HEAD sigue en el historial, y el `.bash_history` dice dónde mirar.
 - Detección: XML con `DOCTYPE`/`ENTITY` en peticiones, y accesos SSH con claves desde IPs nuevas.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Deshabilitar entidades externas y DTD en el parser XML.
+
+## Referencias
+
+- [xxe](../../../knowledge/web/xxe.md)

@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 evidence: Volcado de memoria de un puesto de Forela
 tools: [Volatility 3, windows.netscan, windows.cmdline, strings]
+state: Retired
+tags: [dfir, dfir-/-memoria]
 ---
+
 
 # RogueOne — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Volatility 3, windows.netscan, windows.cmdline, strings]
 
 El SIEM dispara varias alertas en menos de un minuto señalando posible **C2** desde el puesto de Simon Stark (Forela). No hay procesos sospechosos visibles, así que el SOC aísla la máquina y entrega un volcado de memoria para confirmar el canal y reconstruir la línea temporal.
 
-## Evidencia
+## Evidencias
 
 - Un único fichero: volcado de memoria de Windows (`20230810.mem`).
 
-## Método
+## Investigación
 
 1. **Perfil del volcado** y lista de procesos: se buscan huérfanos, procesos con nombre legítimo pero ruta rara y relaciones padre-hijo anómalas.
 
@@ -47,6 +50,14 @@ vol -f 20230810.mem windows.cmdline --pid <PID>
 4. **Hora de ejecución**: `windows.netscan` y los tiempos de creación del proceso (`pslist` con `--physical`) dan el instante en que se estableció el canal.
 
 5. **Huella del binario**: si se puede volcar el ejecutable del proceso, `strings`/hash MD5 lo identifican y permiten buscarlo en inteligencia.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

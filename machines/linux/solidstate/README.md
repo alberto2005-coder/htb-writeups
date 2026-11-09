@@ -36,7 +36,11 @@ nmap -p- --min-rate 5000 -sV -sC <IP> -oN nmap.txt
 
 La web es la página de la empresa. Lo interesante son los puertos de correo y el 4555, que `nmap` identifica con el banner de administración de James.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 nc <IP> 4555
@@ -82,7 +86,12 @@ cat ~/user.txt
 
 Vía alternativa de acceso: el exploit público de **James 2.3.2** (autenticado en 4555) ejecuta comandos y da shell como `james`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 echo $SHELL
@@ -113,9 +122,22 @@ printf '\nos.system("cp /root/root.txt /tmp/root.txt; chmod 644 /tmp/root.txt")\
 cat /tmp/root.txt
 ```
 
-## Lecciones
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Un servicio de administración con `root:root` entrega el correo y, con él, las credenciales que la gente se manda por correo.
 - `rbash` se evade con `bash --noprofile` en el mismo SSH; restringir el shell sin restringir el binario no sirve.
 - Un script en `/opt` que root ejecuta por cron y otro usuario puede escribir es escalada directa.
 - Detección: conexiones a 4555 desde fuera del segmento de correo, `setpassword` en el log de James y escrituras en `/opt` seguidas de ejecución por cron.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

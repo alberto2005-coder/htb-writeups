@@ -49,7 +49,11 @@ pterodactyl.htb        -> landing de Minecraft
 panel.pterodactyl.htb  -> panel Pterodactyl v1.11.10
 ```
 
-## Acceso: CVE-2025-49132
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 `/locales/locale.json` usa los parámetros `locale` y `namespace` para construir una ruta que acaba en `require()`, sin normalizar. Se usa un PoC público ajustando la ruta de PEAR de openSUSE (suele necesitar más `../` que en Debian):
 
@@ -65,32 +69,12 @@ curl -s "http://panel.pterodactyl.htb/locales/locale.json?locale=../../../../../
 
 Del `.env` y de `config/database.php` salen `APP_KEY`, usuario y contraseña de MariaDB. La cadena con **PEAR** es la que da ejecución: `pearcmd.php` acepta argumentos por query string (`register_argc_argv`) y escribe un fichero PHP en el webroot, que después se incluye. La shell vuelve como **`wwwrun`**.
 
-## De wwwrun a usuario
+## Movimiento lateral
 
-```bash
-mysql -h 127.0.0.1 -u pterodactyl -p'<password>' panel
-```
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
 
-```sql
-select email, username, password from users;
-```
-
-El hash bcrypt de `phileasfogg3` cae con John:
-
-```bash
-john --wordlist=rockyou.txt hash.txt
-```
-
-La contraseña está reutilizada en SSH:
-
-```bash
-ssh phileasfogg3@<IP>
-cat ~/user.txt
-```
-
-En `/var/mail/` hay un correo que menciona la cadena de escalada de udisks, la pista del siguiente paso.
-
-## Escalada: CVE-2025-6018 + CVE-2025-6019
+## Escalada de privilegios
 
 La primera pieza es específica de SUSE: `pam_env` procesa `~/.pam_environment` **antes** de `pam_systemd`, así que se pueden inyectar `XDG_SEAT` y `XDG_VTNR` y hacer que Polkit trate la sesión SSH como una consola local (`allow_active`).
 
@@ -116,10 +100,53 @@ uid=0(root)
 
 Con root se leen `/root/root.txt` y la flag de usuario ya obtenida.
 
-## Lecciones
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Un panel de terceros sin actualizar con CVE crítica sin autenticar es el punto de entrada, y el `changelog.txt` dice la versión exacta.
 - El LFI no solo lee: con `pearcmd.php` y `register_argc_argv` escribe y ejecuta.
 - Las credenciales de la base de datos del panel son la vía al hash bcrypt, y la reutilización de contraseña hace el resto.
 - En SUSE, PAM y Polkit no se comportan como en Debian: `pam_env` antes de `pam_systemd` convierte una sesión remota en local.
 - Detección: peticiones a `/locales/locale.json` con `../`, escrituras en el webroot y montajes de loop devices desde una cuenta web.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [CVE-2025-49132](https://nvd.nist.gov/vuln/detail/CVE-2025-49132)
+- [CVE-2025-6018](https://nvd.nist.gov/vuln/detail/CVE-2025-6018)
+- [CVE-2025-6019](https://nvd.nist.gov/vuln/detail/CVE-2025-6019)
+- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
+- [systemd-timers](../../../knowledge/privesc/systemd-timers.md)
+
+## De wwwrun a usuario
+
+```bash
+mysql -h 127.0.0.1 -u pterodactyl -p'<password>' panel
+```
+
+```sql
+select email, username, password from users;
+```
+
+El hash bcrypt de `phileasfogg3` cae con John:
+
+```bash
+john --wordlist=rockyou.txt hash.txt
+```
+
+La contraseña está reutilizada en SSH:
+
+```bash
+ssh phileasfogg3@<IP>
+cat ~/user.txt
+```
+
+En `/var/mail/` hay un correo que menciona la cadena de escalada de udisks, la pista del siguiente paso.

@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Captura de tráfico de una infección con SSLoad
 tools: [Wireshark, tshark, CyberChef, Python]
+state: Retired
+tags: [dfir, soc-/-red]
 ---
+
 
 # Interceptor — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, tshark, CyberChef, Python]
 
 Un SOC detecta actividad sospechosa hacia Internet. La captura contiene la infección completa de un cargador tipo **SSLoad**: descarga de un **MSI** por **WebDAV**, ejecución y comunicación **C2 cifrada con RC4**.
 
-## Evidencia
+## Evidencias
 
 - Un PCAP con tráfico web, WebDAV y conexiones salientes.
 
-## Método
+## Investigación
 
 1. **Descarga inicial**: buscar peticiones a recursos `.msi` y métodos WebDAV (`PROPFIND`, `OPTIONS`, `GET` con `Depth`).
 
@@ -40,6 +43,14 @@ tshark -r interceptor.pcap -Y 'http.request.method=="POST"' -T fields -e http.ho
 ```
 
 5. **Extraer el siguiente stage**: del JSON descifrado salen comandos, rutas y URLs nuevas. Documentar IOCs.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

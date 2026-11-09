@@ -7,6 +7,7 @@ state: Retired
 tags: [crypto, rsa, small-modulus, euler-phi, textbook-rsa]
 ---
 
+
 # Primary Knowledge — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -17,7 +18,7 @@ tags: [crypto, rsa, small-modulus, euler-phi, textbook-rsa]
 
 RSA mal construido: el módulo `n` **es primo**. Entonces `φ(n) = n − 1`, la clave privada sale sin factorizar nada y el mensaje se descifra en dos líneas. El nombre del reto es la pista: si `n` es primo, no hay dos primos que buscar.
 
-## Enunciado
+## Enunciado y superficie
 
 ```python
 from Crypto.Util.number import getPrime, bytes_to_long
@@ -31,7 +32,15 @@ print(f'e = {e}')
 print(f'c = {c}')
 ```
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 En RSA normal `n = p·q` y `φ(n) = (p−1)(q−1)`. Aquí solo se generó un primo, así que:
 
@@ -40,6 +49,10 @@ En RSA normal `n = p·q` y `φ(n) = (p−1)(q−1)`. Aquí solo se generó un pr
 - `m = cᵈ mod n`
 
 No hay factorización ni Coppersmith: es álgebra directa.
+
+## Reproducción local
+
+- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
 
 ## Explotación
 
@@ -59,15 +72,28 @@ print(long_to_bytes(m).decode())
 
 Comprobación: `e*d % (n-1) == 1`, y el resultado debe empezar por `HTB{`.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Confundir φ con n**: hay que usar `n − 1`, no `n`.
 - **`d` negativa**: `pow(e, -1, m)` ya la normaliza; si se calcula a mano con Euclides, sumar `m` hasta que sea positiva.
 - **`long_to_bytes`**: si el mensaje sale con ceros delante, usar `strip` solo de nulos, no de espacios.
 - **`n` de 1024 bits**: el reto no pide factorizar; si se intenta, se pierde el tiempo.
 
-## Lecciones
-
 - La seguridad de RSA depende de que `n` sea producto de dos primos grandes y distintos.
 - Si `n` es primo, `φ(n)` es público por definición: el cifrado es reversible por cualquiera.
 - Mitigación: generar claves con librerías contrastadas (`cryptography`, OpenSSL) y validar que `n = p·q` con `p ≠ q`.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [block-ciphers](../../knowledge/crypto/block-ciphers.md)

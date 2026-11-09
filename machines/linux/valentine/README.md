@@ -38,7 +38,11 @@ curl http://<IP>/dev/
 
 En `/dev/` aparecen `hype_key` y `notes.txt`. La web tiene además un codificador y un decodificador (`/encode.php`, `/decode.php`), que son la pista de que todo lo que se envía pasa por memoria.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Heartbleed** contra el 443 con cualquier implementación pública (PoC en Python, `nmap --script ssl-heartbleed`, Metasploit):
 
@@ -62,7 +66,12 @@ openssl rsa -in hype_key.pem -out hype_key_dec.pem
 ssh -i hype_key_dec.pem -o PubkeyAcceptedKeyTypes=+ssh-rsa hype@<IP>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 cat ~/.bash_history
@@ -79,16 +88,28 @@ tmux -S /.devs/dev_sess
 root@Valentine:~#
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`ssh-rsa` deprecado**: un cliente moderno rechaza la clave con «no mutual signature algorithm»; hay que reactivar el algoritmo antiguo.
 - **Hex, no PEM**: `hype_key` no abre con `openssl` directamente, primero `xxd -r -p`.
 - **Passphrase**: puede venir partida en varias fugas de Heartbleed; conviene repetir el ataque y filtrar por cadenas imprimibles.
 - **DirtyCow**: el kernel es antiguo y el exploit también funciona, pero el socket de tmux es más directo y menos arriesgado.
 
-## Lecciones
-
 - Heartbleed no sólo filtra claves de sesión: cualquier secreto que haya pasado por el proceso TLS puede salir.
 - Publicar una clave privada, aunque esté cifrada, reduce el problema a crackear la *passphrase*.
 - Un socket de tmux con permisos de escritura para otros usuarios equivale a ser root.
 - Mitigación: parchear OpenSSL, no servir material criptográfico desde el webroot, y proteger los sockets de sesión.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2014-0160](https://nvd.nist.gov/vuln/detail/CVE-2014-0160)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

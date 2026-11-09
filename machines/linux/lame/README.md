@@ -32,7 +32,11 @@ nmap -p- -sCV <IP> -oN nmap.txt
 3632/tcp open  distccd  distccd v1
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 **Samba `usermap_script` (CVE-2007-2447)** — el vector con root:
 
@@ -51,7 +55,12 @@ Alternativa con Metasploit: `exploit/multi/samba/usermap_script`.
 
 **`vsftpd 2.3.4`** — el backdoor del `:)` es un clásico, pero en esta caja el puerto 6200 no responde de forma fiable: es un señuelo.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 Por Samba la sesión ya es `uid=0`. Por `distcc` se entra como `daemon` y hace falta enumerar privilegios locales:
 
@@ -59,15 +68,31 @@ Por Samba la sesión ya es `uid=0`. Por `distcc` se entra como `daemon` y hace f
 id; uname -a; ls -la /home; find / -perm -4000 -type f 2>/dev/null
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`vsftpd`**: perder tiempo en el backdoor cuando el puerto 6200 está filtrado.
 - **SMB moderno**: un cliente actual puede rechazar el dialecto; usar `-m SMB2` o el módulo de MSF.
 - **Payloads**: la reverse shell va dentro del nombre de usuario; las comillas y el escape son la mitad del trabajo.
 
-## Lecciones
-
 - Un servicio de 2007 en 2017 es una invitación: versiones → CVEs públicos.
 - En `usermap_script` el fallo es de **inyección de comandos** en la cadena de usuario.
 - `distcc` expuesto es ejecución remota sin credenciales.
 - Mitigación: Samba actualizado, `distcc` no expuesto y `vsftpd` fuera de producción.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+- Deshabilitar el FTP anónimo y sustituirlo por SFTP/FTPS con cuentas nominales.
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2004-2687](https://nvd.nist.gov/vuln/detail/CVE-2004-2687)
+- [CVE-2007-2447](https://nvd.nist.gov/vuln/detail/CVE-2007-2447)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

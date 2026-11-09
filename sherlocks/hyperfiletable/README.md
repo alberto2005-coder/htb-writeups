@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Un único registro de la MFT de un equipo con phishing
 tools: [MFTECmd, MFTExplorer, Timeline Explorer, hexdump]
+state: Retired
+tags: [dfir, dfir-/-windows]
 ---
+
 
 # Hyperfiletable — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [MFTECmd, MFTExplorer, Timeline Explorer, hexdump]
 
 Un empleado nuevo de Forela descarga su documentación de bienvenida, pero alguien le coló un adjunto malicioso por phishing. Del equipo sólo se pudo recuperar **el registro de la MFT**: con eso hay que triar qué pasó.
 
-## Evidencia
+## Evidencias
 
 - Un `$MFT` (y, según el caso, su CSV ya parseado).
 
-## Método
+## Investigación
 
 1. **Parsear**: `MFTECmd` convierte la MFT en CSV.
 
@@ -37,9 +40,16 @@ MFTECmd.exe -f '$MFT' --csv . --csvf mft.csv
 
 5. **Cronología**: `Creation`/`Modified`/`MFTModified` de la descarga, del adjunto y de los procesos/ficheros derivados. Con sólo MFT, los tiempos son la única línea temporal.
 
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
+
 ## Qué enseña
 
-- La MFT es un índice de todo lo que existió en el volumen: nombres, tamaños, marcas de tiempo y atributos.
 - Un `ZoneId=3` prueba que el fichero vino de Internet, sin necesidad del historial del navegador.
 - `HostUrl` guarda la URL exacta de la descarga: IOC directo.
 - El tamaño del registro (`AllocatedSize`/`RealSize`) delata huecos y borrados.

@@ -36,7 +36,11 @@ gobuster dir -u http://<IP>:9999 -w /usr/share/wordlists/dirb/big.txt -x html,js
 
 Rutas interesantes: `/admin/`, un directorio con nombre aleatorio (`/asdiSIAJJ0QWE9JAS`), `/js/`, `/dev/` y `/dev/backup/`.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **`/admin/`**: el login valida las credenciales en JavaScript (`/js/login.js`); se lee la comprobación y se pasa de largo. La página de éxito enlaza al resto.
 2. **Fichero en base64**: el contenido de `/asdiSIAJJ0QWE9JAS` es base64; al decodificarlo sale un ZIP (`impossiblepassword.zip`) con un fichero de texto.
@@ -64,7 +68,12 @@ msf6 > run
 
 Shell como `www-data`; la flag de usuario está en `/home/ayush`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 Enumeración de SUID:
 
@@ -100,15 +109,28 @@ print("A"*52 + struct.pack("<I", system) + struct.pack("<I", exit_) + struct.pac
 # root@frolic
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Los ficheros del puerto 9999 mezclan codificaciones; no perder tiempo con fuerza bruta antes de decodificar.
 - El módulo de Metasploit necesita `TARGETURI /playsms` y el puerto 9999, no el 1880.
 - Las direcciones de libc cambian si la máquina se reinicia: recalcular con `ldd`.
 - Con ASLR activo el ret2libc directo falla; ahí tocaría filtrado o ROP puro.
 
-## Lecciones
-
 - Un login que se valida en el cliente no es un login.
 - PlaySMS 1.4 con subida de CSV autenticada es RCE directa: mantener CMS y plugins al día.
 - Un SUID con buffer overflow y ASLR desactivado es root; `checksec` antes de escribir el exploit.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+
+## Referencias
+
+- [adcs-esc13](../../../knowledge/windows/adcs-esc13.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

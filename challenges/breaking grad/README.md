@@ -7,6 +7,7 @@ state: Retired
 tags: [web, nodejs, prototype-pollution, rce]
 ---
 
+
 # breaking grad — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -17,11 +18,19 @@ tags: [web, nodejs, prototype-pollution, rce]
 
 API Node.js que calcula notas. Un `merge` recursivo sin filtrar claves deja **prototype pollution**; envenenando `Object.prototype` se cambia el flujo de un `child_process` y se ejecuta código.
 
-## Enunciado
+## Enunciado y superficie
 
 Aplicación de «calificaciones» con endpoints para crear estudiantes y calcular la media. El código fuente se entrega junto al reto.
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 En el código, la fusión de objetos no descarta `__proto__` ni `constructor`:
 
@@ -48,6 +57,10 @@ curl -s -X POST http://<IP>:<puerto>/api/students -H 'Content-Type: application/
 curl -s http://<IP>:<puerto>/api/students | grep polluted
 ```
 
+## Reproducción local
+
+- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+
 ## Explotación
 
 La ejecución llega por una llamada a `child_process` cuyas opciones se leen de un objeto contaminado (`shell`, `NODE_OPTIONS` o `env`):
@@ -64,14 +77,26 @@ O con `env` inyectando una shell de arranque:
 
 Al invocar el cálculo, el proceso hijo hereda el objeto envenenado y ejecuta lo que se le indique. Se usa para leer `/flag*` o lanzar una reverse shell.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **El merge debe ser recursivo**: con `Object.assign` no hay contaminación.
 - **`__proto__` bloqueado**: probar `constructor.prototype`.
 - **Persistencia dentro del proceso**: si Node se reinicia por petición, el efecto se pierde; en este reto el servidor es persistente.
 
-## Lecciones
-
 - La contaminación de prototipos en Node es RCE cuando el proceso hijo lee sus opciones de objetos compartidos.
 - `for...in` sin `Object.prototype.hasOwnProperty` es la raíz del fallo.
 - Mitigación: `Object.create(null)`, `Map`, o `lodash.merge` actualizado y validación de esquema con `additionalProperties: false`.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [rop-stack](../../knowledge/pwn/rop-stack.md)

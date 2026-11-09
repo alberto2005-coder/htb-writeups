@@ -7,6 +7,7 @@ state: Retired
 tags: [web, flask, jinja2, ssti, blacklist-bypass]
 ---
 
+
 # baby ninja jinja — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -17,11 +18,19 @@ tags: [web, flask, jinja2, ssti, blacklist-bypass]
 
 Mismo terreno que un SSTI de Jinja2, pero con una **blacklist** que bloquea `{{ }}`, `_`, `.` y palabras como `os` o `config`. Se sale con `{% print %}` para evitar las llaves dobles, el filtro `attr` para sustituir el punto y `request.application` para llegar a los globals sin escribir `__globals__` literal.
 
-## Enunciado
+## Enunciado y superficie
 
 Un buscador que refleja lo que escribes. `{{7*7}}` devuelve error o el texto tal cual: hay filtro. El nombre del reto ya dice qué tecnología hay detrás.
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 La app hace algo como:
 
@@ -33,6 +42,10 @@ return render_template_string(name)
 ```
 
 Como no bloquea `{% %}`, la sentencia de impresión sigue disponible; y como `attr` es un filtro de Jinja2, sustituye al acceso por punto.
+
+## Reproducción local
+
+- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
 
 ## Explotación
 
@@ -62,14 +75,26 @@ Alternativa con `cycler`, que casi nunca está en la lista:
 HTB{<flag>}
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`print` con paréntesis**: en Jinja2 `{%print x%}` funciona sin paréntesis; con ellos también en la mayoría de versiones.
 - **Comillas y `_`**: `replace('~','_')` reconstruye el nombre del atributo sin escribirlo.
 - **`os` bloqueado**: importar el módulo por `__import__('os')` evita la cadena literal.
 
-## Lecciones
-
 - Las blacklists de cadenas se esquivan con filtros y concatenación; el SSTI se cierra con sandbox, no con listas negras.
 - `{% %}` y `attr` son las dos primeras cosas que se prueban cuando `{{ }}` y `.` están filtrados.
 - Mitigación: `SandboxedEnvironment`, variables en vez de plantillas dinámicas, y WAF como capa extra.
+
+## Mitigaciones y detección
+
+- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+
+## Referencias
+
+- [ssti](../../knowledge/web/ssti.md)
+- [rop-stack](../../knowledge/pwn/rop-stack.md)

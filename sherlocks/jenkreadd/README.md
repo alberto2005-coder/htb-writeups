@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 state: Retired
 tags: [dfir, jenkins, cve-2024-23897, file-read, logs]
+sherlock: JenkreadD
+domain: DFIR
 ---
+
 
 # JenkreadD — Hack The Box (Sherlock)
 
@@ -15,7 +18,7 @@ tags: [dfir, jenkins, cve-2024-23897, file-read, logs]
 
 Un servidor **Jenkins** expuesto a Internet ha sido sondeado. La evidencia incluye logs del servicio, el historial de accesos y artefactos del host. Hay que determinar si se explotó la lectura arbitraria de ficheros de la CLI (**CVE-2024-23897**) y qué se llevó el atacante.
 
-## Evidencia y triaje
+## Evidencias
 
 ```bash
 ls -la; grep -a "jenkins" *.log | head
@@ -24,7 +27,7 @@ EvtxECmd.exe -d . --csv out --csvf evtx.csv     # si hay EVTX
 
 Artefactos útiles: `jenkins.log`, `access_log`, `audit.log`, el directorio `$JENKINS_HOME/logs`, tareas programadas y el historial de shell del servicio.
 
-## Método
+## Investigación
 
 - **CVE-2024-23897**: la CLI (`jenkins-cli.jar`) interpreta argumentos que empiezan por `@` como rutas de fichero; un error devuelve líneas del fichero. En los logs se ven peticiones a `/cli` con parámetros `@/etc/passwd`, `@/var/jenkins_home/secrets/...` o similares.
 - Buscar en `access_log` peticiones **POST /cli** con `-webSocket` o `args4j` y códigos 200/500 seguidos de descargas grandes.
@@ -32,7 +35,7 @@ Artefactos útiles: `jenkins.log`, `access_log`, `audit.log`, el directorio `$JE
 - Si hay EVTX/Sysmon, cruzar **4688** con `java -jar jenkins-cli.jar` y **Sysmon 11** con ficheros nuevos.
 - Confirmar qué ficheros se leyeron: claves de `secrets/`, `credentials.xml` y `config.xml` permiten RCE posterior.
 
-## Hallazgos (patrón)
+## Conclusiones
 
 ```text
 POST /cli  args="@<ruta>"  status=500
@@ -47,8 +50,6 @@ El patrón `@ruta` + error con contenido es la firma del CVE; un job nuevo o un 
 - La lectura arbitraria de ficheros en Jenkins suele terminar en RCE: `secrets/` y las credenciales están ahí.
 - Los logs de la CLI son la evidencia principal; el error que revela el fichero queda registrado.
 - Comparar el volumen de peticiones con la línea base separa escaneo de explotación.
-
-## Detección y mitigación
 
 - Actualizar Jenkins (CVE-2024-23897) y deshabilitar la CLI remota si no se usa.
 - Autenticación obligatoria, `authorizationStrategy` mínima y segmentación del panel.

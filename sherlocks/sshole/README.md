@@ -5,7 +5,10 @@ difficulty: Very Easy
 platform: Hack The Box
 evidence: Evidencias de un jumpbox Linux comprometido
 tools: [grep, journalctl, auth.log, tcpdump]
+state: Retired
+tags: [dfir, dfir-/-unix]
 ---
+
 
 # SSHole — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [grep, journalctl, auth.log, tcpdump]
 
 Un *jumpbox* mal configurado empieza a generar tráfico hacia un dominio sospechoso. Se entrega la evidencia recogida del propio servidor: hay que averiguar **cómo entraron** y **qué hicieron después**.
 
-## Evidencia
+## Evidencias
 
 - Archivos del jumpbox (logs de autenticación, historial, configuraciones) empaquetados en un ZIP con la contraseña habitual de los Sherlocks.
 
-## Método
+## Investigación
 
 1. **¿Cómo entraron?** El servicio SSH de la caja es antiguo y vulnerable: se revisa la versión y los intentos de conexión anómalos.
 
@@ -49,6 +52,14 @@ ls -la /tmp /var/tmp /dev/shm
 4. **Reconocimiento interno**: el jumpbox se usa para escanear la red detrás; en los logs y en el tráfico se ven barridos de puertos hacia rangos internos.
 
 5. **Persistencia**: revisar `~/.ssh/authorized_keys`, `cron` y unidades de systemd añadidas.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

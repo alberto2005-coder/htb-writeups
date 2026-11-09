@@ -34,7 +34,11 @@ nmap -sC -sV <IP> -oN nmap.txt
 nmap -p873 --script rsync-list-modules <IP>
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 rsync rsync://<IP>/            # listar módulos
@@ -57,15 +61,31 @@ cat loot/flag.txt
 
 Si el módulo permite escritura (`rsync -av ./algo rsync://<IP>/<modulo>/`), el servicio también sería una vía para dejar ficheros en el host.
 
-## Evidencia (redactada)
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
 
 ```text
 <modulo>/flag.txt  ->  <flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
-- rsync anónimo equivale a un recurso compartido sin contraseña: lista y descarga todo lo que haya en el módulo.
 - Los módulos suelen apuntar a directorios de backups o despliegues, que es donde aparecen secretos.
 - Mitigación: `auth users` y `secrets file` en `rsyncd.conf`, `read only = yes` salvo necesidad, ACLs por IP y `use chroot = yes`.
 - Detección: conexiones al 873 desde fuera de la red de administración y `@RSYNCD: OK` en el tráfico.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

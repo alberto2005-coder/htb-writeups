@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Base de datos de notificaciones de Windows de un puesto
 tools: [DB Browser for SQLite, strings, SQLite]
+state: Retired
+tags: [dfir, dfir-/-windows]
 ---
+
 
 # Jingle Bell — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [DB Browser for SQLite, strings, SQLite]
 
 Torrin es sospechoso de filtrar datos de Forela y de instalar software no autorizado. El equipo forense no encontró la fuga en los artefactos habituales, así que la evidencia que queda es la **base de datos de notificaciones** del propio Windows.
 
-## Evidencia
+## Evidencias
 
 - Copia del perfil: `AppData\Local\Microsoft\Windows\Notifications\` (base `WPNDatabase.db` y sus ficheros asociados).
 
-## Método
+## Investigación
 
 1. **Abrir la base con SQLite**: es un SQLite normal.
 
@@ -41,6 +44,14 @@ SELECT Id, HandlerId, Payload, ArrivalTime FROM Notification;
 4. **Software no autorizado**: el `HandlerId`/`Handler` revela qué aplicación generó cada notificación; una app de mensajería o de transferencia que no es corporativa responde a la pregunta de qué usó para filtrar.
 
 5. **Cronología**: ordenar por `ArrivalTime` y encajar la conversación (quién propone, quién acepta, cuánto se paga).
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

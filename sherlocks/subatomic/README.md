@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 state: Retired
 tags: [malware, electron, asar, discord, persistence]
+sherlock: Subatomic
+domain: Malware Analysis
 ---
+
 
 # Subatomic — Hack The Box (Sherlock)
 
@@ -15,7 +18,7 @@ tags: [malware, electron, asar, discord, persistence]
 
 Un usuario instala lo que parece un juego y, al poco, su cuenta de Discord empieza a enviar mensajes raros y aparecen ficheros que no reconoce. La evidencia es el instalador, la aplicación y artefactos del perfil. El caso gira en torno a una app **Electron** empaquetada con `asar`.
 
-## Evidencia y triaje
+## Evidencias
 
 ```bash
 file *; sha256sum *
@@ -29,7 +32,7 @@ npx asar extract app.asar app/
 find app -name '*.js' | head
 ```
 
-## Método
+## Investigación
 
 1. **Instalador**: comprobar firma, `strings`, recursos y a qué URL descarga.
 2. **asar**: extraer y leer `main.js`, `package.json` y cualquier `preload.js`. Buscar `fetch`, `axios`, `child_process`, `fs.writeFile`.
@@ -37,7 +40,7 @@ find app -name '*.js' | head
 4. **Persistencia**: `app.setLoginItemSettings`, clave `Run`, tarea programada o el propio instalador.
 5. **Red**: dominios/IP en el JS y en `strings`; correlacionar con Sysmon 3/22 y con el firewall.
 
-## Hallazgos (patrón)
+## Conclusiones
 
 ```js
 const t = fs.readFileSync(path.join(process.env.APPDATA,'discord/Local Storage/leveldb/...'));
@@ -52,8 +55,6 @@ El acceso a `leveldb` + POST a un dominio desconocido + persistencia en login de
 - Electron no es un ejecutable monolítico: `app.asar` es el código real y se lee en segundos.
 - El token de Discord es una credencial completa: no caduca al cerrar sesión.
 - La persistencia en `openAtLogin` deja rastro en el registro y en el propio `package.json`.
-
-## Detección y mitigación
 
 - **Sysmon 11/1** para `app.asar` y procesos hijos de la app; **22** para DNS del C2.
 - Bloquear instaladores sin firma y aplicar lista blanca de aplicaciones.

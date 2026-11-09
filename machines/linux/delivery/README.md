@@ -70,7 +70,12 @@ En el canal `#internal` hay credenciales de SSH y una pista: la contraseña es u
 ssh maildeliverer@<IP>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 ```bash
 cat /opt/mattermost/config/config.json

@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, windows, triage, kape, timeline, persistence]
 ---
 
+
 # MangoBleed — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -68,6 +69,5 @@ Con la herramienta identificada se busca su rastro: directorios de staging (`.zi
 
 ## Lecciones
 
-- El triaje permite responder casi todo sin memoria: ejecución, persistencia y acceso a ficheros están en disco.
 - `Prefetch` + `Amcache` + `UserAssist` son el trío para «qué se ejecutó y cuándo».
 - La persistencia en el perfil del usuario evade controles que solo miran servicios del sistema.

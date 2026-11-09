@@ -34,6 +34,46 @@ ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,302,401
 9092/tcp  kafka  (filtrado, solo alcanzable a través del proxy)
 ```
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
+
+- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+```text
+/home/<user>/user.txt  -> <user_flag>
+/root/root.txt         -> <root_flag>
+```
+
+## Lecciones aprendidas
+
+- Las bases de datos de grafos también se inyectan: `MATCH ... {name: '$input'}` no es más seguro que un `SELECT` concatenado.
+- **WebAuthn** no protege si el registro de credenciales se puede iniciar desde una XSS: la passkey pasa a ser del atacante.
+- Un proxy que valida "solo HTTP" y deja pasar bytes arbitrarios expone cualquier protocolo binario detrás.
+- Mitigación: consultas parametrizadas en Neo4j, CSP y escapado en el panel de passkeys con verificación del origin en el registro, y segmentación real (no proxies de conveniencia) para Kafka.
+
+## Mitigaciones y detección
+
+- Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
+- Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)
+
 ## 1. Inyección Cypher
 
 ```text
@@ -97,17 +137,3 @@ ldapsearch -Y GSSAPI -H ldap://ipa.sorcery.htb -b "cn=groups,cn=accounts,dc=sorc
 ```
 
 Una regla sudo de FreeIPA mapeada a un grupo al que pertenece la cuenta de servicio permite `sudo -i` en el host, o ejecutar un script escribible como root.
-
-## Evidencia (redactada)
-
-```text
-/home/<user>/user.txt  -> <user_flag>
-/root/root.txt         -> <root_flag>
-```
-
-## Lecciones
-
-- Las bases de datos de grafos también se inyectan: `MATCH ... {name: '$input'}` no es más seguro que un `SELECT` concatenado.
-- **WebAuthn** no protege si el registro de credenciales se puede iniciar desde una XSS: la passkey pasa a ser del atacante.
-- Un proxy que valida "solo HTTP" y deja pasar bytes arbitrarios expone cualquier protocolo binario detrás.
-- Mitigación: consultas parametrizadas en Neo4j, CSP y escapado en el panel de passkeys con verificación del origin en el registro, y segmentación real (no proxies de conveniencia) para Kafka.

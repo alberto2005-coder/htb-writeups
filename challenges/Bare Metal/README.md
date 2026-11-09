@@ -7,13 +7,68 @@ state: Retired
 tags: [hardware, uart, firmware, binwalk, flash]
 ---
 
+
 # Bare Metal — Hack The Box (Challenge)
 
 [🇬🇧 English](README.en.md) | **Español**
 
-## Enunciado
+## TL;DR
+
+- Ver las secciones adyacentes para el detalle.
+
+## Enunciado y superficie
 
 Se entrega una imagen de firmware de un dispositivo embebido. Hay que localizar la consola serie y extraer la información del sistema: credenciales, servicios y la flag.
+
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Reproducción local
+
+- Reproduce el firmware en QEMU o sobre el dispositivo; consola UART a 3.3 V.
+
+## Explotación
+
+- Ver las secciones adyacentes para el detalle.
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
+
+- **No hay salida en UART** → `TX`/`RX` invertidos o baudios incorrectos; prueba también 4 Mbps en placas modernas.
+- **Caracteres basura** → masa común mal conectada o nivel lógico distinto (1.8 V).
+- **`binwalk -e` no extrae** → imagen cifrada o comprimida con LZMA propietario; usa `unblob` o extrae a mano con los offsets.
+- **Login rechazado** → la contraseña está en el rootfs; no la fuerces por la consola.
+
+- El firmware suele contener la contraseña antes que la consola.
+- `GND` primero, luego `TX`/`RX`; un cable mal puesto no rompe nada, pero no da salida.
+- Las imágenes modernas vienen firmadas: comprobar si el arranque verifica la firma.
+
+MITRE: T1542.001, T1552.001.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [MITRE T1542.001](https://attack.mitre.org/techniques/T1542/)
+- [MITRE T1552.001](https://attack.mitre.org/techniques/T1552/)
+- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [uart-firmware](../../knowledge/hardware/uart-firmware.md)
 
 ## Triaje del firmware
 
@@ -48,18 +103,3 @@ cat rootfs/etc/shadow
 ```
 
 Con `/etc/shadow` y `john`/`hashcat` se recuperan contraseñas débiles; muchas imágenes traen la de `root` en claro en scripts de inicio.
-
-## Errores típicos
-
-- **No hay salida en UART** → `TX`/`RX` invertidos o baudios incorrectos; prueba también 4 Mbps en placas modernas.
-- **Caracteres basura** → masa común mal conectada o nivel lógico distinto (1.8 V).
-- **`binwalk -e` no extrae** → imagen cifrada o comprimida con LZMA propietario; usa `unblob` o extrae a mano con los offsets.
-- **Login rechazado** → la contraseña está en el rootfs; no la fuerces por la consola.
-
-## Lecciones
-
-- El firmware suele contener la contraseña antes que la consola.
-- `GND` primero, luego `TX`/`RX`; un cable mal puesto no rompe nada, pero no da salida.
-- Las imágenes modernas vienen firmadas: comprobar si el arranque verifica la firma.
-
-MITRE: T1542.001, T1552.001.

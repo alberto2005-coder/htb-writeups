@@ -35,7 +35,11 @@ smbclient -N //<IP>/support
 # Dev/winrm_backup.zip , HelpDesk/
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 zip2john winrm_backup.zip > zip.hash
@@ -51,7 +55,12 @@ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -nodes -out legacyy.key
 evil-winrm -i <IP> -S -c legacyy.crt -k legacyy.key
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 1. **Historial de PowerShell** del usuario: credenciales de `svc_deploy`.
 
@@ -69,15 +78,30 @@ impacket-GetLAPSPassword -dc-ip <IP> 'timelapse.htb/svc_deploy:<password>'
 
 3. **WinRM** como `administrator` con la contraseña LAPS: `C:\Users\TRX\Desktop\root.txt`.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Doble crackeo**: el ZIP y el PFX tienen contraseñas distintas; sin la segunda no hay clave privada.
 - **`-S` obligatorio**: WinRM escucha en 5986 (TLS); sin `-S` la conexión falla.
 - **Permisos del historial**: sólo se lee como `legacyy`, antes de saltar de usuario.
 
-## Lecciones
-
 - Un recurso SMB anónimo con backups es acceso inicial habitual.
 - Un PFX es una identidad completa: certificado + clave privada.
 - El historial de PowerShell filtra contraseñas en claro.
 - LAPS es seguro sólo si el grupo de lectura está bien acotado.
+
+## Mitigaciones y detección
+
+- Activar la preautenticación Kerberos, usar contraseñas largas en cuentas de servicio y forzar AES.
+- Detección: 4768 con `PreAuthType=0` y 4769 con RC4 fuera de la línea base.
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

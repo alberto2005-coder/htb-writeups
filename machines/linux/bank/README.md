@@ -77,7 +77,12 @@ nc -lvnp 4444
 www-data@bank:/var/www/bank$
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 find / -perm -u=s -type f 2>/dev/null
@@ -98,16 +103,24 @@ Es un binario del propio reto, propiedad de root y con SUID. Al ejecutarlo abre 
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /home/chris/user.txt  -> <user_flag>
 /root/root.txt        -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Un `302` no protege un recurso: el cuerpo se envía igual y basta cambiar el código para verlo.
 - Filtrar por extensión es inútil si el servidor mapea extensiones arbitrarias a un intérprete; hay que validar tipo real y servir las subidas desde fuera del árbol ejecutable.
 - Un SUID "de la casa" es una puerta trasera permanente: se audita con `find -perm -4000` y se justifica cada binario.
 - Mitigación: `support.php` con control de sesión real, whitelist de MIME y `php_admin_flag engine off` en el directorio de subidas.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

@@ -30,7 +30,11 @@ git-dumper http://searcher.htb/ /tmp/app
 cd /tmp/app && git log -p | grep -iE 'password|user'
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```text
 /search?engine=Google&query=test'
@@ -44,7 +48,12 @@ El `'` rompe el `eval`; se escapa y se añade código:
 
 Shell como `svc`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 1. **Gitea** en `127.0.0.1:3000`; el `.git` del sitio tenía credenciales de un usuario.
 2. Con `sudo -l`:
@@ -62,14 +71,26 @@ chmod +x full-checkup.sh
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Túnel al 3000**: `ssh -L 3000:127.0.0.1:3000 svc@<IP>` para ver Gitea.
 - **Ruta relativa**: si se ejecuta desde otro directorio, el script falla ("Something went wrong").
 - **`eval` con comillas**: hay que cerrar la cadena exactamente como la construye Searchor.
 
-## Lecciones
-
 - `eval()` con entrada de usuario es ejecución de código, no "búsqueda".
 - Un `.git` accesible es un historial de credenciales.
 - `sudo` sobre un script que llama a rutas relativas es root con un fichero en el directorio actual.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2023-43364](https://nvd.nist.gov/vuln/detail/CVE-2023-43364)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

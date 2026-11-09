@@ -35,7 +35,11 @@ finger-user-enum -U /usr/share/seclists/Usernames/Names/names.txt -t <IP>
 # sammy, sunny
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **`sunny`**: contraseña del propio nombre de la máquina; el SSH va en el 22022 y necesita algoritmos antiguos.
 
@@ -51,7 +55,12 @@ hashcat -m 7400 hash.txt /usr/share/wordlists/rockyou.txt
 
 3. **SSH como `sammy`** con la contraseña recuperada.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -78,15 +87,26 @@ root@sunday:~# id
 uid=0(root)
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`/root/troll`**: es una broma; no lleva a root.
 - **SSH antiguo**: sin `KexAlgorithms` modernos el cliente rechaza la conexión.
 - **`wget` con `-i`**: leer `/etc/shadow` sólo sirve si se puede volcar; lo útil es **escribir** (`-O`) o el `askpass`.
 
-## Lecciones
-
 - `finger` filtra usuarios válidos: enumeración gratuita.
 - Un backup de `shadow` en un home convierte un usuario en dos.
 - `sudo` sobre `wget` es escritura arbitraria como root.
 - Mitigación: deshabilitar `finger`, contraseñas fuertes, y `sudo` sin descargadores.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

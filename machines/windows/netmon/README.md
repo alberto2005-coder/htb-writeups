@@ -61,14 +61,28 @@ type C:\Users\Public\Desktop\user.txt
 type C:\Users\Administrator\Desktop\root.txt
 ```
 
-## Errores típicos
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **FTP anónimo cerrado** → prueba `anonymous:anonymous` y `ftp:ftp`; en algunas instancias el share es de solo lectura pero suficiente.
 - **Login de PRTG rechazado** → la contraseña del backup es antigua; prueba variantes de año y mayúsculas.
 - **La notificación no ejecuta** → hay que **guardarla** y luego dispararla desde la lista; el campo de parámetros no admite comillas simples.
 - **`whoami` falla** → el servicio PRTG no corre como SYSTEM en esa build; comprueba el proceso con `tasklist`.
 
-## Detección y mitigación
+## Mitigaciones y detección
 
 - **4688** con `cmd.exe`/`powershell.exe` hijo de `PRTG Core Server.exe`.
 - PRTG: cambiar credenciales por defecto, restringir el panel y aplicar la versión corregida de CVE-2018-9276.
@@ -76,3 +90,11 @@ type C:\Users\Administrator\Desktop\root.txt
 - Alertar de notificaciones nuevas con *Execute Program* y de descargas anónimas por FTP.
 
 MITRE: T1078, T1059.001, T1190.
+
+## Referencias
+
+- [CVE-2018-9276](https://nvd.nist.gov/vuln/detail/CVE-2018-9276)
+- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/)
+- [MITRE T1078](https://attack.mitre.org/techniques/T1078/)
+- [MITRE T1190](https://attack.mitre.org/techniques/T1190/)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

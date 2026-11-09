@@ -33,7 +33,11 @@ nxc smb <IP> -u j.fleischman -p '<password>' --users
 
 El share `IT` es escribible y contiene documentación interna con otro nombre de usuario: `p.agila`.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Robo de NTLM (CVE-2025-24071)**: se genera un `.library-ms` que apunta a nuestro listener y se sube al share. Al abrirlo el usuario víctima autentica contra nosotros.
 
@@ -59,7 +63,12 @@ certipy shadow auto -u p.agila@fluffy.htb -p '<password>' -account winrm_svc -dc
 evil-winrm -i dc01.fluffy.htb -u winrm_svc -H <hash>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 La CA tiene **ESC16**: la extensión de seguridad está deshabilitada en la plantilla, así que un certificado emitido a `ca_svc` se puede reutilizar cambiando el UPN.
 
@@ -83,16 +92,30 @@ certipy auth -pfx administrator.pfx -dc-ip <IP> -username administrator -domain 
 evil-winrm -i dc01.fluffy.htb -u administrator -H <hash_admin>
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - El `.library-ms` hay que subirlo con la ruta UNC correcta y Responder escuchando en la interfaz de la VPN.
 - `certipy auth` puede fallar por desfase horario: usar `faketime` o sincronizar.
 - Revertir el UPN de `ca_svc` al terminar, o la CA queda inconsistente.
 - La contraseña inicial se da en el enunciado; no hace falta fuerza bruta.
 
-## Lecciones
-
 - Un share escribible más un formato que fuerza autenticación es robo de credenciales.
 - Las ACLs encadenadas (`GenericWrite` sobre cuentas de servicio) convierten un usuario normal en administrador de la CA.
 - ESC16: deshabilitar la extensión de seguridad permite cambiar el UPN y suplantar a cualquier principal.
 - Mitigación: bloquear NTLM saliente, revisar ACLs sobre cuentas de servicio y habilitar la extensión de seguridad en las plantillas.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [CVE-2025-24071](https://nvd.nist.gov/vuln/detail/CVE-2025-24071)
+- [adcs-esc13](../../../knowledge/windows/adcs-esc13.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

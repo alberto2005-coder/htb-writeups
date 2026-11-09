@@ -40,7 +40,11 @@ El sitio se sirve como vhost `megahosting.htb`; conviene añadirlo a `/etc/hosts
 echo "<IP> tabby.htb megahosting.htb" | sudo tee -a /etc/hosts
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **LFI** en la sección de noticias:
 
@@ -83,7 +87,12 @@ La contraseña del ZIP es también la de la cuenta `ash`:
 su ash
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 id
@@ -111,16 +120,28 @@ lxc exec privesc /bin/sh
 # cat /mnt/root/root/root.txt
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **403 en `/manager/html`**: no es un callejón; `/manager/text/deploy` sólo exige el rol `manager-script`.
 - **`file=` relativo**: hay que subir suficientes niveles para salir del webroot.
 - **Vhost**: sin `megahosting.htb` en `/etc/hosts`, el 80 sirve una página distinta y el LFI parece roto.
 - **`lxc` vs `lxd`**: hace falta una imagen importada; sin ella `lxc init` falla. El contenedor debe ser privilegiado y con el disco del host montado.
 
-## Lecciones
-
 - Un LFI que alcanza `tomcat-users.xml` convierte un servicio interno en RCE por despliegue de WAR.
 - La reutilización de contraseñas ZIP → sistema es habitual; el backup estaba en el propio webroot.
 - Pertenecer a `lxd`/`docker` es root de facto: el grupo permite montar el sistema de ficheros del host.
 - Mitigación: parchear el LFI, rotar credenciales de Tomcat, sacar backups del webroot y eliminar a los usuarios de los grupos de contenedores.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
+- [linux-sudo-suid](../../../knowledge/privesc/linux-sudo-suid.md)

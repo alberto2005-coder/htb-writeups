@@ -1,7 +1,7 @@
 ---
 challenge: Dark Embargo
 category: Challenge
-type: web
+type: Web
 os: Linux
 difficulty: Medium
 platform: Hack The Box
@@ -9,6 +9,7 @@ state: Retired
 solved: 2026-11-08
 tags: [web, php, memory-corruption, aslr, cve]
 ---
+
 
 # Dark Embargo — Hack The Box (Challenge)
 
@@ -22,7 +23,7 @@ tags: [web, php, memory-corruption, aslr, cve]
 
 Contenedor `php:8.4.26-apache` con una landing estática. La única pista es `X-Powered-By: PHP/8.4.26`, la última versión que arrastra el fallo de `session.upload_progress` (CVE-2026-109618 / CVE-2026-109619). Un multipart que cruza `memory_limit` provoca un *bailout* por OOM que se salta el *teardown* y deja colgando los punteros de sesión. Con uno se filtra memoria por `Set-Cookie` y se rompe ASLR; con el otro se forja un `zend_array` cuyo `pDestructor` es `zif_system`. Resultado: RCE sin autenticar como `www-data` y `/flag.txt` a la vista.
 
-## Superficie
+## Enunciado y superficie
 
 - Reto web, dificultad Medium. Se entrega la build completa en un zip: `Dockerfile`, `index.php`, `flag.txt` y `build_docker.sh`.
 - El `Dockerfile` es una imagen oficial sin `php.ini` propio: `FROM php:8.4.26-apache`, copia `index.php` y deja `flag.txt` en `/flag.txt` con `chmod 0777`.
@@ -63,7 +64,11 @@ Cuatro valores por defecto sostienen todo el exploit:
 - `session.save_path` vacío cae a `/tmp`, escribible.
 - `display_errors = Off` significa que nada de esto se ve en la respuesta: el único canal de salida es una cabecera.
 
-## Cómo funciona `session.upload_progress`
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 La feature existe para barras de progreso: mandas un campo `PHP_SESSION_UPLOAD_PROGRESS` en un multipart y PHP va apuntando cuántos bytes lleva. Lo importante es **dónde** ocurre: dentro del parser de multipart (`main/rfc1867.c`), antes de ejecutar ningún script. Por eso funciona en una página sin PHP.
 
@@ -84,8 +89,6 @@ s:15:"bytes_processed";i:164085;s:4:"done";b:0;...}
 
 `done";b:0` confirma que se ha pillado a mitad. Es un camino pre-auth que reserva y libera objetos de heap con datos que controlamos: materia prima para un use-after-free.
 
-## El fallo: bailout por OOM sin limpieza
-
 `memory_limit` no es un `malloc` que devuelve `NULL`. Cuando ZendMM no puede satisfacer una asignación llama a `zend_mm_safe_error`, que termina en `zend_bailout`: un `longjmp` a la parte alta del request handler.
 
 Ese salto se come el *teardown*. El módulo de sesión no limpia sus globales y ZendMM solo reinicia su contabilidad, así que los dos punteros que tenía —el id de sesión y `$_SESSION`— quedan apuntando a memoria ya liberada. Apache en prefork mantiene vivos a los hijos, así que el estado roto persiste en ese worker.
@@ -98,6 +101,42 @@ http_session_vars.value  = 0x7f0c8107a720   → chunk + 0x7a720
 ```
 
 Dos offsets estables para este build. El resto del trabajo es convencer al allocator de que devuelva ese chunk, clase de tamaño a clase de tamaño, para que nuestros bytes falsos caigan donde esos punteros leen.
+
+## Reproducción local
+
+- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+
+## Explotación
+
+- Ver las secciones adyacentes para el detalle.
+
+## Evidencia
+
+- `id` → `uid=33(www-data) gid=33(www-data)`.
+- `cat /flag.txt` → `HTB{...}` (redactada).
+- `Set-Cookie` de ~600 KB con punteros legibles en el leak.
+
+## Lecciones aprendidas
+
+- **El script no compilaba.** El docstring de cabecera no tenía `"""` de cierre, así que Python se comía el fichero hasta el docstring de `rotate()` y moría con `SyntaxError: invalid decimal literal` en la línea 168. Se cerró el docstring y se añadieron ahí las tres constantes del build, que es donde se buscan cuando hay que reajustarlas. `python -m py_compile` y `--help` ya pasan.
+- Perder media hora con el leak por asumir un prefijo alto fijo. El chunk puede caer en cualquier punto de `0x7f...` bajo: hay que enmascarar y contar, no adivinar.
+- `LEN`/`len` mentirosos: en el leak el campo `len` falso es justo el bug, así que conviene tener claro qué lee cada función (`php_url_encode` recorre bytes, no confía en el terminador).
+- El OOM no es un crash: es un `longjmp`. Entender eso explica por qué el worker sigue vivo y por qué el estado sucio sobrevive entre requests.
+
+## Mitigaciones y detección
+
+- Actualizar a una versión de PHP con el handler corregido (8.4.27 o posterior en la rama 8.4).
+- Si no se usan barras de progreso, `session.upload_progress.enabled = Off`; es la mitigación de una línea y no rompe nada en la mayoría de aplicaciones.
+- `memory_limit` realista por pool y `MaxRequestWorkers` ajustado al tamaño del contenedor: el ataque depende de poder saturar 149 hijos.
+- Reglas de detección: cuerpos multipart con cientos de campos anidados `files[...][...]` y `filename=""`, subidas *chunked* de más de 100 MB, cookies `PHPSESSID` de cientos de KB y respuestas con `Set-Cookie` anormalmente largas.
+- En logs de Apache, picos de hijos en estado `W` con un único cliente y `Content-Length` ausente.
+- MITRE: T1190, T1059.004, T1027.
+
+## Referencias
+
+- CVE-2026-109618 y CVE-2026-109619 (PHP 8.4, `session.upload_progress`).
+- Código de PHP: `main/rfc1867.c`, `ext/session/php_session.h`, `Zend/zend_alloc.c`.
+- MITRE ATT&CK: T1190, T1059.004.
 
 ## Entorno de depuración y offsets
 
@@ -225,32 +264,3 @@ PROOF: HTB{...}
 El *bailout* no corrompe nada: el hijo sobrevive y el `fire` aterriza en uno o dos intentos. El hueco de comando son 200 bytes, así que cabe un reverse shell de una línea sin staging; en esta caja no hay salida a Internet, de modo que la vía práctica es escribir la flag en el webroot y leerla por HTTP.
 
 Parámetros del script: `--blockers 149`, `--rounds 8`, `--leak-tries 6`, `--no-saturate` para el contenedor de un solo worker, `--proof-file`/`--container` para leer la prueba desde dentro del docker, `--no-verify` para certificados self-signed.
-
-## Evidencia
-
-- `id` → `uid=33(www-data) gid=33(www-data)`.
-- `cat /flag.txt` → `HTB{...}` (redactada).
-- `Set-Cookie` de ~600 KB con punteros legibles en el leak.
-
-## Lecciones aprendidas
-
-- **El script no compilaba.** El docstring de cabecera no tenía `"""` de cierre, así que Python se comía el fichero hasta el docstring de `rotate()` y moría con `SyntaxError: invalid decimal literal` en la línea 168. Se cerró el docstring y se añadieron ahí las tres constantes del build, que es donde se buscan cuando hay que reajustarlas. `python -m py_compile` y `--help` ya pasan.
-- Perder media hora con el leak por asumir un prefijo alto fijo. El chunk puede caer en cualquier punto de `0x7f...` bajo: hay que enmascarar y contar, no adivinar.
-- `LEN`/`len` mentirosos: en el leak el campo `len` falso es justo el bug, así que conviene tener claro qué lee cada función (`php_url_encode` recorre bytes, no confía en el terminador).
-- El OOM no es un crash: es un `longjmp`. Entender eso explica por qué el worker sigue vivo y por qué el estado sucio sobrevive entre requests.
-- Los offsets de `libphp.so` son del build exacto. Cambiar de imagen obliga a repetir `info address` y el barrido de `popen`; todo lo demás (máscara de 2 MB, geometría del spray) se mantiene.
-
-## Mitigaciones y detección
-
-- Actualizar a una versión de PHP con el handler corregido (8.4.27 o posterior en la rama 8.4).
-- Si no se usan barras de progreso, `session.upload_progress.enabled = Off`; es la mitigación de una línea y no rompe nada en la mayoría de aplicaciones.
-- `memory_limit` realista por pool y `MaxRequestWorkers` ajustado al tamaño del contenedor: el ataque depende de poder saturar 149 hijos.
-- Reglas de detección: cuerpos multipart con cientos de campos anidados `files[...][...]` y `filename=""`, subidas *chunked* de más de 100 MB, cookies `PHPSESSID` de cientos de KB y respuestas con `Set-Cookie` anormalmente largas.
-- En logs de Apache, picos de hijos en estado `W` con un único cliente y `Content-Length` ausente.
-- MITRE: T1190, T1059.004, T1027.
-
-## Referencias
-
-- CVE-2026-109618 y CVE-2026-109619 (PHP 8.4, `session.upload_progress`).
-- Código de PHP: `main/rfc1867.c`, `ext/session/php_session.h`, `Zend/zend_alloc.c`.
-- MITRE ATT&CK: T1190, T1059.004.

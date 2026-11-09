@@ -74,7 +74,12 @@ john hash.txt --format=krb5asrep --wordlist=/usr/share/wordlists/rockyou.txt
 evil-winrm -i <IP> -u svc-alfresco -p '<password>'
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 ```powershell
 upload SharpHound.exe

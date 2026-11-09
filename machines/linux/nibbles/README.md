@@ -41,7 +41,11 @@ curl -s http://<IP>/nibbleblog/admin/
 curl -s http://<IP>/nibbleblog/content/private/users.xml
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 Login en `/nibbleblog/admin.php` con las credenciales por defecto (`nibbles:nibbles`, que coinciden con el nombre de la máquina). Si no entran, se revisa `content/private/config.xml` y `users.xml`, que suelen ser legibles.
 
@@ -58,7 +62,12 @@ curl -s "http://<IP>/nibbleblog/content/private/plugins/my_image/image.php?c=id"
 
 Reverse shell, y flag de usuario en `/home/nibbler/user.txt`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -81,9 +90,23 @@ sudo /home/nibbler/personal/stuff/monitor.sh
 cat /tmp/root.txt
 ```
 
-## Lecciones
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Un CMS con credenciales por defecto y un plugin de subida sin validación es shell en dos pasos.
 - CVE-2015-6967 sigue apareciendo en instalaciones antiguas: la versión del CMS es el dato clave.
-- `sudo` sobre un script que el usuario puede escribir equivale a `sudo` sobre todo.
 - Detección: POST a `admin.php` con sesión nueva, `.php` en `content/private/plugins` y `monitor.sh` ejecutado por `sudo`.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+
+## Referencias
+
+- [CVE-2015-6967](https://nvd.nist.gov/vuln/detail/CVE-2015-6967)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

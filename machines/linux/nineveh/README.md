@@ -34,7 +34,11 @@ ffuf -u https://<IP>/FUZZ -w /usr/share/seclists/Discovery/Web-Content/directory
 # /db/index.php (phpLiteAdmin) ; en el 80: /department, /info.php, /secure_notes
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Fuerza bruta** del login de `/department` (usuario `admin`) con `hydra`.
 2. **phpLiteAdmin** en `/db/index.php`: por defecto la contraseña es `password`, y la versión permite crear una base `.php` con código.
@@ -45,7 +49,12 @@ ffuf -u https://<IP>/FUZZ -w /usr/share/seclists/Discovery/Web-Content/directory
 curl -k "https://<IP>/department/manage.php?notes=/ninevehNotes.txt/../../tmp/x.php"
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 - **`amrois`**: la imagen de `secure_notes` esconde una clave privada SSH (`steghide`/`strings`/`binwalk` según el caso).
 - **SSH cerrado**: `ps auxww` muestra `knockd`; en `/etc/knockd.conf`:
@@ -67,15 +76,28 @@ ssh -i amrois_rsa amrois@<IP>
 printf '#!/bin/bash\nchmod 4755 /bin/bash\n' > /tmp/update; chmod +x /tmp/update
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **LFI con prefijo**: hace falta el truco del `ninevehNotes.txt/../..` para salir del directorio.
 - **HTTPS con certificado propio**: `curl -k` o añadir el host a `/etc/hosts`.
 - **knockd y tiempo**: la secuencia caduca en segundos; los tres SYN deben ir seguidos.
 
-## Lecciones
-
 - Un LFI combinado con subida de ficheros es RCE sin necesidad de un CVE de inclusión.
 - Las imágenes y los ficheros "de notas" esconden claves.
 - Port knocking no es seguridad, sólo ocultación: se lee la config y se replica.
 - Un escáner de rootkits antiguo ejecutado por root es una puerta trasera.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2014-0476](https://nvd.nist.gov/vuln/detail/CVE-2014-0476)
+- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

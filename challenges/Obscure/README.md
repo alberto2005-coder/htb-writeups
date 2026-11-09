@@ -5,7 +5,9 @@ difficulty: Easy
 platform: Hack The Box
 state: Retired
 tags: [forensics, pcap, webshell, keepass, john, ofuscacion]
+type: Forensics
 ---
+
 
 # Obscure — Hack The Box
 
@@ -17,9 +19,53 @@ tags: [forensics, pcap, webshell, keepass, john, ofuscacion]
 
 Un atacante sube un **webshell PHP ofuscado** (`support.php`) con base64 + zlib + XOR y `eval`. El PCAP de los minutos previos al apagado del servicio contiene los comandos que ejecutó y de ahí sale un **`.kdbx` de KeePass**; `keepass2john` + diccionario abren la caja y aparece la flag.
 
+## Enunciado y superficie
+
+- Categoría Forensics; el reto entrega el material descrito en «Reconocimiento».
+
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
+
+Un atacante sube un **webshell PHP ofuscado** (`support.php`) con base64 + zlib + XOR y `eval`. El PCAP de los minutos previos al apagado del servicio contiene los comandos que ejecutó y de ahí sale un **`.kdbx` de KeePass**; `keepass2john` + diccionario abren la caja y aparece la flag.
+
+## Reproducción local
+
+- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+
+## Explotación
+
+- Ver las secciones adyacentes para el detalle.
+
 ## Evidencia
 
 - `support.php` (webshell ofuscado) y `capture.pcap`.
+
+## Lecciones aprendidas
+
+- **Orden de capas**: si se aplica el XOR antes del base64 no sale nada; hay que seguir el orden del código.
+- **kdbx corrupto**: extraer el objeto con cuidado; una respuesta truncada invalida el fichero.
+- **john lento**: el formato KeePass es costoso; probar también `hashcat -m 13400` con GPU.
+
+- Un webshell ofuscado no oculta su comportamiento: el `eval` final delata la ejecución.
+- Un PCAP de tráfico HTTP sin TLS contiene credenciales, comandos y ficheros exfiltrados.
+- Un gestor de contraseñas es tan fuerte como su contraseña maestra: si está en un diccionario, cae.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [pcap-triage](../../knowledge/forensics/pcap-triage.md)
+- [rop-stack](../../knowledge/pwn/rop-stack.md)
 
 ## Método
 
@@ -41,15 +87,3 @@ john --wordlist=/usr/share/wordlists/rockyou.txt kdbx.hash
 ```
 
 5. **Abrir** con KeePassXC y la contraseña recuperada: dentro está la flag.
-
-## Tropiezos
-
-- **Orden de capas**: si se aplica el XOR antes del base64 no sale nada; hay que seguir el orden del código.
-- **kdbx corrupto**: extraer el objeto con cuidado; una respuesta truncada invalida el fichero.
-- **john lento**: el formato KeePass es costoso; probar también `hashcat -m 13400` con GPU.
-
-## Lecciones
-
-- Un webshell ofuscado no oculta su comportamiento: el `eval` final delata la ejecución.
-- Un PCAP de tráfico HTTP sin TLS contiene credenciales, comandos y ficheros exfiltrados.
-- Un gestor de contraseñas es tan fuerte como su contraseña maestra: si está en un diccionario, cae.

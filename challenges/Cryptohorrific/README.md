@@ -7,13 +7,68 @@ state: Retired
 tags: [mobile, android, apk, aes, jadx]
 ---
 
+
 # Cryptohorrific — Hack The Box (Challenge)
 
 [🇬🇧 English](README.en.md) | **Español**
 
-## Enunciado
+## TL;DR
+
+- Ver las secciones adyacentes para el detalle.
+
+## Enunciado y superficie
 
 APK de Android que guarda la flag cifrada. La clave está en el propio paquete, así que el reto es descompilar, localizar el cifrado y reproducirlo.
+
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Reproducción local
+
+- Emulador Android con la misma API o dispositivo físico; instala con `adb install`.
+
+## Explotación
+
+- Ver las secciones adyacentes para el detalle.
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
+
+- **`jadx` no encuentra la clave** → está en nativo o llega del servidor; revisa `assets/` y `.so`.
+- **`BadPaddingException`** → modo/padding equivocado o clave mal codificada (hex vs base64).
+- **La clave parece texto pero no descifra** → puede ser un hash; prueba MD5/SHA-256 de la cadena como clave.
+- **Ofuscación** → nombres como `a.b.c`; sigue el flujo desde `onCreate` y usa Frida para ver valores en runtime.
+
+- Una clave en el cliente no es secreto: cualquiera con el APK la obtiene.
+- El modo y el padding están en el código; copiarlos mal es el fallo más común.
+- Frida ahorra horas cuando la ofuscación hace ilegible el decompilado.
+
+MITRE: T1409, T1521.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [MITRE T1409](https://attack.mitre.org/techniques/T1409/)
+- [MITRE T1521](https://attack.mitre.org/techniques/T1521/)
+- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [apk-analysis](../../knowledge/mobile/apk-analysis.md)
 
 ## Triaje
 
@@ -74,18 +129,3 @@ Java.perform(function () {
   };
 });
 ```
-
-## Errores típicos
-
-- **`jadx` no encuentra la clave** → está en nativo o llega del servidor; revisa `assets/` y `.so`.
-- **`BadPaddingException`** → modo/padding equivocado o clave mal codificada (hex vs base64).
-- **La clave parece texto pero no descifra** → puede ser un hash; prueba MD5/SHA-256 de la cadena como clave.
-- **Ofuscación** → nombres como `a.b.c`; sigue el flujo desde `onCreate` y usa Frida para ver valores en runtime.
-
-## Lecciones
-
-- Una clave en el cliente no es secreto: cualquiera con el APK la obtiene.
-- El modo y el padding están en el código; copiarlos mal es el fallo más común.
-- Frida ahorra horas cuando la ofuscación hace ilegible el decompilado.
-
-MITRE: T1409, T1521.

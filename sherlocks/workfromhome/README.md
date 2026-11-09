@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 evidence: Artefactos de un portátil tras robo de credenciales y RDP
 tools: [KAPE, MFTECmd, Timeline Explorer, Eric Zimmerman tools]
+state: Retired
+tags: [dfir, dfir-/-windows]
 ---
+
 
 # WorkFromHome — Hack The Box
 
@@ -17,12 +20,12 @@ tools: [KAPE, MFTECmd, Timeline Explorer, Eric Zimmerman tools]
 
 Un empleado en remoto cae en una **web de phishing** que imita el login corporativo y entrega sus credenciales. El atacante entra por **RDP**, abusa de un privilegio de gestión de volúmenes, planta un **DLL malicioso** y se asegura persistencia secuestrando el flujo de **WMI**.
 
-## Evidencia
+## Evidencias
 
 - Perfil de usuario: historial de navegador, `UserAssist`, *jump lists*, `ConsoleHost_history`.
 - `$MFT`, **SRUM**, logs de **WMI**, de **Defender** y visor de eventos.
 
-## Método
+## Investigación
 
 1. **Entrada**: historial de Chrome/Edge → URL de phishing y hora. El `Referer` y el patrón de la URL confirman el robo de credenciales.
 
@@ -33,6 +36,14 @@ Un empleado en remoto cae en una **web de phishing** que imita el login corporat
 4. **DLL**: un `PrintConfig.dll` (o similar) se descarga con `certutil` —LOLBIN— y se coloca en una ruta de búsqueda de `wmiprvse.exe`.
 
 5. **Persistencia**: el *search order hijacking* hace que `wmiprvse.exe` cargue la DLL cada vez que se usa WMI (T1574.001). Verificar en SRUM/Defender el proceso y el momento.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

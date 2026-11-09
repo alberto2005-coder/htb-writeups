@@ -79,7 +79,12 @@ Reverse shell:
 nc -lvnp 4444
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 ```bash
 cat /etc/crontab; ls -l /var/www/laravel/artisan
@@ -107,16 +112,25 @@ nc -lvnp 5555
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /var/www/html/user.txt -> <user_flag>
 /root/root.txt         -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Un AXFR abierto regala la superficie: subdominios de administración incluidos.
 - Concatenar entrada de usuario en comandos de sistema (`ping $ip`) es RCE; se resuelve con `escapeshellarg` y listas de validación.
 - Permisos `777` en el entrypoint de un framework con un cron de root convierten una web comprometida en root en un minuto.
 - Mitigación: `bind` restringido a transferencias autorizadas, prepared statements, y `artisan` en `644 root:root` con el cron apuntando a un wrapper de solo lectura.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- Documentación de la plataforma y del servicio afectado.

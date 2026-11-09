@@ -35,7 +35,11 @@ nxc ldap <IP> -u j.arbuckle -p '<password>' --query "(objectClass=*)" "*" --bloo
 
 Credenciales iniciales del enunciado: `j.arbuckle`. BloodHound marca las ACLs explotables hacia el RODC y sus cuentas asociadas.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Enumerar el RODC**: quién puede administrarlo y qué cuentas están en su ámbito (*msDS-RevealOnDemandGroup*, *Allowed RODC Password Replication Group*).
 
@@ -53,7 +57,12 @@ impacket-psexec garfield.htb/'<user>'@rodc01.garfield.htb
 
 3. **Suplantar a Administrator en el RODC** y volcar sus secretos: `sekurlsa`/`lsadump` sobre el propio RODC dan la clave del `krbtgt_8245` (AES256) y las credenciales cacheadas del ámbito.
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 El salto a `DC01` se hace con un **ticket dorado del RODC**, no del dominio:
 
@@ -76,15 +85,30 @@ secretsdump.py -k -no-pass garfield.htb/administrator@dc01.garfield.htb
 evil-winrm -i dc01.garfield.htb -u administrator -H <hash>
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Confundir los `krbtgt`**: la clave del RODC es `krbtgt_8245`; la del dominio no se obtiene desde el RODC.
 - Sin la extensión KeyList, `DC01` rechaza el ticket del RODC.
 - Sincronizar hora (`faketime`) o Kerberos falla con `KRB_AP_ERR_SKEW`.
 - Revisar `msDS-RevealOnDemandGroup` antes de asumir qué cuentas se pueden volcar.
 
-## Lecciones
-
 - Un RODC es un objetivo más débil que el DC y su `krbtgt` propio permite forjar tickets con KeyList.
 - Los permisos sobre cuentas de equipo y sus administradores son privilegios de dominio en la práctica.
 - Mitigación: auditar ACLs sobre RODCs, restringir el grupo de replicación de contraseñas y monitorizar TGT anómalos con `4769`/`4768`.
+
+## Mitigaciones y detección
+
+- Activar la preautenticación Kerberos, usar contraseñas largas en cuentas de servicio y forzar AES.
+- Detección: 4768 con `PreAuthType=0` y 4769 con RC4 fuera de la línea base.
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

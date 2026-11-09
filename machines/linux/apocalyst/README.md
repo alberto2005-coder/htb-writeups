@@ -36,7 +36,11 @@ wpscan --url http://apocalyst.htb/ --enumerate u
 
 `wpscan` lista el usuario `falaraki`. La enumeración de directorios con diccionarios estándar no encuentra nada relevante (`wp-admin`, `wp-content`, `wp-includes`).
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Wordlist a medida**:
 
@@ -72,7 +76,12 @@ zip -r pwn.zip pwn.php
 curl "http://apocalyst.htb/wp-content/plugins/pwn/pwn.php?cmd=id"
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 ls -l /etc/passwd
@@ -91,16 +100,28 @@ su pwned
 root@apocalyst:~#
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Hostname obligatorio**: WordPress usa URL absoluta, así que sin `apocalyst.htb` en `/etc/hosts` los enlaces y el panel fallan.
 - `cewl` con `-d 3` recoge suficiente texto; con profundidad 1 no aparece el directorio.
 - `steghide` sin passphrase: pulsar Enter, no inventar una.
 - En instalaciones con PAM moderno, un `/etc/passwd` escribible puede no bastar (hace falta entrada en `shadow`); en esta máquina sí funciona.
 
-## Lecciones
-
 - El contenido del sitio es material para la wordlist: `cewl` encuentra lo que los diccionarios no tienen.
 - Datos ocultos en imágenes (`steghide`) siguen siendo una técnica vigente en retos y en malas prácticas reales.
 - Un `/etc/passwd` escribible es root inmediato, sin exploit.
 - Mitigación: permisos 644 en `/etc/passwd`, MFA en el panel y usuarios de WordPress sin capacidad de subir plugins.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

@@ -91,7 +91,12 @@ python -c "import pty; pty.spawn('/bin/bash')"
 
 Si el cliente rechaza el certificado o el protocolo, se puede bajar la seguridad global de OpenSSL en el atacante (`MinProtocol = None`, `CipherString = DEFAULT@SECLEVEL=0`) y revertirlo al terminar.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l

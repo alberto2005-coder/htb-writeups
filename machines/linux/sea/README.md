@@ -40,7 +40,11 @@ Estructura típica de WonderCMS en la raíz: `data/`, `plugins/`, `themes/`. El 
 curl -s http://<IP>/ | grep -i -E 'wondercms|generator'
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 **CVE-2023-41425** — XSS en `installModule` / `loginURL` que permite cargar un ZIP de tema/módulo bajo nuestro control:
 
@@ -74,7 +78,12 @@ hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt
 ssh amay@<IP>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 `amay` no tiene sudo directo, pero hay un servicio web escuchando sólo en local:
 
@@ -98,16 +107,29 @@ El panel (aplicación propia del reto) tiene una funcionalidad de «análisis» 
 
 Si la conexión inversa se corta, encadenar `sleep` y lanzar el comando en segundo plano, o crear un usuario con `sudo` desde el propio panel.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - El XSS de WonderCMS exige que el navegador de la víctima cargue el JS; sin *admin* activo, usar la ejecución directa del módulo.
 - El hash es bcrypt: `-m 3200`, no `-m 0`.
 - El puerto 8080 no se ve desde fuera; hay que hacer el túnel SSH.
 - Las comillas en el payload se rompen con el formulario: codificar en URL.
 
-## Lecciones
-
 - Un CMS con gestor de temas que instala ZIP sin validar es RCE en cuanto hay una víctima con sesión.
 - Contraseñas reutilizadas entre CMS y SSH convierten un hash en acceso al sistema.
 - Un servicio interno sin autenticación robusta e inyección de comandos ejecutado como root es el fallo final.
 - Mitigación: validar paquetes de temas, ejecutar servicios internos con usuario dedicado y nunca con root.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+
+## Referencias
+
+- [CVE-2023-41425](https://nvd.nist.gov/vuln/detail/CVE-2023-41425)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

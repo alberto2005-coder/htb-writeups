@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, mft, ntfs, timestomp, zone-identifier, resident-data, mftecmd]
 ---
 
+
 # BFT — Hack The Box
 
 [⚑ English](README.en.md) | **Español**

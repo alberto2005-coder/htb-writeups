@@ -7,6 +7,7 @@ state: Retired
 tags: [web, sqli, login-bypass, union, database]
 ---
 
+
 # Freelancer — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -17,11 +18,19 @@ tags: [web, sqli, login-bypass, union, database]
 
 Plataforma de freelancers con login y buscador. El formulario de acceso monta la consulta por concatenación: **inyección SQL**. Bypass del login con `' OR 1=1-- -` y extracción de la flag con `UNION SELECT` sobre la tabla que la guarda.
 
-## Enunciado
+## Enunciado y superficie
 
 Login con usuario y contraseña y un buscador de proyectos tras autenticarse. Base de datos MySQL/MariaDB.
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 Probar el bypass clásico en el usuario:
 
@@ -44,6 +53,10 @@ Determinar el número de columnas:
 ...
 ```
 
+## Reproducción local
+
+- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+
 ## Explotación
 
 Con el login saltado, el buscador es el punto de extracción:
@@ -64,14 +77,25 @@ Se colocan las columnas visibles y se enumeran esquema y tablas:
 HTB{<flag>}
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Comentario**: MySQL necesita `-- -` con espacio o `#`; sin él la consulta queda inválida.
 - **Comillas escapadas**: probar variantes con `"` o con `\'`.
 - **Columnas**: si `UNION` falla, ajustar el número con `ORDER BY` antes.
 
-## Lecciones
-
 - Un login vulnerable a SQLi entrega la base de datos entera, no solo el acceso.
 - `UNION` convierte cualquier campo reflejado en un canal de extracción.
 - Mitigación: consultas preparadas, usuario de BD con permisos mínimos y un WAF como capa extra.
+
+## Mitigaciones y detección
+
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [rop-stack](../../knowledge/pwn/rop-stack.md)

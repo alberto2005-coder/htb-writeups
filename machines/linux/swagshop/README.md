@@ -36,7 +36,11 @@ gobuster dir -u http://swagshop.htb -w /usr/share/wordlists/dirb/common.txt
 
 Aparecen `/index.php/admin`, `/downloader` y `/app/etc/local.xml` (que confirma Magento y la versión).
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Crear admin con la SQLi**:
 
@@ -54,7 +58,12 @@ Check http://swagshop.htb/index.php/admin with creds <user>:<password>
 
 3. **Shell** como `www-data` en `/var/www/html`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -77,14 +86,28 @@ root@swagshop:/var/www/html# id
 uid=0(root)
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`/downloader` deshabilitado**: si el Connect Manager no está, la vía alternativa es *Froghopper* (inyección en plantilla de admin) para ejecutar PHP.
 - **Ruta del shell**: depende de cómo se empaquete; conviene listar el directorio tras instalar.
 - **`vi` con comodín**: la regla `sudo` incluye `/var/www/html/*`, así que hay que escribir el fichero dentro de esa ruta.
 
-## Lecciones
-
 - Una SQLi que permite insertar un admin convierte un CMS en RCE por su propio panel de extensiones.
 - `sudo` sobre `vi`/`vim` con comodines es root: el editor ejecuta comandos.
 - Mitigación: parchear Magento, quitar el Connect Manager y no dar `sudo` sobre editores.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [CVE-2015-1397](https://nvd.nist.gov/vuln/detail/CVE-2015-1397)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

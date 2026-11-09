@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Logs y ficheros de un WordPress comprometido
 tools: [grep, access.log, WP-CLI, diff]
+state: Retired
+tags: [dfir, dfir-/-web]
 ---
+
 
 # Ultimatum — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [grep, access.log, WP-CLI, diff]
 
 Un blog **WordPress** deja de funcionar bien y el equipo sospecha de un plugin. Se entregan los registros y los ficheros del sitio para identificar el vector, el alcance y cómo restaurarlo.
 
-## Evidencia
+## Evidencias
 
 - Logs del servidor web (access/error) y una copia del árbol del WordPress.
 
-## Método
+## Investigación
 
 1. **Cuándo empezó**: ordenar el `access.log` por hora y buscar ráfagas de peticiones a un mismo plugin.
 
@@ -45,6 +48,14 @@ wp user list --role=administrator
 ```
 
 5. **Restauración**: reponer el plugin y el core desde el paquete oficial, rotar credenciales, y revisar `wp-config.php` por modificaciones.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

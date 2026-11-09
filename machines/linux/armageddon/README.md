@@ -79,7 +79,12 @@ ssh brucetherealadmin@<IP>
 
 Si el firewall bloquea la reverse shell, no hace falta: el RCE permite leer ficheros y ejecutar consultas, que es todo lo necesario para llegar a las credenciales. La shell interactiva se obtiene por SSH con la contraseña reutilizada.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l

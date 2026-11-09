@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, memory, volatility, rat, browser-forensics, kill-chain]
 ---
 
+
 # Opportunist — Hack The Box
 
 [⚑ English](README.en.md) | **Español**

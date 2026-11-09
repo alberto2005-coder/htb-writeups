@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 evidence: CloudTrail de una cuenta con un bucket S3 expuesto
 tools: [jq, Splunk, AWS CLI]
+state: Retired
+tags: [dfir, cloud-/-aws]
 ---
+
 
 # Nubilum-2 — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [jq, Splunk, AWS CLI]
 
 Forela usa **S3** como almacén y lago de datos. Un usuario reporta que no puede acceder a los ficheros de un directorio y se sospecha de una **política de bucket mal configurada** en `forela-fileshare` que dejó objetos públicos. Hay que reconstruir qué hizo el intruso.
 
-## Evidencia
+## Evidencias
 
 - Logs de **CloudTrail** de la cuenta (ficheros JSON, muchos).
 
-## Método
+## Investigación
 
 1. **Preparar**: cargar los JSON en un SIEM (Splunk/Elastic) o normalizar con `jq`.
 
@@ -37,6 +40,14 @@ jq -r '[.eventTime,.eventName,.userIdentity.type,.userIdentity.arn,.sourceIPAddr
 4. **Actividad sobre objetos**: `ListObjects`, `GetObject`, `DeleteObject`; los `AccessDenied` en `kms:Decrypt` explican por qué el usuario legítimo dejó de ver sus ficheros.
 
 5. **Cierre**: qué objetos se expusieron o borraron, en qué ventana y con qué identidad.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

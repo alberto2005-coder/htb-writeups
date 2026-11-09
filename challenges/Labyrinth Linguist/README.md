@@ -7,6 +7,7 @@ state: Retired
 tags: [web, java, velocity, ssti, rce, cve-2020-13936]
 ---
 
+
 # Labyrinth Linguist — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -17,11 +18,19 @@ tags: [web, java, velocity, ssti, rce, cve-2020-13936]
 
 Aplicación Java (Spring) que «traduce» texto con **Apache Velocity**. La plantilla se construye con la entrada del usuario, así que `#set` permite crear objetos y llegar a `Runtime.exec`: **SSTI** con ejecución de comandos.
 
-## Enunciado
+## Enunciado y superficie
 
 Un formulario que devuelve el texto en otro idioma. Nada de Flask ni Jinja: aquí el motor es **Velocity 1.7**, afectado por **CVE-2020-13936** (el `Uberspector` por defecto no bloquea la reflexión), y su sintaxis es `#set($var = ...)`.
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 Comprobar la sintaxis del motor:
 
@@ -34,6 +43,10 @@ Si devuelve `49`, la entrada se evalúa como plantilla Velocity. En Velocity se 
 ```text
 #set($str = $class.inspect("java.lang.Runtime").type.getRuntime().exec("id"))
 ```
+
+## Reproducción local
+
+- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
 
 ## Explotación
 
@@ -52,14 +65,27 @@ Más corto con `ProcessBuilder`:
 
 La salida del comando se imprime en la respuesta; con `cat /flag*` aparece la flag.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Comillas y `$`**: la URL debe codificar `#` como `%23` si se envía por GET.
 - **`readLine()` una sola vez**: para varias líneas, repetir o usar `System.out`.
 - **Sandbox**: si `$class` está bloqueado, probar `$context`/`$request` y los objetos expuestos por el framework.
 
-## Lecciones
-
 - Velocity también es SSTI: no hace falta que el motor sea Jinja o Twig.
 - `$class.inspect` es el puente a la reflexión de Java y, de ahí, a `Runtime`.
 - Mitigación: `VelocityEngine` con contexto de datos, plantillas fijas en disco y `SecureUberspector`.
+
+## Mitigaciones y detección
+
+- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+
+## Referencias
+
+- [CVE-2020-13936](https://nvd.nist.gov/vuln/detail/CVE-2020-13936)
+- [ssti](../../knowledge/web/ssti.md)
+- [rop-stack](../../knowledge/pwn/rop-stack.md)

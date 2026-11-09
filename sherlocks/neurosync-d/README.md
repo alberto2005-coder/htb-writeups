@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, windows, medical-device, timeline, lateral-movement]
 ---
 
+
 # NeuroSync-D — Hack The Box
 
 [⚑ English](README.en.md) | **Español**

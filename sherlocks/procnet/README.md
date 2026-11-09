@@ -5,7 +5,10 @@ difficulty: Hard
 platform: Hack The Box
 evidence: PCAP, API Monitor y Sysmon de un DC y de un puesto
 tools: [Wireshark, API Monitor, EvtxECmd, Timeline Explorer]
+state: Retired
+tags: [dfir, dfir-/-red-y-endpoint]
 ---
+
 
 # ProcNet — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, API Monitor, EvtxECmd, Timeline Explorer]
 
 El equipo rojo simula un **framework de C2** de código abierto y entrega lo capturado durante el ejercicio: tráfico, llamadas a la API de Windows y Sysmon, tanto del controlador de dominio como del puesto del empleado comprometido. El objetivo es reconstruir la cadena con evidencia de endpoint, no sólo de red.
 
-## Evidencia
+## Evidencias
 
 - Dos directorios: `DC` y `Employee`, cada uno con `pcapng`, una captura de **API Monitor** (`.apmx64`) y logs de Sysmon.
 
-## Método
+## Investigación
 
 1. **Qué procesos hablan**: del PCAP a Sysmon, identificar el binario que abre la conexión y su padre.
 
@@ -40,6 +43,14 @@ EventID 3 (Sysmon) | Image, DestinationIp, DestinationPort
 4. **De empleado a DC**: comparar las dos capturas; el movimiento lateral se ve en el mismo binario/DLL ejecutándose en el otro host y en las llamadas WMI remotas.
 
 5. **Cronología**: unir Sysmon de ambos hosts por hora y marcar primer *beacon*, ejecución remota y recolección.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

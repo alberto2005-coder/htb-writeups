@@ -54,7 +54,12 @@ type C:\Users\ryan\Desktop\user.txt
 whoami /groups | findstr -i dns
 ```
 
-## Escalada: DnsAdmins
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 El grupo `DnsAdmins` permite indicar al servicio DNS una DLL que carga como `SYSTEM` al arrancar:
 
@@ -73,7 +78,12 @@ sc start dns
 
 Al reiniciar el servicio, la DLL se carga como `SYSTEM`; la reverse shell vuelve a tu listener.
 
-## Errores típicos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`dnscmd` no encontrado** → no está en el PATH; usa `C:\Windows\System32\dnscmd.exe`.
 - **`Access is denied` al configurar** → no eres miembro de `DnsAdmins` o el DC no es el mismo host.
@@ -81,7 +91,7 @@ Al reiniciar el servicio, la DLL se carga como `SYSTEM`; la reverse shell vuelve
 - **SMB bloqueado** → publica la DLL por HTTP y usa una ruta UNC accesible o copia local.
 - **El plugin persiste** → `/serverlevelplugindll` queda configurado; hay que limpiarlo (`dnscmd /config /serverlevelplugindll ""`) y reiniciar.
 
-## Detección y mitigación
+## Mitigaciones y detección
 
 - **5136** sobre el objeto del servidor DNS y **7045**/cambios de configuración del servicio.
 - **5145** al share con la DLL y **4624** tipo 3 desde el DC hacia el atacante.
@@ -89,3 +99,11 @@ Al reiniciar el servicio, la DLL se carga como `SYSTEM`; la reverse shell vuelve
 - Revisar `serverlevelplugindll` y bloquear UNC salientes desde DCs.
 
 MITRE: T1543.003, T1055, T1078.
+
+## Referencias
+
+- [MITRE T1055](https://attack.mitre.org/techniques/T1055/)
+- [MITRE T1078](https://attack.mitre.org/techniques/T1078/)
+- [MITRE T1543.003](https://attack.mitre.org/techniques/T1543/)
+- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
+- [linux-sudo-suid](../../../knowledge/privesc/linux-sudo-suid.md)

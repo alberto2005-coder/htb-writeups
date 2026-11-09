@@ -39,7 +39,11 @@ searchsploit achat
 # Achat 0.150 beta7 - Remote Buffer Overflow | windows/remote/36025.py
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Adaptar el exploit**: el original abre `calc.exe`. Se genera una shell inversa **compatible con Unicode** (el protocolo mete cada byte en un `WORD`, así que los bytes `0x00` y los que se interpretan como *bad chars* hay que evitarlos):
 
@@ -61,7 +65,12 @@ C:\Users\alfred\Desktop> whoami
 chatterbox\alfred
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 1. **Credenciales en el registro** (AutoLogon):
 
@@ -85,16 +94,28 @@ C:\Windows\system32> whoami
 nt authority\system
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Unicode**: un `shell_reverse_tcp` normal no vale; sin `unicode_mixed` y `BufferRegister=EAX` el proceso muere.
 - **Puerto del listener**: el 443 evita bloqueos; con otros puertos el shellcode puede contener bytes problemáticos.
 - **Binario del exploit en Python 2**: usa `print` y cadenas de bytes; con Python 3 hay que adaptarlo.
 - **`root.txt` con ACL rara**: en algunas versiones del reto el fichero se lee ajustando permisos (`icacls`), pero lo limpio es llegar como `Administrator`.
 
-## Lecciones
-
 - Software de nicho en un lab suele significar exploit público: identificar la versión es medio camino.
 - Un desbordamiento con conversión de codificación exige *shellcode* a medida; el *encoder* correcto es la diferencia entre shell y crash.
 - `AutoLogon` guarda la contraseña en claro en el registro: es una de las primeras cosas que busca un atacante con shell.
 - Mitigación: parchear el servicio, eliminar AutoLogon y no reutilizar contraseñas entre cuentas.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

@@ -133,7 +133,7 @@ chmod 600 id_ed25519
 ssh trivia@facts.htb -i id_ed25519
 ```
 
-## Escalada
+## Escalada de privilegios
 
 ```bash
 sudo -l

@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Captura de red de una red corporativa
 tools: [Wireshark, tshark, NetworkMiner]
+state: Retired
+tags: [dfir, dfir-/-red]
 ---
+
 
 # Compromised — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, tshark, NetworkMiner]
 
 Hay indicios de tráfico malicioso en la red y al menos un equipo comprometido que contenía datos sensibles. Se entrega un PCAP para identificar el acceso inicial, la máquina afectada y qué se llevaron.
 
-## Evidencia
+## Evidencias
 
 - Un único `capture.pcap`.
 
-## Método
+## Investigación
 
 1. **Panorama**: `Statistics → Conversations` para ver quién habla con quién y cuánto.
 
@@ -41,6 +44,14 @@ tshark -r capture.pcap -Y 'http.request' -T fields -e http.host -e http.request.
 4. **Exfiltración**: ficheros en `Export Objects → HTTP/SMB` y volúmenes anómalos en un flujo concreto (`Follow TCP Stream`).
 
 5. **Cronología**: ordenar por `frame.time` los eventos clave (login, subida de webshell, descarga del dato).
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

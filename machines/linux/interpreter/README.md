@@ -32,7 +32,11 @@ nmap -p- --min-rate 10000 -sV -sC <IP> -oN nmap.txt
 6661/tcp  http    (interfaz interna)
 ```
 
-## Foothold: CVE-2023-43208
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 XStream deserializa el XML de `/api/users` sin allowlist de clases. Con un PoC público:
 
@@ -75,7 +79,7 @@ hashcat -m 10900 hashes.txt /usr/share/wordlists/rockyou.txt
 ssh sedric@<IP>
 ```
 
-## Escalada: eval() en un servicio local
+## Escalada de privilegios
 
 ```bash
 ss -ltnp | grep '127.0.0.1'
@@ -100,16 +104,27 @@ Si hay filtro de caracteres, se codifica la orden (`chr()` o base64) y se constr
 # euid=0
 ```
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /home/sedric/user.txt  -> <user_flag>
 /root/root.txt         -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - **XStream** es reincidente (Mirth, Jenkins, OFBiz): versión sin allowlist equivale a RCE pre-auth.
 - `mirth.properties` es el primer fichero a leer tras entrar en un Mirth; casi siempre lleva la BD en claro.
 - Un servicio en `127.0.0.1` **no** es seguro: cualquier shell de usuario lo alcanza.
 - Mitigación: Mirth parcheado con allowlist de XStream, secretos fuera de los `.properties` y ningún `eval()` sobre datos externos.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar Jenkins, deshabilitar la CLI remota y exigir autenticación en el panel.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [CVE-2023-43208](https://nvd.nist.gov/vuln/detail/CVE-2023-43208)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

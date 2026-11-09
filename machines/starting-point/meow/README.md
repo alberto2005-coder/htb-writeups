@@ -74,6 +74,20 @@ uid=0(root) gid=0(root) groups=0(root)
 
 No hay explotación: es una **mala configuración**. El servicio Telnet está habilitado y la cuenta `root` no tiene contraseña, por lo que cualquier persona con conectividad de red obtiene control total.
 
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
 ## Lecciones aprendidas
 
 - **Telnet debe tratarse como obsoleto:** transmite credenciales y toda la sesión en texto plano.

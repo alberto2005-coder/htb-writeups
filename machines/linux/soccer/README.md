@@ -27,7 +27,11 @@ ffuf -u http://soccer.htb/FUZZ -w /usr/share/seclists/Discovery/Web-Content/dire
 # tiny
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Tiny File Manager 2.4.3** en `http://soccer.htb/tiny/` con `admin:admin@123` (credenciales por defecto publicadas en su repo).
 2. **Subida de PHP** en `tiny/uploads/` con el shell de siempre; visitarlo da `www-data`.
@@ -40,7 +44,12 @@ sqlmap -u "ws://soc-player.soccer.htb:9091" --data '{"id":"*"}' --batch -D socce
 
 5. **SSH** con las credenciales recuperadas de `player`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 cat /usr/local/etc/doas.conf
@@ -61,15 +70,28 @@ EOF
 doas -u root /usr/bin/dstat --evil
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`sqlmap` y WebSocket**: hace falta `websocket-client`; el `*` marca el punto de inyección en el JSON.
 - **Hosts**: `soccer.htb` y `soc-player.soccer.htb` en `/etc/hosts`.
 - **Ruta del plugin**: `~/.dstat` no sirve porque root no lee el home de `player`.
 
-## Lecciones
-
 - Credenciales de fábrica más subida sin restricciones es RCE directo.
 - Los ficheros de configuración de nginx enumeran hosts internos.
 - SQLi no siempre viaja por HTTP: WebSocket también.
 - `doas`/`sudo` sobre herramientas con plugins es ejecución de código como root.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [CVE-2021-45010](https://nvd.nist.gov/vuln/detail/CVE-2021-45010)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

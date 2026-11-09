@@ -44,7 +44,7 @@ gobuster dir -u http://<IP>/ -w /usr/share/seclists/Discovery/Web-Content/common
 
 También se llega con `feroxbuster -u http://<IP> -x php` o mirando `robots.txt`, que a veces anuncia el panel.
 
-## Acceso
+## Foothold
 
 ```text
 http://<IP>/admin.php
@@ -58,15 +58,32 @@ Tras el login, la propia página muestra la flag:
 <flag>
 ```
 
-## Evidencia (redactada)
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
 
 ```text
 /admin.php  ->  <flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Un panel oculto no es un panel protegido: el descubrimiento de contenido lo encuentra en segundos.
 - Las credenciales por defecto (`admin:admin`) siguen siendo la causa número uno de accesos en aplicaciones de ejemplo.
 - Mitigación: retirar paneles de ejemplo en producción, contraseñas fuertes con MFA, rate limiting y bloqueo por intentos.
 - Detección: picos de 404 por usuario y logins correctos desde IPs nuevas.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

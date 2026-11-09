@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 evidence: PCAP de una empresa de criptomonedas
 tools: [Wireshark, tshark, NetworkMiner, CyberChef]
+state: Retired
+tags: [dfir, dfir-/-red]
 ---
+
 
 # Packet Puzzle — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, tshark, NetworkMiner, CyberChef]
 
 Una pequeña empresa japonesa de intercambio de criptomonedas detecta actividad sospechosa en su red interna y exporta un PCAP. Hay que determinar si hubo compromiso y reconstruir los pasos del atacante.
 
-## Evidencia
+## Evidencias
 
 - `NetworkTraffic.pcap` dentro del ZIP habitual.
 
-## Método
+## Investigación
 
 1. **Reconocimiento**: contar puertos tocados por el origen y ver cuántos responden.
 
@@ -43,6 +46,14 @@ tshark -r NetworkTraffic.pcap -Y 'tcp.port==3389' -T fields -e ip.src -e ip.dst 
 4. **Movimiento y recolección**: nuevos flujos SMB internos, comparticiones montadas y copia de datos hacia el host del atacante.
 
 5. **Cronología**: `frame.time` de la primera respuesta del servicio, del login correcto y de la primera transferencia de datos.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

@@ -34,7 +34,6 @@ nmap -Pn -sS -sV -p 22,80,443,8001 10.129.145.90
 
 - Puertos: **22** (OpenSSH 9.6p1 Ubuntu), **443** (Apache 2.4.58, Ubuntu), **80 y 8001 filtrados**.
 - Servicios: WordPress + tema `webagency`; Chrome headless/chromedriver (bot admin); `tesseract` instalado.
-- Trampa habitual: el 80 está *filtered*, no cerrado. Un `curl http://...` devuelve `code=000` y parece que el sitio está caído. Todo el sitio vive en **HTTPS**.
 
 Si no quieres tocar `/etc/hosts`, la alternativa equivalente:
 

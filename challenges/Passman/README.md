@@ -7,6 +7,7 @@ state: Retired
 tags: [web, graphql, idor, broken-access-control, source-review]
 ---
 
+
 # Passman — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -17,11 +18,19 @@ tags: [web, graphql, idor, broken-access-control, source-review]
 
 Gestor de contraseñas con **código fuente** y una API **GraphQL**. La mutación `UpdatePassword` no comprueba a quién pertenece la cuenta: **IDOR / control de acceso roto**. Cambiando la contraseña del usuario `admin` se entra en su cuenta, y ahí está la flag guardada como contraseña.
 
-## Enunciado
+## Enunciado y superficie
 
 «Pandora sospecha que hay un topo en el ministerio y necesita la contraseña maestra, que está en un gestor de contraseñas». Se entrega el código y hay un `entrypoint.sh` que siembra la base de datos.
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 ```bash
 unzip passman.zip && cd passman
@@ -45,6 +54,10 @@ UpdatePassword: {
 ```
 
 La mutación acepta cualquier `username` y no compara con la identidad del token: se puede cambiar la contraseña de otro.
+
+## Reproducción local
+
+- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
 
 ## Explotación
 
@@ -85,16 +98,28 @@ Con el token de admin, la consulta de contraseñas guardadas devuelve la flag:
 { getPhrase(username: "admin") { address username password } }
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Introspection**: si está deshabilitada, el código fuente da los nombres exactos de mutaciones y campos.
 - **JWT**: el token de usuario normal sirve para llamar a la mutación; no hace falta forjarlo.
 - **Formato**: GraphQL exige `Content-Type: application/json`; un `POST` de formulario devuelve error de sintaxis.
 - **Contraseña nueva**: cumple cualquier política que aplique el registro, o el `update` falla en silencio.
 
-## Lecciones
-
 - GraphQL no aporta autorización por sí solo: cada resolver debe comprobar el propietario del recurso.
 - Un `username` en los argumentos es una invitación a IDOR; debe salir del token, no del cliente.
 - La revisión de código encuentra esto en minutos; el escaneo automático, casi nunca.
 - Mitigación: derivar el usuario del JWT, comprobar propiedad en cada mutación y limitar la introspection en producción.
+
+## Mitigaciones y detección
+
+- Fijar el algoritmo esperado y validar firma, `iss`, `aud` y caducidad en cada petición.
+
+## Referencias
+
+- [node-jwt-prototype](../../knowledge/web/node-jwt-prototype.md)
+- [rop-stack](../../knowledge/pwn/rop-stack.md)

@@ -93,7 +93,12 @@ john --format=NT hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ssh L4mpje@<IP>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 ```powershell
 dir "C:\Program Files (x86)"

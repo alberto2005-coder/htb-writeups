@@ -41,6 +41,46 @@ ffuf -u http://<IP>/ -H "Host: FUZZ.monitorsfour.htb" -w <wordlist> -fs <tamaño
 cacti   [Status: 200]
 ```
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
+
+- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
+
+- Un IDOR con `token=0` sobre una API que devuelve hashes MD5 es una brecha completa: MD5 sin sal no es almacenamiento de contraseñas.
+- Reutilizar la contraseña del portal en la herramienta de monitorización convierte el acceso web en RCE por CVE.
+- Docker Desktop con la API en la red de WSL2 sin auth es el host entero: el contenedor no es frontera.
+- Detección: peticiones a `/api/v1/user` con tokens triviales, creación de contenedores desde una IP de aplicación y montajes de `/` en `HostConfig`.
+
+## Mitigaciones y detección
+
+- Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
+- Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
+
+## Referencias
+
+- [CVE-2025-24367](https://nvd.nist.gov/vuln/detail/CVE-2025-24367)
+- [CVE-2025-9074](https://nvd.nist.gov/vuln/detail/CVE-2025-9074)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)
+
 ## IDOR y crackeo
 
 ```bash
@@ -88,10 +128,3 @@ curl -s -X POST 'http://127.0.0.1:2375/containers/pwn/attach?stream=1&stdout=1&s
 ```
 
 Dentro, `/host_root/Users/Administrator/Desktop/root.txt` es la flag de root.
-
-## Lecciones
-
-- Un IDOR con `token=0` sobre una API que devuelve hashes MD5 es una brecha completa: MD5 sin sal no es almacenamiento de contraseñas.
-- Reutilizar la contraseña del portal en la herramienta de monitorización convierte el acceso web en RCE por CVE.
-- Docker Desktop con la API en la red de WSL2 sin auth es el host entero: el contenedor no es frontera.
-- Detección: peticiones a `/api/v1/user` con tokens triviales, creación de contenedores desde una IP de aplicación y montajes de `/` en `HostConfig`.

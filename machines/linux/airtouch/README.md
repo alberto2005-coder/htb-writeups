@@ -38,6 +38,56 @@ AA:BB:CC:DD:EE:FF   6  WPA2  AIRTOUCH_HOME
 
 Dos SSID: uno doméstico con PSK y otro corporativo con 802.1X.
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
+
+- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+Checklist normal sobre el host interno:
+
+```bash
+sudo -l
+find / -perm -4000 -type f 2>/dev/null
+systemctl list-timers --all
+ls -l /etc/cron*; cat /etc/crontab
+```
+
+La vía es una unidad de systemd o un script de cron **escribible** por el usuario de la VPN; se inyecta un payload que corre como root y se espera al timer.
+
+## Evidencia
+
+```text
+/home/<user>/user.txt  -> <user_flag>
+/root/root.txt         -> <root_flag>
+```
+
+## Lecciones aprendidas
+
+- WPA2-PSK solo es tan fuerte como la contraseña: un handshake capturado se rompe offline, sin tocar la red.
+- **PEAP sin validación del certificado del servidor** es el fallo de fondo: el cliente entrega el hash MSCHAPv2 a cualquier AP que diga llamarse igual.
+- Una VPN con las mismas credenciales del dominio convierte una red WiFi en la puerta de la red interna.
+- Mitigación: certificado de servidor validado en los perfiles 802.1X (o EAP-TLS), PMF y 802.11w, WIDS para APs gemelos, y MFA en la VPN.
+
+## Mitigaciones y detección
+
+- Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
+- Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
+
+## Referencias
+
+- [pcap-triage](../../../knowledge/forensics/pcap-triage.md)
+- [systemd-timers](../../../knowledge/privesc/systemd-timers.md)
+
 ## Handshake y crackeo
 
 ```bash
@@ -89,30 +139,3 @@ sudo openvpn --config airtouch.ovpn --auth-user-pass <(printf 'user@airtouch.htb
 ```
 
 Aparece una interfaz `tun0` y con ella la subred interna (`10.x.y.0/24`): aquí sí vale el `nmap` clásico.
-
-## Escalada
-
-Checklist normal sobre el host interno:
-
-```bash
-sudo -l
-find / -perm -4000 -type f 2>/dev/null
-systemctl list-timers --all
-ls -l /etc/cron*; cat /etc/crontab
-```
-
-La vía es una unidad de systemd o un script de cron **escribible** por el usuario de la VPN; se inyecta un payload que corre como root y se espera al timer.
-
-## Evidencia (redactada)
-
-```text
-/home/<user>/user.txt  -> <user_flag>
-/root/root.txt         -> <root_flag>
-```
-
-## Lecciones
-
-- WPA2-PSK solo es tan fuerte como la contraseña: un handshake capturado se rompe offline, sin tocar la red.
-- **PEAP sin validación del certificado del servidor** es el fallo de fondo: el cliente entrega el hash MSCHAPv2 a cualquier AP que diga llamarse igual.
-- Una VPN con las mismas credenciales del dominio convierte una red WiFi en la puerta de la red interna.
-- Mitigación: certificado de servidor validado en los perfiles 802.1X (o EAP-TLS), PMF y 802.11w, WIDS para APs gemelos, y MFA en la VPN.

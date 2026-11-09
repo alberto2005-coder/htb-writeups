@@ -32,7 +32,11 @@ nmap -p- --min-rate 10000 -sV -sC <IP> -oN nmap.txt
 
 La aplicación ejecuta el código que pegas y devuelve la salida; si el código contiene una palabra prohibida, responde con un error del filtro.
 
-## Foothold: escape de la blocklist
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 El filtro busca cadenas, no objetos. Con acceso a `().__class__` se llega a todas las clases cargadas: basta localizar la posición de `Popen` y llamarla.
 
@@ -60,7 +64,7 @@ nc -lvnp 4444
 app-production@code:~$
 ```
 
-## Movimiento a usuario
+## Movimiento lateral
 
 ```bash
 ls /var/www/app/instance/
@@ -76,7 +80,7 @@ hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt
 ssh martin@<IP>
 ```
 
-## Escalada: backy y su configuración
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -104,16 +108,25 @@ ls /tmp/exf
 
 Del `.tar.bz2` salen `root.txt` y, si existe, `/root/.ssh/id_rsa`.
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /home/martin/user.txt  -> <user_flag>
 /root/root.txt         -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Una **blocklist** de identificadores no es un sandbox: si el runtime expone `object`, cualquier filtro es decorativo.
 - Los hashes bcrypt de una SQLite de aplicación se rompen con reglas y diccionario; el usuario de la app suele reutilizar contraseña.
 - `sudo` sobre un script que consume configuración equivale a `sudo` sobre lo que esa configuración controle.
 - Mitigación: `RestrictedPython` con AST validado, contenedor sin capacidad de red, `sudo` con argumentos fijos y validación de rutas con `realpath`.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- Documentación de la plataforma y del servicio afectado.

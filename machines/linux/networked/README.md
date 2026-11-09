@@ -39,7 +39,11 @@ gobuster dir -u http://<IP> -w /usr/share/wordlists/dirb/common.txt -x php,txt
 wget http://<IP>/backup/backup.tar && tar xf backup.tar && cat upload.php lib.php
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Bypass de subida**: `upload.php` comprueba extensión contra una lista blanca y el MIME con `finfo`. Un nombre `x.php.jpg` pasa ambas; el `AddHandler application/x-httpd-php .php` de Apache (sin `$`) ejecuta la parte `.php` intermedia.
 
@@ -61,7 +65,12 @@ $ id
 uid=48(apache) ...  →  guly
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -82,15 +91,26 @@ NAME=eth0
 
 Con `PATH`/`IFACE` manipulados y una línea que ejecute `/bin/bash`, se obtiene root.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`AddHandler` con `.php.jpg`**: si el servidor sólo ejecuta la extensión final, hay que buscar otra combinación; aquí funciona la intermedia.
 - **Cron cada 3 minutos**: la inyección no es inmediata; hay que esperar la siguiente ejecución.
 - **Comillas en el nombre**: el nombre del fichero debe ser válido; usar `touch` con comillas simples.
 
-## Lecciones
-
 - Un backup del código convierte la enumeración en lectura de la lógica de validación.
 - Comprobar extensión y MIME no basta si el servidor ejecuta extensiones intermedias.
 - Un cron que concatena nombres de fichero en un `exec` es una puerta de entrada.
 - Mitigación: `AddHandler` anclado (`$`), validación por contenido y nombres saneados, y scripts `sudo` con comillas.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

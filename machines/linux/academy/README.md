@@ -37,7 +37,11 @@ gobuster dir -u http://academy.htb -w /usr/share/wordlists/dirb/common.txt -x ph
 
 El sitio imita la plataforma de HTB Academy: registro, login y una zona de administración en `admin.php`.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Registro con rol manipulado**: se intercepta el `POST /register.php` y se añade o cambia el campo oculto `roleid=1`. La cuenta pasa a administrador y `admin.php` muestra un panel con un subdominio de desarrollo.
 
@@ -68,7 +72,12 @@ cat /var/www/html/htb-academy-dev-01/.env
 ssh cry0l1t3@<IP>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -89,16 +98,29 @@ sudo composer run-script x
 uid=0(root) gid=0(root)
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - El campo `roleid` puede llamarse distinto (`role`, `is_admin`); se compara el registro normal con el de administrador.
 - El vhost no se resuelve sin añadirlo a `/etc/hosts`.
 - `phpggc` necesita `phar.readonly=0`; si no, el payload sale vacío.
 - La contraseña del `.env` no es la de `cry0l1t3` en todos los despliegues: probar también la de MySQL (`homestead`).
 
-## Lecciones
-
 - Un parámetro de rol aceptado desde el cliente es escalada de privilegios directa.
 - `APP_DEBUG=true` en producción filtra claves que habilitan RCE por deserialización.
 - `composer` con `sudo` equivale a root: cualquier herramienta que ejecute scripts lo es.
 - Mitigación: rol asignado en servidor, debug desactivado fuera de desarrollo y `sudo` restringido a comandos concretos sin scripts.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [CVE-2018-15133](https://nvd.nist.gov/vuln/detail/CVE-2018-15133)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

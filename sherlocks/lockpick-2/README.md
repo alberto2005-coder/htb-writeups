@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Recurso compartido cifrado y muestra de ransomware
 tools: [UPX, Ghidra, CyberChef, Python]
+state: Retired
+tags: [dfir, análisis-de-malware]
 ---
+
 
 # Lockpick 2.0 — Hack The Box
 
@@ -17,13 +20,13 @@ tools: [UPX, Ghidra, CyberChef, Python]
 
 Segundo golpe del mismo grupo: han cifrado un recurso compartido y esta vez la política es **no negociar**. Hay que recuperar los ficheros analizando la muestra y la nota de rescate.
 
-## Evidencia
+## Evidencias
 
 - `DANGER.txt` con la advertencia y la contraseña del ZIP de la muestra.
 - Un directorio `share` con los ficheros cifrados y la nota del atacante.
 - `malware.zip` con el binario.
 
-## Método
+## Investigación
 
 1. **Nota de rescate**: extensión de los cifrados, importe y dirección de pago, correo o portal de contacto. Es la fuente de los IOCs.
 
@@ -39,6 +42,14 @@ detect-it-easy sample
 4. **Descifrar**: reconstruir el flujo y probar con un fichero pequeño; validar con la cabecera conocida (`PK`, `%PDF`, etc.).
 
 5. **Informe**: ficheros afectados, extensión, clave, tiempo de cifrado y recomendaciones (copias offline, segmentación).
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

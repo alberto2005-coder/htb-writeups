@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 evidence: Logs de CloudTrail, artefactos de una EC2 y copia de S3
 tools: [jq, AWS CLI, CyberChef, Elastic]
+state: Retired
+tags: [dfir, cloud-/-aws]
 ---
+
 
 # Nubilum-1 — Hack The Box
 
@@ -17,13 +20,13 @@ tools: [jq, AWS CLI, CyberChef, Elastic]
 
 Amazon avisa de que una **EC2** del entorno se usa con fines maliciosos. El administrador de nube recuerda haber visto más instancias de las que desplegó. Se entrega la entrevista de triaje, los logs de **CloudTrail** y una captura de la instancia comprometida.
 
-## Evidencia
+## Evidencias
 
 - `CloudTrail/` con los JSON de la actividad de la cuenta.
 - `catscale_*.tar.gz` con artefactos recogidos de la instancia.
 - `forela-storage/` (copia del bucket), `unusual-directory.zip` e `interview.txt`.
 
-## Método
+## Investigación
 
 1. **Normalizar** los eventos y quedarse con las llamadas de escritura.
 
@@ -38,6 +41,14 @@ jq -r '[.eventTime,.eventName,.userIdentity.arn,.sourceIPAddress]|@tsv' CloudTra
 4. **Instancia**: en el `tar.gz` de CatScale se ven procesos, conexiones y ficheros; `unusual-directory.zip` suele contener el **implante**.
 
 5. **Persistencia**: comprobar si se crearon claves de acceso, usuarios o políticas nuevas que mantengan el acceso tras el borrado de la instancia.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

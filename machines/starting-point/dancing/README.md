@@ -75,6 +75,15 @@ type flag.txt     # en Windows
 
 Dentro de `Amy.J` hay un `worknotes.txt` con anotaciones del usuario; sirve para entender el entorno, no para escalar.
 
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
 ## Evidencia
 
 - Salida de `smbclient -L` con la sesión nula aceptada.

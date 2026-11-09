@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, psexec, prefetch, mft, lateral-movement, windows]
 ---
 
+
 # Tracer — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -69,6 +70,5 @@ MFTECmd.exe -f C:/triage/$MFT -o out/
 
 ## Lecciones
 
-- PsExec deja tres huellas independientes (servicio, `.key`, pipe): coinciden o la atribución es débil.
 - Prefetch y MFT dan el «cuándo»; el log del servicio da el «desde dónde».
 - Mitigación: monitorizar `7045` con binarios en `ADMIN$`, bloquear SMB entre estaciones y alertar de `psexesvc.exe`.

@@ -37,7 +37,11 @@ El 5985 (WinRM) es la pista de por dónde se entrará. Se añade el vhost:
 echo "<IP> heist.htb" | sudo tee -a /etc/hosts
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Invitado en el portal** (`http://heist.htb/login.php`): el parámetro `guest=true` salta el login y lleva a `issues.php`. Ahí, el usuario `hazard` adjunta un fichero: `/attachments/config.txt`.
 
@@ -76,7 +80,12 @@ evil-winrm -i <IP> -u chase -p '<password>'
 *Evil-WinRM* PS C:\Users\Chase\Desktop> type user.txt
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 `todo.txt` en el escritorio de Chase dice «Keep checking the issues list», y hay un `firefox.exe` corriendo (no es el navegador por defecto de un servidor). Ese Firefox tiene la sesión del administrador del portal de soporte en memoria.
 
@@ -99,16 +108,28 @@ evil-winrm -i <IP> -u Administrator -p '<password>'
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> type root.txt
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`guest=true`**: el login normal rechaza; el bypass es el parámetro GET, no un formulario.
 - **SMB sin shares útiles**: `hazard` autentica pero no llega a nada interesante; el valor está en RPC para listar usuarios.
 - **Spray sin lockout**: aquí no hay bloqueo, pero conviene probar una contraseña por usuario antes de barrer el diccionario.
 - **Permisos de `procdump`**: si no se puede escribir en `C:\Windows\Temp`, usar el perfil del usuario.
 
-## Lecciones
-
 - Las contraseñas *type 7* de Cisco son ofuscación, no cifrado.
 - Reutilizar la contraseña de una aplicación como contraseña de sistema une dos mundos distintos.
 - Un navegador abierto con sesión de admin es una credencial en memoria: `procdump` + `strings` la extrae.
 - Mitigación: contraseñas únicas por servicio, limpiar adjuntos de tickets, cerrar sesiones de navegador en servidores y deshabilitar WinRM donde no haga falta.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

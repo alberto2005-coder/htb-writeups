@@ -7,13 +7,66 @@ state: Retired
 tags: [stego, image, lsb, png, zsteg]
 ---
 
+
 # Hidden in Colors — Hack The Box (Challenge)
 
 [🇬🇧 English](README.en.md) | **Español**
 
-## Enunciado
+## TL;DR
+
+- Ver las secciones adyacentes para el detalle.
+
+## Enunciado y superficie
 
 Una imagen PNG aparentemente normal contiene información en los bits menos significativos. No hay contraseña ni pista: el reto es extraer la capa oculta.
+
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Reproducción local
+
+- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+
+## Explotación
+
+- Ver las secciones adyacentes para el detalle.
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
+
+- **`zsteg` no encuentra nada** → la imagen puede ser JPEG (usa `steghide`) o el payload está en el canal alfa.
+- **Texto cifrado** → hay contraseña; prueba `steghide` con una wordlist o busca la clave en metadatos.
+- **CRC inválido** → la imagen fue modificada a mano; `pngcheck` lo dice y `binwalk` puede extraer el resto.
+- **Bits en orden inverso** → invierte la secuencia o lee de derecha a izquierda.
+
+- El orden de los canales importa tanto como el bit elegido.
+- `zsteg -a` es el primer comando, no el último.
+- Un PNG con CRC roto es una pista, no un error de descarga.
+
+MITRE: T1027.003 (steganografía).
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [MITRE T1027.003](https://attack.mitre.org/techniques/T1027/)
+- [images-audio](../../knowledge/stego/images-audio.md)
 
 ## Triaje
 
@@ -62,18 +115,3 @@ zsteg: b1,rgb,lsb,xy  .. text: "HTB{...}"
 ```
 
 La cadena aparece al leer el bit 1 del canal RGB en orden xy; si sale ruido, cambia canal u orden.
-
-## Errores típicos
-
-- **`zsteg` no encuentra nada** → la imagen puede ser JPEG (usa `steghide`) o el payload está en el canal alfa.
-- **Texto cifrado** → hay contraseña; prueba `steghide` con una wordlist o busca la clave en metadatos.
-- **CRC inválido** → la imagen fue modificada a mano; `pngcheck` lo dice y `binwalk` puede extraer el resto.
-- **Bits en orden inverso** → invierte la secuencia o lee de derecha a izquierda.
-
-## Lecciones
-
-- El orden de los canales importa tanto como el bit elegido.
-- `zsteg -a` es el primer comando, no el último.
-- Un PNG con CRC roto es una pista, no un error de descarga.
-
-MITRE: T1027.003 (steganografía).

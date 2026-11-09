@@ -106,7 +106,12 @@ El `index.php` vivo ya no coincide con el del tarball: trae la contraseña que `
 ssh waldo@<IP>
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -130,7 +135,7 @@ sudo PYTHONPATH=/tmp /opt/scripts/backup.py
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 /etc/passwd  -> usuario waldo con shell /bin/bash
@@ -138,9 +143,20 @@ user.txt     -> <user_flag>
 root.txt     -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Un `Disallow` en `robots.txt` es una pista, no una protección: separa "no indexar" de "no acceder".
 - Comparar un backup con el estado vivo evita perseguir credenciales caducadas; el LFI fue el que dio la buena.
 - `NOPASSWD` con `SETENV` equivale a ejecutar código: cualquier binario que cargue librerías o módulos del entorno es secuestrable.
 - Mitigación: sin `SETENV` en la regla de sudo, `secure_path` y `Defaults env_reset`, y un usuario de backup que no sea root.
+
+## Mitigaciones y detección
+
+- Deshabilitar el FTP anónimo y sustituirlo por SFTP/FTPS con cuentas nominales.
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

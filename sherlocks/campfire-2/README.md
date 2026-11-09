@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 state: Retired
 tags: [dfir, active-directory, asrep, kerberos, evtx]
+sherlock: Campfire-2
+domain: DFIR
 ---
+
 
 # Campfire-2 — Hack The Box (Sherlock)
 
@@ -15,7 +18,7 @@ tags: [dfir, active-directory, asrep, kerberos, evtx]
 
 Segunda parte de Campfire: tras el robo de un ticket en la primera, el atacante consigue una cuenta y busca más credenciales. La evidencia vuelve a ser un conjunto de logs de eventos de un dominio pequeño; el foco está en **AS-REP roasting** y en el uso posterior de la cuenta.
 
-## Evidencia y preparación
+## Evidencias
 
 ```bash
 EvtxECmd.exe -d . --csv out --csvf evtx.csv
@@ -23,7 +26,7 @@ EvtxECmd.exe -d . --csv out --csvf evtx.csv
 
 Canales: `Security.evtx`, `System.evtx` y `Microsoft-Windows-PowerShell/Operational`.
 
-## Método
+## Investigación
 
 - **4768** con `PreAuthType = 0` (sin preautenticación) es la firma de AS-REP: el DC devuelve un blob cifrado con la contraseña del usuario.
 - Agrupar 4768 por `TargetUserName` y hora; una cuenta que recibe muchos en segundos está siendo enumerada o *roasted*.
@@ -31,7 +34,7 @@ Canales: `Security.evtx`, `System.evtx` y `Microsoft-Windows-PowerShell/Operatio
 - En PowerShell, **4104** puede contener el comando que generó el ticket (Rubeus, `GetNPUsers`, `Invoke-Kerberoast`).
 - Cruzar con el log del servicio KDC si está disponible: el `TicketOptions` y el `Status` distinguen éxito de fallo.
 
-## Hallazgos (patrón)
+## Conclusiones
 
 ```text
 4768  user=<cuenta>  PreAuthType=0  Status=0x0
@@ -46,8 +49,6 @@ La secuencia 4768 sin preauth → 4624 en un host nuevo → 4769 RC4 describe el
 - El AS-REP no requiere autenticación: cualquier usuario puede lanzarlo y el DC lo registra igual.
 - Una cuenta sin preautenticación es una debilidad de configuración, no un fallo de contraseña.
 - El cifrado RC4 en 4769 sigue siendo el indicador más fiable de Kerberoasting.
-
-## Detección y mitigación
 
 - Alertar de 4768 con `PreAuthType=0` fuera de horario o en volumen.
 - Activar preautenticación en todas las cuentas y usar contraseñas largas en las de servicio.

@@ -42,12 +42,21 @@ feroxbuster -k -u https://<IP>/ -w /usr/share/wordlists/dirb/common.txt
 
 `system-users.txt` revela el nombre de usuario y que la contraseña es la corporativa por defecto (`pfsense`).
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Login** en `https://<IP>/` con `<usuario>:pfsense`.
 2. **Versión**: el dashboard confirma `2.1.3-RELEASE` (FreeBSD 8.3), vulnerable a CVE-2014-4688.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 La inyección está en el parámetro `graph` de `status_rrd_graph_img.php` y se explota con `searchsploit` o Metasploit:
 
@@ -63,15 +72,28 @@ uid=0(root) gid=0(wheel) groups=0(wheel)
 
 El payload se codifica en **octal** para esquivar el filtro de la aplicación. No hay escalada posterior: el WebGUI ya es root.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Usuario en minúsculas**: el login de pfSense distingue mayúsculas incluso en el nombre de usuario.
 - **Sin stdout**: la inyección no devuelve salida; hay que lanzar una reverse shell o exfiltrar por red.
 - **Certificado autofirmado**: `curl -k` o aceptar la excepción.
 
-## Lecciones
-
 - Un panel de administración de un firewall con contraseña de fábrica es compromiso total.
 - Los ficheros de «usuarios de sistema» en el webroot son un regalo para el atacante.
 - Un WebGUI que corre como root convierte una inyección de comandos en root directo.
 - Mitigación: cambiar credenciales por defecto, actualizar pfSense y no ejecutar la interfaz como root.
+
+## Mitigaciones y detección
+
+- Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
+- Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
+
+## Referencias
+
+- [CVE-2014-4688](https://nvd.nist.gov/vuln/detail/CVE-2014-4688)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

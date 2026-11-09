@@ -31,7 +31,11 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 El 80 está filtrado; el pie de la web dice `request-baskets | Version: 1.2.1`.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **SSRF**: crear un *basket* con `forward_url` apuntando al `localhost` interno.
 
@@ -49,7 +53,12 @@ curl -X POST http://<IP>:55555/api/baskets/proxy \
 
 3. Shell como **`puma`**.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -67,14 +76,28 @@ sudo -l
 
 Es el comportamiento descrito en CVE-2023-26604.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`proxy_response`**: sin esa opción el basket reenvía pero no devuelve el cuerpo.
 - **URL filtrada**: el `Host` público no llega al 80; hay que pasar por el proxy.
 - **`systemctl` sin TTY**: con `sudo` y una terminal real el pager aparece; por SSH no interactivo, usar `-t`.
 
-## Lecciones
-
 - SSRF convierte un servicio interno en externo: el cortafuegos deja de proteger.
 - Un panel con inyección de comandos y credenciales por defecto es RCE inmediato.
 - `sudo` sobre herramientas con pager o editor es ejecución de comandos como root.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2023-26604](https://nvd.nist.gov/vuln/detail/CVE-2023-26604)
+- [CVE-2023-27148](https://nvd.nist.gov/vuln/detail/CVE-2023-27148)
+- [CVE-2023-27163](https://nvd.nist.gov/vuln/detail/CVE-2023-27163)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

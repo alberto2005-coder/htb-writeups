@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, active-directory, dcsync, golden-ticket, domain-admin]
 ---
 
+
 # CrownJewel-1 — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -51,7 +52,6 @@ Tickets para `krbtgt` desde hosts no-DC sugieren **golden ticket**. El `4768` si
 
 - Escalada hasta control de dominio mediante replicación de directorio con una cuenta comprometida.
 - Persistencia probable con ticket dorado: rotar `krbtgt` dos veces es obligatorio.
-- El alcance incluye todo secreto del dominio, no solo los hosts analizados.
 
 ## Lecciones
 

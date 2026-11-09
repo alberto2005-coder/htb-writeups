@@ -38,7 +38,11 @@ ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,302,401
 
 La portada es una app con login y un panel `/admin`. La respuesta incluye `Server: HAProxy` y el backend es Gunicorn: dos servidores que parsean distinto.
 
-## Foothold: smuggling CL.TE
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 HAProxy usa `Content-Length`, Gunicorn prioriza `Transfer-Encoding`. Se envía una petición con ambos para que el backend interprete dos requests donde el proxy ve una:
 
@@ -61,6 +65,37 @@ El backend procesa el `GET /admin` como si viniera del cliente, y las cabeceras 
 GET /profile HTTP/1.1
 Cookie: session=<sesión de admin>
 ```
+
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+```text
+/home/<user>/user.txt  -> <user_flag>
+/root/root.txt         -> <root_flag>
+```
+
+## Lecciones aprendidas
+
+- **Smuggling** sigue siendo rentable cuando un proxy y un backend no coinciden en cómo leer `Content-Length` y `Transfer-Encoding`.
+- Los secretos en el historial de git sobreviven al borrado del fichero: `git log --all` los encuentra.
+- Una clave IAM con `secretsmanager:GetSecretValue` y `kms:Decrypt` es root en la nube aunque no haya shell.
+- Mitigación: rechazar peticiones con ambos headers, normalizar en el proxy, escaneo de secretos en CI y permisos mínimos por servicio.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- Documentación de la plataforma y del servicio afectado.
 
 ## Gitea y secretos en el historial
 
@@ -95,17 +130,3 @@ aws kms decrypt --ciphertext-blob fileb://secret.bin \
 ```
 
 Del descifrado salen las credenciales de `root` del host (o la clave SSH).
-
-## Evidencia (redactada)
-
-```text
-/home/<user>/user.txt  -> <user_flag>
-/root/root.txt         -> <root_flag>
-```
-
-## Lecciones
-
-- **Smuggling** sigue siendo rentable cuando un proxy y un backend no coinciden en cómo leer `Content-Length` y `Transfer-Encoding`.
-- Los secretos en el historial de git sobreviven al borrado del fichero: `git log --all` los encuentra.
-- Una clave IAM con `secretsmanager:GetSecretValue` y `kms:Decrypt` es root en la nube aunque no haya shell.
-- Mitigación: rechazar peticiones con ambos headers, normalizar en el proxy, escaneo de secretos en CI y permisos mínimos por servicio.

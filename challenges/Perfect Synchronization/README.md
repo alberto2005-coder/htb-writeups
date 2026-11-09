@@ -5,7 +5,9 @@ difficulty: Easy
 platform: Hack The Box
 state: Retired
 tags: [crypto, aes, ecb, frequency-analysis]
+type: Crypto
 ---
+
 
 # Perfect Synchronization — Hack The Box
 
@@ -17,9 +19,53 @@ tags: [crypto, aes, ecb, frequency-analysis]
 
 Se cifran con **AES** en modo **ECB** varios mensajes que comparten plantilla. En ECB cada bloque de 16 bytes se cifra igual, sin encadenar: bloques idénticos producen ciphertext idéntico. Con suficientes mensajes se reconstruye el texto por **análisis de frecuencias** a nivel de bloque, sin conocer la clave.
 
+## Enunciado y superficie
+
+- Categoría Crypto; el reto entrega el material descrito en «Reconocimiento».
+
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
+
+Se cifran con **AES** en modo **ECB** varios mensajes que comparten plantilla. En ECB cada bloque de 16 bytes se cifra igual, sin encadenar: bloques idénticos producen ciphertext idéntico. Con suficientes mensajes se reconstruye el texto por **análisis de frecuencias** a nivel de bloque, sin conocer la clave.
+
+## Reproducción local
+
+- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+
+## Explotación
+
+- Ver las secciones adyacentes para el detalle.
+
 ## Evidencia
 
 - `source.py` (cifrado) y `output.txt` (lista de ciphertexts en hexadecimal).
+
+## Lecciones aprendidas
+
+- **Padding**: los últimos bloques llevan relleno PKCS#7; ignorarlos al comparar.
+- **Codificación**: trabajar en bytes, no en `str`, para no romper los bloques de 16.
+- **Confundir CBC**: en CBC el mismo bloque cambia según el IV y el anterior; si no hay repeticiones, no es ECB.
+
+- ECB filtra estructura: es el modo que nunca hay que usar con datos con patrones.
+- La frecuencia de bloques convierte un cifrado "fuerte" en un criptograma resoluble.
+- AES-CBC o, mejor, AES-GCM con nonce único evitan el problema.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [block-ciphers](../../knowledge/crypto/block-ciphers.md)
 
 ## Método
 
@@ -36,15 +82,3 @@ Counter(bloques).most_common(5)
 3. **Frecuencia**: en cada posición, el bloque más repetido es el carácter o palabra más común del idioma/plantilla; probar hipótesis (`' '`, letras frecuentes, palabras del encabezado conocido).
 
 4. **Iterar**: sustituir bloques por su valor y comprobar que el texto resultante es coherente; los mensajes se "sincronizan" y el texto se vuelve legible.
-
-## Tropiezos
-
-- **Padding**: los últimos bloques llevan relleno PKCS#7; ignorarlos al comparar.
-- **Codificación**: trabajar en bytes, no en `str`, para no romper los bloques de 16.
-- **Confundir CBC**: en CBC el mismo bloque cambia según el IV y el anterior; si no hay repeticiones, no es ECB.
-
-## Lecciones
-
-- ECB filtra estructura: es el modo que nunca hay que usar con datos con patrones.
-- La frecuencia de bloques convierte un cifrado "fuerte" en un criptograma resoluble.
-- AES-CBC o, mejor, AES-GCM con nonce único evitan el problema.

@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Ejecutable de Windows con payload cifrado
 tools: [Detect It Easy, x64dbg, PE-bear, CyberChef]
+state: Retired
+tags: [dfir, análisis-de-malware]
 ---
+
 
 # Payload — Hack The Box
 
@@ -19,11 +22,11 @@ tools: [Detect It Easy, x64dbg, PE-bear, CyberChef]
 
 Un ejecutable de Windows, compilado con **MinGW**, descifra en tiempo de ejecución el payload que realmente ejecuta. En lugar de reproducir a mano el algoritmo de descifrado, el ejercicio propone **saltarlo con un depurador** y dejar que el propio malware haga el trabajo.
 
-## Evidencia
+## Evidencias
 
 - Un `.exe` de 32/64 bits sin firma.
 
-## Método
+## Investigación
 
 1. **Triage estático**: compilador y secciones.
 
@@ -40,6 +43,14 @@ MinGW deja rastros de `gcc`/`mingw` y una tabla de imports mínima; el payload s
 4. **Saltar el cifrado**: cuando el buffer ya está en claro, volcar la región (`Follow in Dump` → `Binary → Save to file`) o cambiar un salto para ejecutar el payload descifrado.
 
 5. **Analizar el volcado**: `strings` y un segundo pase en el depurador para ver la URL de C2, el nombre del servicio o los comandos.
+
+## Conclusiones
+
+[LOG] Hack The Box
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

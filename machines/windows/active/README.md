@@ -39,7 +39,11 @@ smbclient //<IP>/Replication -N
 Replication   Disk
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **GPP en SYSVOL**:
 
@@ -75,7 +79,12 @@ impacket-psexec active.htb/Administrator:'<password>'@<IP>
 # o evil-winrm si 5985 está abierto
 ```
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 No hay escalada como tal: la cuenta crackeada ya es del dominio. Se confirma y se cierra con la flag de root en el escritorio de Administrator.
 
@@ -84,15 +93,30 @@ whoami
 # active\administrator
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - `Replication` puede requerir navegar la ruta completa de la GPO; `recurse ON` antes de `mget`.
 - `GetUserSPNs` pide el TGS con `-request`; sin ese flag solo lista.
 - El hash es `-m 13100` (TGS-REP etype 23), no `-m 1000`.
 - Si `psexec` falla por SMB firmado, usar `wmiexec` o `smbexec`.
 
-## Lecciones
-
 - GPP con `cpassword` es una credencial en claro: Microsoft publicó la clave y aun así sigue apareciendo en SYSVOL.
 - Un SPN en una cuenta privilegiada convierte cualquier usuario del dominio en capaz de pedir su TGS.
 - Mitigación: borrar `cpassword` del SYSVOL, contraseñas largas en cuentas de servicio y revisar SPNs innecesarios.
+
+## Mitigaciones y detección
+
+- Activar la preautenticación Kerberos, usar contraseñas largas en cuentas de servicio y forzar AES.
+- Detección: 4768 con `PreAuthType=0` y 4769 con RC4 fuera de la línea base.
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

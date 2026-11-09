@@ -5,7 +5,10 @@ difficulty: Very Easy
 platform: Hack The Box
 evidence: Una única captura de tráfico de un usuario
 tools: [Wireshark, tshark, CyberChef]
+state: Retired
+tags: [dfir, dfir-/-red]
 ---
+
 
 # PCAP Analysis — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, tshark, CyberChef]
 
 Una captura tomada del equipo de un usuario contiene un **chat en texto claro** y una **subida de fichero por HTTP**. Con unas 25 000 tramas, el reto es separar la conversación del ruido y extraer el fichero.
 
-## Evidencia
+## Evidencias
 
 - Un `Pcap_Analysis.pcapng`.
 
-## Método
+## Investigación
 
 1. **Reducir el ruido**: `Statistics → Protocol Hierarchy` y `Conversations`.
 
@@ -44,6 +47,14 @@ tshark -r Pcap_Analysis.pcapng -Y 'http.request.method=="POST"' -T fields -e htt
 `File → Export Objects → HTTP` guarda el fichero; el tamaño se lee en la respuesta del servidor.
 
 4. **El fichero**: `file` no reconoce firma (es datos), así que hay que mirar el contenido y la cabecera del multipart para saber qué se subió.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

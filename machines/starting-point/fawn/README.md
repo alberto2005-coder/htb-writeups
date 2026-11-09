@@ -72,6 +72,20 @@ También se puede hacer de forma no interactiva:
 wget -q ftp://anonymous:anonymous@<TARGET_IP>/flag.txt -O flag.txt
 ```
 
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
 ## Lecciones aprendidas
 
 - El **FTP anónimo** es una de las primeras cosas que hay que comprobar cuando el puerto 21 está abierto.

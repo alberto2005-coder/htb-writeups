@@ -34,7 +34,11 @@ nmap -sC -sV <IP> -oN nmap.txt
 nmap -p3306 --script mysql-info,mysql-empty-password <IP>
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 mysql -h <IP> -u root
@@ -71,15 +75,33 @@ select * from config;
 
 Si `root` tuviera contraseña, el siguiente paso sería probar credenciales por defecto o vacías en otros usuarios y, con `FILE`, leer ficheros del sistema.
 
-## Evidencia (redactada)
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
 
 ```text
 htb.config.value  ->  <flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Un motor de base de datos expuesto con `root` sin contraseña es lectura total del servidor de datos.
 - `bind-address = 0.0.0.0` en 3306 saca la base de datos a la red sin necesidad de vulnerabilidad.
 - Mitigación: `bind-address = 127.0.0.1`, `root@localhost` con contraseña fuerte, usuarios por aplicación y firewall.
 - Detección: conexiones al 3306 desde fuera del segmento de aplicación y logins correctos con `root` desde IPs nuevas.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+
+## Referencias
+
+- Documentación de la plataforma y del servicio afectado.

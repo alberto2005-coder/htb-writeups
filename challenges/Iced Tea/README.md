@@ -7,6 +7,7 @@ state: Retired
 tags: [crypto, tea, block-cipher, decryption]
 ---
 
+
 # Iced Tea — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -17,11 +18,19 @@ tags: [crypto, tea, block-cipher, decryption]
 
 Bloques cifrados con **TEA** (Tiny Encryption Algorithm) y la clave incluida en el código. No hay vulnerabilidad: es implementar el descifrado estándar. La trampa es el empaquetado de enteros y el *endianness*.
 
-## Enunciado
+## Enunciado y superficie
 
 Se entrega el script de cifrado con `key` y dos bloques de 64 bits en hexadecimal. TEA usa 32 rondas, la constante `delta = 0x9e3779b9` y una clave de 128 bits repartida en cuatro palabras de 32.
 
-## Análisis
+## Reconocimiento
+
+- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+
+## Análisis del código
+
+- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+
+## Explicación del fallo
 
 El cifrado suma `delta` y mezcla `v0`/`v1` con desplazamientos; el descifrado hace lo mismo en orden inverso, restando `delta`:
 
@@ -43,6 +52,10 @@ Detalles que fallan si se ignoran:
 - `s` se decrementa **después** de cada ronda.
 - `k` son cuatro enteros de 32 bits, no la clave como bytes.
 
+## Reproducción local
+
+- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+
 ## Explotación
 
 ```python
@@ -60,15 +73,27 @@ Si el texto sale con caracteres raros, probar `<2I` en lugar de `>2I`: el *endia
 
 Comprobación: el resultado concatenado debe empezar por el prefijo de la flag.
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Endianness**: `struct.unpack('>2I')` para big-endian; el script de cifrado suele usar el mismo formato que hay que invertir.
 - **Máscara de 32 bits**: sin `& 0xffffffff` los desplazamientos se desbordan y el descifrado da basura.
 - **Orden de las palabras**: `k[0..3]` en el mismo orden que el cifrador; si se intercambian, no descifra.
-- **No es AES**: no hay IV ni modo; cada bloque es independiente.
-
-## Lecciones
 
 - TEA es un cifrador de juguete: 64 bits de bloque y clave de 128, con debilidades conocidas (equivalentes de clave, related-key).
 - Con la clave en el código, el reto es implementar bien el inverso, no romper nada.
 - Mitigación: usar AES-GCM o ChaCha20-Poly1305, nunca TEA/XTEA en producción.
+
+## Mitigaciones y detección
+
+- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+
+## Referencias
+
+- [rop-stack](../../knowledge/pwn/rop-stack.md)
+- [block-ciphers](../../knowledge/crypto/block-ciphers.md)

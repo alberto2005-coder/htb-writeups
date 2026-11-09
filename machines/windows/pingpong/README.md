@@ -40,6 +40,65 @@ host dc1.ping.htb; host dc2.pong.htb
 - `dc1.ping.htb` resuelve a la IP del target; `dc2.pong.htb` resuelve a una **IP interna** (`192.168.2.x`) que no es enrutable desde la VPN: hará falta un pivote.
 - NTLM está apagado en ambos dominios, de modo que `netexec winrm` y cualquier herramienta que negocie NTLM fallan de entrada.
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
+
+- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+```text
+DC2: C:\Users\<user>\Desktop\user.txt          -> <flag>
+DC1: C:\Users\Administrator\Desktop\root.txt   -> <flag>
+```
+
+- Certificado emitido por `TemporaryWinRM` y TGT de PKINIT.
+- `ldeep` mostrando la clave de la gMSA.
+- Historial de PSReadLine con las credenciales de la cuenta humana.
+- Ticket de impersonación para `mssqlsvc/dc2.pong.htb`.
+- Certificado de `Administrator@ping.htb` y `whoami` = `ping\administrator`.
+
+## Lecciones aprendidas
+
+- **Sin reloj no hay Kerberos**, y el culpable puede no ser el servicio de hora evidente: hay que mirar quién reescribe el reloj.
+- **Un certificado es una credencial**: ESC13 no requiere tocar ACLs, solo pertenecer al grupo de autorización de la plantilla.
+- **Cross-realm es `kvno`**, no impacket, y el PAC caduca: tras cada cambio de grupo hay que pedir un TGT nuevo.
+- **`groupType` importa**: un ACL perfecto sobre un grupo Global sin miembros válidos no sirve de nada.
+- **JEA no es una jaula**: el endpoint restringe cmdlets, no impide leer ficheros del perfil ni ejecutar comandos externos.
+- **El historial de PowerShell es un almacén de credenciales** en texto claro.
+- **RBCD + S4U2Proxy** convierte el control de una cuenta en un ticket de servicio para cualquier usuario; con `SeImpersonate` en el servicio, el siguiente paso es SYSTEM.
+- **ESC4→ESC1** es la ruta más corta cuando ya se puede escribir en una plantilla: `msPKI-Certificate-Name-Flag = 1` y un ACE amplio bastan.
+
+## Mitigaciones y detección
+
+- **Plantillas AD CS**: revisar los grupos de autorización (ESC13), quién puede escribir en las plantillas (ESC4) y cualquier plantilla con `SUPPLY_SUBJECT` y derechos de inscripción amplios (ESC1). Eliminar `EDITF_ATTRIBUTESUBJECTALTNAME2` y auditar los cambios de atributos de plantilla.
+- **gMSA**: limitar quién es gestor (`msDS-GroupMSAMembership`), revisar `GenericAll`/`WriteMembers` sobre grupos gestores y alertar de conversiones de `groupType`.
+- **JEA**: no dejar credenciales en historiales, limpiar `ConsoleHost_history.txt`, restringir qué comandos externos son visibles y no reutilizar la cuenta de servicio para tareas humanas.
+- **RBCD**: monitorizar escrituras en `msDS-AllowedToActOnBehalfOfOtherIdentity` y revisar qué cuentas pueden escribirlo.
+- **MSSQL**: retirar `SeImpersonatePrivilege` a la cuenta del servicio si no es imprescindible, restringir `xp_cmdshell` y usar cuentas de servicio gestionadas sin privilegios locales.
+- **Kerberos**: NTLM deshabilitado **con** el resto del hardening (LDAP signing, channel binding, RC4 fuera) y sincronización de hora monitorizada.
+- **Detección**: eventos 5136 (cambios en atributos de directorio), 4768/4769 anómalos entre reinos, 4886/4887 de inscripción de certificados y ejecución de `certipy`/`Rubeus` en endpoints.
+
+## Referencias
+
+- <https://learn.microsoft.com/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview>
+- <https://learn.microsoft.com/powershell/scripting/security/remoting/jea/overview>
+- <https://learn.microsoft.com/defender-for-identity/security-assessment-edit-rbcd>
+- <https://posts.specterops.io/certified-pre-owned-d95910965cd2>
+- <https://www.rfc-editor.org/rfc/rfc4120>
+
 ## El reloj, antes que nada
 
 Con más de cinco minutos de desfase, Kerberos devuelve `KRB_AP_ERR_SKEW` y todo lo demás parece roto. Aquí el desfase era de **+8 h** y no lo causaba `systemd-timesyncd` (estaba inactivo), sino **VirtualBox Guest Additions** (`vboxservice`), que resincronizaba con el host cada pocos segundos.
@@ -247,19 +306,6 @@ printf 'whoami\ntype C:\\Users\\Administrator\\Desktop\\root.txt\nexit\n' | \
 
 El `-sid` hace que el PAC del certificado lleve el SID de Administrator y no solo su UPN.
 
-## Evidencia (redactada)
-
-```text
-DC2: C:\Users\<user>\Desktop\user.txt          -> <flag>
-DC1: C:\Users\Administrator\Desktop\root.txt   -> <flag>
-```
-
-- Certificado emitido por `TemporaryWinRM` y TGT de PKINIT.
-- `ldeep` mostrando la clave de la gMSA.
-- Historial de PSReadLine con las credenciales de la cuenta humana.
-- Ticket de impersonación para `mssqlsvc/dc2.pong.htb`.
-- Certificado de `Administrator@ping.htb` y `whoami` = `ping\administrator`.
-
 ## Errores que cuestan tiempo
 
 | Síntoma | Causa | Solución |
@@ -271,33 +317,3 @@ DC1: C:\Users\Administrator\Desktop\root.txt   -> <flag>
 | `apt` bloqueado por otro proceso | `apt upgrade` en curso | `apt-get download` + `dpkg-deb -x` del binario necesario |
 | Agente del pivote corrupto | `upload` de evil-winrm con binarios grandes | servirlo por HTTP y descargarlo con `curl.exe` |
 | Credenciales perdidas en el historial | salida truncada en la canalización | filtrar con `findstr` en el propio DC |
-
-## Lecciones
-
-- **Sin reloj no hay Kerberos**, y el culpable puede no ser el servicio de hora evidente: hay que mirar quién reescribe el reloj.
-- **NTLM apagado cambia el tooling**: todo pasa por `ccache`, `-k -no-pass` y claves AES; las herramientas que negocian NTLM no sirven.
-- **Un certificado es una credencial**: ESC13 no requiere tocar ACLs, solo pertenecer al grupo de autorización de la plantilla.
-- **Cross-realm es `kvno`**, no impacket, y el PAC caduca: tras cada cambio de grupo hay que pedir un TGT nuevo.
-- **`groupType` importa**: un ACL perfecto sobre un grupo Global sin miembros válidos no sirve de nada.
-- **JEA no es una jaula**: el endpoint restringe cmdlets, no impide leer ficheros del perfil ni ejecutar comandos externos.
-- **El historial de PowerShell es un almacén de credenciales** en texto claro.
-- **RBCD + S4U2Proxy** convierte el control de una cuenta en un ticket de servicio para cualquier usuario; con `SeImpersonate` en el servicio, el siguiente paso es SYSTEM.
-- **ESC4→ESC1** es la ruta más corta cuando ya se puede escribir en una plantilla: `msPKI-Certificate-Name-Flag = 1` y un ACE amplio bastan.
-
-## Mitigaciones y detección
-
-- **Plantillas AD CS**: revisar los grupos de autorización (ESC13), quién puede escribir en las plantillas (ESC4) y cualquier plantilla con `SUPPLY_SUBJECT` y derechos de inscripción amplios (ESC1). Eliminar `EDITF_ATTRIBUTESUBJECTALTNAME2` y auditar los cambios de atributos de plantilla.
-- **gMSA**: limitar quién es gestor (`msDS-GroupMSAMembership`), revisar `GenericAll`/`WriteMembers` sobre grupos gestores y alertar de conversiones de `groupType`.
-- **JEA**: no dejar credenciales en historiales, limpiar `ConsoleHost_history.txt`, restringir qué comandos externos son visibles y no reutilizar la cuenta de servicio para tareas humanas.
-- **RBCD**: monitorizar escrituras en `msDS-AllowedToActOnBehalfOfOtherIdentity` y revisar qué cuentas pueden escribirlo.
-- **MSSQL**: retirar `SeImpersonatePrivilege` a la cuenta del servicio si no es imprescindible, restringir `xp_cmdshell` y usar cuentas de servicio gestionadas sin privilegios locales.
-- **Kerberos**: NTLM deshabilitado **con** el resto del hardening (LDAP signing, channel binding, RC4 fuera) y sincronización de hora monitorizada.
-- **Detección**: eventos 5136 (cambios en atributos de directorio), 4768/4769 anómalos entre reinos, 4886/4887 de inscripción de certificados y ejecución de `certipy`/`Rubeus` en endpoints.
-
-## Referencias
-
-- <https://learn.microsoft.com/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview>
-- <https://learn.microsoft.com/powershell/scripting/security/remoting/jea/overview>
-- <https://learn.microsoft.com/defender-for-identity/security-assessment-edit-rbcd>
-- <https://posts.specterops.io/certified-pre-owned-d95910965cd2>
-- <https://www.rfc-editor.org/rfc/rfc4120>

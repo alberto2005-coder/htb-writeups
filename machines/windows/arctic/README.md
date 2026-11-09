@@ -73,7 +73,12 @@ C:\ColdFusion8\runtime\bin> whoami
 arctic\tolis
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```text
 C:\> whoami /priv
@@ -94,16 +99,25 @@ C:\> whoami
 nt authority\system
 ```
 
-## Evidencia (redactada)
+## Evidencia
 
 ```text
 C:\Users\tolis\Desktop\user.txt        -> <user_flag>
 C:\Users\Administrator\Desktop\root.txt -> <root_flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Los conectores de subida heredados (FCKeditor, CKFinder) siguen vivos en instalaciones antiguas y aceptan traversal.
 - Un timeout largo no es un fallo de red: el servidor tarda en generar el JSP y hay que esperar antes de concluir que el exploit no funciona.
 - `SeImpersonatePrivilege` en un servicio web es escalada directa a `SYSTEM`; se corrige sacando al servicio de una cuenta con ese privilegio.
 - Mitigación: retirar `CFIDE`, parchear ColdFusion y aplicar las actualizaciones de 2008 R2 (o migrar), y revisar qué cuentas de servicio acumulan privilegios de suplantación.
+
+## Mitigaciones y detección
+
+- Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
+- Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

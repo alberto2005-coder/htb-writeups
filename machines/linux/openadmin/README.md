@@ -35,7 +35,11 @@ ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -fc 403
 
 Aparecen `/music`, `/artwork`, `/sierra` y, desde el botón de login de `/music`, **`/ona/`**.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **OpenNetAdmin 18.1.1**:
 
@@ -78,7 +82,12 @@ curl -s http://127.0.0.1:52846/main.php
 
 `main.php` devuelve una **clave RSA privada cifrada** de `joanna`.
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 ssh2john joanna.key > joanna.hash
@@ -113,16 +122,27 @@ reset; sh 1>&0 2>&0
 root@openadmin:~#
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **Rutas de OpenNetAdmin**: el exploit necesita `/ona/login.php`, no la raíz.
 - **`ss` dentro de loopback**: el 52846 no se ve desde fuera; hay que ejecutar `curl` desde la propia máquina o por túnel SSH.
 - **Grupo `internal`**: sin ser `jimmy` no se puede leer el código del sitio interno.
 - **`nano`**: el escape va por `^R` `^X` (leer fichero y ejecutar comando); sin eso sólo se edita texto.
 
-## Lecciones
-
 - Reutilizar la contraseña de la base de datos como contraseña de sistema es el puente entre RCE web y SSH.
 - Un hash hardcodeado en PHP con SHA-512 sin sal se crackea igual que cualquier otro.
 - Tener `sudo` sobre un editor es tener root: `nano`, `vim`, `less` y compañía escapan.
 - Mitigación: credenciales por servicio, hashes con `password_hash()` (bcrypt/argon2) y `sudo` restringido a binarios sin shell.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

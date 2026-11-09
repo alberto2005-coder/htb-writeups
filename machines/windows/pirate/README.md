@@ -36,6 +36,47 @@ bloodhound-python -dc dc01.pirate.htb -d pirate.htb -u pentest -p '<password>' -
 
 El DC se llama `DC01`, el dominio `pirate.htb` y el DC tiene **SMB signing activo** pero **LDAP signing no obligatorio**: eso es lo que hará posible el relevo final.
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
+
+- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
+
+- Las cuentas Pre-Windows 2000 sin `logonCount` son credenciales gratis; `nxc --pre2k` las encuentra en un minuto.
+- Leer una gMSA es leer una identidad de servicio con WinRM: el ACE `ReadGMSAPassword` hay que revisarlo siempre.
+- Coacción + relevo a LDAPS sigue vivo mientras LDAP signing no sea obligatorio.
+- `secretsdump` en un servidor intermedio suele dar credenciales en claro y, con ellas, el siguiente salto.
+- `WriteSPN` sobre el DC combinado con delegación es dominio total: es la versión moderna del *SPN jacking*.
+- Detección: 4625 masivos de cuentas de equipo, peticiones LDAP a `msDS-ManagedPassword`, y creación de `msDS-AllowedToActOnBehalfOfOtherIdentity`.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [adcs-esc13](../../../knowledge/windows/adcs-esc13.md)
+- [gmsa-read-key](../../../knowledge/windows/gmsa-read-key.md)
+
 ## Pre-Windows 2000
 
 ```bash
@@ -129,12 +170,3 @@ impacket-secretsdump -k -no-pass Administrator@dc01.pirate.htb
 ```
 
 Con el hash de Administrator de dominio se leen ambas flags.
-
-## Lecciones
-
-- Las cuentas Pre-Windows 2000 sin `logonCount` son credenciales gratis; `nxc --pre2k` las encuentra en un minuto.
-- Leer una gMSA es leer una identidad de servicio con WinRM: el ACE `ReadGMSAPassword` hay que revisarlo siempre.
-- Coacción + relevo a LDAPS sigue vivo mientras LDAP signing no sea obligatorio.
-- `secretsdump` en un servidor intermedio suele dar credenciales en claro y, con ellas, el siguiente salto.
-- `WriteSPN` sobre el DC combinado con delegación es dominio total: es la versión moderna del *SPN jacking*.
-- Detección: 4625 masivos de cuentas de equipo, peticiones LDAP a `msDS-ManagedPassword`, y creación de `msDS-AllowedToActOnBehalfOfOtherIdentity`.

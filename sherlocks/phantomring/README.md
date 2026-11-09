@@ -7,6 +7,7 @@ state: Retired
 tags: [malware-analysis, linux, elf, reverse-engineering, ghidra, c2]
 ---
 
+
 # PhantomRing — Hack The Box
 
 [⚑ English](README.en.md) | **Español**

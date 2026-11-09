@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, notepad++, extortion, osint, aws, windows]
 ---
 
+
 # Noted — Hack The Box
 
 [⚑ English](README.en.md) | **Español**

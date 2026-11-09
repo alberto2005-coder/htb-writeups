@@ -49,7 +49,11 @@ Just an uptime test script
  04:48:11 up 15:15, 0 users, load average: 0.05, 0.45, 0.39
 ```
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 1. **Comprobar la vulnerabilidad** inyectando una función vacía en una cabecera:
 
@@ -76,7 +80,12 @@ nmap -sV -p80 --script http-shellshock \
 shelly@Shocker:/usr/lib/cgi-bin$
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```bash
 sudo -l
@@ -98,15 +107,27 @@ root@Shocker:~# id
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-## Tropiezos
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - **`/cgi-bin/` da 403**: el listado está deshabilitado, pero el script concreto (`user.sh`) responde 200.
 - **Cabecera correcta**: Shellshock se dispara en cualquier variable de entorno; si `User-Agent` no funciona, probar `Referer` o `Cookie`.
 - **Comillas**: la carga va entre comillas simples en `curl` para que Bash local no la interprete.
 - **`perl` con `sudo`**: no hace falta shell script; `exec` dentro del intérprete es suficiente.
 
-## Lecciones
-
 - Bash sin parchear + CGI es ejecución remota de comandos: la cabecera es el vector.
 - `sudo` sobre un intérprete (perl, python, ruby) es root, igual que sobre un editor.
 - Mitigación: actualizar Bash, evitar CGI, y reglas `sudo` que no permitan intérpretes.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+
+## Referencias
+
+- [CVE-2014-6271](https://nvd.nist.gov/vuln/detail/CVE-2014-6271)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

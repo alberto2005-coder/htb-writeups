@@ -44,6 +44,10 @@ nmap -p445 --script smb-vuln-ms17-010 <IP>
 
 También se ve con `smbclient -L` que el hostname es `HARIS-PC`.
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
 ## Foothold
 
 Con Metasploit el camino es directo: el módulo `exploit/windows/smb/ms17_010_eternalblue` habla SMBv1, corrompe el pool del kernel y ejecuta el payload en modo kernel, que arranca una shell como SYSTEM.
@@ -62,6 +66,37 @@ Server username: NT AUTHORITY\SYSTEM
 
 Si el exploit falla por el estado del pool, un reinicio del objetivo o unos reintentos suelen bastar; el crash del SMB (`BugCheck`) no persiste.
 
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+```text
+C:\Users\haris\Desktop\user.txt          -> <user_flag>
+C:\Users\Administrator\Desktop\root.txt  -> <root_flag>
+```
+
+## Lecciones aprendidas
+
+- SMBv1 y MS17-010 son el ejemplo canónico de vulnerabilidad de kernel explotable en red: un solo paquete compromete el host.
+- El vector no requiere credenciales ni interacción; parchear es la única defensa real, porque el puerto 445 está expuesto por diseño.
+- Mitigación: deshabilitar SMBv1 (`Set-SmbServerConfiguration -EnableSMB1Protocol $false`), bloquear 445 en el perímetro y aplicar MS17-010. La detección se apoya en eventos de crash del servicio y tráfico SMB anómalo con transacciones `NT Trans` gigantes.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)
+
 ## Post-explotación
 
 ```text
@@ -77,16 +112,3 @@ meterpreter > cat "C:\\Users\\Administrator\\Desktop\\root.txt"
 ```
 
 Alternativa sin Metasploit: cualquier implementación pública de EternalBlue (`MS17-010` de worawit, `eternalblue-doublepulsar`…) con un shellcode de reverse shell propio, o el script de AutoBlue.
-
-## Evidencia (redactada)
-
-```text
-C:\Users\haris\Desktop\user.txt          -> <user_flag>
-C:\Users\Administrator\Desktop\root.txt  -> <root_flag>
-```
-
-## Lecciones
-
-- SMBv1 y MS17-010 son el ejemplo canónico de vulnerabilidad de kernel explotable en red: un solo paquete compromete el host.
-- El vector no requiere credenciales ni interacción; parchear es la única defensa real, porque el puerto 445 está expuesto por diseño.
-- Mitigación: deshabilitar SMBv1 (`Set-SmbServerConfiguration -EnableSMB1Protocol $false`), bloquear 445 en el perímetro y aplicar MS17-010. La detección se apoya en eventos de crash del servicio y tráfico SMB anómalo con transacciones `NT Trans` gigantes.

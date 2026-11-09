@@ -7,6 +7,7 @@ state: Retired
 tags: [dfir, evtx, windows-events, firewall, scheduled-task, powershell, sharphound]
 ---
 
+
 # Logjammer — Hack The Box
 
 [⚑ English](README.en.md) | **Español**

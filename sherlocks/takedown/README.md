@@ -5,7 +5,10 @@ difficulty: Easy
 platform: Hack The Box
 evidence: Captura de red de una intrusión con SMB y PowerShell
 tools: [Wireshark, tshark, CyberChef]
+state: Retired
+tags: [dfir, dfir-/-red]
 ---
+
 
 # Takedown — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, tshark, CyberChef]
 
 El equipo detecta un patrón anómalo en el tráfico: una intrusión que empieza con un fichero **VBS** dejado en un recurso compartido y sigue con la descarga de un script de PowerShell y balizamiento a un C2. Todo está en la captura.
 
-## Evidencia
+## Evidencias
 
 - Un PCAP con tráfico SMB2, HTTP y conexiones salientes.
 
-## Método
+## Investigación
 
 1. **Sesión SMB**: negociación SMB2, autenticación (NTLM) y `Tree Connect` a un recurso.
 
@@ -40,6 +43,14 @@ tshark -r takedown.pcap -Y 'http.request' -T fields -e http.host -e http.request
 4. **Autenticación robada**: si aparece un `NTLMSSP_AUTH`, el hash se ha reutilizado; el tipo y el usuario identifican el movimiento lateral.
 
 5. **C2**: conexiones periódicas (POST) a una IP externa. Contar intervalos y tamaños da el perfil del *beacon*.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

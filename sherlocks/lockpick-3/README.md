@@ -5,7 +5,10 @@ difficulty: Medium
 platform: Hack The Box
 evidence: Binario de Linux, volcado de memoria y estado de la VM
 tools: [Volatility 3, Ghidra, strings, CyberChef]
+state: Retired
+tags: [dfir, análisis-de-malware]
 ---
+
 
 # Lockpick 3.0 — Hack The Box
 
@@ -17,13 +20,13 @@ tools: [Volatility 3, Ghidra, strings, CyberChef]
 
 El grupo detrás de **Lockpick** ha mejorado: esta vez sólo alcanzó un servidor de desarrollo, sin acceso remoto evidente —posible amenaza interna—. Piden ingeniería inversa del binario y análisis de los artefactos de la máquina.
 
-## Evidencia
+## Evidencias
 
 - `ubuntu-client`: el malware.
 - `ubuntu-client-Snapshot2.vmem`: volcado de memoria.
 - `ubuntu-client-Snapshot2.vmsn`: estado de la VM.
 
-## Método
+## Investigación
 
 1. **Identidad**: hash del binario y tipo.
 
@@ -39,6 +42,14 @@ strings -n 6 ubuntu-client | head -40
 4. **Memoria**: con **Volatility 3** sobre el `.vmem`, listar procesos y líneas de comandos (`windows.pslist`/`linux.bash` según perfil) para ver cómo se lanzó y qué servicios creó.
 
 5. **Persistencia**: el malware crea y habilita una unidad de systemd (`ubuntu_running.service`): técnica **T1543.002**. El `.vmsn` confirma el estado del servicio.
+
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
 
 ## Qué enseña
 

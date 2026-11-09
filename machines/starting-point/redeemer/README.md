@@ -31,6 +31,10 @@ nmap -Pn -sV -p 6379 <TARGET_IP>
 |---|---|---|
 | 6379/tcp | Redis | sin autenticación |
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
 ## Foothold
 
 ```bash
@@ -56,6 +60,15 @@ OK
 ```
 
 No hizo falta exploit ni credenciales: el puerto está expuesto y `protected-mode` está en `no`.
+
+## Movimiento lateral
+
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
 
 ## Evidencia
 

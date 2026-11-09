@@ -34,7 +34,11 @@ nmap -sC -sV <IP> -oN nmap.txt
 
 Tres puertos de SMB/RPC y el 3389 de escritorio remoto. Con SMB se puede listar sin credenciales, pero no hace falta: el 3389 es la puerta.
 
-## Acceso
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
 
 ```bash
 xfreerdp /v:<IP> /cert:ignore /u:Administrator
@@ -53,14 +57,32 @@ Ya en el escritorio:
 C:\Users\Administrator\Desktop\flag.txt
 ```
 
-## Evidencia (redactada)
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
 
 ```text
 C:\Users\Administrator\Desktop\flag.txt  -> <flag>
 ```
 
-## Lecciones
+## Lecciones aprendidas
 
 - Una cuenta con contraseña vacía y RDP expuesto es acceso total sin exploit; la política de Windows lo permite por defecto en equipos que no están en dominio.
 - Mitigación: `LimitBlankPasswordUse = 1`, exigir NLA (`UserAuthentication = 1`), cuentas locales con contraseña y RDP solo por VPN o detrás de un jump host.
 - Detección: eventos 4624 tipo 10 desde direcciones no habituales y 4625 repetidos con usuario `Administrator`.
+
+## Mitigaciones y detección
+
+- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
+- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
+
+## Referencias
+
+- Documentación de la plataforma y del servicio afectado.

@@ -5,7 +5,10 @@ difficulty: Very Easy
 platform: Hack The Box
 evidence: Dos capturas: servidor web y controlador de una nube privada
 tools: [Wireshark, tshark, CyberChef]
+state: Retired
+tags: [dfir, dfir-/-red]
 ---
+
 
 # Vantage — Hack The Box
 
@@ -17,11 +20,11 @@ tools: [Wireshark, tshark, CyberChef]
 
 Una empresa pequeña movió recursos a una **nube privada**; el servidor web de desarrollo quedó con la redirección al *dashboard*. Un supuesto atacante escribe diciendo que los datos se filtraron. Hay dos capturas: la del servidor web y la del controlador de la nube.
 
-## Evidencia
+## Evidencias
 
 - `web-server_2025-07-01.pcap` y `controller_2025-07-01.pcap`.
 
-## Método
+## Investigación
 
 1. **Fase de descubrimiento**: miles de `GET /` con un `Host` distinto cada vez, recorriendo una wordlist en orden alfabético. Es **enumeración de subdominios**, no navegación.
 
@@ -41,6 +44,14 @@ tshark -r controller_2025-07-01.pcap -q -z conv,ip
 
 5. **Cronología**: ordenar los dos ficheros por `frame.time` y marcar enumeración, login y primera descarga.
 
+## Conclusiones
+
+[🇬🇧 English](README.en.md) | **Español**
+
+## Lecciones
+
+- Qué se probó y falló, y qué harías distinto la próxima vez.
+
 ## Qué enseña
 
 - Enumeración y explotación tienen firmas distintas: volumen y diversidad frente a repetición sobre un objetivo.
@@ -51,4 +62,3 @@ tshark -r controller_2025-07-01.pcap -q -z conv,ip
 
 - **Ruido TLS**: sin claves, sólo metadatos; centrarse en HTTP y en los flujos internos.
 - **Zonas horarias**: los dos ficheros pueden no coincidir; normalizar antes de cruzar.
-- **Subdominios comodín**: si todo responde 200, el código de estado no distingue; comparar tamaño de respuesta.

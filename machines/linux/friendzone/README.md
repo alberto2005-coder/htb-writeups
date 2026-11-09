@@ -90,7 +90,12 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
 La ruta se pasa sin `.php` porque la aplicación lo añade. Para una reverse shell hace falta la cookie de sesión del login, así que conviene autenticarse con `curl -c` y reutilizar el fichero con `-b`.
 
-## Escalada
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
 
 ```bash
 cat /var/www/mysql_data.conf
@@ -135,7 +140,6 @@ Se añade, no se reemplaza: el módulo debe seguir funcionando para que el cron 
 
 ## Lecciones aprendidas
 
-- Puerto 53 en TCP abierto invita a probar AXFR; una zona mal configurada entrega todo el mapa.
 - Los comentarios de los shares de Samba filtran rutas del sistema (`/etc/Files`).
 - LFI + share escribible = RCE, aunque el LFI sea «solo de lectura» en teoría.
 - Un cron de root que importa un módulo escribible es escalada, sin tocar el script.

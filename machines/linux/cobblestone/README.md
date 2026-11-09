@@ -31,6 +31,49 @@ vote.cobblestone.htb     (app de votaciones)
 deploy.cobblestone.htb   (panel de despliegues)
 ```
 
+## Enumeración
+
+- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+
+## Foothold
+
+- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+
+## Movimiento lateral
+
+- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
+- El detalle está en «Escalada de privilegios».
+
+## Escalada de privilegios
+
+- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+
+## Evidencia
+
+```text
+/home/<user>/user.txt  -> <user_flag>
+/root/root.txt         -> <root_flag>
+```
+
+## Lecciones aprendidas
+
+- **SQLi de segundo orden**: el payload se guarda limpio y explota al releerlo; los WAF que solo miran la petición de entrada no lo ven.
+- `LOAD_FILE` sigue disponible si el usuario de BD tiene `FILE`: leer el `.env` de otra app es leer sus secretos.
+- **SSTI** en un motor de plantillas es RCE: nunca renderizar texto del usuario como plantilla.
+- Mitigación: consultas preparadas en todas las lecturas, `FILE` revocado, plantillas compiladas sin `registerUndefinedFilterCallback`, Cobbler parcheado y `cobblerd` con autenticación.
+
+## Mitigaciones y detección
+
+- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+
+## Referencias
+
+- [CVE-2024-47533](https://nvd.nist.gov/vuln/detail/CVE-2024-47533)
+- [ssti](../../../knowledge/web/ssti.md)
+- [rop-stack](../../../knowledge/pwn/rop-stack.md)
+
 ## 1. SQLi de segundo orden
 
 El registro de `vote` acepta un comentario que se guarda y se inserta más tarde en la consulta de moderación:
@@ -99,17 +142,3 @@ El proceso corre como root y ejecuta el comando inyectado:
 ```bash
 cat /tmp/pwned
 ```
-
-## Evidencia (redactada)
-
-```text
-/home/<user>/user.txt  -> <user_flag>
-/root/root.txt         -> <root_flag>
-```
-
-## Lecciones
-
-- **SQLi de segundo orden**: el payload se guarda limpio y explota al releerlo; los WAF que solo miran la petición de entrada no lo ven.
-- `LOAD_FILE` sigue disponible si el usuario de BD tiene `FILE`: leer el `.env` de otra app es leer sus secretos.
-- **SSTI** en un motor de plantillas es RCE: nunca renderizar texto del usuario como plantilla.
-- Mitigación: consultas preparadas en todas las lecturas, `FILE` revocado, plantillas compiladas sin `registerUndefinedFilterCallback`, Cobbler parcheado y `cobblerd` con autenticación.
