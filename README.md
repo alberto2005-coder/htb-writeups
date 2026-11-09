@@ -67,7 +67,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Bank | Linux | Easy | Machines | **Retired** (ref.) | AXFR, `302` a `200`, whitelist `.htb`, SUID `emergency` | [Ver](machines/linux/bank/README.md) | [EN](machines/linux/bank/README.en.md) |
 | Blue | Windows | Easy | Machines | **Retired** (ref.) | MS17-010 EternalBlue, `hashdump` | [Ver](machines/windows/blue/README.md) | [EN](machines/windows/blue/README.en.md) |
 | Cronos | Linux | Medium | Machines | **Retired** (ref.) | AXFR, SQLi, inyección de comandos, cron de root sobre `artisan` | [Ver](machines/linux/cronos/README.md) | [EN](machines/linux/cronos/README.en.md) |
-| PingPong | Windows | Insane | Machines | **Retired** (ref.) | Dos bosques AD, Kerberos AES256, delegación a MSSQL y AD CS ESC1 | [Ver](machines/windows/pingpong/README.md) | [EN](machines/windows/pingpong/README.en.md) |
+| PingPong | Windows | Insane | Machines | **Retired** | Dos bosques AD, ESC13, pivote, gMSA, JEA, RBCD y ESC4→ESC1 | [Ver](machines/windows/pingpong/README.md) | [EN](machines/windows/pingpong/README.en.md) |
 | AirTouch | Linux | Hard | Machines | **Retired** (ref.) | Handshake WPA2, Evil Twin PEAP-MSCHAPv2 y pivote por VPN | [Ver](machines/linux/airtouch/README.md) | [EN](machines/linux/airtouch/README.en.md) |
 | Eighteen | Windows | Hard | Machines | **Retired** (ref.) | `IMPERSONATE` en MSSQL, hash Werkzeug, CVE-2025-53779 (dMSA) | [Ver](machines/windows/eighteen/README.md) | [EN](machines/windows/eighteen/README.en.md) |
 | Sink | Linux | Insane | Machines | **Retired** (ref.) | Smuggling CL.TE, Gitea con claves AWS, Secrets Manager y KMS | [Ver](machines/linux/sink/README.md) | [EN](machines/linux/sink/README.en.md) |
@@ -125,6 +125,7 @@ Las máquinas completadas en este perfil tienen aquí su enlace público. Las fi
 | Layover | https://labs.hackthebox.com/achievement/machine/4187928/984 |
 | Connected | https://labs.hackthebox.com/achievement/machine/4187928/906 |
 | Unclaimed | https://labs.hackthebox.com/achievement/machine/4187928/1012 |
+| PingPong | https://labs.hackthebox.com/achievement/machine/4187928/891 |
 
 - **Retired:** writeup publicable.
 - **Active:** solo borrador privado; se publica cuando HTB retire la máquina.
