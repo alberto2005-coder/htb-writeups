@@ -39,7 +39,7 @@ La función principal reserva un buffer pequeño y llama a la lectura con un tam
 
 ## Explicación del fallo
 
-El offset hasta `RIP` se mide con un patrón cíclico (en este binario son 72 bytes: 0x40 de buffer más 8 del RBP guardado, pero se comprueba siempre):
+El offset hasta `RIP` se mide con un patrón cíclico. En este binario el frame reserva 0x50 y la dirección de retorno queda a **72 bytes** del inicio del buffer, pero el valor se confirma siempre:
 
 ```bash
 python3 -c "from pwn import *; print(cyclic(200))" > pat
@@ -99,6 +99,7 @@ p.interactive()
 - **`SIGSEGV` antes de `ret`** → offset mal medido; repite el patrón cíclico.
 - **`system` no ejecuta** → pila desalineada; añade un `ret` antes del `pop rdi` (fallo típico en `movaps`).
 - **Funciona en local y no en remoto** → libc distinta; usa la que entrega el reto y recalcula con `libc.symbols`.
+- **Build rota del reto**: hay writeups que documentan tener que restar 64 bytes al puntero de `/bin/sh` para obtener shell en remoto; verifícalo en `gdb` antes de asumirlo.
 
 MITRE: T1203, T1059.
 

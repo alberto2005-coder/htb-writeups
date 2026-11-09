@@ -133,4 +133,3 @@ En Arcane el equivalente es crear un contenedor privilegiado con el volumen del 
 - [CVE-2025-64714](https://nvd.nist.gov/vuln/detail/CVE-2025-64714)
 - [CVE-2026-23744](https://nvd.nist.gov/vuln/detail/CVE-2026-23744)
 - [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

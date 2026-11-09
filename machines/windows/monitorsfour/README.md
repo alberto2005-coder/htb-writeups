@@ -79,7 +79,6 @@ cacti   [Status: 200]
 
 - [CVE-2025-24367](https://nvd.nist.gov/vuln/detail/CVE-2025-24367)
 - [CVE-2025-9074](https://nvd.nist.gov/vuln/detail/CVE-2025-9074)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)
 ## IDOR y crackeo
 
 ```bash

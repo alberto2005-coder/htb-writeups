@@ -116,6 +116,3 @@ nt authority\system
 - Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
 - Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
 
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

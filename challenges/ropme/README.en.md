@@ -38,7 +38,7 @@ The main function allocates a small buffer and calls the read with a larger size
 
 ## Root cause
 
-The offset to `RIP` is measured with a cyclic pattern (72 bytes in this binary: 0x40 buffer plus 8 for the saved RBP, but always verify):
+The offset to `RIP` is measured with a cyclic pattern. In this binary the frame reserves 0x50 and the return address sits **72 bytes** from the start of the buffer, but always confirm it:
 
 ```bash
 python3 -c "from pwn import *; print(cyclic(200))" > pat
@@ -98,6 +98,7 @@ p.interactive()
 - **`SIGSEGV` before `ret`** → wrong offset; re-measure with the cyclic pattern.
 - **`system` does not run** → stack misalignment; add a `ret` before `pop rdi` (classic `movaps` crash).
 - **Works locally, fails remotely** → different libc; use the shipped one and recompute with `libc.symbols`.
+- **Broken challenge build**: some writeups report having to subtract 64 bytes from the `/bin/sh` pointer to get a remote shell; verify it in `gdb` before assuming.
 
 MITRE: T1203, T1059.
 

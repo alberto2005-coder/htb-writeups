@@ -8,7 +8,6 @@ tags: [reversing, elf, gdb, ud2, anti-decompilation]
 type: Reversing
 ---
 
-
 # Behind the Scenes — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
@@ -62,9 +61,6 @@ Un ELF `stripped` que pide una contraseña de 12 caracteres. El autor insertó i
 - Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
 
-## Referencias
-
-- [rop-stack](../../knowledge/pwn/rop-stack.md)
 ## Método
 
 1. **Comprobar la pista**: al ejecutarlo pide `./challenge <password>`; `strings` no revela la contraseña.

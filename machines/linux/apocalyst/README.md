@@ -122,6 +122,3 @@ root@apocalyst:~#
 - Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
 - Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
 
-## Referencias
-
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)

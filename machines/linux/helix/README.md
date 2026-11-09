@@ -115,4 +115,3 @@ Con eso, comandos como root.
 ## Referencias
 
 - [CVE-2023-34468](https://nvd.nist.gov/vuln/detail/CVE-2023-34468)
-- [rop-stack](../../../knowledge/pwn/rop-stack.md)
