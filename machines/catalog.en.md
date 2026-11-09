@@ -32,16 +32,21 @@ Reference notes for **retired** machines, used to study techniques. Rows marked 
 | Sink | Linux | Insane | Smuggling, Gitea, AWS KMS | [ES](../machines/linux/sink/README.md) | [Ver](../machines/linux/sink/README.en.md) |
 | Sorcery | Linux | Insane | Cypher, WebAuthn, Kafka, FreeIPA | [ES](../machines/linux/sorcery/README.md) | [Ver](../machines/linux/sorcery/README.en.md) |
 | Cobblestone | Linux | Insane | Second-order SQLi, Twig SSTI, Cobbler | [ES](../machines/linux/cobblestone/README.md) | [Ver](../machines/linux/cobblestone/README.en.md) |
+| Code | Linux | Easy | Python sandbox escape, bcrypt, `backy.sh` | [ES](../machines/linux/code/README.md) | [Ver](../machines/linux/code/README.en.md) |
+| Kobold | Linux | Easy | MCPJam CVE-2026-23744, PrivateBin, Docker | [ES](../machines/linux/kobold/README.md) | [Ver](../machines/linux/kobold/README.en.md) |
+| Helix | Linux | Medium | NiFi + H2 `CREATE ALIAS`, OPC UA | [ES](../machines/linux/helix/README.md) | [Ver](../machines/linux/helix/README.en.md) |
+| Interpreter | Linux | Medium | Mirth CVE-2023-43208, PBKDF2, `eval()` | [ES](../machines/linux/interpreter/README.md) | [Ver](../machines/linux/interpreter/README.en.md) |
+| VariaType | Linux | Medium | fontTools, FontForge, setuptools | [ES](../machines/linux/variatype/README.md) | [Ver](../machines/linux/variatype/README.en.md) |
 
 ## Pending
 
-18 retired machines with material located but no writeup yet. They get written in batches:
+13 retired machines with material located but no writeup yet. They get written in batches:
 
 **Linux:** Doctor, Frolic, Nibbles, Poison, SolidState, DevArea, Sea.
 
-**Windows:** Devel, Fluffy, Garfield, Interpreter, Kobold, VariaType.
+**Windows:** Devel, Fluffy, Garfield.
 
-**Not yet classified:** Code, Helix, MonitorsFour, Pirate and Pterodactyl.
+**Not yet classified:** MonitorsFour, Pirate and Pterodactyl.
 
 ## PDF dump
 

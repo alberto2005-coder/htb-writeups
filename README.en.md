@@ -54,6 +54,11 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Sink | Linux | Insane | Machines | **Retired** (ref.) | CL.TE smuggling, Gitea with AWS keys, Secrets Manager and KMS | [ES](machines/linux/sink/README.md) | [Ver](machines/linux/sink/README.en.md) |
 | Sorcery | Linux | Insane | Machines | **Retired** (ref.) | Cypher injection, passkey XSS, Kafka and FreeIPA | [ES](machines/linux/sorcery/README.md) | [Ver](machines/linux/sorcery/README.en.md) |
 | Cobblestone | Linux | Insane | Machines | **Retired** (ref.) | Second-order SQLi, XSS, Twig SSTI and CVE-2024-47533 | [ES](machines/linux/cobblestone/README.md) | [Ver](machines/linux/cobblestone/README.en.md) |
+| Code | Linux | Easy | Machines | **Retired** (ref.) | Python blocklist escape, bcrypt and `backy.sh` traversal | [ES](machines/linux/code/README.md) | [Ver](machines/linux/code/README.en.md) |
+| Kobold | Linux | Easy | Machines | **Retired** (ref.) | MCPJam Inspector CVE-2026-23744, PrivateBin and privileged container | [ES](machines/linux/kobold/README.md) | [Ver](machines/linux/kobold/README.en.md) |
+| Helix | Linux | Medium | Machines | **Retired** (ref.) | NiFi 1.21.0, H2 `CREATE ALIAS` (CVE-2023-34468) and OPC UA | [ES](machines/linux/helix/README.md) | [Ver](machines/linux/helix/README.en.md) |
+| Interpreter | Linux | Medium | Machines | **Retired** (ref.) | Mirth Connect CVE-2023-43208, PBKDF2 and `eval()` in a local service | [ES](machines/linux/interpreter/README.md) | [Ver](machines/linux/interpreter/README.en.md) |
+| VariaType | Linux | Medium | Machines | **Retired** (ref.) | fontTools CVE-2025-66034, FontForge CVE-2024-25082, setuptools CVE-2025-47273 | [ES](machines/linux/variatype/README.md) | [Ver](machines/linux/variatype/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it · **ref.** = reference notes, not played on this profile.
 >
@@ -182,6 +187,11 @@ htb-writeups/
 │   │   ├── armageddon/
 │   │   ├── bank/
 │   │   ├── cobblestone/
+│   │   ├── code/
+│   │   ├── helix/
+│   │   ├── interpreter/
+│   │   ├── kobold/
+│   │   ├── variatype/
 │   │   ├── bashed/
 │   │   ├── beep/
 │   │   ├── blocky/

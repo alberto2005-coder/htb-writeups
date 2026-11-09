@@ -54,6 +54,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Sink | Linux | Insane | Machines | **Retired** (ref.) | Smuggling CL.TE, Gitea con claves AWS, Secrets Manager y KMS | [Ver](machines/linux/sink/README.md) | [EN](machines/linux/sink/README.en.md) |
 | Sorcery | Linux | Insane | Machines | **Retired** (ref.) | Cypher injection, XSS en passkeys, Kafka y FreeIPA | [Ver](machines/linux/sorcery/README.md) | [EN](machines/linux/sorcery/README.en.md) |
 | Cobblestone | Linux | Insane | Machines | **Retired** (ref.) | SQLi de segundo orden, XSS, Twig SSTI y CVE-2024-47533 | [Ver](machines/linux/cobblestone/README.md) | [EN](machines/linux/cobblestone/README.en.md) |
+| Code | Linux | Easy | Machines | **Retired** (ref.) | Escape de blocklist en Python, bcrypt y `backy.sh` con traversal | [Ver](machines/linux/code/README.md) | [EN](machines/linux/code/README.en.md) |
+| Kobold | Linux | Easy | Machines | **Retired** (ref.) | MCPJam Inspector CVE-2026-23744, PrivateBin y contenedor privilegiado | [Ver](machines/linux/kobold/README.md) | [EN](machines/linux/kobold/README.en.md) |
+| Helix | Linux | Medium | Machines | **Retired** (ref.) | NiFi 1.21.0, `CREATE ALIAS` de H2 (CVE-2023-34468) y OPC UA | [Ver](machines/linux/helix/README.md) | [EN](machines/linux/helix/README.en.md) |
+| Interpreter | Linux | Medium | Machines | **Retired** (ref.) | Mirth Connect CVE-2023-43208, PBKDF2 y `eval()` en servicio local | [Ver](machines/linux/interpreter/README.md) | [EN](machines/linux/interpreter/README.en.md) |
+| VariaType | Linux | Medium | Machines | **Retired** (ref.) | fontTools CVE-2025-66034, FontForge CVE-2024-25082 y setuptools CVE-2025-47273 | [Ver](machines/linux/variatype/README.md) | [EN](machines/linux/variatype/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >
@@ -182,6 +187,11 @@ htb-writeups/
 │   │   ├── armageddon/
 │   │   ├── bank/
 │   │   ├── cobblestone/
+│   │   ├── code/
+│   │   ├── helix/
+│   │   ├── interpreter/
+│   │   ├── kobold/
+│   │   ├── variatype/
 │   │   ├── bashed/
 │   │   ├── beep/
 │   │   ├── blocky/

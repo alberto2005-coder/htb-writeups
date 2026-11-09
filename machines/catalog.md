@@ -32,16 +32,21 @@ Fichas de máquinas **retiradas** que sirven para estudiar técnicas. Las marcad
 | Sink | Linux | Insane | Smuggling, Gitea, AWS KMS | [Ver](../machines/linux/sink/README.md) | [EN](../machines/linux/sink/README.en.md) |
 | Sorcery | Linux | Insane | Cypher, WebAuthn, Kafka, FreeIPA | [Ver](../machines/linux/sorcery/README.md) | [EN](../machines/linux/sorcery/README.en.md) |
 | Cobblestone | Linux | Insane | SQLi de segundo orden, Twig SSTI, Cobbler | [Ver](../machines/linux/cobblestone/README.md) | [EN](../machines/linux/cobblestone/README.en.md) |
+| Code | Linux | Easy | Escape de sandbox Python, bcrypt, `backy.sh` | [Ver](../machines/linux/code/README.md) | [EN](../machines/linux/code/README.en.md) |
+| Kobold | Linux | Easy | MCPJam CVE-2026-23744, PrivateBin, Docker | [Ver](../machines/linux/kobold/README.md) | [EN](../machines/linux/kobold/README.en.md) |
+| Helix | Linux | Medium | NiFi + H2 `CREATE ALIAS`, OPC UA | [Ver](../machines/linux/helix/README.md) | [EN](../machines/linux/helix/README.en.md) |
+| Interpreter | Linux | Medium | Mirth CVE-2023-43208, PBKDF2, `eval()` | [Ver](../machines/linux/interpreter/README.md) | [EN](../machines/linux/interpreter/README.en.md) |
+| VariaType | Linux | Medium | fontTools, FontForge, setuptools | [Ver](../machines/linux/variatype/README.md) | [EN](../machines/linux/variatype/README.en.md) |
 
 ## Pendientes
 
-18 máquinas retiradas con material localizado y todavía sin ficha propia. Se escriben en lotes:
+13 máquinas retiradas con material localizado y todavía sin ficha propia. Se escriben en lotes:
 
 **Linux:** Doctor, Frolic, Nibbles, Poison, SolidState, DevArea, Sea.
 
-**Windows:** Devel, Fluffy, Garfield, Interpreter, Kobold, VariaType.
+**Windows:** Devel, Fluffy, Garfield.
 
-**Sin clasificar todavía:** Code, Helix, MonitorsFour, Pirate y Pterodactyl.
+**Sin clasificar todavía:** MonitorsFour, Pirate y Pterodactyl.
 
 ## Volcado en PDF
 
