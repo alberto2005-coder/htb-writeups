@@ -24,6 +24,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Fawn | Linux | Very Easy | Starting Point | **Available** | FTP anónimo | [Ver](machines/starting-point/fawn/README.md) | [EN](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | **Available** | SMB null session | [Ver](machines/starting-point/dancing/README.md) | [EN](machines/starting-point/dancing/README.en.md) |
 | Redeemer | Linux | Very Easy | Starting Point | **Available** | Redis sin autenticación | [Ver](machines/starting-point/redeemer/README.md) | [EN](machines/starting-point/redeemer/README.en.md) |
+| Explosion | Windows | Very Easy | Starting Point | **Available** | RDP con la cuenta `Administrator` sin contraseña | [Ver](machines/starting-point/explosion/README.md) | [EN](machines/starting-point/explosion/README.en.md) |
+| Preignition | Linux | Very Easy | Starting Point | **Available** | Panel `/admin.php` oculto con `admin:admin` | [Ver](machines/starting-point/preignition/README.md) | [EN](machines/starting-point/preignition/README.en.md) |
+| Mongod | Linux | Very Easy | Starting Point | **Available** | MongoDB en 27017 sin autenticación | [Ver](machines/starting-point/mongod/README.md) | [EN](machines/starting-point/mongod/README.en.md) |
+| Synced | Linux | Very Easy | Starting Point | **Available** | rsync anónimo en 873 | [Ver](machines/starting-point/synced/README.md) | [EN](machines/starting-point/synced/README.en.md) |
+| Sequel | Linux | Very Easy | Starting Point | **Available** | MySQL con `root` sin contraseña | [Ver](machines/starting-point/sequel/README.md) | [EN](machines/starting-point/sequel/README.en.md) |
 | Cap | Linux | Easy | Machines | **Retired** | IDOR, análisis de pcap, `cap_setuid` | [Ver](machines/linux/cap/README.md) | [EN](machines/linux/cap/README.en.md) |
 | MakeSense | Linux | Medium | Season 11 | **Retired** | XSS al bot admin, AES-GCM forjado, plugin malicioso, OCR como root | [Ver](machines/linux/makesense/README.md) | [EN](machines/linux/makesense/README.en.md) |
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, SQLi en PostgreSQL, `COPY TO PROGRAM`, X11/XTEST, path unit con `eval` | [Borrador](machines/active/dutybound/README.md) | [EN](machines/active/dutybound/README.en.md) |
@@ -175,9 +180,15 @@ htb-writeups/
 │   ├── catalog.md       # Catálogo de máquinas de referencia ES/EN
 │   ├── catalog.en.md
 │   ├── starting-point/
+│   │   ├── README.md    # Índice del itinerario ES/EN
 │   │   ├── meow/        # README.md + README.en.md
 │   │   ├── fawn/
 │   │   ├── dancing/
+│   │   ├── explosion/
+│   │   ├── mongod/
+│   │   ├── preignition/
+│   │   ├── sequel/
+│   │   ├── synced/
 │   │   └── redeemer/
 │   ├── linux/
 │   │   ├── cap/

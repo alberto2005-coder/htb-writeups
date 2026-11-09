@@ -24,6 +24,11 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Fawn | Linux | Very Easy | Starting Point | Available | Anonymous FTP | [ES](machines/starting-point/fawn/README.md) | [Ver](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | Available | SMB null session | [ES](machines/starting-point/dancing/README.md) | [Ver](machines/starting-point/dancing/README.en.md) |
 | Redeemer | Linux | Very Easy | Starting Point | Available | Unauthenticated Redis | [ES](machines/starting-point/redeemer/README.md) | [Ver](machines/starting-point/redeemer/README.en.md) |
+| Explosion | Windows | Very Easy | Starting Point | Available | RDP with a passwordless `Administrator` account | [ES](machines/starting-point/explosion/README.md) | [Ver](machines/starting-point/explosion/README.en.md) |
+| Preignition | Linux | Very Easy | Starting Point | Available | Hidden `/admin.php` panel with `admin:admin` | [ES](machines/starting-point/preignition/README.md) | [Ver](machines/starting-point/preignition/README.en.md) |
+| Mongod | Linux | Very Easy | Starting Point | Available | MongoDB on 27017 with no authentication | [ES](machines/starting-point/mongod/README.md) | [Ver](machines/starting-point/mongod/README.en.md) |
+| Synced | Linux | Very Easy | Starting Point | Available | Anonymous rsync on 873 | [ES](machines/starting-point/synced/README.md) | [Ver](machines/starting-point/synced/README.en.md) |
+| Sequel | Linux | Very Easy | Starting Point | Available | MySQL with a passwordless `root` | [ES](machines/starting-point/sequel/README.md) | [Ver](machines/starting-point/sequel/README.en.md) |
 | Cap | Linux | Easy | Machines | Retired | IDOR, pcap analysis, `cap_setuid` | [ES](machines/linux/cap/README.md) | [Ver](machines/linux/cap/README.en.md) |
 | MakeSense | Linux | Medium | Season 11 | Retired | Admin-bot XSS, forged AES-GCM, malicious plugin, OCR as root | [ES](machines/linux/makesense/README.md) | [Ver](machines/linux/makesense/README.en.md) |
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, PostgreSQL SQLi, `COPY TO PROGRAM`, X11/XTEST, path unit with `eval` | [ES](machines/active/dutybound/README.md) | [Draft](machines/active/dutybound/README.en.md) |
@@ -175,9 +180,15 @@ htb-writeups/
 │   ├── catalog.md       # retired machine catalogue ES/EN
 │   ├── catalog.en.md
 │   ├── starting-point/
+│   │   ├── README.md    # Índice del itinerario ES/EN
 │   │   ├── meow/        # README.md + README.en.md
 │   │   ├── fawn/
 │   │   ├── dancing/
+│   │   ├── explosion/
+│   │   ├── mongod/
+│   │   ├── preignition/
+│   │   ├── sequel/
+│   │   ├── synced/
 │   │   └── redeemer/
 │   ├── linux/
 │   │   ├── cap/
