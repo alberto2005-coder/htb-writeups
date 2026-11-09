@@ -57,6 +57,18 @@ Cada fila de la tabla anterior corresponde a una máquina completada en el perfi
 
 ---
 
+## 🧩 Retos
+
+Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el writeup se centra en el fallo y en la cadena de explotación.
+
+| Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
+|---|---|---|---|---|---|---|
+| Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress` → use-after-free (CVE-2026-109618/109619), leak de ASLR por `Set-Cookie` y `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
+
+- Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
+
+---
+
 ## 🧠 Conocimiento
 
 Notas reutilizables (cada una en español e inglés):
@@ -104,8 +116,12 @@ htb-writeups/
 ├── README.md               # Índice (ES)
 ├── README.en.md            # Índice (EN)
 ├── templates/
-│   ├── machine-template.md      # Plantilla ES
-│   └── machine-template.en.md   # Plantilla EN
+│   ├── machine-template.md      # Plantilla de máquinas ES
+│   ├── machine-template.en.md   # Plantilla de máquinas EN
+│   ├── challenge-template.md    # Plantilla de retos ES
+│   └── challenge-template.en.md # Plantilla de retos EN
+├── challenges/
+│   └── Dark Embargo/    # README.md + README.en.md + exploit.py
 ├── machines/
 │   ├── starting-point/
 │   │   ├── meow/        # README.md + README.en.md

@@ -22,3 +22,6 @@ machines/active/
 # claves y scripts locales del laboratorio
 id_ed25519*
 htb/
+
+# material temporal: repos de terceros clonados para comparar
+.tmp/

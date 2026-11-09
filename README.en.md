@@ -57,6 +57,18 @@ Every row in the table above maps to a machine completed on the profile. These l
 
 ---
 
+## 🧩 Challenges
+
+Solved challenges. There is no privilege escalation: the goal is the challenge flag, so the writeup focuses on the bug and the exploitation chain.
+
+| Challenge | Type | Difficulty | State | Key techniques | ES | EN |
+|---|---|---|---|---|---|---|
+| Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM in `session.upload_progress` → use-after-free (CVE-2026-109618/619), ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | [ES](challenges/Dark%20Embargo/README.md) | [Ver](challenges/Dark%20Embargo/README.en.md) |
+
+- Achievement: https://labs.hackthebox.com/achievement/challenge/4187928/1926
+
+---
+
 ## 🧠 Knowledge base
 
 Reusable notes (each available in Spanish and English):
@@ -104,8 +116,12 @@ htb-writeups/
 ├── README.md               # Index (ES)
 ├── README.en.md            # Index (EN)
 ├── templates/
-│   ├── machine-template.md      # ES template
-│   └── machine-template.en.md   # EN template
+│   ├── machine-template.md      # machine template ES
+│   ├── machine-template.en.md   # machine template EN
+│   ├── challenge-template.md    # challenge template ES
+│   └── challenge-template.en.md # challenge template EN
+├── challenges/
+│   └── Dark Embargo/    # README.md + README.en.md + exploit.py
 ├── machines/
 │   ├── starting-point/
 │   │   ├── meow/        # README.md + README.en.md
