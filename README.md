@@ -43,6 +43,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Facts | Linux | Easy | Machines | **Retired** (ref.) | Camaleon CMS, MinIO, clave SSH, `facter` | [Ver](machines/linux/facts/README.md) | [EN](machines/linux/facts/README.en.md) |
 | Forest | Windows | Easy | Machines | **Retired** (ref.) | AS-REP, `Account Operators` a Exchange, DCSync | [Ver](machines/windows/forest/README.md) | [EN](machines/windows/forest/README.en.md) |
 | FriendZone | Linux | Easy | Machines | **Retired** (ref.) | AXFR, LFI + SMB, hijack de `os.py` | [Ver](machines/linux/friendzone/README.md) | [EN](machines/linux/friendzone/README.en.md) |
+| Admirer | Linux | Easy | Machines | **Retired** (ref.) | Adminer 4.6.2 con MySQL propio y `PYTHONPATH` heredado por sudo | [Ver](machines/linux/admirer/README.md) | [EN](machines/linux/admirer/README.en.md) |
+| Arctic | Windows | Easy | Machines | **Retired** (ref.) | ColdFusion 8 + FCKeditor, `SeImpersonate`, JuicyPotato | [Ver](machines/windows/arctic/README.md) | [EN](machines/windows/arctic/README.en.md) |
+| Bank | Linux | Easy | Machines | **Retired** (ref.) | AXFR, `302` a `200`, whitelist `.htb`, SUID `emergency` | [Ver](machines/linux/bank/README.md) | [EN](machines/linux/bank/README.en.md) |
+| Blue | Windows | Easy | Machines | **Retired** (ref.) | MS17-010 EternalBlue, `hashdump` | [Ver](machines/windows/blue/README.md) | [EN](machines/windows/blue/README.en.md) |
+| Cronos | Linux | Medium | Machines | **Retired** (ref.) | AXFR, SQLi, inyección de comandos, cron de root sobre `artisan` | [Ver](machines/linux/cronos/README.md) | [EN](machines/linux/cronos/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >
@@ -78,9 +83,25 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|
 | Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress` → use-after-free (CVE-2026-109618/109619), leak de ASLR por `Set-Cookie` y `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
+| Emdee five for life | Web | Easy | **Retired** | MD5 contra reloj: sesión HTTP, regex y automatización | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
+| Phonebook | Web | Easy | **Retired** | Inyección LDAP en login y buscador (`*` como comodín) | [Ver](challenges/Phonebook/README.md) | [EN](challenges/Phonebook/README.en.md) |
+| Under Construction | Web | Easy | **Retired** | Confusión de algoritmos JWT: firmar HS256 con la clave pública | [Ver](challenges/Under%20Construction/README.md) | [EN](challenges/Under%20Construction/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
+
+---
+
+## 🕵️ Sherlocks
+
+Escenarios de investigación defensiva: no se ataca nada, se responde a preguntas sobre un incidente a partir de evidencias.
+
+| Sherlock | Dominio | Dificultad | Evidencia | ES | EN |
+|---|---|---|---|---|---|
+| Litter | SOC | Easy | PCAP con túnel DNS (dnscat2) y ZIP del host | [Ver](sherlocks/litter/README.md) | [EN](sherlocks/litter/README.en.md) |
+
+- Índice, metodología y pendientes: [sherlocks/README.md](sherlocks/README.md) · [EN](sherlocks/README.en.md)
+- Plantilla de ficha: [templates/sherlock-template.md](templates/sherlock-template.md) · [EN](templates/sherlock-template.en.md)
 
 ---
 
@@ -150,17 +171,22 @@ htb-writeups/
 │   ├── linux/
 │   │   ├── cap/
 │   │   ├── makesense/
+│   │   ├── admirer/
 │   │   ├── armageddon/
+│   │   ├── bank/
 │   │   ├── bashed/
 │   │   ├── beep/
 │   │   ├── blocky/
 │   │   ├── blunder/
 │   │   ├── delivery/
 │   │   ├── facts/
+│   │   ├── cronos/
 │   │   └── friendzone/
 │   ├── windows/
 │   │   ├── active/
+│   │   ├── arctic/
 │   │   ├── bastion/
+│   │   ├── blue/
 │   │   ├── bounty/
 │   │   └── forest/
 │   └── active/          # máquinas activas: gitignored, no se publican
@@ -169,6 +195,10 @@ htb-writeups/
 │       ├── layover/
 │       ├── connected/
 │       └── unclaimed/
+├── sherlocks/
+│   ├── README.md        # Índice de Sherlocks ES/EN
+│   ├── README.en.md
+│   └── litter/          # README.md + README.en.md
 ├── knowledge/
 │   ├── web/
 │   ├── clickhouse/

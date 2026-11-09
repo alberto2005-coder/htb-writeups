@@ -9,6 +9,9 @@
 | Reto | Tipo | Dificultad | Técnica | Estado | ES | EN |
 |---|---|---|---|---|---|---|
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM en `session.upload_progress`, use-after-free, leak de ASLR por `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [Ver](Dark%20Embargo/README.md) | [EN](Dark%20Embargo/README.en.md) |
+| Emdee five for life | Web | Easy | MD5 contra reloj: sesión, regex y cálculo del hash en un script | **Retired** | [Ver](Emdee%20five%20for%20life/README.md) | [EN](Emdee%20five%20for%20life/README.en.md) |
+| Phonebook | Web | Easy | Inyección LDAP: `*` en usuario y contraseña, y buscador con comodines | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
+| Under Construction | Web | Easy | Confusión de algoritmos JWT: HS256 firmado con la clave pública | **Retired** | [Ver](Under%20Construction/README.md) | [EN](Under%20Construction/README.en.md) |
 
 ## Categorías
 
@@ -39,3 +42,7 @@ Los retos de HTB se agrupan en doce categorías. Los números son orientativos y
 ## Plantilla
 
 `templates/challenge-template.md` y `templates/challenge-template.en.md`.
+
+## Sherlocks
+
+Los escenarios de investigación defensiva no son retos de ataque y viven aparte: [sherlocks/README.md](../sherlocks/README.md) · [EN](../sherlocks/README.en.md).

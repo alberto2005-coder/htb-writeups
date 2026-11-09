@@ -13,7 +13,7 @@ tags: [web, php, pwn]
 
 # Nombre — Hack The Box (Challenge)
 
-[🇬🇧 English](README.en.md) | **Español**
+[🇬🇧 English](challenge-template.en.md) | **Español**
 
 > **Estado:** Retired / Active (borrador privado).
 > Las flags reales están en `private/` y no se publican.

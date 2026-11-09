@@ -9,6 +9,9 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM in `session.upload_progress`, use-after-free, ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [ES](Dark%20Embargo/README.md) | [Ver](Dark%20Embargo/README.en.md) |
+| Emdee five for life | Web | Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
+| Phonebook | Web | Easy | LDAP injection: `*` as user and password, wildcards in search | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
+| Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
 
 ## Categories
 
@@ -39,3 +42,7 @@ HTB groups challenges into twelve categories. Counts are approximate and meant f
 ## Template
 
 `templates/challenge-template.md` and `templates/challenge-template.en.md`.
+
+## Sherlocks
+
+Defensive investigation scenarios are not attack challenges and live elsewhere: [sherlocks/README.en.md](../sherlocks/README.en.md) · [ES](../sherlocks/README.md).

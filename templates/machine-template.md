@@ -11,7 +11,7 @@ tags: [web, linux, privesc]
 
 # Nombre — Hack The Box
 
-[🇬🇧 English](README.en.md) | **Español**
+[🇬🇧 English](machine-template.en.md) | **Español**
 
 > **Estado:** Retired / Active (borrador privado).
 > Las flags y credenciales reales están en `private/` y no se publican.
