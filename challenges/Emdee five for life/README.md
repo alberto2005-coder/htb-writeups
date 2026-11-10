@@ -28,11 +28,11 @@ Un formulario con un único campo `hash`.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+El HTML tiene un `<h3 align='center'>` con la cadena y un formulario `POST` con un único campo `hash`. El servidor responde `Set-Cookie: PHPSESSID=...`; la cadena vive en esa sesión.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+No hay código que auditar: es un ejercicio de estado. Cada `GET` emite cadena nueva y cada `POST` compara contra la de la sesión; sin cookie compartida, la comparación siempre falla.
 
 ## Explicación del fallo
 
@@ -44,7 +44,7 @@ Es un ejercicio de tiempo, no de criptografía: MD5 no se rompe, se calcula.
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+Se puede probar el bucle contra cualquier formulario equivalente; lo importante es reutilizar el objeto `Session` y no crear uno por petición.
 
 ## Explotación
 
@@ -53,7 +53,7 @@ import re, hashlib, requests
 
 s = requests.Session()
 r = s.get("http://<IP>:<PORT>/")
-cadena = re.search(r"<h3 align='center'>([A-Fa-f0-9]+)</h3>", r.text).group(1)
+cadena = re.search(r"<h3 align='center'>([A-Za-z0-9]+)</h3>", r.text).group(1)
 # si el HTML cambia, anclar en la etiqueta que envuelva el texto aleatorio
 digest = hashlib.md5(cadena.encode()).hexdigest()
 r = s.post("http://<IP>:<PORT>/", data={"hash": digest})
@@ -79,8 +79,10 @@ Con Burp también se resuelve: `Ctrl+R` sobre la petición, `Send to Repeater`, 
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+El control «anti-bot» es un temporizador, y un cliente HTTP lo gana siempre.
+
+- Si se quiere frenar automatización: límites por cuenta/IP, CAPTCHA y pruebas de trabajo, no un plazo de un segundo.
+- Detección: ráfagas de `GET`/`POST` con la misma sesión y latencia mínima.
 
 ## Variantes y tropiezos
 

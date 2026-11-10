@@ -29,7 +29,7 @@ Artefactos útiles: `jenkins.log`, `access_log`, `audit.log`, el directorio `$JE
 
 ## Investigación
 
-- **CVE-2024-23897**: la CLI (`jenkins-cli.jar`) interpreta argumentos que empiezan por `@` como rutas de fichero; un error devuelve líneas del fichero. En los logs se ven peticiones a `/cli` con parámetros `@/etc/passwd`, `@/var/jenkins_home/secrets/...` o similares.
+- **CVE-2024-23897** (Jenkins <= 2.441 y LTS <= 2.426.2; corrige en 2.442 / 2.426.3): la CLI interpreta argumentos que empiezan por `@` como rutas y **args4j** expande el fichero. Sin `Overall/Read` solo se leen las **primeras líneas**; con ese permiso, el fichero completo. En los logs se ven peticiones a `/cli` con parámetros `@/etc/passwd`, `@/var/jenkins_home/secrets/...` o similares.
 - Buscar en `access_log` peticiones **POST /cli** con `-webSocket` o `args4j` y códigos 200/500 seguidos de descargas grandes.
 - Revisar el log de auditoría de Jenkins: creación de usuarios, cambios de credenciales y ejecución de jobs.
 - Si hay EVTX/Sysmon, cruzar **4688** con `java -jar jenkins-cli.jar` y **Sysmon 11** con ficheros nuevos.
@@ -50,6 +50,7 @@ El patrón `@ruta` + error con contenido es la firma del CVE; un job nuevo o un 
 - La lectura arbitraria de ficheros en Jenkins suele terminar en RCE: `secrets/` y las credenciales están ahí.
 - Los logs de la CLI son la evidencia principal; el error que revela el fichero queda registrado.
 - Comparar el volumen de peticiones con la línea base separa escaneo de explotación.
+- El número de líneas leídas depende de los comandos CLI disponibles: un `@` con error de sintaxis devuelve la primera línea del fichero.
 
 - Actualizar Jenkins (CVE-2024-23897) y deshabilitar la CLI remota si no se usa.
 - Autenticación obligatoria, `authorizationStrategy` mínima y segmentación del panel.

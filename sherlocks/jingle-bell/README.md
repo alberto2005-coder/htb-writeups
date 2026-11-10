@@ -6,9 +6,8 @@ platform: Hack The Box
 evidence: Base de datos de notificaciones de Windows de un puesto
 tools: [DB Browser for SQLite, strings, SQLite]
 state: Retired
-tags: [dfir, dfir-/-windows]
+tags: [dfir, windows, notifications, wpndatabase, slack, insider-threat]
 ---
-
 
 # Jingle Bell — Hack The Box
 
@@ -22,45 +21,48 @@ Torrin es sospechoso de filtrar datos de Forela y de instalar software no autori
 
 ## Evidencias
 
-- Copia del perfil: `AppData\Local\Microsoft\Windows\Notifications\` (base `WPNDatabase.db` y sus ficheros asociados).
+- `Torrincase/C/Users/<usuario>/AppData/Local/Microsoft/Windows/Notifications/wpndatabase.db` y sus acompañantes `-wal` y `-shm`.
 
 ## Investigación
 
-1. **Abrir la base con SQLite**: es un SQLite normal.
+1. **Abrir la base**: es SQLite normal; hay que copiar los tres ficheros juntos para que el WAL se fusione.
 
 ```bash
-sqlite3 WPNDatabase.db '.tables'
-sqlite3 WPNDatabase.db '.schema Notification'
+sqlite3 wpndatabase.db '.tables'
+sqlite3 wpndatabase.db '.schema Notification'
 ```
 
-2. **Leer la tabla `Notification`**: cada fila es una notificación *toast* con su aplicación de origen, el payload y la hora. Ahí queda el rastro de la conversación.
+2. **La tabla `Notification`**: cada fila es un *toast* con `Payload` (el XML que se mostró), `ArrivalTime` (FILETIME de Windows) y `HandlerId`, que apunta a `NotificationHandler` para saber qué aplicación lo generó.
 
 ```sql
-SELECT Id, HandlerId, Payload, ArrivalTime FROM Notification;
+SELECT Id, HandlerId, ArrivalTime, Payload FROM Notification;
 ```
 
-3. **Interpretar el payload**: el XML interno trae el remitente, el texto y a veces adjuntos. Se identifican dos partes: el usuario de Forela y su interlocutor externo.
+3. **La aplicación**: `NotificationHandler` identifica **Slack** como origen de los toasts. Ese es el software no corporativo que usó para la fuga, y explica por qué no quedaba rastro en los artefactos clásicos.
 
-4. **Software no autorizado**: el `HandlerId`/`Handler` revela qué aplicación generó cada notificación; una app de mensajería o de transferencia que no es corporativa responde a la pregunta de qué usó para filtrar.
+4. **La conversación**: el XML del `Payload` trae remitente y texto. Ordenando por hora aparece el intercambio completo con la otra parte (una empresa externa), incluida la propuesta, la entrega y el pago.
 
-5. **Cronología**: ordenar por `ArrivalTime` y encajar la conversación (quién propone, quién acepta, cuánto se paga).
+5. **Cuidado con la hora**: `ArrivalTime` es cuándo Windows mostró el aviso, no cuándo se envió el mensaje. Si la pregunta pide la hora del mensaje, hay que sacarla del enlace de lanzamiento del toast, no de esa columna.
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+Torrin filtró información de Forela por **Slack**. La base de notificaciones conservó el contenido de los mensajes que ya se habían mostrado en pantalla, incluso sin la aplicación ni sus logs.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- Las notificaciones de Windows guardan **contenido de mensajes** que el usuario ya vio: es evidencia de comunicaciones.
+- Una app de mensajería deja rastro aunque se desinstale: la base de notificaciones sobrevive en el perfil.
+- `HandlerId` identifica la aplicación sin necesidad de ejecutarla.
+- `Payload` es XML escapado: formatearlo antes de leerlo.
 
 ## Qué enseña
 
-- Las notificaciones de Windows guardan **contenido de mensajes** que el usuario ya vio: es evidencia de comunicaciones.
-- Una app de mensajería deja rastro aunque se desinstale: la base de notificaciones sobrevive en el perfil.
-- El `HandlerId` identifica la aplicación sin necesidad de ejecutarla.
+- Los artefactos "menores" del perfil (notificaciones, Jump Lists, Activity) resuelven casos que el correo y el disco no explican.
+- `ArrivalTime` y la hora del mensaje son cosas distintas; confundirlas arruina la línea temporal.
+- Un insider puede no dejar correo: la notificación del chat sí queda.
 
 ## Tropiezos
 
-- **Base bloqueada**: copiar `WPNDatabase.db` junto con sus `-wal`/`-shm` para no perder filas recientes.
-- **Payload XML**: el texto va escapado; conviene formatearlo antes de leerlo.
+- **Base bloqueada**: copiar `wpndatabase.db` con `-wal`/`-shm`; sin ellos se pierden las filas recientes.
 - **Varias cuentas**: filtrar por el SID del usuario investigado.
+- **XML**: el texto va escapado y con etiquetas de la app; conviene extraer solo el cuerpo.

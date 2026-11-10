@@ -43,11 +43,11 @@ def encrypt(m):
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+Dos ficheros: `source.py` y `output.txt`. El segundo empieza con la instrucción de envolver el resultado en `HTB{}` y sigue con una cadena de mayúsculas, `_`, `?!` y comas.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+`encrypt` suma `i` al índice de cada letra y deja intacto lo que no es alfabético. `from_identity_map` aplica `% 26`, así que el resultado siempre cae en `A-Z`.
 
 ## Explicación del fallo
 
@@ -61,7 +61,16 @@ Con eso, descifrar es restar en lugar de sumar.
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```bash
+python3 - <<'PY'
+from source import to_identity_map, from_identity_map
+c = open('output.txt').read().splitlines()[-1]
+print(''.join(ch if not ch.isalpha() else from_identity_map(to_identity_map(ch) - i)
+              for i, ch in enumerate(c)))
+PY
+```
+
+El `import` funciona porque el script del reto no ejecuta nada al cargarse.
 
 ## Explotación
 
@@ -101,8 +110,10 @@ Alternativa sin código: en CyberChef, «ROT13 Brute Force» o un script de una 
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+Aquí no hay sistema que proteger: el reto enseña a leer un cifrado clásico. En un sistema real, un desplazamiento fijo o progresivo no es cifrado: cualquier analista lo revierte sin clave.
+
+- Usar AES-GCM con nonce único y clave fuera del código.
+- No llamar «cifrado» a una codificación o a un César: cambia el modelo de amenaza.
 
 ## Referencias
 

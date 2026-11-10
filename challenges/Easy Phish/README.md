@@ -13,92 +13,62 @@ tags: [osint, phishing, dns, spf, dmarc]
 
 ## TL;DR
 
-- Ver las secciones adyacentes para el detalle.
+El reto no tiene infraestructura de atacante: la pregunta es **por qué** los correos falsos de `secure-startup.com` no se marcan como spam. La respuesta está en sus propios registros DNS: un **SPF** con `?all` (neutral, no `-all`) y un **DMARC** con `p=none`. Cada registro lleva además media flag.
 
 ## Enunciado y superficie
 
-Una empresa detecta correos que suplantan su dominio. Hay que localizar la infraestructura del atacante: dominio parecido, registros DNS y servidor de correo.
+«Customers of secure-startup.com have been receiving some very convincing phishing emails, can you figure out why?» No hay binario ni web: solo un dominio y la pista de que algo falla en la autenticación de correo.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+dig +short TXT secure-startup.com
+dig +short TXT _dmarc.secure-startup.com
+dig +short MX secure-startup.com
+```
 
-## Análisis del código
+```text
+"v=spf1 a mx ?all - HTB{RIP_SPF_Always_2nd"
+"v=DMARC1;p=none;_F1ddl3_2_DMARC}"
+```
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+## Análisis
 
-## Explicación del fallo
+- **SPF**: `?all` significa *neutral*. Un receptor no puede afirmar que el emisor esté autorizado, pero tampoco lo rechaza; con `-all` (fail) el correo suplantado se habría marcado. El `a`/`mx` autoriza solo los hosts del propio dominio.
+- **DMARC**: `p=none` pide informes pero **no da instrucción de rechazo** a quien recibe. Sin alineación obligatoria ni política `quarantine`/`reject`, el spoofing pasa.
+- **DKIM**: no hay registro publicado, así que no hay segunda barrera que compensa.
 
-[🇬🇧 English](README.en.md) | **Español**
-
-## Reproducción local
-
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+La flag está partida entre los dos TXT: se concatenan en orden (SPF primero, DMARC después).
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+```bash
+dig +short TXT secure-startup.com | tr -d '"'
+dig +short TXT _dmarc.secure-startup.com | tr -d '"'
+# unir las dos mitades dentro de HTB{...}
+```
 
 ## Evidencia
 
-- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
-- Los valores reales viven en `private/` y no se publican.
+- Salida de `dig` con el SPF y el DMARC (valores redactados en la ficha).
+- Explicación de por qué `?all` y `p=none` permiten la suplantación.
 
 ## Lecciones aprendidas
 
-- **`dnstwist` sin resultados registrados** → el dominio aún no resuelve; mira `--registered` y CT.
-- **El correo usa un dominio legítimo comprometido** → revisa `Received` en orden inverso, no solo el `From`.
-- **Muchas IPs** → separa `A` de `MX`; el correo sale por el MX.
-- **Sin SPF/DMARC** → el atacante usa un relay; sigue el `Return-Path`.
-
-- El `From` no prueba nada; `Return-Path` + `Received` sí.
-- Certificate Transparency encuentra dominios antes de que estén indexados.
-- Un SPF permisivo (`~all`) explica por qué el correo no se marcó como spam.
-
-MITRE: T1583.001, T1566.002, T1596.
+- **`?all` no protege**: solo `-all` indica que ningún otro host puede enviar por el dominio.
+- **`p=none` es modo observación**: sin `quarantine`/`reject`, DMARC no frena nada.
+- SPF sin DKIM ni DMARC deja la puerta abierta: los tres se complementan.
+- La flag en los TXT es un truco del reto; en la vida real el dato es la política, no el texto.
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- Publicar `v=spf1 ... -all` con todos los emisores legítimos (incluidos los SaaS) y revisar el límite de 10 búsquedas DNS.
+- DMARC en `p=quarantine` o `p=reject` con `rua`/`ruf` y alineación estricta.
+- DKIM firmando todo el correo saliente.
+- Detección: correos con `Authentication-Results` que muestren `spf=neutral` o `dmarc=none` para el propio dominio.
 
 ## Referencias
 
-- [MITRE T1566.002](https://attack.mitre.org/techniques/T1566/002/)
-- [MITRE T1583.001](https://attack.mitre.org/techniques/T1583/001/)
-- [MITRE T1596](https://attack.mitre.org/techniques/T1596/)
+- [RFC 7208 (SPF)](https://www.rfc-editor.org/rfc/rfc7208)
+- [RFC 7489 (DMARC)](https://www.rfc-editor.org/rfc/rfc7489)
 - [phishing-infrastructure](../../knowledge/osint/phishing-infrastructure.md)
-## Método
-
-1. **Dominio señuelo**: comparar el legítimo con variantes (typosquatting, guion, TLD distinto). `dnstwist` genera y resuelve candidatos:
-
-   ```bash
-   dnstwist --registered <empresa>.com
-   ```
-
-2. **DNS**: `dig` sobre el sospechoso:
-
-   ```bash
-   dig +short A <dominio-sospechoso>
-   dig +short MX <dominio-sospechoso>
-   dig +short TXT <dominio-sospechoso>
-   ```
-
-   Un `TXT` con `v=spf1` y otro con `v=DMARC1` confirman que el atacante montó correo.
-
-3. **Reputación y antigüedad**: `whois`, Certificate Transparency (`crt.sh`), VirusTotal y URLScan. Un dominio de días con certificado reciente es la señal.
-
-4. **Cabeceras del correo**: `Received`, `Return-Path`, `Message-ID` y `Authentication-Results`. El `Return-Path` suele apuntar al dominio del atacante y el `Received` al servidor real.
-
-5. **IP del servidor**: resolver el `A`/`MX` y buscar la IP en Shodan/Censys para ver el panel de correo.
-
-## Hallazgos (patrón)
-
-```text
-A     <dominio> -> <IP>
-MX    <dominio> -> mail.<dominio>
-TXT   "v=spf1 a mx ip4:<IP> ~all"
-TXT   "v=DMARC1; p=none;"
-```
-
-La combinación de SPF/DMARC propios y un MX dedicado indica infraestructura de phishing activa.

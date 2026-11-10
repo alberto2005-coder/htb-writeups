@@ -23,11 +23,11 @@ Terminal en el navegador con comandos (`start`, `help`, `clear`…). El juego si
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+En el HTML hay tres scripts: `commands.js`, `main.js` y `game.js`. `main.js` decide qué comandos valen y llama a `/api/monitor`; al cargar, pide `/api/options` y guarda la respuesta en `availableOptions`.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+La comprobación es `availableOptions[currentStep].includes(cmd) || availableOptions['secret'].includes(cmd)`. Es decir: existe una lista `secret` que no se muestra en la interfaz y que el servidor acepta como comando válido.
 
 ## Explicación del fallo
 
@@ -62,7 +62,7 @@ curl -s http://<IP>:<puerto>/api/options
 
 ## Reproducción local
 
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+El reto se sirve como contenedor; se puede levantar en local y repetir el `GET /api/options` y el `POST /api/monitor` contra `127.0.0.1`.
 
 ## Explotación
 
@@ -97,5 +97,6 @@ La flag también aparece en la respuesta de la petición `monitor` en la pestañ
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- No enviar al cliente listas de comandos que el servidor no necesita: el catálogo entero es un mapa del juego.
+- Validar en servidor contra el estado real de la partida, no contra una lista que el cliente ya conoce.
+- Detección: peticiones a endpoints de opciones seguidas de comandos que no aparecen en la interfaz.

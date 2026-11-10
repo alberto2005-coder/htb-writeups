@@ -87,10 +87,10 @@ cat /etc/crontab; ls -l /var/www/laravel/artisan
 
 ```text
 * * * * * root php /var/www/laravel/artisan schedule:run >> /dev/null 2>&1
--rwxrwxrwx 1 www-data www-data 1339 artisan
+-rwxr-xr-x 1 www-data www-data 1646 artisan
 ```
 
-`artisan` is Laravel's entrypoint and is `777`, so it can be rewritten. Prepend a payload and let root's cron run it every minute:
+`artisan` is Laravel's entrypoint and is owned by `www-data` (755), so the web user can rewrite it. Prepend a payload and let root's cron run it every minute:
 
 ```php
 <?php
@@ -110,7 +110,7 @@ uid=0(root) gid=0(root) groups=0(root)
 ## Evidence (redacted)
 
 ```text
-/var/www/html/user.txt -> <user_flag>
+/home/noulis/user.txt -> <user_flag>
 /root/root.txt         -> <root_flag>
 ```
 
@@ -118,5 +118,5 @@ uid=0(root) gid=0(root) groups=0(root)
 
 - An open AXFR gives away the surface, admin subdomains included.
 - Concatenating user input into system commands (`ping $ip`) is RCE; `escapeshellarg` plus validation lists fixes it.
-- `777` on a framework entrypoint combined with a root cron turns a compromised web app into root within a minute.
+- A framework entrypoint writable by the web user, combined with a root cron, turns a compromised web app into root within a minute.
 - Mitigation: restrict `allow-transfer` to authorised secondaries, use prepared statements, and keep `artisan` at `644 root:root` with the cron calling a read-only wrapper.

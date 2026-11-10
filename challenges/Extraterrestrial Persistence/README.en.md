@@ -23,7 +23,7 @@ A shell script installs Linux persistence: it downloads a binary to `/usr/local/
 
 ## Method
 
-1. **Read the script**: it first checks `whoami`/`hostname` to run only on the expected host, then downloads and stages the unit.
+1. **Read the script**: it first checks `whoami`/`hostname` (`pandora` / `linux_HQ`), so it only runs on the intended host, then downloads the payload with `curl` to `/usr/local/bin/service` and stages the unit.
 
 ```bash
 cat persistence.sh
@@ -57,3 +57,4 @@ After=network.target network-online.target
 - Persistence scripts usually ship their own installer; reading it gives the whole mechanism.
 - A `base64` blob in an `echo` is trivial obfuscation: one line undoes it.
 - A `oneshot` unit with `RemainAfterExit` is quiet persistence.
+- A download domain that imitates a repository (`files.pypi-install.com` is not PyPI) is a cheap lure worth alerting on.

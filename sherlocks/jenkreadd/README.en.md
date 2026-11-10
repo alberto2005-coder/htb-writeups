@@ -26,7 +26,7 @@ Useful artifacts: `jenkins.log`, `access_log`, `audit.log`, `$JENKINS_HOME/logs`
 
 ## Method
 
-- **CVE-2024-23897**: the CLI (`jenkins-cli.jar`) treats arguments starting with `@` as file paths; an error returns lines from the file. Logs show requests to `/cli` with `@/etc/passwd`, `@/var/jenkins_home/secrets/...` and similar.
+- **CVE-2024-23897** (Jenkins <= 2.441 and LTS <= 2.426.2; fixed in 2.442 / 2.426.3): the CLI treats arguments starting with `@` as paths and **args4j** expands the file. Without `Overall/Read` only the **first lines** are read; with that permission, the whole file. Logs show requests to `/cli` with `@/etc/passwd`, `@/var/jenkins_home/secrets/...` and similar.
 - Look in `access_log` for **POST /cli** with `-webSocket` or `args4j` and 200/500 responses followed by large downloads.
 - Review the Jenkins audit log: user creation, credential changes and job runs.
 - With EVTX/Sysmon, cross-check **4688** for `java -jar jenkins-cli.jar` and **Sysmon 11** for new files.
@@ -47,6 +47,7 @@ audit.log: new user / job created
 - Arbitrary file read in Jenkins usually ends in RCE: `secrets/` and credentials live there.
 - CLI logs are the main evidence; the error that leaks the file is recorded.
 - Compare request volume with the baseline to separate scanning from exploitation.
+- How many lines come back depends on the available CLI commands: a `@` that triggers a syntax error returns the file's first line.
 
 ## Detection and mitigation
 

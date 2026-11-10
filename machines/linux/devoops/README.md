@@ -75,7 +75,7 @@ ssh -i id_rsa roosa@<IP>
 cat ~/user.txt
 ```
 
-Vía alternativa (no la usada aquí): el endpoint `/feed` deserializa base64 con **`pickle`**, lo que da RCE como `roosa` directamente. El código está en `/home/roosa/deploy/src/feed.py`.
+Vía alternativa (no la usada aquí): el endpoint `/newpost` deserializa con **`pickle`** el cuerpo en base64 (la ruta nace en `src/feed.py`), lo que da RCE como `roosa` directamente. El código está en `/home/roosa/deploy/src/feed.py`.
 
 ## Movimiento lateral
 

@@ -20,27 +20,36 @@ Un script de shell instala persistencia en Linux: se descarga un binario a `/usr
 
 ## Enunciado y superficie
 
-- Categoría Forensics; el reto entrega el material descrito en «Reconocimiento».
+«There is a rumor that aliens have developed a persistence mechanism that is impossible to detect». Se entrega `persistence.sh`, un script de instalación de persistencia para Linux.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+file persistence.sh
+cat persistence.sh
+```
+
+El script comprueba `whoami`/`hostname` (`pandora` y `linux_HQ`), descarga un binario con `curl` a `/usr/local/bin/service`, lo hace ejecutable y escribe una unidad de systemd desde base64.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+La unidad se crea con `echo -e "<base64>" | base64 --decode > /usr/lib/systemd/system/service.service` y se activa con `systemctl enable`. El bloque base64 es el único punto interesante del script.
 
 ## Explicación del fallo
 
-Un script de shell instala persistencia en Linux: se descarga un binario a `/usr/local/bin/service`, crea una **unidad de systemd** a partir de un bloque **base64** y la habilita. Al decodificar el bloque aparece el `.service`, y su `Description` contiene la flag.
+No hay vulnerabilidad: es una cadena de instalación. El script se autolimita al host víctima, descarga el payload y registra un servicio que se ejecuta en cada arranque. La flag está escondida en el campo `Description` de la unidad, no en el binario.
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```bash
+grep -o '"[A-Za-z0-9+/=]\{40,\}"' persistence.sh | tr -d '"' | base64 -d
+```
+
+Se decodifica el bloque sin ejecutar el script; no hace falta systemd.
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+1. Leer el script y localizar el `echo -e` con base64. 2. Decodificarlo. 3. Leer `Description=`.
 
 ## Evidencia
 
@@ -58,8 +67,9 @@ Un script de shell instala persistencia en Linux: se descarga un binario a `/usr
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- Monitorizar `/usr/lib/systemd/system` y `systemctl enable` fuera de despliegues: una unidad nueva es persistencia.
+- Alertar de descargas a `/usr/local/bin` desde dominios que imitan repositorios (`files.pypi-install.com` no es PyPI).
+- EDR: procesos `curl` seguidos de `chmod +x` y `systemctl` en el mismo árbol.
 
 ## Referencias
 

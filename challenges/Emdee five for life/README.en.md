@@ -41,7 +41,7 @@ import re, hashlib, requests
 
 s = requests.Session()
 r = s.get("http://<IP>:<PORT>/")
-cadena = re.search(r"<h3 align='center'>([A-Fa-f0-9]+)</h3>", r.text).group(1)
+cadena = re.search(r"<h3 align='center'>([A-Za-z0-9]+)</h3>", r.text).group(1)
 # if the HTML changes, anchor on the tag wrapping the random text
 digest = hashlib.md5(cadena.encode()).hexdigest()
 r = s.post("http://<IP>:<PORT>/", data={"hash": digest})
@@ -57,6 +57,7 @@ Burp works too: `Ctrl+R` the request, `Send to Repeater`, and drive it with a pr
 ## Pitfalls
 
 - **Loose regex**: capturing the wrong `<h3>` (there are several) and hashing decorative text.
+- **Wrong character class**: the string mixes letters and digits (`6Ml1m0JmWq`), so a `[A-Fa-f0-9]+` pattern never matches; use `[A-Za-z0-9]+`.
 - **New session per request**: `requests.get` without `Session` drops the cookie, so the string never matches.
 - **Uppercase MD5**: the server compares lowercase; `hexdigest()` already returns that.
 
