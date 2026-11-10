@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 94 máquinas, 50 Sherlocks, 50 retos y 41 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 93 máquinas, 50 Sherlocks, 50 retos y 41 temas de conocimiento, cada uno en ES/EN.
 
 ---
 

@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 94 machines, 50 Sherlocks, 50 challenges and 41 knowledge topics, each in ES/EN.
+> **Numbers:** 93 machines, 50 Sherlocks, 50 challenges and 41 knowledge topics, each in ES/EN.
 
 ---
 
