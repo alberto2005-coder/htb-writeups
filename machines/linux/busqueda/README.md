@@ -32,7 +32,7 @@ cd /tmp/app && git log -p | grep -iE 'password|user'
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+El pie del sitio dice `Powered by Searchor` y la versión **2.4.0** está en el HTML. `/var/www/app` expone su `.git`: `git log -p` da la URL del remoto de Gitea con credenciales. `sudo -l` muestra `/usr/bin/python3 /opt/scripts/system-checkup.py *`.
 
 ## Foothold
 
@@ -62,7 +62,7 @@ Shell como `svc`.
 (root) /usr/bin/python3 /opt/scripts/system-checkup.py *
 ```
 
-3. `docker-inspect` del script revela variables de entorno con la contraseña de `administrator` en Gitea; dentro del repo está el código de `system-checkup.py`.
+3. `docker-inspect` del contenedor `gitea` vuelca sus variables de entorno, incluida la contraseña de la **base de datos** (`GITEA__database__PASSWD`); la cuenta `administrator` de Gitea reutiliza la contraseña de `cody`. En el repo de Gitea está el código de `system-checkup.py`.
 4. `full-checkup` ejecuta `./full-checkup.sh` desde el **directorio actual**:
 
 ```bash

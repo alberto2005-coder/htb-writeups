@@ -15,11 +15,11 @@ tags: [reversing, elf, gdb, ud2, anti-decompilation]
 
 ## TL;DR
 
-A `stripped` ELF asking for a 12-character password. The author inserted **`UD2`** instructions so decompilers lose their way: Ghidra shows an almost empty `main`. The answer is to drop to **GDB**, inspect the four `strncmp` calls and read the compared literals.
+A 64-bit ELF with **no debug info but symbols intact** (`main` is still there) asking for a 12-character password. The binary installs a `SIGILL` handler and executes **`UD2`** (`0f 0b`): the invalid-opcode exception fires, the handler resumes past it, and decompilers lose the thread. Ghidra shows an almost empty `main`; with **GDB** (or by marking the byte after each `UD2` as code) the four `strcmp` calls and their literals appear.
 
 ## Evidence
 
-- `behindthescenes`, a `stripped` ELF executable.
+- `behindthescenes`, a 64-bit ELF: no debug info, symbols intact.
 
 ## Method
 
@@ -34,7 +34,7 @@ gdb -q ./behindthescenes
 
 `UD2` is an "invalid" instruction that breaks static analysis; the real flow is visible in assembly.
 
-3. **Four `strncmp` calls**: each compares a 3-4 character chunk. Break on each call and read the second argument (`x/s $rsi`), or inspect the hexdump next to the code.
+3. **Four `strcmp` calls**: each compares a 3-4 character chunk. Break on each call and read the second argument (`x/s $rsi`), or inspect the hexdump next to the code.
 
 4. **Rebuild**: the password is the concatenation of the fragments (`Itz` + `_0n` + `Ly_` + `UD2`).
 
@@ -47,8 +47,18 @@ gdb -q ./behindthescenes
 ## Pitfalls
 
 - **`UD2` and Ghidra**: garbage output does not make it unsolvable; switch to GDB.
-- **Patching**: turning `UD2` into `NOP` lets you follow the flow, but it is not required.
+- **`SIGILL`, not `NOP`**: the binary does not die at `UD2`; the handler steps over it. Patching to `NOP` is a convenience, not a requirement.
 - **Length**: the program demands 12 bytes; count the fragments before trying.
+
+## Why it works
+
+`main` calls `sigaction(SIGILL, ...)` and then `ud2`. The CPU raises the invalid-opcode exception, the installed handler advances `RIP` and returns, so execution continues on the next instruction. Static tools stop at the first `UD2`, which is the whole trick: the code is still there.
+
+## Mitigation
+
+There is no vulnerability here: the challenge shows that **obfuscation does not protect a secret**. If the password is checked client-side it can be extracted; `UD2` only annoys the tool, not the analyst.
+
+- Practical rule: no secret embedded in a distributed binary; if unavoidable, derive it per user and verify server-side.
 
 ## Lessons
 

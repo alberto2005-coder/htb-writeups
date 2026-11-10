@@ -1,7 +1,7 @@
 ---
 challenge: Deadly Arthropod
 category: Forensics
-difficulty: Easy
+difficulty: Medium
 platform: Hack The Box
 state: Retired
 tags: [forensics, usb, hid, pcap, keystrokes]
@@ -16,19 +16,23 @@ type: Forensics
 
 ## TL;DR
 
-La captura contiene tráfico **USB de un teclado**. Cada pulsación viaja como un informe HID de 8 bytes; reconstruyendo la secuencia de *keycodes* se lee el texto que se tecleó, que es la flag. El detalle está en el mapa de teclas y en las mayúsculas.
+La captura es de tráfico **USB de un teclado** (la descripción del dispositivo lo identifica como **Razer BlackWidow Ultimate 2013**). Cada pulsación viaja como un informe HID de 8 bytes; filtrando los paquetes de 35 bytes y descartando los informes vacíos, la secuencia de *keycodes* da el texto tecleado, que contiene la flag. El detalle está en el mapa de teclas y en las mayúsculas.
 
 ## Enunciado y superficie
 
-- Categoría Forensics; el reto entrega el material descrito en «Reconocimiento».
+Se entrega `deadly_arthropod.pcap`, una captura de una sola transferencia USB sin tráfico de red. Categoría Forensics.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+tshark -r deadly_arthropod.pcap -q -z io,phs
+```
+
+Solo hay USB. Enumerando los dispositivos aparece un teclado; sus informes HID son los paquetes de **35 bytes** (los de 27 son el resto de la enumeración).
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+El informe HID de arranque tiene 8 bytes: el byte 0 son los modificadores (Shift) y el byte 2 el *keycode*. Los informes `00 00 ...` son liberaciones y hay que descartarlos, o cada tecla sale dos veces.
 
 ## Explicación del fallo
 
@@ -59,8 +63,11 @@ La captura contiene tráfico **USB de un teclado**. Cada pulsación viaja como u
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+No hay vulnerabilidad de software: el fallo es **físico**. Un sniffer USB ve todo lo que se teclea, incluida la flag.
+
+- Cifrar o bloquear puertos USB en equipos sensibles y usar teclados con autenticación cuando el riesgo lo justifique.
+- Detección: capturas USB con un dispositivo HID de apariencia desconocida y actividad de teclado sin sesión de usuario; en endpoint, drivers HID inyectados.
+- Lección operativa: nunca teclear secretos en un equipo con un sniffer USB conectado.
 
 ## Referencias
 
@@ -76,7 +83,8 @@ tshark -r usb.pcapng -Y 'usb.transfer_type == 0x01' -T fields -e usb.src -e usb.
 2. **Extraer los informes HID**: el byte 0 es el modificador (Shift) y el byte 2 el *keycode* de la tecla pulsada.
 
 ```bash
-tshark -r usb.pcapng -Y 'usb.capdata' -T fields -e usb.capdata
+tshark -r deadly_arthropod.pcap -Y 'usb.transfer_type == 0x01 && frame.len == 35' \
+  -T fields -e usb.capdata | grep -v '^0000000000000000$'
 ```
 
 3. **Traducir**: con la tabla HID (USB HID Usage ID) cada keycode se convierte en carácter; los informes con `0000000000000000` son liberaciones (ignorar) y el modificador `02` o `20` indica Shift.

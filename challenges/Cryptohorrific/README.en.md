@@ -4,88 +4,96 @@ type: Mobile
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [mobile, android, apk, aes, jadx]
+tags: [mobile, ios, aes, plist, cccrypt, hopper]
 ---
 
 # Cryptohorrific — Hack The Box (Challenge)
 
 **English** | [🇪🇸 Español](README.md)
 
+## TL;DR
+
+**It is not Android: it is an iOS app.** You get an `.app` bundle with a Mach-O binary and a `challenge.plist` holding a base64 blob. `ViewController` calls `CCCrypt` with the key and IV in clear; replaying that AES outside the app yields the flag.
+
 ## Brief
 
-An Android APK stores the flag encrypted. The key ships inside the package, so the task is to decompile, find the encryption and reproduce it.
+"Secure coding is the keystone of the application security!" Category Mobile. The bundle (`hackthebox.app`) ships its `Info.plist`, resources and a 64-bit Mach-O executable.
 
 ## Triage
 
 ```bash
-file app.apk
-unzip -l app.apk | head
-apktool d app.apk -o apk_out
-jadx -d jadx_out app.apk
+unzip -l Cryptohorrific.zip
+file hackthebox.app/hackthebox          # Mach-O 64-bit x86_64
+plistutil -i hackthebox.app/challenge.plist -o challenge.xml
+cat challenge.xml
 ```
 
-- `apktool` gives resources and a readable `AndroidManifest.xml`.
-- `jadx` gives decompiled Java/Kotlin, where the logic lives.
+The plist has three fields (`title`, `id`, `flag`); `flag` is a long base64 string. `plistutil` (or Python's `plistlib`) turns it into readable XML.
 
 ## Locate the encryption
 
 ```bash
-grep -R -n -i "AES\|Cipher\|SecretKey\|encrypt\|decrypt" jadx_out | head -30
+strings -a hackthebox.app/hackthebox | grep -iE 'key|iv|CCCrypt|AES'
 ```
 
-Typical patterns:
+The binary is Mach-O and calls **`CCCrypt`** (CommonCrypto). In Hopper/IDA, following `-[ViewController viewDidLoad]`, the key and IV appear as literals:
 
-```java
-SecretKeySpec key = new SecretKeySpec("...".getBytes(), "AES");
-Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+```text
+key = !A%D*G-KaPdSgVkY
+iv  = QfTjWnZq4t7w!z%C
 ```
 
-The key may live in `strings.xml`, a constant, `BuildConfig` or `assets/`. It can also be native (`lib/…/libnative.so`), reviewed with `strings` and Ghidra.
+## Root cause
+
+The key lives **in the client**. Anyone with the bundle extracts it in minutes, so the encryption only buys obfuscation. The effective mode is AES-128-**ECB**, unauthenticated: the IV is in the code but protects nothing.
 
 ## Reproduce the decryption
 
 ```python
-from Crypto.Cipher import AES
 import base64
-ct = base64.b64decode('<blob>')
-c = AES.new(b'<16 bytes>', AES.MODE_ECB)
-print(c.decrypt(ct))
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+
+ct = base64.b64decode("<blob from the plist>")
+k = b"!A%D*G-KaPdSgVkY"
+print(unpad(AES.new(k, AES.MODE_ECB).decrypt(ct), 16).decode())
 ```
 
-For CBC the IV is often the first 16 bytes or a constant in code; for GCM you need `nonce` and `tag`.
-
-## Check at runtime
+Equivalent with OpenSSL:
 
 ```bash
-adb install app.apk
-adb logcat | grep -i "flag\|cipher"
+echo "<blob>" | base64 -d | \
+  openssl enc -d -aes-128-ecb -nopad -K "$(printf '%s' '!A%D*G-KaPdSgVkY' | xxd -p)"
 ```
 
-Frida hooks `Cipher.doFinal` without decompiling everything:
+## Exploitation
 
-```javascript
-Java.perform(function () {
-  var C = Java.use('javax.crypto.Cipher');
-  C.doFinal.overload('[B').implementation = function (b) {
-    console.log('in ', b);
-    var r = this.doFinal(b);
-    console.log('out', r);
-    return r;
-  };
-});
-```
+1. Extract the bundle and convert the plist to XML.
+2. Identify the base64 blob in the `flag` field.
+3. Find `CCCrypt` and its arguments in the Mach-O.
+4. Decrypt locally with the key (ECB ignores the IV).
 
-## Typical errors
+## Evidence
 
-- **`jadx` cannot find the key** → it is native or fetched from a server; check `assets/` and `.so`.
-- **`BadPaddingException`** → wrong mode/padding or key encoding (hex vs base64).
-- **The key looks like text but does not decrypt** → it may be a hash; try MD5/SHA-256 of the string as key.
-- **Obfuscation** → names like `a.b.c`; follow the flow from `onCreate` and use Frida for runtime values.
+- `challenge.plist` with the base64 blob (redacted).
+- `strings`/Hopper showing `CCCrypt` and the key literals.
+- Plaintext in `HTB{...}` form.
 
 ## Lessons
 
-- A key in the client is not a secret: anyone with the APK gets it.
-- Mode and padding are in the code; copying them wrong is the most common failure.
-- Frida saves hours when obfuscation makes the decompiled code unreadable.
+- **iOS, not Android**: a ZIP with `Info.plist` and a Mach-O will not open in `jadx`; use Hopper/IDA/radare2 plus `plistutil`.
+- **`CCCrypt` is the entry point**: almost all Apple symmetric crypto goes through it.
+- **ECB ignores the IV**: if the result does not match while trying CBC, check the mode before rebuilding the key.
+- A key inside a binary is not a secret, just an inconvenience.
 
-MITRE: T1409, T1521.
+## Mitigation
+
+- Never encrypt secrets with embedded keys: the binary is public by definition.
+- If client-side crypto is unavoidable, derive keys per user, verify server-side and use AES-GCM with a nonce; never ECB.
+- Review: grep for `CCCrypt`/`kCCAlgorithmAES` with literal keys in the binary.
+
+## References
+
+- [MITRE T1409](https://attack.mitre.org/techniques/T1409/)
+- [MITRE T1521](https://attack.mitre.org/techniques/T1521/)
+- [apk-analysis](../../knowledge/mobile/apk-analysis.md)

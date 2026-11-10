@@ -42,7 +42,7 @@ Usual alternatives:
 admin' #
 ```
 
-A redirect to the panel means the query is concatenated.
+A redirect to the panel means the query is concatenated. The shortest working payload is `username=' or 1=1#&password=x` (the space before `#` matters on MySQL).
 
 ## Exploitation
 
@@ -76,3 +76,5 @@ If `info` filtered paths, the same parameter enumerates: `home`, `about`, `conta
 - A concatenated `SELECT` in a login is an immediate bypass: no password required.
 - The parameter that picks a "section" is usually the one that serves the flag.
 - Mitigation: prepared statements, server-side hash comparison, and a section allowlist instead of a dynamic include.
+- `info` is effectively an include selector: an allowlist (`home`, `about`, `contact`) is the fix, and the flag must never be reachable as a parameter.
+- Detection: `POST` bodies with quotes and `OR` in the username, and `panel.php?info=` values outside the known set.

@@ -16,7 +16,7 @@ tags: [searchor, cve-2023-43364, eval, gitea, docker, sudo]
 
 ## TL;DR
 
-The site runs **Searchor 2.4.0**, whose `eval()` over the search URL is **Python code injection** (CVE-2023-43364) → shell as `svc`. An exposed `.git` in `/var/www/app` yields **Gitea** credentials; Gitea runs locally and its administrator password comes out of `docker inspect`. `system-checkup.py` runs as root through `sudo` and calls `./full-checkup.sh` by **relative path**: root shell.
+The site runs **Searchor 2.4.0**, whose `eval()` over the search URL is **Python code injection** (CVE-2023-43364) → shell as `svc`. An exposed `.git` in `/var/www/app` yields **Gitea** credentials; Gitea runs locally, `docker inspect` leaks its **database** password, and the `administrator` account reuses `cody`'s password. `system-checkup.py` runs as root through `sudo` and calls `./full-checkup.sh` by **relative path**: root shell.
 
 ## Recon
 
@@ -53,7 +53,7 @@ Shell as `svc`.
 (root) /usr/bin/python3 /opt/scripts/system-checkup.py *
 ```
 
-3. The script's `docker-inspect` reveals environment variables with the Gitea `administrator` password; the repo holds the script source.
+3. `docker-inspect` on the `gitea` container dumps its environment, including the **database** password (`GITEA__database__PASSWD`); the `administrator` account reuses `cody`'s password. The Gitea repo holds the script source.
 4. `full-checkup` runs `./full-checkup.sh` from the **current directory**:
 
 ```bash

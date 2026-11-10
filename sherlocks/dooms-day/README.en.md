@@ -1,10 +1,10 @@
 ---
 sherlock: dOOMs Day
 domain: SOC
-difficulty: Medium
+difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [dfir, web, php2shell, cve, webshell, log-analysis]
+tags: [dfir, web, php, php2shell, cve-2026-109618, cve-2026-109619, log-analysis]
 ---
 
 # dOOMs Day — Hack The Box
@@ -15,62 +15,63 @@ tags: [dfir, web, php2shell, cve, webshell, log-analysis]
 
 ## Scenario
 
-A PHP site managed by a third-party CMS shows new files and outbound traffic to an unknown host. The webroot, the access logs and the CMS database are provided; the job is to rebuild the **PHP2Shell** exploitation chain and measure what happened after access.
+An Apache server running **PHP 8.4.26** keeps recycling workers and has a child process that should not exist. `access.log`, `error.log` and a capture are provided; rebuild the **PHP2Shell** exploitation (CVE-2026-109618 / CVE-2026-109619), which never touches the application: it lives in PHP's multipart parser.
 
 ## Evidence
 
-- Apache/nginx `access.log` and `error.log`.
-- A copy of the webroot (including `.htaccess`, `uploads/`, `cache/`).
-- A database export with the template or settings table.
-- Optionally `last`, `auth.log` and the host's cron entries.
+- Apache `logs/access.log` and `logs/error.log`.
+- `capture.pcap` for the period.
 
 ## Investigation
 
-### 1. Find the opening request
-
-PHP2Shell is abused through an HTTP request that injects code into a context the CMS later evaluates (template, cache, or serialised parameter). Hunt the anomalous shape in the log, not the generic `200`:
+### 1. Worker exhaustion
 
 ```bash
-awk '{print $6, $7}' access.log | sort | uniq -c | sort -rn | head -30
-grep -E "POST .*(template|cache|theme|module)" access.log | head
+grep AH00161 "logs/error.log" | wc -l
 ```
 
-A `POST` to an admin endpoint with a script `User-Agent` (`python-requests`, `curl`) and a large body is the candidate. A 200 instead of 302/403 confirms authentication was bypassed.
+Apache reports that no children are available dozens of times from a single client: the attacker keeps multipart uploads stalled until the whole prefork pool is busy (149 of 150 by default).
 
-### 2. Check whether the payload ran
+### 2. An OOM that is not a crash
 
 ```bash
-grep -RIn "eval\|assert\|create_function\|preg_replace" webroot/ --include="*.php" | head -40
-find webroot/ -newermt "2026-01-01" -type f -printf "%TY-%Tm-%Td %TH:%TM  %p\n" | sort
+grep -m1 "Allowed memory size" "logs/error.log"
 ```
 
-Files dated to the incident inside writable directories (`uploads`, `cache`, `tmp`, `sessions`) are the webshell. An `eval` over user-controlled data in the original CMS explains why it worked.
+The default limit (`128M` = `134217728` bytes) is crossed on purpose. When ZendMM cannot allocate it does not return `NULL`: it calls `zend_bailout` (`longjmp`), skips the request teardown and leaves session pointers dangling. The worker survives and reuses that dirty state on the next request: the use-after-free primitive.
 
-### 3. What the attacker did
+### 3. The two CVEs
+
+- **CVE-2026-109618**: memory-exhaustion corruption while parsing, before the script runs.
+- **CVE-2026-109619**: stale global state outliving the request memory.
+
+Fixed in PHP **8.4.27** (and 8.2.35 / 8.3.36 / 8.5.12). The field that triggers both is `PHP_SESSION_UPLOAD_PROGRESS`, handled in `main/rfc1867.c` before the application: that is why `access.log` says almost nothing and `error.log` says everything.
+
+### 4. ASLR leak through the response
+
+The dangling session is reclaimed with a forged header and PHP writes ~600 KB of neighbouring heap into `Set-Cookie: PHPSESSID=...`; from there come the `libphp.so` and chunk bases. Access-log signal: `Set-Cookie` headers hundreds of KB long.
 
 ```bash
-grep -E "shell|cmd|upload|wget|curl" access.log | awk '{print $1, $4, $7}' | sort | uniq -c | sort -rn | head
+awk '{print length($0)}' logs/access.log | sort -rn | head
 ```
 
-Rebuild the sequence: webshell upload → recon (`whoami`, `id`, `uname -a`) → second-stage download → lateral movement or exfiltration. Requests to the webshell with `?cmd=` or `?c=` in the `GET` are the signature.
+### 5. Post-exploitation
 
-### 4. Persistence and scope
-
-```bash
-crontab -l; ls -la /etc/cron.*
-grep -RIn "base64_decode\|gzinflate" webroot/ | head
-```
-
-Review scheduled tasks, newly created users (recent dates in `/etc/passwd`) and outbound connections for the period. Scope closes with the compromised CMS accounts: if the injection came from an account, rotate its credentials and the `APP_KEY`.
+With the bases known, a forged `zend_array` whose `pDestructor` points at `zif_system` yields execution as `www-data`. The PCAP shows the reverse shell to **4444**; on the host, child processes of the worker (`sh -c ...`), not of the final binary.
 
 ## Findings
 
-- Access through PHP2Shell in the CMS, without valid credentials.
-- A webshell in an upload directory where PHP execution was enabled.
-- Minimal post-exploitation: reconnaissance plus a downloaded second stage.
+Unauthenticated compromise without touching the application: the vector is the PHP runtime (`session.upload_progress`) and the evidence is in `error.log` (worker exhaustion plus OOM), not in the web logs.
 
 ## Lessons
 
-- A CMS that writes templates or cache to disk and evaluates them is RCE when the directory does not block PHP.
-- The line between a compromise and a scare lives in `access.log`: read the request body, not just the URL.
-- Mitigation: `php_admin_flag engine off` in upload directories, WAF payload rules, and patch the CMS.
+- A memory fatal is not a crash: it is a `longjmp` that can leave reusable state behind.
+- Exploitation happens **before** the script: it works even on a page with no PHP.
+- `error.log` is the primary artifact; `access.log` only gives the client and the sizes.
+
+## Detection and mitigation
+
+- `session.upload_progress.enabled = Off` when progress bars are unused: one line, nothing breaks.
+- Update to PHP 8.4.27+ (8.2.35 / 8.3.36 / 8.5.12).
+- Realistic `memory_limit` and a `MaxRequestWorkers` sized to the container.
+- Alerts: repeated `AH00161` from one client, `Allowed memory size` followed by a worker child, `Set-Cookie` hundreds of KB long, `PHP_SESSION_UPLOAD_PROGRESS` in a request body.

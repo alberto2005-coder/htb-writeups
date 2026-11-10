@@ -4,7 +4,9 @@ domain: DFIR / Network
 difficulty: Easy
 platform: Hack The Box
 evidence: Packet capture from a corporate network
-tools: [Wireshark, tshark, NetworkMiner]
+tools: [Wireshark, tshark, NetworkMiner, VirusTotal]
+state: Retired
+tags: [dfir, network-forensics, pcap, malware-triage, dns-tunneling]
 ---
 
 # Compromised — Hack The Box
@@ -15,41 +17,60 @@ tools: [Wireshark, tshark, NetworkMiner]
 
 ## Scenario
 
-There are signs of malicious traffic and at least one compromised host that held sensitive data. A PCAP is provided to identify initial access, the affected machine and what was taken.
+The SOC spots suspicious traffic: a host on the corporate network is compromised and data that should never have left is gone. One PCAP is provided; rebuild initial access, classify the malware and say what was exfiltrated.
 
 ## Evidence
 
-- A single `capture.pcap`.
+- `capture.pcap`.
 
 ## Method
 
-1. **Overview**: `Statistics → Conversations` shows who talks to whom and how much.
+1. **Overview**: who talks to whom, and how much.
 
 ```bash
 tshark -r capture.pcap -q -z conv,ip
-tshark -r capture.pcap -q -z io,phs
 ```
 
-2. **Initial access**: look for HTTP requests with suspicious parameters or cleartext credentials, and exposed administration protocols (SMB, RDP, WinRM, FTP).
+2. **Initial download**: the victim requests, over plain HTTP, a file named like an image (`6ctf5JL.gif`) from `162.252.172.54`, but the payload is a **PE DLL**.
 
 ```bash
-tshark -r capture.pcap -Y 'http.request' -T fields -e http.host -e http.request.uri
+tshark -r capture.pcap -Y 'http.request' -T fields -e ip.dst -e http.host -e http.request.uri
 ```
 
-3. **Compromised host**: the one receiving the exploit and then producing downloads or new outbound connections. Map the IP to NetBIOS/DNS names.
+`Export Objects` truncates the stream: reassemble the TCP flow, confirm with `file` that it is a PE and **then** hash it, or the SHA-256 will not match any database.
 
-4. **Exfiltration**: files under `Export Objects → HTTP/SMB` and anomalous volumes in a specific stream (`Follow TCP Stream`).
+3. **Classification**: that SHA-256 on VirusTotal identifies it as **Pikabot** (a loader); the same record gives the family label and the first-seen date the attribution questions ask for.
 
-5. **Timeline**: order key events by `frame.time` (login, webshell upload, data download).
+4. **C2**: after execution the host speaks **HTTPS with self-signed certificates** to external hosts on non-standard ports (2078, 2222 and 3299).
+
+```bash
+tshark -r capture.pcap -Y 'ssl.handshake.type==11' -T fields -e ip.dst -e tcp.port -e x509sat.printableString
+```
+
+5. **Exfiltration**: the final channel is neither HTTP nor TLS but **DNS**: long names and an anomalous volume towards an attacker domain, a tunnel pattern.
+
+```bash
+tshark -r capture.pcap -Y dns -T fields -e dns.qry.name | sort | uniq -c | sort -rn | head
+```
+
+## Findings
+
+One PCAP holds the whole chain: a Pikabot DLL pulled over HTTP from `162.252.172.54`, self-signed TLS beacons on high ports, and data leaving over a DNS tunnel. The family comes from VirusTotal, not from decrypting traffic.
+
+## Lessons
+
+- The download hides as an image: the name says nothing, the `MZ` signature does.
+- Wireshark's object export truncates large flows; reassemble before hashing.
+- Three different protocols (HTTP, TLS, DNS) and only network visibility ties them together.
 
 ## What it teaches
 
-- In a PCAP, initial access usually hides in cleartext HTTP or an unencrypted administration protocol.
-- The compromise's fingerprint is not only the entry: the **outbound** data confirms impact.
-- Exporting objects reveals what was downloaded or stolen without hand-rebuilding the protocol.
+- A modern C2 switches channel per stage: download, beacons, egress.
+- Self-signed certificates on high ports are a cheap, strong signal.
+- DNS tunnelling shows up in name length and volume, with nothing decrypted.
 
 ## Pitfalls
 
-- **Partial capture**: it may start mid-intrusion; do not assume the first packet is the beginning.
-- **TLS**: when the channel is encrypted, rely on metadata (SNI, certificates, volumes, times).
-- **Scan filler**: separate discovery noise from exploitation traffic.
+- **TLS**: without keys the content stays closed; analysis runs on metadata (SNI, certificate, ports, volumes).
+- **Noise**: separate discovery traffic from exploitation.
+- **Hashes**: hashing the exported object instead of the reassembled flow yields a value no database knows.

@@ -48,7 +48,7 @@ echo "<IP> bank.htb chris.bank.htb admin.bank.htb" | sudo tee -a /etc/hosts
 gobuster dir -u http://bank.htb -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html
 ```
 
-`chris.bank.htb` is the default Apache page. `bank.htb` exposes a login, `index.php` and a `support.php` that redirects to the login with `302` even without a session.
+`chris.bank.htb` is the default Apache page. An alternative to the `302` trick: `/balance_transfer/` holds hundreds of encrypted `.acc` files and **one was left in cleartext** with `chris@bank.htb` and its password. `bank.htb` exposes a login, `index.php` and a `support.php` that redirects to the login with `302` even without a session.
 
 ## Foothold
 

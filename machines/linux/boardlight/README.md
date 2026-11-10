@@ -33,16 +33,18 @@ ffuf -u http://board.htb -H 'Host: FUZZ.board.htb' -w subdomains.txt -fs 15949
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+Dos vhosts: `board.htb` (estático) y `crm.board.htb`, que solo aparece al fuzzear el `Host`. El segundo sirve **Dolibarr 17.0.0**, cuya versión se confirma en el pie y en `?version=` de los estáticos, con credenciales de fábrica `admin:admin`.
 
 ## Foothold
 
 1. **Dolibarr 17.0.0** en `http://crm.board.htb` con `admin:admin`.
-2. **CVE-2023-30253**: crear una página web con PHP en el editor y previsualizarla; el código se ejecuta.
+2. **CVE-2023-30253**: el filtro del módulo de webs bloquea `<?php` pero distingue mayúsculas, así que `<?PHP` pasa; se crea la página y se previsualiza.
 
 ```php
-<?php system($_GET['c']); ?>
+<?PHP system($_GET['c']); ?>
 ```
+
+La CVE afecta a Dolibarr **< 17.0.1** y su arreglo normaliza la etiqueta; el vector es el editor de webs, no un plugin.
 
 3. Reverse shell como `www-data` y lectura del `conf.php`:
 
