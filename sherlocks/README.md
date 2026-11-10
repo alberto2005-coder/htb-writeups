@@ -45,7 +45,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | SSHole | DFIR / Unix | Very Easy | Bypass de `sshd` en Alpine (`*` de `crypt()`) en un jumpbox usado para escanear `192.168.18.0/24` | `auth.log`, `last`, `journalctl` | [Ver](sshole/README.md) |
 | ShadowBait | DFIR / Windows | Easy | Documento de Office de Steven → PowerShell → C2 `192.168.204.152:8899` → DPAPI y persistencia | Hayabusa, EvtxECmd | [Ver](shadowbait/README.md) |
 | Compromised | DFIR / Red | Easy | PCAP de una red corporativa | Wireshark, `tshark` | [Ver](compromised/README.md) |
-| Packet Puzzle | DFIR / Red | Medium | PCAP de una empresa japonesa de criptomonedas; la secuencia RDP→SMB no está confirmada por writeups públicos | Wireshark, `tshark` | [Ver](packet-puzzle/README.md) |
+| Packet Puzzle | DFIR / Red | Medium | PCAP de una empresa japonesa de criptomonedas: CVE-2024-4577 en PHP 8.1.25 vía POST, `cristo`, `nc64.exe`, GodPotato y `Win32Error:2` (`[CORREGIDO]` con cyb3rloud y FinalBreach) | Wireshark, `tshark` | [Ver](packet-puzzle/README.md) |
 | Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | SQLite, DB Browser | [Ver](jingle-bell/README.md) |
 | Ultimatum | DFIR / Web | Easy | CVE-2023-3460 en Ultimate Member: admin `secragon`, web shell y shell remota | `access.log`, WP-CLI | [Ver](ultimatum/README.md) |
 | ProcNet | DFIR / Endpoint | Hard | C2 de código abierto: JA3, API Monitor (Vault) y Sysmon de empleado y DC | API Monitor, EvtxECmd | [Ver](procnet/README.md) |
