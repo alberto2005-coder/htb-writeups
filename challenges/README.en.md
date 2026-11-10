@@ -53,6 +53,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Perfect Synchronization | Crypto | Easy | Per-character substitution (`char + 15`): frequency analysis, not AES-ECB | **Retired** | [ES](Perfect%20Synchronization/README.md) | [Ver](Perfect%20Synchronization/README.en.md) |
 | xorxorxor | Crypto | Easy | Repeating-key XOR with a known prefix | **Retired** | [ES](xorxorxor/README.md) | [Ver](xorxorxor/README.en.md) |
 | Baby Time Capsule | Crypto | Very Easy | RSA with small moduli: factor and decrypt | **Retired** | [ES](Baby%20Time%20Capsule/README.md) | [Ver](Baby%20Time%20Capsule/README.en.md) |
+| Gunship | Web | Easy | Prototype pollution in `flat@5.0.0` + AST injection in the template engine | **Retired** | [ES](Gunship/README.md) | [Ver](Gunship/README.en.md) |
+| baby interdimensional internet | Web | Easy | Python 2 `exec()` over `ingredient`/`measurements`, no filters | **Retired** | [ES](baby%20interdimensional%20internet/README.md) | [Ver](baby%20interdimensional%20internet/README.en.md) |
+| Interdimensional Internet | Web | Medium | `[ ( _ .` WAF bypassed with `\x` and exfiltration via `flask.session` | **Retired** | [ES](Interdimensional%20Internet/README.md) | [Ver](Interdimensional%20Internet/README.en.md) |
+| Fake Boost | Forensics | Easy | Reversed base64 PowerShell and AES exfiltration in a `POST` | **Retired** | [ES](Fake%20Boost/README.md) | [Ver](Fake%20Boost/README.en.md) |
+| Impossible Password | Reversing | Easy | Second `strcmp` against `rand()`: equalise `$rdi`/`$rsi` in gdb | **Retired** | [ES](Impossible%20Password/README.md) | [Ver](Impossible%20Password/README.en.md) |
 
 ## Categories
 

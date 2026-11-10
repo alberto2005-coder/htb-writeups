@@ -61,6 +61,11 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | MFTECmd, MFTExplorer | [Ver](hyperfiletable/README.md) |
 | WorkFromHome | DFIR / Windows | Medium | Phishing → RDP → `SeManageVolumePrivilege` → `PrintConfig.dll` y persistencia WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.md) |
 | Lockpick 3.0 | Malware / Linux | Hard | Binario con XOR y clave por argumento, memoria y unidad systemd | Volatility 3, Ghidra | [Ver](lockpick-3/README.md) |
+| Jugglin | DFIR / WSL2 | Medium | Capturas de API de `wsl.exe`: exfiltración y volcado con `lsassy` sin rastro en logs de Windows | API Monitor | [Ver](jugglin/README.md) |
+| Heist | DFIR / Malware | Hard | Phishing → `Partnership.pdf.exe` → RedLine; PCAP, Prefetch y SRUM | Wireshark, SrumECmd | [Ver](heist/README.md) |
+| BOughT | DFIR / Malware | Hard | Memoria + AD1: persistencia en `StartUp`, mutex, DGA de 59.049 dominios y DDoS | Volatility 2, Ghidra | [Ver](bought/README.md) |
+| Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | EvtxECmd, MFTECmd | [Ver](liberty/README.md) |
+| Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | Chainsaw, MFTECmd | [Ver](jinkies/README.md) |
 
 ## Metodología común
 

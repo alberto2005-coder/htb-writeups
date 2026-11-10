@@ -81,6 +81,11 @@ Fichas de máquinas **retiradas** que sirven para estudiar técnicas. Las marcad
 | Busqueda | Linux | Easy | `eval()` de Searchor, `.git` con credenciales, Gitea y `full-checkup.sh` relativo | [Ver](../machines/linux/busqueda/README.md) | [EN](../machines/linux/busqueda/README.en.md) |
 | Soccer | Linux | Easy | Tiny File Manager por defecto, SQLi ciega por WebSocket y `doas` con `dstat` | [Ver](../machines/linux/soccer/README.md) | [EN](../machines/linux/soccer/README.en.md) |
 | Timelapse | Windows | Easy | SMB anónimo, PFX, historial de PowerShell y LAPS hasta Administrator | [Ver](../machines/windows/timelapse/README.md) | [EN](../machines/windows/timelapse/README.en.md) |
+| Cicada | Windows | Easy | SMB de invitado, contraseña de onboarding, spray y `SeBackupPrivilege` | [Ver](../machines/windows/cicada/README.md) | [EN](../machines/windows/cicada/README.en.md) |
+| Support | Windows | Easy | Reversing de `UserInfo.exe`, contraseña en `info`, GenericAll sobre el DC y RBCD | [Ver](../machines/windows/support/README.md) | [EN](../machines/windows/support/README.en.md) |
+| Administrator | Windows | Medium | ACLs hasta FTP, `.psafe3`, targeted kerberoasting y DCSync | [Ver](../machines/windows/administrator/README.md) | [EN](../machines/windows/administrator/README.en.md) |
+| Escape | Windows | Medium | PDF con credenciales MSSQL, `xp_dirtree` y ADCS ESC1 | [Ver](../machines/windows/escape/README.md) | [EN](../machines/windows/escape/README.en.md) |
+| Pilgrimage | Linux | Easy | `/.git`, ImageMagick CVE-2022-44268 y binwalk CVE-2022-4510 | [Ver](../machines/linux/pilgrimage/README.md) | [EN](../machines/linux/pilgrimage/README.en.md) |
 
 ## Pendientes
 
