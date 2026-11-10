@@ -5,6 +5,8 @@
 Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
+>
+> **Numbers:** 94 machines, 50 Sherlocks, 50 challenges and 36 knowledge topics, each in ES/EN.
 
 ---
 
@@ -103,6 +105,11 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Busqueda | Linux | Easy | Web / Inyección | Retired (ref.) | Searchor `eval()`, a `.git` with credentials, Gitea and the relative `full-checkup.sh` | [ES](machines/linux/busqueda/README.md) | [Ver](machines/linux/busqueda/README.en.md) |
 | Soccer | Linux | Easy | Web / SQLi en WebSocket | Retired (ref.) | Default Tiny File Manager, blind WebSocket SQLi and `doas` with `dstat` | [ES](machines/linux/soccer/README.md) | [Ver](machines/linux/soccer/README.en.md) |
 | Timelapse | Windows | Easy | Active Directory / Certificados | Retired (ref.) | Anonymous SMB, PFX, PowerShell history and LAPS up to Administrator | [ES](machines/windows/timelapse/README.md) | [Ver](machines/windows/timelapse/README.en.md) |
+| Cicada | Windows | Easy | Active Directory / SMB | Retired (ref.) | Guest SMB, onboarding password, spray, `description` and `info`, `SeBackupPrivilege` and SAM/SYSTEM | [ES](machines/windows/cicada/README.md) | [Ver](machines/windows/cicada/README.en.md) |
+| Support | Windows | Easy | Active Directory | Retired (ref.) | Reversing `UserInfo.exe` (XOR + base64), LDAP, password in `info`, GenericAll over the DC and RBCD | [ES](machines/windows/support/README.md) | [Ver](machines/windows/support/README.en.md) |
+| Administrator | Windows | Medium | Active Directory | Retired (ref.) | GenericAll and ForceChangePassword, FTP with `.psafe3`, GenericWrite, targeted kerberoasting and DCSync | [ES](machines/windows/administrator/README.md) | [Ver](machines/windows/administrator/README.en.md) |
+| Escape | Windows | Medium | Active Directory / MSSQL | Retired (ref.) | PDF with credentials, `xp_dirtree` as `sql_svc`, `ERRORLOG.BAK` and ADCS ESC1 up to Administrator | [ES](machines/windows/escape/README.md) | [Ver](machines/windows/escape/README.en.md) |
+| Pilgrimage | Linux | Easy | Web / Linux | Retired (ref.) | Exposed `/.git`, ImageMagick 7.1.0-49 (CVE-2022-44268) and binwalk 2.3.2 (CVE-2022-4510) | [ES](machines/linux/pilgrimage/README.md) | [Ver](machines/linux/pilgrimage/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it · **ref.** = reference notes, not played on this profile.
 >
@@ -142,6 +149,11 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 | Emdee five for life | Misc | Very Easy | **Retired** | MD5 against the clock: session handling, regex, automation | [ES](challenges/Emdee%20five%20for%20life/README.md) | [Ver](challenges/Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | **Retired** | LDAP injection in login and search (`*` wildcard) | [ES](challenges/Phonebook/README.md) | [Ver](challenges/Phonebook/README.en.md) |
 | Under Construction | Web | Easy | **Retired** | JWT algorithm confusion: sign HS256 with the public key | [ES](challenges/Under%20Construction/README.md) | [Ver](challenges/Under%20Construction/README.en.md) |
+| Gunship | Web | Easy | **Retired** | Prototype pollution in `flat@5.0.0` and AST injection in the template engine (Handlebars and Pug variants) | [ES](challenges/Gunship/README.md) | [Ver](challenges/Gunship/README.en.md) |
+| baby interdimensional internet | Web | Easy | **Retired** | Python 2 `exec()` over `ingredient`/`measurements`, no filters or limits | [ES](challenges/baby%20interdimensional%20internet/README.md) | [Ver](challenges/baby%20interdimensional%20internet/README.en.md) |
+| Interdimensional Internet | Web | Medium | **Retired** | `[ ( _ .` WAF bypassed with `\x5b\x28\x5f\x2e` and exfiltration via `flask.session` | [ES](challenges/Interdimensional%20Internet/README.md) | [Ver](challenges/Interdimensional%20Internet/README.en.md) |
+| Fake Boost | Forensics | Easy | **Retired** | Reversed base64 PowerShell, AES-CBC and HTTP exfiltration in a `POST` | [ES](challenges/Fake%20Boost/README.md) | [Ver](challenges/Fake%20Boost/README.en.md) |
+| Impossible Password | Reversing | Easy | **Retired** | Second `strcmp` against `rand()`: equalise `$rdi`/`$rsi` in gdb | [ES](challenges/Impossible%20Password/README.md) | [Ver](challenges/Impossible%20Password/README.en.md) |
 
 - Achievement: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Category index and conventions: [challenges/README.en.md](challenges/README.en.md) · [ES](challenges/README.md)
@@ -155,6 +167,11 @@ Defensive investigation scenarios: nothing is attacked, you answer questions abo
 | Sherlock | Domain | Difficulty | Evidence | ES | EN |
 |---|---|---|---|---|---|
 | Litter | SOC | Easy | PCAP with DNS tunnelling (dnscat2) and host ZIP | [ES](sherlocks/litter/README.md) | [Ver](sherlocks/litter/README.en.md) |
+| Jugglin | DFIR / WSL2 | Medium | `wsl.exe` API captures: exfiltration and `lsassy` with no Windows log trace | [ES](sherlocks/jugglin/README.md) | [Ver](sherlocks/jugglin/README.en.md) |
+| Heist | DFIR / Malware | Hard | `Partnership.pdf.exe` → RedLine, PCAP, Prefetch and SRUM | [ES](sherlocks/heist/README.md) | [Ver](sherlocks/heist/README.en.md) |
+| BOughT | DFIR / Malware | Hard | Memory + AD1, `StartUp` persistence, mutex, 59,049-domain DGA and DDoS | [ES](sherlocks/bought/README.md) | [Ver](sherlocks/bought/README.en.md) |
+| Liberty | DFIR / Windows | Medium | Spray → RDP, Net-NTLMv2 theft via a `.url` and PowerShell Web Access | [ES](sherlocks/liberty/README.md) | [Ver](sherlocks/liberty/README.en.md) |
+| Jinkies | DFIR / Windows | Medium | SMB with credentials, `bk_db.ibd` backup and reuse down to the local hash | [ES](sherlocks/jinkies/README.md) | [Ver](sherlocks/jinkies/README.en.md) |
 
 - Index, methodology and pending notes: [sherlocks/README.en.md](sherlocks/README.en.md) · [ES](sherlocks/README.md)
 - Note template: [templates/sherlock-template.en.md](templates/sherlock-template.en.md) · [ES](templates/sherlock-template.md)
