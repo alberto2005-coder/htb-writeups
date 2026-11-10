@@ -48,7 +48,7 @@ La captura contiene tráfico **USB de un teclado**. Cada pulsación viaja como u
 
 ## Evidencia
 
-- Una captura de tráfico USB (`usb.pcapng`).
+- `deadly_arthropod.pcap`, captura de una única transferencia USB sin tráfico de red.
 
 ## Lecciones aprendidas
 
