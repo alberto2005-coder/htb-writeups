@@ -22,6 +22,10 @@ Itinerario de iniciación de Hack The Box: máquinas cortas, en tiers lineales, 
 | Explosion | Windows | 3389/rdp | `Administrator` con contraseña vacía | [Ver](explosion/README.md) | [EN](explosion/README.en.md) |
 | Preignition | Linux | 80/http | `/admin.php` oculto y `admin:admin` | [Ver](preignition/README.md) | [EN](preignition/README.en.md) |
 | Mongod | Linux | 27017/mongo | MongoDB sin `--auth` | [Ver](mongod/README.md) | [EN](mongod/README.en.md) |
+| Synced | Linux | 873/rsync | Módulo anónimo y `rsync` sin credenciales | [Ver](synced/README.md) | [EN](synced/README.en.md) |
+| Sequel | Linux | 3306/mysql | `root` sin contraseña y `show databases` | [Ver](sequel/README.md) | [EN](sequel/README.en.md) |
+
+> **Tiers:** las ocho primeras (Meow → Synced) son Tier 0; **Sequel** es Tier 1 y también pertenece a esta sección. Están las nueve.
 
 ## Lecciones transversales
 
