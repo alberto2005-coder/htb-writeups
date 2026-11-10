@@ -4,47 +4,58 @@ category: Crypto
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [crypto, aes, ecb, frequency-analysis]
+tags: [crypto, substitution, frequency-analysis, custom-cipher]
+type: Crypto
 ---
 
 # Perfect Synchronization — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; no real flags.
+> **State:** Retired. Analysis notes; the flag is not published.
 
-## TL;DR
+## Brief
 
-Several messages sharing a template are encrypted with **AES** in **ECB** mode. ECB encrypts each 16-byte block independently, with no chaining: identical blocks produce identical ciphertext. With enough messages the plaintext is rebuilt by block-level **frequency analysis**, without the key.
+You get a ciphertext and the code fragment that produced it. There is no AES to break: you have to understand what the script actually did.
 
-## Evidence
+## What the cipher does
 
-- `source.py` (the cipher) and `output.txt` (a list of hex ciphertexts).
-
-## Method
-
-1. **Confirm ECB**: the same 16-byte block in equivalent positions → the same ciphertext across messages.
+The script takes **each character on its own**, adds a **salt of 15** and writes the result:
 
 ```python
-from collections import Counter
-blocks = [c[i:i+16] for c in ct_list for i in range(0, len(c), 16)]
-Counter(blocks).most_common(5)
+salt = 15
+encrypted = ''.join(chr(ord(c) + salt) for c in text)
 ```
 
-2. **Align the template**: messages share structure; each block position maps to a field (greeting, name, closing).
+That is a **per-character substitution**: every plaintext letter always becomes the same ciphertext letter. No blocks, no key, no ECB: the "perfect synchronization" in the name is the flaw itself.
 
-3. **Frequency**: at each position the most repeated block is the most common character or word of the language/template; test hypotheses (`' '`, frequent letters, known header words).
+```python
+# decrypt
+plain = ''.join(chr(ord(c) - 15) for c in encrypted)
+```
 
-4. **Iterate**: replace blocks with their value and check the text reads coherently; the messages "synchronise" and the plaintext emerges.
+## Solving it
 
-## Pitfalls
+1. Apply the inverse shift — if the salt is known, the challenge ends here.
+2. If the salt were not given, the simple substitution structure allows **frequency analysis**: the most repeated ciphertext letters map to the language's own (`e`, `a`, `o` in Spanish; `e`, `t`, `a` in English).
+3. For short texts with many known words, the repetition pattern falls to **quipqiup** or a cryptogram solver.
 
-- **Padding**: the last blocks carry PKCS#7 padding; ignore them when comparing.
-- **Encoding**: work in bytes, not `str`, or 16-byte blocks break.
-- **Confusing it with CBC**: in CBC the same block changes with the IV and predecessor; no repeats means not ECB.
+```bash
+python3 - <<'PY'
+ct = open('ciphertext.txt').read().strip()
+print(''.join(chr(ord(c) - 15) for c in ct))
+PY
+```
+
+## Findings
+
+- This is not encryption: it is a **monoalphabetic shift/substitution** dressed up as a modern scheme.
+- The challenge name describes the flaw: each character transforms identically, so the pattern survives.
+- With the salt in sight no cryptanalysis is needed; without it, frequencies and patterns suffice.
 
 ## Lessons
 
-- ECB leaks structure: the one mode never to use on patterned data.
-- Block frequency turns a "strong" cipher into a solvable cryptogram.
-- AES-CBC, or better AES-GCM with a unique nonce, avoids the problem.
+- Reading the cipher's code saves hours of assuming AES/ECB.
+- Repeating a per-character transform preserves the language's structure.
+- A fixed, public salt adds no security at all.
+- Mitigation: real authenticated encryption (AES-GCM) with a secret key and a unique nonce; never "add a number" per character.

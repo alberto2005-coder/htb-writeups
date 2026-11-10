@@ -10,77 +10,80 @@ type: Forensics
 
 # Obscure — Hack The Box
 
-[🇬🇧 English](README.en.md) | **Español**
+[⚑ English](README.en.md) | **Español**
 
-> **Estado:** Retired. Ficha de método; sin flags reales.
+> **Estado:** Retired. Ficha de análisis; el flag no se publica.
 
-## TL;DR
+## Enunciado
 
-Un atacante sube un **webshell PHP ofuscado** (`support.php`) con base64 + zlib + XOR y `eval`. El PCAP de los minutos previos al apagado del servicio contiene los comandos que ejecutó y de ahí sale un **`.kdbx` de KeePass**; `keepass2john` + diccionario abren la caja y aparece la flag.
+Se entrega la captura de tráfico de un servidor web comprometido y hay que reconstruir qué hizo el atacante y qué se llevó.
 
-## Enunciado y superficie
+## Evidencias
 
-- Categoría Forensics; el reto entrega el material descrito en «Reconocimiento».
-
-## Reconocimiento
-
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
-
-## Explicación del fallo
-
-Un atacante sube un **webshell PHP ofuscado** (`support.php`) con base64 + zlib + XOR y `eval`. El PCAP de los minutos previos al apagado del servicio contiene los comandos que ejecutó y de ahí sale un **`.kdbx` de KeePass**; `keepass2john` + diccionario abren la caja y aparece la flag.
-
-## Reproducción local
-
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
-
-## Explotación
-
-- Ver las secciones adyacentes para el detalle.
-
-## Evidencia
-
-- `support.php` (webshell ofuscado) y `capture.pcap`.
-
-## Lecciones aprendidas
-
-- **Orden de capas**: si se aplica el XOR antes del base64 no sale nada; hay que seguir el orden del código.
-- **kdbx corrupto**: extraer el objeto con cuidado; una respuesta truncada invalida el fichero.
-- **john lento**: el formato KeePass es costoso; probar también `hashcat -m 13400` con GPU.
-
-- Un webshell ofuscado no oculta su comportamiento: el `eval` final delata la ejecución.
-- Un PCAP de tráfico HTTP sin TLS contiene credenciales, comandos y ficheros exfiltrados.
-- Un gestor de contraseñas es tan fuerte como su contraseña maestra: si está en un diccionario, cae.
-
-## Mitigaciones y detección
-
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [pcap-triage](../../knowledge/forensics/pcap-triage.md)
-## Método
-
-1. **Entender el webshell**: deshacer capas en orden — base64, descompresión zlib y XOR con la clave del propio código. Un `eval` al final indica que el parámetro POST ejecuta código.
-
-```bash
-grep -o "base64_decode\|gzuncompress\|gzinflate\|eval" support.php
+```text
+19-05-21_22532255.pcap    captura del incidente
 ```
 
-2. **Leer la conversación**: en Wireshark, `http.request.method == POST` y `Follow → HTTP Stream`. Las peticiones llevan el comando en el cuerpo; las respuestas, la salida.
+## Método
 
-3. **Reconstruir la sesión**: con `ls -al` se ve un fichero interesante, `pwdb.kdbx`. Se extrae del propio flujo o con `Export Objects → HTTP`.
+### 1. Ver qué se habló
 
-4. **Crackear la caja**:
+```bash
+tshark -r 19-05-21_22532255.pcap -q -z conv,tcp
+tshark -r 19-05-21_22532255.pcap -Y "http.request" -T fields -e http.request.method -e http.request.uri | sort | uniq -c
+```
+
+El interés está en las peticiones `POST` a un único script, siempre con el mismo nombre: ahí viaja el payload.
+
+### 2. Seguir el flujo completo
+
+```bash
+tshark -r 19-05-21_22532255.pcap -q -z follow,tcp,ascii,0
+```
+
+En el cuerpo del `POST` aparece un parámetro con un blob **base64**; al decodificarlo no sale PHP legible, sino datos binarios: hay otra capa.
+
+### 3. Deshacer la ofuscación
+
+El patrón habitual es base64 → **zlib** → **XOR** con una clave de un byte o derivada de una cadena del propio blob:
+
+```python
+import base64, zlib
+raw = base64.b64decode(blob)
+data = zlib.decompress(raw)
+print(bytes(b ^ 0x5a for b in data).decode("latin-1"))
+```
+
+El resultado es el **webshell** que el atacante subió: un script PHP con el ejecutor de comandos (`support.php` en la raíz del sitio). Esa es la prueba del acceso inicial, y también la respuesta a «¿qué dejó instalado?».
+
+### 4. Qué más se descargó
+
+Repitiendo el seguimiento de cada flujo aparecen dos ficheros más: un `to-do.txt` de la víctima y una base de datos de **KeePass** (`pwdb.kdbx`). La extracción se hace desde el propio `tshark`:
+
+```bash
+tshark -r 19-05-21_22532255.pcap --export-objects http,exported/
+ls -l exported/
+```
+
+### 5. Abrir el gestor
 
 ```bash
 keepass2john pwdb.kdbx > kdbx.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt kdbx.hash
+keepassxc-cli show -s pwdb.kdbx <entrada>
 ```
 
-5. **Abrir** con KeePassXC y la contraseña recuperada: dentro está la flag.
+Con la contraseña crackeada se abre la base y el flag está en una de las entradas.
+
+## Conclusiones
+
+- El compromiso fue una **subida de webshell** vía HTTP `POST`, no una explotación de servicio.
+- La ofuscación del payload es base64 + compresión + XOR: tres capas, todas reversibles sin la clave del atacante.
+- El robo real es el gestor de contraseñas: la captura contiene la base y su contraseña cae por diccionario.
+
+## Lecciones
+
+- En un PCAP, `follow,tcp` + `--export-objects` resuelve el 90 % del trabajo antes de abrir Wireshark.
+- Un blob base64 que no decodifica a texto es señal de compresión, no de cifrado.
+- Un `.kdbx` en el tráfico es un compromiso de todas las credenciales que contenga.
+- Mitigación: validación de subidas, permisos de escritura fuera del docroot y gestor de contraseñas con contraseña maestra fuerte.

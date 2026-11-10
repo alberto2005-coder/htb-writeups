@@ -37,7 +37,10 @@ Aparecen `/music`, `/artwork`, `/sierra` y, desde el botón de login de `/music`
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `/ona/` responde con la pantalla de login y un aviso de versión: `OpenNetAdmin v18.1.1`.
+- `/music`, `/artwork` y `/sierra` son páginas estáticas; el botón de login de `/music` apunta a `/ona/`.
+- `/var/www/html/ona/local/config/database_settings.inc.php` es el fichero que se lee tras el RCE: credenciales de la base `ona_default`.
+- `jimmy` pertenece al grupo `internal`, y `/var/www/internal` es de `jimmy:internal`: de ahí sale el sitio del 52846.
 
 ## Foothold
 
@@ -141,4 +144,8 @@ root@openadmin:~#
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- OpenNetAdmin actualizado (la 18.1.1 acumula el RCE de 47691) o retirado; el panel no debe estar en Internet.
+- Credenciales por servicio: la contraseña de la base de datos no puede valer como contraseña de sistema.
+- `password_hash()` (bcrypt/argon2) en lugar de `hash('sha512', ...)` hardcodeado en el código.
+- El vhost interno con `AssignUserID joanna` no debe servir claves privadas; y sin `sudo` sobre editores (`nano`, `vi`, `less`) para usuarios normales.
+- Detección: peticiones a `/ona/login.php` con parámetros inyectados, `su`/`ssh` desde `www-data` y ejecución de `nano` por `sudo`.

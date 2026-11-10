@@ -41,11 +41,14 @@ wget http://<IP>/backup/backup.tar && tar xf backup.tar && cat upload.php lib.ph
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `backup.tar` contiene `upload.php`, `lib.php`, `photos.php` y `index.php`: la validación se lee entera.
+- `upload.php` comprueba dos cosas: que la extensión final esté en una lista blanca (`.jpg`, `.png`, `.gif`, `.jpeg`) y que el tipo MIME detectado con `finfo` sea `image/*`. El nombre se reescribe a `<IP>_<n>.<ext>` conservando lo que va después del primer punto.
+- `lib.php` define `check_ip()` con una expresión regular que decide qué ficheros de `uploads/` se consideran ataques.
+- `photos.php` recorre `uploads/` y muestra las imágenes: confirma qué se ha subido y con qué nombre.
 
 ## Foothold
 
-1. **Bypass de subida**: `upload.php` comprueba extensión contra una lista blanca y el MIME con `finfo`. Un nombre `x.php.jpg` pasa ambas; el `AddHandler application/x-httpd-php .php` de Apache (sin `$`) ejecuta la parte `.php` intermedia.
+1. **Bypass de subida**: `upload.php` comprueba la **extensión final** contra una lista blanca y el MIME leyendo los *magic bytes* con `finfo`. Un nombre `x.php.jpg` (o `x.php.png`) pasa ambas: la extensión mirada es la última y el contenido sigue siendo un JPEG válido. El `AddHandler application/x-httpd-php .php` de Apache, sin `$` al final, ejecuta la parte `.php` **intermedia**.
 
 ```bash
 cp shell.php shell.php.jpg
@@ -113,4 +116,8 @@ interface BOOTPROTO:     proto bash
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- `AddHandler` con anclaje (`\.php$`) o, mejor, `SetHandler` dentro de un `<FilesMatch>`; validar el nombre completo y no sólo la extensión final.
+- El directorio de subidas **fuera** del árbol servido, o servido con `php_admin_flag engine off` y `Content-Disposition`.
+- El cron de vigilancia no debe concatenar nombres de fichero en un `exec`: usar `escapeshellarg()` o `unlink()` desde PHP.
+- `changename.sh` con `printf '%s'` y validación sin espacios; `ifup` nunca sobre un fichero que escribe un usuario.
+- Detección: ficheros con dos extensiones en `uploads/`, `.php` dentro de directorios de datos y `rm` con nombres que contienen `;`.

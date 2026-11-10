@@ -5,51 +5,85 @@ difficulty: Easy
 platform: Hack The Box
 state: Retired
 tags: [forensics, pcap, webshell, keepass, john, obfuscation]
+type: Forensics
 ---
 
 # Obscure — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; no real flags.
+> **State:** Retired. Analysis notes; the flag is not published.
 
-## TL;DR
+## Brief
 
-An attacker uploads an **obfuscated PHP webshell** (`support.php`) using base64 + zlib + XOR and `eval`. The PCAP from the minutes before the service was shut down contains the commands executed and yields a **KeePass `.kdbx`**; `keepass2john` plus a dictionary opens the vault and reveals the flag.
+You get the traffic capture of a compromised web server and must reconstruct what the attacker did and what was taken.
 
 ## Evidence
 
-- `support.php` (obfuscated webshell) and `capture.pcap`.
+```text
+19-05-21_22532255.pcap    capture of the incident
+```
 
 ## Method
 
-1. **Understand the webshell**: peel the layers in order — base64, zlib decompression and XOR with the key embedded in the code. A trailing `eval` means the POST parameter executes code.
+### 1. See what was said
 
 ```bash
-grep -o "base64_decode\|gzuncompress\|gzinflate\|eval" support.php
+tshark -r 19-05-21_22532255.pcap -q -z conv,tcp
+tshark -r 19-05-21_22532255.pcap -Y "http.request" -T fields -e http.request.method -e http.request.uri | sort | uniq -c
 ```
 
-2. **Read the conversation**: in Wireshark, `http.request.method == POST` and `Follow → HTTP Stream`. Requests carry the command in the body; responses carry the output.
+The interest is in the `POST` requests to a single script, always the same name: that is where the payload travels.
 
-3. **Rebuild the session**: `ls -al` reveals an interesting file, `pwdb.kdbx`. Extract it from the stream or through `Export Objects → HTTP`.
+### 2. Follow the whole stream
 
-4. **Crack the vault**:
+```bash
+tshark -r 19-05-21_22532255.pcap -q -z follow,tcp,ascii,0
+```
+
+The `POST` body carries a parameter with a **base64** blob; decoded, it is not readable PHP but binary data: there is another layer.
+
+### 3. Undo the obfuscation
+
+The usual pattern is base64 → **zlib** → **XOR** with a single-byte key or one derived from a string inside the blob:
+
+```python
+import base64, zlib
+raw = base64.b64decode(blob)
+data = zlib.decompress(raw)
+print(bytes(b ^ 0x5a for b in data).decode("latin-1"))
+```
+
+The result is the **webshell** the attacker uploaded: a PHP script with the command runner (`support.php` in the site root). That is the proof of initial access and the answer to "what did they leave behind?".
+
+### 4. What else was pulled
+
+Repeating the stream follow exposes two more files: a victim `to-do.txt` and a **KeePass** database (`pwdb.kdbx`). Extract them straight from `tshark`:
+
+```bash
+tshark -r 19-05-21_22532255.pcap --export-objects http,exported/
+ls -l exported/
+```
+
+### 5. Open the manager
 
 ```bash
 keepass2john pwdb.kdbx > kdbx.hash
 john --wordlist=/usr/share/wordlists/rockyou.txt kdbx.hash
+keepassxc-cli show -s pwdb.kdbx <entry>
 ```
 
-5. **Open it** with KeePassXC and the recovered password: the flag is inside.
+With the cracked password the database opens and the flag sits in one of its entries.
 
-## Pitfalls
+## Findings
 
-- **Layer order**: XOR before base64 gives nothing; follow the order in the code.
-- **Corrupt kdbx**: extract the object carefully; a truncated response breaks the file.
-- **Slow john**: the KeePass format is expensive; also try `hashcat -m 13400` on a GPU.
+- The compromise was a **webshell upload** over HTTP `POST`, not a service exploit.
+- Payload obfuscation is base64 + compression + XOR: three layers, all reversible without the attacker's key.
+- The real theft is the password manager: the capture holds the database and its password falls to a dictionary.
 
 ## Lessons
 
-- An obfuscated webshell does not hide its behaviour: the final `eval` gives execution away.
-- A PCAP of cleartext HTTP holds credentials, commands and exfiltrated files.
-- A password manager is only as strong as its master password: if it is in a dictionary, it falls.
+- On a PCAP, `follow,tcp` plus `--export-objects` settles most of the work before opening Wireshark.
+- A base64 blob that does not decode to text signals compression, not encryption.
+- A `.kdbx` in the traffic compromises every credential inside it.
+- Mitigation: upload validation, write permissions outside the docroot, and a strong master password on the manager.

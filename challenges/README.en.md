@@ -15,7 +15,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Cryptohorrific | Mobile | Easy | iOS app: base64 blob in the plist, AES key inside the Mach-O binary | **Retired** | [ES](Cryptohorrific/README.md) | [Ver](Cryptohorrific/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM in `session.upload_progress`, use-after-free, ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [ES](Dark%20Embargo/README.md) | [Ver](Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
-| Phonebook | Web | Easy | LDAP injection: `*` as user and password, wildcards in search | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
+| Phonebook | Web | Easy | Blind LDAP injection: the flag is `reese`'s password, not the `*` bypass | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
 | Toxic | Web | Very Easy | PHP object injection: `PageModel::__destruct` includes a file (LFI) and nginx log poisoning | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` over the date format; `addslashes` does not stop `${}` | **Retired** | [ES](LoveTok/README.md) | [Ver](LoveTok/README.en.md) |
@@ -27,7 +27,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | Retired | [ES](breaking%20grad/README.md) | [Ver](breaking%20grad/README.en.md) |
 | Weather App | Web | Easy | SSRF with *response splitting* and SQLi in the internal service up to admin account takeover | **Retired** | [ES](Weather%20App/README.md) | [Ver](Weather%20App/README.en.md) |
 | Freelancer | Web | Easy | SQLi in `portfolio.php?id=` and an `/admin` panel found by fuzzing | **Retired** | [ES](Freelancer/README.md) | [Ver](Freelancer/README.en.md) |
-| Passman | Web | Easy | GraphQL IDOR in `UpdatePassword`: changing the admin password | **Retired** | [ES](Passman/README.md) | [Ver](Passman/README.en.md) |
+| Passman | Web | Easy | GraphQL: unauthenticated `UpdatePassword`; the flag lives in the admin's manager | **Retired** | [ES](Passman/README.md) | [Ver](Passman/README.en.md) |
 | Cartographer | Web | Easy | SQLi in the login form and `panel.php?info=flag` | **Retired** | [ES](Cartographer/README.md) | [Ver](Cartographer/README.en.md) |
 | Dynastic | Crypto | Very Easy | Trithemius cipher: the shift is the index | **Retired** | [ES](Dynastic/README.md) | [Ver](Dynastic/README.en.md) |
 | Makeshift | Crypto | Very Easy | Reversal plus permutation of three-byte blocks | **Retired** | [ES](Makeshift/README.md) | [Ver](Makeshift/README.en.md) |
@@ -49,8 +49,8 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | KORP Terminal | Web | Very Easy | Error-based SQLi and a cracked bcrypt hash | **Retired** | [ES](KORP%20Terminal/README.md) | [Ver](KORP%20Terminal/README.en.md) |
 | TimeKORP | Web | Very Easy | Command injection through the time format | **Retired** | [ES](TimeKORP/README.md) | [Ver](TimeKORP/README.en.md) |
 | Behind the Scenes | Reversing | Very Easy | `UD2` anti-decompilation and four `strncmp` calls in GDB | **Retired** | [ES](Behind%20the%20Scenes/README.md) | [Ver](Behind%20the%20Scenes/README.en.md) |
-| OnlyHacks | Web | Very Easy | Stored XSS against a bot to steal its session cookie | **Retired** | [ES](OnlyHacks/README.md) | [Ver](OnlyHacks/README.en.md) |
-| Perfect Synchronization | Crypto | Easy | AES-ECB and block-level frequency analysis | **Retired** | [ES](Perfect%20Synchronization/README.md) | [Ver](Perfect%20Synchronization/README.en.md) |
+| OnlyHacks | Web | Very Easy | IDOR at `/chat?rid=3`: the flag sits in another user's chat (the bot XSS is an alternative) | **Retired** | [ES](OnlyHacks/README.md) | [Ver](OnlyHacks/README.en.md) |
+| Perfect Synchronization | Crypto | Easy | Per-character substitution (`char + 15`): frequency analysis, not AES-ECB | **Retired** | [ES](Perfect%20Synchronization/README.md) | [Ver](Perfect%20Synchronization/README.en.md) |
 | xorxorxor | Crypto | Easy | Repeating-key XOR with a known prefix | **Retired** | [ES](xorxorxor/README.md) | [Ver](xorxorxor/README.en.md) |
 | Baby Time Capsule | Crypto | Very Easy | RSA with small moduli: factor and decrypt | **Retired** | [ES](Baby%20Time%20Capsule/README.md) | [Ver](Baby%20Time%20Capsule/README.en.md) |
 

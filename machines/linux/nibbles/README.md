@@ -43,11 +43,13 @@ curl -s http://<IP>/nibbleblog/content/private/users.xml
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `/nibbleblog/README` es público y dice la versión exacta: **v4.0.3** (*Coffee*). `/nibbleblog/update.php` la repite.
+- `content/private/config.xml` y `users.xml` **no** son legibles sin sesión: el `users.xml` está protegido. La entrada es la contraseña por defecto, no la enumeración de esos ficheros.
+- La portada de `/nibbleblog/` deja el enlace al panel en `/nibbleblog/admin.php`; hay bloqueo tras varios intentos, así que conviene no hacer fuerza bruta a ciegas.
 
 ## Foothold
 
-Login en `/nibbleblog/admin.php` con las credenciales por defecto (`admin:nibbles`; el usuario es `admin`, no el nombre de la máquina). Si no entran, se revisa `content/private/config.xml` y `users.xml`, que suelen ser legibles.
+Login en `/nibbleblog/admin.php` con las credenciales por defecto (`admin:nibbles`; el usuario es `admin` y la contraseña coincide con el nombre del CMS, no con el de la máquina). Es la vía: `users.xml` no es legible sin sesión y el panel bloquea tras varios intentos fallidos.
 
 Con sesión de administrador:
 

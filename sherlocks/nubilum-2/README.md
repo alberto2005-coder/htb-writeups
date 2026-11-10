@@ -3,61 +3,78 @@ sherlock: Nubilum-2
 domain: Cloud / AWS
 difficulty: Medium
 platform: Hack The Box
+state: Retired
 evidence: CloudTrail de una cuenta con un bucket S3 expuesto
 tools: [jq, Splunk, AWS CLI]
-state: Retired
-tags: [dfir, cloud-/-aws]
+tags: [dfir, cloud, aws, s3, iam, cloudtrail]
 ---
-
 
 # Nubilum-2 — Hack The Box
 
-[🇬🇧 English](README.en.md) | **Español**
+[⚑ English](README.en.md) | **Español**
 
-> Investigación defensiva. Sin respuestas literales de la plataforma.
+> **Estado:** Retired. Ficha de investigación; sin respuestas literales de la plataforma.
 
 ## Escenario
 
-Forela usa **S3** como almacén y lago de datos. Un usuario reporta que no puede acceder a los ficheros de un directorio y se sospecha de una **política de bucket mal configurada** en `forela-fileshare` que dejó objetos públicos. Hay que reconstruir qué hizo el intruso.
+Forela usa **S3** como almacén y lago de datos. Un usuario reporta que no puede acceder a los ficheros de un directorio concreto y se sospecha de una **política de bucket mal configurada** en `forela-fileshare`. Hay que reconstruir qué hizo el intruso y por qué el usuario legítimo perdió el acceso.
 
 ## Evidencias
 
-- Logs de **CloudTrail** de la cuenta (ficheros JSON, muchos).
+- Logs de **CloudTrail** de la cuenta `949622803460`, en JSON comprimido por región.
 
 ## Investigación
 
-1. **Preparar**: cargar los JSON en un SIEM (Splunk/Elastic) o normalizar con `jq`.
+### 1. Preparar
 
 ```bash
-jq -r '[.eventTime,.eventName,.userIdentity.type,.userIdentity.arn,.sourceIPAddress,.errorCode]|@tsv' *.json \
-  | sort > timeline.tsv
+jq -s '[.[].Records[]] | sort_by(.eventTime) | unique_by(.eventID)' CloudTrail/*/*.json > merged.json
+jq -r '.[] | [.eventTime,.eventName,.userIdentity.type,.sourceIPAddress,.errorCode] | @tsv' merged.json | sort > timeline.tsv
 ```
 
-2. **Entrada**: cambios de política y de ACL del bucket (`PutBucketPolicy`, `PutBucketAcl`, `PutObjectAcl`) y quién los hizo.
+### 2. El origen
 
-3. **Identidad**: creación de claves de acceso (`CreateAccessKey`) para un usuario existente —el patrón clásico de persistencia— y desde qué IP.
+El `userAgent` distingue al atacante del tráfico normal: un `aws-cli` reciente lanzado desde una distribución de pentest identifica las llamadas manuales. Con eso se aísla la IP de origen y la ventana.
 
-4. **Actividad sobre objetos**: `ListObjects`, `GetObject`, `DeleteObject`; los `AccessDenied` en `kms:Decrypt` explican por qué el usuario legítimo dejó de ver sus ficheros.
+```bash
+jq -r '.[] | "\(.sourceIPAddress)\t\(.userAgent)"' merged.json | sort -u | grep -i "aws-cli"
+```
 
-5. **Cierre**: qué objetos se expusieron o borraron, en qué ventana y con qué identidad.
+### 3. La fuga inicial
+
+Lecturas **anónimas** (`userIdentity.type = AWSAccount`/`Anonymous`) sobre objetos del bucket: el atacante descarga un CSV de claves de acceso sin autenticarse. Ése es el punto de partida de todo.
+
+```bash
+jq -r '.[] | select(.eventName=="GetObject") | [.eventTime,.userIdentity.type,.requestParameters.key] | @tsv' merged.json | grep -i "accesskeys\|credential"
+```
+
+### 4. Escalada con las claves robadas
+
+Con las claves del CSV, el actor encadena decenas de llamadas **denegadas** (`AccessDenied`) hasta encontrar un permiso útil, y termina escribiendo una **política inline sobre sí mismo** para ampliar privilegios.
+
+```bash
+jq -r '.[] | select(.errorCode=="AccessDenied") | .eventName' merged.json | sort | uniq -c | sort -rn
+jq -r '.[] | select(.eventName|test("PutUserPolicy|AttachUserPolicy|CreateAccessKey|PutBucketPolicy")) | [.eventTime,.eventName,.userIdentity.arn] | @tsv' merged.json
+```
+
+### 5. Impacto en el negocio
+
+El usuario legítimo deja de ver sus ficheros porque los objetos acaban cifrados con una clave KMS sobre la que no tiene `kms:Decrypt`. Los `AccessDenied` en `kms:Decrypt` y los cambios de ACL/política del bucket explican la incidencia del helpdesk.
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- Entrada: bucket con lectura pública y un CSV de claves IAM dentro.
+- Escalada: sondeo con `AccessDenied` hasta dar con un permiso de escritura de políticas.
+- Persistencia: clave de acceso creada y política inline autoasignada.
+- Impacto: pérdida de acceso del usuario legítimo por cambios de política y de cifrado.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- Un bucket público con credenciales dentro es un compromiso de cuenta, no una fuga de datos.
+- Los `AccessDenied` son evidencia: dibujan el reconocimiento del atacante.
+- `PutUserPolicy` sobre el propio usuario es escalada de privilegios silenciosa y debe alertarse.
+- La incidencia del helpdesk suele ser la punta: el cambio de política es la causa.
 
-## Qué enseña
+## Nota de dificultad
 
-- Una política de bucket permisiva convierte datos internos en públicos sin tocar IAM.
-- Crear una clave de acceso es persistencia silenciosa en AWS.
-- Los `AccessDenied` también son evidencia: cuentan el impacto en el negocio.
-- El análisis cloud se hace con consultas, no abriendo ficheros uno a uno.
-
-## Tropiezos
-
-- **Codificación**: algunos exports vienen con los JSON en una sola línea o en `Records[]`; desenvolverlos primero.
-- **Duplicados**: las entregas de logs pueden repetir eventos; deduplicar por `eventID`.
-- **`kms:Decrypt`**: sin ese permiso, un objeto "público" sigue sin poder leerse.
+El índice la recoge como **Medium**; alguna fuente pública la lista como **Easy**. Se mantiene Medium y se anota la discrepancia.

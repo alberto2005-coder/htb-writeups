@@ -45,7 +45,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | SSHole | DFIR / Unix | Very Easy | Evidencias de un jumpbox comprometido | `auth.log`, `last`, `journalctl` | [Ver](sshole/README.en.md) |
 | ShadowBait | DFIR / Windows | Easy | Logs de Sysmon, PowerShell y Security | Hayabusa, EvtxECmd | [Ver](shadowbait/README.en.md) |
 | Compromised | DFIR / Red | Easy | PCAP de una red corporativa | Wireshark, `tshark` | [Ver](compromised/README.en.md) |
-| Packet Puzzle | DFIR / Red | Medium | PCAP de una empresa de criptomonedas | Wireshark, `tshark` | [Ver](packet-puzzle/README.en.md) |
+| Packet Puzzle | DFIR / Red | Medium | PCAP from a Japanese crypto company; the RDP→SMB sequence is not confirmed by public writeups | Wireshark, `tshark` | [Ver](packet-puzzle/README.en.md) |
 | Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | SQLite, DB Browser | [Ver](jingle-bell/README.en.md) |
 | Ultimatum | DFIR / Web | Easy | Logs y ficheros de un WordPress comprometido | `access.log`, WP-CLI | [Ver](ultimatum/README.en.md) |
 | ProcNet | DFIR / Endpoint | Hard | PCAP, API Monitor y Sysmon de DC y puesto | API Monitor, EvtxECmd | [Ver](procnet/README.en.md) |
@@ -53,11 +53,11 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Vantage | DFIR / Red | Very Easy | PCAP de servidor web y controlador de nube | Wireshark, `tshark` | [Ver](vantage/README.en.md) |
 | Lockpick | Malware / Ransomware | Easy | Muestra de ransomware y ficheros cifrados | Ghidra, x64dbg | [Ver](lockpick/README.en.md) |
 | Lockpick 2.0 | Malware / Ransomware | Easy | Recurso compartido cifrado y muestra con nota | UPX, Ghidra | [Ver](lockpick-2/README.en.md) |
-| Payload | Malware / Windows | Easy | Ejecutable MinGW con payload cifrado en runtime | x64dbg, PE-bear | [Ver](payload/README.en.md) |
+| Payload | Malware / Windows | Easy | `func_pointer.exe` (MinGW) decrypting its payload at runtime | x64dbg, radare2, PEStudio | [Ver](payload/README.en.md) |
 | Takedown | Red / DFIR | Easy | PCAP con SMB, VBS y PowerShell hacia un C2 | Wireshark, `tshark` | [Ver](takedown/README.en.md) |
 | Interceptor | SOC / Red | Easy | PCAP de una infección SSLoad con C2 en RC4 | Wireshark, CyberChef | [Ver](interceptor/README.en.md) |
 | Nubilum-1 | Cloud / AWS | Medium | CloudTrail, EC2 comprometida y copia de S3 | `jq`, AWS CLI | [Ver](nubilum-1/README.en.md) |
-| Nubilum-2 | Cloud / AWS | Medium | Bucket S3 con política pública y claves creadas | Splunk, `jq` | [Ver](nubilum-2/README.en.md) |
+| Nubilum-2 | Cloud / AWS | Medium (sources: Easy) | S3 with anonymous read of an IAM key CSV and self-escalation via `PutUserPolicy` | Splunk, `jq` | [Ver](nubilum-2/README.en.md) |
 | Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | MFTECmd, MFTExplorer | [Ver](hyperfiletable/README.en.md) |
 | WorkFromHome | DFIR / Windows | Medium | Robo de credenciales, RDP y secuestro de DLL en WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.en.md) |
 | Lockpick 3.0 | Malware / Linux | Hard | XOR binary with the key passed as an argument, memory and systemd unit | Volatility 3, Ghidra | [Ver](lockpick-3/README.en.md) |

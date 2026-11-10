@@ -3,50 +3,69 @@ sherlock: Payload
 domain: Malware analysis
 difficulty: Easy
 platform: Hack The Box
-evidence: Windows executable with an encrypted payload
-tools: [Detect It Easy, x64dbg, PE-bear, CyberChef]
+state: Retired
+evidence: Windows executable with a runtime-decrypted payload
+tools: [PEStudio, radare2, x64dbg, Detect It Easy]
+tags: [malware, windows, mingw, unpacking, x64dbg]
 ---
 
 # Payload — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> Defensive investigation. No platform answers copied.
+> **State:** Retired. Analysis notes; no platform answers.
 
 ## Scenario
 
-A Windows executable, compiled with **MinGW**, decrypts at runtime the payload it actually executes. Rather than reimplementing the decryption by hand, the exercise walks you through **skipping it with a debugger** and letting the malware do the work.
+First day after training: a suspicious binary arrives and you must say what it does without running it in production. The executable shows a harmless dialog and **decrypts in memory** the payload that actually matters.
 
 ## Evidence
 
-- One unsigned 32/64-bit `.exe`.
+- A single file: **`func_pointer.exe`**.
 
-## Method
+## Investigation
 
-1. **Static triage**: compiler and sections.
+### 1. Static triage
 
 ```bash
-file sample.exe; strings -n 6 sample.exe | head -40
+file func_pointer.exe
+rabin2 -I func_pointer.exe      # or radare2 -I: arch, bits, protections, timestamp
 ```
 
-MinGW leaves `gcc`/`mingw` traces and a minimal import table; the payload usually sits in `.rdata`/`.data`.
+- The binary is compiled with **MinGW** (GCC for Windows): compiler strings and a minimal import table give it away.
+- Running it only pops a dialog reading `HTB pwned us`: the functionality sits behind a decryption routine.
+- The PE header timestamp and the compiler are the first two answers asked for.
 
-2. **Entry point**: open in **x64dbg**, go to `EntryPoint` and follow the calls that receive a buffer and a length.
+### 2. Where the payload is
 
-3. **Decryption loop**: usually XOR/RC4/AES over a memory region. Find the instruction writing the decrypted byte and set a **breakpoint after the loop**.
+The binary uses **function pointers**: it takes an encrypted buffer, decrypts it in memory and jumps to it. In `x64dbg`:
 
-4. **Skip the encryption**: once the buffer is plaintext, dump the region (`Follow in Dump` → `Binary → Save to file`) or flip a jump to execute the decrypted payload.
+1. Load, run to the user entry point (`Run to user code`).
+2. Find the call receiving a buffer and a length, plus the loop writing byte by byte with `XOR` (or a small block cipher).
+3. Set a **breakpoint after the loop**: at that point the buffer is plaintext.
 
-5. **Analyse the dump**: `strings` and a second debugging pass to uncover the C2 URL, service name or commands.
+### 3. Extract the second stage
 
-## What it teaches
+```text
+Follow in Dump → select the region → Binary → Save to file
+```
 
-- Dynamic execution saves reimplementing algorithms: the malware decrypts for you.
-- A breakpoint after the decryption loop is the standard trick against custom packers.
-- MinGW binaries carry no signature or metadata: triage starts with the compiler.
+The dump holds the decrypted payload. The task asks for **the address** where it landed and its content: `strings` on the dump reveals the C2 URL, service name or commands.
 
-## Pitfalls
+### 4. Verification
 
-- **ASLR/PIE**: if the binary relocates, use module-relative addresses.
-- **Anti-debugging**: `IsDebuggerPresent`, `NtQueryInformationProcess` or timing checks; patch the branch.
-- **Running the payload**: extract and analyse statically, never outside the isolated VM.
+- `PEStudio` on the dump tells whether it is a full PE or shellcode.
+- Compare hashes of the original and the dump: they must differ (encrypted vs plaintext).
+
+## Findings
+
+- The binary is a *loader*: it does not attack by itself, it delivers the next stage.
+- The encryption is reversible **on the host**; there is no need to reimplement the algorithm.
+- The decrypted buffer address is an analysis datum, not an internal detail.
+
+## Lessons
+
+- Against a home-made packer, the debugger does the work: run until the malware decrypts itself.
+- `MinGW` + minimal imports + a decoy dialog is a loader profile, not an application.
+- The PE header timestamp is unreliable as proof of compilation but useful as a hint.
+- Never launch the second stage outside an isolated, network-less VM.

