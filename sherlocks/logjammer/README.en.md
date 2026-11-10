@@ -44,9 +44,9 @@ Load the full CSV in Timeline Explorer, filter by `EventID` and sort by time. Fi
 
 ### 3. Persistence and configuration
 
-- **4698**: scheduled task created. The embedded XML holds the script path and schedule. This is what survives a reboot.
-- **4719**: audit policy change (someone preparing to erase or dodge logs).
-- **2004** in the firewall channel: rule created with numeric fields (`Direction 2` = outbound, `Protocol 6` = TCP, `RemotePort 4444`). Translate the codes before answering; an outbound rule to 4444 is a C2.
+- **4698**: scheduled task created. The embedded XML holds the name (`HTB-AUTOMATION`), the script path (`C:\Users\CyberJunkie\Desktop\Automation-HTB.ps1`), the argument (`-A cyberjunkie@hackthebox.eu`) and the schedule. This is what survives a reboot.
+- **4719**: audit policy change; the case's subcategory is *Other Object Access Events* (someone preparing to erase or dodge logs).
+- **2004** in the firewall channel: rule created (`Metasploit C2 Bypass`) with numeric fields (`Direction 2` = outbound, `Protocol 6` = TCP, `RemotePort 4444`). Translate the codes before answering; an outbound rule to 4444 is a C2.
 
 ### 4. Tooling and execution
 
@@ -55,11 +55,11 @@ Load the full CSV in Timeline Explorer, filter by `EventID` and sort by time. Fi
 
 ### 5. Evidence destruction
 
-- **104** in the firewall channel: the log was cleared. The deletion itself generates the event flagging the tampered channel. Cross-check **1102** (Security) when present.
+- **104** lands in **System.evtx** (`Firewall log file was cleared`), not in the firewall channel: the deletion itself generates the event that flags the tampered channel. Cross-check the **1102** in Security, which had already fired earlier (14:36:45) when the Security log was cleared.
 
 ## Findings
 
-- Hands-on-keyboard activity with scheduled-task persistence and an outbound rule to 4444.
+- Hands-on-keyboard activity on 2023-03-27 from 14:37:09 UTC: scheduled-task persistence and an outbound rule to 4444.
 - AD reconnaissance with SharpHound, caught by Defender.
 - Log-clearing attempt that leaves a trace in the firewall channel.
 

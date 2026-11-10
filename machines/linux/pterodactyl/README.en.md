@@ -17,7 +17,7 @@ tags: [linux, opensuse, pterodactyl, cve-2025-49132, pearcmd, polkit, udisks2]
 
 ## TL;DR
 
-**openSUSE Leap 15.6** running the **Pterodactyl 1.11.10** panel at `panel.pterodactyl.htb`. CVE-2025-49132 gives **unauthenticated LFI/RCE** in `/locales/locale.json`; chained with `pearcmd.php` it writes a webshell and runs as `wwwrun`, leaking the database credentials on the way. MariaDB dumps the users table, the bcrypt hash for `phileasfogg3` cracks, and SSH follows. Root comes from the **CVE-2025-6018 + CVE-2025-6019** chain: PAM/Polkit plus `udisks2` without `nosuid`.
+**openSUSE Leap 15.6** running the **Pterodactyl 1.11.10** panel at `panel.pterodactyl.htb`. CVE-2025-49132 gives **unauthenticated LFI/RCE** in `/locales/locale.json`; chained with `pearcmd.php` it writes a webshell and runs as `wwwrun`, leaking the database credentials on the way. `php artisan tinker` dumps the users table (the model hides `password`, so ask for it explicitly), the bcrypt hash for `phileasfogg3` cracks, and SSH follows. Root comes from the **CVE-2025-6018 + CVE-2025-6019** chain: PAM/Polkit plus `udisks2` without `nosuid`.
 
 ## Recon
 
@@ -65,15 +65,15 @@ curl -s "http://panel.pterodactyl.htb/locales/locale.json?locale=../../../../../
 
 `.env` and `config/database.php` yield `APP_KEY` plus MariaDB user and password. The **PEAR** chain is what executes: `pearcmd.php` takes arguments from the query string (`register_argc_argv`) and writes a PHP file into the webroot, later included. The shell returns as **`wwwrun`**.
 
-## From wwwrun to a user
+## Lateral movement: from wwwrun to a user
 
 ```bash
-mysql -h 127.0.0.1 -u pterodactyl -p'<password>' panel
+cd /var/www/pterodactyl
+php artisan tinker
+# User::select('email','username','password')->get();
 ```
 
-```sql
-select email, username, password from users;
-```
+The `User` model hides `password` via `$hidden`, so a plain `select *` will not return it; naming the column explicitly does. Alternative: log into MariaDB with the `.env` credentials (`mysql -h 127.0.0.1 -u pterodactyl -p'<password>' panel`).
 
 `phileasfogg3`'s bcrypt hash falls to John:
 
@@ -101,7 +101,7 @@ XDG_VTNR=1
 EOF
 ```
 
-With those `allow_active` rights, the second piece applies: `udisks2` mounts filesystems through `libblockdev` without `nosuid`, so an XFS image prepared with a root SUID binary mounts and runs:
+With those `allow_active` rights, the second piece applies: **CVE-2025-6019** is a race during the *resize* of an XFS image — `libblockdev`/`udisks2` ends up mounting the filesystem without `nosuid`, so the image's root SUID binary runs with privileges:
 
 ```bash
 # XFS image with a prepared SUID /root-shell

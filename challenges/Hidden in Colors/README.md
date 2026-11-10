@@ -1,116 +1,86 @@
 ---
 challenge: Hidden in Colors
 type: Stego
-difficulty: Easy
+difficulty: Hard
 platform: Hack The Box
 state: Retired
-tags: [stego, image, lsb, png, zsteg]
+tags: [stego, imagen, png, colores, hex, mapeo]
 ---
 
-
-# Hidden in Colors — Hack The Box (Challenge)
+# Hidden in Colors — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
+
+> **Estado:** Retired. Reto resuelto; sin flags reales.
 
 ## TL;DR
 
-- Ver las secciones adyacentes para el detalle.
+La imagen no esconde datos en los bits menos significativos: **el propio valor de color de cada píxel es el dato**. Los colores están elegidos de forma artificial (pocos tonos, valores hexadecimales "demasiado limpios"), y el mensaje se recupera mapeando esos códigos de color a caracteres. Es un reto de **Stego Hard**, no un `zsteg` de un paso.
 
 ## Enunciado y superficie
 
-Una imagen PNG aparentemente normal contiene información en los bits menos significativos. No hay contraseña ni pista: el reto es extraer la capa oculta.
+"We intercepted this weird image coming from a…": se entrega una única imagen PNG. No hay contraseña ni aplicación; el artefacto es el binario entero del reto.
 
 ## Reconocimiento
-
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
-
-## Explicación del fallo
-
-[🇬🇧 English](README.en.md) | **Español**
-
-## Reproducción local
-
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
-
-## Explotación
-
-- Ver las secciones adyacentes para el detalle.
-
-## Evidencia
-
-- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
-- Los valores reales viven en `private/` y no se publican.
-
-## Lecciones aprendidas
-
-- **`zsteg` no encuentra nada** → la imagen puede ser JPEG (usa `steghide`) o el payload está en el canal alfa.
-- **Texto cifrado** → hay contraseña; prueba `steghide` con una wordlist o busca la clave en metadatos.
-- **CRC inválido** → la imagen fue modificada a mano; `pngcheck` lo dice y `binwalk` puede extraer el resto.
-- **Bits en orden inverso** → invierte la secuencia o lee de derecha a izquierda.
-
-- El orden de los canales importa tanto como el bit elegido.
-- `zsteg -a` es el primer comando, no el último.
-- Un PNG con CRC roto es una pista, no un error de descarga.
-
-MITRE: T1027.003 (steganografía).
-
-## Mitigaciones y detección
-
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [MITRE T1027.003](https://attack.mitre.org/techniques/T1027/003/)
-- [images-audio](../../knowledge/stego/images-audio.md)
-## Triaje
 
 ```bash
 file image.png
 exiftool image.png
 pngcheck -v image.png
-binwalk image.png
+zsteg -a image.png | head -30
 ```
 
-- `exiftool` para metadatos y comentarios.
-- `pngcheck` detecta chunks extraños (tEXt, zTXt, iTXt) y errores de CRC.
-- `binwalk` señala si hay un ZIP u otro fichero embebido.
+Lo esperable: PNG válido, sin metadatos útiles y sin LSB legible. Si `zsteg` no devuelve texto, la hipótesis del LSB está descartada y toca mirar los **valores de color**.
 
-## Extracción
+## Explicación del fallo
 
-1. **LSB con `zsteg`** (el más directo en PNG/BMP):
+Al abrir la imagen se ve un patrón de colores planos, no una foto. Los píxeles usan una paleta muy reducida y sus códigos hexadecimales (`#RRGGBB`) siguen una secuencia, no una distribución natural. Ese es el canal: **el dato está codificado en el color, no en el bit bajo**.
 
-   ```bash
-   zsteg image.png
-   zsteg -a image.png       # todas las combinaciones
-   ```
+## Explotación
 
-2. **`steghide`** si la imagen es JPEG o hay contraseña:
+1. **Listar los colores** por frecuencia o en orden de aparición, con GIMP (cuentagotas + ventana de paleta), con la vista "Extract RGBA values" de StegOnline, o con Python:
 
-   ```bash
-   steghide extract -sf image.jpg
-   ```
-
-3. **Bits plano a plano** con Python cuando `zsteg` no da nada:
-
-   ```python
-   from PIL import Image
-   im = Image.open('image.png').convert('RGB')
-   bits = [str(p[i] & 1) for p in im.getdata() for i in range(3)]
-   data = bytes(int(''.join(bits[i:i+8]), 2) for i in range(0, len(bits)-7, 8))
-   print(data[:200])
-   ```
-
-4. **Canales y orden**: probar R, G, B, alfa, orden RGB/BGR y si los bits van en el canal menos significativo o en el más.
-
-## Hallazgos (patrón)
-
-```text
-zsteg: b1,rgb,lsb,xy  .. text: "HTB{...}"
+```python
+from PIL import Image
+im = Image.open("image.png").convert("RGB")
+seen, order = set(), []
+for px in im.getdata():
+    if px not in seen:
+        seen.add(px); order.append(px)
+print(len(order), order[:16])
 ```
 
-La cadena aparece al leer el bit 1 del canal RGB en orden xy; si sale ruido, cambia canal u orden.
+2. **Mapear cada color a su valor**: si son pocos (decenas), cada color puede ser un carácter ASCII o un nibble; si son 256, cada color es directamente un byte `0xRRGGBB` reducido.
+
+```python
+codes = ["%02x%02x%02x" % px for px in order]
+print("".join(chr(int(c, 16) % 256) for c in codes)[:200])
+```
+
+3. **Reconstruir el orden**: el mensaje suele leerse en el orden de barrido de la imagen (fila a fila); si el texto sale desordenado, probar orden de columnas o el inverso.
+
+```python
+data = "".join(chr(px[0]) for px in im.getdata() if px != (0, 0, 0))
+print(data[:120])
+```
+
+4. **Verificar**: la salida debe empezar por el prefijo de la flag (`HTB{`). Cuando aparece, se ha encontrado el mapa correcto.
+
+## Evidencia
+
+- Salidas recortadas de los comandos clave; sin flags ni tokens.
+- Los valores reales viven en `private/` y no se publican.
+
+## Lecciones aprendidas
+
+- **Descartar el LSB primero** con `zsteg -a`: si no hay texto, el canal es otro y no se pierde tiempo.
+- **Los colores "bonitos" son una pista**: una paleta artificial delata codificación en el valor de color.
+- **El orden importa**: un mapa correcto con un barrido incorrecto sigue dando basura.
+
+- En Stego, la herramienta por defecto no es la respuesta por defecto.
+- Una imagen de pocos colores planos es un fichero de datos disfrazado.
+- Mitigación: no sirve aquí; en el mundo real, el canal encubierto se detecta por análisis de paleta y entropía, no por firmas.
+
+## Nota de verificación
+
+El reto es **Hard** en HTB y el walkthrough oficial trabaja el "mapeo de códigos de color hex"; no hay writeups públicos detallados de la solución paso a paso, así que los pasos anteriores describen la técnica, no una transcripción de la respuesta.

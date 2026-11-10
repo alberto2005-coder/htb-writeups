@@ -1,63 +1,73 @@
 ---
 sherlock: Loggy
-domain: SOC
-difficulty: Very Easy
+domain: Malware analysis
+difficulty: Easy
 platform: Hack The Box
+evidence: Go binary, keylog and screenshots from a compromised host
+tools: [Ghidra, strings, CyberChef, readpe]
 state: Retired
-tags: [dfir, logs, web-server, access-log, triage]
+tags: [dfir, malware, go, keylogger, ftp, exfiltration]
 ---
 
 # Loggy — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Investigation notes; platform answers are not reproduced.
+> Defensive investigation. No platform answers copied.
 
 ## Scenario
 
-A web server keeps alerting on odd requests. Application and system logs are provided; the job is to identify the malicious activity, the targeted resource, and whether it succeeded.
+Janice from accounting was told by the SOC that her corporate credentials are on the dark web. Files are recovered from her machine and sent to the REM analyst. Reconstruct what the binary did, what it stole and where it sent it.
 
 ## Evidence
 
-- `access.log` and `error.log`.
-- Authentication logs for the same period.
-- Server configuration (vhosts, paths).
+- `Loggy.exe`: PE32+ x86-64, 6.5 MB, MD5 `215e79eaa7b9ac16a7d2bce15c94b8de`.
+- The screenshot and keylog file the binary produced on the host.
 
 ## Investigation
 
-### 1. Normalise the format
+1. **Triage**: hash, type, compiler.
 
 ```bash
-awk '{print $1}' access.log | sort | uniq -c | sort -rn | head
-awk '{print $7}' access.log | sort | uniq -c | sort -rn | head -20
+sha256sum Loggy.exe; file Loggy.exe
+strings -n 8 Loggy.exe | grep -i "go1\." | head
 ```
 
-Top IPs and paths separate scanner noise from the real attacker: few, highly targeted requests with a tool `User-Agent`.
+The binary is written in **Go**: the runtime and `go/pkg/mod` paths give it away. That changes the approach (Ghidra plus `strings`, no classic Windows imports).
 
-### 2. Find the attack pattern
+2. **Capabilities**: grepping the module paths exposes two telling repositories:
 
 ```bash
-grep -Ei "union|select|\.\./|/etc/passwd|cmd=|shell|\.env" access.log | head -30
+strings Loggy.exe | grep -i github
+# github.com/kbinani/screenshot   -> screen capture
+# github.com/jlaffaye/ftp         -> FTP client
 ```
 
-Classify what you find: traversal, injection, upload, path scanning. Status codes say whether it worked: a `200` where a `403` belongs is the signal.
+3. **Keylogger**: the binary hooks the keyboard and **appends** keystrokes to `keylog.txt`. Janice's password change lands there, which is how the credentials leaked.
 
-### 3. Close the window
+4. **Exfiltration**: `sendFilesViaFTP` logs in with **hardcoded** credentials to an external server and uploads the screenshots and the keylog.
 
 ```bash
-grep "<ATTACKER_IP>" access.log | awk '{print $4, $6, $7, $9}' | head -40
+strings Loggy.exe | grep -E ":21"
+# <host>:21
 ```
 
-The full ordered sequence (recon → exploit → resource access) is the answer. Check for later requests from the same IP against other vhosts.
+5. **IOCs**: exfiltration host, attacker credentials, generated file paths and the module paths that fingerprint the tooling.
 
 ## Findings
 
-- Targeted activity against a specific web resource.
-- The line between attempt and compromise lives in status codes and response size.
-- Automated scanners in the rest of the log are background noise.
+- Go keylogger plus screen capture, exfiltrating over **clear-text FTP** on port 21.
+- No persistence needed: the damage is credential theft, not encryption.
+- The attacker's credentials are baked into the binary, which attributes the infrastructure.
 
 ## Lessons
 
-- `awk` plus `sort | uniq -c` solves half a log case before opening anything else.
-- Comparing response size (`$10`) exposes data extraction that a bare `200` hides.
-- A log without synchronised clocks cannot be correlated: NTP is forensic too.
+- In Go binaries, module paths are a free capability list.
+- A plain-text keylog in the user profile is direct evidence of stolen credentials.
+- Outbound FTP from a workstation is an exfiltration signal almost no egress filter blocks.
+
+## Pitfalls
+
+- **Hunting classic imports**: Go has no useful Import Address Table; read strings and functions.
+- **Running the sample**: isolated VM only; static analysis is enough here.
+- **Host vs URL**: the dial string includes the port (`:21`); the answer is the domain alone.

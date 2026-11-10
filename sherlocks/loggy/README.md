@@ -1,64 +1,73 @@
 ---
 sherlock: Loggy
-domain: SOC
-difficulty: Very Easy
+domain: Análisis de malware
+difficulty: Easy
 platform: Hack The Box
+evidence: Binario Go, keylog y capturas de una máquina comprometida
+tools: [Ghidra, strings, CyberChef, readpe]
 state: Retired
-tags: [dfir, logs, web-server, access-log, triage]
+tags: [dfir, malware, go, keylogger, ftp, exfiltracion]
 ---
-
 
 # Loggy — Hack The Box
 
-[⚑ English](README.en.md) | **Español**
+[🇬🇧 English](README.en.md) | **Español**
 
-> **Estado:** Retired. Ficha de investigación; sin respuestas literales de la plataforma.
+> Investigación defensiva. Sin respuestas literales de la plataforma.
 
 ## Escenario
 
-Un servidor web genera alertas por peticiones extrañas. Se entrega un conjunto de logs de aplicación y de sistema; hay que identificar la actividad maliciosa, el recurso objetivo y si hubo éxito.
+Janice, de contabilidad, fue avisada por el SOC: sus credenciales corporativas aparecen en la dark web. Se recuperan ficheros de su equipo y se envían al analista de REM. Hay que reconstruir qué hizo el binario, qué robó y a dónde lo envió.
 
 ## Evidencias
 
-- `access.log` y `error.log`.
-- Logs de autenticación del mismo periodo.
-- Configuración del servidor (vhosts, rutas).
+- `Loggy.exe`: PE32+ x86-64, 6,5 MB, MD5 `215e79eaa7b9ac16a7d2bce15c94b8de`.
+- La captura de pantalla y el fichero de keylog generados en el equipo.
 
 ## Investigación
 
-### 1. Normalizar el formato
+1. **Triage**: hash, tipo y compilador.
 
 ```bash
-awk '{print $1}' access.log | sort | uniq -c | sort -rn | head
-awk '{print $7}' access.log | sort | uniq -c | sort -rn | head -20
+sha256sum Loggy.exe; file Loggy.exe
+strings -n 8 Loggy.exe | grep -i "go1\." | head
 ```
 
-Con el top de IPs y de rutas se separa el ruido de escáneres del atacante real: pocas peticiones, muy dirigidas, `User-Agent` de herramienta.
+El binario está escrito en **Go**: se reconoce por el runtime y las rutas `go/pkg/mod`. Eso cambia el enfoque (Ghidra + `strings`, sin importaciones de Windows al uso).
 
-### 2. Buscar el patrón de ataque
+2. **Capacidades**: buscando dependencias en las cadenas aparecen dos repositorios reveladores:
 
 ```bash
-grep -Ei "union|select|\.\./|/etc/passwd|cmd=|shell|\.env" access.log | head -30
+strings Loggy.exe | grep -i github
+# github.com/kbinani/screenshot   -> capturas de pantalla
+# github.com/jlaffaye/ftp         -> cliente FTP
 ```
 
-Se clasifica lo encontrado: traversal, inyección, subida de fichero, escaneo de rutas. El código de respuesta dice si funcionó: `200` donde debería haber `403` es la señal.
+3. **Keylogger**: el binario intercepta el teclado y **añade** las pulsaciones a `keylog.txt`. Ahí queda el cambio de contraseña de Janice, que es como se filtran las credenciales.
 
-### 3. Cerrar la ventana
+4. **Exfiltración**: `sendFilesViaFTP` se conecta con credenciales **hardcodeadas** a un servidor externo y sube las capturas y el keylog.
 
 ```bash
-grep "<IP_ATACANTE>" access.log | awk '{print $4, $6, $7, $9}' | head -40
+strings Loggy.exe | grep -E ":21"
+# <host>:21
 ```
 
-La secuencia completa (reconocimiento → exploit → acceso a recurso) ordenada por hora es la respuesta. Se comprueba si hay peticiones posteriores desde la misma IP a otros vhosts.
+5. **IOCs**: host de exfiltración, credenciales del atacante, rutas de los ficheros generados y nombres de los repositorios usados como firma.
 
-## Conclusiones
+## Hallazgos
 
-- Actividad dirigida contra un recurso concreto del servidor web.
-- La diferencia entre intento y compromiso está en los códigos de estado y en el tamaño de la respuesta.
-- Los escáneres automáticos del resto del log son ruido de fondo.
+- Keylogger + capturas de pantalla en Go, con exfiltración por **FTP en claro** al puerto 21.
+- Persistencia innecesaria: el daño es el robo de credenciales, no el cifrado.
+- El binario lleva las credenciales del atacante embebidas, lo que permite atribuir la infraestructura.
 
 ## Lecciones
 
-- `awk` + `sort | uniq -c` resuelve la mitad de un caso de logs antes de abrir nada más.
-- Comparar tamaño de respuesta (`$10`) delata extracciones de datos que un `200` solo no muestra.
-- Un log sin reloj sincronizado no sirve para correlacionar: NTP también es forense.
+- En binarios Go, las rutas de módulos son una lista de capacidades gratis.
+- Un keylog en texto plano en el perfil del usuario es evidencia directa de credenciales robadas.
+- FTP de salida desde un puesto de usuario es una señal de exfiltración que casi ningún filtrado bloquea.
+
+## Tropiezos
+
+- **Buscar importaciones clásicas**: en Go no hay `Import Address Table` útil; hay que leer cadenas y funciones.
+- **Ejecutar la muestra**: sólo en VM aislada; aquí basta el análisis estático.
+- **Confundir el host con la URL**: el dial lleva el puerto (`:21`); la respuesta es sólo el dominio.

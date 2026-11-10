@@ -1,14 +1,13 @@
 ---
 sherlock: Lockpick 3.0
 domain: Análisis de malware
-difficulty: Medium
+difficulty: Hard
 platform: Hack The Box
-evidence: Binario de Linux, volcado de memoria y estado de la VM
+evidence: ELF de Linux, volcado de memoria y estado de la VM
 tools: [Volatility 3, Ghidra, strings, CyberChef]
 state: Retired
-tags: [dfir, análisis-de-malware]
+tags: [dfir, malware, ransomware, linux, xor, systemd, memoria]
 ---
-
 
 # Lockpick 3.0 — Hack The Box
 
@@ -18,48 +17,44 @@ tags: [dfir, análisis-de-malware]
 
 ## Escenario
 
-El grupo detrás de **Lockpick** ha mejorado: esta vez sólo alcanzó un servidor de desarrollo, sin acceso remoto evidente —posible amenaza interna—. Piden ingeniería inversa del binario y análisis de los artefactos de la máquina.
+El grupo de **Lockpick** ha mejorado: esta vez sólo alcanzó un servidor de desarrollo, sin acceso remoto evidente —posible amenaza interna—. Piden ingeniería inversa del binario y análisis de los artefactos de la máquina.
 
 ## Evidencias
 
-- `ubuntu-client`: el malware.
+- `ubuntu-client`: el malware (ELF, MD5 `a2444b61b65be96fc2e65924dee8febd`).
 - `ubuntu-client-Snapshot2.vmem`: volcado de memoria.
 - `ubuntu-client-Snapshot2.vmsn`: estado de la VM.
 
 ## Investigación
 
-1. **Identidad**: hash del binario y tipo.
+1. **Identidad**: `md5sum` y `file`; es un ELF de Linux, así que se analiza con `objdump -d`/Ghidra, no con herramientas de Windows.
+
+2. **Cadenas cifradas**: el binario guarda su configuración con un **XOR repetido**. La clave **no está en el fichero**: se pasa por línea de comandos (`./ubuntu-client <clave>`). Por eso `strings` del binario no basta y hay que mirar el `.vmem`, donde la línea de comandos del proceso conserva la clave.
 
 ```bash
-md5sum ubuntu-client; file ubuntu-client
-strings -n 6 ubuntu-client | head -40
+strings -n 8 ubuntu-client-Snapshot2.vmem | grep ubuntu-client
 ```
 
-2. **Ofuscación**: las cadenas están **cifradas con XOR**; buscar el bucle y la clave en el desensamblado o probar XOR de un byte en CyberChef hasta que aparezca texto legible.
+3. **Descifrar**: con la clave del comando se invierte el XOR sobre la sección de datos y aparecen la URL base del C2, los endpoints (`/connect` para clave/IV/`client_id` y `/uploads/` para exfiltración) y una unidad de systemd completa.
 
-3. **Comunicación**: el binario monta peticiones a un endpoint (`/connect`) que devuelve **clave, IV y client_id** en JSON; otro endpoint sube ficheros. Eso es el esquema de cifrado.
+4. **Comunicación**: `_cJSON_GetObjectItem` confirma que la respuesta de `/connect` es JSON con el material criptográfico; el `client_id` identifica la víctima.
 
-4. **Memoria**: con **Volatility 3** sobre el `.vmem`, listar procesos y líneas de comandos (`windows.pslist`/`linux.bash` según perfil) para ver cómo se lanzó y qué servicios creó.
+5. **Persistencia**: el malware escribe y habilita `ubuntu_running.service` en `/etc/systemd/system` (técnica **T1543.002**). El `.vmsn` confirma el estado del servicio y el `.vmem` el proceso en ejecución.
 
-5. **Persistencia**: el malware crea y habilita una unidad de systemd (`ubuntu_running.service`): técnica **T1543.002**. El `.vmsn` confirma el estado del servicio.
+## Hallazgos
 
-## Conclusiones
-
-[🇬🇧 English](README.en.md) | **Español**
+- C2 alojado en PaaS (`*.ondigitalocean.app`), lo que complica el bloqueo por IP.
+- Cadena de claves entregada por el servidor: cifrado simétrico con material remoto.
+- Persistencia por unidad systemd creada por el propio binario.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
-
-## Qué enseña
-
-- Un XOR de un byte se detecta por la entropía de las cadenas y se rompe probando claves.
-- Un `client_id` junto a clave e IV indica cifrado simétrico con material entregado por el C2.
-- El volcado de memoria conserva la línea de comandos y los servicios creados.
-- Comparar `.vmem` y `.vmsn` distingue lo que estaba en RAM de lo que quedó configurado.
+- Si la clave va por argumento, el binario no la delata: la memoria sí.
+- Un XOR repetido se rompe en cuanto se conoce la clave; el reto es encontrarla, no el algoritmo.
+- Comparar `.vmem` y `.vmsn` separa lo que estaba en RAM de lo que quedó configurado en disco.
 
 ## Tropiezos
 
-- **Perfil de memoria**: sin el símbolo correcto, Volatility devuelve vacío; comprobar versión del kernel.
-- **Cadenas cifradas**: `strings` no basta; hay que descifrar o buscar en el desensamblado.
-- **No ejecutar**: el binario se analiza estáticamente o en VM aislada.
+- **Perfil de memoria**: es Linux; usar `linux.bash`/`linux.pslist`, no los plugins de Windows.
+- **Cadenas ofuscadas**: `strings` sobre el ELF no muestra la config; hay que descifrar.
+- **No ejecutar**: análisis estático o VM aislada.

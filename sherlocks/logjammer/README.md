@@ -45,9 +45,9 @@ Con el CSV completo en Timeline Explorer se filtran por `EventID` y se ordenan p
 
 ### 3. Persistencia y configuración
 
-- **4698**: tarea programada creada. El XML embebido trae la ruta del script y la periodicidad. Es el mecanismo que sobrevive al reinicio.
-- **4719**: cambio de política de auditoría (alguien se prepara para borrar o evitar logs).
-- **2004** en el canal de cortafuegos: regla creada con campos numéricos (`Direction 2` = salida, `Protocol 6` = TCP, `RemotePort 4444`). Traducir los códigos antes de responder; una regla de salida al 4444 es un C2.
+- **4698**: tarea programada creada. El XML embebido trae el nombre (`HTB-AUTOMATION`), la ruta del script (`C:\Users\CyberJunkie\Desktop\Automation-HTB.ps1`), el argumento (`-A cyberjunkie@hackthebox.eu`) y la periodicidad. Es el mecanismo que sobrevive al reinicio.
+- **4719**: cambio de política de auditoría; la subcategoría del caso es *Other Object Access Events* (alguien se prepara para borrar o evitar logs).
+- **2004** en el canal de cortafuegos: regla creada (`Metasploit C2 Bypass`) con campos numéricos (`Direction 2` = salida, `Protocol 6` = TCP, `RemotePort 4444`). Traducir los códigos antes de responder; una regla de salida al 4444 es un C2.
 
 ### 4. Herramientas y ejecución
 
@@ -56,11 +56,11 @@ Con el CSV completo en Timeline Explorer se filtran por `EventID` y se ordenan p
 
 ### 5. Destrucción de evidencia
 
-- **104** en el canal de cortafuegos: el log fue vaciado. El propio borrado genera el evento que señala el canal manipulado. Cruzarlo con **1102** (Security) si existe.
+- **104** aparece en **System.evtx** (`Firewall log file was cleared`), no en el canal de cortafuegos: el propio borrado genera el evento que señala el canal manipulado. Se cruza con el **1102** de Security, que ya se había disparado antes (14:36:45) al vaciar el log de seguridad.
 
 ## Conclusiones
 
-- Actividad *hands-on-keyboard* con persistencia por tarea programada y regla de salida al 4444.
+- Actividad *hands-on-keyboard* el 2023-03-27 desde las 14:37:09 UTC: persistencia por tarea programada y regla de salida al 4444.
 - Reconocimiento de AD con SharpHound, detectado por Defender.
 - Intento de borrado de logs que deja rastro en el canal de cortafuegos.
 

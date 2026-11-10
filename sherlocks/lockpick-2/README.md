@@ -24,7 +24,8 @@ Segundo golpe del mismo grupo: han cifrado un recurso compartido y esta vez la p
 
 - `DANGER.txt` con la advertencia y la contraseña del ZIP de la muestra.
 - Un directorio `share` con los ficheros cifrados y la nota del atacante.
-- `malware.zip` con el binario.
+- `malware.zip` con el binario: un ELF llamado `update`, **empaquetado con UPX**.
+- Los documentos cifrados (`expanding-horizons.pdf`, `takeover.docx`) y la nota `countdown.txt`.
 
 ## Investigación
 
@@ -37,11 +38,13 @@ upx -d sample -o sample.unpacked   # si está empaquetado
 detect-it-easy sample
 ```
 
-3. **Algoritmo**: identificar AES/RSA y, sobre todo, **de dónde sale la clave**. En esta familia suele haber una rutina que cifra con clave derivada de datos locales o embebidos.
+3. **Algoritmo**: `upx -d update` y, en `encrypt_file`, aparece `aes_256_cbc`. La clave y el IV están **en el propio binario** (32 y 16 bytes en hexadecimal), así que el material de descifrado se extrae del desensamblado y no de la red.
 
-4. **Descifrar**: reconstruir el flujo y probar con un fichero pequeño; validar con la cabecera conocida (`PK`, `%PDF`, etc.).
+4. **Descifrar**: AES-256-CBC con esa clave e IV sobre los ficheros del `share`; se valida abriendo el PDF y el DOCX resultantes (`Australian market`, `Notionwide Bank`).
 
-5. **Informe**: ficheros afectados, extensión, clave, tiempo de cifrado y recomendaciones (copias offline, segmentación).
+5. **Informe**: ficheros afectados, extensión, clave, ventana de cifrado y rescate exigido (un millón de libras en `countdown.txt`). El nombre del fichero de clave sale de la URL corta de la nota.
+
+Nota de dificultad: los índices públicos la listan como Easy y algún writeup la etiqueta como Hard; se deja **Easy** y se anota la discrepancia.
 
 ## Conclusiones
 

@@ -1,46 +1,63 @@
 ---
 challenge: Illumination
-category: Forensics
+type: Forensics
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [forensics, git, base64, secretos-en-historial]
-type: Forensics
+tags: [forensics, git, historial, base64, secretos]
 ---
 
 # Illumination — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
 
-> **Estado:** Retired. Ficha de método; sin flags reales.
+> **Estado:** Retired. Reto resuelto; sin flags reales.
 
 ## TL;DR
 
-El ZIP contiene `bot.js`, `config.json` y un directorio **`.git`**. El `config.json` actual tiene el token puesto a “Replace me”, pero en el **historial de git** hay una versión anterior con el token real, en base64. Se recupera con `git log` / `git show` y se decodifica.
+El ZIP trae `bot.js`, `config.json` y el directorio **`.git`** completo. El `config.json` actual tiene el token sustituido por un texto de relleno, pero en el **historial** hay un commit anterior con el token real en base64. `git log` / `git show` lo recuperan y `base64 -d` da la flag.
 
 ## Enunciado y superficie
 
-- Categoría Forensics; el reto entrega el material descrito en «Reconocimiento».
+"Un desarrollador junior acaba de cambiarse a una nueva plataforma de control de código fuente. ¿Puedes encontrar el token secreto?" El artefacto es el repositorio entero, no un volcado de ficheros.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+unzip Illumination.zip && cd Illumination.JS
+ls -la
+git log --oneline --all
+git log -p --all -- config.json
+```
 
-## Análisis del código
+Estructura: `bot.js`, `config.json`, `.git/`. El `config.json` actual:
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+```json
+{"token": "Replace me with token when in use! Security Risk!",
+ "prefix": "~", "lightNum": "1337",
+ "username": "UmVkIEhlcnJpbmcsIHJlYWQgdGhlIEpTIGNhcmVmdWxseQ==",
+ "host": "127.0.0.1"}
+```
 
 ## Explicación del fallo
 
-El ZIP contiene `bot.js`, `config.json` y un directorio **`.git`**. El `config.json` actual tiene el token puesto a “Replace me”, pero en el **historial de git** hay una versión anterior con el token real, en base64. Se recupera con `git log` / `git show` y se decodifica.
+`bot.js` hace `client.login(Buffer.from(config.token, 'base64').toString('ascii'))`: el token se guarda en base64 y se decodifica en tiempo de ejecución. El `username` en base64 dice literalmente *"Red Herring, read the JS carefully"* — es una distracción deliberada.
 
-## Reproducción local
-
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+El historial tiene cuatro commits: el inicial crea el token real, y uno posterior lo sustituye con el mensaje *"I removed the unique token as it was a security risk"*. Borrar un secreto en un commit **no** lo elimina del repositorio.
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+```bash
+git show 47241a4:config.json        # o el commit donde se elimina
+# "-       "token": "SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=","
+echo 'SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=' | base64 -d
+```
+
+```text
+HTB{...}
+```
+
+Si `git log` pareciera vacío, `git fsck --lost-found` rescata commits huérfanos.
 
 ## Evidencia
 
@@ -51,44 +68,14 @@ El ZIP contiene `bot.js`, `config.json` y un directorio **`.git`**. El `config.j
 └── .git/
 ```
 
-```json
-{"token": "Replace me with token when in use! Security Risk!",
- "prefix": "~", "lightNum": "1337",
- "username": "UmVkIEhlcnJpbmcsIHJlYWQgdGhlIEpTIGNhcmVmdWxseQ==", "host": "127.0.0.1"}
-```
-
-El `username` es una distracción evidente (dice literalmente «red herring, lee el JS con cuidado»).
+Salidas recortadas; la flag no se publica.
 
 ## Lecciones aprendidas
 
 - **Mirar sólo el fichero actual**: el token ya no está ahí; sin `.git` no hay reto.
-- **`username`**: es una pista falsa a propósito; no lleva a la flag.
-- **Objetos sueltos**: si `git log` parece vacío, `git fsck --lost-found` rescata commits huérfanos.
+- **El `username`** es una pista falsa a propósito; no lleva a la flag.
+- **El commit que "limpia"** es el que señala dónde estaba el secreto.
 
-- Un `.git` publicado es un backup completo del código y de **todos** los secretos que alguna vez se commitearon.
-- Borrar un secreto en un commit posterior no lo elimina: hay que reescribir el historial y rotarlo.
-- Un token filtrado se considera comprometido aunque el servicio ya no lo use.
-
-## Mitigaciones y detección
-
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Método
-
-1. **Ver el historial** del repositorio:
-
-```bash
-git log --oneline --all
-git log -p --all -- config.json
-```
-
-2. **Recuperar la versión filtrada**: al principio de la historia el token estaba en claro en el JSON; el commit posterior lo sustituye por el texto de relleno. Con `git show <commit>:config.json` se obtiene el valor original.
-
-3. **Decodificar**: el token comprometido viene en base64.
-
-```bash
-echo '<token>' | base64 -d
-```
-
-4. **Comprobarlo** con el propio bot (el prefijo `~` delata el comando que usa el token).
+- Un `.git` publicado es una copia de seguridad de **todos** los secretos que alguna vez se commitearon.
+- Rotar el token no basta si el historial sigue accesible.
+- Mitigación: `.git` fuera del artefacto, escaneo de secretos en CI y reescritura del historial más rotación de credenciales.

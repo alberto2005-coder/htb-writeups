@@ -43,7 +43,7 @@ curl -s http://<IP>/nibbleblog/content/private/users.xml
 
 ## Access
 
-Login at `/nibbleblog/admin.php` with the defaults (`nibbles:nibbles`, matching the box name). If they fail, read `content/private/config.xml` and `users.xml`, often world-readable.
+Login at `/nibbleblog/admin.php` with the defaults (`admin:nibbles`; the user is `admin`, not the box name). If they fail, read `content/private/config.xml` and `users.xml`, often world-readable.
 
 As admin:
 
@@ -68,7 +68,7 @@ sudo -l
 (root) NOPASSWD: /home/nibbler/personal/stuff/monitor.sh
 ```
 
-The script lives in the home and is writable by `nibbler`, so replace it with one that copies the flag or spawns a shell:
+The script does not exist until `~/personal.zip` is extracted (it creates `personal/stuff/`), and it lands as `-rwxrwxrwx`, writable by `nibbler`. Replace it with one that copies the flag or spawns a shell:
 
 ```bash
 cat > /home/nibbler/personal/stuff/monitor.sh <<'EOF'

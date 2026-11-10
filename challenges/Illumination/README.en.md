@@ -1,21 +1,63 @@
 ---
 challenge: Illumination
-category: Forensics
+type: Forensics
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [forensics, git, base64, secrets-in-history]
+tags: [forensics, git, history, base64, secrets]
 ---
 
 # Illumination — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; no real flags.
+> **State:** Retired. Solved challenge; no real flags.
 
 ## TL;DR
 
-The ZIP holds `bot.js`, `config.json` and a **`.git`** directory. The current `config.json` has the token set to "Replace me", but the **git history** contains an earlier version with the real token, base64-encoded. Recover it with `git log` / `git show` and decode.
+The ZIP ships `bot.js`, `config.json` and the whole **`.git`** directory. The current `config.json` has the token replaced by filler text, but the **history** holds an earlier commit with the real token in base64. `git log` / `git show` recover it and `base64 -d` yields the flag.
+
+## Brief
+
+"A Junior Developer just switched to a new source control platform. Can you find the secret token?" The artifact is the repository itself, not a file dump.
+
+## Recon
+
+```bash
+unzip Illumination.zip && cd Illumination.JS
+ls -la
+git log --oneline --all
+git log -p --all -- config.json
+```
+
+Layout: `bot.js`, `config.json`, `.git/`. The current `config.json`:
+
+```json
+{"token": "Replace me with token when in use! Security Risk!",
+ "prefix": "~", "lightNum": "1337",
+ "username": "UmVkIEhlcnJpbmcsIHJlYWQgdGhlIEpTIGNhcmVmdWxseQ==",
+ "host": "127.0.0.1"}
+```
+
+## The flaw
+
+`bot.js` runs `client.login(Buffer.from(config.token, 'base64').toString('ascii'))`: the token is stored base64 and decoded at runtime. The base64 `username` literally says *"Red Herring, read the JS carefully"* — a deliberate distraction.
+
+The history has four commits: the initial one creates the real token, a later one replaces it with the message *"I removed the unique token as it was a security risk"*. Deleting a secret in a later commit does **not** remove it from the repository.
+
+## Exploitation
+
+```bash
+git show 47241a4:config.json        # or whichever commit removes it
+# "-       "token": "SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=","
+echo 'SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=' | base64 -d
+```
+
+```text
+HTB{...}
+```
+
+If `git log` looks empty, `git fsck --lost-found` rescues orphaned commits.
 
 ## Evidence
 
@@ -26,41 +68,14 @@ The ZIP holds `bot.js`, `config.json` and a **`.git`** directory. The current `c
 └── .git/
 ```
 
-```json
-{"token": "Replace me with token when in use! Security Risk!",
- "prefix": "~", "lightNum": "1337",
- "username": "UmVkIEhlcnJpbmcsIHJlYWQgdGhlIEpTIGNhcmVmdWxseQ==", "host": "127.0.0.1"}
-```
-
-The `username` is an obvious distractor (it literally says "red herring, read the JS carefully").
-
-## Method
-
-1. **Inspect the history**:
-
-```bash
-git log --oneline --all
-git log -p --all -- config.json
-```
-
-2. **Recover the leaked version**: early in the history the token sat in cleartext in the JSON; a later commit replaced it with the placeholder. `git show <commit>:config.json` returns the original value.
-
-3. **Decode**: the compromised token is base64.
-
-```bash
-echo '<token>' | base64 -d
-```
-
-4. **Verify** with the bot itself (the `~` prefix reveals which command consumes the token).
-
-## Pitfalls
-
-- **Only reading the current file**: the token is not there anymore; without `.git` there is no challenge.
-- **`username`**: a deliberate red herring; it does not lead to the flag.
-- **Loose objects**: if `git log` looks empty, `git fsck --lost-found` recovers orphaned commits.
+Trimmed output; the flag is not published.
 
 ## Lessons
 
-- A published `.git` is a full backup of the code **and** of every secret ever committed.
-- Deleting a secret in a later commit does not remove it: rewrite history and rotate the credential.
-- A leaked token is compromised even if the service no longer uses it.
+- **Looking only at the current file**: the token is gone from there; without `.git` there is no challenge.
+- **The `username`** is a deliberate red herring; it does not lead to the flag.
+- **The "cleanup" commit** is the one that points at where the secret was.
+
+- A published `.git` is a backup of **every** secret ever committed.
+- Rotating the token is not enough while the history stays reachable.
+- Mitigation: keep `.git` out of artifacts, scan for secrets in CI, rewrite history and rotate credentials.

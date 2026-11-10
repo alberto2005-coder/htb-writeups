@@ -3,12 +3,11 @@ sherlock: Lockpick
 domain: Análisis de malware
 difficulty: Easy
 platform: Hack The Box
-evidence: Muestra de ransomware y ficheros cifrados
-tools: [Detect It Easy, Ghidra, x64dbg, CyberChef]
+evidence: Muestra de ransomware, ficheros cifrados y nota de rescate
+tools: [IDA, Ghidra, strings, CyberChef]
 state: Retired
-tags: [dfir, análisis-de-malware]
+tags: [dfir, malware, ransomware, linux, analisis-estatico]
 ---
-
 
 # Lockpick — Hack The Box
 
@@ -18,50 +17,49 @@ tags: [dfir, análisis-de-malware]
 
 ## Escenario
 
-Primer caso de la familia **Lockpick**: un ransomware ha cifrado datos de la empresa. Hay que analizar la muestra para entender cómo cifra, qué clave usa y cómo recuperar los ficheros sin pagar.
+Forela se niega a pagar: una parte de sus servidores UNIX ha quedado cifrada y hay que recuperar los ficheros analizando la muestra. El ZIP trae un `DANGER.txt` con la contraseña del propio ZIP y la advertencia de manipular el binario sólo en una VM aislada.
 
 ## Evidencias
 
-- La muestra del binario y un conjunto de ficheros cifrados con su nota de rescate.
+- `DANGER.txt` (contraseña del ZIP y aviso).
+- El binario de ransomware, sin empaquetar.
+- Un directorio con ficheros cifrados.
 
 ## Investigación
 
-1. **Triage**: hash, tipo de fichero, compilador, si está empaquetado.
+1. **Triage**: hash y tipo; es un ELF de Linux, no un PE.
 
 ```bash
-sha256sum sample; file sample
-detect-it-easy sample
-strings -n 8 sample | head -50
+md5sum lockpick; file lockpick; strings -n 8 lockpick | head -40
 ```
 
-2. **Importaciones**: buscar `CryptAcquireContext`/`CryptEncrypt` (CryptoAPI), `BCrypt*`, o AES/RSA embebido. Un binario Go o .NET cambia el enfoque de análisis.
+2. **Flujo de cifrado**: en IDA/Ghidra, `main` recorre un directorio y llama a `encrypt_file(ruta, clave)`. La clave **está embebida en el binario**, no se negocia con un servidor: por eso la recuperación es posible sin pagar.
 
-3. **Clave**: localizar cómo se genera o deriva. Lo habitual es AES con clave aleatoria por fichero y esa clave cifrada con una pública RSA; si la clave es simétrica y está embebida u ofuscada, se extrae.
+3. **Clave y algoritmo**: la pregunta del caso es literalmente la cadena de clave. Se localiza en la función de cifrado (o con `strings` si no está ofuscada) y se confirma qué rutina la usa.
 
-4. **Descifrar**: reproducir la rutina con el algoritmo y el modo correctos y verificar con la cabecera del fichero original.
+4. **Descifrar**: se reproduce el inverso (AES en modo ECB/CBC según lo que muestre el desensamblado) sobre una copia de los ficheros, y se valida con la cabecera conocida del original.
 
 ```python
 from Crypto.Cipher import AES
-# clave/IV extraídos; el modo y el padding deben coincidir con los del binario
+# clave extraída del binario; el modo y el padding deben coincidir con los del sample
 ```
 
-5. **Documentar** los IOCs y el punto exacto del código donde se cifra.
+5. **Integridad**: el caso pide el MD5 de un fichero ya descifrado (`complaints.csv` en los writeups públicos) para confirmar que la recuperación es correcta.
 
-## Conclusiones
+## Hallazgos
 
-[🇬🇧 English](README.en.md) | **Español**
+- Ransomware **ELM/ELF para UNIX** con clave simétrica estática embebida.
+- Sin infraestructura de C2 ni material asimétrico: el cifrado es reversible con la muestra.
+- El `DANGER.txt` es parte de la cadena de custodia: contraseña del ZIP y advertencia de aislamiento.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
-
-## Qué enseña
-
-- `strings` + importaciones resuelven la mitad del triage sin desensamblar.
-- Recuperar datos es posible cuando la clave está embebida, no cuando es asimétrica y se borra.
+- `file` + `strings` resuelven el triage antes de abrir el desensamblador.
+- Una clave estática en el binario es el peor diseño posible para el atacante: el descifrado se automatiza.
+- El hash del fichero recuperado es la prueba de que el inverso está bien implementado.
 
 ## Tropiezos
 
-- **Ejecutar la muestra**: usar siempre una VM aislada y sin red.
-- **Modo y padding**: un AES-CBC con IV distinto produce basura; comprobar con el primer bloque.
-- **Empaquetado**: si las cadenas son ruido, desempaquetar (UPX u otro) antes de analizar.
+- **Ejecutar la muestra**: siempre VM aislada y sin red.
+- **Modo y padding**: un IV o un modo distintos producen basura; comprobar con el primer bloque.
+- **Confundir cifrado con codificación**: aquí hay criptografía real con clave embebida, no base64.

