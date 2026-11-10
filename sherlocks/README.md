@@ -66,6 +66,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | BOughT | DFIR / Malware | Hard | Memoria + AD1: persistencia en `StartUp`, mutex, DGA de 59.049 dominios y DDoS | Volatility 2, Ghidra | [Ver](bought/README.md) |
 | Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | EvtxECmd, MFTECmd | [Ver](liberty/README.md) |
 | Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | Chainsaw, MFTECmd | [Ver](jinkies/README.md) |
+| i-like-to | DFIR / MOVEit | Easy | Triaje KAPE de un servidor MOVEit: IIS logs, `$MFT`, EVTX, memoria y volcado SQL | MFTECmd, EvtxECmd, `strings` | [Ver](i-like-to/README.md) |
 
 ## Metodología común
 

@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 109 máquinas, 50 Sherlocks, 50 retos y 45 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 111 máquinas, 51 Sherlocks, 51 retos y 47 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -131,6 +131,8 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Servmon | Windows | Easy | Windows / Servicios | **Retired** (ref.) | NVMS path traversal, NSClient++ y túnel SSH | [Ver](machines/windows/servmon/README.md) | [EN](machines/windows/servmon/README.en.md) |
 | Resolute | Windows | Medium | Active Directory | **Retired** (ref.) | LDAP anónimo, reutilización y `DnsAdmins` | [Ver](machines/windows/resolute/README.md) | [EN](machines/windows/resolute/README.en.md) |
 | Bastard | Windows | Medium | Web / Windows | **Retired** (ref.) | Drupalgeddon2 y JuicyPotato | [Ver](machines/windows/bastard/README.md) | [EN](machines/windows/bastard/README.en.md) |
+| Cascade | Windows | Medium | Active Directory / Windows | **Retired** (ref.) | LDAP anónimo, `cascadeLegacyPwd`, VNC reversible y AD Recycle Bin | [Ver](machines/windows/cascade/README.md) | [EN](machines/windows/cascade/README.en.md) |
+| Traceback | Linux | Easy | Web / Linux | **Retired** (ref.) | Webshell SmEvK con credenciales por defecto, `luvit` por sudo y MOTD escribible | [Ver](machines/linux/traceback/README.md) | [EN](machines/linux/traceback/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >
@@ -175,6 +177,7 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Interdimensional Internet | Web | Medium | **Retired** | WAF de `[ ( _ .` evadido con `\x5b\x28\x5f\x2e` y exfiltración por `flask.session` | [Ver](challenges/Interdimensional%20Internet/README.md) | [EN](challenges/Interdimensional%20Internet/README.en.md) |
 | Fake Boost | Forensics | Easy | **Retired** | PowerShell invertido + base64, AES-CBC y exfiltración HTTP a un `POST` | [Ver](challenges/Fake%20Boost/README.md) | [EN](challenges/Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | **Retired** | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | [Ver](challenges/Impossible%20Password/README.md) | [EN](challenges/Impossible%20Password/README.en.md) |
+| Reg | Pwn | Easy | **Retired** | `gets()` en `run()`, offset `0x38` y ret2win a `winner()` en un binario sin PIE | [Ver](challenges/Reg/README.md) | [EN](challenges/Reg/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -193,6 +196,7 @@ Escenarios de investigación defensiva: no se ataca nada, se responde a pregunta
 | BOughT | DFIR / Malware | Hard | Memoria + AD1, persistencia en `StartUp`, mutex, DGA de 59.049 dominios y DDoS | [Ver](sherlocks/bought/README.md) | [EN](sherlocks/bought/README.en.md) |
 | Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | [Ver](sherlocks/liberty/README.md) | [EN](sherlocks/liberty/README.en.md) |
 | Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | [Ver](sherlocks/jinkies/README.md) | [EN](sherlocks/jinkies/README.en.md) |
+| i-like-to | DFIR / MOVEit | Easy | CVE-2023-34362: logs de IIS, `$MFT`, EVTX, memoria y volcado SQL | [Ver](sherlocks/i-like-to/README.md) | [EN](sherlocks/i-like-to/README.en.md) |
 
 - Índice, metodología y pendientes: [sherlocks/README.md](sherlocks/README.md) · [EN](sherlocks/README.en.md)
 - Plantilla de ficha: [templates/sherlock-template.md](templates/sherlock-template.md) · [EN](templates/sherlock-template.en.md)
@@ -248,6 +252,8 @@ Notas reutilizables (cada una en español e inglés):
 - [Cadenas de ACL en AD: de GenericAll a DCSync](knowledge/windows/ad-acl-chains.md) · [EN](knowledge/windows/ad-acl-chains.en.md)
 - [RedLine Stealer: cadena de entrega, C2 y artefactos](knowledge/forensics/malware-redline.md) · [EN](knowledge/forensics/malware-redline.en.md)
 - [ImageMagick CVE-2022-44268: lectura arbitraria de ficheros](knowledge/linux/imagemagick-file-read.md) · [EN](knowledge/linux/imagemagick-file-read.en.md)
+- [AD Recycle Bin: objetos borrados como fuente de credenciales](knowledge/windows/ad-recycle-bin.md) · [EN](knowledge/windows/ad-recycle-bin.en.md)
+- [MOVEit CVE-2023-34362: explotación y artefactos para DFIR](knowledge/forensics/moveit-cve-2023-34362.md) · [EN](knowledge/forensics/moveit-cve-2023-34362.en.md)
 
 ---
 

@@ -58,6 +58,7 @@
 | Interdimensional Internet | Web | Medium | WAF de `[ ( _ .` evadido con `\x` y exfiltración por `flask.session` | **Retired** | [Ver](Interdimensional%20Internet/README.md) | [EN](Interdimensional%20Internet/README.en.md) |
 | Fake Boost | Forensics | Easy | PowerShell invertido + base64 y exfiltración AES en un `POST` | **Retired** | [Ver](Fake%20Boost/README.md) | [EN](Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | **Retired** | [Ver](Impossible%20Password/README.md) | [EN](Impossible%20Password/README.en.md) |
+| Reg | Pwn | Easy | `gets()` en `run()`: offset `0x38` y ret2win a `winner()` sin PIE | **Retired** | [Ver](Reg/README.md) | [EN](Reg/README.en.md) |
 
 ## Categorías
 

@@ -66,6 +66,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | BOughT | DFIR / Malware | Hard | Memory + AD1: `StartUp` persistence, mutex, 59,049-domain DGA and DDoS | Volatility 2, Ghidra | [Ver](bought/README.en.md) |
 | Liberty | DFIR / Windows | Medium | Spray → RDP, Net-NTLMv2 theft via a `.url` and PowerShell Web Access | EvtxECmd, MFTECmd | [Ver](liberty/README.en.md) |
 | Jinkies | DFIR / Windows | Medium | SMB with credentials, `bk_db.ibd` backup and reuse down to the local hash | Chainsaw, MFTECmd | [Ver](jinkies/README.en.md) |
+| i-like-to | DFIR / MOVEit | Easy | KAPE triage of a MOVEit server: IIS logs, `$MFT`, EVTX, memory and SQL dump | MFTECmd, EvtxECmd, `strings` | [Ver](i-like-to/README.en.md) |
 
 ## Shared methodology
 
