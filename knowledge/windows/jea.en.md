@@ -26,7 +26,7 @@ Get-PSSessionConfiguration -Name '<CONFIG>' | Format-List *
 from pypsrp.client import Client
 
 c = Client('<HOST>', username='<domain>\\<user>', password='<password>', ssl=False)
-out, streams, errs = c.execute_ps('Get-Command | Select-Object -ExpandProperty Name')
+out, streams, had_errors = c.execute_ps('Get-Command | Select-Object -ExpandProperty Name')
 print(out)
 ```
 

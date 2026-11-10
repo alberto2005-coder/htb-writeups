@@ -13,6 +13,8 @@ A template can carry an **issuance policy** (`msPKI-Certificate-Policy`) with an
 
 That is the difference from ESC1: you are not impersonating anyone, you are being granted a group. If the group sits in the target's `LocalGroups` / `Remote Desktop Users` / WinRM list, you have a shell.
 
+The linked group must be **universal and currently empty**: AD refuses to link an OID to a group that has members.
+
 ## 2. Enumerate
 
 ```bash
@@ -30,7 +32,8 @@ Linked Group         : <DOMAIN>\<group>
 By hand:
 
 ```bash
-certipy template -u '<user>@<domain>' -p '<password>' -dc-ip <DC_IP> -template '<TEMPLATE>'
+# read the template; bare `certipy template` rewrites it into ESC1
+certipy find -u '<user>@<domain>' -p '<password>' -dc-ip <DC_IP> -template '<TEMPLATE>' -stdout
 ldapsearch -x -H ldap://<DC_IP> -D '<user>@<domain>' -w '<password>' \
   -b 'CN=OID,CN=Public Key Services,CN=Services,CN=Configuration,DC=<domain>,DC=<tld>' \
   '(msDS-OIDToGroupLink=*)' msDS-OIDToGroupLink

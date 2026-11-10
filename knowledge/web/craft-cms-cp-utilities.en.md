@@ -130,4 +130,4 @@ Custom modules are the ones storing service credentials (SMTP, APIs, relays) in 
 
 - Craft CMS — Configuration and `.env`: <https://craftcms.com/docs/5.x/configure.html>
 - Yii2 `yii\base\Security` (`encryptByKey`, `decryptByKey`, `hkdf`)
-- CVE-2026-28695 / CVE-2026-44011 advisory family (behavior injection via `element-search`)
+- Craft CMS security advisories: <https://craftcms.com/knowledge-base/security> (the CVE IDs for the `element-search` family could not be verified, so they are not cited).

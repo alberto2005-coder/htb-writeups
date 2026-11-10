@@ -71,6 +71,7 @@ Buscar sobre todo: usuario y contraseña de la base de datos, URL del datasource
 ```properties
 management.endpoints.web.exposure.include=health
 management.endpoint.heapdump.enabled=false
+management.endpoint.heapdump.access=none
 management.server.port=127.0.0.1:9090
 ```
 

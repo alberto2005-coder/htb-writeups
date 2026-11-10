@@ -130,4 +130,4 @@ Los módulos a medida son los que guardan credenciales de servicios (SMTP, APIs,
 
 - Craft CMS — Configuration and `.env`: <https://craftcms.com/docs/5.x/configure.html>
 - Yii2 `yii\base\Security` (`encryptByKey`, `decryptByKey`, `hkdf`)
-- Familia de avisos CVE-2026-28695 / CVE-2026-44011 (behavior injection en `element-search`)
+- Avisos de seguridad de Craft CMS: <https://craftcms.com/knowledge-base/security> (los identificadores CVE de la familia `element-search` no se pudieron verificar; no se citan).

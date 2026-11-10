@@ -68,8 +68,9 @@ The SPN must exist in the KDC and match the service you will use. `-impersonate`
 Clear `msDS-AllowedToActOnBehalfOfOtherIdentity` on the computer and drop the added SPN:
 
 ```bash
-impacket-rbcd -delegate-from '<svc>' -delegate-to '<TARGET>$' -action clear -dc-ip <DC_IP> '<domain>/<user>:<password>'
+impacket-rbcd -delegate-from '<svc>' -delegate-to '<TARGET>$' -action flush -dc-ip <DC_IP> '<domain>/<user>:<password>'
 ```
+`flush` writes an **empty** descriptor: it drops every ACE in the attribute, including pre-existing legitimate delegations. `remove` deletes only the specified principal's ACE.
 
 ## 7. Detection and mitigation
 
