@@ -48,7 +48,6 @@ type: Crypto
 
 ## Lecciones aprendidas
 
-- **`6` inicial**: `bytes_to_long` mete un byte `0x06` delante; `int(data, 16)` lo convierte y `long_to_bytes` lo vuelve a dejar como byte, por eso el base64 decodifica bien aunque sobre un byte.
 - **Quitar el `0x`**: si se pasa el prefijo a `int(..., 16)` con base 16 explícita, Python lo acepta; si se hace `bytes.fromhex` con `0x`, falla.
 - **Saltos de línea** en `output.txt`: usar `strip()`.
 

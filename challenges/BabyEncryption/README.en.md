@@ -19,7 +19,7 @@ You get `chall.py` and `msg.enc`. The cipher is school arithmetic on each byte: 
 
 ## Evidence
 
-- `chall.py` (the cipher) and `msg.enc` (binary ciphertext).
+- `chall.py` (the cipher) and `msg.enc` (ciphertext in **hex**, as `ct.hex()` writes it).
 
 ## Method
 
@@ -39,7 +39,8 @@ def encryption(msg):
 def decryption(msg):
     return bytes((179 * (c - 18)) % 256 for c in msg)
 
-print(decryption(open("msg.enc", "rb").read()).decode())
+data = bytes.fromhex(open("msg.enc").read().strip())
+print(decryption(data).decode())
 ```
 
 3. **Check** the output starts with `HTB{`; otherwise the modulus or shift was mistyped.
@@ -48,7 +49,7 @@ print(decryption(open("msg.enc", "rb").read()).decode())
 
 - **`pow(123, -1, 256)`**: available from Python 3.8; otherwise compute it by hand (179).
 - **Multiplying before subtracting**: reversing the order yields garbage.
-- **Binary `msg.enc`**: open it with `rb`, never as text.
+- **`msg.enc` is hex**: `chall.py` writes `ct.hex()`, so read it as text and convert with `bytes.fromhex`.
 
 ## Lessons
 

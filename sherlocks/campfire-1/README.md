@@ -1,7 +1,7 @@
 ---
 sherlock: Campfire-1
 domain: SOC
-difficulty: Easy
+difficulty: Very Easy
 platform: Hack The Box
 state: Retired
 tags: [dfir, active-directory, windows-events, kerberoasting]
@@ -22,6 +22,7 @@ Logs de un dominio Windows tras un incidente: la empresa sospecha que alguien es
 
 - `Security.evtx` y logs de servicio del DC.
 - Export de eventos relacionados con Kerberos (4768, 4769, 4771).
+- `PowerShell/Operational` de la estación y Prefetch: aparecen Rubeus y PowerView.
 - Inventario de equipos y cuentas de servicio.
 
 ## Investigación

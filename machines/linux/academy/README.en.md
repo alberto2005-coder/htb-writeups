@@ -16,7 +16,7 @@ tags: [linux, web, laravel, deserialization, cve-2018-15133, vhost, sudo]
 
 ## TL;DR
 
-Registration accepts a hidden `roleid`: change it and you get the admin panel, which reveals the `dev-staging-01.academy.htb` vhost. That environment runs Laravel with `APP_DEBUG=true` and leaks the `APP_KEY`; with it, **CVE-2018-15133** deserialization gives RCE. Another app's `.env` leaks a password that works for `cry0l1t3`, who escalates through `sudo` on `composer`.
+Registration accepts a hidden `roleid`: change it and you get the admin panel, which reveals the `dev-staging-01.academy.htb` vhost. That environment runs Laravel with `APP_DEBUG=true` and leaks the `APP_KEY`; with it, **CVE-2018-15133** deserialization gives RCE. Another app's `.env` leaks a password that works for `cry0l1t3`, who is in `adm`; the TTY audit logs (`aureport --tty`) reveal `mrb3n`'s password, and `mrb3n` is the account with `sudo` on `composer`.
 
 ## Recon
 
@@ -69,6 +69,8 @@ ssh cry0l1t3@<IP>
 ```
 
 ## Escalation
+
+`cry0l1t3` is in `adm`, so `aureport --tty` exposes `mrb3n`'s keystrokes and password; `mrb3n` is the account with this rule:
 
 ```bash
 sudo -l

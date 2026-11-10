@@ -1,7 +1,7 @@
 ---
 machine: AirTouch
 os: Linux
-difficulty: Hard
+difficulty: Medium
 platform: Hack The Box
 category: Machines
 state: Retired
@@ -17,7 +17,7 @@ tags: [linux, wifi, wpa2, evil-twin, peap, vpn]
 
 ## TL;DR
 
-An unusual box because the entry point is **radio**: capture the WPA2-PSK handshake of the home network, crack it with `hashcat -m 22000`, and use that key to stand up an **Evil Twin** of the corporate network and harvest **PEAP-MSCHAPv2** credentials from a client that reconnects. Those credentials open the VPN, and from the internal subnet the escalation is standard Linux.
+Entry is **SNMP**: a public community leaks the consultant's contact and credentials, which give SSH to a workstation with two wireless radios. From there you capture the WPA2-PSK handshake of `AirTouch-Internet`, crack it with `hashcat -m 22000`, and use the key to decrypt traffic and steal a session cookie that opens the web admin panel, whose file upload gives RCE. With the real certificate and private key found on the host you run an **Evil Twin** of `AirTouch-Office` (WPA-EAP) to harvest **PEAP-MSCHAPv2** credentials, join the management network and reach root through ordinary Linux privesc.
 
 ## Recon
 

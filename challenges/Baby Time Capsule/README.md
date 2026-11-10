@@ -4,7 +4,7 @@ category: Crypto
 difficulty: Very Easy
 platform: Hack The Box
 state: Retired
-tags: [crypto, rsa, small-modulus, factoring]
+tags: [crypto, rsa, hastad, crt, small-exponent]
 type: Crypto
 ---
 
@@ -16,77 +16,69 @@ type: Crypto
 
 ## TL;DR
 
-Tres "cápsulas del tiempo": tripletas `(n, e, ct)` de **RSA** con módulos **pequeños** y el mismo mensaje. Con `n` de pocos bits, factorizar es trivial (Factordb o `sympy.factorint`), se calcula `φ(n)` y `d`, y se descifra. El cifrado es correcto; el tamaño de la clave, no.
+`server.py` cifra **la misma flag** con RSA y `e = 5`, generando un módulo de 1024 bits nuevo en cada consulta. Con cinco cifrados bajo módulos coprimos, el teorema chino del resto reconstruye `m^5` **sin reducción modular** y una raíz quinta entera devuelve el mensaje: ataque de difusión de Håstad. No hay que factorizar nada.
 
 ## Enunciado y superficie
 
-- Categoría Crypto; el reto entrega el material descrito en «Reconocimiento».
+Servicio remoto que entrega "cápsulas del tiempo": cada petición devuelve un cifrado y una clave pública nuevos. Categoría Crypto, dificultad Very Easy.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```python
+from pwn import remote
+io = remote("<HOST>", <PORT>)
+# responder 'Y' cinco veces y guardar (ct_i, n_i)
+```
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+```python
+self.e = 5
+m = bytes_to_long(self.msg)
+m = pow(m, e, n)
+```
+
+Exponente fijo pequeño, mismo mensaje y un `n` distinto por consulta: el escenario exacto de Håstad.
 
 ## Explicación del fallo
 
-Tres "cápsulas del tiempo": tripletas `(n, e, ct)` de **RSA** con módulos **pequeños** y el mismo mensaje. Con `n` de pocos bits, factorizar es trivial (Factordb o `sympy.factorint`), se calcula `φ(n)` y `d`, y se descifra. El cifrado es correcto; el tamaño de la clave, no.
+Con `e = 5` y cinco módulos coprimos, `c_i = m^5 (mod n_i)`. El TCR da un único `C < prod(n_i)` con `C = m^5`; como `m^5 < prod(n_i)` para una flag corta, `C` es el valor entero de `m^5` y la raíz quinta exacta lo revela sin clave privada.
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```python
+from sympy.ntheory.modular import crt
+from gmpy2 import iroot
+from Crypto.Util.number import long_to_bytes
+
+M = crt(ns, cts)[0]
+m, exact = iroot(M, 5)
+print(exact, long_to_bytes(int(m)))
+```
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+1. Pedir cinco cápsulas (cinco `n` distintos, mismo `e = 5`).
+2. Combinar con TCR para obtener `m^5` sobre los enteros.
+3. `iroot(M, 5)`; si `exact` es `True`, ese es el mensaje.
 
 ## Evidencia
 
-- `source.py` y `output.txt` con las tripletas.
+- `server.py` con `e = 5` y módulo nuevo por consulta.
+- Los cinco pares `(n, ct)` y el `C` reconstruido.
 
 ## Lecciones aprendidas
 
-- **`e` pequeño con `m` pequeño**: si `m^e < n`, el cifrado no necesita ni descifrado: la raíz `e`-ésima del entero da el mensaje.
-- **Bytes vs entero**: convertir con `long_to_bytes`, no con `str()`.
-- **`d` con `pow(..., -1, ...)`**: requiere Python 3.8+; si no, `sympy.invert`.
-
-- RSA no es seguro por el algoritmo, sino por el tamaño y la calidad de `n`.
-- Un módulo factorizable anula toda la seguridad, aunque el código sea impecable.
-- `e=3` con mensajes cortos es el otro clásico: sin padding, se rompe con una raíz.
+- **`e` pequeño con el mismo mensaje y módulos distintos** es firma de Håstad, no de factorización.
+- **El TCR convierte congruencias en una igualdad entera** cuando el producto de módulos supera a `m^e`.
+- **Comprobar `exact` en `iroot`** evita aceptar una raíz truncada.
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- Usar `e` estándar (65537) y **padding aleatorio** (OAEP) para que el mismo mensaje cifre distinto.
+- No reutilizar el mensaje entre claves; rotar claves no sustituye al padding.
 
 ## Referencias
 
 - [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-## Método
-
-1. **Mirar los números**: si `n` tiene menos de ~256 bits, está roto por diseño.
-
-```python
-for n, e, ct in capsules:
-    print(n.bit_length(), e)
-```
-
-2. **Factorizar** `n = p * q`:
-
-```bash
-# copiar n en factordb.com
-python -c "from sympy import factorint; print(factorint(n))"
-```
-
-3. **Clave privada**:
-
-```python
-phi = (p - 1) * (q - 1)
-d = pow(e, -1, phi)
-m = pow(ct, d, n)
-print(m.to_bytes((m.bit_length() + 7)//8, 'big'))
-```
-
-4. **Comprobar** que el mensaje empieza por `HTB{`.
+- Håstad, *Solving simultaneous modular equations of low degree* (1988).

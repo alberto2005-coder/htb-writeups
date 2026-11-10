@@ -68,7 +68,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Blue | Windows | Easy | Machines | **Retired** (ref.) | MS17-010 EternalBlue, `hashdump` | [ES](machines/windows/blue/README.md) | [Ver](machines/windows/blue/README.en.md) |
 | Cronos | Linux | Medium | Machines | **Retired** (ref.) | AXFR, SQLi, command injection, root cron over `artisan` | [ES](machines/linux/cronos/README.md) | [Ver](machines/linux/cronos/README.en.md) |
 | PingPong | Windows | Insane | Machines | Retired | Dual AD forest, ESC13, pivot, gMSA, JEA, RBCD and ESC4→ESC1 | [ES](machines/windows/pingpong/README.md) | [Ver](machines/windows/pingpong/README.en.md) |
-| AirTouch | Linux | Hard | Machines | **Retired** (ref.) | WPA2 handshake, PEAP-MSCHAPv2 Evil Twin and VPN pivot | [ES](machines/linux/airtouch/README.md) | [Ver](machines/linux/airtouch/README.en.md) |
+| AirTouch | Linux | Medium | Machines | **Retired** (ref.) | WPA2 handshake, PEAP-MSCHAPv2 Evil Twin and VPN pivot | [ES](machines/linux/airtouch/README.md) | [Ver](machines/linux/airtouch/README.en.md) |
 | Eighteen | Windows | Hard | Machines | **Retired** (ref.) | MSSQL `IMPERSONATE`, Werkzeug hash, CVE-2025-53779 (dMSA) | [ES](machines/windows/eighteen/README.md) | [Ver](machines/windows/eighteen/README.en.md) |
 | Sink | Linux | Insane | Machines | **Retired** (ref.) | CL.TE smuggling, Gitea with AWS keys, Secrets Manager and KMS | [ES](machines/linux/sink/README.md) | [Ver](machines/linux/sink/README.en.md) |
 | Sorcery | Linux | Insane | Machines | **Retired** (ref.) | Cypher injection, passkey XSS, Kafka and FreeIPA | [ES](machines/linux/sorcery/README.md) | [Ver](machines/linux/sorcery/README.en.md) |

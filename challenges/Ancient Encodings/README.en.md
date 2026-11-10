@@ -47,7 +47,6 @@ print(b64decode(long_to_bytes(int(data, 16))).decode())
 
 ## Pitfalls
 
-- **Leading `6`**: `bytes_to_long` prepends a `0x06` byte; `int(data, 16)` plus `long_to_bytes` restores it, which is why the base64 still decodes despite the extra byte.
 - **Stripping `0x`**: `int(..., 16)` accepts the prefix, `bytes.fromhex` does not.
 - **Newlines** in `output.txt`: call `strip()`.
 
