@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 93 machines, 50 Sherlocks, 50 challenges and 41 knowledge topics, each in ES/EN.
+> **Numbers:** 109 machines, 50 Sherlocks, 50 challenges and 41 knowledge topics, each in ES/EN.
 
 ---
 
@@ -46,6 +46,22 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Mongod | Linux | Very Easy | Starting Point | Available | MongoDB on 27017 with no authentication | [ES](machines/starting-point/mongod/README.md) | [Ver](machines/starting-point/mongod/README.en.md) |
 | Synced | Linux | Very Easy | Starting Point | Available | Anonymous rsync on 873 | [ES](machines/starting-point/synced/README.md) | [Ver](machines/starting-point/synced/README.en.md) |
 | Sequel | Linux | Very Easy | Starting Point | Available | MySQL with a passwordless `root` | [ES](machines/starting-point/sequel/README.md) | [Ver](machines/starting-point/sequel/README.en.md) |
+| Appointment | Linux | Very Easy | Starting Point | Available | Login SQLi: `admin' or '1'='1'#` | [ES](machines/starting-point/appointment/README.md) | [Ver](machines/starting-point/appointment/README.en.md) |
+| Crocodile | Linux | Very Easy | Starting Point | Available | Anonymous FTP with `allowed.userlist` and `.passwd` | [ES](machines/starting-point/crocodile/README.md) | [Ver](machines/starting-point/crocodile/README.en.md) |
+| Responder | Windows | Very Easy | Starting Point | Available | LFI to UNC, NetNTLMv2 capture and WinRM | [ES](machines/starting-point/responder/README.md) | [Ver](machines/starting-point/responder/README.en.md) |
+| Three | Linux | Very Easy | Starting Point | Available | Unauthenticated S3 bucket and webshell | [ES](machines/starting-point/three/README.md) | [Ver](machines/starting-point/three/README.en.md) |
+| Ignition | Linux | Very Easy | Starting Point | Available | Magento with `admin:qwerty123` on `/admin` | [ES](machines/starting-point/ignition/README.md) | [Ver](machines/starting-point/ignition/README.en.md) |
+| Bike | Linux | Very Easy | Starting Point | Available | Handlebars SSTI in Node.js up to root | [ES](machines/starting-point/bike/README.md) | [Ver](machines/starting-point/bike/README.en.md) |
+| Funnel | Linux | Very Easy | Starting Point | Available | SSH spray and a tunnel to loopback PostgreSQL | [ES](machines/starting-point/funnel/README.md) | [Ver](machines/starting-point/funnel/README.en.md) |
+| Pennyworth | Linux | Very Easy | Starting Point | Available | Jenkins `root:password` and the Groovy console | [ES](machines/starting-point/pennyworth/README.md) | [Ver](machines/starting-point/pennyworth/README.en.md) |
+| Tactics | Windows | Very Easy | Starting Point | Available | SMB null session and a passwordless `Administrator` | [ES](machines/starting-point/tactics/README.md) | [Ver](machines/starting-point/tactics/README.en.md) |
+| Archetype | Windows | Very Easy | Starting Point | Available | `prod.dtsConfig`, `xp_cmdshell`, PS history and psexec | [ES](machines/starting-point/archetype/README.md) | [Ver](machines/starting-point/archetype/README.en.md) |
+| Oopsie | Linux | Very Easy | Starting Point | Available | Cookie IDOR, webshell upload and the `bugtracker` SUID | [ES](machines/starting-point/oopsie/README.md) | [Ver](machines/starting-point/oopsie/README.en.md) |
+| Vaccine | Linux | Very Easy | Starting Point | Available | `backup.zip`, SQLi with `sqlmap --os-shell` and `sudo vi` | [ES](machines/starting-point/vaccine/README.md) | [Ver](machines/starting-point/vaccine/README.en.md) |
+| Unified | Linux | Very Easy | Starting Point | Available | Log4Shell (CVE-2021-44228) on UniFi and MongoDB 27117 | [ES](machines/starting-point/unified/README.md) | [Ver](machines/starting-point/unified/README.en.md) |
+| Included | Linux | Very Easy | Starting Point | Available | LFI to `/proc/net/udp`, unauthenticated TFTP and `lxd` | [ES](machines/starting-point/included/README.md) | [Ver](machines/starting-point/included/README.en.md) |
+| Markup | Windows | Very Easy | Starting Point | Available | XXE to read `id_rsa` and a scheduled `job.bat` | [ES](machines/starting-point/markup/README.md) | [Ver](machines/starting-point/markup/README.en.md) |
+| Base | Linux | Very Easy | Starting Point | Available | `strcmp` with arrays, unrestricted upload and `sudo find` | [ES](machines/starting-point/base/README.md) | [Ver](machines/starting-point/base/README.en.md) |
 | Cap | Linux | Easy | Machines | Retired | IDOR, pcap analysis, `cap_setuid` | [ES](machines/linux/cap/README.md) | [Ver](machines/linux/cap/README.en.md) |
 | MakeSense | Linux | Medium | Season 11 | Retired | Admin-bot XSS, forged AES-GCM, malicious plugin, OCR as root | [ES](machines/linux/makesense/README.md) | [Ver](machines/linux/makesense/README.en.md) |
 | DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, PostgreSQL SQLi, `COPY TO PROGRAM`, X11/XTEST, path unit with `eval` | [ES](machines/active/dutybound/README.md) | [Draft](machines/active/dutybound/README.en.md) |
