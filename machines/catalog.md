@@ -2,7 +2,7 @@
 
 [🇬🇧 English](catalog.en.md) | **Español**
 
-Fichas de máquinas **retiradas** que sirven para estudiar técnicas. Las marcadas como `ref.` no se han jugado en este perfil: son material de estudio, no un logro, y no llevan flags ni credenciales. Las que sí están jugadas viven en `machines/linux/` o `machines/windows/` y aparecen en el índice principal.
+Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reúne las **retiradas**; al final hay una sección con las 25 de **Starting Point**, que siguen disponibles en la plataforma. Las marcadas como `ref.` no se han jugado en este perfil: son material de estudio, no un logro, y no llevan flags ni credenciales. Las que sí están jugadas viven en `machines/linux/`, `machines/windows/` o `machines/starting-point/` y aparecen en el índice principal.
 
 ## Escritas
 
@@ -86,6 +86,7 @@ Fichas de máquinas **retiradas** que sirven para estudiar técnicas. Las marcad
 | Administrator | Windows | Medium | ACLs hasta FTP, `.psafe3`, targeted kerberoasting y DCSync | [Ver](../machines/windows/administrator/README.md) | [EN](../machines/windows/administrator/README.en.md) |
 | Escape | Windows | Medium | PDF con credenciales MSSQL, `xp_dirtree` y ADCS ESC1 | [Ver](../machines/windows/escape/README.md) | [EN](../machines/windows/escape/README.en.md) |
 | Pilgrimage | Linux | Easy | `/.git`, ImageMagick CVE-2022-44268 y binwalk CVE-2022-4510 | [Ver](../machines/linux/pilgrimage/README.md) | [EN](../machines/linux/pilgrimage/README.en.md) |
+| MakeSense | Linux | Medium | Season 11: XSS al bot admin, AES-GCM forjado, plugin malicioso y OCR como root | [Ver](../machines/linux/makesense/README.md) | [EN](../machines/linux/makesense/README.en.md) |
 
 ## Pendientes
 

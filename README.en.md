@@ -126,6 +126,11 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Administrator | Windows | Medium | Active Directory | Retired (ref.) | GenericAll and ForceChangePassword, FTP with `.psafe3`, GenericWrite, targeted kerberoasting and DCSync | [ES](machines/windows/administrator/README.md) | [Ver](machines/windows/administrator/README.en.md) |
 | Escape | Windows | Medium | Active Directory / MSSQL | Retired (ref.) | PDF with credentials, `xp_dirtree` as `sql_svc`, `ERRORLOG.BAK` and ADCS ESC1 up to Administrator | [ES](machines/windows/escape/README.md) | [Ver](machines/windows/escape/README.en.md) |
 | Pilgrimage | Linux | Easy | Web / Linux | Retired (ref.) | Exposed `/.git`, ImageMagick 7.1.0-49 (CVE-2022-44268) and binwalk 2.3.2 (CVE-2022-4510) | [ES](machines/linux/pilgrimage/README.md) | [Ver](machines/linux/pilgrimage/README.en.md) |
+| Sauna | Windows | Easy | Active Directory | Retired (ref.) | AS-REP roasting, autologon credentials and DCSync | [ES](machines/windows/sauna/README.md) | [Ver](machines/windows/sauna/README.en.md) |
+| Netmon | Windows | Easy | Web / Windows | Retired (ref.) | Anonymous FTP, PRTG and CVE-2018-9276 | [ES](machines/windows/netmon/README.md) | [Ver](machines/windows/netmon/README.en.md) |
+| Servmon | Windows | Easy | Windows / Services | Retired (ref.) | NVMS path traversal, NSClient++ and SSH tunnel | [ES](machines/windows/servmon/README.md) | [Ver](machines/windows/servmon/README.en.md) |
+| Resolute | Windows | Medium | Active Directory | Retired (ref.) | Anonymous LDAP, password reuse and `DnsAdmins` | [ES](machines/windows/resolute/README.md) | [Ver](machines/windows/resolute/README.en.md) |
+| Bastard | Windows | Medium | Web / Windows | Retired (ref.) | Drupalgeddon2 and JuicyPotato | [ES](machines/windows/bastard/README.md) | [Ver](machines/windows/bastard/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it · **ref.** = reference notes, not played on this profile.
 >
@@ -288,16 +293,9 @@ htb-writeups/
 │   ├── catalog.md       # retired machine catalogue ES/EN
 │   ├── catalog.en.md
 │   ├── starting-point/
-│   │   ├── README.md    # Índice del itinerario ES/EN
+│   │   ├── README.md    # Track index ES/EN
 │   │   ├── meow/        # README.md + README.en.md
-│   │   ├── fawn/
-│   │   ├── dancing/
-│   │   ├── explosion/
-│   │   ├── mongod/
-│   │   ├── preignition/
-│   │   ├── sequel/
-│   │   ├── synced/
-│   │   └── redeemer/
+│   │   └── ...          # 25 notes: Tier 0, 1 and 2
 │   ├── linux/
 │   │   ├── cap/
 │   │   ├── makesense/
@@ -342,13 +340,19 @@ htb-writeups/
 │   └── litter/          # README.md + README.en.md
 ├── knowledge/
 │   ├── web/
-│   ├── clickhouse/
+│   ├── windows/
+│   ├── general/
 │   ├── crypto/
 │   ├── forensics/
-│   ├── linux/
-│   ├── general/
 │   ├── privesc/
-│   └── windows/
+│   ├── linux/
+│   ├── cloud/
+│   ├── pwn/
+│   ├── osint/
+│   ├── stego/
+│   ├── mobile/
+│   ├── hardware/
+│   └── clickhouse/
 └── private/             # git-ignored: real credentials and flags
 ```
 
