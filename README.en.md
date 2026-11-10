@@ -290,7 +290,9 @@ htb-writeups/
 │   ├── machine-template.md      # machine template ES
 │   ├── machine-template.en.md   # machine template EN
 │   ├── challenge-template.md    # challenge template ES
-│   └── challenge-template.en.md # challenge template EN
+│   ├── challenge-template.en.md # challenge template EN
+│   ├── sherlock-template.md     # Sherlock template ES
+│   └── sherlock-template.en.md  # Sherlock template EN
 ├── challenges/
 │   ├── README.md        # challenge index ES/EN
 │   ├── README.en.md

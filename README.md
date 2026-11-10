@@ -290,7 +290,9 @@ htb-writeups/
 │   ├── machine-template.md      # Plantilla de máquinas ES
 │   ├── machine-template.en.md   # Plantilla de máquinas EN
 │   ├── challenge-template.md    # Plantilla de retos ES
-│   └── challenge-template.en.md # Plantilla de retos EN
+│   ├── challenge-template.en.md # Plantilla de retos EN
+│   ├── sherlock-template.md     # Plantilla de Sherlock ES
+│   └── sherlock-template.en.md  # Plantilla de Sherlock EN
 ├── challenges/
 │   ├── README.md        # Índice de retos ES/EN
 │   ├── README.en.md
