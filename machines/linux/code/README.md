@@ -17,7 +17,7 @@ tags: [linux, python, sandbox-escape, bcrypt, backy, sudo]
 
 ## TL;DR
 
-Un editor de Python en el navegador (Flask en el 5000) con una **blocklist de palabras**: `import`, `os`, `subprocess`, `eval`, `__`… El filtro es textual, pero el intérprete sigue teniendo cargadas todas las clases, así que se sale del *sandbox* enumerando subclases y llamando a `subprocess.Popen` por índice. Shell como `app-production`; la SQLite de la app guarda un bcrypt de `martin`, y la escalada es un `sudo` sobre `backy.sh`, cuyo JSON de configuración acepta traversal y archiva `/root`.
+Un editor de Python en el navegador (Flask en el 5000) con una **blocklist de palabras**: `import`, `os`, `subprocess`, `eval`, `__`… El filtro es textual, pero el intérprete sigue teniendo cargadas todas las clases, así que se sale del *sandbox* enumerando subclases y llamando a `subprocess.Popen` por índice. Shell como `app-production`; la SQLite de la app guarda el hash de `martin`, y la escalada es un `sudo` sobre `backy.sh`, cuyo JSON de configuración acepta traversal y archiva `/root`.
 
 ## Reconocimiento
 
@@ -30,11 +30,12 @@ nmap -p- --min-rate 10000 -sV -sC <IP> -oN nmap.txt
 5000/tcp  http  Flask (Python Playground)
 ```
 
-La aplicación ejecuta el código que pegas y devuelve la salida; si el código contiene una palabra prohibida, responde con un error del filtro.
+La aplicación ejecuta el código que pegas y devuelve la salida. El filtro es una lista de cadenas: `eval, exec, import, open, os, read, system, write, subprocess, __import__, __builtins__` (lista real de la build).
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- 5000 es **Gunicorn 20.0.4** sirviendo el editor; no hay vhosts ni rutas ocultas.
+- El editor no pide cuenta: se ejecuta código de inmediato.
 
 ## Foothold
 
@@ -72,10 +73,10 @@ sqlite3 /var/www/app/instance/database.db "select username, password from users;
 ```
 
 ```text
-martin | $2y$...  (o MD5, según la build)
+martin | <hash>  (MD5 sin sal en unas builds, bcrypt en otras)
 ```
 
-Mirar el prefijo antes de elegir el modo de `hashcat`: bcrypt es `-m 3200`, MD5 es `-m 0`.
+Los writeups públicos no coinciden: unos ven **MD5 sin sal** (`-m 0`, cae en CrackStation) y otros **bcrypt** (`-m 3200`). Mirar el prefijo en la base real antes de elegir modo.
 
 ```bash
 hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt
@@ -89,10 +90,10 @@ sudo -l
 ```
 
 ```text
-(root) NOPASSWD: /usr/bin/backy.sh
+(ALL : ALL) NOPASSWD: /usr/bin/backy.sh
 ```
 
-`backy.sh` lee un JSON con `directories_to_archive` y hace un `tar`. La validación exige que la ruta empiece por `/home` o `/var` y limpia `../` una sola pasada: con `....//` la limpieza deja `../` y el `tar` acaba leyendo `/root`.
+`backy.sh` es un wrapper de `/usr/bin/backy` (Go). Pasa `directories_to_archive` por `jq 'gsub("\\.\\./"; "")'` —una sola pasada— y después exige que cada ruta empiece por `/var/` o `/home/`. Con `....//` la limpieza deja `../`, la allowlist se cumple por el prefijo y el `tar` sale hasta `/root`.
 
 ```bash
 mkdir -p /tmp/exf && cd /tmp/exf

@@ -16,7 +16,7 @@ tags: [linux, web, ctf, playsms, rce, suid, buffer-overflow, ret2libc]
 
 ## TL;DR
 
-Máquina con mucha enumeración y sabor a CTF: 22, 1880 (Node-RED) y 9999 (nginx). En el 9999 hay páginas con codificaciones (base64, brainfuck, hex), un ZIP protegido y un `backup` que apunta a `/playsms`. Las credenciales `admin:idkwhatispass` abren PlaySMS 1.4, vulnerable a subida de CSV autenticada → RCE. Para root, un SUID de 32 bits en `/home/ayush/.binary/rop` con buffer overflow y ret2libc.
+Máquina con mucha enumeración y sabor a CTF: 22, 1880 (Node-RED) y 9999 (nginx). En el 9999 hay páginas con codificaciones (base64, brainfuck, hex), un ZIP protegido y un `backup` que apunta a `/playsms`. Las credenciales `admin:idkwhatispass` abren PlaySMS 1.4, vulnerable a **CVE-2017-9101** (importación de CSV autenticada) → RCE. Para root, un SUID de 32 bits en `/home/ayush/.binary/rop` con buffer overflow y ret2libc.
 
 ## Reconocimiento
 
@@ -43,8 +43,8 @@ Rutas interesantes: `/admin/`, un directorio con nombre aleatorio (`/asdiSIAJJ0Q
 ## Foothold
 
 1. **`/admin/`**: el login valida las credenciales en JavaScript (`/js/login.js`); se lee la comprobación y se pasa de largo. La página de éxito enlaza al resto.
-2. **Fichero en base64**: el contenido de `/asdiSIAJJ0QWE9JAS` es base64; al decodificarlo sale un ZIP (`impossiblepassword.zip`) con un fichero de texto.
-3. **Contraseña del ZIP**: el ZIP se rompe aparte (texto `impossiblepassword` y `zip2john` con diccionario). La página en brainfuck del 9999 decodifica a **`idkwhatispass`**, que es la contraseña de PlaySMS, no la del ZIP.
+2. **Cadena de codificaciones**: `/asdiSIAJJ0QWE9JAS` está en base64; al decodificar sale un ZIP cuyo contenido interno vuelve a estar en hex → base64 → **brainfuck**.
+3. **El brainfuck** decodifica a **`idkwhatispass`**, que es la contraseña de PlaySMS (no la del ZIP, que se abre aparte con el texto `impossiblepassword`).
 4. **`/dev/backup/`**: devuelve la cadena `/playsms`. Ahí está el panel de PlaySMS y `admin:idkwhatispass` funciona.
 
 ```bash
@@ -95,7 +95,7 @@ ldd /home/ayush/.binary/rop
 
 El offset hasta `EIP` es 52. Con `gdb`/`pattern_create` se localiza, y con `readelf -s /lib/i386-linux-gnu/libc.so.6 | grep -E ' system| exit'` más `strings -a -t x libc.so.6 | grep '/bin/sh'` se monta el ret2libc:
 
-ASLR desactivado fija la base de libc (en esta build, `0xb7e19000`), pero **las direcciones no se copian de otro writeup**: se recalculan con `readelf -s libc.so.6 | grep -E ' system| exit'` y `strings -a -t x libc.so.6 | grep '/bin/sh'`.
+ASLR desactivado (`/proc/sys/kernel/randomize_va_space` = 0) fija la base de libc (en esta build, `0xb7e19000`). Los offsets **cambian entre builds**: los writeups publican `system` en `0x3a940` y en `0x3ada0` según la libc, así que las direcciones no se copian de otro writeup: se recalculan con `readelf -s libc.so.6 | grep -E ' system| exit'` y `strings -a -t x libc.so.6 | grep '/bin/sh'`.
 
 ```python
 import struct

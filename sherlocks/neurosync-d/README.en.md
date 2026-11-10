@@ -1,59 +1,71 @@
 ---
 sherlock: NeuroSync-D
-domain: SOC
+domain: DFIR / Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [dfir, windows, medical-device, timeline, lateral-movement]
+tags: [dfir, nextjs, cve-2025-29927, ssrf, lfi, redis, bci]
 ---
 
 # NeuroSync-D — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Investigation notes; platform answers are not reproduced.
+> **State:** Retired. Investigation notes; no platform answers.
 
 ## Scenario
 
-The maker of a connected medical device (a neural interface) notices anomalous activity on a technician's workstation. Endpoint artefacts and network logs are provided; the job is to establish how access was gained, what was manipulated, and whether the incident reached other systems.
+NeuroSync builds BCI (brain-computer interface) devices and its site runs on **Next.js**. An APT group is inside and moving laterally; some online devices were hijacked through an *N-day*. Emulate the offensive chain, then explain it from the logs.
 
 ## Evidence
 
-- Endpoint artefacts: registry, `Prefetch`, `Amcache`, PowerShell history.
-- Authentication and network logs from the lab segment.
-- The vendor's device and software inventory.
+```text
+NeuroSync/
+├── interface.log      (Next.js stdout: startup plus one line per request)
+├── access.log         (frontend)
+├── data-api.log       (internal API)
+├── redis.log          (job queue)
+└── bci-device.log     (hardware communication)
+```
 
 ## Investigation
 
-### 1. Entry point
+### 1. Version and CVE
+
+`interface.log` opens with the Next.js banner (`Local: http://localhost:3000`) and records the `User-Agent` and status of every request. The version predates the **CVE-2025-29927** fix: an authorization bypass in the middleware achieved by sending the repeated internal header.
 
 ```bash
-PECmd.exe -d triage/Prefetch --csv out/
-grep -i "powershell" out/*.csv | head -20
+grep -h "Local:" interface.log
+grep -i "x-middleware-subrequest" interface.log | head
+# x-middleware-subrequest: middleware:middleware:middleware:middleware:middleware
 ```
 
-Typical indicators are an executable downloaded to `Downloads` followed by `powershell -enc` in the same time window. The console history (`ConsoleHost_history.txt`) often keeps the full command.
+### 2. Web recon
 
-### 2. What happened to the device
+`access.log` first shows requests to the usual Next.js static files to fingerprint the build (`main-app.js`, `_buildManifest.js`) returning `200`, and then the vulnerable endpoint with the bypass header.
 
-Cross the execution time with the clinical software logs: configuration reads, patient-data exports or firmware changes. In this scenario the point is not the malware but the **access to regulated data**.
+### 3. SSRF and the internal API
 
-### 3. Scope
+With the middleware skipped, the attacker makes the server fetch internal addresses and discovers an **API on port 4000**. `data-api.log` keeps the scan and the follow-up requests.
 
-```bash
-grep -i "4624\|4625\|4648" Security.evtx | head
-```
+### 4. LFI and secrets
 
-Review type 3/10 logons from the compromised host to other machines and use of service credentials. Scope closes with the systems that shared the account.
+The API exposes a log-reading endpoint vulnerable to path traversal: first `/etc/passwd`, then its own source and a **secret** file (`secrets.txt`). With the signing key the attacker can forge messages the queue accepts.
+
+### 5. RCE through Redis injection
+
+The app consumes jobs from **Redis**. The attacker publishes a signed command that, once decoded, downloads and executes against an external host; `bci-device.log` and `redis.log` record the effect on the device.
 
 ## Findings
 
-- Compromise of a lab workstation with access to medical-device data.
-- Lateral movement limited by segmentation, but sensitive information exposed.
-- Impact measured in compliance (health data), not just flags.
+- Entry: **CVE-2025-29927** in the Next.js middleware.
+- Recon: SSRF to map the internal network and find the API on 4000.
+- Data: LFI on the log endpoint up to the source and the signing secret.
+- Impact: Redis queue injection → execution on the BCI device.
 
 ## Lessons
 
-- In regulated environments, start from which data was touched, not from which binary ran.
-- Network segmentation is what separates an incident from a disaster when the endpoint falls.
-- Chain of custody and hashes are part of the deliverable.
+- A middleware bypass needs no exotic payload: the repeated internal header is enough.
+- Application (`interface.log`) and API (`data-api.log`) logs must be correlated: each sees half.
+- A secret on the web server is a key to any service that signs with it.
+- Mitigation: patch Next.js (>= 15.2.3 / 14.2.25 / 13.5.9 / 12.3.5), strip internal headers at the edge, keep APIs off flat networks and authenticate Redis.

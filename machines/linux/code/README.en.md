@@ -17,7 +17,7 @@ tags: [linux, python, sandbox-escape, bcrypt, backy, sudo]
 
 ## TL;DR
 
-A Python editor in the browser (Flask on 5000) with a **keyword blocklist**: `import`, `os`, `subprocess`, `eval`, `__`… The filter is textual, but the interpreter still holds every loaded class, so the sandbox is escaped by enumerating subclasses and calling `subprocess.Popen` by index. Shell as `app-production`; the app's SQLite holds `martin`'s bcrypt, and escalation is `sudo` over `backy.sh`, whose JSON config accepts traversal and archives `/root`.
+A Python editor in the browser (Flask on 5000) with a **keyword blocklist**: `import`, `os`, `subprocess`, `eval`, `__`… The filter is textual, but the interpreter still holds every loaded class, so the sandbox is escaped by enumerating subclasses and calling `subprocess.Popen` by index. Shell as `app-production`; the app's SQLite holds `martin`'s password hash, and escalation is `sudo` over `backy.sh`, whose JSON config accepts traversal and archives `/root`.
 
 ## Recon
 
@@ -30,7 +30,7 @@ nmap -p- --min-rate 10000 -sV -sC <IP> -oN nmap.txt
 5000/tcp  http  Flask (Python Playground)
 ```
 
-The app runs whatever you paste and returns the output; a banned word triggers a filter error.
+The app runs whatever you paste and returns the output. The blocklist is string-based: `eval, exec, import, open, os, read, system, write, subprocess, __import__, __builtins__` (the build's real list).
 
 ## Foothold: escaping the blocklist
 
@@ -68,10 +68,10 @@ sqlite3 /var/www/app/instance/database.db "select username, password from users;
 ```
 
 ```text
-martin | $2y$...  (or MD5, depending on the build)
+martin | <hash>  (unsalted MD5 in some builds, bcrypt in others)
 ```
 
-Check the prefix before picking the `hashcat` mode: bcrypt is `-m 3200`, MD5 is `-m 0`.
+Public writeups disagree: some see **unsalted MD5** (`-m 0`, falls in CrackStation) and others **bcrypt** (`-m 3200`). Check the prefix in the real database before choosing.
 
 ```bash
 hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt
@@ -85,10 +85,10 @@ sudo -l
 ```
 
 ```text
-(root) NOPASSWD: /usr/bin/backy.sh
+(ALL : ALL) NOPASSWD: /usr/bin/backy.sh
 ```
 
-`backy.sh` reads a JSON with `directories_to_archive` and tars it. Validation requires the path to start with `/home` or `/var` and strips `../` only once: with `....//` the strip leaves `../` behind and the `tar` ends up reading `/root`.
+`backy.sh` wraps `/usr/bin/backy` (Go). It pipes `directories_to_archive` through `jq 'gsub("\\.\\./"; "")'` — one pass only — and then requires every path to start with `/var/` or `/home/`. With `....//` the strip leaves `../`, the prefix still satisfies the allowlist and the `tar` escapes to `/root`.
 
 ```bash
 mkdir -p /tmp/exf && cd /tmp/exf

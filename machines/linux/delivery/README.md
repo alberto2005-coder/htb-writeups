@@ -64,7 +64,7 @@ Email: <TICKETID>@delivery.htb
 
 Llega el correo de verificación; se lee en el ticket, se pulsa el enlace y la cuenta queda activa. Es un fallo de lógica: ninguna de las dos aplicaciones es vulnerable por separado.
 
-En el canal `#internal` hay credenciales de SSH y una pista: la contraseña es una variante de una palabra común, así que conviene atacar con reglas.
+En el canal `#internal` el usuario `root` publica las credenciales SSH del servicio de correo (`maildeliverer` / `<password>`) y la pista de que todo el equipo reutiliza variantes de `PleaseSubscribe!`, así que conviene atacar con reglas.
 
 ```bash
 ssh maildeliverer@<IP>
@@ -104,7 +104,11 @@ john hash.txt --wordlist=base.txt --rules=best64
 su root
 ```
 
-La pista del canal era literal: la contraseña es la palabra con un sufijo numérico. Sin la pista, bcrypt habría tardado años.
+La pista del canal era literal: la contraseña es una **variante de `PleaseSubscribe!`** con sufijos, y la tabla `Users` de Mattermost guarda `$2a$10$`. Sin la pista, bcrypt habría tardado años.
+
+```bash
+hashcat -m 3200 hash.txt base.txt -r /usr/share/hashcat/rules/best64.rule
+```
 
 ## Evidencia
 

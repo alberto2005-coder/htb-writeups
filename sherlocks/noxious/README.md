@@ -7,7 +7,6 @@ state: Retired
 tags: [dfir, pcap, llmnr, ntlmv2, responder, hashcat, active-directory]
 ---
 
-
 # Noxious — Hack The Box
 
 [⚑ English](README.en.md) | **Español**
@@ -16,62 +15,56 @@ tags: [dfir, pcap, llmnr, ntlmv2, responder, hashcat, active-directory]
 
 ## Escenario
 
-El IDS avisa de un posible dispositivo no autorizado en la VLAN de Active Directory y de tráfico **LLMNR** poco habitual. Se sospecha un envenenamiento LLMNR: hay que localizar al atacante, la víctima y demostrar si las credenciales se llegaron a crackear.
+El IDS avisa de un dispositivo no autorizado en la VLAN de Active Directory y de tráfico **LLMNR** poco habitual. La víctima conocida es `Forela-WKstn002` (`172.17.79.136`). Hay que localizar al atacante, el nombre falso que usó, el hash capturado y si llegó a crackearse.
 
 ## Evidencias
 
-- Captura de red parcial de la VLAN.
-- Contexto de la máquina víctima (`Forela-WKstn002`).
+- `capture.pcap` (parcial, sin el inicio de la sesión).
+- Contexto: workstation víctima y dominio `forela.local`.
 
 ## Investigación
 
-### 1. Quién pregunta y quién responde
+### 1. Quién responde
 
-En Wireshark:
+```bash
+tshark -r capture.pcap -Y 'llmnr' -T fields -e frame.number -e ip.src -e ip.dst -e llmnr.qry.name
+```
+
+El patrón es siempre el mismo: la víctima pregunta por un nombre que no resuelve y **`172.17.79.135` contesta**, un equipo que no es el DC. En `nbns` aparece además el nombre de host del atacante, **`kali`**: un dispositivo no inventariado. El usuario tecleó `DCC01` en lugar de `DC01` y la consulta acabó en LLMNR.
+
+### 2. Captura de NTLMv2
+
+```bash
+tshark -r capture.pcap -Y 'ntlmssp' -T fields -e frame.number -e ip.src -e ip.dst \
+  -e ntlmssp.auth.username -e ntlmssp.ntlmserverchallenge
+```
+
+En SMB2 aparece `NTLMSSP_AUTH` del usuario **`john.deacon`** contra la IP del rogue, con reto de servidor **`601019d191f054f1`** y `NTProofStr` `c0cc803a6d9fb5a9082253a04dbd4cd4`. Con esos campos se arma el hash:
 
 ```text
-llmnr
-nbns
+john.deacon::FORELA:601019d191f054f1:c0cc803a6d9fb5a9082253a04dbd4cd4:<blob>
 ```
 
-LLMNR y NBT-NS son mecanismos de resolución **local**: cuando el equipo no resuelve un nombre por DNS, lo pregunta a toda la red. Un atacante con Responder contesta «ese soy yo» y la víctima le manda su autenticación.
-
-La firma de un envenenamiento es una **respuesta** LLMNR/NBT-NS desde una IP que no es la del servidor legítimo, seguida de tráfico SMB hacia esa IP.
-
-### 2. La víctima y el atacante
-
-```bash
-tshark -r capture.pcap -Y 'llmnr' -T fields -e frame.number -e ip.src -e ip.dst -e llmnr.name
-```
-
-Se identifica la IP de la víctima (la que pregunta) y la IP del que responde siempre con el mismo nombre falso, que además resuelve un nombre de host ofensivo en NBNS. Esa IP es el dispositivo rogue.
-
-### 3. Captura de NTLMv2
-
-```bash
-tshark -r capture.pcap -Y 'ntlmssp' -T fields -e ip.src -e ip.dst -e ntlmssp.auth.username -e ntlmssp.ntlmserverchallenge
-```
-
-En el intercambio SMB aparece `NTLMSSP_AUTH` con el usuario víctima y el `ServerChallenge`. Con esos campos se reconstruye el hash en formato `usuario::dominio:challenge:proof:blob` y se comprueba si la contraseña cae:
+### 3. Crackeo
 
 ```bash
 hashcat -m 5600 hash.txt /usr/share/wordlists/rockyou.txt
 ```
 
-Si crackea, el impacto es real: la contraseña de un usuario del dominio queda en manos del atacante.
+El modo es **5600 (NetNTLMv2)**. La contraseña cae con diccionario, así que la captura tuvo impacto real: credenciales válidas del dominio.
 
 ### 4. Cierre
 
-Se documentan: IP del rogue, nombre falso usado, víctima, usuario cuyo hash se capturó, si se crackeó y en qué momento. La respuesta al IDS incluye bloquear LLMNR/NBT-NS por GPO y exigir firma SMB.
+Se documentan IP del rogue (`172.17.79.135`), hostname (`kali`), víctima, usuario, reto, hash y si crackeó. La respuesta al IDS: deshabilitar LLMNR/NBT-NS por GPO, exigir firma SMB y segmentar.
 
 ## Conclusiones
 
 - LLMNR/NBT-NS activos permiten a cualquier equipo de la VLAN suplantar la resolución de nombres.
-- El envenenamiento deriva en captura de NTLMv2 y, con contraseñas débiles, en credenciales válidas.
-- Un dispositivo no inventariado que responde a LLMNR es la señal más clara del ataque.
+- La cadena acaba en NTLMv2 + diccionario = credenciales válidas.
+- Un dispositivo no inventariado que responde a LLMNR es la señal más clara.
 
 ## Lecciones
 
-- Deshabilitar LLMNR y NBT-NS por GPO es la mitigación principal; el resto son parches.
-- `hashcat -m 5600` sobre NTLMv2 es rápido: la fortaleza de la contraseña es la única defensa real.
-- En el PCAP, mirar siempre quién **responde** a las consultas, no solo quién pregunta.
+- En el PCAP hay que mirar quién **responde**, no sólo quién pregunta.
+- `hashcat -m 5600` es rapidísimo: la fortaleza de la contraseña es la única defensa.
+- Un typo del usuario (`DCC01`) es el desencadenante: la mitigación es desactivar el protocolo, no educar.

