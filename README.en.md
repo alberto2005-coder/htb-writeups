@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 94 machines, 50 Sherlocks, 50 challenges and 36 knowledge topics, each in ES/EN.
+> **Numbers:** 94 machines, 50 Sherlocks, 50 challenges and 41 knowledge topics, each in ES/EN.
 
 ---
 
@@ -218,6 +218,11 @@ Reusable notes (each available in Spanish and English):
 - [Steganography in images and audio](knowledge/stego/images-audio.en.md) · [ES](knowledge/stego/images-audio.md)
 - [APK analysis: from `jadx` to Frida](knowledge/mobile/apk-analysis.en.md) · [ES](knowledge/mobile/apk-analysis.md)
 - [Hardware: UART, firmware and extraction](knowledge/hardware/uart-firmware.en.md) · [ES](knowledge/hardware/uart-firmware.md)
+- [Prototype pollution and AST injection](knowledge/web/prototype-pollution-ast.en.md) · [ES](knowledge/web/prototype-pollution-ast.md)
+- [WSL2 in DFIR: host artifacts and API capture](knowledge/forensics/wsl2-dfir.en.md) · [ES](knowledge/forensics/wsl2-dfir.md)
+- [AD ACL chains: from GenericAll to DCSync](knowledge/windows/ad-acl-chains.en.md) · [ES](knowledge/windows/ad-acl-chains.md)
+- [RedLine Stealer: delivery chain, C2 and artifacts](knowledge/forensics/malware-redline.en.md) · [ES](knowledge/forensics/malware-redline.md)
+- [ImageMagick CVE-2022-44268: arbitrary file read](knowledge/linux/imagemagick-file-read.en.md) · [ES](knowledge/linux/imagemagick-file-read.md)
 
 ---
 
