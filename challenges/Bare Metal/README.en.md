@@ -9,7 +9,7 @@ tags: [hardware, avr, firmware, bit-bang, disassembly]
 
 # Bare Metal — Hack The Box (Challenge)
 
-[🇬🇧 English](README.en.md) | **Español**
+**English** | [🇪🇸 Español](README.md)
 
 ## TL;DR
 
