@@ -23,6 +23,8 @@ WordPress con un tema a medida (`webagency`) que transcribe voz en el navegador 
 
 ## Reconocimiento
 
+WordPress **7.0** con Apache 2.4.58 sobre Ubuntu 24.04; el `http-generator` y `readme.html` lo confirman. Las fuentes discrepan en la base de datos (MySQL/MariaDB en unos writeups, SQLite en otros): no cambia la cadena.
+
 ```bash
 # 1. Vhost en /etc/hosts (o usar --resolve, ver abajo)
 echo "10.129.145.90 makesense.htb" | sudo tee -a /etc/hosts
@@ -202,6 +204,8 @@ sshpass -p '<DB_PASSWORD>' ssh walter@10.129.145.90 'id; cat ~/user.txt'
 
 ### Enumeración local
 
+Falso positivo habitual: **PackageKit 1.2.8** invita a probar CVE-2026-41651 (*Pack2TheRoot*), pero Ubuntu backportó el parche sin subir la versión. No es la vía y cuesta tiempo.
+
 ```bash
 id; groups
 ps aux | grep -vE '^\[|kthread|kworker' | head -30
@@ -304,6 +308,7 @@ Para un repo público conviene recortar capturas del panel, del OCR y del `uid=0
 - **Credenciales reutilizadas**: la contraseña de la base de datos abrió también SSH y el Basic auth del servicio interno.
 - **Servicios en loopback = pivote desde usuario, no desde anónimo**: sin `walter` el 8001 es inalcanzable (de ahí el `filtered` del escaneo externo).
 - **Los directorios de guardado dentro de un docroot son ejecución de código** si el servidor interpreta PHP.
+- **Un CVE que "casa por versión" puede estar parcheado por backport**: comprobar el changelog del paquete antes de invertir la sesión en él.
 - Detalle práctico: el bot tarda ~60 s y los archivos guardados caducan; conviene automatizar cada fase en un solo script.
 
 ## Mitigaciones y detección

@@ -63,15 +63,11 @@ uid=1000(ben) gid=1000(ben) groups=1000(ben)
 
 ```bash
 id
-grep -E "ben|operator|docker" /etc/group
+getent group | grep -E "ben|operator|docker"
+ls -ld /privatebin-data /privatebin-data/data
 ```
 
-```text
-operator:x:37:ben
-docker:x:111:alice
-```
-
-Note: `id` shows `operator` (37) but **not** `docker`, because that membership lives in `/etc/gshadow`. After reading the file, `newgrp docker` activates the group in the current shell; without it `docker run` fails with *permission denied*.
+`ben` belongs to a non-default group that can write into the PrivateBin data directory: that is the real lead. The `docker` membership matters only if `getent group docker` actually lists the user. Public writeups disagree here — some show it in `id` and open the socket with `newgrp docker`, others reach the same place through Arcane and never touch `/var/run/docker.sock` — so verify it on the box instead of assuming the group.
 
 ## Escalation I: PrivateBin and Arcane
 
@@ -105,7 +101,7 @@ docker run -v /:/host --rm -it alpine chroot /host bash
 root@kobold:/# cat /root/root.txt
 ```
 
-In Arcane the equivalent is logging in as admin (`admin`/`<password>`) and creating a privileged container with the host volume mounted. If that login is not reachable, Arcane 1.13.0 also carries an authentication bypass (**CVE-2026-23944**) and an SSRF in `/templates/fetch` (**CVE-2026-40242**).
+In Arcane the equivalent is logging in as admin (`admin`/`<password>`) and creating a privileged container with the host volume mounted. Arcane is a UI over the same Docker daemon, so an admin account there is equivalent to the `docker` group: whichever of the two doors is open, the result is the host's filesystem.
 
 ## Evidence (redacted)
 

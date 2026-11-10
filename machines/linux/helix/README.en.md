@@ -17,7 +17,7 @@ tags: [linux, apache-nifi, h2, ics, cve-2023-34468, opc-ua]
 
 ## TL;DR
 
-An industrial workflow simulated on **Apache NiFi 1.21.0** (`flow.helix.htb:8080/nifi`). The canvas is served **without authentication** and the anonymous user holds `canWrite: true`, the misconfiguration that makes the CVE exploitable. The `ExecuteSQL` processor accepts a `DBCPConnectionPool` with whatever JDBC URL you supply: point it at your own **H2** database with `CREATE ALIAS` and Java runs inside NiFi's JVM (**CVE-2023-34468**), yielding a shell as `nifi`. After that, an SSH key backup in the service's support files gets you in as `operator`, and escalation arrives through the internal OPC UA service plus the maintenance console.
+An industrial workflow simulated on **Apache NiFi 1.21.0** (`flow.helix.htb:8080/nifi`). The canvas is served **without authentication** and the anonymous user holds `canWrite: true`. The CVE is documented as requiring authentication, but with the canvas open that requirement is void: the anonymous user can create the controller service and the processor himself. The `ExecuteSQL` processor accepts a `DBCPConnectionPool` with whatever JDBC URL you supply: point it at your own **H2** database with `CREATE ALIAS` and Java runs inside NiFi's JVM (**CVE-2023-34468**), yielding a shell as `nifi`. After that, an SSH key backup in the service's support files gets you in as `operator`, and escalation arrives through the internal OPC UA service plus the maintenance console.
 
 ## Recon
 
@@ -93,7 +93,7 @@ Tunnel 4840 (`ssh -L 4840:127.0.0.1:4840 operator@<IP>`) and write reactor nodes
 sudo /usr/local/sbin/helix-maint-console
 ```
 
-Inside it, commands as root.
+The window the agent grants is what unlocks the console; forcing maintenance mode from the HMI alone is not enough. Inside it, commands as root.
 
 ## Evidence (redacted)
 

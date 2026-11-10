@@ -15,7 +15,7 @@
 | Cryptohorrific | Mobile | Easy | App iOS: blob base64 en el plist y clave AES en el binario Mach-O | **Retired** | [Ver](Cryptohorrific/README.md) | [EN](Cryptohorrific/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM en `session.upload_progress`, use-after-free, leak de ASLR por `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [Ver](Dark%20Embargo/README.md) | [EN](Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | MD5 contra reloj: sesión, regex y cálculo del hash en un script | **Retired** | [Ver](Emdee%20five%20for%20life/README.md) | [EN](Emdee%20five%20for%20life/README.en.md) |
-| Phonebook | Web | Easy | Inyección LDAP: `*` en usuario y contraseña, y buscador con comodines | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
+| Phonebook | Web | Easy | Inyección LDAP ciega: el flag es la contraseña de `reese`, no el bypass `*` | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | Confusión de algoritmos JWT: HS256 firmado con la clave pública | **Retired** | [Ver](Under%20Construction/README.md) | [EN](Under%20Construction/README.en.md) |
 | Toxic | Web | Very Easy | Inyeccion de objetos PHP: `PageModel::__destruct` incluye un fichero (LFI) y log poisoning en nginx | **Retired** | [Ver](Toxic/README.md) | [EN](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | **Retired** | [Ver](LoveTok/README.md) | [EN](LoveTok/README.en.md) |
@@ -27,7 +27,7 @@
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | **Retired** | [Ver](breaking%20grad/README.md) | [EN](breaking%20grad/README.en.md) |
 | Weather App | Web | Easy | SSRF con *response splitting* y SQLi en el servicio interno hasta la toma de la cuenta admin | **Retired** | [Ver](Weather%20App/README.md) | [EN](Weather%20App/README.en.md) |
 | Freelancer | Web | Easy | SQLi en `portfolio.php?id=` y panel `/admin` hallado por fuzzing | **Retired** | [Ver](Freelancer/README.md) | [EN](Freelancer/README.en.md) |
-| Passman | Web | Easy | GraphQL con IDOR en `UpdatePassword`: cambio de la contraseña del admin | **Retired** | [Ver](Passman/README.md) | [EN](Passman/README.en.md) |
+| Passman | Web | Easy | GraphQL: `UpdatePassword` sin autorización; el flag está en el gestor del admin | **Retired** | [Ver](Passman/README.md) | [EN](Passman/README.en.md) |
 | Cartographer | Web | Easy | SQLi en el login y `panel.php?info=flag` | **Retired** | [Ver](Cartographer/README.md) | [EN](Cartographer/README.en.md) |
 | Dynastic | Crypto | Very Easy | Cifrado de Trithemius: el desplazamiento es el índice | **Retired** | [Ver](Dynastic/README.md) | [EN](Dynastic/README.en.md) |
 | Makeshift | Crypto | Very Easy | Inversión y permutación de bloques de tres | **Retired** | [Ver](Makeshift/README.md) | [EN](Makeshift/README.en.md) |
@@ -49,8 +49,8 @@
 | KORP Terminal | Web | Very Easy | SQLi con error visible y hash bcrypt crackeado | **Retired** | [Ver](KORP%20Terminal/README.md) | [EN](KORP%20Terminal/README.en.md) |
 | TimeKORP | Web | Very Easy | Inyección de comandos a través del formato de la hora | **Retired** | [Ver](TimeKORP/README.md) | [EN](TimeKORP/README.en.md) |
 | Behind the Scenes | Reversing | Very Easy | `UD2` como anti-descompilación y cuatro `strncmp` en GDB | **Retired** | [Ver](Behind%20the%20Scenes/README.md) | [EN](Behind%20the%20Scenes/README.en.md) |
-| OnlyHacks | Web | Very Easy | XSS almacenado contra un bot para robar la cookie de sesión | **Retired** | [Ver](OnlyHacks/README.md) | [EN](OnlyHacks/README.en.md) |
-| Perfect Synchronization | Crypto | Easy | AES-ECB y análisis de frecuencias por bloques | **Retired** | [Ver](Perfect%20Synchronization/README.md) | [EN](Perfect%20Synchronization/README.en.md) |
+| OnlyHacks | Web | Very Easy | IDOR en `/chat?rid=3`: el flag está en el chat de otro usuario (el XSS al bot es alternativa) | **Retired** | [Ver](OnlyHacks/README.md) | [EN](OnlyHacks/README.en.md) |
+| Perfect Synchronization | Crypto | Easy | Sustitución por carácter (`char + 15`): análisis de frecuencias, no AES-ECB | **Retired** | [Ver](Perfect%20Synchronization/README.md) | [EN](Perfect%20Synchronization/README.en.md) |
 | xorxorxor | Crypto | Easy | XOR con clave repetida y prefijo conocido | **Retired** | [Ver](xorxorxor/README.md) | [EN](xorxorxor/README.en.md) |
 | Baby Time Capsule | Crypto | Very Easy | RSA con módulos pequeños: factorizar y descifrar | **Retired** | [Ver](Baby%20Time%20Capsule/README.md) | [EN](Baby%20Time%20Capsule/README.en.md) |
 

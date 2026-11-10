@@ -3,50 +3,78 @@ sherlock: Nubilum-2
 domain: Cloud / AWS
 difficulty: Medium
 platform: Hack The Box
+state: Retired
 evidence: CloudTrail from an account with an exposed S3 bucket
 tools: [jq, Splunk, AWS CLI]
+tags: [dfir, cloud, aws, s3, iam, cloudtrail]
 ---
 
 # Nubilum-2 — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> Defensive investigation. No platform answers copied.
+> **State:** Retired. Investigation notes; no platform answers.
 
 ## Scenario
 
-Forela uses **S3** as both storage and data lake. A user reports being unable to access files in one directory, and a **misconfigured bucket policy** on `forela-fileshare` is suspected of exposing objects publicly. Rebuild what the intruder did.
+Forela uses **S3** as storage and data lake. A user reports being unable to access files in one directory, and a **misconfigured bucket policy** on `forela-fileshare` is suspected. Reconstruct what the intruder did and why the legitimate user lost access.
 
 ## Evidence
 
-- The account's **CloudTrail** logs (many JSON files).
+- **CloudTrail** logs from account `949622803460`, gzipped JSON per region.
 
-## Method
+## Investigation
 
-1. **Prepare**: ingest the JSON into a SIEM (Splunk/Elastic) or normalise with `jq`.
+### 1. Prepare
 
 ```bash
-jq -r '[.eventTime,.eventName,.userIdentity.type,.userIdentity.arn,.sourceIPAddress,.errorCode]|@tsv' *.json \
-  | sort > timeline.tsv
+jq -s '[.[].Records[]] | sort_by(.eventTime) | unique_by(.eventID)' CloudTrail/*/*.json > merged.json
+jq -r '.[] | [.eventTime,.eventName,.userIdentity.type,.sourceIPAddress,.errorCode] | @tsv' merged.json | sort > timeline.tsv
 ```
 
-2. **Entry**: bucket policy and ACL changes (`PutBucketPolicy`, `PutBucketAcl`, `PutObjectAcl`) and who made them.
+### 2. The origin
 
-3. **Identity**: `CreateAccessKey` for an existing user — the classic persistence pattern — and from which IP.
+The `userAgent` separates the attacker from normal traffic: a recent `aws-cli` from a pentest distribution marks the manual calls. That isolates the source IP and the window.
 
-4. **Object activity**: `ListObjects`, `GetObject`, `DeleteObject`; `AccessDenied` on `kms:Decrypt` explains why the legitimate user lost access.
+```bash
+jq -r '.[] | "\(.sourceIPAddress)\t\(.userAgent)"' merged.json | sort -u | grep -i "aws-cli"
+```
 
-5. **Wrap-up**: which objects were exposed or deleted, in which window, under which identity.
+### 3. The initial leak
 
-## What it teaches
+**Anonymous** reads (`userIdentity.type = AWSAccount`/`Anonymous`) of bucket objects: the attacker downloads an access-key CSV without authenticating. That is where everything starts.
 
-- A permissive bucket policy makes internal data public without touching IAM.
-- Creating an access key is quiet persistence in AWS.
-- `AccessDenied` events are evidence too: they show business impact.
-- Cloud analysis happens through queries, not by opening files one by one.
+```bash
+jq -r '.[] | select(.eventName=="GetObject") | [.eventTime,.userIdentity.type,.requestParameters.key] | @tsv' merged.json | grep -i "accesskeys\|credential"
+```
 
-## Pitfalls
+### 4. Escalation with the stolen keys
 
-- **Encoding**: some exports wrap JSON in a single line or inside `Records[]`; unwrap first.
-- **Duplicates**: log deliveries can repeat events; deduplicate on `eventID`.
-- **`kms:Decrypt`**: without it, a "public" object still cannot be read.
+Using the CSV keys, the actor chains dozens of **denied** calls (`AccessDenied`) until finding a useful permission, and ends up writing an **inline policy on itself** to widen privileges.
+
+```bash
+jq -r '.[] | select(.errorCode=="AccessDenied") | .eventName' merged.json | sort | uniq -c | sort -rn
+jq -r '.[] | select(.eventName|test("PutUserPolicy|AttachUserPolicy|CreateAccessKey|PutBucketPolicy")) | [.eventTime,.eventName,.userIdentity.arn] | @tsv' merged.json
+```
+
+### 5. Business impact
+
+The legitimate user stops seeing their files because the objects end up encrypted with a KMS key they lack `kms:Decrypt` for. The `AccessDenied` on `kms:Decrypt` plus the ACL/policy changes explain the helpdesk ticket.
+
+## Findings
+
+- Entry: a publicly readable bucket with an IAM access-key CSV inside.
+- Escalation: probing with `AccessDenied` until a policy-write permission appears.
+- Persistence: an access key created and an inline policy self-assigned.
+- Impact: the legitimate user loses access through policy and encryption changes.
+
+## Lessons
+
+- A public bucket holding credentials is an account compromise, not a data leak.
+- `AccessDenied` events are evidence: they map the attacker's reconnaissance.
+- `PutUserPolicy` on one's own user is quiet privilege escalation and deserves an alert.
+- The helpdesk ticket is the tip: the policy change is the cause.
+
+## Difficulty note
+
+The index records **Medium**; one public source lists it as **Easy**. It stays Medium here and the discrepancy is noted.

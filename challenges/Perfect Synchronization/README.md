@@ -4,78 +4,58 @@ category: Crypto
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [crypto, aes, ecb, frequency-analysis]
+tags: [crypto, substitution, frequency-analysis, custom-cipher]
 type: Crypto
 ---
 
 # Perfect Synchronization — Hack The Box
 
-[🇬🇧 English](README.en.md) | **Español**
+[⚑ English](README.en.md) | **Español**
 
-> **Estado:** Retired. Ficha de método; sin flags reales.
+> **Estado:** Retired. Ficha de análisis; el flag no se publica.
 
-## TL;DR
+## Enunciado
 
-Se cifran con **AES** en modo **ECB** varios mensajes que comparten plantilla. En ECB cada bloque de 16 bytes se cifra igual, sin encadenar: bloques idénticos producen ciphertext idéntico. Con suficientes mensajes se reconstruye el texto por **análisis de frecuencias** a nivel de bloque, sin conocer la clave.
+Se entrega un texto cifrado y el fragmento de código que lo generó. No hay que romper AES: hay que entender qué hizo realmente el script.
 
-## Enunciado y superficie
+## Qué hace el cifrado
 
-- Categoría Crypto; el reto entrega el material descrito en «Reconocimiento».
-
-## Reconocimiento
-
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
-
-## Explicación del fallo
-
-Se cifran con **AES** en modo **ECB** varios mensajes que comparten plantilla. En ECB cada bloque de 16 bytes se cifra igual, sin encadenar: bloques idénticos producen ciphertext idéntico. Con suficientes mensajes se reconstruye el texto por **análisis de frecuencias** a nivel de bloque, sin conocer la clave.
-
-## Reproducción local
-
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
-
-## Explotación
-
-- Ver las secciones adyacentes para el detalle.
-
-## Evidencia
-
-- `source.py` (cifrado) y `output.txt` (lista de ciphertexts en hexadecimal).
-
-## Lecciones aprendidas
-
-- **Padding**: los últimos bloques llevan relleno PKCS#7; ignorarlos al comparar.
-- **Codificación**: trabajar en bytes, no en `str`, para no romper los bloques de 16.
-- **Confundir CBC**: en CBC el mismo bloque cambia según el IV y el anterior; si no hay repeticiones, no es ECB.
-
-- ECB filtra estructura: es el modo que nunca hay que usar con datos con patrones.
-- La frecuencia de bloques convierte un cifrado "fuerte" en un criptograma resoluble.
-- AES-CBC o, mejor, AES-GCM con nonce único evitan el problema.
-
-## Mitigaciones y detección
-
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Referencias
-
-- [block-ciphers](../../knowledge/crypto/block-ciphers.md)
-## Método
-
-1. **Confirmar ECB**: mismo bloque de 16 bytes en posiciones equivalentes → mismo ciphertext en varios mensajes.
+El script toma **cada carácter por separado**, le suma un **salt de 15** y escribe el resultado:
 
 ```python
-from collections import Counter
-bloques = [c[i:i+16] for c in ct_list for i in range(0, len(c), 16)]
-Counter(bloques).most_common(5)
+salt = 15
+cifrado = ''.join(chr(ord(c) + salt) for c in texto)
 ```
 
-2. **Alinear la plantilla**: los mensajes comparten estructura; cada posición de bloque corresponde a un campo (saludo, nombre, despedida).
+Es una **sustitución por carácter**: cada letra del texto plano se convierte siempre en la misma letra del texto cifrado. No hay bloques, no hay clave, no hay ECB: la «sincronización perfecta» del nombre es el propio defecto.
 
-3. **Frecuencia**: en cada posición, el bloque más repetido es el carácter o palabra más común del idioma/plantilla; probar hipótesis (`' '`, letras frecuentes, palabras del encabezado conocido).
+```python
+# descifrar
+claro = ''.join(chr(ord(c) - 15) for c in cifrado)
+```
 
-4. **Iterar**: sustituir bloques por su valor y comprobar que el texto resultante es coherente; los mensajes se "sincronizan" y el texto se vuelve legible.
+## Resolverlo
+
+1. Aplicar el desplazamiento inverso — si el salt se conoce, el reto termina aquí.
+2. Si el salt no se diera, la estructura de sustitución simple permite **análisis de frecuencias**: las letras más repetidas del cifrado corresponden a las del idioma del texto (`e`, `a`, `o` en español; `e`, `t`, `a` en inglés).
+3. Para textos cortos o con muchas palabras conocidas, el patrón de repetición se resuelve con **quipqiup** o un solucionador de criptogramas.
+
+```bash
+python3 - <<'PY'
+ct = open('cifrado.txt').read().strip()
+print(''.join(chr(ord(c) - 15) for c in ct))
+PY
+```
+
+## Conclusiones
+
+- No es un cifrado: es un **desplazamiento/sustitución monoalfabética** disfrazado de esquema moderno.
+- El nombre del reto describe el fallo: cada carácter se transforma siempre igual, así que el patrón se conserva.
+- Con el salt a la vista no hace falta criptoanálisis; sin él, frecuencias y patrones bastan.
+
+## Lecciones
+
+- Leer el código del cifrado ahorra horas de suponer AES/ECB.
+- Repetir transformación por carácter = conservar estructura del lenguaje.
+- Un salt fijo y público no aporta seguridad ninguna.
+- Mitigación: cifrado autenticado real (AES-GCM) con clave secreta y nonce único; nunca «sumar un número» a cada carácter.

@@ -43,7 +43,7 @@ curl -s http://<IP>/nibbleblog/content/private/users.xml
 
 ## Access
 
-Login at `/nibbleblog/admin.php` with the defaults (`admin:nibbles`; the user is `admin`, not the box name). If they fail, read `content/private/config.xml` and `users.xml`, often world-readable.
+Login at `/nibbleblog/admin.php` with the defaults (`admin:nibbles`; the user is `admin`, not the box name). `content/private/users.xml` lives under `private/`, so it is **not** readable without a session: the defaults are the way in, not a file shortcut.
 
 As admin:
 

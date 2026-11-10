@@ -51,7 +51,9 @@ panel.pterodactyl.htb  -> panel Pterodactyl v1.11.10
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `changelog.txt` publica la versión exacta: **Pterodactyl Panel v1.11.10**, anterior al parche 1.11.11 de CVE-2025-49132.
+- `phpinfo.php` está expuesto: da `register_argc_argv`, la ruta de PEAR (`/usr/share/php/PEAR`) y el formato de los temporales (`/tmp/phpXXXXXX`), que es lo que la cadena con `pearcmd.php` necesita.
+- `ffuf` con `Host: FUZZ.pterodactyl.htb` separa la landing de Minecraft (`pterodactyl.htb`) del panel (`panel.pterodactyl.htb`).
 
 ## Foothold
 
@@ -68,11 +70,6 @@ curl -s "http://panel.pterodactyl.htb/locales/locale.json?locale=../../../../../
 ```
 
 Del `.env` y de `config/database.php` salen `APP_KEY`, usuario y contraseña de MariaDB. La cadena con **PEAR** es la que da ejecución: `pearcmd.php` acepta argumentos por query string (`register_argc_argv`) y escribe un fichero PHP en el webroot, que después se incluye. La shell vuelve como **`wwwrun`**.
-
-## Movimiento lateral
-
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
 
 ## Escalada de privilegios
 
@@ -115,8 +112,11 @@ Con root se leen `/root/root.txt` y la flag de usuario ya obtenida.
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- Pterodactyl 1.11.11 o superior: `locale` y `namespace` se resuelven contra una allowlist y no llegan a `require()`.
+- Quitar `phpinfo.php` y `pearcmd.php` del host servido, y `register_argc_argv=Off` en el PHP del panel.
+- `APP_KEY`, credenciales de MariaDB y `HASHIDS_SALT` fuera del webroot, con permisos 0640 y dueño del servicio.
+- openSUSE con los parches de CVE-2025-6018/6019 (PAM/polkit y udisks2) y `nosuid` en los montajes de medios extraíbles.
+- Detección: GET a `/locales/locale.json` con `../`, `.php` nuevos en el webroot y `udisksctl` ejecutado por una cuenta web.
 
 
 ## Movimiento lateral: de wwwrun a usuario

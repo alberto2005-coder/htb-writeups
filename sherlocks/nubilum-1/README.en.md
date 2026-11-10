@@ -3,51 +3,88 @@ sherlock: Nubilum-1
 domain: Cloud / AWS
 difficulty: Medium
 platform: Hack The Box
-evidence: CloudTrail logs, EC2 artifacts and an S3 copy
-tools: [jq, AWS CLI, CyberChef, Elastic]
+state: Retired
+evidence: CloudTrail, EC2 artefacts (CatScale), S3 copy and interview
+tools: [jq, AWS CLI, Splunk, CyberChef]
+tags: [dfir, cloud, aws, cloudtrail, ec2, s3, poshc2]
 ---
 
 # Nubilum-1 — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> Defensive investigation. No platform answers copied.
+> **State:** Retired. Investigation notes; no platform answers.
 
 ## Scenario
 
-Amazon warns that an **EC2** instance in the environment is being used maliciously. The cloud admin recalls seeing more instances than he deployed. You get the triage interview, **CloudTrail** logs and a capture from the compromised instance.
+Amazon warns that one **EC2** in the account is being used for malicious purposes. The cloud administrator does not remember deploying it, but does remember seeing **more than six instances** running when logging into the console. You get the triage interview, the **CloudTrail** logs, a **CatScale** capture of the instance, a copy of the bucket and an "unusual" directory.
 
 ## Evidence
 
-- `CloudTrail/` with the account's activity JSON.
-- `catscale_*.tar.gz` with artifacts collected from the instance.
-- `forela-storage/` (bucket copy), `unusual-directory.zip` and `interview.txt`.
-
-## Method
-
-1. **Normalise** events and keep write calls.
-
-```bash
-jq -r '[.eventTime,.eventName,.userIdentity.arn,.sourceIPAddress]|@tsv' CloudTrail/*.json | sort | head
+```text
+CloudTrail/949622803460/CloudTrail/<region>/*.json   (~8,700 files)
+catscale_ip-172-31-24-20-20230130-1628.tar.gz        (EC2 artefacts)
+forela-storage/                                      (S3 bucket copy)
+unusual-directory.zip                                 (directory found on the host)
+interview.txt                                         (sysadmin interview)
 ```
 
-2. **Baseline**: which users and roles create resources (`RunInstances`, `CreateKeyPair`, `CreateUser`, `AttachUserPolicy`). Anything that contradicts the interview belongs to the attacker.
+## Investigation
 
-3. **Source IP** and time window: group by `sourceIPAddress`, count actions per hour.
+### 1. Normalise CloudTrail
 
-4. **Instance**: the CatScale archive shows processes, connections and files; `unusual-directory.zip` usually holds the **implant**.
+The JSON files carry `Records[]` and are split by region; merge and sort them by time first, or there is no timeline.
 
-5. **Persistence**: check for newly created access keys, users or policies that survive instance deletion.
+```bash
+jq -s '[.[].Records[]] | sort_by(.eventTime)' CloudTrail/*/*.json > merged.json
+jq -r '.[] | [.eventTime,.eventName,.userIdentity.arn,.sourceIPAddress] | @tsv' merged.json | sort > timeline.tsv
+```
 
-## What it teaches
+### 2. The compromised identity
 
-- CloudTrail is the cloud's "PCAP": who, what, when and from where.
-- Cloud abuse starts by creating resources (mining, C2) with stolen credentials.
-- The admin interview is evidence: it defines the baseline.
-- Deleting an instance does not revoke keys created before it.
+The interview states which users and roles exist; anything outside it is the attacker's. The usual pattern: an EC2 automation user allowed to create instances and key pairs.
 
-## Pitfalls
+```bash
+jq -r '.[].userIdentity.arn' merged.json | sort | uniq -c | sort -rn | head
+jq -r '.[] | select(.eventName|test("RunInstances|CreateKeyPair|CreateAccessKey")) | [.eventTime,.eventName,.userIdentity.arn,.sourceIPAddress] | @tsv' merged.json
+```
 
-- **Volume**: filter by `eventName` and `errorCode` before reading.
-- **Roles versus users**: the effective identity may be an assumed role; follow `sessionIssuer`.
-- **Time zones**: CloudTrail is UTC; the interview is not.
+### 3. Where the keys were
+
+The bucket copy contains a backup script with an `access_key`/`secret_key` pair in clear text. Searching the `AKIA` prefix finds the file and its path inside the bucket.
+
+```bash
+grep -rn "AKIA" forela-storage/ | head
+```
+
+### 4. Timeline of the abuse
+
+With the user identified, isolate its `sourceIPAddress` values: several addresses from the same range, in ascending order, distinct from legitimate traffic. They give the hours of instance and key-pair creation.
+
+```bash
+jq -r '.[] | select(.userIdentity.arn|test("<automation-user>")) | .sourceIPAddress' merged.json | sort -u
+```
+
+### 5. The implant
+
+`unusual-directory.zip` holds the C2 framework installed on the instance: **PoshC2**. The CatScale `tar.gz` confirms it through the process list, listening ports and files in the install directory.
+
+```bash
+tar xzf catscale_*.tar.gz && ls -R | head -40
+grep -rl "poshc2\|PoshC2" . | head
+```
+
+## Findings
+
+- Entry: IAM keys of an automation user **hardcoded** in a script inside an S3 bucket.
+- Abuse: creation of key pairs and extra EC2 instances from attacker IPs.
+- Implant: **PoshC2** on the instance AWS reported.
+- Likely persistence: keys and users created that survive instance deletion.
+
+## Lessons
+
+- CloudTrail is the cloud's PCAP: identity, action, time and origin per event.
+- Nearly 9,000 files are handled with `jq`, not by opening them: merge, deduplicate by `eventID`, filter by `eventName`.
+- The interview defines the **baseline**: without it, legitimate and added activity are indistinguishable.
+- Deleting the instance does not revoke keys created earlier: rotate and audit IAM.
+- A secret in a backup script is a public secret: `AWS Secrets Manager` or an instance role, never a clear-text `access_key`.

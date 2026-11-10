@@ -17,7 +17,7 @@ tags: [linux, apache-nifi, h2, ics, cve-2023-34468, opc-ua]
 
 ## TL;DR
 
-Un flujo industrial simulado sobre **Apache NiFi 1.21.0** (`flow.helix.htb:8080/nifi`). El canvas se sirve **sin autenticar** y el anónimo tiene `canWrite: true`, que es la misconfiguración que hace explotable la CVE. El procesador `ExecuteSQL` acepta un `DBCPConnectionPool` con la URL JDBC que le pongas: apuntándolo a un **H2** propio con `CREATE ALIAS` se ejecuta Java dentro de la JVM de NiFi (**CVE-2023-34468**, corregida en 1.22.0) y sale shell como `nifi`. Después, un backup de clave SSH en los soportes del servicio da acceso a `operator`, y la escalada llega por el servicio OPC UA interno y la consola de mantenimiento.
+Un flujo industrial simulado sobre **Apache NiFi 1.21.0** (`flow.helix.htb:8080/nifi`). El canvas se sirve **sin autenticar** y el anónimo tiene `canWrite: true`, que es la misconfiguración que hace explotable la CVE. El detalle que hace explotable la CVE es que NiFi la clasifica como *authenticated*: aquí el canvas está **sin autenticar**, así que el requisito se cumple sin credenciales. El procesador `ExecuteSQL` acepta un `DBCPConnectionPool` con la URL JDBC que le pongas: apuntándolo a un **H2** propio con `CREATE ALIAS` se ejecuta Java dentro de la JVM de NiFi (**CVE-2023-34468**, corregida en 1.22.0) y sale shell como `nifi`. Después, un backup de clave SSH en los soportes del servicio da acceso a `operator`, y la escalada llega por el servicio OPC UA interno y la consola de mantenimiento.
 
 ## Reconocimiento
 
@@ -40,7 +40,14 @@ echo "<IP> helix.htb flow.helix.htb" | sudo tee -a /etc/hosts
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `/nifi-api/flow/about` devuelve `"version":"1.21.0"` y la fecha de build: es la última release antes del parche de **CVE-2023-34468** (corregida en 1.22.0).
+- `/nifi/` carga el canvas **sin login** y el usuario anónimo entra con permiso de escritura sobre el flujo: se pueden crear *Controller Services* y procesadores.
+- El resto de vhosts (`helix.htb`) es una web corporativa; el interés está en `flow.helix.htb:8080`.
+
+```bash
+curl -s http://flow.helix.htb:8080/nifi-api/flow/about | jq '.about.version'
+curl -s http://flow.helix.htb:8080/nifi-api/access/config | jq
+```
 
 ## Foothold
 
@@ -115,8 +122,11 @@ Dentro, comandos como root.
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- NiFi 1.22.0 o superior, y `nifi.security.allow-anonymous-access=false` con autorización por política.
+- Allowlist de drivers JDBC y prohibición de `INIT=`/`RUNSCRIPT FROM` en URLs de conexión.
+- Recoger y borrar los *support bundles* en cuanto se generan: llevan claves en claro.
+- El 4840 (OPC UA) sólo desde el segmento de control, y la consola de mantenimiento con `sudo` auditado.
+- Detección: creación de *Controller Services* por usuarios anónimos y conexiones salientes del proceso `nifi` hacia bases de datos que no son las del flujo.
 
 ## Referencias
 
