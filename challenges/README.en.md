@@ -58,6 +58,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Interdimensional Internet | Web | Medium | `[ ( _ .` WAF bypassed with `\x` and exfiltration via `flask.session` | **Retired** | [ES](Interdimensional%20Internet/README.md) | [Ver](Interdimensional%20Internet/README.en.md) |
 | Fake Boost | Forensics | Easy | Reversed base64 PowerShell and AES exfiltration in a `POST` | **Retired** | [ES](Fake%20Boost/README.md) | [Ver](Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | Second `strcmp` against `rand()`: equalise `$rdi`/`$rsi` in gdb | **Retired** | [ES](Impossible%20Password/README.md) | [Ver](Impossible%20Password/README.en.md) |
+| Reg | Pwn | Easy | `gets()` in `run()`: `0x38` offset and ret2win into `winner()` with no PIE | **Retired** | [ES](Reg/README.md) | [Ver](Reg/README.en.md) |
 
 ## Categories
 

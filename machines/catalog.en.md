@@ -87,6 +87,8 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Escape | Windows | Medium | PDF with MSSQL credentials, `xp_dirtree` and ADCS ESC1 | [Ver](../machines/windows/escape/README.md) | [EN](../machines/windows/escape/README.en.md) |
 | Pilgrimage | Linux | Easy | `/.git`, ImageMagick CVE-2022-44268 and binwalk CVE-2022-4510 | [Ver](../machines/linux/pilgrimage/README.md) | [EN](../machines/linux/pilgrimage/README.en.md) |
 | MakeSense | Linux | Medium | Season 11: admin-bot XSS, forged AES-GCM, malicious plugin and OCR as root | [Ver](../machines/linux/makesense/README.md) | [EN](../machines/linux/makesense/README.en.md) |
+| Cascade | Windows | Medium | Anonymous LDAP, `cascadeLegacyPwd`, reversible VNC and AD Recycle Bin | [Ver](../machines/windows/cascade/README.md) | [EN](../machines/windows/cascade/README.en.md) |
+| Traceback | Linux | Easy | SmEvK web shell with default credentials, `luvit` via sudo and writable MOTD | [Ver](../machines/linux/traceback/README.md) | [EN](../machines/linux/traceback/README.en.md) |
 
 ## Pending
 
