@@ -2,7 +2,7 @@
 
 **English** | [🇪🇸 Español](catalog.md)
 
-Reference notes for **retired** machines, used to study techniques. Rows marked `ref.` were not played on this profile: they are study material, not an achievement, and carry no flags or credentials. Machines that were played live live in `machines/linux/` or `machines/windows/` and appear in the main index.
+Reference notes for machines used to study techniques. The main table covers **retired** boxes; at the end there is a section with the 25 **Starting Point** machines, which are still available on the platform. Rows marked `ref.` were not played on this profile: they are study material, not an achievement, and carry no flags or credentials. Machines that were played live live in `machines/linux/`, `machines/windows/` or `machines/starting-point/` and appear in the main index.
 
 ## Written
 
@@ -86,6 +86,7 @@ Reference notes for **retired** machines, used to study techniques. Rows marked 
 | Administrator | Windows | Medium | ACL chain to FTP, `.psafe3`, targeted kerberoasting and DCSync | [Ver](../machines/windows/administrator/README.md) | [EN](../machines/windows/administrator/README.en.md) |
 | Escape | Windows | Medium | PDF with MSSQL credentials, `xp_dirtree` and ADCS ESC1 | [Ver](../machines/windows/escape/README.md) | [EN](../machines/windows/escape/README.en.md) |
 | Pilgrimage | Linux | Easy | `/.git`, ImageMagick CVE-2022-44268 and binwalk CVE-2022-4510 | [Ver](../machines/linux/pilgrimage/README.md) | [EN](../machines/linux/pilgrimage/README.en.md) |
+| MakeSense | Linux | Medium | Season 11: admin-bot XSS, forged AES-GCM, malicious plugin and OCR as root | [Ver](../machines/linux/makesense/README.md) | [EN](../machines/linux/makesense/README.en.md) |
 
 ## Pending
 

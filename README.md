@@ -126,6 +126,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Administrator | Windows | Medium | Active Directory | **Retired** (ref.) | GenericAll y ForceChangePassword, FTP con `.psafe3`, GenericWrite, targeted kerberoasting y DCSync | [Ver](machines/windows/administrator/README.md) | [EN](machines/windows/administrator/README.en.md) |
 | Escape | Windows | Medium | Active Directory / MSSQL | **Retired** (ref.) | PDF con credenciales, `xp_dirtree` como `sql_svc`, `ERRORLOG.BAK` y ADCS ESC1 hasta Administrator | [Ver](machines/windows/escape/README.md) | [EN](machines/windows/escape/README.en.md) |
 | Pilgrimage | Linux | Easy | Web / Linux | **Retired** (ref.) | `/.git` expuesto, ImageMagick 7.1.0-49 (CVE-2022-44268) y binwalk 2.3.2 (CVE-2022-4510) | [Ver](machines/linux/pilgrimage/README.md) | [EN](machines/linux/pilgrimage/README.en.md) |
+| Sauna | Windows | Easy | Active Directory | **Retired** (ref.) | AS-REP roasting, credenciales de autologon y DCSync | [Ver](machines/windows/sauna/README.md) | [EN](machines/windows/sauna/README.en.md) |
+| Netmon | Windows | Easy | Web / Windows | **Retired** (ref.) | FTP anónimo, PRTG y CVE-2018-9276 | [Ver](machines/windows/netmon/README.md) | [EN](machines/windows/netmon/README.en.md) |
+| Servmon | Windows | Easy | Windows / Servicios | **Retired** (ref.) | NVMS path traversal, NSClient++ y túnel SSH | [Ver](machines/windows/servmon/README.md) | [EN](machines/windows/servmon/README.en.md) |
+| Resolute | Windows | Medium | Active Directory | **Retired** (ref.) | LDAP anónimo, reutilización y `DnsAdmins` | [Ver](machines/windows/resolute/README.md) | [EN](machines/windows/resolute/README.en.md) |
+| Bastard | Windows | Medium | Web / Windows | **Retired** (ref.) | Drupalgeddon2 y JuicyPotato | [Ver](machines/windows/bastard/README.md) | [EN](machines/windows/bastard/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >
@@ -290,14 +295,7 @@ htb-writeups/
 │   ├── starting-point/
 │   │   ├── README.md    # Índice del itinerario ES/EN
 │   │   ├── meow/        # README.md + README.en.md
-│   │   ├── fawn/
-│   │   ├── dancing/
-│   │   ├── explosion/
-│   │   ├── mongod/
-│   │   ├── preignition/
-│   │   ├── sequel/
-│   │   ├── synced/
-│   │   └── redeemer/
+│   │   └── ...          # 25 fichas: Tier 0, 1 y 2
 │   ├── linux/
 │   │   ├── cap/
 │   │   ├── makesense/
@@ -342,13 +340,19 @@ htb-writeups/
 │   └── litter/          # README.md + README.en.md
 ├── knowledge/
 │   ├── web/
-│   ├── clickhouse/
+│   ├── windows/
+│   ├── general/
 │   ├── crypto/
 │   ├── forensics/
-│   ├── linux/
-│   ├── general/
 │   ├── privesc/
-│   └── windows/
+│   ├── linux/
+│   ├── cloud/
+│   ├── pwn/
+│   ├── osint/
+│   ├── stego/
+│   ├── mobile/
+│   ├── hardware/
+│   └── clickhouse/
 └── private/             # ignorado por git: credenciales y flags reales
 ```
 
