@@ -39,11 +39,19 @@ Un empleado en remoto cae en una **web de phishing** que imita el login corporat
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- Entrada: phishing que imita el login corporativo; las credenciales se usan por **RDP** (4624 tipo 10), así que la sesión del atacante es interactiva desde el primer minuto.
+- El privilegio clave es **`SeManageVolumePrivilege`** en la cuenta de Otello: permite operaciones a nivel de volumen y escribir en rutas protegidas.
+- La DLL legítima **`PrintConfig.dll`** se sustituye por una maliciosa descargada con `certutil`, en una ruta de búsqueda de `wmiprvse.exe`: *search order hijacking* (T1574.001) con persistencia vía WMI.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- El historial del navegador y `UserAssist` fechan el clic en el phishing mejor que el log de Defender.
+- `SeManageVolumePrivilege` parece innocuo y da escritura donde no debería: revisar privilegios, no solo grupos.
+- La sustitución de una DLL de Windows por nombre es invisible para el usuario: solo SRUM/Defender y el hash la delatan.
+
+- El orden correcto es navegador → RDP → privilegios → DLL → WMI; saltarse el historial deja la entrada sin explicar.
+- `SeManageVolumePrivilege` no aparece en las guías de escalada habituales y aquí es el pivote.
+- Comparar el hash de `PrintConfig.dll` con el de la instalación limpia confirma la sustitución.
 
 ## Qué enseña
 

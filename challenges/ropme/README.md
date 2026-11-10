@@ -1,7 +1,7 @@
 ---
 challenge: ropme
 type: Pwn
-difficulty: Easy
+difficulty: Hard
 platform: Hack The Box
 state: Retired
 tags: [pwn, buffer-overflow, rop, ret2libc, got-leak, pwntools]

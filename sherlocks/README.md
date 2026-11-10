@@ -33,7 +33,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Loggy | Malware / Go | Easy | `Loggy.exe`: keylogger en Go con capturas y exfiltración por FTP | Ghidra, `strings`, CyberChef | [Ver](loggy/README.md) |
 | Bumblebee | DFIR | Easy | Base SQLite de phpBB y `access.log` | `sqlite3`, `grep`, correlación de IPs | [Ver](bumblebee/README.md) |
 | Meerkat | SOC | Easy | PCAP y alertas de Suricata | Wireshark, `tshark`, `jq` | [Ver](meerkat/README.md) |
-| Tracer | DFIR | Easy | Logs de PSEXESVC y `Prefetch` | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.md) |
+| Tracer | DFIR | Easy | PsExec nueve veces: `psexesvc.exe`, `.key`, named pipes y host de origen | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.md) |
 | Noted | DFIR | Easy | Artefactos de Notepad++ | `config.xml`, copias de seguridad, OSINT | [Ver](noted/README.md) |
 | Logjammer | Log Analysis | Easy | Cinco canales EVTX de un host | EvtxECmd, Timeline Explorer | [Ver](logjammer/README.md) |
 | Unit42 | DFIR | Very Easy | Sysmon y Dropbox en un host Windows | Sysmon, EvtxECmd, timestomping | [Ver](unit42/README.md) |
@@ -47,7 +47,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Compromised | DFIR / Red | Easy | PCAP de una red corporativa | Wireshark, `tshark` | [Ver](compromised/README.md) |
 | Packet Puzzle | DFIR / Red | Medium | PCAP de una empresa japonesa de criptomonedas; la secuencia RDP→SMB no está confirmada por writeups públicos | Wireshark, `tshark` | [Ver](packet-puzzle/README.md) |
 | Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | SQLite, DB Browser | [Ver](jingle-bell/README.md) |
-| Ultimatum | DFIR / Web | Easy | Logs y ficheros de un WordPress comprometido | `access.log`, WP-CLI | [Ver](ultimatum/README.md) |
+| Ultimatum | DFIR / Web | Easy | CVE-2023-3460 en Ultimate Member: admin `secragon`, web shell y shell remota | `access.log`, WP-CLI | [Ver](ultimatum/README.md) |
 | ProcNet | DFIR / Endpoint | Hard | C2 de código abierto: JA3, API Monitor (Vault) y Sysmon de empleado y DC | API Monitor, EvtxECmd | [Ver](procnet/README.md) |
 | PCAP Analysis | DFIR / Red | Very Easy | Captura de P13: chat en claro en TCP/250 y subida HTTP de ~107 KB a otra subred | Wireshark, `tshark` | [Ver](pcap-analysis/README.md) |
 | Vantage | DFIR / Red | Very Easy | PCAP de servidor web y controlador de nube | Wireshark, `tshark` | [Ver](vantage/README.md) |
@@ -59,7 +59,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Nubilum-1 | Cloud / AWS | Medium | CloudTrail, EC2 comprometida y copia de S3 | `jq`, AWS CLI | [Ver](nubilum-1/README.md) |
 | Nubilum-2 | Cloud / AWS | Medium (fuentes: Easy) | S3 con lectura anónima de un CSV de claves IAM y autoescalada con `PutUserPolicy` | Splunk, `jq` | [Ver](nubilum-2/README.md) |
 | Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | MFTECmd, MFTExplorer | [Ver](hyperfiletable/README.md) |
-| WorkFromHome | DFIR / Windows | Medium | Robo de credenciales, RDP y secuestro de DLL en WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.md) |
+| WorkFromHome | DFIR / Windows | Medium | Phishing → RDP → `SeManageVolumePrivilege` → `PrintConfig.dll` y persistencia WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.md) |
 | Lockpick 3.0 | Malware / Linux | Hard | Binario con XOR y clave por argumento, memoria y unidad systemd | Volatility 3, Ghidra | [Ver](lockpick-3/README.md) |
 
 ## Metodología común

@@ -33,13 +33,13 @@ awk '{print $4, $7}' access.log | sort | uniq -c | sort -rn | head
 grep -i 'wp-content/plugins' access.log | awk '{print $7}' | sort | uniq -c | sort -rn
 ```
 
-2. **Vector**: un plugin desactualizado con una ruta vulnerable (`admin-ajax.php?action=...`, subida o LFI). Comparar con la versión publicada.
+2. **Vector**: **CVE-2023-3460** en el plugin **Ultimate Member < 2.6.7**. El fallo permite a un visitante sin cuenta crear un administrador de WordPress abusando de los campos de registro; el PoC público deja un usuario llamado **`secragon`**, y ese nombre es la firma que aparece en los logs del Sherlock.
 
 ```bash
 grep -r "Version:" wp-content/plugins/<plugin>/ | sort -u
 ```
 
-3. **Ejecución**: peticiones POST al endpoint vulnerable y respuestas 200 inusuales; tras ellas aparecen ficheros nuevos en `wp-content/uploads`.
+3. **Ejecución**: tras el admin falso, el atacante navega el panel, instala un **web shell** y abre una shell remota; en `wp-content/uploads` y en los temas aparecen los ficheros nuevos, y el `access.log` muestra el `POST` de creación de cuenta seguido de actividad administrativa.
 
 4. **Persistencia**: usuario admin nuevo en la base, `mu-plugins`, temas modificados y tareas cron de WP.
 
@@ -51,11 +51,15 @@ wp user list --role=administrator
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- Acceso inicial con **CVE-2023-3460**: el PoC crea el administrador `secragon` sin autenticarse, y ese nombre queda en el `access.log`.
+- Tras el admin falso, exploración manual del panel, instalación de un **web shell** y shell remota desde el propio servidor.
+- Alcance: ficheros nuevos en `wp-content`, usuarios añadidos y cron de WordPress; la restauración exige limpiar todo eso, no solo borrar el admin.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- El nombre del usuario creado por el PoC (`secragon`) es la firma que enlaza el exploit con el resto de la actividad.
+- Un plugin con CVE de escalada de privilegios no necesita shell para ser crítico: crea un admin y desde ahí se opera.
+- Comparar la lista de plugins y sus versiones con la fecha del primer `POST` sospechoso fecha el compromiso.
 
 ## Qué enseña
 

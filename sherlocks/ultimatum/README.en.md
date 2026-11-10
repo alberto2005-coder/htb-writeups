@@ -30,7 +30,7 @@ awk '{print $4, $7}' access.log | sort | uniq -c | sort -rn | head
 grep -i 'wp-content/plugins' access.log | awk '{print $7}' | sort | uniq -c | sort -rn
 ```
 
-2. **Vector**: an outdated plugin with a vulnerable route (`admin-ajax.php?action=...`, upload or LFI). Compare against the published version.
+2. **Vector**: **CVE-2023-3460** in **Ultimate Member < 2.6.7**. An unauthenticated visitor can create a WordPress administrator through the registration fields; the public PoC leaves an account named **`secragon`**, and that name is the signature visible in the Sherlock's logs.
 
 ```bash
 grep -r "Version:" wp-content/plugins/<plugin>/ | sort -u

@@ -46,7 +46,9 @@ También se ve con `smbclient -L` que el hostname es `HARIS-PC`.
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- El 445 anuncia `Windows 7 Professional 7601 Service Pack 1`; `nmap -p445 --script smb-vuln-ms17-010` responde `VULNERABLE` y confirma el hostname `HARIS-PC`.
+- SMBv1 está habilitado y la sesión anónima permite listar, pero no hace falta: el fallo es de kernel y se explota sin credenciales.
+- No hay escalada posterior: `NT AUTHORITY\SYSTEM` llega con la propia explotación; `hashdump` solo sirve para contexto.
 
 ## Foothold
 
@@ -73,7 +75,7 @@ Si el exploit falla por el estado del pool, un reinicio del objetivo o unos rein
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la explotación devuelve `NT AUTHORITY\SYSTEM` en el mismo paso; no hay usuario que escalar.
 
 ## Evidencia
 

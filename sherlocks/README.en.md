@@ -33,7 +33,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Loggy | Malware / Go | Easy | `Loggy.exe`: Go keylogger with screenshots and FTP exfiltration | Ghidra, `strings`, CyberChef | [Ver](loggy/README.en.md) |
 | Bumblebee | DFIR | Easy | phpBB SQLite database and `access.log` | `sqlite3`, `grep`, IP correlation | [Ver](bumblebee/README.en.md) |
 | Meerkat | SOC | Easy | PCAP and Suricata alerts | Wireshark, `tshark`, `jq` | [Ver](meerkat/README.en.md) |
-| Tracer | DFIR | Easy | PSEXESVC logs and `Prefetch` | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.en.md) |
+| Tracer | DFIR | Easy | PsExec nine times: `psexesvc.exe`, `.key`, named pipes and source host | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.en.md) |
 | Noted | DFIR | Easy | Notepad++ artefacts | `config.xml`, backups, OSINT | [Ver](noted/README.en.md) |
 | Logjammer | Log Analysis | Easy | Five EVTX channels from one host | EvtxECmd, Timeline Explorer | [Ver](logjammer/README.en.md) |
 | Unit42 | DFIR | Very Easy | Sysmon y Dropbox en un host Windows | Sysmon, EvtxECmd, timestomping | [Ver](unit42/README.en.md) |
@@ -47,7 +47,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Compromised | DFIR / Red | Easy | PCAP de una red corporativa | Wireshark, `tshark` | [Ver](compromised/README.en.md) |
 | Packet Puzzle | DFIR / Red | Medium | PCAP from a Japanese crypto company; the RDP→SMB sequence is not confirmed by public writeups | Wireshark, `tshark` | [Ver](packet-puzzle/README.en.md) |
 | Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | SQLite, DB Browser | [Ver](jingle-bell/README.en.md) |
-| Ultimatum | DFIR / Web | Easy | Logs y ficheros de un WordPress comprometido | `access.log`, WP-CLI | [Ver](ultimatum/README.en.md) |
+| Ultimatum | DFIR / Web | Easy | CVE-2023-3460 in Ultimate Member: `secragon` admin, web shell and remote shell | `access.log`, WP-CLI | [Ver](ultimatum/README.en.md) |
 | ProcNet | DFIR / Endpoint | Hard | Open-source C2: JA3, API Monitor (Vault) and Sysmon from employee and DC | API Monitor, EvtxECmd | [Ver](procnet/README.en.md) |
 | PCAP Analysis | DFIR / Red | Very Easy | P13's capture: cleartext chat on TCP/250 and a ~107 KB HTTP upload to another subnet | Wireshark, `tshark` | [Ver](pcap-analysis/README.en.md) |
 | Vantage | DFIR / Red | Very Easy | PCAP de servidor web y controlador de nube | Wireshark, `tshark` | [Ver](vantage/README.en.md) |
@@ -59,7 +59,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Nubilum-1 | Cloud / AWS | Medium | CloudTrail, EC2 comprometida y copia de S3 | `jq`, AWS CLI | [Ver](nubilum-1/README.en.md) |
 | Nubilum-2 | Cloud / AWS | Medium (sources: Easy) | S3 with anonymous read of an IAM key CSV and self-escalation via `PutUserPolicy` | Splunk, `jq` | [Ver](nubilum-2/README.en.md) |
 | Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | MFTECmd, MFTExplorer | [Ver](hyperfiletable/README.en.md) |
-| WorkFromHome | DFIR / Windows | Medium | Robo de credenciales, RDP y secuestro de DLL en WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.en.md) |
+| WorkFromHome | DFIR / Windows | Medium | Phishing → RDP → `SeManageVolumePrivilege` → `PrintConfig.dll` and WMI persistence | SRUM, MFT, KAPE | [Ver](workfromhome/README.en.md) |
 | Lockpick 3.0 | Malware / Linux | Hard | XOR binary with the key passed as an argument, memory and systemd unit | Volatility 3, Ghidra | [Ver](lockpick-3/README.en.md) |
 
 ## Shared methodology

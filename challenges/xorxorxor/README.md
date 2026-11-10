@@ -24,11 +24,15 @@ El cifrado es un **XOR** del mensaje con una clave corta que se repite. Como el 
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+- El reto entrega dos ficheros: `challenge.py` (el cifrado) y `output.txt` con el resultado en hexadecimal.
+- `challenge.py` hace XOR del mensaje con una clave de **4 bytes** que repite; la clave no viaja en el fichero.
+- No hay más material: el ataque es de **texto plano conocido**, no de fuerza bruta.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+- `challenge.py` recorre el mensaje byte a byte y lo XOR con `key[i % len(key)]`, con `len(key) == 4`.
+- Al repetir la clave cada 4 bytes, el cifrado es un XOR posicional; cada posición se resuelve por separado.
+- La flag empieza por `HTB{`, así que los cuatro primeros bytes de la clave salen de `ciphertext ^ b'HTB{'`.
 
 ## Explicación del fallo
 
@@ -36,11 +40,18 @@ El cifrado es un **XOR** del mensaje con una clave corta que se repite. Como el 
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```python
+ct = bytes.fromhex(open('output.txt').read().strip())
+key = bytes(c ^ p for c, p in zip(ct, b'HTB{'))
+print(key)                    # 4 bytes
+print(bytes(c ^ key[i % 4] for i, c in enumerate(ct)).decode())
+```
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+1. Se derivan los 4 bytes de clave con el prefijo conocido `HTB{`.
+2. Se descifra todo el fichero repitiendo la clave cada 4 posiciones.
+3. Se verifica que el resultado es ASCII imprimible y termina en `}`: si no, la longitud de la clave no era 4.
 
 ## Evidencia
 
@@ -58,7 +69,7 @@ El cifrado es un **XOR** del mensaje con una clave corta que se repite. Como el 
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- No usar XOR con clave corta y reutilizada: AES-GCM o un keystream aleatorio por mensaje. Detección: ficheros con entropía baja y longitud múltiplo de la clave.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
 
 ## Referencias

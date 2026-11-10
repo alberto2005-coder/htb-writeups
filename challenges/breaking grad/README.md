@@ -23,11 +23,15 @@ Aplicación de «calificaciones» con endpoints para crear estudiantes y calcula
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+- Aplicación Node/Express de «calificaciones» con `/api/calculate` y `/api/register`; el reto **entrega el código** y el `Dockerfile`.
+- `package.json` fija `static-eval` 2.0.2 y el `ObjectHelper.merge` recursivo del proyecto: la mezcla no descarta `__proto__` ni `constructor`.
+- Existe `/debug/:action` con `version` (que hace `fork` de `VersionCheck.js`) y `ram`: el proceso hijo es el que convierte la contaminación en ejecución.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+- El `merge` recursivo copia claves del JSON del cliente en objetos del servidor sin filtrar `__proto__`/`constructor.prototype`.
+- Con `constructor.prototype.NODE_OPTIONS = --require /proc/self/environ` se inyecta un módulo en el arranque de Node.
+- `/debug/version` ejecuta `fork`, que respeta `NODE_OPTIONS`: el `require` carga el contenido del entorno y ahí va el payload.
 
 ## Explicación del fallo
 
@@ -93,5 +97,5 @@ Al invocar el cálculo, el proceso hijo hereda el objeto envenenado y ejecuta lo
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Filtrar `__proto__`, `constructor` y `prototype` en el merge (`Object.create(null)`, `hasOwnProperty`), congelar prototipos y no evaluar expresiones del cliente. Detección: JSON con `constructor` anidado.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
