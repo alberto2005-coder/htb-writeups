@@ -22,6 +22,10 @@ Hack The Box's beginner track: short boxes in linear tiers, each training **one 
 | Explosion | Windows | 3389/rdp | `Administrator` with a blank password | [ES](explosion/README.md) | [Ver](explosion/README.en.md) |
 | Preignition | Linux | 80/http | Hidden `/admin.php` and `admin:admin` | [ES](preignition/README.md) | [Ver](preignition/README.en.md) |
 | Mongod | Linux | 27017/mongo | MongoDB without `--auth` | [ES](mongod/README.md) | [Ver](mongod/README.en.md) |
+| Synced | Linux | 873/rsync | Anonymous module and `rsync` with no credentials | [ES](synced/README.md) | [Ver](synced/README.en.md) |
+| Sequel | Linux | 3306/mysql | `root` with no password and `show databases` | [ES](sequel/README.md) | [Ver](sequel/README.en.md) |
+
+> **Tiers:** the first eight (Meow → Synced) are Tier 0; **Sequel** is Tier 1 and still belongs in this section. All nine are here.
 
 ## Cross-cutting lessons
 
