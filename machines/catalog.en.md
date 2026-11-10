@@ -81,6 +81,11 @@ Reference notes for **retired** machines, used to study techniques. Rows marked 
 | Busqueda | Linux | Easy | Searchor `eval()`, a `.git` with credentials, Gitea and the relative `full-checkup.sh` | [ES](../machines/linux/busqueda/README.md) | [Ver](../machines/linux/busqueda/README.en.md) |
 | Soccer | Linux | Easy | Default Tiny File Manager, blind WebSocket SQLi and `doas` with `dstat` | [ES](../machines/linux/soccer/README.md) | [Ver](../machines/linux/soccer/README.en.md) |
 | Timelapse | Windows | Easy | Anonymous SMB, PFX, PowerShell history and LAPS up to Administrator | [ES](../machines/windows/timelapse/README.md) | [Ver](../machines/windows/timelapse/README.en.md) |
+| Cicada | Windows | Easy | Guest SMB, onboarding password, spray and `SeBackupPrivilege` | [Ver](../machines/windows/cicada/README.md) | [EN](../machines/windows/cicada/README.en.md) |
+| Support | Windows | Easy | Reversing `UserInfo.exe`, password in `info`, GenericAll over the DC and RBCD | [Ver](../machines/windows/support/README.md) | [EN](../machines/windows/support/README.en.md) |
+| Administrator | Windows | Medium | ACL chain to FTP, `.psafe3`, targeted kerberoasting and DCSync | [Ver](../machines/windows/administrator/README.md) | [EN](../machines/windows/administrator/README.en.md) |
+| Escape | Windows | Medium | PDF with MSSQL credentials, `xp_dirtree` and ADCS ESC1 | [Ver](../machines/windows/escape/README.md) | [EN](../machines/windows/escape/README.en.md) |
+| Pilgrimage | Linux | Easy | `/.git`, ImageMagick CVE-2022-44268 and binwalk CVE-2022-4510 | [Ver](../machines/linux/pilgrimage/README.md) | [EN](../machines/linux/pilgrimage/README.en.md) |
 
 ## Pending
 

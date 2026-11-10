@@ -53,6 +53,11 @@
 | Perfect Synchronization | Crypto | Easy | Sustitución por carácter (`char + 15`): análisis de frecuencias, no AES-ECB | **Retired** | [Ver](Perfect%20Synchronization/README.md) | [EN](Perfect%20Synchronization/README.en.md) |
 | xorxorxor | Crypto | Easy | XOR con clave repetida y prefijo conocido | **Retired** | [Ver](xorxorxor/README.md) | [EN](xorxorxor/README.en.md) |
 | Baby Time Capsule | Crypto | Very Easy | RSA con módulos pequeños: factorizar y descifrar | **Retired** | [Ver](Baby%20Time%20Capsule/README.md) | [EN](Baby%20Time%20Capsule/README.en.md) |
+| Gunship | Web | Easy | Prototype pollution en `flat@5.0.0` + AST injection en el motor de plantillas | **Retired** | [Ver](Gunship/README.md) | [EN](Gunship/README.en.md) |
+| baby interdimensional internet | Web | Easy | `exec()` de Python 2 sobre `ingredient`/`measurements`, sin filtros | **Retired** | [Ver](baby%20interdimensional%20internet/README.md) | [EN](baby%20interdimensional%20internet/README.en.md) |
+| Interdimensional Internet | Web | Medium | WAF de `[ ( _ .` evadido con `\x` y exfiltración por `flask.session` | **Retired** | [Ver](Interdimensional%20Internet/README.md) | [EN](Interdimensional%20Internet/README.en.md) |
+| Fake Boost | Forensics | Easy | PowerShell invertido + base64 y exfiltración AES en un `POST` | **Retired** | [Ver](Fake%20Boost/README.md) | [EN](Fake%20Boost/README.en.md) |
+| Impossible Password | Reversing | Easy | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | **Retired** | [Ver](Impossible%20Password/README.md) | [EN](Impossible%20Password/README.en.md) |
 
 ## Categorías
 
