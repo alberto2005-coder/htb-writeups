@@ -46,11 +46,15 @@ tshark -r controller_2025-07-01.pcap -q -z conv,ip
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- La enumeración son **3.695 peticiones** de `ffuf` (UA de la herramienta) con un `Host` distinto por intento; el cambio a un Chrome real marca el momento en que el atacante encuentra `cloud.vantage.tech`.
+- En el dashboard (**OpenStack Horizon**) el login incluye campos trampa (`fake_email`, `fake_password`): hay que ignorarlos para leer las credenciales reales.
+- El cruce con la captura del controlador muestra la descarga de datos por la API de la nube: el impacto está en la segunda captura, no en la web.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- Contar `Host` distintos es lo que separa fuzzing de navegación; sin eso, el PCAP parece tráfico normal.
+- El `User-Agent` identifica la herramienta y su ritmo: `ffuf` no pausa como un humano.
+- Mirar solo la captura web deja fuera la exfiltración: la pareja de PCAP es obligatoria.
 
 ## Qué enseña
 

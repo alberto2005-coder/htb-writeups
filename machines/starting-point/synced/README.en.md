@@ -26,8 +26,9 @@ nmap -sC -sV <IP> -oN nmap.txt
 ```
 
 ```text
-22/tcp   ssh    OpenSSH
-873/tcp  rsync  rsync
+873/tcp  open  rsync  (protocol version 31)
+
+No SSH: the box only exposes the `rsync` daemon (writeups agree port 22 does not answer).
 ```
 
 ```bash

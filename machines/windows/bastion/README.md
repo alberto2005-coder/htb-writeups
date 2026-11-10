@@ -5,7 +5,7 @@ difficulty: Easy
 platform: Hack The Box
 category: Machines
 state: Retired
-tags: [windows, smb, vhd, sam, mremoteng, cve]
+tags: [windows, smb, vhd, sam, mremoteng, static-key]
 ---
 
 # Bastion — Hack The Box
@@ -17,7 +17,7 @@ tags: [windows, smb, vhd, sam, mremoteng, cve]
 
 ## TL;DR
 
-Windows Server 2016 en WORKGROUP, sin dominio. El SMB permite invitado y comparte `Backups` con una copia de Windows Image Backup: dos VHD, uno de 5,4 GB. En vez de descargarlo, se monta por SMB con `guestmount`, se copian `SAM` y `SYSTEM` y se sacan los hashes locales. El de `L4mpje` se rompe con rockyou y da SSH. Como administrador local queda `mRemoteNG`, cuyas contraseñas guardadas están cifradas con una clave fija (CVE-2023-30367) y llevan a `Administrator`.
+Windows Server 2016 en WORKGROUP, sin dominio. El SMB permite invitado y comparte `Backups` con una copia de Windows Image Backup: dos VHD, uno de 5,4 GB. En vez de descargarlo, se monta por SMB con `guestmount`, se copian `SAM` y `SYSTEM` y se sacan los hashes locales. El de `L4mpje` se rompe con rockyou y da SSH. Como administrador local queda `mRemoteNG`, cuyas contraseñas guardadas se cifran con una **clave estática publicada** por el propio proyecto (fallo de diseño, sin CVE asignado) y se descifran con `mremoteng-decrypt`; de ahí sale `Administrator`.
 
 ## Reconocimiento
 
@@ -37,29 +37,9 @@ Equipo suelto, no unido a dominio. `smb2-security-mode` muestra signing no reque
 
 ## Enumeración
 
-```bash
-smbclient -L //<IP> -N
-smbmap -H <IP> -u guest -p ''
-```
-
-```text
-Backups   READ      Backups
-```
-
-```bash
-smbclient //<IP>/Backups -N
-smb: \> recurse ON
-smb: \> ls
-```
-
-```text
-note.txt
-WindowsImageBackup\L4mpje-PC\Backup 2019-02-22 124351\
-   9b9cfbc3-369e-11e9-a17c-806e6f6e6963.vhd   (37 MB)
-   9b9cfbc4-369e-11e9-a17c-806e6f6e6963.vhd   (5,4 GB)
-```
-
-`note.txt` avisa de que no se descargue el VHD por tamaño. Es una pista: se puede montar en remoto.
+- `smbclient -L //<IP> -N` con invitado lista `ADMIN$`, `C$`, `IPC$` y **`Backups`**, que es legible y escribible.
+- Dentro, `note.txt` avisa de que la copia es enorme: `WindowsImageBackup/L4mpje-PC/Backup 2019-02-22 124351` con dos `.vhd` (uno de 5,4 GB).
+- En vez de descargarlo, se monta: `guestmount --add <vhd> --inspector --ro /mnt/vhd` (o `vhdimount` + `mmls -aB`). Con el volumen montado se copian `Windows/System32/config/SAM` y `SYSTEM` y `impacket-secretsdump -sam SAM -system SYSTEM LOCAL` da el hash de `L4mpje`.
 
 ## Foothold
 

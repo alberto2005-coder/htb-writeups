@@ -6,7 +6,7 @@ platform: Hack The Box
 category: Web / CMS
 state: Retired
 pwned: 2026-11-09
-tags: [windows, drupal, drupalgeddon2, cve-2018-7600, juicypotato, seimpersonate]
+tags: [windows, drupal, drupalgeddon2, cve-2018-7600, kernel, ms15-051, cve-2015-1701]
 ---
 
 # Bastard — Hack The Box
@@ -15,7 +15,7 @@ tags: [windows, drupal, drupalgeddon2, cve-2018-7600, juicypotato, seimpersonate
 
 ## TL;DR
 
-Un **Drupal 7.54** sin parchear cae con **Drupalgeddon2** (CVE-2018-7600): se ejecuta PHP sin autenticación y se sube un webshell. El servicio corre como una cuenta con `SeImpersonatePrivilege`, así que **JuicyPotato** completa el paso a `SYSTEM`.
+Un **Drupal 7.54** sin parchear cae con **Drupalgeddon2** (CVE-2018-7600): se ejecuta PHP sin autenticación y se sube un webshell. El host está sin parches (`Hotfix(s): N/A`), así que un exploit de kernel, **MS15-051** (CVE-2015-1701), completa el paso a `SYSTEM`. Los writeups de referencia usan el exploit de kernel, no un Potato.
 
 ## Reconocimiento
 
@@ -37,7 +37,9 @@ droopescan scan drupal -u http://<TARGET_IP>
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `curl http://<IP>/CHANGELOG.txt` fija la versión exacta: **Drupal 7.54** (anterior al parche 7.58 de CVE-2018-7600).
+- `droopescan scan drupal -u http://<IP>` confirma el núcleo y que no hay módulos de terceros que distraigan; el 445/5985 no aportan credenciales.
+- `systeminfo` tras el foothold muestra `Windows Server 2008 R2` con `Hotfix(s): N/A`: de ahí sale la decisión de usar un kernel exploit.
 
 ## Foothold
 

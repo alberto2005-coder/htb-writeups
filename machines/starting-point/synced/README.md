@@ -26,9 +26,10 @@ nmap -sC -sV <IP> -oN nmap.txt
 ```
 
 ```text
-22/tcp   ssh    OpenSSH
-873/tcp  rsync  rsync
+873/tcp  open  rsync  (protocol version 31)
 ```
+
+No hay SSH: esta caja solo expone el demonio `rsync` (los writeups coinciden en que el 22 no responde).
 
 ```bash
 nmap -p873 --script rsync-list-modules <IP>
@@ -36,7 +37,9 @@ nmap -p873 --script rsync-list-modules <IP>
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `rsync rsync://<IP>/` (o `nmap -p873 --script rsync-list-modules`) lista un único módulo: **`public`**, descrito como «Anonymous Share».
+- `rsync --list-only rsync://<IP>/public/` muestra un `flag.txt` de **33 bytes** y nada más: el módulo es de solo lectura y no permite salir de su raíz.
+- No hay más servicios: sin SSH ni web, la superficie entera es el 873.
 
 ## Foothold
 
@@ -68,7 +71,7 @@ Si el módulo permite escritura (`rsync -av ./algo rsync://<IP>/<modulo>/`), el 
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag se descarga del módulo anónimo; no hay usuario de sistema ni escalada.
 
 ## Evidencia
 
@@ -84,4 +87,4 @@ Si el módulo permite escritura (`rsync -av ./algo rsync://<IP>/<modulo>/`), el 
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- `auth users` + `secrets file` en `rsyncd.conf`, `read only = yes` y `hosts allow` por subred. Detección: `#list` a 873 desde hosts no autorizados y transferencias sin usuario.

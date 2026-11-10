@@ -40,7 +40,7 @@ wevtutil qe System /q:"*[System[EventID=7045]]" /f:text
 
 ### 2. Contar las ejecuciones
 
-Cada sesión deja una entrada en el canal operativo del servicio. Contar los arranques (`PSEXESVC` iniciado) da el número de veces; comprobar que coinciden con las entradas de `Prefetch` y con los ficheros creados evita contar reconexiones como ejecuciones nuevas.
+Cada sesión deja una entrada en el canal operativo del servicio. Contar los arranques (`PSEXESVC` iniciado) da el número de veces; en esta caja el `RunCount` de `Prefetch` es **9**, y las marcas de tiempo de las ejecuciones permiten aislar la **quinta desde el final** y leer su `.key` (el fichero que PsExec deja por ejecución) y sus named pipes (`\psexesvc`).
 
 ### 3. El rastro del nombre de origen
 

@@ -23,11 +23,15 @@ Aplicación con descarga de código. Un campo de ciudad devuelve el tiempo. Exis
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+- El reto **entrega el código** (`weather-app.zip`): `unzip` y `npm install` en local, y `package.json` delata un runtime Node antiguo.
+- Rutas: `/` (formulario de ciudad), `/login` y `/api/weather`, que proxya hacia `http://internal-api:3000/weather?city=<ciudad>`.
+- El servicio interno no está expuesto: la única vía es que el frontend hable por él.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+- En `routes/weather.js` la ciudad se concatena en la URL sin validar: `http://internal-api:3000/weather?city=${city}`.
+- El cliente HTTP (Node antiguo) no sanea `\r\n` en la ruta, así que un `city` con CRLF inyecta una segunda petición contra el servicio interno.
+- El servicio interno monta la ciudad en una consulta SQL por concatenación: la respuesta splitting sirve para alcanzar el login y la SQLi para crear un admin.
 
 ## Explicación del fallo
 

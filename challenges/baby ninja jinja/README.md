@@ -23,11 +23,15 @@ Un buscador que refleja lo que escribes. `{{7*7}}` devuelve error o el texto tal
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+- Un buscador que refleja el término sin escapar. `{{7*7}}` no devuelve `49`: hay una **blacklist** que bloquea `{{`, `}}`, `_`, `.`, `os` y `config`.
+- El nombre del reto confirma Jinja2 en Flask; el servidor devuelve la plantilla renderizada desde `render_template_string`.
+- La lista negra es la única defensa: no hay sandbox ni `SandboxedEnvironment`.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+- `{% print 7*7 %}` sí funciona: la blacklist solo cubre las llaves dobles, no las sentencias.
+- Sin `.` se usa el filtro `attr` (`''|attr('__class__')`), y sin `_` se recurre a `request.application` para llegar a los globals.
+- Con `attr` y `request.application.__globals__` se alcanza `os.popen` sin escribir los nombres prohibidos.
 
 ## Explicación del fallo
 
