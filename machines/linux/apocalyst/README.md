@@ -38,7 +38,7 @@ wpscan --url http://apocalyst.htb/ --enumerate u
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+`wpscan --enumerate u` da `falaraki` y el generador del HTML fija **WordPress 4.8**. Ningún diccionario estándar encuentra el directorio: el nombre sale del texto del blog, y dentro hay dos imágenes casi idénticas (`image.jpg` y `rightiousness.jpg`) que solo se distinguen por tamaño.
 
 ## Foothold
 

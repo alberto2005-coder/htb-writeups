@@ -34,7 +34,7 @@ echo "<IP> apocalyst.htb" >> /etc/hosts
 wpscan --url http://apocalyst.htb/ --enumerate u
 ```
 
-`wpscan` lists user `falaraki`. Directory brute force with standard lists finds nothing useful (`wp-admin`, `wp-content`, `wp-includes`).
+The generator meta pins **WordPress 4.8** and `wpscan` lists user `falaraki`. Directory brute force with standard lists finds nothing useful (`wp-admin`, `wp-content`, `wp-includes`).
 
 ## Access
 
@@ -45,7 +45,7 @@ cewl http://apocalyst.htb/ -w cewl.txt --with-numbers -d 3
 wfuzz -c -w cewl.txt --hc 404 http://apocalyst.htb/FUZZ/
 ```
 
-A blog-named directory appears; inside is an image.
+A blog-named directory appears; inside are two near-identical images (`image.jpg` and `rightiousness.jpg`) that differ only in size. That is the hint.
 
 2. **Steganography**:
 

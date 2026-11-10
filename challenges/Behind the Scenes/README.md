@@ -16,19 +16,25 @@ type: Reversing
 
 ## TL;DR
 
-Un ELF `stripped` que pide una contraseña de 12 caracteres. El autor insertó instrucciones **`UD2`** para que el descompilador se pierda: Ghidra muestra un `main` casi vacío. La solución es bajar a **GDB**, ver los cuatro `strncmp` y leer los literales comparados.
+El binario instala un manejador de `SIGILL` y ejecuta `UD2` (`0f 0b`): la excepción de opcode inválido salta, el manejador reanuda en la instrucción siguiente y el flujo real queda escondido para el desensamblador. Ghidra muestra un `main` casi vacío; con **GDB** (o marcando el byte tras cada `UD2` como código) aparecen los cuatro `strcmp` y los literales.
 
 ## Enunciado y superficie
 
-- Categoría Reversing; el reto entrega el material descrito en «Reconocimiento».
+«Después de mucho pelear por proteger nuestras cadenas secretas, dimos con la solución: hacer la descompilación más difícil». Se entrega un único ELF de 64 bits (`behindthescenes`) que pide la contraseña por argumento.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+file behindthescenes
+./behindthescenes            # ./challenge <password>
+strings -a behindthescenes | head
+```
+
+`strings` no da la contraseña y `ltrace`/`strace` tampoco: el binario ejecuta `UD2` a propósito y la lógica real vive en el manejador de `SIGILL`.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+`main` registra un manejador con `sigaction(SIGILL, ...)` y termina en `ud2` (`0f 0b`). Al ejecutarse, la CPU lanza `SIGILL`, el manejador avanza el `RIP` y continúa. Ghidra deja de desensamblar tras el primer `UD2`; de ahí que `main` parezca vacío.
 
 ## Explicación del fallo
 
@@ -36,11 +42,16 @@ Un ELF `stripped` que pide una contraseña de 12 caracteres. El autor insertó i
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```bash
+chmod +x behindthescenes
+./behindthescenes Itz_0nLy_UD2
+```
+
+No necesita red ni contenedor: la contraseña se valida en local.
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+1. Ejecutar sin argumentos para ver el uso. 2. Desensamblar `main` con GDB o marcar como código el byte posterior a cada `UD2`. 3. Leer los cuatro `strcmp` y concatenar los fragmentos.
 
 ## Evidencia
 
@@ -49,8 +60,8 @@ Un ELF `stripped` que pide una contraseña de 12 caracteres. El autor insertó i
 ## Lecciones aprendidas
 
 - **`UD2` y Ghidra**: si el decompilador da basura, no es un reto imposible: cambiar a GDB.
-- **Parchear**: convertir los `UD2` en `NOP` permite seguir el flujo, pero no es necesario.
-- **Longitud**: el programa exige 12 bytes; contar los fragmentos antes de probar.
+- **`SIGILL`, no `NOP`**: el binario no se rompe al llegar al `UD2`; el manejador lo salta y sigue. Parchear a `NOP` es una comodidad, no un requisito.
+- **Longitud**: exige 12 bytes; contar los fragmentos antes de probar.
 
 - La "anti-descompilación" es ofuscación: el ensamblador sigue contando la verdad.
 - Comparar cadenas troceadas es una forma de esconder un secreto en el código.
@@ -58,8 +69,10 @@ Un ELF `stripped` que pide una contraseña de 12 caracteres. El autor insertó i
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+Aquí no hay vulnerabilidad: el reto demuestra que **ofuscar no protege un secreto**. Si la contraseña se valida en el cliente, se extrae; `UD2` solo molesta a la herramienta, no al analista.
+
+- Regla práctica: ningún secreto embebido en un binario distribuido; si hace falta, clave derivada por usuario y verificación en servidor.
+- Detección (si se usara en malware): ejecutables con `SIGILL`/`SIGTRAP` como flujo normal y secciones sin desensamblar son señal de ofuscación.
 
 ## Método
 

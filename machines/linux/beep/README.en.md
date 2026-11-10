@@ -17,7 +17,7 @@ tags: [linux, elastix, freepbx, lfi, cve, sudo]
 
 ## TL;DR
 
-An Elastix PBX with FreePBX, Webmin and a pile of mail services. An LFI in `vtigercrm/graph.php` reads `/etc/amportal.conf` and hands over the database, panel and Asterisk passwords. With a valid extension, CVE-2012-4869 in `callme_page.php` runs commands as `asterisk`. Escalation is a `sudo nmap` solved through interactive mode.
+An Elastix PBX with FreePBX, Webmin and a pile of mail services. An LFI in `vtigercrm/graph.php` reads `/etc/amportal.conf` and hands over the database, panel and Asterisk passwords. With a valid extension, CVE-2012-4869 in `callme_page.php` runs commands as `asterisk`. Escalation reuses that password: it is also `root`'s SSH password (legacy algorithms must be enabled on the client).
 
 ## Recon
 
@@ -104,13 +104,15 @@ User asterisk may run the following commands on beep:
     ...
 ```
 
-This `nmap` still keeps interactive mode, which spawns a shell:
+The direct route, and the one reference writeups document, is the `amportal.conf` password reused for `root`:
 
 ```bash
-sudo nmap --interactive
-nmap> !sh
-# id → uid=0(root)
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 \
+    -oHostKeyAlgorithms=+ssh-dss root@<IP>
+# password: <the one from amportal.conf>
 ```
+
+Other doors on the same host: Webmin 1.570 on 10000 and ShellShock against the old CGIs. The `sudo` rules on `nmap`, `yum` or `touch` are a second door but **not** one to assume: `nmap`'s `--interactive` mode was removed in later releases; check `nmap --version` before relying on it.
 
 ## Evidence
 
@@ -123,7 +125,7 @@ nmap> !sh
 - Appliances (Elastix, FreePBX) accumulate old panels and services: `searchsploit` on the product beats hunting per-service CVEs.
 - An LFI that reads configuration turns a read-only bug into credentials for several systems.
 - TLS 1.0 forces client tweaks; know how to do it without breaking the rest of the lab.
-- `nmap` interactive mode is instant root when it is in sudoers (GTFOBins).
+- The panel password reused for `root` is the short escalation; `sudo` on `nmap`/`yum` is a second door, but interactive mode no longer exists in recent releases.
 - Panel extensions are exploit input: enumerate them before firing.
 
 ## Mitigations and detection
@@ -132,7 +134,7 @@ nmap> !sh
 - Restrict `recordings/misc/callme_page.php` and validate `callmenum` against real extensions.
 - Remove `nmap`, `yum` and friends from sudoers; if required, pin arguments.
 - Disable TLS 1.0/1.1 and SSLv3 on the server.
-- Detection: requests to `graph.php?current_language=` containing `../`, outbound calls from Asterisk, `nmap --interactive` processes.
+- Detection: requests to `graph.php?current_language=` containing `../`, outbound calls from Asterisk, `nmap` spawned by `asterisk`.
 - MITRE: T1005 (local data), T1190, T1548.003.
 
 ## References

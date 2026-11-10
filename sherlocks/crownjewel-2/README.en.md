@@ -4,7 +4,7 @@ category: DFIR / Active Directory
 difficulty: Medium
 platform: Hack The Box
 state: Retired
-tags: [dfir, active-directory, pass-the-hash, smb, evtx]
+tags: [dfir, active-directory, ntds, ntdsutil, esent, evtx]
 ---
 
 # CrownJewel-2 — Hack The Box (Sherlock)
@@ -13,54 +13,58 @@ tags: [dfir, active-directory, pass-the-hash, smb, evtx]
 
 ## Scenario
 
-A follow-up to CrownJewel-1: the attacker already owns an account and moves across the domain. Evidence is event logs from the DCs and the compromised host; the task is to reconstruct lateral movement and tell it apart from legitimate admin traffic.
+The second round against Forela's DC. In CrownJewel-1 the attacker copied `NTDS.dit` with **`vssadmin`**; now they are back with a domain admin account and this time they use **`ntdsutil.exe`**, which also creates a volume snapshot but leaves traces in the **Application** log of the ESE database.
 
 ## Evidence and setup
 
-```bash
-unzip crownjewel2.zip        # usual password: hacktheblue
-sha256sum *                  # inventory before touching anything
-EvtxECmd.exe -d Logs --csv out --csvf all.csv
-```
-
-Useful channels: `Security.evtx`, `System.evtx`, `Microsoft-Windows-Sysmon/Operational`, `PowerShell/Operational` and the SMB service log.
-
-## Questions the analysis answers
-
-1. Which account authenticated first after the compromise?
-2. Which hosts received that logon, and in what order?
-3. Was a hash used instead of a password?
-4. Which resource was read or copied?
+- `Artifacts/` with `Application.evtx`, `Security.evtx`, `System.evtx` and the NTFS operational log.
+- `EvtxECmd` to turn EVTX into CSV, `Timeline Explorer` or `Hayabusa` to filter.
+- Timestamps are requested in UTC as `YYYY-MM-DD HH:MM:SS`.
 
 ## Method
 
-- Filter **4624 type 3** and **type 10**, grouped by `TargetUserName`, `IpAddress` and time. The same user appearing on hosts they never work on is the signal.
-- **4624 with NTLM `AuthenticationPackage`** and empty/`NtLmSsp` `LogonProcess` points to *pass-the-hash*; Kerberos would show `Kerberos` and a prior TGT.
-- Cross-check **5140/5145** for the share accessed and **4662** for AD objects.
-- DC **4768/4769** give context: no TGT for that account before the 4624 means the logon used a hash or cleartext credential.
-- Build a timeline (`Timeline Explorer`) and keep the first occurrence of each user/host pair.
+### 1. The snapshot
 
-## Findings (pattern)
+`ntdsutil` starts the Volume Shadow Copy service before copying. In `System.evtx` the service enters `running` (event 7036); that mark is when the dump began.
 
-```text
-4624 type 3  user=<account>  src=<attacker host>  auth=NTLM
-5145         share=\\ <host>\C$  access=ReadData
-4662         object=DC=<domain>  DS-Replication-Get-Changes
+```bash
+EvtxECmd.exe -f System.evtx --csv out --csvf system.csv
+grep -i "Volume Shadow Copy" out/system.csv
 ```
 
-NTLM + `C$` access + AD reads without a prior TGT describe the movement and the goal; that is not a normal interactive logon.
+### 2. ESE: the three events that give the copy away
+
+The ESE database logs, in **Application**:
+
+- **325** — a new database copy is about to be created (includes the destination path),
+- **326** — copy created,
+- **327** — database detached and ready for use.
+
+That sequence proves `ntdsutil` rather than `vssadmin`, and it hands over the **full path** of the dumped `ntds.dit`.
+
+### 3. Who, and with what
+
+In `Security.evtx`: `4624` for the compromised domain admin, `4672` (special privileges) for the same `Logon ID`, and `4688` with `ntdsutil.exe`. The `Logon ID` is what joins the three; it identifies the account and the source host.
+
+`ntdsutil` also enumerates groups while it runs: look for **Backup Operators** and **Administrators** queries to confirm the objective.
+
+### 4. Getting the data out
+
+The copy leaves the DC over SMB: `5140`/`5145` against `C$` or `ADMIN$`, or straight to an attacker share. Correlating those with the `325/326` timestamps closes the timeline.
+
+## Findings
+
+The dump used `ntdsutil`, not `vssadmin`: the signature is **7036 (VSS) + 325/326/327 (ESE) + 4688**, and the file path is in event 325 itself. The account is a domain admin, so rotate `krbtgt` twice and hunt the persistence it left.
 
 ## Lessons
 
-- Pass-the-hash produces no 4768: the absence of Kerberos is as informative as a 4624.
-- Baseline the user to avoid false positives from admin tooling.
-- Administrative shares (`C$`, `ADMIN$`) are the best lateral-movement indicator.
+- `ntdsutil` leaves a triple trace (VSS service, ESENT events, process); `vssadmin` only leaves the service and the binary.
+- The `Logon ID` chains `4624` → `4688` → `4672`; without it the events tell no story.
+- Event 325 gives the exact dump path, so there is no need to guess from `$MFT`.
 
 ## Detection and mitigation
 
-- Alert on 4624 type 3 with NTLM from non-admin hosts.
-- Protect privileged accounts (LAPS, `Protected Users`, restricted credentials).
-- Segment and restrict `C$`/`ADMIN$`; audit 5140/5145.
-- Rotate the compromised hash and review active sessions.
-
-MITRE: T1550.002, T1021.002, T1078.
+- Restrict `ntdsutil.exe` and `vssadmin.exe` with AppLocker/WDAC and alert on their execution on a DC.
+- Tier domain admin accounts, enable `Protected Users` and LAPS.
+- Alerts: VSS `7036` followed by `325/326/327` within ten minutes; `5145` on `C$`/`ADMIN$` from non-admin hosts.
+- MITRE: T1003.003, T1021.002, T1078.

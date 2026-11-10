@@ -4,11 +4,10 @@ category: DFIR / Active Directory
 difficulty: Medium
 platform: Hack The Box
 state: Retired
-tags: [dfir, active-directory, pass-the-hash, smb, evtx]
+tags: [dfir, active-directory, ntds, ntdsutil, esent, evtx]
 sherlock: CrownJewel-2
 domain: DFIR
 ---
-
 
 # CrownJewel-2 — Hack The Box (Sherlock)
 
@@ -16,49 +15,58 @@ domain: DFIR
 
 ## Escenario
 
-Continuación del compromiso de CrownJewel-1: el atacante ya tiene una cuenta y se mueve por el dominio. La evidencia son logs de eventos de los DC y del host comprometido; hay que reconstruir el movimiento lateral y distinguirlo del tráfico administrativo legítimo.
+Segunda vuelta del compromiso del DC de Forela. En CrownJewel-1 el atacante copió `NTDS.dit` con **`vssadmin`**; aquí vuelve con una cuenta de administrador de dominio y esta vez usa **`ntdsutil.exe`**, que también crea una instantánea de volumen pero deja rastro en el log **Application** de la base ESE (ESENT).
 
 ## Evidencias
 
-```bash
-unzip crownjewel2.zip        # contraseña habitual: hacktheblue
-sha256sum *                  # inventario antes de tocar nada
-EvtxECmd.exe -d Logs --csv out --csvf all.csv
-```
-
-Canales útiles: `Security.evtx`, `System.evtx`, `Microsoft-Windows-Sysmon/Operational`, `PowerShell/Operational` y el log del servicio SMB.
+- Carpeta `Artifacts/` con `Application.evtx`, `Security.evtx`, `System.evtx` y el log operacional de NTFS.
+- `EvtxECmd` para pasar los EVTX a CSV, `Timeline Explorer` o `Hayabusa` para filtrar.
+- Las horas se piden en UTC y con formato `YYYY-MM-DD HH:MM:SS`.
 
 ## Investigación
 
-1. ¿Con qué cuenta se autenticó el atacante por primera vez tras el compromiso?
-2. ¿Qué hosts recibieron ese logon y en qué orden?
-3. ¿Se usó hash en lugar de contraseña?
-4. ¿Qué recurso se leyó o copió?
+### 1. La instantánea
 
-- Filtrar **4624 tipo 3** y **tipo 10**, agrupando por `TargetUserName`, `IpAddress` y hora. Un mismo usuario apareciendo en hosts donde nunca trabaja es la señal.
-- **4624 con `AuthenticationPackage` NTLM** y `LogonProcess` vacío/`NtLmSsp` apunta a *pass-the-hash*; Kerberos tendría `Kerberos` y un TGT previo.
-- Cruzar con **5140/5145** para ver qué share se abrió y **4662** si se tocó AD.
-- Los **4768/4769** del DC dan el contexto: si no hay TGT para esa cuenta antes del 4624, el logon fue por hash o por credencial en claro.
+`ntdsutil` dispara el servicio de instantáneas antes de copiar. En `System.evtx`, el servicio **Volume Shadow Copy** pasa a `running` (evento 7036); esa marca es el inicio del volcado y lo que se pregunta primero.
+
+```bash
+EvtxECmd.exe -f System.evtx --csv out --csvf system.csv
+grep -i "Volume Shadow Copy" out/system.csv
+```
+
+### 2. ESE: los tres eventos que delatan la copia
+
+La base ESE registra en **Application**:
+
+- **325** — se va a crear una copia nueva de la base (incluye la ruta de destino),
+- **326** — copia creada,
+- **327** — base desmontada y lista para usar.
+
+Esa secuencia es la prueba de que se usó `ntdsutil` y no `vssadmin`, y da la **ruta completa** del `ntds.dit` volcado.
+
+### 3. Quién y con qué
+
+En `Security.evtx`: `4624` del administrador de dominio comprometido, `4672` (privilegios especiales) para el mismo `Logon ID` y `4688` con `ntdsutil.exe`. El `Logon ID` es lo que une los tres eventos; con él se identifica al usuario y el host de origen.
+
+Además, `ntdsutil` enumera grupos durante la operación: aparecen consultas a **Backup Operators** y **Administrators**, útiles para confirmar el objetivo.
+
+### 4. Salida de los datos
+
+La copia se saca del DC por SMB: `5140`/`5145` sobre `C$` o `ADMIN$`, o directamente hacia un recurso del atacante. Cruzar la hora de los `325/326` con esos accesos cierra la línea temporal.
 
 ## Conclusiones
 
-```text
-4624 type 3  user=<cuenta>  src=<host atacante>  auth=NTLM
-5145         share=\\<host>\C$  access=ReadData
-4662         object=DC=<dominio>  DS-Replication-Get-Changes
-```
-
-La combinación NTLM + acceso a `C$` + lectura de AD sin TGT previo describe el movimiento y el objetivo; no es un logon interactivo normal.
+El volcado se hizo con `ntdsutil`, no con `vssadmin`: la firma es la terna **7036 (VSS) + 325/326/327 (ESE) + 4688**, y la ruta del fichero sale del propio evento 325. La cuenta usada es de administrador de dominio, así que hay que rotar `krbtgt` dos veces y revisar la persistencia que dejó.
 
 ## Lecciones
 
-- El *pass-the-hash* no genera 4768: la ausencia de Kerberos es tan informativa como la presencia de un 4624.
-- Comparar con la línea base del usuario evita falsos positivos de herramientas de administración.
-- Los shares administrativos (`C$`, `ADMIN$`) son el mejor indicador de lateral movement.
+- `ntdsutil` deja triple rastro (servicio VSS, eventos ESENT y proceso); `vssadmin` solo deja el servicio y el binario.
+- El `Logon ID` une `4624` → `4688` → `4672`; sin él, los eventos no cuentan una historia.
+- El evento 325 da la ruta exacta del volcado: no hay que adivinarla por el `$MFT`.
 
-- Alertar de 4624 tipo 3 con NTLM desde hosts que no son de administración.
-- Proteger cuentas privilegiadas (LAPS, `Protected Users`, credenciales restringidas).
-- Segmentar y limitar `C$`/`ADMIN$`; auditar 5140/5145.
-- Rotar el hash comprometido y revisar sesiones activas.
+## Mitigaciones y detección
 
-MITRE: T1550.002, T1021.002, T1078.
+- Restringir `ntdsutil.exe` y `vssadmin.exe` con AppLocker/WDAC y alertar de su ejecución en un DC.
+- Cuentas de administrador de dominio en *tiering*, `Protected Users` y LAPS.
+- Alertas: `7036` de VSS seguido de `325/326/327` en menos de 10 minutos; `5145` sobre `C$`/`ADMIN$` desde hosts que no son de administración.
+- MITRE: T1003.003, T1021.002, T1078.

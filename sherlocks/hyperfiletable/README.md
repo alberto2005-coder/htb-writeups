@@ -22,7 +22,7 @@ Un empleado nuevo de Forela descarga su documentación de bienvenida, pero algui
 
 ## Evidencias
 
-- Un `$MFT` (y, según el caso, su CSV ya parseado).
+- Un `$MFT` comprimido con **bzip2** (se descomprime antes de parsear; el MD5 que pide el reto es el del `$MFT` descomprimido, no el del archivo).
 
 ## Investigación
 
@@ -34,7 +34,7 @@ MFTECmd.exe -f '$MFT' --csv . --csvf mft.csv
 
 2. **Usuario**: el perfil con actividad es el único usuario real del sistema; sus rutas (`C:\Users\<usuario>\...`) lo confirman.
 
-3. **Adjunto**: buscar extensiones ejecutables o de scripting descargadas por el navegador — un `.hta`, `.js`, `.lnk` o `.zip` en `Downloads`.
+3. **Adjunto**: en este caso es un **`.hta`** descargado desde un enlace tipo Google Drive, junto a un PowerPoint legítimo que hace de señuelo. Buscar extensiones ejecutables o de scripting en `Downloads`.
 
 4. **Origen**: la **Zone.Identifier** es un flujo alternativo (`file:Zone.Identifier:$DATA`). `ZoneId=3` significa "descargado de Internet"; junto a ella aparece `HostUrl` con la URL de descarga.
 
@@ -42,7 +42,7 @@ MFTECmd.exe -f '$MFT' --csv . --csvf mft.csv
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+El nuevo empleado descargó un `.hta` malicioso desde un enlace externo y lo ejecutó: la MFT conserva la ruta, el `Zone.Identifier` con `ZoneId=3` y el `HostUrl` de la descarga, y la diferencia entre tamaño real y asignado delata el fichero y sus restos.
 
 ## Lecciones
 

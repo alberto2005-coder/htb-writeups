@@ -130,7 +130,7 @@ sudo -u#-1 /bin/bash
 
 ## Mitigations and detection
 
-- Update Bludit (3.9.3 fixes the brute-force bypass; 3.10+ the upload).
+- Update Bludit: the brute-force bypass (CVE-2019-17240) and the upload traversal (CVE-2019-16113) both hit 3.9.2; the login fix lands in 3.9.3 and the upload fix in 3.10.
 - Do not trust `X-Forwarded-For` unless a controlled proxy rewrites it; rate-limit per account.
 - Validate `uuid` and serve uploads from a non-executable directory.
 - Upgrade sudo to >= 1.8.28 and avoid `(ALL, !root)` rules.

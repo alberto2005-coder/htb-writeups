@@ -135,7 +135,7 @@ sudo -u#-1 /bin/bash
 
 ## Mitigaciones y detección
 
-- Actualizar Bludit (3.9.3 corrige el bypass de fuerza bruta; 3.10+ la subida).
+- Actualizar Bludit: el bypass de fuerza bruta (CVE-2019-17240) y el traversal de subida (CVE-2019-16113) afectan a 3.9.2; el arreglo del login llega en 3.9.3 y el de la subida en 3.10.
 - No confiar en `X-Forwarded-For` salvo detrás de un proxy propio que lo reescriba; limitar intentos por cuenta.
 - Validar el parámetro `uuid` y servir las subidas desde un directorio sin ejecución.
 - Actualizar sudo a >= 1.8.28 y no usar reglas `(ALL, !root)`.

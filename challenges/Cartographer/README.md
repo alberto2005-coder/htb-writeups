@@ -23,11 +23,15 @@ Login PHP con **SQL injection** clásica: `' OR '1'='1` entra sin credenciales. 
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+curl -s -i http://<IP>:<puerto>/ | head -40
+```
+
+Un único formulario `POST` con `username` y `password`. No hay rutas en el HTML ni pistas en `robots.txt`: el reto es el login, y la fuerza bruta con rockyou no llega.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+El login concatena usuario y contraseña en la consulta. El bypass conocido es `username=' or 1=1#&password=x`, que devuelve `302` hacia `panel.php?info=home`; también funciona `'-` como usuario.
 
 ## Explicación del fallo
 
@@ -54,7 +58,7 @@ Si el servidor responde con redirección al panel, la consulta se está concaten
 
 ## Reproducción local
 
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+El reto se sirve como contenedor Docker; se puede levantar en local y apuntar las peticiones a `127.0.0.1` para iterar sobre los payloads.
 
 ## Explotación
 
@@ -94,4 +98,6 @@ Si `info` estuviera filtrando rutas, el mismo parámetro sirve para enumerar: `h
 
 ## Mitigaciones y detección
 
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- Consultas preparadas y permisos mínimos para la cuenta de base de datos: un `SELECT` concatenado en el login es bypass inmediato.
+- El parámetro `info` es un `include` dinámico: allowlist de secciones (`home`, `about`, `contact`) en vez de resolver el nombre del fichero, y nunca la flag accesible por parámetro.
+- Detección: `POST` con comillas y `OR` en el usuario, y peticiones a `panel.php?info=` con valores fuera de la lista.

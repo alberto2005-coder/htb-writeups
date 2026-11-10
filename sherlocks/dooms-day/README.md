@@ -1,77 +1,77 @@
 ---
 sherlock: dOOMs Day
 domain: SOC
-difficulty: Medium
+difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [dfir, web, php2shell, cve, webshell, log-analysis]
+tags: [dfir, web, php, php2shell, cve-2026-109618, cve-2026-109619, log-analysis]
 ---
-
 
 # dOOMs Day — Hack The Box
 
-[⚑ English](README.en.md) | **Español**
+[🇬🇧 English](README.en.md) | **Español**
 
 > **Estado:** Retired. Ficha de investigación; sin respuestas literales de la plataforma.
 
 ## Escenario
 
-Una web PHP gestionada por un CMS de terceros aparece con ficheros nuevos y tráfico saliente hacia un host desconocido. Se entrega el árbol web, los logs de acceso y la base de datos del CMS; el objetivo es reconstruir la cadena de explotación de la vulnerabilidad **PHP2Shell** y medir qué se hizo tras el acceso.
+Un servidor Apache con **PHP 8.4.26** acumula caídas de workers y un proceso hijo que no debería existir. Se entregan `access.log`, `error.log` y una captura; el objetivo es reconstruir la explotación de **PHP2Shell** (CVE-2026-109618 / CVE-2026-109619), que no toca la aplicación: vive en el parser de multipart de PHP.
 
 ## Evidencias
 
-- `access.log` / `error.log` de Apache o nginx.
-- Copia del webroot (incluye `.htaccess`, `uploads/`, `cache/`).
-- Export de la base de datos con la tabla de plantillas o configuración.
-- Opcional: `last`, `auth.log` y reglas de cron del host.
+- `logs/access.log` y `logs/error.log` de Apache.
+- `capture.pcap` del periodo.
 
 ## Investigación
 
-### 1. Encontrar la petición inicial
-
-PHP2Shell se abusa a través de una petición HTTP que inyecta código en un contexto que el CMS evaluará después (plantilla, caché o parámetro serializado). En el log se busca la forma anómala, no el `200` genérico:
+### 1. Agotamiento de workers
 
 ```bash
-awk '{print $6, $7}' access.log | sort | uniq -c | sort -rn | head -30
-grep -E "POST .*(template|cache|theme|module)" access.log | head
+grep AH00161 "logs/error.log" | wc -l
 ```
 
-Un `POST` a un endpoint de administración con un `User-Agent` de script (`python-requests`, `curl`) y cuerpo grande es el candidato. El código de respuesta (200 en lugar de 302/403) confirma que se saltó la autenticación.
+Apache avisa de que no quedan hijos disponibles decenas de veces con un único cliente: el atacante mantiene subidas `multipart` estancadas hasta ocupar todo el pool (149 de 150 con la configuración por defecto).
 
-### 2. Verificar si el payload se evaluó
+### 2. El OOM que no es un crash
 
 ```bash
-grep -RIn "eval\|assert\|create_function\|preg_replace" webroot/ --include="*.php" | head -40
-find webroot/ -newermt "2026-01-01" -type f -printf "%TY-%Tm-%Td %TH:%TM  %p\n" | sort
+grep -m1 "Allowed memory size" "logs/error.log"
 ```
 
-Los ficheros con fecha del incidente en directorios escribibles (`uploads`, `cache`, `tmp`, `sessions`) son el webshell. Un `eval` sobre datos controlables por el usuario en el CMS original explica por qué funcionó.
+El límite por defecto (`128M` = `134217728` bytes) se cruza a propósito. Cuando ZendMM no puede reservar no devuelve `NULL`: llama a `zend_bailout` (`longjmp`), se salta el *teardown* del request y deja punteros de sesión colgando. El worker sigue vivo y reutiliza ese estado sucio en la petición siguiente: es la primitiva de use-after-free.
 
-### 3. Qué hizo el atacante
+### 3. Las dos CVEs
+
+- **CVE-2026-109618**: corrupción por agotamiento de memoria durante el parseo, antes de ejecutar el script.
+- **CVE-2026-109619**: estado global obsoleto que sobrevive a la memoria del request.
+
+Se corrigen en PHP **8.4.27** (y 8.2.35 / 8.3.36 / 8.5.12). El campo que las activa es `PHP_SESSION_UPLOAD_PROGRESS`, procesado en `main/rfc1867.c` antes de la aplicación: por eso el `access.log` casi no dice nada y todo está en `error.log`.
+
+### 4. Fuga de ASLR por la respuesta
+
+La sesión colgante se reocupa con una cabecera falsa y PHP escribe ~600 KB de heap vecino en `Set-Cookie: PHPSESSID=...`; de ahí salen las bases de `libphp.so` y del chunk. Señal en el log de acceso: `Set-Cookie` de cientos de KB.
 
 ```bash
-grep -E "shell|cmd|upload|wget|curl" access.log | awk '{print $1, $4, $7}' | sort | uniq -c | sort -rn | head
+awk '{print length($0)}' logs/access.log | sort -rn | head
 ```
 
-Se reconstruye la secuencia: subida del webshell → reconocimiento (`whoami`, `id`, `uname -a`) → descarga de una segunda etapa → movimiento lateral o exfiltración. Las peticiones al webshell con `?cmd=` o `?c=` en el `GET` son la firma.
+### 5. Post-explotación
 
-### 4. Persistencia y alcance
-
-```bash
-crontab -l; ls -la /etc/cron.*
-grep -RIn "base64_decode\|gzinflate" webroot/ | head
-```
-
-Se revisan tareas programadas, usuarios creados (`/etc/passwd` con fechas recientes) y conexiones salientes del periodo. El alcance se cierra con los usuarios del CMS comprometidos: si la inyección llegó desde una cuenta, hay que rotar sus credenciales y la `APP_KEY`.
+Con las bases conocidas se forja un `zend_array` cuyo `pDestructor` apunta a `zif_system` y se obtiene ejecución como `www-data`. En el PCAP se ve la reverse shell al **4444**; en el host, procesos hijos del worker (`sh -c ...`), no del binario final.
 
 ## Conclusiones
 
-- Acceso por explotación de PHP2Shell en el CMS, sin credenciales válidas.
-- Webshell en un directorio de subidas con ejecución PHP habilitada.
-- Post-explotación mínima: reconocimiento y una segunda etapa descargada.
+Compromiso sin autenticar y sin tocar la aplicación: el vector es el runtime PHP (`session.upload_progress`) y la evidencia está en `error.log` (workers agotados + OOM), no en los logs de la web.
 
 ## Lecciones
 
-- Un CMS que escribe plantillas o caché en disco y las evalúa es RCE si el directorio no bloquea PHP.
-- La diferencia entre compromiso y susto está en `access.log`: hay que leer el cuerpo de la petición, no solo la URL.
-- Mitigación: `php_admin_flag engine off` en directorios de subida, WAF con reglas de payload, y actualizar el CMS.
+- Un fatal por memoria no es un crash: es un `longjmp` que puede dejar estado reutilizable.
+- La explotación ocurre **antes** del script: funciona incluso en una página sin PHP.
+- El `error.log` es el artefacto principal; el `access.log` solo da el cliente y el tamaño.
+
+## Mitigaciones y detección
+
+- `session.upload_progress.enabled = Off` si no se usan barras de progreso: una línea y no rompe nada.
+- Actualizar a PHP 8.4.27+ (8.2.35 / 8.3.36 / 8.5.12).
+- `memory_limit` realista y `MaxRequestWorkers` acorde al contenedor.
+- Alertas: `AH00161` repetido con un solo cliente, `Allowed memory size` seguido de un hijo del worker, `Set-Cookie` de cientos de KB, `PHP_SESSION_UPLOAD_PROGRESS` en el cuerpo.
