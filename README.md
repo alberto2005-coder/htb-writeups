@@ -5,6 +5,8 @@
 Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
+>
+> **Cifras:** 94 máquinas, 50 Sherlocks, 50 retos y 36 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -103,6 +105,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Busqueda | Linux | Easy | Web / Inyección | **Retired** (ref.) | `eval()` de Searchor, `.git` con credenciales, Gitea y `full-checkup.sh` relativo | [Ver](machines/linux/busqueda/README.md) | [EN](machines/linux/busqueda/README.en.md) |
 | Soccer | Linux | Easy | Web / SQLi en WebSocket | **Retired** (ref.) | Tiny File Manager por defecto, SQLi ciega por WebSocket y `doas` con `dstat` | [Ver](machines/linux/soccer/README.md) | [EN](machines/linux/soccer/README.en.md) |
 | Timelapse | Windows | Easy | Active Directory / Certificados | **Retired** (ref.) | SMB anónimo, PFX, historial de PowerShell y LAPS hasta Administrator | [Ver](machines/windows/timelapse/README.md) | [EN](machines/windows/timelapse/README.en.md) |
+| Cicada | Windows | Easy | Active Directory / SMB | **Retired** (ref.) | SMB de invitado, contraseña de onboarding, spray, `description` e `info`, `SeBackupPrivilege` y SAM/SYSTEM | [Ver](machines/windows/cicada/README.md) | [EN](machines/windows/cicada/README.en.md) |
+| Support | Windows | Easy | Active Directory | **Retired** (ref.) | Reversing de `UserInfo.exe` (XOR + base64), LDAP, contraseña en `info`, GenericAll sobre el DC y RBCD | [Ver](machines/windows/support/README.md) | [EN](machines/windows/support/README.en.md) |
+| Administrator | Windows | Medium | Active Directory | **Retired** (ref.) | GenericAll y ForceChangePassword, FTP con `.psafe3`, GenericWrite, targeted kerberoasting y DCSync | [Ver](machines/windows/administrator/README.md) | [EN](machines/windows/administrator/README.en.md) |
+| Escape | Windows | Medium | Active Directory / MSSQL | **Retired** (ref.) | PDF con credenciales, `xp_dirtree` como `sql_svc`, `ERRORLOG.BAK` y ADCS ESC1 hasta Administrator | [Ver](machines/windows/escape/README.md) | [EN](machines/windows/escape/README.en.md) |
+| Pilgrimage | Linux | Easy | Web / Linux | **Retired** (ref.) | `/.git` expuesto, ImageMagick 7.1.0-49 (CVE-2022-44268) y binwalk 2.3.2 (CVE-2022-4510) | [Ver](machines/linux/pilgrimage/README.md) | [EN](machines/linux/pilgrimage/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >
@@ -142,6 +149,11 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Emdee five for life | Misc | Very Easy | **Retired** | MD5 contra reloj: sesión HTTP, regex y automatización | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | **Retired** | Inyección LDAP en login y buscador (`*` como comodín) | [Ver](challenges/Phonebook/README.md) | [EN](challenges/Phonebook/README.en.md) |
 | Under Construction | Web | Easy | **Retired** | Confusión de algoritmos JWT: firmar HS256 con la clave pública | [Ver](challenges/Under%20Construction/README.md) | [EN](challenges/Under%20Construction/README.en.md) |
+| Gunship | Web | Easy | **Retired** | Prototype pollution en `flat@5.0.0` y AST injection en el motor de plantillas (variantes Handlebars y Pug) | [Ver](challenges/Gunship/README.md) | [EN](challenges/Gunship/README.en.md) |
+| baby interdimensional internet | Web | Easy | **Retired** | `exec()` de Python 2 sobre `ingredient`/`measurements`, sin filtros ni límites | [Ver](challenges/baby%20interdimensional%20internet/README.md) | [EN](challenges/baby%20interdimensional%20internet/README.en.md) |
+| Interdimensional Internet | Web | Medium | **Retired** | WAF de `[ ( _ .` evadido con `\x5b\x28\x5f\x2e` y exfiltración por `flask.session` | [Ver](challenges/Interdimensional%20Internet/README.md) | [EN](challenges/Interdimensional%20Internet/README.en.md) |
+| Fake Boost | Forensics | Easy | **Retired** | PowerShell invertido + base64, AES-CBC y exfiltración HTTP a un `POST` | [Ver](challenges/Fake%20Boost/README.md) | [EN](challenges/Fake%20Boost/README.en.md) |
+| Impossible Password | Reversing | Easy | **Retired** | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | [Ver](challenges/Impossible%20Password/README.md) | [EN](challenges/Impossible%20Password/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -155,6 +167,11 @@ Escenarios de investigación defensiva: no se ataca nada, se responde a pregunta
 | Sherlock | Dominio | Dificultad | Evidencia | ES | EN |
 |---|---|---|---|---|---|
 | Litter | SOC | Easy | PCAP con túnel DNS (dnscat2) y ZIP del host | [Ver](sherlocks/litter/README.md) | [EN](sherlocks/litter/README.en.md) |
+| Jugglin | DFIR / WSL2 | Medium | Capturas de API de `wsl.exe`: exfiltración y `lsassy` sin rastro en logs de Windows | [Ver](sherlocks/jugglin/README.md) | [EN](sherlocks/jugglin/README.en.md) |
+| Heist | DFIR / Malware | Hard | `Partnership.pdf.exe` → RedLine, PCAP, Prefetch y SRUM | [Ver](sherlocks/heist/README.md) | [EN](sherlocks/heist/README.en.md) |
+| BOughT | DFIR / Malware | Hard | Memoria + AD1, persistencia en `StartUp`, mutex, DGA de 59.049 dominios y DDoS | [Ver](sherlocks/bought/README.md) | [EN](sherlocks/bought/README.en.md) |
+| Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | [Ver](sherlocks/liberty/README.md) | [EN](sherlocks/liberty/README.en.md) |
+| Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | [Ver](sherlocks/jinkies/README.md) | [EN](sherlocks/jinkies/README.en.md) |
 
 - Índice, metodología y pendientes: [sherlocks/README.md](sherlocks/README.md) · [EN](sherlocks/README.en.md)
 - Plantilla de ficha: [templates/sherlock-template.md](templates/sherlock-template.md) · [EN](templates/sherlock-template.en.md)
