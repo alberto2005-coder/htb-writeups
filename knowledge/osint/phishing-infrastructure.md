@@ -62,7 +62,7 @@ curl -s https://<dominio>/ | grep -E "form|action|password"
 - Clon exacto de un login legítimo (comparar hash del HTML).
 - Ofuscación JavaScript que monta el formulario en runtime.
 
-## 6.Respuesta
+## 6. Respuesta
 
 - Bloquear dominio e IP en el filtro de correo y en el DNS.
 - Avisar a los usuarios que recibieron el mensaje.

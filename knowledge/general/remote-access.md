@@ -123,7 +123,9 @@ manage-bde -protectors -disable C:          # sólo en lab
 Offline (disco montado en Linux, por ejemplo un `.vhd`):
 
 ```bash
-dislocker -V /dev/sdb1 -p<CLAVE> -r /mnt/clear
+mkdir -p /mnt/bde
+dislocker -V /dev/sdb1 -p<CLAVE> -- /mnt/bde      # -p = recovery password
+mount -o loop /mnt/bde/dislocker-file /mnt/win
 ```
 
 ## Reglas que ahorran horas

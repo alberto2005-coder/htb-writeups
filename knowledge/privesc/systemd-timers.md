@@ -39,7 +39,7 @@ En systemd las pistas de `crontab` no valen: un timer puede disparar cada minuto
 | `EnvironmentFile` escribible | cambia variables que root usa |
 | `PATH` relativo | `ExecStart=run.sh` sin ruta absoluta → hijack en el directorio de trabajo |
 | `ProtectSystem`/`ProtectHome` ausentes | escritura sobre rutas del sistema |
-| `RelativePath`/ruta con espacios | ejecución de otro binario |
+| `User=` ausente | la unit corre como root |
 
 ### El patrón más rentable
 

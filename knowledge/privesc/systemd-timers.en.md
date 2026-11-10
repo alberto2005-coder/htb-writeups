@@ -39,7 +39,7 @@ systemctl show -p ExecStart,User,Environment <unit>.service
 | Writable `EnvironmentFile` | change variables root relies on |
 | Relative `PATH` | `ExecStart=run.sh` without an absolute path → hijack in the working dir |
 | Missing `ProtectSystem`/`ProtectHome` | writes to system paths |
-| Spaces in paths | execution of a different binary |
+| Missing `User=` | the unit runs as root |
 
 ### The most profitable pattern
 

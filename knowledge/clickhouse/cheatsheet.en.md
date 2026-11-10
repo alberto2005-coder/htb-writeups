@@ -42,7 +42,7 @@ SELECT name, value FROM system.settings WHERE name LIKE '%file%';
 curl -s 'http://<HOST>:8123/' --data-binary 'SELECT * FROM <db>.<t> FORMAT TSVWithNames'
 ```
 
-`system.users` stores `name`, `auth_type` and the hash (SHA256 in modern versions) — useful when passwords are reused.
+`system.users` stores `name`, `auth_type` and, in `auth_params`, the hash serialized as JSON (SHA256 by default in modern versions) — useful when passwords are reused.
 
 ## Reading files
 
@@ -57,8 +57,9 @@ Other formats read binaries raw; `url()`, `s3()`, `mysql()` and `postgresql()` p
 
 ```sql
 INSERT INTO TABLE FUNCTION file('/tmp/pwned.txt', 'LineAsString', 'line String') VALUES ('hola');
-SELECT 'content' INTO OUTFILE '/tmp/out.txt';
 ```
+
+`file()` writes **server-side** and appends by default (`engine_file_truncate_on_insert=1` to truncate). `SELECT ... INTO OUTFILE` does **not** help here: it writes on the client (`clickhouse-client`/`clickhouse-local`) and fails over the HTTP interface.
 
 If the server runs as root, this is arbitrary write **as root**. The classic pattern: overwrite a script that a `systemd` timer executes as root, or drop a key into `authorized_keys`.
 
@@ -80,7 +81,7 @@ Always restore what you touched: in a lab, cleanup is part of the job.
 
 ## Detection
 
-- `file(`, `url(`, `INTO OUTFILE` in the query log.
+- `file(`, `url(`, `s3(` in the query log.
 - New files in system paths owned by the service user.
 - HTTP requests to 8123 from unexpected hosts.
 

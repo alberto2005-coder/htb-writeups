@@ -60,13 +60,13 @@ Ampliar el diff y mirar los píxeles con diferencia distinta de cero.
 
 ```bash
 soxi audio.wav
-spectrogram audio.wav -o spec.png      # o Sonic Visualiser
+sox audio.wav -n spectrogram -o spec.png     # o Sonic Visualiser
 ```
 
 - **Espectrograma**: texto dibujado en frecuencias altas, muy común.
-- **DTMF**: tonos de marcación → `multimon-ng -a DTMF`.
-- **Morse**: `sox audio.wav -n stat` y `multimon-ng -a MORSE`.
-- **LSB de muestras**: `wav2lsb` o script propio con `soundfile`.
+- **DTMF**: tonos de marcación → `multimon-ng -t wav -a DTMF audio.wav`.
+- **Morse (CW)**: `multimon-ng -t wav -a MORSE_CW audio.wav` (el demodulador se llama `MORSE_CW`, no `MORSE`).
+- **LSB de muestras**: script propio con `soundfile`/`wave`; no hay herramienta estándar.
 - **Metadatos**: `exiftool`, `ffprobe -show_format`.
 
 ## 6. Qué no hacer

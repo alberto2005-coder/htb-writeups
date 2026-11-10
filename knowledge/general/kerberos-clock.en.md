@@ -71,13 +71,13 @@ faketime -f '+8h' certipy req -u '<user>@<domain>' -p '<password>' -ca '<CA>' -t
 
 ## 4. The clock that reverts itself
 
-If `timedatectl` shows the right time and seconds later it is wrong again, something is syncing from another source. On a VirtualBox VM the usual culprit is **`vboxservice`** (Guest Additions), which syncs with the host every few seconds:
+If `timedatectl` shows the right time and seconds later it is wrong again, something is syncing from another source. On a VirtualBox VM the usual culprit is **`VBoxService`** (the `vboxadd-service` service, Guest Additions), which syncs with the host every few seconds:
 
 ```bash
-systemctl status vboxservice
-ps aux | grep -i vbox
-sudo systemctl mask vboxservice
-sudo service vboxservice stop
+systemctl status vboxadd-service      # LSB: VirtualBox Additions service
+ps aux | grep -i VBoxService
+sudo systemctl mask vboxadd-service
+sudo service vboxadd-service stop
 ```
 
 `systemd-timesyncd` is usually `inactive` and is not the problem: checking it and ruling it out saves time.

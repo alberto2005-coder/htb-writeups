@@ -71,13 +71,13 @@ faketime -f '+8h' certipy req -u '<user>@<domain>' -p '<password>' -ca '<CA>' -t
 
 ## 4. El reloj que se revierte solo
 
-Si `timedatectl` muestra la hora correcta y a los segundos vuelve a estar mal, hay un servicio sincronizando con otra fuente. En una VM de VirtualBox el culpable habitual es **`vboxservice`** (Guest Additions), que ajusta la hora con el host cada pocos segundos:
+Si `timedatectl` muestra la hora correcta y a los segundos vuelve a estar mal, hay un servicio sincronizando con otra fuente. En una VM de VirtualBox el culpable habitual es **`VBoxService`** (servicio `vboxadd-service`, Guest Additions), que ajusta la hora con el host cada pocos segundos:
 
 ```bash
-systemctl status vboxservice
-ps aux | grep -i vbox
-sudo systemctl mask vboxservice
-sudo service vboxservice stop
+systemctl status vboxadd-service      # LSB: VirtualBox Additions service
+ps aux | grep -i VBoxService
+sudo systemctl mask vboxadd-service
+sudo service vboxadd-service stop
 ```
 
 `systemd-timesyncd` suele estar `inactive` y no es el problema: comprobarlo y descartarlo evita perder tiempo.
