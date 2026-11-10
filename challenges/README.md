@@ -12,7 +12,7 @@
 | Easy Phish | OSINT | Very Easy | Typosquatting y registros SPF/DMARC del dominio señuelo | **Retired** | [Ver](Easy%20Phish/README.md) | [EN](Easy%20Phish/README.en.md) |
 | Hidden in Colors | Stego | Easy | LSB en PNG con `zsteg` y lectura por canales | **Retired** | [Ver](Hidden%20in%20Colors/README.md) | [EN](Hidden%20in%20Colors/README.en.md) |
 | Bare Metal | Hardware | Easy | UART a 3.3 V, U-Boot y extracción del rootfs con `binwalk` | **Retired** | [Ver](Bare%20Metal/README.md) | [EN](Bare%20Metal/README.en.md) |
-| Cryptohorrific | Mobile | Easy | APK con AES: clave en el paquete y descifrado tras `jadx` | **Retired** | [Ver](Cryptohorrific/README.md) | [EN](Cryptohorrific/README.en.md) |
+| Cryptohorrific | Mobile | Easy | App iOS: blob base64 en el plist y clave AES en el binario Mach-O | **Retired** | [Ver](Cryptohorrific/README.md) | [EN](Cryptohorrific/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM en `session.upload_progress`, use-after-free, leak de ASLR por `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [Ver](Dark%20Embargo/README.md) | [EN](Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | MD5 contra reloj: sesión, regex y cálculo del hash en un script | **Retired** | [Ver](Emdee%20five%20for%20life/README.md) | [EN](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | Inyección LDAP: `*` en usuario y contraseña, y buscador con comodines | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
@@ -36,7 +36,7 @@
 | Illumination | Forensics | Easy | `.git` filtrado: el token sigue en el historial y en base64 | **Retired** | [Ver](Illumination/README.md) | [EN](Illumination/README.en.md) |
 | MarketDump | Forensics | Easy | Exportar objetos HTTP y decodificar el outlier en base58 | **Retired** | [Ver](MarketDump/README.md) | [EN](MarketDump/README.en.md) |
 | Took the Byte | Forensics | Easy | XOR de un byte (`0xFF`) hasta un ZIP con el fichero de contraseña | **Retired** | [Ver](Took%20the%20Byte/README.md) | [EN](Took%20the%20Byte/README.en.md) |
-| Deadly Arthropod | Forensics | Easy | Reconstruir pulsaciones desde informes HID de un teclado USB | **Retired** | [Ver](Deadly%20Arthropod/README.md) | [EN](Deadly%20Arthropod/README.en.md) |
+| Deadly Arthropod | Forensics | Medium | Reconstruir pulsaciones desde informes HID de un teclado USB | **Retired** | [Ver](Deadly%20Arthropod/README.md) | [EN](Deadly%20Arthropod/README.en.md) |
 | Obscure | Forensics | Easy | Webshell ofuscado, PCAP con comandos y `.kdbx` crackeado con john | **Retired** | [Ver](Obscure/README.md) | [EN](Obscure/README.en.md) |
 | Keep Tryin' | Forensics | Medium | Exfiltración por DNS en base64url y RC4 con clave débil | **Retired** | [Ver](Keep%20Tryin'/README.md) | [EN](Keep%20Tryin'/README.en.md) |
 | Alien Cradle | Forensics | Very Easy | Desofuscar un *download cradle* de PowerShell por concatenación | **Retired** | [Ver](Alien%20Cradle/README.md) | [EN](Alien%20Cradle/README.en.md) |
