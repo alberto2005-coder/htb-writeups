@@ -73,7 +73,13 @@ El comentario del share `Files` («/etc/Files») delata que los shares cuelgan d
 
 ## Foothold
 
-`https://administrator1.friendzone.red` tiene un login; con `admin:<password>` redirige a `dashboard.php`, que carga una página según `pagename` y añade `.php` automáticamente.
+`https://administrator1.friendzone.red` tiene un login; con `admin:<password>` redirige a `dashboard.php`, que carga una página según `pagename` y añade `.php` automáticamente:
+
+```php
+include($_GET['pagename'] . ".php");
+```
+
+El `.php` lo pone la aplicación: por eso la ruta del share se pasa **sin** extensión.
 
 ```bash
 smbclient //<IP>/Development -N
@@ -92,8 +98,8 @@ La ruta se pasa sin `.php` porque la aplicación lo añade. Para una reverse she
 
 ## Movimiento lateral
 
-- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
-- El detalle está en «Escalada de privilegios».
+- De `www-data` a `friend` con la contraseña de `mysql_data.conf`; de ahí a root por el módulo `os` de Python.
+- No hay segundo equipo: todo se resuelve en FriendZone.
 
 ## Escalada de privilegios
 
@@ -112,6 +118,10 @@ su friend
 ```bash
 find / -writable -type f 2>/dev/null | grep -vE '^/(proc|sys)'
 # /usr/lib/python2.7/os.py
+```
+
+```text
+-rwxrwxrwx 1 root root 25910 /usr/lib/python2.7/os.py   # 777
 ```
 
 ```bash

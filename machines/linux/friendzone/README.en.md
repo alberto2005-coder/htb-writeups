@@ -73,7 +73,13 @@ The `Files` share comment ("/etc/Files") betrays that shares live under `/etc`; 
 
 ## Foothold
 
-`https://administrator1.friendzone.red` has a login; with `admin:<password>` it redirects to `dashboard.php`, which loads a page from `pagename` and appends `.php` automatically.
+`https://administrator1.friendzone.red` has a login; with `admin:<password>` it redirects to `dashboard.php`, which loads a page from `pagename` and appends `.php` automatically:
+
+```php
+include($_GET['pagename'] . ".php");
+```
+
+The app adds `.php`, which is why the share path is passed **without** the extension.
 
 ```bash
 smbclient //<IP>/Development -N
@@ -107,6 +113,10 @@ su friend
 ```bash
 find / -writable -type f 2>/dev/null | grep -vE '^/(proc|sys)'
 # /usr/lib/python2.7/os.py
+```
+
+```text
+-rwxrwxrwx 1 root root 25910 /usr/lib/python2.7/os.py   # 777
 ```
 
 ```bash

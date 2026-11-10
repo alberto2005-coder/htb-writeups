@@ -4,69 +4,76 @@ domain: DFIR
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [dfir, notepad++, extortion, osint, aws, windows]
+tags: [dfir, notepad++, extortion, hands-on-keyboard, osint]
 ---
 
 # Noted — Hack The Box
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; platform answers are not reproduced.
+> **State:** Retired. Methodology notes; no platform answers.
 
 ## Scenario
 
-Simon, a developer at Forela, found an extortion note on his desktop: someone claims to have collected sensitive data from his machine. The CERT hands over only the **Notepad++ artefacts**, suspecting the attacker wrote the note and staged everything from there. There is an **OSINT** component: contact the actor using third-party services.
+Simon, a Forela developer, finds an extortion note on his desktop: someone claims to have collected data from his machine. The CERT only provides the **Notepad++ artifacts**, suspecting the attacker wrote the note and worked from that application with hands-on-keyboard access.
 
 ## Evidence
 
 ```text
-%APPDATA%\Notepad++\config.xml
-%APPDATA%\Notepad++\backup\
-%APPDATA%\Notepad++\session.xml
-%APPDATA%\Notepad++\shortcuts.xml
+Noted/C/Users/Simon.stark/AppData/Roaming/Notepad++/
+├── config.xml
+├── session.xml
+├── shortcuts.xml
+└── backup/
+    ├── LootAndPurge.java@2023-07-24_145332
+    └── YOU HAVE BEEN HACKED.txt@2023-07-24_150548
 ```
 
 ## Investigation
 
 ### 1. File history
 
-`config.xml` keeps recent files as `File` objects with `filename`, `path` and `encoding` attributes. That yields the paths of scripts Simon worked with and, above all, the files the attacker opened.
+`config.xml` keeps the recent-files list in `<File filename="...">` objects. It yields Simon's AWS operations script and his project path:
 
 ```bash
 grep -o 'filename="[^"]*"' config.xml | sort -u
-grep -o 'path="[^"]*"' config.xml | sort -u
 ```
 
-Look for an AWS operations script (name and full path): it is the usual first question in this case and the hint that the attacker wanted credentials.
+```text
+C:\Users\Simon.stark\Documents\Dev_Ops\AWS_objects migration.pl
+```
 
 ### 2. Backups
 
-Notepad++ drops open documents, even unsaved ones, into `backup\`:
+`backup/` preserves the content of open documents, even unsaved ones. The file name carries the last-save date and time:
 
 ```bash
-ls -la backup/
-file backup/*
-strings -n 6 backup/* | head -60
+strings -n 6 "backup/YOU HAVE BEEN HACKED.txt@2023-07-24_150548" | head -40
 ```
 
-The extortion note text, the contact link and possibly content Simon never saved show up here.
+The note demands cryptocurrency and leaves a Tor email address. `session.xml` dates the last modification of the Java code to **2023-07-24 09:53:23 UTC** (NTFS timestamps in the XML), the moment the attacker compiled the tool.
 
-### 3. Session and tabs
+### 3. The attacker's program
 
-`session.xml` lists documents open at shutdown with their paths; it orders what was opened before and after, and flags files that no longer exist (deleted by the attacker).
+`LootAndPurge.java` walks the profile, selects documents and compresses them into `Forela-Dev-Data.zip`, password-protected before exfiltration.
 
-### 4. Contact OSINT
+```bash
+grep -nE "zip|password|File" "backup/LootAndPurge.java@2023-07-24_145332" | head -20
+```
 
-The note's contact address (anonymous mail service or `.onion`) is resolved through public services. Document the provider and creation date if visible; do not engage the actor beyond what the challenge requires.
+### 4. Contact (OSINT)
+
+The note's address points to an anonymous `.onion` mail provider; the wallet is an **ETH** address. The task is to locate the provider's support address, not to engage the actor.
 
 ## Findings
 
-- Access: the attacker worked **in Simon's own session** (hands-on-keyboard), not through automated malware.
-- Goal: AWS scripts and credentials, then the extortion note.
-- Key proof: the Notepad++ history dates and locates every action.
+- No malware: the attacker worked **inside Simon's session** (hands-on-keyboard) using his own IDE.
+- Target: code and development plans; the AWS script was the map.
+- Proof: Notepad++ artifacts give a path and time for every file.
 
 ## Lessons
 
-- Desktop applications store far more than users think: recents, backups and session data.
-- Hands-on-keyboard is proven with application artefacts, not with a binary's `Prefetch`.
-- Mitigation: purge sensitive histories, never hardcode credentials in scripts, and use a secrets manager.
+- Desktop applications keep more than users think: recent files, backups and session state.
+- `session.xml` and `config.xml` complement each other: the first says what was open, the second what was ever opened.
+- A password-protected ZIP built on the host is still exfiltration; the password travels separately.
+- Mitigation: purge sensitive histories, keep credentials out of scripts, use a secret manager.

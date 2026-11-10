@@ -4,9 +4,8 @@ domain: SOC
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [soc, pcap, suricata, credential-stuffing, cve-2022-25237, persistence]
+tags: [soc, pcap, suricata, credential-stuffing, cve-2022-25237, bonitasoft, persistence]
 ---
-
 
 # Meerkat — Hack The Box
 
@@ -16,7 +15,7 @@ tags: [soc, pcap, suricata, credential-stuffing, cve-2022-25237, persistence]
 
 ## Escenario
 
-Forela usa una plataforma de gestión de procesos (Bonitasoft BPM) y sospecha que está comprometida. Se entrega un **PCAP** y el JSON de **alertas de Suricata** del periodo del incidente. Hay que confirmar si hubo intrusión y reconstruirla.
+Forela usa una plataforma de gestión de procesos (**Bonitasoft BPM**) y sospecha que está comprometida. Se entregan un **PCAP** y el JSON de **alertas de Suricata** del periodo.
 
 ## Evidencias
 
@@ -27,43 +26,50 @@ meerkat-alerts.json
 
 ## Investigación
 
-### 1. Alertas primero, paquete después
+### 1. Alertas primero
 
 ```bash
-jq -r '.alert.signature' meerkat-alerts.json | sort | uniq -c | sort -rn
-jq 'select(.alert.severity==1)' meerkat-alerts.json | head -40
+jq -r '.alert.signature' meerkat-alerts.json | sort | uniq -c | sort -rn | headjq 'select(.alert.severity==1)' meerkat-alerts.json | head -40
 ```
 
-La alerta dominante suele apuntar al vector: intentos masivos contra el login de la API. Se anotan IP origen, `timestamp` y `flow_id`, y se localiza esa conversación en el PCAP con Wireshark (`ip.addr==... && tcp.port==...`).
+Aparecen tres familias: intentos de login con el usuario por defecto (`ET WEB_SPECIFIC_APPS Bonitasoft Default User Login Attempt`), el bypass de autorización (`ET EXPLOIT Bonitasoft Authorization Bypass M1 (CVE-2022-25237)`) y tráfico de descarga hacia un paste externo.
 
-### 2. Fuerza bruta / credential stuffing
+### 2. Credential stuffing
 
 ```bash
-tshark -r meerkat.pcap -Y 'http.request.method=="POST"' \
-  -T fields -e frame.time -e ip.src -e http.request.uri -e http.user_agent | head -50
+tshark -r meerkat.pcap -Y 'http.request.method=="POST" && http.request.uri contains "loginservice"' \
+  -T fields -e frame.time -e ip.src -e http.user_agent | head -50
 ```
 
-Cientos de `POST /bonita/loginservice` con distintos usuarios y códigos `401`/`403`, seguidos de un `200` y una cookie de sesión: ahí está el punto de inflexión. Se identifica la cuenta válida y el instante exacto.
+Cientos de `POST /bonita/loginservice` con `python-requests/2.28.1` y **pares usuario/contraseña distintos** desde la misma IP: es *credential stuffing*, no fuerza bruta sobre una cuenta. Termina en un `204`/`200` con cookies de sesión y una cuenta válida.
 
-### 3. Bypass de autorización y extensión maliciosa
+### 3. CVE-2022-25237
 
-Tras autenticarse, el actor abusa de **CVE-2022-25237**: un fallo en la validación del parámetro `options` de la API permite saltarse los controles de autorización y llegar a funciones de administración. Se ve en el PCAP como peticiones a `/bonita/API/...` con parámetros manipulados que devuelven `200` donde antes había `403`.
+Bonita Web 2021.2 tiene un `RestAPIAuthorizationFilter` con un patrón de exclusión demasiado amplio: añadir **`;i18ntranslation`** (o `/../i18ntranslation/`) al final de la URL permite llamar a endpoints privilegiados sin permisos. En el PCAP se ve como peticiones a `/bonita/API/...` que devuelven `200` donde antes había `403`.
 
-Con privilegios, sube una **extensión/página** propia (un `.zip` con código) que el servidor despliega y ejecuta:
+### 4. Extensión maliciosa y ejecución
 
 ```bash
-tshark -r meerkat.pcap -Y 'http.request.method=="POST" && http.content_type contains "multipart"' \
-  -T fields -e frame.time -e ip.src -e http.request.uri -e http.file_data | head
+tshark -r meerkat.pcap -Y 'http.request.method=="POST" && http.request.uri contains "pageUpload"' \
+  -T fields -e frame.time -e ip.src -e http.request.uri
 ```
+
+El actor sube un ZIP (`rce_api_extension.zip`) por `/bonita/API/pageUpload`, lo publica y llama a `/bonita/API/extension/rce?cmd=...`: ejecución de comandos como el usuario del servicio. Antes de usarlo comprueba con `whoami` y borra el ZIP para no dejar rastro.
+
+### 5. Persistencia
+
+El comando es un `wget` a **`pastes.io`**; el script descargado hace `curl` de una segunda paste y la **añade a `/home/ubuntu/.ssh/authorized_keys`**, luego reinicia `ssh`. Es la sub-técnica **T1098.004** (Account Manipulation: SSH Authorized Keys). Con la paste original borrada, la copia de Wayback Machine recupera el contenido.
 
 ## Conclusiones
 
-- Acceso: credential stuffing contra `loginservice` con una cuenta válida.
+- Acceso: credential stuffing contra `loginservice` con una cuenta corporativa válida.
 - Escalada: CVE-2022-25237 para saltarse la autorización de la API.
-- Ejecución: extensión maliciosa subida por el propio panel de administración.
+- Ejecución: extensión subida por el propio panel (`pageUpload` → `extension/rce`).
+- Persistencia: clave pública en `authorized_keys` del usuario `ubuntu`.
 
 ## Lecciones
 
-- Las alertas de Suricata dan el «qué»; el PCAP da el «cómo» y el «cuándo». Sin cruzar ambos, la cronología se queda en hipótesis.
-- Credential stuffing se detecta por volumen y por variedad de usuarios desde una misma IP, no por un payload concreto.
-- Mitigación: rate limiting, MFA en la API, parchear CVE-2022-25237 y restringir quién puede subir extensiones.
+- Las alertas dan el «qué»; el PCAP, el «cómo» y el «cuándo».
+- Distinguir stuffing (usuarios variados) de spraying (misma contraseña) cambia la respuesta.
+- Un endpoint que sube plugins es ejecución de código por diseño: hay que restringirlo.
+- Mitigación: MFA y rate limiting en la API, parche de Bonita, allowlist de extensiones y monitorización de `authorized_keys`.

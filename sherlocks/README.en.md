@@ -26,8 +26,8 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Opportunist | DFIR / Malware | Medium | Memory + triage from a corporate host | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |
 | dOOMs Day | DFIR | Easy | Web logs from a compromised PHP server | access-log analysis, PHP2Shell | [Ver](dooms-day/README.md) |
 | Brutus | DFIR | Very Easy | Authentication logs | `grep`, `awk`, timeline | [Ver](brutus/README.md) |
-| MangoBleed | DFIR | Very Easy | Windows triage | EvtxECmd, timeline | [Ver](mangobleed/README.md) |
-| NeuroSync-D | DFIR | Easy | Artifacts from a medical-device vendor | RegRipper, MFT | [Ver](neurosync-d/README.md) |
+| MangoBleed | DFIR / Linux | Very Easy | UAC MongoDB triage: CVE-2025-14847 and `/var/lib/mongodb` exfiltration | `mongod.log`, `auth.log`, `grep` | [Ver](mangobleed/README.en.md) |
+| NeuroSync-D | DFIR / Web | Easy | Next.js CVE-2025-29927 → SSRF, LFI and Redis to RCE | `interface.log`, `data-api.log`, `grep` | [Ver](neurosync-d/README.en.md) |
 | Campfire-1 | DFIR / Active Directory | Very Easy | Domain event logs | EvtxECmd, 4769 analysis | [Ver](campfire-1/README.md) |
 | CrownJewel-1 | DFIR / Active Directory | Medium | DC telemetry after a compromise | 4662/4769 events, correlation | [Ver](crownjewel-1/README.md) |
 | Loggy | Malware / Go | Easy | `Loggy.exe`: Go keylogger with screenshots and FTP exfiltration | Ghidra, `strings`, CyberChef | [Ver](loggy/README.en.md) |
@@ -38,7 +38,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Logjammer | Log Analysis | Easy | Five EVTX channels from one host | EvtxECmd, Timeline Explorer | [Ver](logjammer/README.en.md) |
 | Unit42 | DFIR | Very Easy | Sysmon y Dropbox en un host Windows | Sysmon, EvtxECmd, timestomping | [Ver](unit42/README.en.md) |
 | BFT | DFIR | Very Easy | `$MFT` de un ZIP troyanizado | MFTECmd, `grep`, offsets | [Ver](bft/README.en.md) |
-| Noxious | DFIR | Medium | PCAP con envenenamiento LLMNR/NBT-NS | Wireshark, hashcat `-m 5600` | [Ver](noxious/README.en.md) |
+| Noxious | DFIR | Medium | PCAP with LLMNR/NBT-NS poisoning | Wireshark, hashcat `-m 5600` | [Ver](noxious/README.en.md) |
 | Reaper | DFIR | Very Easy | `ntlmrelay.pcapng` y `Security.evtx` | Wireshark, EvtxECmd | [Ver](reaper/README.en.md) |
 | Knock Knock | DFIR | Medium | PCAP de *password spray* y *port knocking* | Wireshark, `tshark` | [Ver](knock-knock/README.en.md) |
 | RogueOne | DFIR / Memoria | Medium | Volcado de memoria de un puesto Forela | Volatility 3, `windows.netscan` | [Ver](rogueone/README.en.md) |

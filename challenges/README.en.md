@@ -18,12 +18,12 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Phonebook | Web | Easy | LDAP injection: `*` as user and password, wildcards in search | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
 | Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
 | Toxic | Web | Very Easy | PHP object injection: `PageModel::__destruct` includes a file (LFI) and nginx log poisoning | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
-| LoveTok | Web | Easy | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | Retired | [ES](LoveTok/README.md) | [Ver](LoveTok/README.en.md) |
+| LoveTok | Web | Easy | `eval` over the date format; `addslashes` does not stop `${}` | **Retired** | [ES](LoveTok/README.md) | [Ver](LoveTok/README.en.md) |
 | Templated | Web | Easy | SSTI de Jinja2 en `render_template_string` | Retired | [ES](Templated/README.md) | [Ver](Templated/README.en.md) |
 | baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | Retired | [ES](baby%20ninja%20jinja/README.md) | [Ver](baby%20ninja%20jinja/README.en.md) |
 | Spookifier | Web | Easy | SSTI de Mako: `self.module` hasta `os` | Retired | [ES](Spookifier/README.md) | [Ver](Spookifier/README.en.md) |
 | Flag Command | Web | Very Easy | Bundle JS con endpoints ocultos; comando secreto por API | Retired | [ES](Flag%20Command/README.md) | [Ver](Flag%20Command/README.en.md) |
-| Labyrinth Linguist | Web | Easy | SSTI de Velocity: `#set` y reflexión de Java | Retired | [ES](Labyrinth%20Linguist/README.md) | [Ver](Labyrinth%20Linguist/README.en.md) |
+| Labyrinth Linguist | Web | Easy | Velocity SSTI: `#set` plus Java reflection | **Retired** | [ES](Labyrinth%20Linguist/README.md) | [Ver](Labyrinth%20Linguist/README.en.md) |
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | Retired | [ES](breaking%20grad/README.md) | [Ver](breaking%20grad/README.en.md) |
 | Weather App | Web | Easy | SSRF with *response splitting* and SQLi in the internal service up to admin account takeover | **Retired** | [ES](Weather%20App/README.md) | [Ver](Weather%20App/README.en.md) |
 | Freelancer | Web | Easy | SQLi in `portfolio.php?id=` and an `/admin` panel found by fuzzing | **Retired** | [ES](Freelancer/README.md) | [Ver](Freelancer/README.en.md) |
