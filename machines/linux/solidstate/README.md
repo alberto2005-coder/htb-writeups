@@ -38,7 +38,9 @@ La web es la página de la empresa. Lo interesante son los puertos de correo y e
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **4555/tcp** devuelve el banner `JAMES Remote Administration Tool 2.3.2`: es la administración remota del servidor de correo, no un servicio web.
+- **110/tcp** (POP3) y **119/tcp** (NNTP) son del mismo James; **25/tcp** es el SMTP y **80/tcp** sólo sirve la página corporativa, sin aplicación.
+- Con `root:root` en el 4555, `listusers` enumera las cinco cuentas (`james`, `thomas`, `john`, `mindy`, `mailadmin`) y `setpassword` permite fijar la contraseña de cualquiera.
 
 ## Foothold
 
@@ -88,8 +90,7 @@ Vía alternativa de acceso: el exploit público de **James 2.3.2** (autenticado 
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+No aplica: `mindy` es el usuario final y el cron de root cierra la máquina. El «salto» real es de servicio a servicio dentro del mismo host: administración del correo (4555) → buzón (110) → SSH (22).
 
 ## Escalada de privilegios
 
@@ -136,4 +137,14 @@ cat /tmp/root.txt
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- No exponer la administración remota de James y, si se expone, cambiar `root:root` y limitarla por red.
+- Actualizar Apache James (2.3.2 es de 2009) y deshabilitar `setpassword` remoto.
+- Nunca enviar credenciales de sistema por correo; y no reutilizar la contraseña del buzón como contraseña SSH.
+- `rbash` sólo funciona si el usuario no puede ejecutar otro binario: `ssh -t "bash --noprofile"` lo demuestra.
+- `/opt/tmp.py` debe ser `root:root 0755`; un script de cron escribible por otros es root.
+- Detección: conexiones externas al 4555, `setpassword` en el log de James y escrituras en `/opt` seguidas de ejecución por cron.
+
+## Referencias
+
+- [Apache James 2.3.2 — RCE (Exploit-DB 35513)](https://www.exploit-db.com/exploits/35513)
+- [Hack The Box — SolidState](https://www.hackthebox.com/machines/solidstate)

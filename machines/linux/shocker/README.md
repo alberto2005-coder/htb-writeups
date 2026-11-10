@@ -51,7 +51,9 @@ Just an uptime test script
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `gobuster` con `-x sh,cgi` encuentra `/cgi-bin/user.sh`; el directorio `/cgi-bin/` da **403** sin barra final, así que las wordlists que no añaden `/` no lo ven.
+- El script se puede pedir directamente y responde texto plano: `Just an uptime test script` seguido de la salida de `uptime`. Es un CGI en Bash: cada cabecera HTTP acaba como variable de entorno.
+- Que el binario sea vulnerable se confirma con una función vacía en el `User-Agent` antes de intentar nada más.
 
 ## Foothold
 
@@ -82,8 +84,7 @@ shelly@Shocker:/usr/lib/cgi-bin$
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+No aplica: `shelly` es el único usuario de la cadena y la escalada a root se resuelve en el mismo host. No hay servicios internos ni segundo host que pivotar.
 
 ## Escalada de privilegios
 
@@ -125,8 +126,16 @@ uid=0(root) gid=0(root) groups=0(root)
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar Bash con los parches de Shellshock (CVE-2014-6271 y sus derivados) y comprobar la versión, no sólo el `nmap`.
+- Retirar CGI: cualquier script que herede el entorno HTTP multiplica la superficie.
+- No conceder `sudo` sobre intérpretes (`perl`, `python`, `ruby`, `awk`): es un shell con otro nombre.
+- Detección: peticiones con `() { :; };` en cabeceras, y procesos `bash`/`sh` hijos de `apache2` que no sean el CGI esperado.
 
 ## Referencias
 
 - [CVE-2014-6271](https://nvd.nist.gov/vuln/detail/CVE-2014-6271)
+
+## Referencias
+
+- [CVE-2014-6271](https://nvd.nist.gov/vuln/detail/CVE-2014-6271)
+- [GTFOBins: perl](https://gtfobins.github.io/gtfobins/perl/)

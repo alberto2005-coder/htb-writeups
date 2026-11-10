@@ -33,11 +33,14 @@ print(f'c = {c}')
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+El material del reto es el propio **script de generación** y su salida: `n`, `e` y `c`. No hay servicio, ni endpoint, ni binario: es criptografía pura y el ataque se hace sobre los números.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+Sí se entrega código, y ahí está el fallo: `getPrime(1024)` devuelve **un primo**, no un producto de dos primos. `n` no tiene factores que buscar porque no es un módulo RSA: es un número primo de 1024 bits.
+
+- `φ(n) = n − 1` en lugar de `(p−1)(q−1)`.
+- No hace falta factorizar ni Coppersmith: con `d` conocido, el mensaje sale directo.
 
 ## Explicación del fallo
 
@@ -51,7 +54,16 @@ No hay factorización ni Coppersmith: es álgebra directa.
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+Con `pycryptodome` instalado basta; no hace falta red ni contenedor:
+
+```bash
+python3 - <<'PY'
+from Crypto.Util.number import long_to_bytes
+n, e, c = <n>, <e>, <c>
+d = pow(e, -1, n - 1)
+print(long_to_bytes(pow(c, d, n)).decode())
+PY
+```
 
 ## Explotación
 
@@ -89,8 +101,10 @@ Comprobación: `e*d % (n-1) == 1`, y el resultado debe empezar por `HTB{`.
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- Generar `n` como producto de **dos primos** de tamaño comparable y verificar que es compuesto antes de publicar la clave.
+- Usar una librería de alto nivel (`cryptography`, `PyCryptodome` con `RSA.generate`) en vez de montar el esquema a mano.
+- Nunca implementar RSA de libro de texto: sin padding OAEP, un `e` pequeño y un módulo primo se rompen igual de fácil.
+- Detección: tests de la clave pública (comprobar que `n` es compuesto, tamaño de `e`, presencia de padding) en CI.
 
 ## Referencias
 
