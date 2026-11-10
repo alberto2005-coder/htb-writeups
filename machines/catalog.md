@@ -109,7 +109,7 @@ Un volcado en español de 164 directorios de máquina, 140 con PDF (448 PDF y 73
 
 ## Starting Point (disponibles)
 
-Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 109 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
+Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 111 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|

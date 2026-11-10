@@ -111,7 +111,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 109 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 111 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|
