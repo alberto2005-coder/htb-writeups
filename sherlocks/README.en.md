@@ -28,7 +28,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Brutus | DFIR | Very Easy | Authentication logs | `grep`, `awk`, timeline | [Ver](brutus/README.md) |
 | MangoBleed | DFIR | Very Easy | Windows triage | EvtxECmd, timeline | [Ver](mangobleed/README.md) |
 | NeuroSync-D | DFIR | Easy | Artifacts from a medical-device vendor | RegRipper, MFT | [Ver](neurosync-d/README.md) |
-| Campfire-1 | DFIR / Active Directory | Easy | Domain event logs | EvtxECmd, 4769 analysis | [Ver](campfire-1/README.md) |
+| Campfire-1 | DFIR / Active Directory | Very Easy | Domain event logs | EvtxECmd, 4769 analysis | [Ver](campfire-1/README.md) |
 | CrownJewel-1 | DFIR / Active Directory | Medium | DC telemetry after a compromise | 4662/4769 events, correlation | [Ver](crownjewel-1/README.md) |
 | Loggy | DFIR | Very Easy | Web server logs | `awk`, `grep`, timeline | [Ver](loggy/README.md) |
 | Bumblebee | DFIR | Easy | phpBB SQLite database and `access.log` | `sqlite3`, `grep`, IP correlation | [Ver](bumblebee/README.en.md) |

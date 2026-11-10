@@ -1,7 +1,7 @@
 ---
 sherlock: Campfire-1
 domain: SOC
-difficulty: Easy
+difficulty: Very Easy
 platform: Hack The Box
 state: Retired
 tags: [dfir, active-directory, windows-events, kerberoasting]

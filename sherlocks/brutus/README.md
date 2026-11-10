@@ -22,6 +22,7 @@ Un servidor Linux expuesto a Internet ha recibido un volumen anómalo de intento
 
 - Imagen de disco o copia de `/var/log`.
 - `auth.log` / `secure` del periodo del incidente.
+- `wtmp` y el parser `utmp.py` que entrega el reto.
 - Listado de usuarios del sistema (`/etc/passwd`).
 
 ```bash
@@ -64,7 +65,7 @@ grep -E "Accepted (password|publickey)" auth.log
 grep -c "Failed password" auth.log
 ```
 
-Si no hay ninguna línea `Accepted` en la ventana del ataque, el brute force **no tuvo éxito**: el impacto es de exposición y ruido, no de compromiso. Conviene comprobar también `last`, `lastb` y sesiones `sshd` abiertas.
+Aquí sí hay `Accepted password for root from <IP>`: el brute force **tuvo éxito** y la cuenta comprometida es `root`. La primera sesión se abre y cierra en el mismo segundo (el script confirma credenciales); la segunda, minutos después, es la sesión manual. `wtmp` da la hora exacta y `last`/`lastb` la contrastan.
 
 ### 4. Contexto del host
 
@@ -78,7 +79,7 @@ Sirve para descartar que el atacante creara una cuenta durante el mismo periodo.
 ## Conclusiones
 
 - Ataque de fuerza bruta/llenado de credenciales contra SSH desde una única IP.
-- Sin autenticaciones correctas: no hay compromiso, pero sí evidencia de que el servicio está expuesto al mundo.
+- Acceso conseguido como `root`, creación de un usuario de persistencia y descarga de un script de enumeración.
 - Recomendación inmediata: deshabilitar login por contraseña, mover SSH a clave, `fail2ban` y limitar el acceso por red.
 
 ## Lecciones

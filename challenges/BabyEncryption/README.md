@@ -44,13 +44,13 @@ Se entrega `chall.py` y `msg.enc`. El cifrado es aritmética escolar sobre cada 
 
 ## Evidencia
 
-- `chall.py` (cifrado) y `msg.enc` (mensaje cifrado, binario).
+- `chall.py` (cifrado) y `msg.enc` (mensaje cifrado en **hexadecimal**, tal como lo escribe `ct.hex()`).
 
 ## Lecciones aprendidas
 
 - **`pow(123, -1, 256)`**: existe desde Python 3.8; si no, calcularlo a mano (179).
 - **Multiplicar por 123 después de restar**: invertir el orden produce basura.
-- **`msg.enc` binario**: abrirlo en modo `rb`, nunca como texto.
+- **`msg.enc` es hexadecimal**: `chall.py` hace `f.write(ct.hex())`, así que se lee como texto y se convierte con `bytes.fromhex`.
 
 - Toda función afín `a*x + b (mod m)` es reversible si `gcd(a, m) = 1`.
 - Un cifrado "casero" sin clave es una codificación: se rompe con álgebra, no con fuerza bruta.
@@ -82,7 +82,8 @@ def encryption(msg):
 def decryption(msg):
     return bytes((179 * (c - 18)) % 256 for c in msg)
 
-print(decryption(open("msg.enc", "rb").read()).decode())
+data = bytes.fromhex(open("msg.enc").read().strip())
+print(decryption(data).decode())
 ```
 
 3. **Comprobar** que el resultado empieza por `HTB{`; si no, el módulo o el desplazamiento están mal copiados.

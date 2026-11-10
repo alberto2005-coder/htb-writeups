@@ -21,6 +21,7 @@ An Internet-facing Linux server received an abnormal volume of authentication at
 
 - Disk image or a copy of `/var/log`.
 - `auth.log` / `secure` covering the incident.
+- `wtmp` plus the `utmp.py` parser shipped with the challenge.
 - The system user list (`/etc/passwd`).
 
 ```bash
@@ -77,7 +78,7 @@ This rules out an account created by the attacker during the same period.
 ## Findings
 
 - Credential-stuffing/brute force against SSH from a single IP.
-- No successful logins: no compromise, but proof the service is world-reachable.
+- Successful `Accepted password for root`, a persistence account and a downloaded enumeration script.
 - Immediate fix: disable password login, move SSH to keys, `fail2ban`, and network-level restrictions.
 
 ## Lessons

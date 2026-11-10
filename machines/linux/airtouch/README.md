@@ -1,7 +1,7 @@
 ---
 machine: AirTouch
 os: Linux
-difficulty: Hard
+difficulty: Medium
 platform: Hack The Box
 category: Machines
 state: Retired
@@ -17,11 +17,18 @@ tags: [linux, wifi, wpa2, evil-twin, peap, vpn]
 
 ## TL;DR
 
-Máquina poco habitual porque el punto de entrada es **radio**: se captura el handshake WPA2-PSK de la red doméstica, se rompe con `hashcat -m 22000`, y con esa clave se monta un **Evil Twin** de la red corporativa para cosechar credenciales **PEAP-MSCHAPv2** de un cliente que se reconecta. Esas credenciales abren la VPN y desde la subred interna la escalada es Linux estándar.
+La entrada es **SNMP**: un community público filtra el contacto y las credenciales del consultor, que dan SSH a una estación de trabajo con dos radios WiFi. Desde ella se captura el handshake WPA2-PSK de `AirTouch-Internet`, se rompe con `hashcat -m 22000` y, descifrando el tráfico con esa clave, se roba una cookie de sesión que abre el panel web de administración; su subida de ficheros da RCE. Con el certificado y la clave privada reales que hay en el host se monta un **Evil Twin** de `AirTouch-Office` (WPA-EAP) para cosechar credenciales **PEAP-MSCHAPv2**, se entra en la red de gestión y se llega a root por la vía Linux habitual.
 
 ## Reconocimiento
 
-El escaneo de red no sirve de mucho: el servicio está en el aire.
+El puerto 161 expone SNMP con un community por defecto; el resto del camino está en el aire.
+
+```bash
+onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt <IP>
+snmpwalk -v2c -c public <IP> 1.3.6.1.2.1.1
+```
+
+Con el usuario y la contraseña del consultor, SSH a la estación de trabajo.
 
 ```bash
 sudo airmon-ng check kill
@@ -44,7 +51,7 @@ Dos SSID: uno doméstico con PSK y otro corporativo con 802.1X.
 
 ## Foothold
 
-- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
+WPA-PSK de `AirTouch-Internet` crackeado → red interna → cookie de sesión robada del tráfico → panel de administración → subida insegura → RCE. Después, Evil Twin de `AirTouch-Office` con el certificado real del host → MSCHAPv2 → red de gestión.
 
 ## Movimiento lateral
 
@@ -62,7 +69,7 @@ systemctl list-timers --all
 ls -l /etc/cron*; cat /etc/crontab
 ```
 
-La vía es una unidad de systemd o un script de cron **escribible** por el usuario de la VPN; se inyecta un payload que corre como root y se espera al timer.
+En el host de gestión, el usuario de la VPN tiene un script o unidad de systemd escribible que corre como root; se inyecta el payload y se espera al timer. (La cadena exacta de root varía según el despliegue: verificar `sudo -l`, SUID y timers antes de asumirla.)
 
 ## Evidencia
 

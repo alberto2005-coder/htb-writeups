@@ -16,7 +16,7 @@ tags: [linux, web, laravel, deserialization, cve-2018-15133, vhost, sudo]
 
 ## TL;DR
 
-El registro del sitio permite enviar un `roleid` oculto: cambiarlo da acceso al panel de administración, que revela el vhost `dev-staging-01.academy.htb`. Ese entorno corre Laravel con `APP_DEBUG=true` y filtra el `APP_KEY`; con él, la deserialización de **CVE-2018-15133** da RCE. Un `.env` de otra aplicación filtra una contraseña que sirve para el usuario `cry0l1t3`, que escala con `sudo` sobre `composer`.
+El registro del sitio permite enviar un `roleid` oculto: cambiarlo da acceso al panel de administración, que revela el vhost `dev-staging-01.academy.htb`. Ese entorno corre Laravel con `APP_DEBUG=true` y filtra el `APP_KEY`; con él, la deserialización de **CVE-2018-15133** da RCE. Un `.env` de otra aplicación filtra una contraseña que sirve para el usuario `cry0l1t3` (grupo `adm`); los logs de auditoría de TTY (`aureport --tty`) revelan la contraseña de `mrb3n`, que es la cuenta con `sudo` sobre `composer`.
 
 ## Reconocimiento
 
@@ -79,7 +79,11 @@ ssh cry0l1t3@<IP>
 
 ## Escalada de privilegios
 
+Como `cry0l1t3` pertenece a `adm`, `aureport --tty` muestra las pulsaciones de la sesión de `mrb3n` y de ahí sale su contraseña:
+
 ```bash
+sudo aureport --tty | less
+su mrb3n
 sudo -l
 # (ALL : ALL) NOPASSWD: /usr/bin/composer
 ```
