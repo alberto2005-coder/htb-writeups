@@ -132,5 +132,5 @@ WinRM (5985) también está abierto, así que `evil-winrm -u Administrator -p '<
 
 ## Referencias
 
-- CVE-2023-30367 (mRemoteNG, cifrado con clave fija).
+- Almacenamiento de contraseñas de mRemoteNG con clave estática (fallo de diseño; sin CVE).
 - MITRE ATT&CK: T1039, T1552.001.
