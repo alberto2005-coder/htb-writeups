@@ -103,3 +103,35 @@ Un volcado en español de 164 directorios de máquina, 140 con PDF (448 PDF y 73
 - **PingPong es Insane**, no Hard: el índice de origen lo lista como Hard, pero el lanzamiento semanal y varias fuentes independientes lo dan como Insane (Windows, dos bosques de AD).
 - **`ref.`** significa ficha de referencia: la máquina no se ha completado en este perfil, así que no hay enlace de logro ni se publican flags.
 - El inventario cruzado de las colecciones (cobertura, duplicados, licencias) queda fuera del repo, en un directorio local ignorado por git, porque incluye material de terceros.
+
+## Starting Point (disponibles)
+
+Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 109 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
+
+| Máquina | OS | Dificultad | Técnica principal | ES | EN |
+|---|---|---|---|---|---|
+| Meow | Linux | Very Easy | Telnet con `root` sin contraseña | [Ver](../machines/starting-point/meow/README.md) | [EN](../machines/starting-point/meow/README.en.md) |
+| Fawn | Linux | Very Easy | FTP anónimo y `get flag.txt` | [Ver](../machines/starting-point/fawn/README.md) | [EN](../machines/starting-point/fawn/README.en.md) |
+| Dancing | Windows | Very Easy | SMB nulo y share `WorkShares` | [Ver](../machines/starting-point/dancing/README.md) | [EN](../machines/starting-point/dancing/README.en.md) |
+| Redeemer | Linux | Very Easy | Redis sin `AUTH` | [Ver](../machines/starting-point/redeemer/README.md) | [EN](../machines/starting-point/redeemer/README.en.md) |
+| Explosion | Windows | Very Easy | RDP con `Administrator` vacío | [Ver](../machines/starting-point/explosion/README.md) | [EN](../machines/starting-point/explosion/README.en.md) |
+| Preignition | Linux | Very Easy | `/admin.php` con `admin:admin` | [Ver](../machines/starting-point/preignition/README.md) | [EN](../machines/starting-point/preignition/README.en.md) |
+| Mongod | Linux | Very Easy | MongoDB sin `--auth` | [Ver](../machines/starting-point/mongod/README.md) | [EN](../machines/starting-point/mongod/README.en.md) |
+| Synced | Linux | Very Easy | rsync anónimo en 873 | [Ver](../machines/starting-point/synced/README.md) | [EN](../machines/starting-point/synced/README.en.md) |
+| Sequel | Linux | Very Easy | MySQL `root` sin contraseña | [Ver](../machines/starting-point/sequel/README.md) | [EN](../machines/starting-point/sequel/README.en.md) |
+| Appointment | Linux | Very Easy | SQLi en login `admin' or '1'='1'#` | [Ver](../machines/starting-point/appointment/README.md) | [EN](../machines/starting-point/appointment/README.en.md) |
+| Crocodile | Linux | Very Easy | FTP anónimo con listas de usuarios | [Ver](../machines/starting-point/crocodile/README.md) | [EN](../machines/starting-point/crocodile/README.en.md) |
+| Responder | Windows | Very Easy | LFI a UNC, NetNTLMv2 y WinRM | [Ver](../machines/starting-point/responder/README.md) | [EN](../machines/starting-point/responder/README.en.md) |
+| Three | Linux | Very Easy | Bucket S3 sin IAM y webshell | [Ver](../machines/starting-point/three/README.md) | [EN](../machines/starting-point/three/README.en.md) |
+| Ignition | Linux | Very Easy | Magento con `admin:qwerty123` | [Ver](../machines/starting-point/ignition/README.md) | [EN](../machines/starting-point/ignition/README.en.md) |
+| Bike | Linux | Very Easy | SSTI de Handlebars como root | [Ver](../machines/starting-point/bike/README.md) | [EN](../machines/starting-point/bike/README.en.md) |
+| Funnel | Linux | Very Easy | Spray SSH y túnel a PostgreSQL | [Ver](../machines/starting-point/funnel/README.md) | [EN](../machines/starting-point/funnel/README.en.md) |
+| Pennyworth | Linux | Very Easy | Jenkins `root:password` y Groovy | [Ver](../machines/starting-point/pennyworth/README.md) | [EN](../machines/starting-point/pennyworth/README.en.md) |
+| Tactics | Windows | Very Easy | SMB nulo y `Administrator` vacío | [Ver](../machines/starting-point/tactics/README.md) | [EN](../machines/starting-point/tactics/README.en.md) |
+| Archetype | Windows | Very Easy | `prod.dtsConfig`, `xp_cmdshell`, psexec | [Ver](../machines/starting-point/archetype/README.md) | [EN](../machines/starting-point/archetype/README.en.md) |
+| Oopsie | Linux | Very Easy | IDOR en cookies, subida y SUID | [Ver](../machines/starting-point/oopsie/README.md) | [EN](../machines/starting-point/oopsie/README.en.md) |
+| Vaccine | Linux | Very Easy | `backup.zip`, SQLi y `sudo vi` | [Ver](../machines/starting-point/vaccine/README.md) | [EN](../machines/starting-point/vaccine/README.en.md) |
+| Unified | Linux | Very Easy | Log4Shell en UniFi y MongoDB | [Ver](../machines/starting-point/unified/README.md) | [EN](../machines/starting-point/unified/README.en.md) |
+| Included | Linux | Very Easy | LFI, TFTP y grupo `lxd` | [Ver](../machines/starting-point/included/README.md) | [EN](../machines/starting-point/included/README.en.md) |
+| Markup | Windows | Very Easy | XXE a `id_rsa` y `job.bat` | [Ver](../machines/starting-point/markup/README.md) | [EN](../machines/starting-point/markup/README.en.md) |
+| Base | Linux | Very Easy | `strcmp` con arrays y `sudo find` | [Ver](../machines/starting-point/base/README.md) | [EN](../machines/starting-point/base/README.en.md) |

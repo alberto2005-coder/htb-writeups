@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 109 máquinas, 50 Sherlocks, 50 retos y 41 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 109 máquinas, 50 Sherlocks, 50 retos y 45 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -210,6 +210,10 @@ Notas reutilizables (cada una en español e inglés):
 - [RSA: módulo pequeño y RSA de libro](knowledge/crypto/rsa-small-modulus.md) · [EN](knowledge/crypto/rsa-small-modulus.en.md)
 - [Cifrados de bloque y cifrados propios](knowledge/crypto/block-ciphers.md) · [EN](knowledge/crypto/block-ciphers.en.md)
 - [SSTI: de la plantilla a la ejecución](knowledge/web/ssti.md) · [EN](knowledge/web/ssti.en.md)
+- [SQLi en el login: bypass de autenticación](knowledge/web/sqli-auth-bypass.md) · [EN](knowledge/web/sqli-auth-bypass.en.md)
+- [Enumeración SMB: sesión nula, shares y credenciales](knowledge/general/smb-enumeration.md) · [EN](knowledge/general/smb-enumeration.en.md)
+- [S3 mal configurado: buckets abiertos y webshell](knowledge/cloud/s3-misconfiguration.md) · [EN](knowledge/cloud/s3-misconfiguration.en.md)
+- [Log4Shell: de un User-Agent a RCE](knowledge/web/log4shell.md) · [EN](knowledge/web/log4shell.en.md)
 - [Deserialización PHP](knowledge/web/php-deserialization.md) · [EN](knowledge/web/php-deserialization.en.md)
 - [JWT y contaminación de prototipos](knowledge/web/node-jwt-prototype.md) · [EN](knowledge/web/node-jwt-prototype.en.md)
 - [Triaje de PCAP](knowledge/forensics/pcap-triage.md) · [EN](knowledge/forensics/pcap-triage.en.md)
