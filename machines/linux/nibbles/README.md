@@ -105,7 +105,8 @@ cat /tmp/root.txt
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Nibbleblog 4.0.3 no tiene parche: el CMS se retira o se migra, y el plugin «My Image» se deshabilita mientras siga instalado.
+- `sudo` nunca sobre un script del propio usuario: si vive en su `$HOME` y es escribible, la regla equivale a root para cualquiera.
 - Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
 
 ## Referencias
