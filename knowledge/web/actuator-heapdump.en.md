@@ -70,6 +70,7 @@ Look especially for: database user and password, datasource URL, API keys, strin
 ```properties
 management.endpoints.web.exposure.include=health
 management.endpoint.heapdump.enabled=false
+management.endpoint.heapdump.access=none
 management.server.port=127.0.0.1:9090
 ```
 

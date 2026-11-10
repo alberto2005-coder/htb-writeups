@@ -59,7 +59,7 @@ Rutas típicas: `GenericAll` sobre usuario/grupo, `WriteDACL`, `ForceChangePassw
 ## 6. Errores típicos
 
 - **`KRB_AP_ERR_SKEW`** → reloj; ver [reloj y Kerberos](../general/kerberos-clock.md).
-- **`KDC_ERR_C_PRINCIPAL_UNKNOWN`** en `kerbrute`** → el usuario no existe o el realm está mal escrito.
+- **`KDC_ERR_C_PRINCIPAL_UNKNOWN` en `kerbrute` → el usuario no existe o el realm está mal escrito.
 - **`GetUserSPNs` devuelve 0 cuentas** → no hay SPN o falta autenticación; usa `-dc-ip` y un usuario válido.
 - **Hashcat no rompe** → prueba reglas (`-r`) y máscaras antes de listas gigantes.
 - **`gpp_autologin` vacío** → el `Groups.xml` ya se limpió; busca en `Policies/` y backups.

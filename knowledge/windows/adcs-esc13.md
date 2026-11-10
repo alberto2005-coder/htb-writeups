@@ -13,6 +13,8 @@ Una plantilla puede llevar una **política de emisión** (`msPKI-Certificate-Pol
 
 Es la diferencia con ESC1: aquí no suplantas a nadie, te dan un grupo. Si ese grupo está en el `LocalGroups`/`Remote Desktop Users`/WinRM del host, tienes shell.
 
+El grupo enlazado debe ser **universal y estar vacío**: AD no permite apuntar un OID a un grupo con miembros.
+
 ## 2. Enumerar
 
 ```bash
@@ -30,7 +32,8 @@ Linked Group         : <DOMINIO>\<grupo>
 También se puede ver a mano:
 
 ```bash
-certipy template -u '<user>@<domain>' -p '<password>' -dc-ip <DC_IP> -template '<TEMPLATE>'
+# leer la plantilla; `certipy template` sin flags la reescribe para ESC1
+certipy find -u '<user>@<domain>' -p '<password>' -dc-ip <DC_IP> -template '<TEMPLATE>' -stdout
 ldapsearch -x -H ldap://<DC_IP> -D '<user>@<domain>' -w '<password>' \
   -b 'CN=OID,CN=Public Key Services,CN=Services,CN=Configuration,DC=<domain>,DC=<tld>' \
   '(msDS-OIDToGroupLink=*)' msDS-OIDToGroupLink

