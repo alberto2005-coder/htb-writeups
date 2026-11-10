@@ -24,11 +24,17 @@ Un ELF de 64 bits pide una contraseña; si es correcta, imprime la flag. La cont
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+Se entrega un único fichero, `pass`, un ELF de 64 bits. `file` y `strings -n 6` responden casi todo: la contraseña aparece como literal y, con `-e l` (UTF-32 little endian), también la flag.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+No hay código fuente y no hace falta: la comprobación es un `strcmp` en `main` contra un literal de `.rodata`, y la flag vive en la misma sección. En Ghidra/IDA se ven las dos cadenas juntas; en estático, `strings` ya las separa.
+
+```bash
+strings -n 6 pass | less
+strings -e l pass | grep -i htb
+objdump -d -M intel pass | grep -A2 strcmp
+```
 
 ## Explicación del fallo
 
@@ -36,7 +42,7 @@ Un ELF de 64 bits pide una contraseña; si es correcta, imprime la flag. La cont
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+El binario se puede ejecutar en una VM aislada: con la contraseña correcta imprime la flag, sin red ni dependencias externas. Aun así, el análisis estático ya la da sin ejecutar nada.
 
 ## Explotación
 
@@ -58,8 +64,10 @@ Un ELF de 64 bits pide una contraseña; si es correcta, imprime la flag. La cont
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
+- No incrustar secretos ni contraseñas en binarios: cualquiera con `strings` los lee.
+- Si hay que comparar una contraseña en cliente, usar un hash con sal y comparación en tiempo constante; aun así el binario es público.
+- La ofuscación (strip, packers, cifrado de cadenas) sólo retrasa el análisis; no protege un secreto embebido.
+- Detección: publicación de binarios con cadenas sensibles, y comprobación en CI de secretos en artefactos compilados.
 
 ## Método
 

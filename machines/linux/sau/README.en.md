@@ -16,7 +16,7 @@ tags: [ssrf, request-baskets, maltrail, cve-2023-27163, systemctl, less]
 
 ## TL;DR
 
-A two-hop chain: **Request Baskets 1.2.1** on 55555 with **SSRF** (CVE-2023-27163) reaches a **Maltrail 0.53** that only listens on `127.0.0.1:80`; its command injection (CVE-2023-27148) gives a shell as `puma`. Escalation is `sudo systemctl status` → **`less` pager** → `!sh`.
+A two-hop chain: **Request Baskets 1.2.1** on 55555 with **SSRF** (CVE-2023-27163) reaches a **Maltrail 0.53** that only listens on `127.0.0.1:80`; its command injection in the login `username` field gives a shell as `puma` (public huntr advisory and `spookier` PoC; sources cite it both as CVE-2023-27148 and as CVE-2023-31543, so the flaw is named without picking an identifier). Escalation is `sudo systemctl status` → **`less` pager** → `!sh`.
 
 ## Recon
 

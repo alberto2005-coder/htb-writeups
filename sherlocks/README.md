@@ -22,7 +22,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | JenkreadD | DFIR / Web | Easy | Jenkins CVE-2024-23897: `POST /cli` con `@ruta` | `grep`, análisis de logs | [Ver](jenkreadd/README.md) |
 | Subatomic | Malware / DFIR | Medium | App Electron con robo del token de Discord y persistencia | `asar`, análisis JS | [Ver](subatomic/README.md) |
 | Litter | SOC | Easy | PCAP + ZIP de un host de pruebas | Wireshark, dnscat2-decoder | [Ver](litter/README.md) |
-| PhantomRing | Malware Analysis | Very Easy | Binario ELF de post-explotación | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
+| PhantomRing | Malware Analysis | Very Easy | ELF sin `strip` en `/var/tmp`: `nm` da los nombres y el puerto de C2 es un inmediato | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
 | Opportunist | DFIR / Malware | Medium | Memoria + triaje de un equipo corporativo | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |
 | dOOMs Day | DFIR | Easy | Logs web de un servidor PHP comprometido | análisis de access logs, PHP2Shell | [Ver](dooms-day/README.md) |
 | Brutus | DFIR | Very Easy | Logs de autenticación | `grep`, `awk`, timeline | [Ver](brutus/README.md) |
@@ -39,17 +39,17 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Unit42 | DFIR | Very Easy | Sysmon y Dropbox en un host Windows | Sysmon, EvtxECmd, timestomping | [Ver](unit42/README.md) |
 | BFT | DFIR | Very Easy | `$MFT` de un ZIP troyanizado | MFTECmd, `grep`, offsets | [Ver](bft/README.md) |
 | Noxious | DFIR | Medium | PCAP con envenenamiento LLMNR/NBT-NS | Wireshark, hashcat `-m 5600` | [Ver](noxious/README.md) |
-| Reaper | DFIR | Very Easy | `ntlmrelay.pcapng` y `Security.evtx` | Wireshark, EvtxECmd | [Ver](reaper/README.md) |
+| Reaper | DFIR | Very Easy | NTLM relay tras un nombre mal escrito: LLMNR, 4624 con IP y equipo que no cuadran, 5140 | Wireshark, EvtxECmd | [Ver](reaper/README.md) |
 | Knock Knock | DFIR | Medium | PCAP de *password spray* y *port knocking* | Wireshark, `tshark` | [Ver](knock-knock/README.md) |
-| RogueOne | DFIR / Memoria | Medium | Volcado de memoria de un puesto Forela | Volatility 3, `windows.netscan` | [Ver](rogueone/README.md) |
+| RogueOne | DFIR / Memoria | Easy | `svchost.exe` falso en `Downloads` con C2 a 13.127.155.166:8888 y `cmd.exe` hijo | Volatility 3, `windows.netscan` | [Ver](rogueone/README.md) |
 | SSHole | DFIR / Unix | Very Easy | Evidencias de un jumpbox comprometido | `auth.log`, `last`, `journalctl` | [Ver](sshole/README.md) |
 | ShadowBait | DFIR / Windows | Easy | Logs de Sysmon, PowerShell y Security | Hayabusa, EvtxECmd | [Ver](shadowbait/README.md) |
 | Compromised | DFIR / Red | Easy | PCAP de una red corporativa | Wireshark, `tshark` | [Ver](compromised/README.md) |
 | Packet Puzzle | DFIR / Red | Medium | PCAP de una empresa japonesa de criptomonedas; la secuencia RDP→SMB no está confirmada por writeups públicos | Wireshark, `tshark` | [Ver](packet-puzzle/README.md) |
 | Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | SQLite, DB Browser | [Ver](jingle-bell/README.md) |
 | Ultimatum | DFIR / Web | Easy | Logs y ficheros de un WordPress comprometido | `access.log`, WP-CLI | [Ver](ultimatum/README.md) |
-| ProcNet | DFIR / Endpoint | Hard | PCAP, API Monitor y Sysmon de DC y puesto | API Monitor, EvtxECmd | [Ver](procnet/README.md) |
-| PCAP Analysis | DFIR / Red | Very Easy | Una captura de tráfico de un usuario | Wireshark, `tshark` | [Ver](pcap-analysis/README.md) |
+| ProcNet | DFIR / Endpoint | Hard | C2 de código abierto: JA3, API Monitor (Vault) y Sysmon de empleado y DC | API Monitor, EvtxECmd | [Ver](procnet/README.md) |
+| PCAP Analysis | DFIR / Red | Very Easy | Captura de P13: chat en claro en TCP/250 y subida HTTP de ~107 KB a otra subred | Wireshark, `tshark` | [Ver](pcap-analysis/README.md) |
 | Vantage | DFIR / Red | Very Easy | PCAP de servidor web y controlador de nube | Wireshark, `tshark` | [Ver](vantage/README.md) |
 | Lockpick | Malware / Ransomware | Easy | Muestra de ransomware y ficheros cifrados | Ghidra, x64dbg | [Ver](lockpick/README.md) |
 | Lockpick 2.0 | Malware / Ransomware | Easy | Recurso compartido cifrado y muestra con nota | UPX, Ghidra | [Ver](lockpick-2/README.md) |

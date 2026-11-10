@@ -38,7 +38,10 @@ Aparecen `/index.php/admin`, `/downloader` y `/app/etc/local.xml` (que confirma 
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `/index.php/admin` muestra el panel de Magento y el pie confirma `Magento ver. 1.9.0.0`.
+- `/downloader` es el **Magento Connect Manager**; `/app/etc/local.xml` confirma la instalación y su versión.
+- Los `searchsploit` útiles son la SQLi *Shoplift* (37977) y el RCE autenticado por paquete (37811); el segundo exige ser admin, así que el orden importa.
+- En instancias parcheadas `/downloader` ya no existe: entonces la vía es la inyección en plantilla de admin (*Froghopper*).
 
 ## Foothold
 
@@ -60,8 +63,7 @@ Check http://swagshop.htb/index.php/admin with creds <user>:<password>
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+No aplica: `www-data` es el usuario final y la escalada se resuelve con la regla `sudo` sobre `vi`. El único salto es de aplicación a sistema: panel de Magento → Connect Manager → shell PHP.
 
 ## Escalada de privilegios
 
@@ -103,9 +105,11 @@ uid=0(root)
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- Aplicar SUPEE-5344 (y el resto de parches de Magento 1) o migrar: 1.9.0.0 acumula SQLi y RCE conocidos.
+- Eliminar `/downloader` (Connect Manager) del servidor y restringir la instalación de paquetes.
+- `sudo` sobre `vi`/`vim` con comodín (`/var/www/html/*`) es root: usar editores sin shell o retirar la regla.
+- Consultas parametrizadas en la capa de base de datos y permisos mínimos para el usuario de Magento.
+- Detección: peticiones a `admin_user` con `INSERT` desde parámetros públicos, escrituras en `app/code/local` y `sudo vi` seguido de `sh`.
 
 ## Referencias
 

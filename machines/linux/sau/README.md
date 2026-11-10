@@ -16,7 +16,7 @@ tags: [ssrf, request-baskets, maltrail, cve-2023-27163, systemctl, less]
 
 ## TL;DR
 
-Cadena de dos saltos: **Request Baskets 1.2.1** en el 55555 con **SSRF** (CVE-2023-27163) permite alcanzar un **Maltrail 0.53** que sólo escucha en `127.0.0.1:80`; su inyección de comandos (CVE-2023-27148) da shell como `puma`. La escalada es `sudo systemctl status` → **pager `less`** → `!sh`.
+Cadena de dos saltos: **Request Baskets 1.2.1** en el 55555 con **SSRF** (CVE-2023-27163) permite alcanzar un **Maltrail 0.53** que sólo escucha en `127.0.0.1:80`; su inyección de comandos en el campo `username` del login da shell como `puma` (aviso público de huntr y PoC de `spookier`; las fuentes lo citan como CVE-2023-27148 y como CVE-2023-31543, así que se nombra el fallo sin elegir identificador). La escalada es `sudo systemctl status` → **pager `less`** → `!sh`.
 
 ## Reconocimiento
 
@@ -33,7 +33,10 @@ El 80 está filtrado; el pie de la web dice `request-baskets | Version: 1.2.1`.
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **22** SSH y **55555** son los únicos puertos alcanzables; **80** y **8338** aparecen *filtrados* (`nmap` los marca así, no cerrados).
+- El pie de la página del 55555 publica la versión: `Powered by request-baskets | Version: 1.2.1`, la última afectada por CVE-2023-27163.
+- La UI vive en `/web`; la API que crea *baskets* es `/api/baskets/<nombre>` y acepta `forward_url`, `proxy_response`, `expand_path` y `capacity`.
+- El nombre del basket está restringido por regex (`^[\w\-_.]{1,250}$`), así que no sirve para inyectar: el vector es el `forward_url`.
 
 ## Foothold
 
@@ -55,8 +58,7 @@ curl -X POST http://<IP>:55555/api/baskets/proxy \
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+No hay salto lateral: la cadena SSRF → Maltrail ocurre dentro del mismo host y `puma` es ya el usuario final. Lo que sí hay es un **pivote de red**: el 80 filtrado se vuelve alcanzable a través del proxy del 55555.
 
 ## Escalada de privilegios
 
@@ -93,7 +95,11 @@ Es el comportamiento descrito en CVE-2023-26604.
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Actualizar `request-baskets` por encima de 1.2.1 y no exponer la UI de administración a Internet.
+- Restringir el **egress** del propio servicio: un SSRF sólo llega a `127.0.0.1` si el proceso puede abrir esas conexiones.
+- Parchar Maltrail (≥ 0.54) y no dejar paneles internos con credenciales por defecto.
+- `systemctl status` como root equivale a un shell: usar `--no-pager` o `SYSTEMD_PAGER=cat` en la regla, o mejor, permitir sólo `systemctl is-active`.
+- Detección: peticiones a `/api/baskets/*` con `forward_url` apuntando a loopback y procesos web lanzando bash.
 
 ## Referencias
 

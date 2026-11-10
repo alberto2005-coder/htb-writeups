@@ -29,7 +29,9 @@ ffuf -u http://soccer.htb/FUZZ -w /usr/share/seclists/Discovery/Web-Content/dire
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `/tiny/` sirve **Tiny File Manager 2.4.3**; el pie enlaza al proyecto y expone la versión, que corresponde a **CVE-2021-45010**.
+- El repositorio del proyecto documenta las credenciales de fábrica: `admin:admin@123` (y `user:12345`), sin cambiar en la instancia.
+- Desde `www-data`, `/etc/nginx/sites-enabled/` revela un segundo vhost, `soc-player.soccer.htb`, y su servicio Node en **9091** con WebSocket.
 
 ## Foothold
 
@@ -46,8 +48,7 @@ sqlmap -u "ws://soc-player.soccer.htb:9091" --data '{"id":"*"}' --batch -D socce
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+El salto es `www-data` → `player`: el volcado de la SQLi sobre el WebSocket entrega las credenciales del usuario del sistema, que se reutilizan por SSH. El 9091 no se ve desde el primer vhost, así que el túnel conceptual es «shell web → enumeración de nginx → segundo servicio».
 
 ## Escalada de privilegios
 
@@ -88,8 +89,10 @@ doas -u root /usr/bin/dstat --evil
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+- Cambiar las credenciales por defecto del gestor de ficheros y parchear Tiny File Manager (CVE-2021-45010: traversal en la subida autenticada).
+- Parametrizar la consulta del WebSocket: el `id` se interpola sin comillas en un *template literal*, por eso la inyección es numérica y ciega.
+- Quitar la regla de `doas` sobre `dstat` o impedir que el usuario escriba en `/usr/local/share/dstat`.
+- Detección: subidas `.php` en `/tiny/uploads/`, conexiones WS con payloads que contienen comillas o `OR`, y `doas` ejecutando `dstat` con `--<plugin>` no estándar.
 
 ## Referencias
 

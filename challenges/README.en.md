@@ -19,9 +19,9 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
 | Toxic | Web | Very Easy | PHP object injection: `PageModel::__destruct` includes a file (LFI) and nginx log poisoning | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` over the date format; `addslashes` does not stop `${}` | **Retired** | [ES](LoveTok/README.md) | [Ver](LoveTok/README.en.md) |
-| Templated | Web | Easy | SSTI de Jinja2 en `render_template_string` | Retired | [ES](Templated/README.md) | [Ver](Templated/README.en.md) |
+| Templated | Web | Easy | Jinja2 SSTI at `/<nombre>`: `{{7*7}}` → 49 and RCE via `__globals__` | Retired | [ES](Templated/README.md) | [Ver](Templated/README.en.md) |
 | baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | Retired | [ES](baby%20ninja%20jinja/README.md) | [Ver](baby%20ninja%20jinja/README.en.md) |
-| Spookifier | Web | Easy | SSTI de Mako: `self.module` hasta `os` | Retired | [ES](Spookifier/README.md) | [Ver](Spookifier/README.en.md) |
+| Spookifier | Web | Very Easy | Mako SSTI through `font4`: `${self.module.cache.util.os.popen(...).read()}` | Retired | [ES](Spookifier/README.md) | [Ver](Spookifier/README.en.md) |
 | Flag Command | Web | Very Easy | Bundle JS con endpoints ocultos; comando secreto por API | Retired | [ES](Flag%20Command/README.md) | [Ver](Flag%20Command/README.en.md) |
 | Labyrinth Linguist | Web | Easy | Velocity SSTI: `#set` plus Java reflection | **Retired** | [ES](Labyrinth%20Linguist/README.md) | [Ver](Labyrinth%20Linguist/README.en.md) |
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | Retired | [ES](breaking%20grad/README.md) | [Ver](breaking%20grad/README.en.md) |
@@ -31,7 +31,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Cartographer | Web | Easy | SQLi in the login form and `panel.php?info=flag` | **Retired** | [ES](Cartographer/README.md) | [Ver](Cartographer/README.en.md) |
 | Dynastic | Crypto | Very Easy | Trithemius cipher: the shift is the index | **Retired** | [ES](Dynastic/README.md) | [Ver](Dynastic/README.en.md) |
 | Makeshift | Crypto | Very Easy | Reversal plus permutation of three-byte blocks | **Retired** | [ES](Makeshift/README.md) | [Ver](Makeshift/README.en.md) |
-| Primary Knowledge | Crypto | Very Easy | RSA with a prime `n` → φ = n − 1 | **Retired** | [ES](Primary%20Knowledge/README.md) | [Ver](Primary%20Knowledge/README.en.md) |
+| Primary Knowledge | Crypto | Very Easy | RSA with a prime `n`: `φ(n) = n − 1`, no factorisation needed | **Retired** | [ES](Primary%20Knowledge/README.md) | [Ver](Primary%20Knowledge/README.en.md) |
 | Iced Tea | Crypto | Easy | 32-round TEA with `delta` and a 32-bit mask | **Retired** | [ES](Iced%20Tea/README.md) | [Ver](Iced%20Tea/README.en.md) |
 | Illumination | Forensics | Easy | Leaked `.git`: the token survives in history, base64-encoded | **Retired** | [ES](Illumination/README.md) | [Ver](Illumination/README.en.md) |
 | MarketDump | Forensics | Easy | Export HTTP objects and decode the outlier as base58 | **Retired** | [ES](MarketDump/README.md) | [Ver](MarketDump/README.en.md) |
@@ -41,11 +41,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Keep Tryin' | Forensics | Medium | DNS exfiltration in base64url and RC4 with a weak key | **Retired** | [ES](Keep%20Tryin'/README.md) | [Ver](Keep%20Tryin'/README.en.md) |
 | Alien Cradle | Forensics | Very Easy | Deobfuscate a PowerShell download cradle built from string concatenation | **Retired** | [ES](Alien%20Cradle/README.md) | [Ver](Alien%20Cradle/README.en.md) |
 | Extraterrestrial Persistence | Forensics | Very Easy | base64-encoded systemd unit as the persistence mechanism | **Retired** | [ES](Extraterrestrial%20Persistence/README.md) | [Ver](Extraterrestrial%20Persistence/README.en.md) |
-| Plaintext Tleasure | Forensics | Very Easy | Cleartext HTTP: credentials and flag inside the stream | **Retired** | [ES](Plaintext%20Tleasure/README.md) | [Ver](Plaintext%20Tleasure/README.en.md) |
+| Plaintext Tleasure | Forensics | Very Easy | PCAP with cleartext HTTP: credentials and transfer readable without decryption | **Retired** | [ES](Plaintext%20Tleasure/README.md) | [Ver](Plaintext%20Tleasure/README.en.md) |
 | Urgent | Forensics | Very Easy | Phishing email: base64, URL encoding and a VBScript attachment | **Retired** | [ES](Urgent/README.md) | [Ver](Urgent/README.en.md) |
 | BabyEncryption | Crypto | Very Easy | Affine map modulo 256 and the modular inverse | **Retired** | [ES](BabyEncryption/README.md) | [Ver](BabyEncryption/README.en.md) |
 | Ancient Encodings | Crypto | Very Easy | Base64 inside hexadecimal, no key | **Retired** | [ES](Ancient%20Encodings/README.md) | [Ver](Ancient%20Encodings/README.en.md) |
-| SpookyPass | Reversing | Very Easy | Cleartext password in the ELF's strings | **Retired** | [ES](SpookyPass/README.md) | [Ver](SpookyPass/README.en.md) |
+| SpookyPass | Reversing | Very Easy | ELF with the password and flag in `.rodata`; the flag as UTF-32 (`strings -e l`) | **Retired** | [ES](SpookyPass/README.md) | [Ver](SpookyPass/README.en.md) |
 | KORP Terminal | Web | Very Easy | Error-based SQLi and a cracked bcrypt hash | **Retired** | [ES](KORP%20Terminal/README.md) | [Ver](KORP%20Terminal/README.en.md) |
 | TimeKORP | Web | Very Easy | Command injection through the time format | **Retired** | [ES](TimeKORP/README.md) | [Ver](TimeKORP/README.en.md) |
 | Behind the Scenes | Reversing | Very Easy | `UD2` anti-decompilation and four `strncmp` calls in GDB | **Retired** | [ES](Behind%20the%20Scenes/README.md) | [Ver](Behind%20the%20Scenes/README.en.md) |

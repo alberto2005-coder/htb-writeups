@@ -42,7 +42,10 @@ curl -s http://<IP>/ | grep -i -E 'wondercms|generator'
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `whatweb`/Wappalyzer identifican el CMS por la estructura `data/`, `themes/` y `plugins/`; el generador no siempre aparece, así que se confirma leyendo `data/database.js`.
+- La versión sale del propio tema: `curl http://<IP>/themes/bike/version` devuelve `3.2.0`, dentro del rango de **CVE-2023-41425** (3.2.0 – 3.4.2).
+- El panel está en `/loginURL` y también como `?page=loginURL`; ahí se envía el enlace que dispara el XSS contra el administrador.
+- `data/database.js` es un fichero JSON, no una base de datos: contiene el hash del administrador del CMS.
 
 ## Foothold
 
@@ -80,8 +83,7 @@ ssh amay@<IP>
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+`www-data` no es el usuario final: en `data/database.js` está el hash **bcrypt** del administrador del CMS, que se crackea (`-m 3200`) y resulta ser también la contraseña SSH de `amay`. Ese salto es el movimiento lateral del reto; después, `amay` abre el 8080 con las mismas credenciales.
 
 ## Escalada de privilegios
 
@@ -98,7 +100,7 @@ Se reenvía el puerto y se entra con las mismas credenciales:
 ssh -L 8080:127.0.0.1:8080 amay@<IP>
 ```
 
-El panel (aplicación propia del reto) tiene una funcionalidad de «análisis» que pasa la entrada a una shell sin sanear. Un payload con separador de comandos devuelve ejecución como root:
+El panel es un «System Monitor» en desarrollo con un formulario de **análisis de logs** (`log_file=`) que pasa la ruta a una shell sin sanear, y corre como root. Un payload con separador de comandos devuelve ejecución como root:
 
 ```text
 ; id
@@ -126,8 +128,11 @@ Si la conexión inversa se corta, encadenar `sleep` y lanzar el comando en segun
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
-- Actualizar el CMS, poner un WAF delante y revisar la integridad de los ficheros.
+- Actualizar WonderCMS fuera del rango 3.2.0 – 3.4.2 y no permitir instalar módulos desde URLs arbitrarias (allowlist de origen).
+- Servir el CMS con un usuario dedicado y `open_basedir`; que `data/` no sea escribible por el proceso web.
+- El monitor interno debe correr como usuario sin privilegios y validar `log_file` contra una lista de rutas permitidas, nunca concatenarlo en una shell.
+- Contraseñas distintas por servicio: el hash del CMS no debe abrir SSH.
+- Detección: peticiones a `installModule`/`loginURL` con parámetros, y procesos web lanzando comandos (`sh -c`) desde un servicio de monitorización.
 
 ## Referencias
 

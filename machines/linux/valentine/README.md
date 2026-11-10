@@ -40,7 +40,10 @@ En `/dev/` aparecen `hype_key` y `notes.txt`. La web tiene además un codificado
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **443/tcp** corre Apache 2.2.22 sobre un OpenSSL 1.0.1: `nmap --script ssl-heartbleed` lo marca **VULNERABLE**, y el propio sitio luce el logo de Heartbleed.
+- `/dev/` está indexado y entrega `hype_key` y `notes.txt`. `hype_key` es **hexadecimal**, no PEM: hay que convertirlo con `xxd -r -p`.
+- `/encode.php` y `/decode.php` existen porque el material sensible pasa por el proceso TLS: son la pista de que Heartbleed puede recuperarlo.
+- El socket `/.devs/dev_sess` es `srw-rw---- root:hype`; aparece en el historial de `hype`, no en la enumeración web.
 
 ## Foothold
 
@@ -68,8 +71,7 @@ ssh -i hype_key_dec.pem -o PubkeyAcceptedKeyTypes=+ssh-rsa hype@<IP>
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+No aplica: `hype` es el usuario final y root se alcanza por el socket de tmux del propio host. La cadena es horizontal dentro de la misma máquina: web → memoria (Heartbleed) → clave SSH → socket de sesión.
 
 ## Escalada de privilegios
 
@@ -107,7 +109,11 @@ root@Valentine:~#
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Parchar OpenSSL (≥ 1.0.1g) y renovar certificados y claves: una clave que estuvo expuesta se considera comprometida.
+- No publicar material criptográfico en el webroot; `hype_key` no debía estar en `/dev/`.
+- Proteger los sockets de tmux (`/tmp` con `0700`, socket fuera de rutas compartidas) y no ejecutar sesiones persistentes como root.
+- Deshabilitar `ssh-rsa` sólo cuando el cliente lo soporte; mientras tanto, inventariar el algoritmo aceptado.
+- Detección: ráfagas de heartbeat malformados en TLS, descargas de `/dev/*` y conexiones a sockets de sesión ajenos.
 
 ## Referencias
 

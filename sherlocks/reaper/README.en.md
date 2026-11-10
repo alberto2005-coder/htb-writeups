@@ -11,11 +11,11 @@ tags: [dfir, ntlm-relay, llmnr, pcap, security-log, event-4624, event-5140]
 
 **English** | [🇪🇸 Español](README.md)
 
-> **State:** Retired. Methodology notes; platform answers are not reproduced.
+> **State:** Retired. Method notes; no platform answers.
 
 ## Scenario
 
-The SIEM alerts on a suspicious logon: the **source IP and workstation name do not match**. A network capture from the incident window and the Windows Security log are provided; correlate them and explain what happened.
+The SIEM alerts on a suspicious logon: the **IP and the source workstation name do not match**. You get the network capture from that window and the Windows Security log; correlate them and explain what happened.
 
 ## Evidence
 
@@ -28,48 +28,52 @@ Reaper/Security.evtx
 
 ### 1. Explaining the alert
 
-Windows records the client-declared `Workstation Name` and the arriving IP in event **4624**. An attacker relaying authentication can send one machine's name from another IP: that is what trips the rule.
+Windows records in event **4624** the `Workstation Name` the client claims and the IP it comes from. An attacker **relaying** an authentication can send one machine's name while connecting from another IP: that is the mismatch.
 
-```powershell
-Get-WinEvent -Path .\Security.evtx -FilterXPath "*[System[EventID=4624]]" |
-  Select-Object TimeCreated, @{n='msg';e={$_.Message}} | Format-List
+```bash
+EvtxECmd -f Security.evtx --csv out --csvf sec.csv
 ```
 
-Note `LogonType` (3 = network), user, `Workstation Name`, IP and time.
+Filter the CSV on `EventId=4624` and note `LogonType` (3 = network), user, `WorkstationName`, IP and time (UTC).
 
 ### 2. The typo that opens the door
 
-The PCAP shows the victim mistyping a share path (`\\FORELA-WKSTN00X\...`). Since the name does not exist, the host asks the whole network over **LLMNR/NBNS**:
+The capture shows the victim mistyping a share name. Since the name does not exist, the host asks the whole segment over **LLMNR/NBT-NS**:
 
 ```bash
-tshark -r ntlmrelay.pcapng -Y 'llmnr || nbns' -T fields -e frame.number -e ip.src -e ip.dst -e llmnr.name -e nbns.name
+tshark -r ntlmrelay.pcapng -Y 'llmnr || nbns' \
+  -T fields -e frame.number -e ip.src -e ip.dst -e llmnr.name -e nbns.name
 ```
 
-The attacker answers and the victim authenticates to them.
+A host on the same segment answers and the victim authenticates to it.
 
 ### 3. The relay
 
-With `ntlmrelayx` the attacker does not keep the hash: they **relay** it to another machine where that user has more rights. The PCAP shows the outbound SMB session and the Security log shows the result:
-
-- **4624** type 3 with the victim user, but from the attacker's IP
-- **5140** share access (`\\*\share`) on the target host
+The SMB stream carries **NTLMSSP**: `NEGOTIATE`, the attacker's `CHALLENGE`, the victim's `AUTHENTICATE`. The attacker does not keep the hash: it **forwards** it to another machine where that user holds more privileges.
 
 ```bash
+tshark -r ntlmrelay.pcapng -Y 'ntlmssp' -T fields -e ip.src -e ip.dst | sort -u
 tshark -r ntlmrelay.pcapng -Y 'smb2' -T fields -e ip.src -e ip.dst -e smb2.filename | sort -u
 ```
 
+In the Security log, the outcome:
+
+- **4624** type 3 for the victim's account, but from the attacker's IP.
+- **5140** naming the share that was accessed; here `\\*\IPC$`, the usual channel for enumeration after a relay.
+
 ### 4. Timeline
 
-Join: name typo → LLMNR query → attacker answer → SMB auth to the attacker → 4624/5140 on the target. Order and seconds between steps are the proof; a lone 4624 proves nothing.
+Join them: typo → LLMNR query → attacker's answer → SMB authentication to the attacker → 4624/5140 on the target. Order and the seconds between steps are the proof; a lone 4624 proves no relay.
 
 ## Findings
 
-- Vector: LLMNR/NBT-NS poisoning after a mistyped name.
-- Technique: **NTLM relay** to another workstation, not cracking.
-- Proof: `Workstation Name` vs IP mismatch in 4624, plus 5140 on the target.
+- Vector: **LLMNR/NBT-NS** poisoning after a mistyped name.
+- Technique: **NTLM relay** against another workstation, not cracking.
+- Proof: the `Workstation Name`/IP mismatch in 4624, plus 5140 on the target.
 
 ## Lessons
 
-- A mistyped name is enough for a user to hand over their authentication.
-- Relay is detected by crossing network and logs: the captured hash never appears, because it is forwarded, not captured.
+- A single typo is enough for a user to hand over their authentication.
+- Relay detection crosses network and log: there is no hash to crack because the hash is forwarded.
+- `EvtxECmd` to CSV plus `jq`/grep beats opening the viewer for one question.
 - Mitigation: disable LLMNR/NBT-NS, require SMB signing and LDAP channel binding, and segment workstations from each other.

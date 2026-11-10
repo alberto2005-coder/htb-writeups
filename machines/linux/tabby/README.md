@@ -42,7 +42,10 @@ echo "<IP> tabby.htb megahosting.htb" | sudo tee -a /etc/hosts
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- El sitio del 80 es «Mega Hosting» y sólo responde bien con el vhost `megahosting.htb`: sin él, el LFI parece roto porque se sirve otra página.
+- `news.php?file=statement` es el parámetro vulnerable; `../../../../etc/passwd` confirma el traversal y revela `ash` y `tomcat`.
+- **8080** es Tomcat 9.0.31. El `tomcat-users.xml` útil está en `/usr/share/tomcat9/etc/tomcat-users.xml` (paquete de Ubuntu), no en `/opt/tomcat/conf/`.
+- El usuario `tomcat` tiene rol `manager-script`: `/manager/html` da 403 desde fuera, pero `/manager/text` funciona.
 
 ## Foothold
 
@@ -89,8 +92,7 @@ su ash
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+`tomcat` → `ash`: en `/var/www/html/files/` hay un backup ZIP que se crackea con `fcrackzip` y cuya contraseña es la de la cuenta `ash`. Es el único salto: el resto ya es escalada de privilegios con el grupo `lxd`.
 
 ## Escalada de privilegios
 
@@ -139,9 +141,13 @@ lxc exec privesc /bin/sh
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Corregir el LFI de `news.php` (validar `file` contra una lista blanca) y sacar `tomcat-users.xml` de rutas legibles por la web.
+- Rotar las credenciales de Tomcat y limitar `/manager/text` por IP; deshabilitar `manager-script` si no se usa.
+- No dejar backups en el webroot y no reutilizar la contraseña del ZIP como contraseña de sistema.
+- Sacar a los usuarios de los grupos `lxd`/`docker`: son root de facto.
+- Detección: lecturas de `tomcat-users.xml` por HTTP, `PUT /manager/text/deploy` y aparición de contextos nuevos en Tomcat.
 
 ## Referencias
 
-- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
-- [linux-sudo-suid](../../../knowledge/privesc/linux-sudo-suid.md)
+- [Hack The Box — Tabby](https://www.hackthebox.com/machines/tabby)
+- [HackTricks — LXD/LXC privilege escalation](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation)

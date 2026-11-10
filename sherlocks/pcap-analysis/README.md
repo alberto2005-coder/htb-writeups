@@ -1,69 +1,80 @@
 ---
 sherlock: PCAP Analysis
-domain: DFIR / Red
+domain: SOC / DFIR de red
 difficulty: Very Easy
 platform: Hack The Box
-evidence: Una única captura de tráfico de un usuario
-tools: [Wireshark, tshark, CyberChef]
 state: Retired
-tags: [dfir, dfir-/-red]
+evidence: Una única captura de tráfico de un usuario
+tools: [Wireshark, tshark, capinfos, xxd]
+tags: [dfir, soc, pcap, http, file-upload]
 ---
-
 
 # PCAP Analysis — Hack The Box
 
-[🇬🇧 English](README.en.md) | **Español**
+[⚑ English](README.en.md) | **Español**
 
-> Investigación defensiva. Sin respuestas literales de la plataforma.
+> **Estado:** Retired. Ficha de método; sin respuestas literales de la plataforma.
 
 ## Escenario
 
-Una captura tomada del equipo de un usuario contiene un **chat en texto claro** y una **subida de fichero por HTTP**. Con unas 25 000 tramas, el reto es separar la conversación del ruido y extraer el fichero.
+«Hemos capturado este tráfico del equipo de P13». Eso es todo lo que da el enunciado: una captura con miles de tramas en la que conviven un **chat en texto claro** en un puerto poco habitual y una **subida de fichero por HTTP** sin cifrar.
 
 ## Evidencias
 
-- Un `Pcap_Analysis.pcapng`.
+```text
+Pcap_Analysis.zip     (contraseña en la página del Sherlock)
+Pcap_Analysis.pcapng
+```
 
 ## Investigación
 
-1. **Reducir el ruido**: `Statistics → Protocol Hierarchy` y `Conversations`.
+### 1. Medir antes de leer
 
 ```bash
+unzip -P <password> PCAP_Analysis.zip
+capinfos Pcap_Analysis.pcapng
 tshark -r Pcap_Analysis.pcapng -q -z io,phs
 ```
 
-2. **El chat**: filtrar por el protocolo de mensajería en claro y seguir el flujo.
+`capinfos` da número de paquetes, duración y tamaños; la jerarquía de protocolos dice qué merece la pena filtrar. En una captura de este tamaño, abrirla sin filtrar es perder el tiempo.
+
+### 2. El chat
+
+El identificador del Sherlock es el **puerto no estándar**: no es IRC ni un protocolo conocido, es texto plano sobre TCP. Al filtrar por ese puerto y reconstruir el payload se lee la conversación y se obtienen los dos extremos:
 
 ```bash
-tshark -r Pcap_Analysis.pcapng -Y 'tcp.port==6667 || http' -T fields -e _ws.col.Info | head
+tshark -r Pcap_Analysis.pcapng -Y 'tcp.port==250 && tcp.len>1' \
+  -T fields -e ip.src -e ip.dst -e tcp.payload | xxd -r -p
 ```
 
-3. **La subida**: localizar el `POST` con `multipart/form-data` y exportar el objeto.
+Los nombres que aparecen en los mensajes identifican a cada interlocutor y sus IP; el emisor del chat es el mismo host que después sube el fichero.
+
+### 3. La subida
 
 ```bash
-tshark -r Pcap_Analysis.pcapng -Y 'http.request.method=="POST"' -T fields -e http.request.uri
+tshark -r Pcap_Analysis.pcapng -Y 'http.request.method=="POST"' \
+  -T fields -e ip.src -e ip.dst -e http.request.uri -e http.content_length
 ```
 
-`File → Export Objects → HTTP` guarda el fichero; el tamaño se lee en la respuesta del servidor.
+El `POST` es `multipart/form-data` contra un Apache en otra subred. Para leer la petición completa y la respuesta (que revela el directorio de destino):
 
-4. **El fichero**: `file` no reconoce firma (es datos), así que hay que mirar el contenido y la cabecera del multipart para saber qué se subió.
+```bash
+tshark -r Pcap_Analysis.pcapng -q -z follow,tcp,ascii,<stream>
+```
+
+### 4. El fichero
+
+`File → Export Objects → HTTP` guarda el objeto; el fichero se llama `file`, pesa unos 107 KB y su contenido es prácticamente aleatorio, es decir, ya está cifrado o comprimido. El tamaño de la transferencia sale restando el primer y el último paquete del flujo.
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- El emisor del chat y el de la subida son la misma estación: un usuario que conversa y exfiltra en la misma sesión de captura.
+- La conversación va en claro en un puerto no estándar, y la subida por HTTP sin TLS: ambos canales son legibles sin descifrar nada.
+- El fichero subido es opaco (alta entropía), así que la evidencia útil es el **quién, a dónde y cuándo**, no el contenido.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
-
-## Qué enseña
-
-- En un PCAP grande, el primer paso siempre es reducir: protocolos, conversaciones, después contenido.
-- El chat en claro y la subida HTTP dan nombre, intención y prueba de exfiltración.
-- `Export Objects` evita reconstruir el multipart a mano.
-
-## Tropiezos
-
-- **Nombre del campo**: en el multipart, `name=` es el campo del formulario y `filename=` el nombre real del fichero.
-- **Ruido de fondo**: tráfico de actualizaciones y DNS consume la mayor parte de las tramas; filtrar antes de leer.
-- **Cifrado**: si la subida va por TLS, sólo quedan metadatos (SNI, tamaños, horas).
+- `capinfos` y la jerarquía de protocolos convierten una captura grande en un plan de filtros.
+- Un puerto raro con texto legible no es «tráfico desconocido»: es un protocolo casero y se lee siguiendo el flujo.
+- La respuesta del servidor suele confesar más que la petición: ruta de guardado, versión de Apache, código de estado.
+- Un objeto de alta entropía no se «descifra» sin más datos; se documenta como IOC y se correlaciona.

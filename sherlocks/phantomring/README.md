@@ -1,12 +1,11 @@
 ---
 sherlock: PhantomRing
-domain: SOC
+domain: Análisis de malware / Linux
 difficulty: Very Easy
 platform: Hack The Box
 state: Retired
 tags: [malware-analysis, linux, elf, reverse-engineering, ghidra, c2]
 ---
-
 
 # PhantomRing — Hack The Box
 
@@ -16,66 +15,67 @@ tags: [malware-analysis, linux, elf, reverse-engineering, ghidra, c2]
 
 ## Escenario
 
-Una alerta señaló actividad extraña en un servidor Linux. El analista anterior dejó una muestra: un binario ELF ejecutado desde `/var/tmp` que parece mantener comunicación con el exterior. Hay que caracterizarlo: qué hace, con quién habla y cómo se camufla.
+Una alerta señaló actividad extraña en un servidor Linux. El analista anterior dejó una muestra: un **ELF** ejecutado desde `/var/tmp` que mantiene comunicación con el exterior. Hay que caracterizarlo sin detonarlo: qué hace, con quién habla y cómo se camufla.
 
 ## Evidencias
 
-- Muestra ELF (sin empaquetar y sin símbolos, pero no ofuscada en exceso).
-- Metadatos del host: ruta de ejecución, usuario que lo lanzó, hora.
-- Opcionalmente, captura del tráfico.
+```text
+phantomring.zip        (contraseña en la página del Sherlock)
+  └── phantom_ring/agent
+```
 
 ## Investigación
 
 ### 1. Triaje estático
 
-Nunca en la máquina de análisis sin aislamiento; aquí basta con no ejecutarlo.
-
 ```bash
-file phantom
-sha256sum phantom
-readelf -h phantom
-strings -n 6 phantom | less
+file phantom_ring/agent
+sha256sum phantom_ring/agent
+readelf -h phantom_ring/agent
+strings -n 6 phantom_ring/agent | less
 ```
 
-`file` confirma arquitectura y enlazado (estático o dinámico). `strings` suele dar la primera pista: URLs, dominios, rutas de persistencia y mensajes de error del propio autor.
-
-### 2. Importaciones y comportamiento
+Es un **ELF x86-64 PIE, enlazado dinámicamente** con intérprete `/lib64/ld-linux-x86-64.so.2`, sin empaquetar y **sin `strip`**: eso cambia la estrategia, porque los nombres reales de las funciones siguen ahí.
 
 ```bash
-readelf -s phantom | grep -E "UND|FUNC"
-objdump -d -M intel phantom | less
+nm phantom_ring/agent | grep ' T \| t '
 ```
 
-La lista de símbolos importados dice casi todo: `socket`, `connect`, `getaddrinfo` apuntan a C2; `fork`, `setsid`, `daemon` a demonización; `chmod`, `unlink` a limpieza de huellas.
+### 2. Símbolos: el atajo
 
-### 3. Descompilar con Ghidra
+Con el binario sin *strippear*, `nm` devuelve funciones con nombre en lugar de `sub_401230`. Buscar las que huelen a red, a persistencia y a ejecución de comandos reduce el análisis a unos minutos:
 
-Se importa el binario, se deja el analizador automático y se buscan las referencias a las cadenas interesantes (`Search > For Strings`, luego `References`). El `main` suele mostrar:
+```bash
+nm phantom_ring/agent | grep -iE 'connect|socket|exec|persist|cmd|port'
+objdump -d -M intel --disassemble=<funcion> phantom_ring/agent | less
+```
 
-1. Comprobación de argumentos / entorno.
-2. Conexión al host remoto con un token o cabecera fija.
-3. Bucle de lectura de comandos y ejecución (`popen`/`system`).
-4. Rutina de persistencia opcional.
+### 3. El puerto de C2
 
-Con el seudocódigo se reconstruye el protocolo (qué se envía primero, cómo se identifica el implante, qué formato tienen las respuestas).
+El puerto no está en una tabla ni cifrado: aparece como **operando inmediato** de la instrucción que prepara la estructura de `connect`. Convertido de hexadecimal a decimal es la respuesta, sin necesidad de ejecutar nada.
 
-### 4. Correlación con el host
+### 4. Comportamiento
+
+Con `Ghidra` (o `objdump`) se reconstruye el flujo: comprobación de entorno, conexión al host remoto, bucle de lectura de comandos y ejecución (`system`/`popen`), más una rutina opcional de persistencia. Los IOC salen de aquí: hash SHA-256, ruta `/var/tmp`, nombre del proceso y endpoint de C2.
+
+### 5. Correlación con el host
 
 ```bash
 ls -la /var/tmp
-grep -R "phantom" /etc/cron* /etc/systemd 2>/dev/null
+grep -R "agent" /etc/cron* /etc/systemd 2>/dev/null
 ```
 
-La ruta de ejecución y el usuario permiten responder si el implante corría como servicio, por cron o a mano. Los IOC salen de aquí: hash, ruta, nombre del proceso, dominio/IP de C2.
+La ruta y el usuario de ejecución dicen si corría como servicio, por cron o a mano.
 
 ## Conclusiones
 
-- Implante tipo *backdoor* con C2 por socket y ejecución de comandos.
-- Se ejecuta desde un directorio temporal escribible, práctica habitual para pasar desapercibido.
-- El análisis estático basta para extraer C2, protocolo e IOC; no hace falta detonarlo.
+- Implante tipo *backdoor*: C2 por socket y ejecución de comandos en el host.
+- Se ejecuta desde un directorio temporal escribible, práctica habitual para no tocar rutas vigiladas.
+- El análisis estático basta para extraer C2, protocolo e IOC; el binario nunca se ejecuta.
 
 ## Lecciones
 
-- `/var/tmp` y `/dev/shm` ejecutables son un indicador de por sí.
-- `strings` + importaciones resuelven la mitad de un binario pequeño antes de abrir el descompilador.
-- Documentar IOC (hash, ruta, C2, proceso) es el entregable real, no el seudocódigo.
+- `/var/tmp` y `/dev/shm` ejecutables son un indicador por sí mismos.
+- Un binario **sin `strip`** regala los nombres de función: empieza por `nm`, no por el descompilador.
+- `strings` + símbolos resuelven la mitad de un binario pequeño; el puerto suele estar como inmediato en el código.
+- Documentar hash, ruta y endpoint convierte el análisis en algo accionable para el equipo de detección.

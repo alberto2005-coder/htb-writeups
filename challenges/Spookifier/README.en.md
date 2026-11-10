@@ -1,7 +1,7 @@
 ---
 challenge: Spookifier
 type: Web
-difficulty: Easy
+difficulty: Very Easy
 platform: Hack The Box
 state: Retired
 tags: [web, flask, mako, ssti, rce]
@@ -15,7 +15,7 @@ tags: [web, flask, mako, ssti, rce]
 
 ## TL;DR
 
-A text converter with "styles" that renders input through **Mako**, Python's `${}`-based template engine. No globals chain needed: `self` is exposed and reaches `os` in one line.
+A text converter with "styles" that renders input through **Mako**, Python's `${}`-based template engine. No globals chain needed: `self` is exposed and reaches `os` in one line. The challenge **ships the source** (`spookifier.zip`: `main.py`, `routes.py`, `util.py`), so the vector is read, not guessed.
 
 ## Brief
 

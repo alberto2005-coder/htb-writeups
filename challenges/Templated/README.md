@@ -27,11 +27,16 @@ Devuelve `Hello John`. Un 404 personalizado sugiere que el nombre se renderiza, 
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+Un único endpoint: `/<nombre>`. La respuesta es `Hello <nombre>` y un 404 personalizado que también renderiza, señal de que el nombre pasa por una plantilla y no se imprime tal cual.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+No se entrega el código, pero el comportamiento lo identifica: `render_template_string("Hello " + name)` concatena la entrada **antes** de compilar la plantilla. Las dos pruebas separan motores:
+
+```text
+/{{7*7}}     -> Hello 49      (evaluación aritmética)
+/{{7*'7'}}   -> Hello 7777777 (Jinja2; Twig daría 49 en ambos)
+```
 
 ## Explicación del fallo
 
@@ -52,7 +57,16 @@ La primera confirma evaluación aritmética; la segunda, que es Jinja2 (Twig dev
 
 ## Reproducción local
 
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+Un Flask mínimo reproduce el fallo en local:
+
+```python
+from flask import Flask, render_template_string
+app = Flask(__name__)
+
+@app.route("/<name>")
+def index(name):
+    return render_template_string("Hello " + name)
+```
 
 ## Explotación
 
@@ -92,7 +106,10 @@ Si el reto filtra `.` o `_`, `request|attr('application')|attr('__globals__')` p
 
 ## Mitigaciones y detección
 
-- No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
+- Pasar la entrada como **variable** (`render_template_string("Hello {{ name }}", name=name)`), nunca concatenada en la plantilla.
+- Si el usuario debe poder elegir formato, usar `Template` con sandbox (Jinja2 `SandboxedEnvironment`) o un motor sin acceso a Python.
+- Escapar la salida y validar el nombre contra un allowlist.
+- Detección: peticiones con `{{`, `{%` o `__class__` en la ruta, y errores 500 con trazas de Jinja2.
 
 ## Referencias
 
