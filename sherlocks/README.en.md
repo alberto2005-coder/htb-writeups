@@ -18,9 +18,9 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 |---|---|---|---|---|---|
 | CrownJewel-2 | DFIR / Active Directory | Medium | DC logs with pass-the-hash and `C$` access | EvtxECmd, Timeline Explorer | [Ver](crownjewel-2/README.en.md) |
 | Campfire-2 | DFIR / Active Directory | Easy | 4768 without pre-authentication (AS-REP) and later use | EvtxECmd, 4768/4769 | [Ver](campfire-2/README.en.md) |
-| Safecracker | DFIR / Malware | Medium | Ransomware with a custom extension and embedded key | Ghidra, `strings`, PE-bear | [Ver](safecracker/README.en.md) |
+| Safecracker | DFIR / Malware | Medium | Ransomware in a ZIP for Autopsy: accounts, encryption and deletion via `NtSetInformationFile` | Ghidra, `strings`, PE-bear | [Ver](safecracker/README.en.md) |
 | JenkreadD | DFIR / Web | Easy | Jenkins CVE-2024-23897: `POST /cli` with `@path` | `grep`, log analysis | [Ver](jenkreadd/README.en.md) |
-| Subatomic | Malware / DFIR | Medium | Electron app stealing the Discord token with persistence | `asar`, JS analysis | [Ver](subatomic/README.en.md) |
+| Subatomic | Malware / DFIR | Medium | Fake game installer: Electron `app.asar`, Discord token theft and `openAtLogin` | `asar`, JS analysis | [Ver](subatomic/README.en.md) |
 | Litter | SOC | Easy | PCAP + ZIP from a test host | Wireshark, dnscat2-decoder | [Ver](litter/README.en.md) |
 | PhantomRing | Malware Analysis | Very Easy | Unstripped ELF in `/var/tmp`: `nm` yields the names and the C2 port is an immediate operand | Ghidra, `strings`, `file` | [Ver](phantomring/README.md) |
 | Opportunist | DFIR / Malware | Medium | Memory + triage from a corporate host | Volatility 3, VirusTotal, ChromeCacheView, SQLECmd | [Ver](opportunist/README.md) |
@@ -42,8 +42,8 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Reaper | DFIR | Very Easy | NTLM relay after a mistyped share: LLMNR, a 4624 whose IP and workstation disagree, 5140 | Wireshark, EvtxECmd | [Ver](reaper/README.en.md) |
 | Knock Knock | DFIR | Medium | PCAP de *password spray* y *port knocking* | Wireshark, `tshark` | [Ver](knock-knock/README.en.md) |
 | RogueOne | DFIR / Memoria | Easy | Fake `svchost.exe` in `Downloads` with C2 to 13.127.155.166:8888 and a `cmd.exe` child | Volatility 3, `windows.netscan` | [Ver](rogueone/README.en.md) |
-| SSHole | DFIR / Unix | Very Easy | Evidencias de un jumpbox comprometido | `auth.log`, `last`, `journalctl` | [Ver](sshole/README.en.md) |
-| ShadowBait | DFIR / Windows | Easy | Logs de Sysmon, PowerShell y Security | Hayabusa, EvtxECmd | [Ver](shadowbait/README.en.md) |
+| SSHole | DFIR / Unix | Very Easy | Alpine `sshd` bypass (crypt's `*`) on a jumpbox later used to scan `192.168.18.0/24` | `auth.log`, `last`, `journalctl` | [Ver](sshole/README.en.md) |
+| ShadowBait | DFIR / Windows | Easy | Steven's Office document → PowerShell → C2 `192.168.204.152:8899` → DPAPI and persistence | Hayabusa, EvtxECmd | [Ver](shadowbait/README.en.md) |
 | Compromised | DFIR / Red | Easy | PCAP de una red corporativa | Wireshark, `tshark` | [Ver](compromised/README.en.md) |
 | Packet Puzzle | DFIR / Red | Medium | PCAP from a Japanese crypto company; the RDP→SMB sequence is not confirmed by public writeups | Wireshark, `tshark` | [Ver](packet-puzzle/README.en.md) |
 | Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | SQLite, DB Browser | [Ver](jingle-bell/README.en.md) |
@@ -54,7 +54,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Lockpick | Malware / Ransomware | Easy | Muestra de ransomware y ficheros cifrados | Ghidra, x64dbg | [Ver](lockpick/README.en.md) |
 | Lockpick 2.0 | Malware / Ransomware | Easy | Recurso compartido cifrado y muestra con nota | UPX, Ghidra | [Ver](lockpick-2/README.en.md) |
 | Payload | Malware / Windows | Easy | `func_pointer.exe` (MinGW) decrypting its payload at runtime | x64dbg, radare2, PEStudio | [Ver](payload/README.en.md) |
-| Takedown | Red / DFIR | Easy | PCAP con SMB, VBS y PowerShell hacia un C2 | Wireshark, `tshark` | [Ver](takedown/README.en.md) |
+| Takedown | Red / DFIR | Easy | PCAP with SMB2 → `.vbs` → PowerShell → C2, plus `NTLMSSP_AUTH` for pass-the-hash | Wireshark, `tshark` | [Ver](takedown/README.en.md) |
 | Interceptor | SOC / Red | Easy | PCAP de una infección SSLoad con C2 en RC4 | Wireshark, CyberChef | [Ver](interceptor/README.en.md) |
 | Nubilum-1 | Cloud / AWS | Medium | CloudTrail, EC2 comprometida y copia de S3 | `jq`, AWS CLI | [Ver](nubilum-1/README.en.md) |
 | Nubilum-2 | Cloud / AWS | Medium (sources: Easy) | S3 with anonymous read of an IAM key CSV and self-escalation via `PutUserPolicy` | Splunk, `jq` | [Ver](nubilum-2/README.en.md) |

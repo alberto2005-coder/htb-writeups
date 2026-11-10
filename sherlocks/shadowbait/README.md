@@ -52,11 +52,16 @@ EventID 4104 | ScriptBlockText contains DownloadString
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- Acceso inicial por un documento de Office que lanza PowerShell: el padre `WINWORD.EXE` con hijo `powershell.exe` es la firma de la cadena.
+- El script descarga `OpenDLL.exe` y lo ejecuta en memoria; Sysmon 3 da el C2 en `192.168.204.152:8899`.
+- El acceso a credenciales pasa por **DPAPI** sobre un `PSCredential` guardado (`ConvertTo-SecureString` + `Export-Clixml`), no por volcar LSASS.
+- Persistencia en tareas programadas y en `Run`/`RunOnce`; `7045` confirma el servicio creado.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- El *Script Block Logging* (4104) es lo que convierte PowerShell en evidencia legible: sin él, sólo quedaría el proceso.
+- Un documento que abre una URL en `AppData\Roaming\Microsoft\Credentials` es exfiltración de credenciales, no «actividad rara».
+- Hayabusa a CSV primero: filtrar 60.000 eventos a mano no es viable.
 
 ## Qué enseña
 

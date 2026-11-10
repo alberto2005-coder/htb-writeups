@@ -33,7 +33,9 @@ nmap -Pn -sV -p 6379 <TARGET_IP>
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- Un único puerto relevante: **6379/tcp** (Redis). `nmap -sV` lo marca como Redis y no pide autenticación.
+- `redis-cli -h <IP> info` devuelve `redis_version` y `connected_clients`: si responde a `INFO` sin `AUTH`, la instancia está abierta.
+- Redis expone 16 bases (0-15); la flag suele estar en una de las primeras, así que conviene recorrerlas con `select` antes de asumir que no hay nada.
 
 ## Foothold
 
@@ -68,7 +70,7 @@ No hizo falta exploit ni credenciales: el puerto está expuesto y `protected-mod
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 

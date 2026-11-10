@@ -37,7 +37,9 @@ finger-user-enum -U /usr/share/seclists/Usernames/Names/names.txt -t <IP>
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **79/tcp** (finger) es el servicio que delata Solaris: no existe en un Linux normal. `finger @<IP>` ya devuelve el usuario `root` conectado; con `finger-user-enum` y una lista de nombres salen `sunny` y `sammy` (Solaris hace *substring matching*, así que también aparecen cuentas de servicio).
+- **111/tcp** (rpcbind) y **22022/tcp** (SunSSH 1.3): el SSH no está en el 22 y exige algoritmos antiguos (`diffie-hellman-group1-sha1`).
+- `/backup/` es legible desde `sunny` y contiene `shadow.backup`: un volcado de `/etc/shadow` con el hash `$5$` de `sammy`.
 
 ## Foothold
 
@@ -57,8 +59,7 @@ hashcat -m 7400 hash.txt /usr/share/wordlists/rockyou.txt
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+`sunny` → `sammy` con el hash SHA-256 crypt (`$5$`, `hashcat -m 7400`) del backup de `shadow`. `sunny` no puede leer `user.txt` (es de `sammy`, modo 640): el backup es el puente. Como alternativa, `sunny` tiene `sudo` sobre `/root/troll`, que imprime un mensaje y abre shell; un script de root lo restaura cada pocos segundos, así que hay que sobrescribirlo y ejecutarlo en la ventana.
 
 ## Escalada de privilegios
 
@@ -105,4 +106,4 @@ uid=0(root)
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Retirar `finger`, rotar contraseñas y no conceder `sudo` sobre descargadores (`wget`, `curl`): son escritura arbitraria como root. Un script de root modificable por el usuario (`/root/troll`) es lo mismo con otro nombre.

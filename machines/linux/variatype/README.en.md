@@ -17,7 +17,7 @@ tags: [linux, git-disclosure, fonttools, fontforge, setuptools, cve-2025-47273]
 
 ## TL;DR
 
-A three-CVE chain across typography tooling. An exposed `.git` leaks internal portal credentials; **CVE-2025-66034** (fontTools varLib) writes a PHP web shell through a `.designspace` with CDATA; **CVE-2024-25082** (FontForge) injects commands through a ZIP filename for a shell as `steve`; and the plugin loader running under `sudo` uses a vulnerable setuptools, **CVE-2025-47273**, to write a key into `/root/.ssh/authorized_keys`.
+A three-CVE chain across typography tooling. An exposed `.git` leaks internal portal credentials; **CVE-2025-66034** (fontTools varLib) writes a PHP web shell through a `.designspace` with CDATA; **CVE-2024-25082** (FontForge) injects commands through a filename inside a ZIP for a shell as `www-data`, and the same trick against the user's ZIP pivots to `steve`; and the plugin loader running under `sudo` uses a vulnerable setuptools, **CVE-2025-47273**, to write a key into `/root/.ssh/authorized_keys`.
 
 ## Recon
 
@@ -32,19 +32,19 @@ ffuf -u http://<IP> -H "Host: FUZZ.variatype.htb" -w subdomains.txt -mc 200,403
 ```
 
 ```text
-git.variatype.htb   -> exposed repository
-dev.variatype.htb   -> upload portal (internal)
+variatype.htb        -> public site (/services, /tools/variable-font-generator)
+portal.variatype.htb -> internal portal with an exposed .git
 ```
 
 ## Foothold: .git and credentials
 
 ```bash
-wget -r http://git.variatype.htb/.git/
-cd git.variatype.htb && git log --all --oneline
+git-dumper http://portal.variatype.htb/.git/ portal
+cd portal && git log --all --oneline
 git log -p | grep -iE "password|api_key|token"
 ```
 
-A password in a reverted commit grants access to the font portal (`dev.variatype.htb`).
+A credential for the `gitbot` app user in the history grants access to the font portal (`portal.variatype.htb`).
 
 ## 2. CVE-2025-66034: file write with fontTools
 

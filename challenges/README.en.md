@@ -16,8 +16,8 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM in `session.upload_progress`, use-after-free, ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [ES](Dark%20Embargo/README.md) | [Ver](Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | MD5 against the clock: session handling, regex, hashing in a script | **Retired** | [ES](Emdee%20five%20for%20life/README.md) | [Ver](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | Blind LDAP injection: the flag is `reese`'s password, not the `*` bypass | **Retired** | [ES](Phonebook/README.md) | [Ver](Phonebook/README.en.md) |
-| Under Construction | Web | Easy | JWT algorithm confusion: HS256 signed with the public key | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
-| Toxic | Web | Very Easy | PHP object injection: `PageModel::__destruct` includes a file (LFI) and nginx log poisoning | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
+| Under Construction | Web | Easy | JWT `alg` confusion RS256→HS256 signing with `/public.pem` | **Retired** | [ES](Under%20Construction/README.md) | [Ver](Under%20Construction/README.en.md) |
+| Toxic | Web | Very Easy | PHP deserialization in the cookie → `PageModel::__destruct` → LFI plus log poisoning | Retired | [ES](Toxic/README.md) | [Ver](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` over the date format; `addslashes` does not stop `${}` | **Retired** | [ES](LoveTok/README.md) | [Ver](LoveTok/README.en.md) |
 | Templated | Web | Easy | Jinja2 SSTI at `/<nombre>`: `{{7*7}}` → 49 and RCE via `__globals__` | Retired | [ES](Templated/README.md) | [Ver](Templated/README.en.md) |
 | baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | Retired | [ES](baby%20ninja%20jinja/README.md) | [Ver](baby%20ninja%20jinja/README.en.md) |
@@ -35,19 +35,19 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Iced Tea | Crypto | Easy | 32-round TEA with `delta` and a 32-bit mask | **Retired** | [ES](Iced%20Tea/README.md) | [Ver](Iced%20Tea/README.en.md) |
 | Illumination | Forensics | Easy | Leaked `.git`: the token survives in history, base64-encoded | **Retired** | [ES](Illumination/README.md) | [Ver](Illumination/README.en.md) |
 | MarketDump | Forensics | Easy | Export HTTP objects and decode the outlier as base58 | **Retired** | [ES](MarketDump/README.md) | [Ver](MarketDump/README.en.md) |
-| Took the Byte | Forensics | Easy | Single-byte XOR (`0xFF`) down to a ZIP holding the password file | **Retired** | [ES](Took%20the%20Byte/README.md) | [Ver](Took%20the%20Byte/README.en.md) |
+| Took the Byte | Forensics | Easy | Single-byte XOR (`0xFF`) over `password` → a ZIP with `password.txt` | **Retired** | [ES](Took%20the%20Byte/README.md) | [Ver](Took%20the%20Byte/README.en.md) |
 | Deadly Arthropod | Forensics | Medium | Rebuild keystrokes from USB keyboard HID reports | **Retired** | [ES](Deadly%20Arthropod/README.md) | [Ver](Deadly%20Arthropod/README.en.md) |
 | Obscure | Forensics | Easy | Obfuscated webshell, PCAP with commands and a `.kdbx` cracked with john | **Retired** | [ES](Obscure/README.md) | [Ver](Obscure/README.en.md) |
 | Keep Tryin' | Forensics | Medium | DNS exfiltration in base64url and RC4 with a weak key | **Retired** | [ES](Keep%20Tryin'/README.md) | [Ver](Keep%20Tryin'/README.en.md) |
 | Alien Cradle | Forensics | Very Easy | Deobfuscate a PowerShell download cradle built from string concatenation | **Retired** | [ES](Alien%20Cradle/README.md) | [Ver](Alien%20Cradle/README.en.md) |
 | Extraterrestrial Persistence | Forensics | Very Easy | base64-encoded systemd unit as the persistence mechanism | **Retired** | [ES](Extraterrestrial%20Persistence/README.md) | [Ver](Extraterrestrial%20Persistence/README.en.md) |
 | Plaintext Tleasure | Forensics | Very Easy | PCAP with cleartext HTTP: credentials and transfer readable without decryption | **Retired** | [ES](Plaintext%20Tleasure/README.md) | [Ver](Plaintext%20Tleasure/README.en.md) |
-| Urgent | Forensics | Very Easy | Phishing email: base64, URL encoding and a VBScript attachment | **Retired** | [ES](Urgent/README.md) | [Ver](Urgent/README.en.md) |
+| Urgent | Forensics | Very Easy | Phishing `.eml`: base64/quoted-printable MIME, URL encoding and a VBS attachment | **Retired** | [ES](Urgent/README.md) | [Ver](Urgent/README.en.md) |
 | BabyEncryption | Crypto | Very Easy | Affine map modulo 256 and the modular inverse | **Retired** | [ES](BabyEncryption/README.md) | [Ver](BabyEncryption/README.en.md) |
 | Ancient Encodings | Crypto | Very Easy | Base64 inside hexadecimal, no key | **Retired** | [ES](Ancient%20Encodings/README.md) | [Ver](Ancient%20Encodings/README.en.md) |
 | SpookyPass | Reversing | Very Easy | ELF with the password and flag in `.rodata`; the flag as UTF-32 (`strings -e l`) | **Retired** | [ES](SpookyPass/README.md) | [Ver](SpookyPass/README.en.md) |
 | KORP Terminal | Web | Very Easy | Error-based SQLi and a cracked bcrypt hash | **Retired** | [ES](KORP%20Terminal/README.md) | [Ver](KORP%20Terminal/README.en.md) |
-| TimeKORP | Web | Very Easy | Command injection through the time format | **Retired** | [ES](TimeKORP/README.md) | [Ver](TimeKORP/README.en.md) |
+| TimeKORP | Web | Very Easy | Command injection into `date` through `format`: `%H:%M:%S' |cat /flag #` | **Retired** | [ES](TimeKORP/README.md) | [Ver](TimeKORP/README.en.md) |
 | Behind the Scenes | Reversing | Very Easy | `UD2` anti-decompilation and four `strncmp` calls in GDB | **Retired** | [ES](Behind%20the%20Scenes/README.md) | [Ver](Behind%20the%20Scenes/README.en.md) |
 | OnlyHacks | Web | Very Easy | IDOR at `/chat?rid=3`: the flag sits in another user's chat (the bot XSS is an alternative) | **Retired** | [ES](OnlyHacks/README.md) | [Ver](OnlyHacks/README.en.md) |
 | Perfect Synchronization | Crypto | Easy | Per-character substitution (`char + 15`): frequency analysis, not AES-ECB | **Retired** | [ES](Perfect%20Synchronization/README.md) | [Ver](Perfect%20Synchronization/README.en.md) |

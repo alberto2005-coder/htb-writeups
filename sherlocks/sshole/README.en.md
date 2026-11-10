@@ -52,7 +52,9 @@ ls -la /tmp /var/tmp /dev/shm
 
 ## What it teaches
 
-- A vulnerable SSH server is compromised **without credentials**: the log pattern differs from brute force.
+- The jumpbox runs **Alpine Linux** and its `sshd` accepts an authentication bypass (CVE-2026-123158): Alpine's `crypt()` returns `*` when the password exceeds 256 bytes, and an account with no password also stores `*` in `/etc/shadow`. `sshd` compares `*` to `*` and **accepts the login** without knowing the password.
+- The account is the service account `adminsvc`; `auth.log` never records the password sent, so the bypass is **inferred** from a successful session with no `password`/`publickey` stage.
+- Afterwards the box scans `192.168.18.0/24`, runs a script and uploads to an external domain (`devv.coding.eu`): the jumpbox was the pivot, not the target.
 - A jumpbox is a pivot platform: the forensic value is in the *outbound* traffic that follows.
 - Comparing `auth.log` with `last` and shell history rebuilds the session.
 

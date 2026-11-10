@@ -80,7 +80,7 @@ uid=0(root)
 
 ## Pitfalls
 
-- **`/root/troll`**: a joke; it leads nowhere.
+- **`/root/troll`**: prints `testing` and `id`, and a root job restores it every few seconds from `/root/troll.original`. Overwriting it inside that window runs your script as root (the race alternative to `wget`).
 - **Old SSH**: without legacy `KexAlgorithms` the client refuses to connect.
 - **`wget -i`**: reading `/etc/shadow` only helps if you can dump it; the useful part is **writing** (`-O`) or the `askpass` trick.
 

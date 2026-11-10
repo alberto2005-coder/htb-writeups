@@ -23,11 +23,11 @@ Registro y login. Tras autenticarse, redirige a `/home`, que muestra `Welcome <u
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+Registro y login en una app Node/Express. Tras autenticarse se llega a `/home` y existe `/admin`, que exige rol de administrador. La cookie `auth` es un **JWT** y el servidor publica su clave en `/public.pem`; hay además un `/jwks.json` y el token lleva `kid`.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+El reto **sí entrega el código** (arriba): `jwt.verify(req.cookies.auth, publicKey)` sin la opción `algorithms`. La librería acepta el algoritmo que declare el token, así que un `alg: HS256` hace que la clave pública se use como **secreto HMAC**.
 
 ## Explicación del fallo
 
@@ -52,7 +52,7 @@ El fallo clásico: `jwt.verify` sin la opción `algorithms`. Si el token pide `H
 
 ## Reproducción local
 
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+El código del reto levanta en local con `npm start`; el ataque se prueba contra `127.0.0.1` con la misma clave pública que sirve `/public.pem`.
 
 ## Explotación
 

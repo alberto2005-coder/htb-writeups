@@ -17,7 +17,7 @@ tags: [linux, git-disclosure, fonttools, fontforge, setuptools, cve-2025-47273]
 
 ## TL;DR
 
-Cadena de tres CVEs en herramientas tipográficas. Un `.git` expuesto filtra credenciales del portal interno; **CVE-2025-66034** (fontTools varLib) escribe un webshell PHP a través de un `.designspace` con CDATA; **CVE-2024-25082** (FontForge) inyecta comandos en el nombre de un ZIP y da shell como `steve`; y el cargador de plugins que corre con `sudo` usa un setuptools vulnerable, **CVE-2025-47273**, para escribir una clave en `/root/.ssh/authorized_keys`.
+Cadena de tres CVEs en herramientas tipográficas. El portal interno **`portal.variatype.htb`** expone su `.git` y filtra la credencial de `gitbot`; el generador de fuentes (`/tools/variable-font-generator/process`) usa **fontTools** y permite escribir un webshell PHP a través de un `.designspace`; **CVE-2024-25082** (FontForge) inyecta comandos en el nombre de un fichero dentro de un ZIP y da shell como `www-data`, y el mismo patrón aplicado al ZIP del usuario pivotа a `steve`; y el cargador de plugins que corre con `sudo` usa un setuptools vulnerable, **CVE-2025-47273**, para escribir una clave en `/root/.ssh/authorized_keys`.
 
 ## Reconocimiento
 
@@ -32,13 +32,16 @@ ffuf -u http://<IP> -H "Host: FUZZ.variatype.htb" -w subdomains.txt -mc 200,403
 ```
 
 ```text
-git.variatype.htb   -> repositorio expuesto
-dev.variatype.htb   -> portal de subida (interno)
+variatype.htb        -> web pública (/services, referencia a /tools/variable-font-generator)
+portal.variatype.htb -> portal interno con .git expuesto
 ```
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- `ffuf` sobre la web pública encuentra `/services` y la referencia a `/tools/variable-font-generator`; el formulario que genera fuentes variables es el que después procesa los `.designspace`.
+- El vhost interno sólo aparece con fuzzing de `Host`: `portal.variatype.htb`. Ahí está el `.git`, y `git-dumper` recupera código e historial.
+- En el historial hay una credencial de **`gitbot`** (usuario de la app, no del sistema) añadida para el pipeline de validación: es la que abre el generador.
+- El generador corre fontTools y acepta un `.designspace`; el resto de la cadena depende de qué binario procese el resultado (FontForge para el ZIP).
 
 ## Foothold
 
@@ -52,12 +55,20 @@ Aparece una contraseña en un commit revertido que da acceso al portal de fuente
 
 ## Movimiento lateral
 
-- La cadena reutiliza credenciales dentro del mismo host; no hay salto a un segundo equipo.
-- El detalle está en «Escalada de privilegios».
+`www-data` no es el usuario final: el mismo servicio de tipografías procesa un **ZIP** cuyo nombre interno contiene una orden, y FontForge (CVE-2024-25082) la ejecuta. Con esa segunda inyección se escribe una clave en `/home/steve/.ssh/authorized_keys` (el home es escribible) y se entra por SSH como `steve`.
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+`steve` puede ejecutar como root un cargador de plugins que usa **setuptools**; la versión es vulnerable a **CVE-2025-47273** (path traversal al resolver un paquete desde un índice controlado). Con un índice propio se consigue **escritura arbitraria como root**, y el destino útil es `/root/.ssh/authorized_keys`:
+
+```bash
+# índice local con el paquete malicioso, servido por HTTP
+python3 -m http.server 8000
+# el cargador escribe la ruta que trae el paquete, codificada
+# %2froot%2f.ssh%2fauthorized_keys
+```
+
+Después, `ssh -i key root@variatype.htb`.
 
 ## Evidencia
 
@@ -77,7 +88,7 @@ Aparece una contraseña en un commit revertido que da acceso al portal de fuente
 
 - Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
 - Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Aislar el generador de fuentes: sin escritura en el docroot y con fontTools/FontForge actualizados. El cargador de plugins debe fijar la versión de setuptools y no resolver índices externos en nombre de root.
 - No construir plantillas con entrada del usuario; usar sandbox y contexto restringido.
 
 ## Referencias

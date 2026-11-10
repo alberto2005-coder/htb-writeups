@@ -37,6 +37,7 @@ strings -a -n 8 sample.exe | head -50
 3. **Clave**: puede estar embebida, derivada de una contraseña o generada por `CryptGenRandom`. Si es embebida, se extrae del binario; si es aleatoria, se busca en memoria o en el fichero de clave.
 4. **Verificación**: descifrar un fichero de prueba y comprobar cabecera (`%PDF`, `PK`, `\x89PNG`).
 5. **Alcance**: contar ficheros afectados por extensión y por unidad; revisar `$MFT`/`UsnJrnl` para los renombrados.
+6. **Evidencia de disco**: el paquete del Sherlock es un ZIP que se carga en **Autopsy** (no sólo el binario). De ahí salen la cuenta usada en el acceso inicial, los ficheros cifrados y la nota de rescate; la pregunta clave del análisis es **qué llamada al sistema borra los originales** tras cifrarlos (`NtSetInformationFile` con `FileDispositionInformation`).
 
 ## Conclusiones
 
@@ -46,7 +47,7 @@ tamaño original + 16 bytes  ->  IV de 16 bytes + AES-CBC
 strings: "README_DECRYPT.txt", "AES", "key"
 ```
 
-La nota de rescate y la extensión confirman ransomware; el tamaño alineado a 16 confirma cifrado por bloques.
+La nota de rescate y la extensión confirman ransomware; el tamaño alineado a 16 confirma cifrado por bloques. En la evidencia de Autopsy, además, se ve que el binario **borra los originales** con `NtSetInformationFile` en lugar de `DeleteFile`, un detalle que explica por qué el triaje automático no lo detectó.
 
 ## Lecciones
 

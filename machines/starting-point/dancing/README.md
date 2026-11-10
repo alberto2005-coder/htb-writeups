@@ -82,7 +82,7 @@ Dentro de `Amy.J` hay un `worknotes.txt` con anotaciones del usuario; sirve para
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 

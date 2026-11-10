@@ -46,11 +46,16 @@ tshark -r takedown.pcap -Y 'http.request' -T fields -e http.host -e http.request
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- Acceso inicial: un `.vbs` escrito en un recurso compartido mediante SMB2; la víctima lo ejecuta, no hay exploit remoto.
+- El VBS lanza PowerShell y descarga el siguiente script por HTTP: la captura contiene la URL completa y el contenido.
+- Hay reutilización de credenciales: `NTLMSSP_AUTH` con el hash del administrador permite `pass-the-hash` sin conocer la contraseña.
+- El C2 se reconoce por la periodicidad de los `POST`, no por el contenido, que va cifrado o en base64.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- Buscar el `.vbs` con un filtro HTTP es el error clásico: el fichero llega por **SMB2**, no por descarga web.
+- En un PCAP con SMB conviene empezar por `Create Request`: ahí está el nombre y el recurso.
+- La cadencia entre `POST` (y su tamaño constante) es lo que distingue un beacon de navegación normal.
 
 ## Qué enseña
 
