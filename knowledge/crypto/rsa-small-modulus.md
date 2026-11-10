@@ -33,7 +33,7 @@ d = pow(e, -1, phi)
 print(long_to_bytes(pow(c, d, n)))
 ```
 
-`factorint` va bien hasta ~60 dígitos; para más, `yafu`, `msieve` o `RsaCtfTool`:
+Los docs de SymPy lo dicen claro: rho y p−1 sacan factores de ~10 dígitos en segundos y `ecm` factoriza ~35 dígitos con comodidad; sin factores pequeños, un `n` de 60 dígitos no sale. Para eso, `yafu`, `msieve` o `RsaCtfTool`:
 
 ```bash
 RsaCtfTool.py --publickey key.pub --uncipherfile flag.enc --private
@@ -45,7 +45,7 @@ RsaCtfTool.py --publickey key.pub --uncipherfile flag.enc --private
   ```python
   d = pow(e, -1, n - 1)
   ```
-- **`e = 3` y `m` corto** → si `c < n`, la raíz cúbica entera da el mensaje:
+- **`e = 3` y `m` corto** → si `m³ < n` el cifrado no llega a reducir módulo `n` (`c = m³`) y la raíz cúbica entera devuelve el mensaje:
   ```python
   from gmpy2 import iroot
   m, exact = iroot(c, 3)
@@ -71,7 +71,7 @@ Si el resultado no es texto, prueba `long_to_bytes` de `pycryptodome`, revisa en
 
 ## 6. Detección y mitigación (lado real)
 
-- RSA de menos de 2048 bits se considera roto; 3072/4096 es el mínimo actual.
+- NIST SP 800-57: 2048 bits es el mínimo aceptable hasta 2030 y 3072 a partir de ahí; 1024 está deprecado (RSA-768 se factorizó en 2009).
 - `e = 3` sin padding OAEP permite ataques de raíz; usa siempre OAEP.
 - Rotar claves ante cualquier sospecha de factorización (módulos compartidos entre certificados).
 - En CTF, documenta el ataque y la matemática; el valor está en reconocer el supuesto roto.

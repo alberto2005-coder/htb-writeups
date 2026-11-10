@@ -33,7 +33,7 @@ d = pow(e, -1, phi)
 print(long_to_bytes(pow(c, d, n)))
 ```
 
-`factorint` is fine up to ~60 digits; beyond that use `yafu`, `msieve` or `RsaCtfTool`:
+SymPy's docs are explicit: rho and p−1 pull out ~10-digit factors in seconds and `ecm` factors ~35 digits comfortably; with no small factor, a 60-digit `n` does not budge. For that, use `yafu`, `msieve` or `RsaCtfTool`:
 
 ```bash
 RsaCtfTool.py --publickey key.pub --uncipherfile flag.enc --private
@@ -45,7 +45,7 @@ RsaCtfTool.py --publickey key.pub --uncipherfile flag.enc --private
   ```python
   d = pow(e, -1, n - 1)
   ```
-- **`e = 3` and short `m`** → if `c < n`, the integer cube root is the message:
+- **`e = 3` and short `m`** → if `m³ < n` the ciphertext never wraps modulo `n` (`c = m³`) and the integer cube root returns the message:
   ```python
   from gmpy2 import iroot
   m, exact = iroot(c, 3)
@@ -71,7 +71,7 @@ If the output is not text, try `long_to_bytes` from `pycryptodome`, check `c`'s 
 
 ## 6. Detection and mitigation (real world)
 
-- RSA below 2048 bits is considered broken; 3072/4096 is the current floor.
+- NIST SP 800-57: 2048 bits is the minimum until 2030 and 3072 from then on; 1024 is deprecated (RSA-768 was factored in 2009).
 - `e = 3` without OAEP padding enables root attacks; always use OAEP.
 - Rotate keys on any suspicion of factoring (moduli shared across certificates).
 - In CTFs, document the attack and the maths; the value is recognising the broken assumption.

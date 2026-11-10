@@ -60,13 +60,13 @@ Zoom into the diff and look for pixels with non-zero difference.
 
 ```bash
 soxi audio.wav
-spectrogram audio.wav -o spec.png      # or Sonic Visualiser
+sox audio.wav -n spectrogram -o spec.png     # or Sonic Visualiser
 ```
 
 - **Spectrogram**: text drawn at high frequencies, very common.
-- **DTMF**: dial tones → `multimon-ng -a DTMF`.
-- **Morse**: `sox audio.wav -n stat` and `multimon-ng -a MORSE`.
-- **Sample LSB**: `wav2lsb` or a small `soundfile` script.
+- **DTMF**: dial tones → `multimon-ng -t wav -a DTMF audio.wav`.
+- **Morse (CW)**: `multimon-ng -t wav -a MORSE_CW audio.wav` (the demodulator is `MORSE_CW`, not `MORSE`).
+- **Sample LSB**: a small `soundfile`/`wave` script; there is no standard tool for it.
 - **Metadata**: `exiftool`, `ffprobe -show_format`.
 
 ## 6. What not to do

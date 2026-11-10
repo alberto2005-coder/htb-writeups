@@ -16,7 +16,7 @@ file blob.bin
 xxd blob.bin | head
 ```
 
-Si la entropía es alta pero hay estructura repetida, sospecha XOR. Si empieza por `====` o solo tiene `A-Za-z0-9+/`, es base64.
+Si la entropía es alta pero hay estructura repetida, sospecha XOR. Si solo tiene `A-Za-z0-9+/` y termina en `=` (o `==`), es base64.
 
 ## 2. XOR de un byte
 
