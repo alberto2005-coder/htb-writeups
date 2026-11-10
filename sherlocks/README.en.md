@@ -30,7 +30,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | NeuroSync-D | DFIR | Easy | Artifacts from a medical-device vendor | RegRipper, MFT | [Ver](neurosync-d/README.md) |
 | Campfire-1 | DFIR / Active Directory | Very Easy | Domain event logs | EvtxECmd, 4769 analysis | [Ver](campfire-1/README.md) |
 | CrownJewel-1 | DFIR / Active Directory | Medium | DC telemetry after a compromise | 4662/4769 events, correlation | [Ver](crownjewel-1/README.md) |
-| Loggy | DFIR | Very Easy | Web server logs | `awk`, `grep`, timeline | [Ver](loggy/README.md) |
+| Loggy | Malware / Go | Easy | `Loggy.exe`: Go keylogger with screenshots and FTP exfiltration | Ghidra, `strings`, CyberChef | [Ver](loggy/README.en.md) |
 | Bumblebee | DFIR | Easy | phpBB SQLite database and `access.log` | `sqlite3`, `grep`, IP correlation | [Ver](bumblebee/README.en.md) |
 | Meerkat | SOC | Easy | PCAP and Suricata alerts | Wireshark, `tshark`, `jq` | [Ver](meerkat/README.en.md) |
 | Tracer | DFIR | Easy | PSEXESVC logs and `Prefetch` | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.en.md) |
@@ -60,7 +60,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Nubilum-2 | Cloud / AWS | Medium | Bucket S3 con política pública y claves creadas | Splunk, `jq` | [Ver](nubilum-2/README.en.md) |
 | Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | MFTECmd, MFTExplorer | [Ver](hyperfiletable/README.en.md) |
 | WorkFromHome | DFIR / Windows | Medium | Robo de credenciales, RDP y secuestro de DLL en WMI | SRUM, MFT, KAPE | [Ver](workfromhome/README.en.md) |
-| Lockpick 3.0 | Malware / Linux | Medium | Binario con XOR, volcado de memoria y unidad systemd | Volatility 3, Ghidra | [Ver](lockpick-3/README.en.md) |
+| Lockpick 3.0 | Malware / Linux | Hard | XOR binary with the key passed as an argument, memory and systemd unit | Volatility 3, Ghidra | [Ver](lockpick-3/README.en.md) |
 
 ## Shared methodology
 

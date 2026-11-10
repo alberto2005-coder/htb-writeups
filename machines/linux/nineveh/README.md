@@ -40,9 +40,9 @@ ffuf -u https://<IP>/FUZZ -w /usr/share/seclists/Discovery/Web-Content/directory
 
 ## Foothold
 
-1. **Fuerza bruta** del login de `/department` (usuario `admin`) con `hydra`.
-2. **phpLiteAdmin** en `/db/index.php`: por defecto la contraseña es `password`, y la versión permite crear una base `.php` con código.
-3. **LFI**: `manage.php?notes=` incluye ficheros; con `/ninevehNotes.txt/../../tmp/<shell>.php` se ejecuta el PHP creado.
+1. **Fuerza bruta** del login de `/department` (usuario `admin`, credenciales débiles que caen con rockyou; el propio código deja un comentario firmado por `amrois`).
+2. **phpLiteAdmin 1.9** en `/db/index.php`: la contraseña también cae con rockyou y **no** es la de por defecto; la versión permite crear una base `.php` con código.
+3. **LFI**: `manage.php?notes=` incluye ficheros, pero exige que la ruta contenga `ninevehNotes`; con `/ninevehNotes.txt/../../tmp/<shell>.php` (o `/ninevehNotes.txt/../../../var/tmp/<shell>.php`) se ejecuta el PHP creado.
 4. **`www-data`**.
 
 ```bash
@@ -56,7 +56,7 @@ curl -k "https://<IP>/department/manage.php?notes=/ninevehNotes.txt/../../tmp/x.
 
 ## Escalada de privilegios
 
-- **`amrois`**: la imagen de `secure_notes` esconde una clave privada SSH (`steghide`/`strings`/`binwalk` según el caso).
+- **`amrois`**: `https://<IP>/secure_notes/nineveh.png` lleva una clave RSA privada pegada en el propio PNG: `strings nineveh.png` la devuelve sin más.
 - **SSH cerrado**: `ps auxww` muestra `knockd`; en `/etc/knockd.conf`:
 
 ```text

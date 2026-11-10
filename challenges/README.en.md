@@ -10,7 +10,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 |---|---|---|---|---|---|---|
 | ropme | Pwn | Easy | Ret2libc with a `puts@got` leak: libc base and `system("/bin/sh")` | **Retired** | [ES](ropme/README.md) | [Ver](ropme/README.en.md) |
 | Easy Phish | OSINT | Very Easy | `?all` SPF and `p=none` DMARC on the legitimate domain | **Retired** | [ES](Easy%20Phish/README.md) | [Ver](Easy%20Phish/README.en.md) |
-| Hidden in Colors | Stego | Easy | PNG LSB with `zsteg` and per-channel reading | **Retired** | [ES](Hidden%20in%20Colors/README.md) | [Ver](Hidden%20in%20Colors/README.en.md) |
+| Hidden in Colors | Stego | Hard | PNG hex colours: the data lives in the colour value, not the LSB | **Retired** | [ES](Hidden%20in%20Colors/README.md) | [Ver](Hidden%20in%20Colors/README.en.md) |
 | Bare Metal | Hardware | Easy | 3.3 V UART, U-Boot and rootfs extraction with `binwalk` | **Retired** | [ES](Bare%20Metal/README.md) | [Ver](Bare%20Metal/README.en.md) |
 | Cryptohorrific | Mobile | Easy | iOS app: base64 blob in the plist, AES key inside the Mach-O binary | **Retired** | [ES](Cryptohorrific/README.md) | [Ver](Cryptohorrific/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM in `session.upload_progress`, use-after-free, ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [ES](Dark%20Embargo/README.md) | [Ver](Dark%20Embargo/README.en.md) |
@@ -26,7 +26,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Labyrinth Linguist | Web | Easy | SSTI de Velocity: `#set` y reflexión de Java | Retired | [ES](Labyrinth%20Linguist/README.md) | [Ver](Labyrinth%20Linguist/README.en.md) |
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | Retired | [ES](breaking%20grad/README.md) | [Ver](breaking%20grad/README.en.md) |
 | Weather App | Web | Easy | SSRF with *response splitting* and SQLi in the internal service up to admin account takeover | **Retired** | [ES](Weather%20App/README.md) | [Ver](Weather%20App/README.en.md) |
-| Freelancer | Web | Easy | SQLi en el login y `UNION SELECT` para extraer la flag | Retired | [ES](Freelancer/README.md) | [Ver](Freelancer/README.en.md) |
+| Freelancer | Web | Easy | SQLi in `portfolio.php?id=` and an `/admin` panel found by fuzzing | **Retired** | [ES](Freelancer/README.md) | [Ver](Freelancer/README.en.md) |
 | Passman | Web | Easy | GraphQL IDOR in `UpdatePassword`: changing the admin password | **Retired** | [ES](Passman/README.md) | [Ver](Passman/README.en.md) |
 | Cartographer | Web | Easy | SQLi in the login form and `panel.php?info=flag` | **Retired** | [ES](Cartographer/README.md) | [Ver](Cartographer/README.en.md) |
 | Dynastic | Crypto | Very Easy | Trithemius cipher: the shift is the index | **Retired** | [ES](Dynastic/README.md) | [Ver](Dynastic/README.en.md) |

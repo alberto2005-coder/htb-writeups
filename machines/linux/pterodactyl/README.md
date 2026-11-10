@@ -17,7 +17,7 @@ tags: [linux, opensuse, pterodactyl, cve-2025-49132, pearcmd, polkit, udisks2]
 
 ## TL;DR
 
-**openSUSE Leap 15.6** con el panel **Pterodactyl 1.11.10** en `panel.pterodactyl.htb`. La CVE-2025-49132 permite **LFI/RCE sin autenticar** en `/locales/locale.json`; encadenada con `pearcmd.php` escribe un webshell y ejecuta como `wwwrun`, y de paso filtra las credenciales de la base de datos. Con MariaDB se vuelca la tabla de usuarios, se crackea el hash bcrypt de `phileasfogg3` y se entra por SSH. Root con la cadena **CVE-2025-6018 + CVE-2025-6019**: PAM/Polkit y `udisks2` sin `nosuid`.
+**openSUSE Leap 15.6** con el panel **Pterodactyl 1.11.10** en `panel.pterodactyl.htb`. La CVE-2025-49132 permite **LFI/RCE sin autenticar** en `/locales/locale.json`; encadenada con `pearcmd.php` escribe un webshell y ejecuta como `wwwrun`, y de paso filtra las credenciales de la base de datos. Con `php artisan tinker` se vuelca la tabla de usuarios (el modelo oculta `password`, hay que pedirlo explícito), se crackea el hash bcrypt de `phileasfogg3` y se entra por SSH. Root con la cadena **CVE-2025-6018 + CVE-2025-6019**: PAM/Polkit y `udisks2` sin `nosuid`.
 
 ## Reconocimiento
 
@@ -85,7 +85,7 @@ XDG_VTNR=1
 EOF
 ```
 
-Con esos permisos `allow_active` se usa la segunda pieza: `udisks2` monta sistemas de ficheros a través de `libblockdev` sin `nosuid`, así que una imagen XFS preparada con un binario SUID de root se monta y se ejecuta:
+Con esos permisos `allow_active` se usa la segunda pieza: **CVE-2025-6019** es una carrera en el *resize* de una imagen XFS — `libblockdev`/`udisks2` acaba montando el sistema de ficheros sin `nosuid`, así que el binario SUID de root de la imagen se ejecuta con privilegios:
 
 ```bash
 # imagen XFS con /root-shell SUID ya preparada
@@ -118,22 +118,16 @@ Con root se leen `/root/root.txt` y la flag de usuario ya obtenida.
 - Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
 - Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
 
-## Referencias
 
-- [CVE-2025-49132](https://nvd.nist.gov/vuln/detail/CVE-2025-49132)
-- [CVE-2025-6018](https://nvd.nist.gov/vuln/detail/CVE-2025-6018)
-- [CVE-2025-6019](https://nvd.nist.gov/vuln/detail/CVE-2025-6019)
-- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
-- [systemd-timers](../../../knowledge/privesc/systemd-timers.md)
-## De wwwrun a usuario
+## Movimiento lateral: de wwwrun a usuario
 
 ```bash
-mysql -h 127.0.0.1 -u pterodactyl -p'<password>' panel
+cd /var/www/pterodactyl
+php artisan tinker
+# User::select('email','username','password')->get();
 ```
 
-```sql
-select email, username, password from users;
-```
+El modelo `User` esconde `password` en `$hidden`, así que un `select *` normal no lo devuelve; pidiendo la columna de forma explícita sí. Alternativa: entrar en MariaDB con las credenciales del `.env` (`mysql -h 127.0.0.1 -u pterodactyl -p'<password>' panel`).
 
 El hash bcrypt de `phileasfogg3` cae con John:
 
@@ -149,3 +143,11 @@ cat ~/user.txt
 ```
 
 En `/var/mail/` hay un correo que menciona la cadena de escalada de udisks, la pista del siguiente paso.
+
+## Referencias
+
+- [CVE-2025-49132](https://nvd.nist.gov/vuln/detail/CVE-2025-49132)
+- [CVE-2025-6018](https://nvd.nist.gov/vuln/detail/CVE-2025-6018)
+- [CVE-2025-6019](https://nvd.nist.gov/vuln/detail/CVE-2025-6019)
+- [lfi-to-rce](../../../knowledge/web/lfi-to-rce.md)
+- [systemd-timers](../../../knowledge/privesc/systemd-timers.md)

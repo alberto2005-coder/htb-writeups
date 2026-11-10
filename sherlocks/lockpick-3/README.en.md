@@ -1,10 +1,12 @@
 ---
 sherlock: Lockpick 3.0
 domain: Malware analysis
-difficulty: Medium
+difficulty: Hard
 platform: Hack The Box
-evidence: Linux binary, memory dump and VM state
+evidence: Linux ELF, memory dump and VM state
 tools: [Volatility 3, Ghidra, strings, CyberChef]
+state: Retired
+tags: [dfir, malware, ransomware, linux, xor, systemd, memory]
 ---
 
 # Lockpick 3.0 — Hack The Box
@@ -15,40 +17,44 @@ tools: [Volatility 3, Ghidra, strings, CyberChef]
 
 ## Scenario
 
-The crew behind **Lockpick** has improved: this time it only hit a development server, with no obvious remote access — likely an insider. You are asked to reverse the binary and analyse the host artifacts.
+The **Lockpick** crew has improved: this time it only hit a development server, with no obvious remote access — likely an insider. You are asked to reverse the binary and analyse the host artifacts.
 
 ## Evidence
 
-- `ubuntu-client`: the malware.
+- `ubuntu-client`: the malware (ELF, MD5 `a2444b61b65be96fc2e65924dee8febd`).
 - `ubuntu-client-Snapshot2.vmem`: memory dump.
 - `ubuntu-client-Snapshot2.vmsn`: VM state.
 
-## Method
+## Investigation
 
-1. **Identity**: hash and type.
+1. **Identity**: `md5sum` and `file`; this is a Linux ELF, so `objdump -d`/Ghidra, not Windows tooling.
+
+2. **Encrypted strings**: the binary hides its configuration behind a **repeating XOR**. The key is **not in the file**: it is passed on the command line (`./ubuntu-client <key>`). That is why `strings` on the binary is not enough and the `.vmem` matters — the process command line keeps the key.
 
 ```bash
-md5sum ubuntu-client; file ubuntu-client
-strings -n 6 ubuntu-client | head -40
+strings -n 8 ubuntu-client-Snapshot2.vmem | grep ubuntu-client
 ```
 
-2. **Obfuscation**: strings are **XOR-encrypted**; find the loop and key in the disassembly or brute-force a single-byte XOR in CyberChef until readable text appears.
+3. **Decrypt**: with the key from the command line, invert the XOR over the data section and the C2 base URL, the endpoints (`/connect` for key/IV/`client_id`, `/uploads/` for exfiltration) and a full systemd unit appear.
 
-3. **Communication**: the binary calls an endpoint (`/connect`) that returns **key, IV and client_id** as JSON; another endpoint uploads files. That is the encryption scheme.
+4. **Communication**: `_cJSON_GetObjectItem` confirms `/connect` answers JSON with the crypto material; `client_id` identifies the victim.
 
-4. **Memory**: **Volatility 3** on the `.vmem` — list processes and command lines (`windows.pslist`/`linux.bash` depending on profile) to see how it was launched and which services it created.
+5. **Persistence**: the malware writes and enables `ubuntu_running.service` under `/etc/systemd/system` (technique **T1543.002**). The `.vmsn` confirms the service state and the `.vmem` the running process.
 
-5. **Persistence**: the malware creates and enables a systemd unit (`ubuntu_running.service`): technique **T1543.002**. The `.vmsn` confirms the service state.
+## Findings
 
-## What it teaches
+- C2 hosted on a PaaS (`*.ondigitalocean.app`), which makes IP blocking hard.
+- Server-supplied key material: symmetric crypto with remote secrets.
+- Persistence through a systemd unit the binary creates itself.
 
-- A single-byte XOR shows up through string entropy and falls by trying keys.
-- A `client_id` next to key and IV means symmetric crypto with server-supplied material.
-- A memory dump preserves the command line and the services created.
-- Comparing `.vmem` and `.vmsn` separates what was in RAM from what was configured.
+## Lessons
+
+- If the key travels as an argument, the binary does not leak it: memory does.
+- A repeating XOR breaks as soon as the key is known; finding it is the challenge.
+- Comparing `.vmem` and `.vmsn` separates what was in RAM from what was configured on disk.
 
 ## Pitfalls
 
-- **Memory profile**: with the wrong symbols Volatility returns nothing; check the kernel version.
-- **Encrypted strings**: `strings` is not enough; decrypt or read the disassembly.
-- **Do not execute**: analyse statically or in an isolated VM.
+- **Memory profile**: this is Linux; use `linux.bash`/`linux.pslist`, not Windows plugins.
+- **Obfuscated strings**: `strings` on the ELF shows no config; decrypt it.
+- **Do not execute**: static analysis or an isolated VM.

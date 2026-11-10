@@ -10,7 +10,7 @@
 |---|---|---|---|---|---|---|
 | ropme | Pwn | Easy | Ret2libc con leak de `puts@got`: base de libc y `system("/bin/sh")` | **Retired** | [Ver](ropme/README.md) | [EN](ropme/README.en.md) |
 | Easy Phish | OSINT | Very Easy | SPF con `?all` y DMARC `p=none` en el dominio legítimo | **Retired** | [Ver](Easy%20Phish/README.md) | [EN](Easy%20Phish/README.en.md) |
-| Hidden in Colors | Stego | Easy | LSB en PNG con `zsteg` y lectura por canales | **Retired** | [Ver](Hidden%20in%20Colors/README.md) | [EN](Hidden%20in%20Colors/README.en.md) |
+| Hidden in Colors | Stego | Hard | Colores hex del PNG: el dato está en el valor de color, no en el LSB | **Retired** | [Ver](Hidden%20in%20Colors/README.md) | [EN](Hidden%20in%20Colors/README.en.md) |
 | Bare Metal | Hardware | Easy | UART a 3.3 V, U-Boot y extracción del rootfs con `binwalk` | **Retired** | [Ver](Bare%20Metal/README.md) | [EN](Bare%20Metal/README.en.md) |
 | Cryptohorrific | Mobile | Easy | App iOS: blob base64 en el plist y clave AES en el binario Mach-O | **Retired** | [Ver](Cryptohorrific/README.md) | [EN](Cryptohorrific/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM en `session.upload_progress`, use-after-free, leak de ASLR por `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [Ver](Dark%20Embargo/README.md) | [EN](Dark%20Embargo/README.en.md) |
@@ -26,7 +26,7 @@
 | Labyrinth Linguist | Web | Easy | SSTI de Velocity: `#set` y reflexión de Java | **Retired** | [Ver](Labyrinth%20Linguist/README.md) | [EN](Labyrinth%20Linguist/README.en.md) |
 | breaking grad | Web | Easy | Contaminación de prototipos en Node hasta `child_process` | **Retired** | [Ver](breaking%20grad/README.md) | [EN](breaking%20grad/README.en.md) |
 | Weather App | Web | Easy | SSRF con *response splitting* y SQLi en el servicio interno hasta la toma de la cuenta admin | **Retired** | [Ver](Weather%20App/README.md) | [EN](Weather%20App/README.en.md) |
-| Freelancer | Web | Easy | SQLi en el login y `UNION SELECT` para extraer la flag | **Retired** | [Ver](Freelancer/README.md) | [EN](Freelancer/README.en.md) |
+| Freelancer | Web | Easy | SQLi en `portfolio.php?id=` y panel `/admin` hallado por fuzzing | **Retired** | [Ver](Freelancer/README.md) | [EN](Freelancer/README.en.md) |
 | Passman | Web | Easy | GraphQL con IDOR en `UpdatePassword`: cambio de la contraseña del admin | **Retired** | [Ver](Passman/README.md) | [EN](Passman/README.en.md) |
 | Cartographer | Web | Easy | SQLi en el login y `panel.php?info=flag` | **Retired** | [Ver](Cartographer/README.md) | [EN](Cartographer/README.en.md) |
 | Dynastic | Crypto | Very Easy | Cifrado de Trithemius: el desplazamiento es el índice | **Retired** | [Ver](Dynastic/README.md) | [EN](Dynastic/README.en.md) |

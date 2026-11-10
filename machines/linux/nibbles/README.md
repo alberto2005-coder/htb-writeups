@@ -47,7 +47,7 @@ curl -s http://<IP>/nibbleblog/content/private/users.xml
 
 ## Foothold
 
-Login en `/nibbleblog/admin.php` con las credenciales por defecto (`nibbles:nibbles`, que coinciden con el nombre de la máquina). Si no entran, se revisa `content/private/config.xml` y `users.xml`, que suelen ser legibles.
+Login en `/nibbleblog/admin.php` con las credenciales por defecto (`admin:nibbles`; el usuario es `admin`, no el nombre de la máquina). Si no entran, se revisa `content/private/config.xml` y `users.xml`, que suelen ser legibles.
 
 Con sesión de administrador:
 
@@ -77,7 +77,7 @@ sudo -l
 (root) NOPASSWD: /home/nibbler/personal/stuff/monitor.sh
 ```
 
-El script vive en el home y es escribible por `nibbler`, así que se reemplaza por uno que copie la flag o dé shell:
+El script no existe hasta descomprimir `~/personal.zip` (que crea `personal/stuff/`), y queda `-rwxrwxrwx`, escribible por `nibbler`. Se reemplaza por uno que copie la flag o dé shell:
 
 ```bash
 cat > /home/nibbler/personal/stuff/monitor.sh <<'EOF'
