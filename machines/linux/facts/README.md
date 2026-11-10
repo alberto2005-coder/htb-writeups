@@ -17,7 +17,7 @@ tags: [linux, camaleon, cve, minio, ssh-key, facter]
 
 ## TL;DR
 
-Camaleon CMS 2.9.0 con registro abierto en `/admin/register`. Se crea una cuenta y se escala a administrador con CVE-2025-2304, que además filtra las credenciales de un MinIO interno. Un LFI (CVE-2024-46987) lee `/etc/passwd` y la flag de usuario. MinIO escucha en 54321 y guarda el backup del home de `william`, con su clave SSH privada; se rompe la passphrase y se entra como `trivia`. `sudo facter --custom-dir` ejecuta Ruby como root.
+Camaleon CMS 2.9.0 con registro abierto en `/admin/register`. Se crea una cuenta y se escala a administrador con CVE-2025-2304, que además filtra las credenciales de un MinIO interno. Un LFI (CVE-2024-46987) lee `/etc/passwd` y la flag de usuario. MinIO escucha en 54321 y guarda un backup de un home que incluye la clave SSH privada de `trivia`; se rompe la passphrase y se entra como `trivia`. `sudo facter --custom-dir` ejecuta Ruby como root.
 
 ## Reconocimiento
 
@@ -91,7 +91,7 @@ trivia:x:1000:1000:...
 william:x:1001:1001:...
 ```
 
-La flag de usuario está en el home de `william`; el LFI la lee directamente.
+La clave del backup pertenece a `trivia` (se confirma con `ssh-keygen -y` y `authorized_keys`) y la flag de usuario está en su home. El LFI sirve para leer el sistema y los ficheros, no para la flag.
 
 ## Movimiento lateral
 

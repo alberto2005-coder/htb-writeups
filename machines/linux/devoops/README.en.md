@@ -71,7 +71,7 @@ ssh -i id_rsa roosa@<IP>
 cat ~/user.txt
 ```
 
-Alternative route (not used here): `/feed` base64-deserialises with **`pickle`**, giving RCE as `roosa` directly. The code lives in `/home/roosa/deploy/src/feed.py`.
+Alternative route (not used here): `/newpost` **`pickle`**-deserialises a base64 body (the route originates in `src/feed.py`), giving RCE as `roosa` directly. The code lives in `/home/roosa/deploy/src/feed.py`.
 
 ## Escalation through git history
 

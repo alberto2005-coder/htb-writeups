@@ -40,7 +40,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | BFT | DFIR | Very Easy | `$MFT` de un ZIP troyanizado | MFTECmd, `grep`, offsets | [Ver](bft/README.md) |
 | Noxious | DFIR | Medium | PCAP con envenenamiento LLMNR/NBT-NS | Wireshark, hashcat `-m 5600` | [Ver](noxious/README.md) |
 | Reaper | DFIR | Very Easy | `ntlmrelay.pcapng` y `Security.evtx` | Wireshark, EvtxECmd | [Ver](reaper/README.md) |
-| Knock Knock | DFIR | Easy | PCAP de *password spray* y *port knocking* | Wireshark, `tshark` | [Ver](knock-knock/README.md) |
+| Knock Knock | DFIR | Medium | PCAP de *password spray* y *port knocking* | Wireshark, `tshark` | [Ver](knock-knock/README.md) |
 | RogueOne | DFIR / Memoria | Medium | Volcado de memoria de un puesto Forela | Volatility 3, `windows.netscan` | [Ver](rogueone/README.md) |
 | SSHole | DFIR / Unix | Very Easy | Evidencias de un jumpbox comprometido | `auth.log`, `last`, `journalctl` | [Ver](sshole/README.md) |
 | ShadowBait | DFIR / Windows | Easy | Logs de Sysmon, PowerShell y Security | Hayabusa, EvtxECmd | [Ver](shadowbait/README.md) |

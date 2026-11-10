@@ -46,7 +46,7 @@ En el vhost aparece un blog con registro y «New Message». El 8089 es la consol
 
 ## Foothold
 
-Se publica un mensaje con el título `{{7*7}}` y se visita `/archive`:
+Se publica un mensaje con el título `{{7*7}}` y se visita `/archive` (el RSS evalúa el título; `/home` lo escapa):
 
 ```text
 49
@@ -67,8 +67,21 @@ id
 
 ## Movimiento lateral
 
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
+`adm` da lectura de logs. Buscando contraseñas en ellos aparece el reseteo de `shaun`:
+
+```bash
+grep -ri "password" /var/log/apache2/ 2>/dev/null
+cat /var/log/apache2/backup
+```
+
+```text
+... /reset?email=shaun&password=Guitar123 ...
+```
+
+```bash
+su shaun
+cat ~/user.txt
+```
 
 ## Escalada de privilegios
 
@@ -108,20 +121,3 @@ La shell vuelve como root y se lee `/root/root.txt`.
 ## Referencias
 
 - [ssti](../../../knowledge/web/ssti.md)
-## De web a shaun
-
-`adm` da lectura de logs. Buscando contraseñas en ellos aparece el reseteo de `shaun`:
-
-```bash
-grep -ri "password" /var/log/apache2/ 2>/dev/null
-cat /var/log/apache2/backup
-```
-
-```text
-... /reset?email=shaun&password=Guitar123 ...
-```
-
-```bash
-su shaun
-cat ~/user.txt
-```

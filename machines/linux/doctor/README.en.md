@@ -42,7 +42,7 @@ The vhost hosts a blog with registration and "New Message". Port 8089 is the Spl
 
 ## Access: SSTI in the message title
 
-Publish a post titled `{{7*7}}` and visit `/archive`:
+Publish a post titled `{{7*7}}` and visit `/archive` (the RSS feed evaluates the title; `/home` escapes it):
 
 ```text
 49

@@ -51,11 +51,11 @@ The tunnel signature (labels, subdomain length, answer pattern) points at **dnsc
 python3 dnscat2-decoder/dnscat2_decoder.py suspicious_traffic.pcap microsofto365.com > dnscat_dump.txt
 ```
 
-The dump holds the rebuilt session: commands, output and transferred files. That answers the client version, the name the attacker gave the binary left on the host, and what was exfiltrated.
+The dump holds the rebuilt session: commands, output and transferred files. That answers the client version (**dnscat2-v0.07-client**), the name the attacker gave the binary on the host, and what was exfiltrated. The tunnel server is `192.168.157.145`.
 
 ### 3. Sizing the damage
 
-The dump shows the command that dumped the database and the total record count. Watch the count: the index starts at zero, so the row count is the last index plus one.
+The dump shows the command that read the PII CSV and the total record count. Watch the count: the index starts at zero, so with the last record at 720 the total is **721**.
 
 ## Findings
 

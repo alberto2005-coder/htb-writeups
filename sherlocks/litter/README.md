@@ -52,11 +52,11 @@ La firma del túnel (etiquetas, tamaño de los subdominios, patrón de respuesta
 python3 dnscat2-decoder/dnscat2_decoder.py suspicious_traffic.pcap microsofto365.com > dnscat_dump.txt
 ```
 
-El volcado contiene la sesión reconstruida: comandos, salida y ficheros transferidos. Con eso se responde a la versión del cliente, al nombre que el atacante dio al binario que dejó en el host y al contenido exfiltrado.
+El volcado contiene la sesión reconstruida: comandos, salida y ficheros transferidos. De ahí salen la versión del cliente (**dnscat2-v0.07-client**), el nombre con el que el atacante renombró el binario en el host y el contenido exfiltrado. El servidor del túnel es `192.168.157.145`.
 
 ### 3. Cuantificar el daño
 
-En el volcado se ve el comando que volcó la base de datos y el total de registros. Ojo con el conteo: el índice arranca en cero, así que el número de filas es el último índice más uno.
+En el volcado se ve el comando que leyó el CSV de PII y el total de registros. Ojo con el conteo: el índice arranca en cero, así que con el último registro en 720 el total es **721**.
 
 ## Conclusiones
 
