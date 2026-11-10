@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 109 machines, 50 Sherlocks, 50 challenges and 41 knowledge topics, each in ES/EN.
+> **Numbers:** 109 machines, 50 Sherlocks, 50 challenges and 45 knowledge topics, each in ES/EN.
 
 ---
 
@@ -210,6 +210,10 @@ Reusable notes (each available in Spanish and English):
 - [RSA: small modulus and textbook RSA](knowledge/crypto/rsa-small-modulus.en.md) · [ES](knowledge/crypto/rsa-small-modulus.md)
 - [Block and custom ciphers](knowledge/crypto/block-ciphers.en.md) · [ES](knowledge/crypto/block-ciphers.md)
 - [SSTI: from template to execution](knowledge/web/ssti.en.md) · [ES](knowledge/web/ssti.md)
+- [SQLi in the login: authentication bypass](knowledge/web/sqli-auth-bypass.en.md) · [ES](knowledge/web/sqli-auth-bypass.md)
+- [SMB enumeration: null sessions, shares and credentials](knowledge/general/smb-enumeration.en.md) · [ES](knowledge/general/smb-enumeration.md)
+- [Misconfigured S3: open buckets and webshells](knowledge/cloud/s3-misconfiguration.en.md) · [ES](knowledge/cloud/s3-misconfiguration.md)
+- [Log4Shell: from a User-Agent to RCE](knowledge/web/log4shell.en.md) · [ES](knowledge/web/log4shell.md)
 - [PHP deserialization](knowledge/web/php-deserialization.en.md) · [ES](knowledge/web/php-deserialization.md)
 - [JWT and prototype pollution](knowledge/web/node-jwt-prototype.en.md) · [ES](knowledge/web/node-jwt-prototype.md)
 - [PCAP triage](knowledge/forensics/pcap-triage.en.md) · [ES](knowledge/forensics/pcap-triage.md)
