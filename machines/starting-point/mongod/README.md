@@ -34,7 +34,9 @@ nmap -sC -sV <IP> -oN nmap.txt
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- **22/tcp** SSH y **27017/tcp** MongoDB; el 27017 es el único que da datos.
+- `nmap -p27017 --script mongodb-info` responde sin credenciales: confirma `MongoDB 3.6.8` y que no hay `--auth`.
+- `show dbs` lista `admin`, `config`, `local` y `sensitive_information`; esta última canta por el nombre.
 
 ## Foothold
 
@@ -68,7 +70,7 @@ Con un cliente gráfico (Compass) el recorrido es el mismo: conectar sin usuario
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 
@@ -84,7 +86,7 @@ sensitive_information.flag  ->  <flag>
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- `security.authorization: enabled` con usuarios por base, `bindIp` a loopback/interfaz interna y TLS. Detección: conexiones a 27017 sin `SCRAM` y `listDatabases` desde hosts que no son de aplicación.
 
 ## Referencias
 

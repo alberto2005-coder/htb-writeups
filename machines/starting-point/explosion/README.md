@@ -32,11 +32,13 @@ nmap -sC -sV <IP> -oN nmap.txt
 3389/tcp  ms-wbt-server  Microsoft Terminal Services
 ```
 
-Tres puertos de SMB/RPC y el 3389 de escritorio remoto. Con SMB se puede listar sin credenciales, pero no hace falta: el 3389 es la puerta.
+Tres puertos de SMB/RPC y el 3389 de escritorio remoto. Con SMB se puede listar sin credenciales, pero no hace falta: el 3389 es la puerta. Alguna fuente pública describe un paso de «crackear un ZIP»; en esta caja no hay ZIP: el acceso es RDP con contraseña vacía.
 
 ## Enumeración
 
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
+- El 3389 es el único servicio que da acceso: `nmap -sV` lo identifica como `ms-wbt-server`, y el 135/139/445 acompañan como RPC/SMB de Windows.
+- SMB permite enumerar sin credenciales, pero no aporta nada: el reto es de RDP, no de shares.
+- Un test de credenciales vacías con `xfreerdp` (Enter sin escribir contraseña) confirma que la cuenta `Administrator` no tiene contraseña y que la política lo permite.
 
 ## Foothold
 
@@ -64,7 +66,7 @@ C:\Users\Administrator\Desktop\flag.txt
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 

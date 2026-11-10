@@ -26,14 +26,14 @@ Un *jumpbox* mal configurado empieza a generar tráfico hacia un dominio sospech
 
 ## Investigación
 
-1. **¿Cómo entraron?** El servicio SSH de la caja es antiguo y vulnerable: se revisa la versión y los intentos de conexión anómalos.
+1. **¿Cómo entraron?** El jumpbox es **Alpine Linux** y su `sshd` acepta un *bypass* de autenticación (CVE-2026-123158): un `crypt()` de Alpine devuelve `*` cuando la contraseña supera 256 bytes, y en `/etc/shadow` una cuenta sin contraseña también guarda `*`. El servidor compara `*` con `*` y **acepta el login** sin conocer la contraseña.
 
 ```bash
 grep -i 'sshd' auth.log | less
 grep -c 'Failed password' auth.log
 ```
 
-Un acceso exitoso sin fase de autenticación previa (ni *password* ni *publickey*) apunta a un **bypass** del servidor SSH, no a fuerza bruta.
+Un acceso exitoso sin fase de autenticación previa (ni *password* ni *publickey*) apunta a un **bypass** del servidor SSH, no a fuerza bruta. El usuario es la cuenta de servicio `adminsvc`, sin contraseña válida, y el log no registra el valor enviado: el bypass se **infiere**, no se lee.
 
 2. **Sesión del atacante**: correlacionar la IP de origen con el resto de artefactos.
 
@@ -49,17 +49,23 @@ cat ~/.bash_history
 ls -la /tmp /var/tmp /dev/shm
 ```
 
-4. **Reconocimiento interno**: el jumpbox se usa para escanear la red detrás; en los logs y en el tráfico se ven barridos de puertos hacia rangos internos.
+4. **Reconocimiento interno**: el jumpbox se usa para escanear la red detrás. En los artefactos aparece un barrido de `192.168.18.0/24`, un script ejecutado y una subida a un dominio externo (`devv.coding.eu`): el jumpbox era el pivote, no el objetivo.
 
 5. **Persistencia**: revisar `~/.ssh/authorized_keys`, `cron` y unidades de systemd añadidas.
 
 ## Conclusiones
 
-[🇬🇧 English](README.en.md) | **Español**
+- Entrada: bypass de autenticación de `sshd` en Alpine, sin fuerza bruta y sin credencial válida.
+- La cuenta `adminsvc` no tenía contraseña: el fallo de `crypt()` la convirtió en puerta abierta.
+- Uso posterior: escaneo de `192.168.18.0/24`, ejecución de un script y exfiltración a un dominio externo.
 
 ## Lecciones
 
-- Qué se probó y falló, y qué harías distinto la próxima vez.
+- Un jumpbox es el peor sitio para una versión sin parchear: multiplica el alcance del atacante.
+- Comparar `*` con `*` es una autenticación rota por diseño; conviene revisar cómo trata `crypt()` los errores.
+- Si el log no guarda la contraseña, la conclusión se sostiene con la **ausencia** de `password`/`publickey` y el éxito de la sesión.
+
+- Sin el parche, una cuenta con `*` en `/etc/shadow` sigue siendo una puerta abierta: el fallo no está en la contraseña, está en cómo se compara.
 
 ## Qué enseña
 

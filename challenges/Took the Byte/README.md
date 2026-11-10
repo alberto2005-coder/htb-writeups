@@ -24,11 +24,11 @@ Te dan un fichero llamado `password` que no abre con nada. Su contenido es casi 
 
 ## Reconocimiento
 
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
+Se entrega un único fichero llamado `password`, sin extensión útil. `file` no lo reconoce y `xxd | head` muestra un patrón muy repetido: casi todos los bytes son `0xFF`, salvo el principio.
 
 ## Análisis del código
 
-- El reto no entrega código fuente; el análisis se apoya en el comportamiento descrito en «Explicación del fallo».
+No hay código: el «cifrado» es un **XOR de un byte** aplicado al fichero original. Se detecta por la repetición de `0xFF` y por la ausencia de cabeceras conocidas; la transformación es simétrica, así que la misma operación lo deshace.
 
 ## Explicación del fallo
 
@@ -36,11 +36,22 @@ Te dan un fichero llamado `password` que no abre con nada. Su contenido es casi 
 
 ## Reproducción local
 
-- Reproduce el artefacto del reto en local (intérprete o contenedor) para iterar sin el servidor.
+```bash
+python3 - <<'PY'
+data = open('password','rb').read()
+open('out.bin','wb').write(bytes(b ^ 0xFF for b in data))
+PY
+file out.bin      # Zip archive data
+unzip -o out.bin && cat password.txt
+```
+
+Si la clave no fuese `0xFF`, basta probar las 256 posibles y quedarse con la que produzca una firma válida (`PK`, `%PDF`, `\x89PNG`).
 
 ## Explotación
 
-- Ver las secciones adyacentes para el detalle.
+1. `xxd password | head` confirma el muro de `ff`.
+2. Se aplica el XOR con `0xFF` a **todo** el fichero (no sólo a la cabecera).
+3. `file out.bin` devuelve `Zip archive data`; `unzip` extrae `password.txt` con la flag.
 
 ## Evidencia
 
@@ -57,7 +68,9 @@ Te dan un fichero llamado `password` que no abre con nada. Su contenido es casi 
 
 ## Mitigaciones y detección
 
-- Aplicar la corrección de la categoría: validación en servidor, versiones parcheadas y mínimo privilegio.
+- Un XOR de un byte no es cifrado: para datos sensibles, AES-GCM con clave gestionada fuera del artefacto.
+- No reutilizar una única clave de un byte para todo el fichero: es un cifrado César sobre bytes y se rompe por frecuencia.
+- Detección: ficheros con entropía anómalamente baja o un byte dominante, y adjuntos sin firma reconocible.
 - Detección: revisar los logs de la aplicación y alertar de 4xx/5xx repetidos o entradas anómalas.
 
 ## Método

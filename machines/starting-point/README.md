@@ -1,72 +1,40 @@
 # Starting Point
 
-[🇬🇧 English](README.en.md) | **Español**
+[⚑ English](README.en.md) | **Español**
 
-Máquinas del itinerario **Starting Point** de Hack The Box. Van en tres tiers lineales (0, 1 y 2) y no son máquinas "normales": cada una entrena un servicio o una técnica concreta. Todas las fichas de esta categoría viven **solo** en este directorio; las máquinas retiradas de dificultad Easy/Medium están en `machines/linux/` y `machines/windows/` según su sistema.
+Itinerario de iniciación de Hack The Box: máquinas cortas, en tiers lineales, donde cada una entrena **un servicio** y su mala configuración típica. No son cajas de dificultad Easy/Medium retiradas —esas viven en `machines/linux/` y `machines/windows/`— sino ejercicios guiados: el objetivo es interiorizar la enumeración antes de encadenar vulnerabilidades.
 
-## TL;DR
+## Cómo se trabajan
 
-- Ver las secciones adyacentes para el detalle.
-
-## Reconocimiento
-
-- Superficie reducida a lo que entrega el enunciado; el detalle está en «Enunciado y superficie».
-
-## Enumeración
-
-- Puertos, servicios y usuarios relevantes descritos en «Reconocimiento».
-
-## Foothold
-
-- Vector de entrada y payload descritos en «Reconocimiento» y «Escalada de privilegios».
-
-## Movimiento lateral
-
-- No aplica: la cadena se resuelve en un único host, sin salto lateral.
-- Ver «Escalada de privilegios» para el paso de usuario a administrador.
-
-## Escalada de privilegios
-
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
-
-## Evidencia
-
-- Salidas recortadas de los comandos clave; sin flags, credenciales ni tokens.
-- Los valores reales viven en `private/` y no se publican.
-
-## Lecciones aprendidas
-
-- Qué se probó y falló, y qué harías distinto la próxima vez.
-
-## Mitigaciones y detección
-
-- Firmar SMB, deshabilitar SMBv1 y limitar los shares administrativos por grupo.
-- Detección: 5140/5145 anómalos y 4624 tipo 3 con NTLM desde hosts no administrativos.
-- Deshabilitar el FTP anónimo y sustituirlo por SFTP/FTPS con cuentas nominales.
-- Consultas parametrizadas y permisos mínimos para la cuenta de base de datos.
+1. Desplegar la instancia en la plataforma y conectarse a la VPN.
+2. `nmap -Pn -sV -p-` sobre la IP: la superficie es mínima a propósito.
+3. Enumerar el servicio con su cliente nativo (`telnet`, `ftp`, `smbclient`, `redis-cli`, `mongo`, un navegador…).
+4. Explotar la configuración por defecto y leer la flag del servicio o del sistema de ficheros.
 
 ## Fichas
 
-| Máquina | OS | Concepto | Estado | ES | EN |
+| Máquina | OS | Servicio | Concepto | ES | EN |
 |---|---|---|---|---|---|
-| Meow | Linux | FTP y Telnet sin credenciales | 100% | [Ver](meow/README.md) | [EN](meow/README.en.md) |
-| Fawn | Linux | FTP anónimo | 100% | [Ver](fawn/README.md) | [EN](fawn/README.en.md) |
-| Dancing | Windows | SMB sin sesión | 100% | [Ver](dancing/README.md) | [EN](dancing/README.en.md) |
-| Redeemer | Linux | Redis sin autenticación | 100% | [Ver](redeemer/README.md) | [EN](redeemer/README.en.md) |
-| Explosion | Windows | RDP con contraseña vacía | pendiente | [Ver](explosion/README.md) | [EN](explosion/README.en.md) |
-| Preignition | Linux | Panel oculto y credenciales por defecto | pendiente | [Ver](preignition/README.md) | [EN](preignition/README.en.md) |
-| Mongod | Linux | MongoDB sin `--auth` | pendiente | [Ver](mongod/README.md) | [EN](mongod/README.en.md) |
-| Synced | Linux | rsync anónimo | pendiente | [Ver](synced/README.md) | [EN](synced/README.en.md) |
-| Sequel | Linux | MySQL con `root` sin contraseña | pendiente | [Ver](sequel/README.md) | [EN](sequel/README.en.md) |
+| Meow | Linux | 23/telnet | `root` sin contraseña | [Ver](meow/README.md) | [EN](meow/README.en.md) |
+| Fawn | Linux | 21/ftp | Acceso anónimo y `get flag.txt` | [Ver](fawn/README.md) | [EN](fawn/README.en.md) |
+| Dancing | Windows | 445/smb | Sesión nula y share `WorkShares` | [Ver](dancing/README.md) | [EN](dancing/README.en.md) |
+| Redeemer | Linux | 6379/redis | Redis sin `AUTH` y `keys *` | [Ver](redeemer/README.md) | [EN](redeemer/README.en.md) |
+| Explosion | Windows | 3389/rdp | `Administrator` con contraseña vacía | [Ver](explosion/README.md) | [EN](explosion/README.en.md) |
+| Preignition | Linux | 80/http | `/admin.php` oculto y `admin:admin` | [Ver](preignition/README.md) | [EN](preignition/README.en.md) |
+| Mongod | Linux | 27017/mongo | MongoDB sin `--auth` | [Ver](mongod/README.md) | [EN](mongod/README.en.md) |
 
-## Cómo se resuelven
+## Lecciones transversales
 
-1. `nmap -sC -sV` y anotar **versión** de cada servicio.
-2. Ir al servicio con su propio cliente (`ftp`, `smbclient`, `redis-cli`, `mongosh`, `rsync`, `mysql`, `xfreerdp`).
-3. Comprobar credenciales vacías, accesos anónimos y paneles ocultos antes de buscar exploits.
-4. La flag suele estar en un fichero del escritorio, en una colección o en una tabla.
+- El servicio que responde «sin credenciales» **es** el hallazgo: sesión nula en SMB, FTP anónimo, Redis abierto, MongoDB sin `--auth`, Telnet con `root` vacío.
+- Cada protocolo tiene su cliente: `smbclient -L //IP -N`, `ftp` con `anonymous`, `redis-cli`, `mongosh`, `xfreerdp /cert:ignore`.
+- La flag casi nunca requiere escalada: está en el recurso compartido, en la base de datos o en el escritorio del administrador.
+- Lo aprendido se traslada: los mismos servicios aparecen en cajas Easy/Medium, pero allí con un paso más de enumeración.
 
-## Pendiente
+## Mitigaciones de referencia
 
-- Confirmar el tier exacto de cada máquina en la plataforma y añadirlo a la tabla.
-- Completar las que falten de los tiers 1 y 2 (Appointment, Crocodile, Responder, Three, Ignition, Bike, Pennyworth, Tactics, Archetype, Oopsie, Vaccine…).
+- SMB: firmar y cifrar, deshabilitar SMBv1, retirar la sesión nula y limitar shares administrativos por grupo.
+- FTP: prohibir `anonymous` y usar SFTP/FTPS con cuentas nominales.
+- Telnet: retirarlo; SSH con contraseña fuerte y `PermitRootLogin no`.
+- Redis y MongoDB: `requirepass`/`--auth`, bind a loopback y ACLs por base.
+- RDP: contraseñas no vacías, NLA obligatorio y MFA.
+- Detección: 4624 tipo 3 con NTLM anónimo, `230 Login successful` de `anonymous`, `INFO`/`keys *` sin `AUTH` y `show dbs` sin autenticación.

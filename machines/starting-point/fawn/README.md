@@ -79,7 +79,7 @@ wget -q ftp://anonymous:anonymous@<TARGET_IP>/flag.txt -O flag.txt
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 

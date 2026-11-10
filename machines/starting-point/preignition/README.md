@@ -65,7 +65,7 @@ Tras el login, la propia página muestra la flag:
 
 ## Escalada de privilegios
 
-- Enumeración local y vector de elevación descritos en «Foothold» y «Lecciones aprendidas».
+- No aplica: la flag está en el propio servicio comprometido; no hay usuario de sistema que comprometer ni escalada posterior.
 
 ## Evidencia
 
@@ -82,4 +82,4 @@ Tras el login, la propia página muestra la flag:
 
 ## Mitigaciones y detección
 
-- Solo claves, sin contraseña, y `AllowUsers`/`fail2ban` para limitar el acceso.
+- Retirar páginas de administración del docroot público, exigir contraseña no por defecto y añadir MFA. Detección: peticiones a `/*.php` no enlazadas y `200` en `/admin.php` desde IPs nuevas.
