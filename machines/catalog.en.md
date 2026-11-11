@@ -8,6 +8,10 @@ Reference notes for machines used to study techniques. The main table covers **r
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|
+| Sizzle | Windows | Insane | SCF/Responder, ADCS, Kerberoasting and DCSync | [ES](../machines/windows/sizzle/README.md) | [Ver](../machines/windows/sizzle/README.en.md) |
+| Reel | Windows | Hard | RTF CVE-2017-0199, WriteOwner/WriteDacl ACLs and backup script | [ES](../machines/windows/reel/README.md) | [Ver](../machines/windows/reel/README.en.md) |
+| Absolute | Windows | Insane | AS-REP, shadow credentials, KrbRelay and DCSync | [ES](../machines/windows/absolute/README.md) | [Ver](../machines/windows/absolute/README.en.md) |
+| Multimaster | Windows | Insane | SQLi, CEF debug, GenericWrite/AS-REP and Server Operators | [ES](../machines/windows/multimaster/README.md) | [Ver](../machines/windows/multimaster/README.en.md) |
 | Authority | Windows | Medium | Anonymous SMB, Ansible Vault, PWM, ESC1 (`CorpVPN`) and PassTheCert | [ES](../machines/windows/authority/README.md) | [Ver](../machines/windows/authority/README.en.md) |
 | Sauna | Windows | Easy | AS-REP roasting, autologon credentials and DCSync | [ES](../machines/windows/sauna/README.md) | [Ver](../machines/windows/sauna/README.en.md) |
 | Netmon | Windows | Easy | Anonymous FTP, PRTG and CVE-2018-9276 | [ES](../machines/windows/netmon/README.md) | [Ver](../machines/windows/netmon/README.en.md) |
@@ -117,7 +121,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 116 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 121 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|

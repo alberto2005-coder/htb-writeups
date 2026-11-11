@@ -8,6 +8,8 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
+| Marshal in the Middle | Forensics | Medium | Zeek logs, TLS decryption and HTTP exfiltration | **Retired** | [ES](Marshal%20in%20the%20Middle/README.md) | [Ver](Marshal%20in%20the%20Middle/README.en.md) |
+| Lernaean | Web | Easy | Hydra, weak password and avoidable JavaScript redirect | **Retired** | [ES](Lernaean/README.md) | [Ver](Lernaean/README.en.md) |
 | Kryptor | Pwn | Insane | Kernel 5.9.10: DirtyPipe (CVE-2022-0847) over busybox's entry point, triggered through `modprobe` | **Retired** | [ES](Kryptor/README.md) | [Ver](Kryptor/README.en.md) |
 | Oldbridge | Pwn | Medium | Canary brute force (`fork`), PIE leak and `leave; ret` pivot into ret2libc | **Retired** | [ES](Oldbridge/README.md) | [Ver](Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | Format string in `printf(local_38)`: `%7$hn` turns `0xdeadbeef` into `0xdead1337` | **Retired** | [ES](Space%20Pirate%20Entrypoint/README.md) | [Ver](Space%20Pirate%20Entrypoint/README.en.md) |

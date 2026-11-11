@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 117 máquinas, 58 Sherlocks, 79 retos y 65 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 121 máquinas, 60 Sherlocks, 81 retos y 65 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -22,6 +22,10 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 | Máquina | OS | Dificultad | Categoría | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Sizzle | Windows | Insane | Active Directory / ADCS | **Retired** | SCF/Responder, ADCS, Kerberoasting y DCSync | [Ver](machines/windows/sizzle/README.md) | [EN](machines/windows/sizzle/README.en.md) |
+| Reel | Windows | Hard | Active Directory | **Retired** | RTF CVE-2017-0199, ACL WriteOwner/WriteDacl y script de backup | [Ver](machines/windows/reel/README.md) | [EN](machines/windows/reel/README.en.md) |
+| Absolute | Windows | Insane | Active Directory / ADCS | **Retired** | AS-REP, shadow credentials, KrbRelay y DCSync | [Ver](machines/windows/absolute/README.md) | [EN](machines/windows/absolute/README.en.md) |
+| Multimaster | Windows | Insane | Active Directory / MSSQL | **Retired** | SQLi, CEF debug, GenericWrite/AS-REP y Server Operators | [Ver](machines/windows/multimaster/README.md) | [EN](machines/windows/multimaster/README.en.md) |
 | Authority | Windows | Medium | Active Directory / ADCS | **Retired** | SMB anónimo, Ansible Vault, PWM, ESC1 en `CorpVPN` y PassTheCert | [Ver](machines/windows/authority/README.md) | [EN](machines/windows/authority/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | **Available** | FTP/Telnet sin credenciales | [Ver](machines/starting-point/meow/README.md) | [EN](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | **Available** | FTP anónimo | [Ver](machines/starting-point/fawn/README.md) | [EN](machines/starting-point/fawn/README.en.md) |
@@ -174,6 +178,8 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 
 | Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|
+| Marshal in the Middle | Forensics | Medium | **Retired** | Logs de Zeek, TLS con `secrets.log`, exfiltración HTTP y frames 5725/7039/9887 | [Ver](challenges/Marshal%20in%20the%20Middle/README.md) | [EN](challenges/Marshal%20in%20the%20Middle/README.en.md) |
+| Lernaean | Web | Easy | **Retired** | Hydra sobre el login y bypass del redirect JavaScript con `curl` | [Ver](challenges/Lernaean/README.md) | [EN](challenges/Lernaean/README.en.md) |
 | Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) en kernel 5.9.10: busybox parcheado en page cache y `modprobe` como root | [Ver](challenges/Kryptor/README.md) | [EN](challenges/Kryptor/README.en.md) |
 | Oldbridge | Pwn | Medium | **Retired** | BOF con XOR `0xd`: canario heredado por `fork`, base de PIE y stack pivot a ROP | [Ver](challenges/Oldbridge/README.md) | [EN](challenges/Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` escribe `0x1337` en la variable que abre la puerta | [Ver](challenges/Space%20Pirate%20Entrypoint/README.md) | [EN](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
@@ -224,6 +230,8 @@ Escenarios de investigación defensiva: no se ataca nada, se responde a pregunta
 
 | Sherlock | Dominio | Dificultad | Evidencia | ES | EN |
 |---|---|---|---|---|---|
+| Phantom Check | DFIR | Very Easy | Dos EVTX de PowerShell: consultas WMI y script anti-VM | [Ver](sherlocks/phantom-check/README.md) | [EN](sherlocks/phantom-check/README.en.md) |
+| TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell, Defender y evento 4616 | [Ver](sherlocks/ticktock/README.md) | [EN](sherlocks/ticktock/README.en.md) |
 | Litter | SOC | Easy | PCAP con túnel DNS (dnscat2) y ZIP del host | [Ver](sherlocks/litter/README.md) | [EN](sherlocks/litter/README.en.md) |
 | Jugglin | DFIR / WSL2 | Medium | Capturas de API de `wsl.exe`: exfiltración y `lsassy` sin rastro en logs de Windows | [Ver](sherlocks/jugglin/README.md) | [EN](sherlocks/jugglin/README.en.md) |
 | Heist | DFIR / Malware | Hard | `Partnership.pdf.exe` → RedLine, PCAP, Prefetch y SRUM | [Ver](sherlocks/heist/README.md) | [EN](sherlocks/heist/README.en.md) |

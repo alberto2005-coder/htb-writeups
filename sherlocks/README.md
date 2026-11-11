@@ -16,6 +16,8 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 
 | Sherlock | Dominio | Dificultad | Evidencia principal | Herramientas | Ficha |
 |---|---|---|---|---|---|
+| Phantom Check | DFIR | Very Easy | Dos EVTX de PowerShell: WMI y anti-VM | EvtxECmd, KAPE | [Ver](phantom-check/README.md) |
+| TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell y Defender | MFTECmd, Chainsaw, EvtxECmd | [Ver](ticktock/README.md) |
 | CrownJewel-2 | DFIR / Active Directory | Medium | Logs de DC con pass-the-hash y acceso a `C$` | EvtxECmd, Timeline Explorer | [Ver](crownjewel-2/README.md) |
 | Campfire-2 | DFIR / Active Directory | Easy | 4768 sin preautenticación (AS-REP) y uso posterior | EvtxECmd, 4768/4769 | [Ver](campfire-2/README.md) |
 | Safecracker | DFIR / Malware | Medium | Ransomware en un ZIP para Autopsy: cuentas, cifrado y borrado con `NtSetInformationFile` | Ghidra, `strings`, PE-bear | [Ver](safecracker/README.md) |
