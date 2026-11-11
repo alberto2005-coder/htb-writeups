@@ -16,6 +16,8 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 
 | Sherlock | Domain | Difficulty | Main evidence | Tools | Note |
 |---|---|---|---|---|---|
+| Phantom Check | DFIR | Very Easy | Two PowerShell EVTX logs: WMI and anti-VM | EvtxECmd, KAPE | [Ver](phantom-check/README.md) |
+| TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell and Defender | MFTECmd, Chainsaw, EvtxECmd | [Ver](ticktock/README.md) |
 | CrownJewel-2 | DFIR / Active Directory | Medium | DC logs with pass-the-hash and `C$` access | EvtxECmd, Timeline Explorer | [Ver](crownjewel-2/README.en.md) |
 | Campfire-2 | DFIR / Active Directory | Easy | 4768 without pre-authentication (AS-REP) and later use | EvtxECmd, 4768/4769 | [Ver](campfire-2/README.en.md) |
 | Safecracker | DFIR / Malware | Medium | Ransomware in a ZIP for Autopsy: accounts, encryption and deletion via `NtSetInformationFile` | Ghidra, `strings`, PE-bear | [Ver](safecracker/README.en.md) |

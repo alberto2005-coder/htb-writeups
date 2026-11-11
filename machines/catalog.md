@@ -8,6 +8,10 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
+| Sizzle | Windows | Insane | SCF/Responder, ADCS, Kerberoasting y DCSync | [Ver](../machines/windows/sizzle/README.md) | [EN](../machines/windows/sizzle/README.en.md) |
+| Reel | Windows | Hard | RTF CVE-2017-0199, ACL WriteOwner/WriteDacl y script de backup | [Ver](../machines/windows/reel/README.md) | [EN](../machines/windows/reel/README.en.md) |
+| Absolute | Windows | Insane | AS-REP, shadow credentials, KrbRelay y DCSync | [Ver](../machines/windows/absolute/README.md) | [EN](../machines/windows/absolute/README.en.md) |
+| Multimaster | Windows | Insane | SQLi, CEF debug, GenericWrite/AS-REP y Server Operators | [Ver](../machines/windows/multimaster/README.md) | [EN](../machines/windows/multimaster/README.en.md) |
 | Authority | Windows | Medium | SMB anónimo, Ansible Vault, PWM, ESC1 (`CorpVPN`) y PassTheCert | [Ver](../machines/windows/authority/README.md) | [EN](../machines/windows/authority/README.en.md) |
 | Sauna | Windows | Easy | AS-REP roasting, credenciales de autologon y DCSync | [Ver](../machines/windows/sauna/README.md) | [EN](../machines/windows/sauna/README.en.md) |
 | Netmon | Windows | Easy | FTP anónimo, PRTG y CVE-2018-9276 | [Ver](../machines/windows/netmon/README.md) | [EN](../machines/windows/netmon/README.en.md) |
@@ -115,7 +119,7 @@ Un volcado en español de 164 directorios de máquina, 140 con PDF (448 PDF y 73
 
 ## Starting Point (disponibles)
 
-Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 116 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
+Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 121 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|

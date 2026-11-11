@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 117 machines, 58 Sherlocks, 79 challenges and 65 knowledge topics, each in ES/EN.
+> **Numbers:** 121 machines, 60 Sherlocks, 81 challenges and 65 knowledge topics, each in ES/EN.
 
 ---
 
@@ -22,6 +22,10 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 | Machine | OS | Difficulty | Category | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Sizzle | Windows | Insane | Active Directory / ADCS | **Retired** | SCF/Responder, ADCS, Kerberoasting and DCSync | [ES](machines/windows/sizzle/README.md) | [Ver](machines/windows/sizzle/README.en.md) |
+| Reel | Windows | Hard | Active Directory | **Retired** | RTF CVE-2017-0199, WriteOwner/WriteDacl ACLs and backup script | [ES](machines/windows/reel/README.md) | [Ver](machines/windows/reel/README.en.md) |
+| Absolute | Windows | Insane | Active Directory / ADCS | **Retired** | AS-REP, shadow credentials, KrbRelay and DCSync | [ES](machines/windows/absolute/README.md) | [Ver](machines/windows/absolute/README.en.md) |
+| Multimaster | Windows | Insane | Active Directory / MSSQL | **Retired** | SQLi, CEF debug, GenericWrite/AS-REP and Server Operators | [ES](machines/windows/multimaster/README.md) | [Ver](machines/windows/multimaster/README.en.md) |
 | Authority | Windows | Medium | Active Directory / ADCS | **Retired** | Anonymous SMB, Ansible Vault, PWM, ESC1 on `CorpVPN` and PassTheCert | [ES](machines/windows/authority/README.md) | [Ver](machines/windows/authority/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | Available | Unauthenticated FTP/Telnet | [ES](machines/starting-point/meow/README.md) | [Ver](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | Available | Anonymous FTP | [ES](machines/starting-point/fawn/README.md) | [Ver](machines/starting-point/fawn/README.en.md) |
@@ -174,6 +178,8 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 
 | Challenge | Type | Difficulty | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|
+| Marshal in the Middle | Forensics | Medium | **Retired** | Zeek logs, TLS with `secrets.log`, HTTP exfiltration and frames 5725/7039/9887 | [ES](challenges/Marshal%20in%20the%20Middle/README.md) | [Ver](challenges/Marshal%20in%20the%20Middle/README.en.md) |
+| Lernaean | Web | Easy | **Retired** | Hydra against the login and JavaScript redirect bypass with `curl` | [ES](challenges/Lernaean/README.md) | [Ver](challenges/Lernaean/README.en.md) |
 | Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) on kernel 5.9.10: busybox patched in the page cache and `modprobe` as root | [ES](challenges/Kryptor/README.md) | [Ver](challenges/Kryptor/README.en.md) |
 | Oldbridge | Pwn | Medium | **Retired** | XOR `0xd` overflow: canary inherited across `fork`, PIE base and stack pivot into ROP | [ES](challenges/Oldbridge/README.md) | [Ver](challenges/Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` writes `0x1337` into the variable that opens the door | [ES](challenges/Space%20Pirate%20Entrypoint/README.md) | [Ver](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
@@ -224,6 +230,8 @@ Defensive investigation scenarios: nothing is attacked, you answer questions abo
 
 | Sherlock | Domain | Difficulty | Evidence | ES | EN |
 |---|---|---|---|---|---|
+| Phantom Check | DFIR | Very Easy | Two PowerShell EVTX logs: WMI queries and anti-VM script | [ES](sherlocks/phantom-check/README.md) | [Ver](sherlocks/phantom-check/README.en.md) |
+| TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell, Defender and event 4616 | [ES](sherlocks/ticktock/README.md) | [Ver](sherlocks/ticktock/README.en.md) |
 | Litter | SOC | Easy | PCAP with DNS tunnelling (dnscat2) and host ZIP | [ES](sherlocks/litter/README.md) | [Ver](sherlocks/litter/README.en.md) |
 | Jugglin | DFIR / WSL2 | Medium | `wsl.exe` API captures: exfiltration and `lsassy` with no Windows log trace | [ES](sherlocks/jugglin/README.md) | [Ver](sherlocks/jugglin/README.en.md) |
 | Heist | DFIR / Malware | Hard | `Partnership.pdf.exe` → RedLine, PCAP, Prefetch and SRUM | [ES](sherlocks/heist/README.md) | [Ver](sherlocks/heist/README.en.md) |
