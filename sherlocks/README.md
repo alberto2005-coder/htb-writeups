@@ -72,6 +72,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Constellation | Threat Intelligence | Medium | PDF con instrucciones a un insider: metadatos y URLs con hora | exiftool, Unfurl | [Ver](constellation/README.md) |
 | Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` con PowerShell compilado y exfiltración SFTP | PEStudio, CyberChef, Ghidra | [Ver](heartbreaker-continuum/README.md) |
 | MisCloud | Cloud / GCP | Medium | Hook `post-receive`, cuenta de servicio y exfiltración desde un bucket | Wireshark, `jq` | [Ver](miscloud/README.md) |
+| Hunter | Threat Hunting | Insane | Triaje de endpoint y PCAP parcial: servicio 7045, Amcache, Prefetch, `Windows.edb` y FileZilla | EvtxECmd, PECmd, SIDR, Wireshark | [Ver](hunter/README.md) |
 | Trent | DFIR / Red | Medium | PCAP de un router: CVE-2024-28353 y reverse shell | Wireshark, `tshark` | [Ver](trent/README.md) |
 
 ## Metodología común
