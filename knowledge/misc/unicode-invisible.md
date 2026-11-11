@@ -26,14 +26,14 @@ En JavaScript, `U+3164` pertenece a la categoría *Letter, other* y es un identi
 
 ## 3. Detección
 
-`cat -A` no los muestra; `xxd` sí:
+`cat -A` los convierte en bytes escapados y no revela el code point; `xxd` sí:
 
 ```bash
 grep -nP "[^\x00-\x7F]" app.js
 python3 -c "import unicodedata,sys;print([unicodedata.name(c) for c in open('app.js').read() if ord(c)>127])"
 ```
 
-Editores: VS Code resalta Unicode sospechoso desde la 1.63; vim no. Un linter con regla `no-irregular-whitespace` o `non-ascii` ayuda en CI.
+Editores: VS Code resalta por defecto caracteres invisibles y confundibles desde la 1.63 (U+3164 incluido); vim no. Un linter con regla `no-irregular-whitespace` o `non-ascii` ayuda en CI.
 
 ## 4. Caso típico
 

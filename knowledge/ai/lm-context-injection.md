@@ -75,4 +75,4 @@ El modelo completa `os.system(cmd)`. La clave de API del endpoint suele estar en
 - **Cifrar la clave y dejarla en el mismo fichero**: el traversal la entrega igual.
 - **Probar solo prompts «maliciosos»**: el fallo está en el contexto, no en la frase.
 
-MITRE ATLAS: AML.T0051 (LLM prompt injection). Referencias: OWASP Top 10 for LLM (LLM01, LLM05), CWE-22 y la documentación de `languagemodels`.
+MITRE ATLAS: AML.T0051 (LLM prompt injection). Referencias: OWASP Top 10 for LLM (LLM01; LLM05 en la edición 2025, LLM02 en la de 2023), CWE-22 y la documentación de `languagemodels`.

