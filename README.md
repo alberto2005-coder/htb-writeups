@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 58 Sherlocks, 77 retos y 62 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 58 Sherlocks, 78 retos y 63 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -22,6 +22,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 | Máquina | OS | Dificultad | Categoría | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Oldbridge | Pwn | Medium | **Retired** | BOF con XOR `0xd`: canario heredado por `fork`, base de PIE y stack pivot a ROP | [Ver](challenges/Oldbridge/README.md) | [EN](challenges/Oldbridge/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | **Available** | FTP/Telnet sin credenciales | [Ver](machines/starting-point/meow/README.md) | [EN](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | **Available** | FTP anónimo | [Ver](machines/starting-point/fawn/README.md) | [EN](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | **Available** | SMB null session | [Ver](machines/starting-point/dancing/README.md) | [EN](machines/starting-point/dancing/README.en.md) |
@@ -307,6 +308,7 @@ Notas reutilizables (cada una en español e inglés):
 - [Format strings: leer y escribir con printf](knowledge/pwn/format-strings.md) · [EN](knowledge/pwn/format-strings.en.md)
 - [Sobrescritura parcial de direcciones](knowledge/pwn/partial-overwrite.md) · [EN](knowledge/pwn/partial-overwrite.en.md)
 - [Cadenas C y bytes nulos: truncado silencioso](knowledge/pwn/null-byte-truncation.md) · [EN](knowledge/pwn/null-byte-truncation.en.md)
+- [Canario, PIE y ROP: de la fuga al shell](knowledge/pwn/canary-pie-rop.md) · [EN](knowledge/pwn/canary-pie-rop.en.md)
 
 ---
 
