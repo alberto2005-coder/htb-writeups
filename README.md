@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 57 Sherlocks, 74 retos y 55 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 58 Sherlocks, 74 retos y 56 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -229,6 +229,7 @@ Escenarios de investigación defensiva: no se ataca nada, se responde a pregunta
 | Constellation | Threat Intelligence | Medium | PDF con instrucciones a un insider: metadatos y URLs con hora | [Ver](sherlocks/constellation/README.md) | [EN](sherlocks/constellation/README.en.md) |
 | Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` con PowerShell compilado y exfiltración por SFTP | [Ver](sherlocks/heartbreaker-continuum/README.md) | [EN](sherlocks/heartbreaker-continuum/README.en.md) |
 | MisCloud | Cloud / GCP | Medium | Hook de Gitea, cuenta de servicio y bucket: captura más audit logs | [Ver](sherlocks/miscloud/README.md) | [EN](sherlocks/miscloud/README.en.md) |
+| Hunter | Threat Hunting | Insane | Servicio 7045, PDF recuperado del índice de Windows, KeePass y CVE-2023-32784 hasta la exfiltración FTP | [Ver](sherlocks/hunter/README.md) | [EN](sherlocks/hunter/README.en.md) |
 | Heartbreaker-Denouement | Cloud / AWS | Medium | SSRF a IMDS, credenciales de rol y snapshots de RDS compartidos: CloudTrail en JSONL | [Ver](sherlocks/heartbreaker-denouement/README.md) | [EN](sherlocks/heartbreaker-denouement/README.en.md) |
 | Trent | DFIR / Red | Medium | PCAP de un router: CVE-2024-28353 y reverse shell al C2 | [Ver](sherlocks/trent/README.md) | [EN](sherlocks/trent/README.en.md) |
 
@@ -296,6 +297,7 @@ Notas reutilizables (cada una en español e inglés):
 - [Contratos inteligentes: estado, pagos y superficies típicas](knowledge/blockchain/smart-contracts.md) · [EN](knowledge/blockchain/smart-contracts.en.md)
 - [PRNG, semillas y esquemas de clave](knowledge/reversing/prng-keyschedule.md) · [EN](knowledge/reversing/prng-keyschedule.en.md)
 - [PyJail: listas negras y escapes](knowledge/misc/pyjail-bypass.md) · [EN](knowledge/misc/pyjail-bypass.en.md)
+- [Threat hunting: hipótesis, pivotes y evidencia](knowledge/threat-hunting/threat-hunting.md) · [EN](knowledge/threat-hunting/threat-hunting.en.md)
 
 ---
 
