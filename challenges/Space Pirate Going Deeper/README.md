@@ -81,16 +81,16 @@ void admin_panel(long a, long b, long c) {
 
 ## Explicación del fallo
 
-El marco de `admin_panel` deja el búfer a `rbp-0x38` y el retorno a `rbp+0x08`:
+El marco de `admin_panel` deja el búfer a `rbp-0x30` y el retorno a `rbp+0x08`:
 
 ```text
-rbp-0x38  [ local_38, 40 bytes ]   <- read escribe 57
-rbp-0x10  [ local_10, 8 bytes ]
+rbp-0x30  [ local_38, 40 bytes ]   <- read escribe 57
+rbp-0x08  [ local_10, 8 bytes ]
 rbp+0x00  [ saved RBP, 8 bytes ]
 rbp+0x08  [ return address    ]    <- byte bajo modificable
 ```
 
-Con 40 bytes se llena el búfer, 16 más cubren `local_10` y el `saved RBP`, y el byte 56 toca el byte menos significativo del retorno. El retorno original apunta a `0x400ba0` (la instrucción siguiente a la llamada en `main`); cambiando ese byte a `0x01` se salta a `0x400b01`, dentro de la rama que imprime el mensaje y ejecuta `system`.
+Ghidra llama a la variable `local_38`, pero el desensamblado la sitúa en `rbp-0x30`; el offset se mide desde ahí. Con 40 bytes se llena el búfer, 8 cubren `local_10` y 8 el `saved RBP`, y el byte 56 (el 57.º) toca el byte menos significativo del retorno. El retorno original apunta a `0x400ba0` (la instrucción siguiente a la llamada en `main`); cambiando ese byte a `0x01` se salta a `0x400b01`, dentro de la rama que imprime el mensaje y ejecuta `system`.
 
 No hace falta canario (no hay), ni filtrar PIE (no hay), ni ROP: es una **sobrescritura parcial** de un byte.
 

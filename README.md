@@ -22,8 +22,6 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 | Máquina | OS | Dificultad | Categoría | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|---|
-| Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) en kernel 5.9.10: busybox parcheado en page cache y `modprobe` como root | [Ver](challenges/Kryptor/README.md) | [EN](challenges/Kryptor/README.en.md) |
-| Oldbridge | Pwn | Medium | **Retired** | BOF con XOR `0xd`: canario heredado por `fork`, base de PIE y stack pivot a ROP | [Ver](challenges/Oldbridge/README.md) | [EN](challenges/Oldbridge/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | **Available** | FTP/Telnet sin credenciales | [Ver](machines/starting-point/meow/README.md) | [EN](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | **Available** | FTP anónimo | [Ver](machines/starting-point/fawn/README.md) | [EN](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | **Available** | SMB null session | [Ver](machines/starting-point/dancing/README.md) | [EN](machines/starting-point/dancing/README.en.md) |
@@ -175,6 +173,8 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 
 | Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|
+| Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) en kernel 5.9.10: busybox parcheado en page cache y `modprobe` como root | [Ver](challenges/Kryptor/README.md) | [EN](challenges/Kryptor/README.en.md) |
+| Oldbridge | Pwn | Medium | **Retired** | BOF con XOR `0xd`: canario heredado por `fork`, base de PIE y stack pivot a ROP | [Ver](challenges/Oldbridge/README.md) | [EN](challenges/Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` escribe `0x1337` en la variable que abre la puerta | [Ver](challenges/Space%20Pirate%20Entrypoint/README.md) | [EN](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
 | Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` de 57 en un búfer de 40; sobrescritura parcial del retorno a `0x400b01` | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [EN](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
 | Vault-breaker | Pwn | Very Easy | **Retired** | Clave generada de 31 a 0 bytes: `strcpy` la vacía y el XOR revela la flag | [Ver](challenges/Vault-breaker/README.md) | [EN](challenges/Vault-breaker/README.en.md) |

@@ -25,7 +25,7 @@ The six high bytes do not need writing and ASLR does not need leaking: they do n
 
 ## 3. How many bytes can change
 
-- **1 byte**: reaches targets within the next 256 bytes after the original return, inside the same page.
+- **1 byte**: reaches any target within the same 256-byte block as the original return, without changing page.
 - **2 bytes**: covers 64 KB; useful to jump to another function if the page stays the same.
 - **3 bytes or more**: part of the address is overwritten and must be known.
 

@@ -74,9 +74,9 @@ The `0x420` (1056) read covers exactly:
 
 ```text
 rbp-0x410  [ buffer, 1032 bytes ]
-rbp+0x000  [ canary, 8 bytes ]
-rbp+0x008  [ saved rbp, 8 bytes ]
-rbp+0x010  [ return address, 8 bytes ]
+rbp-0x008  [ canary, 8 bytes ]
+rbp+0x000  [ saved rbp, 8 bytes ]
+rbp+0x008  [ return address, 8 bytes ]
 ```
 
 1032 + 8 + 8 + 8 = 1056. Not a single byte is left for a ROP chain: only **one** return address can be written. Hence the pivot.
@@ -85,7 +85,7 @@ rbp+0x010  [ return address, 8 bytes ]
 
 ### Canary and PIE by brute force
 
-The parent does not die when a child fails. Sending 1032 filler bytes and trying the next byte (0–255) yields `Username found!` only when the canary byte is right. Repeat for the 8 canary bytes, the 8 `saved rbp` bytes and the 6–7 return bytes.
+The parent does not die when a child fails. Sending the encrypted username (`il{dih`) plus filler up to 1032 bytes, then trying the next byte (0–255) yields `Username found!` only when the canary byte is right. Repeat for the 8 canary bytes, the 8 `saved rbp` bytes and the 6–7 return bytes.
 
 - The canary ends in `00`; the first byte is known and the rest are tested.
 - `check_username`'s return ends in `0xcf` (`main+566`), shrinking the search space.
@@ -102,7 +102,7 @@ leave      ; mov rsp, rbp ; pop rbp
 ret
 ```
 
-If `saved rbp` points into the buffer, `leave` moves `rsp` there, `pop rbp` consumes the first 8 bytes and `ret` jumps into the chain written in the filler. The distance between `saved rbp` and the buffer start is build-dependent: `0x480` in one writeup, `0x478` in the other.
+The leaked `saved rbp` sits `0x480` above the start of the buffer; the exploit subtracts a further `0x8` (`0x478`) to align the stack, so the chain starts in the filler.
 
 ### Build offsets
 
@@ -134,7 +134,7 @@ run
 x/6gx $rbp-0x410
 ```
 
-The canary sits at `rbp`, the saved rbp at `rbp+8` and the return at `rbp+16`.
+The canary sits at `rbp-0x8`, the saved rbp at `rbp` and the return at `rbp+8`.
 
 ## Exploitation
 

@@ -22,11 +22,6 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 | Machine | OS | Difficulty | Category | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|---|
-| Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) on kernel 5.9.10: busybox patched in the page cache and `modprobe` as root | [ES](challenges/Kryptor/README.md) | [Ver](challenges/Kryptor/README.en.md) |
-| Oldbridge | Pwn | Medium | **Retired** | XOR `0xd` overflow: canary inherited across `fork`, PIE base and stack pivot into ROP | [ES](challenges/Oldbridge/README.md) | [Ver](challenges/Oldbridge/README.en.md) |
-| Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` writes `0x1337` into the variable that opens the door | [ES](challenges/Space%20Pirate%20Entrypoint/README.md) | [Ver](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
-| Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` of 57 into a 40-byte buffer; partial overwrite of the return to `0x400b01` | [ES](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
-| Vault-breaker | Pwn | Very Easy | **Retired** | Key generated from 31 down to 0 bytes: `strcpy` empties it and XOR reveals the flag | [ES](challenges/Vault-breaker/README.md) | [Ver](challenges/Vault-breaker/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | Available | Unauthenticated FTP/Telnet | [ES](machines/starting-point/meow/README.md) | [Ver](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | Available | Anonymous FTP | [ES](machines/starting-point/fawn/README.md) | [Ver](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | Available | SMB null session | [ES](machines/starting-point/dancing/README.md) | [Ver](machines/starting-point/dancing/README.en.md) |
@@ -178,6 +173,11 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 
 | Challenge | Type | Difficulty | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|
+| Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) on kernel 5.9.10: busybox patched in the page cache and `modprobe` as root | [ES](challenges/Kryptor/README.md) | [Ver](challenges/Kryptor/README.en.md) |
+| Oldbridge | Pwn | Medium | **Retired** | XOR `0xd` overflow: canary inherited across `fork`, PIE base and stack pivot into ROP | [ES](challenges/Oldbridge/README.md) | [Ver](challenges/Oldbridge/README.en.md) |
+| Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` writes `0x1337` into the variable that opens the door | [ES](challenges/Space%20Pirate%20Entrypoint/README.md) | [Ver](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
+| Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` of 57 into a 40-byte buffer; partial overwrite of the return to `0x400b01` | [ES](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
+| Vault-breaker | Pwn | Very Easy | **Retired** | Key generated from 31 down to 0 bytes: `strcpy` empties it and XOR reveals the flag | [ES](challenges/Vault-breaker/README.md) | [Ver](challenges/Vault-breaker/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM in `session.upload_progress` → use-after-free (CVE-2026-109618/619), ASLR leak via `Set-Cookie`, `pDestructor` → `system()` | [ES](challenges/Dark%20Embargo/README.md) | [Ver](challenges/Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | **Retired** | MD5 against the clock: session handling, regex, automation | [ES](challenges/Emdee%20five%20for%20life/README.md) | [Ver](challenges/Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | **Retired** | LDAP injection in login and search (`*` wildcard) | [ES](challenges/Phonebook/README.md) | [Ver](challenges/Phonebook/README.en.md) |

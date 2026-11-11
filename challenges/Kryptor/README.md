@@ -151,7 +151,7 @@ write(p[1], shellcode, sizeof(shellcode));   /* cae en la page cache */
 ## Evidencia
 
 - `uname -r` o `strings bzImage` con `5.9.10`.
-- `checksec`/boot con SMEP, SMAP, KASLR y KPTI.
+- Arranque con SMEP, SMAP, KASLR y KPTI (`checksec` solo cubre el binario de usuario).
 - Salida del exploit con `FLAG_START`/`FLAG_END` y el contenido leído, nunca la flag real.
 
 ## Lecciones aprendidas
