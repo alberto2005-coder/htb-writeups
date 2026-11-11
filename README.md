@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 58 Sherlocks, 79 retos y 64 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 117 máquinas, 58 Sherlocks, 79 retos y 65 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -22,6 +22,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 | Máquina | OS | Dificultad | Categoría | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Authority | Windows | Medium | Active Directory / ADCS | **Retired** | SMB anónimo, Ansible Vault, PWM, ESC1 en `CorpVPN` y PassTheCert | [Ver](machines/windows/authority/README.md) | [EN](machines/windows/authority/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | **Available** | FTP/Telnet sin credenciales | [Ver](machines/starting-point/meow/README.md) | [EN](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | **Available** | FTP anónimo | [Ver](machines/starting-point/fawn/README.md) | [EN](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | **Available** | SMB null session | [Ver](machines/starting-point/dancing/README.md) | [EN](machines/starting-point/dancing/README.en.md) |
@@ -274,6 +275,7 @@ Notas reutilizables (cada una en español e inglés):
 - [Privesc Windows: SeImpersonate, servicios y LAPS](knowledge/windows/privesc-windows.md) · [EN](knowledge/windows/privesc-windows.en.md)
 - [Explotar un CVE: versión, PoC y adaptación](knowledge/web/cve-workflow.md) · [EN](knowledge/web/cve-workflow.en.md)
 - [AD CS: ESC13 (política de emisión enlazada a un grupo)](knowledge/windows/adcs-esc13.md) · [EN](knowledge/windows/adcs-esc13.en.md)
+- [AD CS: ESC1 (el solicitante elige el sujeto)](knowledge/windows/adcs-esc1.md) · [EN](knowledge/windows/adcs-esc1.en.md)
 - [AD CS: ESC4 → ESC1](knowledge/windows/adcs-esc4-esc1.md) · [EN](knowledge/windows/adcs-esc4-esc1.en.md)
 - [gMSA: leer la contraseña gestionada desde el grupo](knowledge/windows/gmsa-read-key.md) · [EN](knowledge/windows/gmsa-read-key.en.md)
 - [JEA: endpoints restringidos y PSReadLine](knowledge/windows/jea.md) · [EN](knowledge/windows/jea.en.md)
