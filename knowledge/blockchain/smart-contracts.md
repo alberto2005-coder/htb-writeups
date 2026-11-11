@@ -42,7 +42,7 @@ vm.load(address(contract), bytes32(uint256(0)));
 ## Fallos típicos
 
 - **Pago sin control**: `loot()` que transfiere si el estado llega a un valor que el atacante puede fijar.
-- **Falta de validación**: restas sin comprobar límites, `uint` que envuelve, divisiones por cero.
+- **Falta de validación**: restas sin comprobar límites, `uint` que envuelve (en versiones <0.8 o con `unchecked`), divisiones por cero.
 - **Control de acceso ausente**: `initialize()` o `setOwner()` sin protección.
 - **Reentrancy**: `call{value:}` antes de poner el saldo a cero.
 - **Oráculos manipulables**: precio leído de un pool que el atacante mueve.

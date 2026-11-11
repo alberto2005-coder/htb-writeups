@@ -23,11 +23,13 @@ Three things must line up:
 
 Without `create`, `logrotate` does not create the new file and the race is useless. `copytruncate` also rules it out.
 
+No single version fixes it: `logrotten` has been tested on 3.8.6, 3.11.0, 3.15.0 and 3.18.0, and the flaw is configuration (log ownership and the `su` directive).
+
 ## Checks
 
 ```bash
 pspy -pf -i 1000            # see logrotate and its config
-logrotate --version         # 3.8.0 - 3.16.0 are the race-prone versions
+logrotate --version         # no universal fixed version: it depends on the configuration
 ls -ld /path/to/log
 cat /etc/logrotate.d/<service>
 ```
