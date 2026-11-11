@@ -74,9 +74,9 @@ El `read` de `0x420` (1056) cubre exactamente:
 
 ```text
 rbp-0x410  [ búfer, 1032 bytes ]
-rbp+0x000  [ canario, 8 bytes ]
-rbp+0x008  [ saved rbp, 8 bytes ]
-rbp+0x010  [ return address, 8 bytes ]
+rbp-0x008  [ canario, 8 bytes ]
+rbp+0x000  [ saved rbp, 8 bytes ]
+rbp+0x008  [ return address, 8 bytes ]
 ```
 
 1032 + 8 + 8 + 8 = 1056. No sobra ni un byte para una cadena ROP: solo se puede reescribir el retorno con **una** dirección. De ahí el pivot.
@@ -85,7 +85,7 @@ rbp+0x010  [ return address, 8 bytes ]
 
 ### Canario y PIE por fuerza bruta
 
-El proceso padre no muere cuando el hijo falla. Enviando 1032 bytes de relleno y probando el byte siguiente (0–255), la respuesta `Username found!` aparece solo cuando el byte del canario es correcto. Se repite para los 8 bytes del canario, los 8 del `saved rbp` y los 6–7 del retorno.
+El proceso padre no muere cuando el hijo falla. Enviando el usuario cifrado (`il{dih`) y relleno hasta 1032 bytes, y probando el byte siguiente (0–255), la respuesta `Username found!` aparece solo cuando el byte del canario es correcto. Se repite para los 8 bytes del canario, los 8 del `saved rbp` y los 6–7 del retorno.
 
 - El canario acaba en `00`; el primer byte ya se conoce y el resto se prueba.
 - El retorno de `check_username` termina en `0xcf` (`main+566`), lo que reduce el espacio de búsqueda.
@@ -102,7 +102,7 @@ leave      ; mov rsp, rbp ; pop rbp
 ret
 ```
 
-Si el `saved rbp` apunta al búfer, `leave` mueve `rsp` allí, `pop rbp` consume los primeros 8 bytes y `ret` salta a la cadena que el atacante ha escrito en el relleno. La distancia entre el `saved rbp` y el inicio del búfer varía con el build: `0x480` en un writeup y `0x478` en otro.
+El valor filtrado de `saved rbp` está `0x480` por encima del inicio del búfer; el exploit resta `0x8` más (`0x478`) para alinear la pila, de modo que la cadena empieza en el relleno.
 
 ### offsets del build
 
@@ -134,7 +134,7 @@ run
 x/6gx $rbp-0x410
 ```
 
-El canario está en `rbp`, el `saved rbp` en `rbp+8` y el retorno en `rbp+16`.
+El canario está en `rbp-0x8`, el `saved rbp` en `rbp` y el retorno en `rbp+8`.
 
 ## Explotación
 

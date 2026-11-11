@@ -151,7 +151,7 @@ write(p[1], shellcode, sizeof(shellcode));   /* lands in the page cache */
 ## Evidence
 
 - `uname -r` or `strings bzImage` showing `5.9.10`.
-- Boot/`checksec` with SMEP, SMAP, KASLR and KPTI.
+- Boot log with SMEP, SMAP, KASLR and KPTI (`checksec` only covers the user binary).
 - Exploit output with `FLAG_START`/`FLAG_END` and the read contents, never the real flag.
 
 ## Lessons learned

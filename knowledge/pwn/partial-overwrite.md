@@ -25,7 +25,7 @@ No hace falta escribir los seis bytes altos ni filtrar ASLR: no cambian.
 
 ## 3. Cuántos bytes se pueden cambiar
 
-- **1 byte**: alcanza destinos en los 256 bytes siguientes al retorno original, dentro de la misma página.
+- **1 byte**: alcanza cualquier destino dentro del mismo bloque de 256 bytes que el retorno original, sin cambiar de página.
 - **2 bytes**: cubre 64 KB; útil para saltar a otra función del binario si la página no cambia.
 - **3 bytes o más**: ya se pisa parte de la dirección y hay que conocerla.
 

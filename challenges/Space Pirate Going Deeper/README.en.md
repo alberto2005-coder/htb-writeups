@@ -81,16 +81,16 @@ void admin_panel(long a, long b, long c) {
 
 ## The bug
 
-`admin_panel` places the buffer at `rbp-0x38` and the return address at `rbp+0x08`:
+`admin_panel` places the buffer at `rbp-0x30` and the return address at `rbp+0x08`:
 
 ```text
-rbp-0x38  [ local_38, 40 bytes ]   <- read writes 57
-rbp-0x10  [ local_10, 8 bytes ]
+rbp-0x30  [ local_38, 40 bytes ]   <- read writes 57
+rbp-0x08  [ local_10, 8 bytes ]
 rbp+0x00  [ saved RBP, 8 bytes ]
 rbp+0x08  [ return address    ]    <- low byte controllable
 ```
 
-40 bytes fill the buffer, 16 more cover `local_10` and the saved RBP, and byte 56 hits the least significant byte of the return address. The original return points to `0x400ba0` (the instruction after the call in `main`); changing that byte to `0x01` jumps to `0x400b01`, inside the branch that prints the message and runs `system`.
+Ghidra names it `local_38`, but the disassembly places it at `rbp-0x30`; the offset is measured from there. 40 bytes fill the buffer, 8 cover `local_10` and 8 the saved RBP, and byte 56 (the 57th) hits the least significant byte of the return address. The original return points to `0x400ba0` (the instruction after the call in `main`); changing that byte to `0x01` jumps to `0x400b01`, inside the branch that prints the message and runs `system`.
 
 No canary to bypass (none), no PIE to leak (none), no ROP: this is a **partial overwrite** of one byte.
 
