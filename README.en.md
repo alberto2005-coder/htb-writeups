@@ -353,6 +353,7 @@ It checks Python 3.8+, the hook and both scripts, and only then sets `core.hooks
 - Both scripts live in `private/scripts/`, which is git-ignored: copy them into the clone or the hook will block with `falta ...`.
 - Manual run: `.githooks/pre-commit` (or each script separately).
 - Hook test: `.githooks/test.sh`.
+- Before publishing: `.githooks/pre-publish.sh` (the `pre-push` hook runs it).
 - Disable it: `git config --unset core.hooksPath`.
 
 The configuration is local and is not versioned.
@@ -367,8 +368,10 @@ htb-writeups/
 ├── README.en.md            # Index (EN)
 ├── .githooks/
 │   ├── pre-commit          # quality hook (links and indexes)
+│   ├── pre-push            # runs the task before publishing
 │   ├── install.sh          # checks requirements and enables the hook
-│   └── test.sh             # tests installer and hook blocking
+│   ├── test.sh             # tests installer and hook blocking
+│   └── pre-publish.sh      # tests + links + indexes
 ├── templates/
 │   ├── machine-template.md      # machine template ES
 │   ├── machine-template.en.md   # machine template EN
