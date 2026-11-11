@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 111 máquinas, 51 Sherlocks, 51 retos y 47 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 51 Sherlocks, 51 retos y 49 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -133,6 +133,11 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Bastard | Windows | Medium | Web / Windows | **Retired** (ref.) | Drupalgeddon2 y JuicyPotato | [Ver](machines/windows/bastard/README.md) | [EN](machines/windows/bastard/README.en.md) |
 | Cascade | Windows | Medium | Active Directory / Windows | **Retired** (ref.) | LDAP anónimo, `cascadeLegacyPwd`, VNC reversible y AD Recycle Bin | [Ver](machines/windows/cascade/README.md) | [EN](machines/windows/cascade/README.en.md) |
 | Traceback | Linux | Easy | Web / Linux | **Retired** (ref.) | Webshell SmEvK con credenciales por defecto, `luvit` por sudo y MOTD escribible | [Ver](machines/linux/traceback/README.md) | [EN](machines/linux/traceback/README.en.md) |
+| Craft | Linux | Easy | Web / Linux | **Retired** (ref.) | `eval()` en Flask, historial de Gogs, MySQL en claro y OTP de Vault | [Ver](machines/linux/craft/README.md) | [EN](machines/linux/craft/README.en.md) |
+| Book | Linux | Medium | Web / Linux | **Retired** (ref.) | Truncado SQL en el registro, XSS en el PDF y carrera de `logrotate` | [Ver](machines/linux/book/README.md) | [EN](machines/linux/book/README.en.md) |
+| Querier | Windows | Medium | Active Directory / MSSQL | **Retired** (ref.) | Macro con credenciales, `xp_dirtree`, NetNTLMv2 y GPP | [Ver](machines/windows/querier/README.md) | [EN](machines/windows/querier/README.en.md) |
+| Remote | Windows | Medium | Web / Windows | **Retired** (ref.) | NFS con el backup de Umbraco, SHA1, RCE XSLT y TeamViewer | [Ver](machines/windows/remote/README.md) | [EN](machines/windows/remote/README.en.md) |
+| Luke | FreeBSD | Medium | Web / FreeBSD | **Retired** (ref.) | `config.php` en claro, API con JWT y Ajenti como root | [Ver](machines/freebsd/luke/README.md) | [EN](machines/freebsd/luke/README.en.md) |
 
 > **Estados:** **Available** = Starting Point, siempre disponible y publicable · **Retired** = retirada, publicable · **Active** = en su temporada, no se publica hasta que HTB la retire · **ref.** = ficha de referencia, no jugada en este perfil.
 >
@@ -254,6 +259,8 @@ Notas reutilizables (cada una en español e inglés):
 - [ImageMagick CVE-2022-44268: lectura arbitraria de ficheros](knowledge/linux/imagemagick-file-read.md) · [EN](knowledge/linux/imagemagick-file-read.en.md)
 - [AD Recycle Bin: objetos borrados como fuente de credenciales](knowledge/windows/ad-recycle-bin.md) · [EN](knowledge/windows/ad-recycle-bin.en.md)
 - [MOVEit CVE-2023-34362: explotación y artefactos para DFIR](knowledge/forensics/moveit-cve-2023-34362.md) · [EN](knowledge/forensics/moveit-cve-2023-34362.en.md)
+- [Carrera de `logrotate` con directorio escribible](knowledge/linux/logrotate-race.md) · [EN](knowledge/linux/logrotate-race.en.md)
+- [TeamViewer 7 y CVE-2019-18988: clave AES compartida](knowledge/windows/teamviewer-cve-2019-18988.md) · [EN](knowledge/windows/teamviewer-cve-2019-18988.en.md)
 
 ---
 

@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 111 machines, 51 Sherlocks, 51 challenges and 47 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 51 Sherlocks, 51 challenges and 49 knowledge topics, each in ES/EN.
 
 ---
 
@@ -133,6 +133,11 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 | Bastard | Windows | Medium | Web / Windows | Retired (ref.) | Drupalgeddon2 and JuicyPotato | [ES](machines/windows/bastard/README.md) | [Ver](machines/windows/bastard/README.en.md) |
 | Cascade | Windows | Medium | Active Directory / Windows | Retired (ref.) | Anonymous LDAP, `cascadeLegacyPwd`, reversible VNC and AD Recycle Bin | [ES](machines/windows/cascade/README.md) | [Ver](machines/windows/cascade/README.en.md) |
 | Traceback | Linux | Easy | Web / Linux | Retired (ref.) | SmEvK web shell with default credentials, `luvit` via sudo and writable MOTD | [ES](machines/linux/traceback/README.md) | [Ver](machines/linux/traceback/README.en.md) |
+| Craft | Linux | Easy | Web / Linux | Retired (ref.) | `eval()` in Flask, Gogs history, cleartext MySQL and a Vault OTP | [ES](machines/linux/craft/README.md) | [Ver](machines/linux/craft/README.en.md) |
+| Book | Linux | Medium | Web / Linux | Retired (ref.) | SQL truncation on signup, XSS in the PDF and a `logrotate` race | [ES](machines/linux/book/README.md) | [Ver](machines/linux/book/README.en.md) |
+| Querier | Windows | Medium | Active Directory / MSSQL | Retired (ref.) | Credentials in a macro, `xp_dirtree`, NetNTLMv2 and GPP | [ES](machines/windows/querier/README.md) | [Ver](machines/windows/querier/README.en.md) |
+| Remote | Windows | Medium | Web / Windows | Retired (ref.) | NFS with the Umbraco backup, SHA1, XSLT RCE and TeamViewer | [ES](machines/windows/remote/README.md) | [Ver](machines/windows/remote/README.en.md) |
+| Luke | FreeBSD | Medium | Web / FreeBSD | Retired (ref.) | Cleartext `config.php`, an API with JWT and Ajenti as root | [ES](machines/freebsd/luke/README.md) | [Ver](machines/freebsd/luke/README.en.md) |
 
 > **States:** **Available** = Starting Point, always available and publishable · **Retired** = retired, publishable · **Active** = in its season, not published until HTB retires it · **ref.** = reference notes, not played on this profile.
 >
@@ -254,6 +259,8 @@ Reusable notes (each available in Spanish and English):
 - [ImageMagick CVE-2022-44268: arbitrary file read](knowledge/linux/imagemagick-file-read.en.md) · [ES](knowledge/linux/imagemagick-file-read.md)
 - [AD Recycle Bin: deleted objects as a credential source](knowledge/windows/ad-recycle-bin.en.md) · [ES](knowledge/windows/ad-recycle-bin.md)
 - [MOVEit CVE-2023-34362: exploitation and DFIR artifacts](knowledge/forensics/moveit-cve-2023-34362.en.md) · [ES](knowledge/forensics/moveit-cve-2023-34362.md)
+- [`logrotate` race with a writable directory](knowledge/linux/logrotate-race.en.md) · [ES](knowledge/linux/logrotate-race.md)
+- [TeamViewer 7 and CVE-2019-18988: shared AES key](knowledge/windows/teamviewer-cve-2019-18988.en.md) · [ES](knowledge/windows/teamviewer-cve-2019-18988.md)
 
 ---
 
