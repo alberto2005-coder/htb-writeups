@@ -341,13 +341,15 @@ Reusable notes (each available in Spanish and English):
 
 The `.githooks/pre-commit` hook runs `private/scripts/verify.py` and `private/scripts/audit-indices.py` before every commit. It blocks the commit on broken links, missing or orphan index rows, bad language headers or malformed root tables.
 
-To enable it in a fresh clone:
+To enable it in a fresh clone, run the installer:
 
 ```bash
-git config core.hooksPath .githooks
+.githooks/install.sh
 ```
 
-- Requires **Python 3**.
+It checks Python 3.8+, the hook and both scripts, and only then sets `core.hooksPath`. You can also do it by hand with `git config core.hooksPath .githooks`.
+
+- Requires **Python 3.8 or later**.
 - Both scripts live in `private/scripts/`, which is git-ignored: copy them into the clone or the hook will block with `falta ...`.
 - Manual run: `.githooks/pre-commit` (or each script separately).
 - Disable it: `git config --unset core.hooksPath`.
@@ -363,7 +365,8 @@ htb-writeups/
 ├── README.md               # Index (ES)
 ├── README.en.md            # Index (EN)
 ├── .githooks/
-│   └── pre-commit          # quality hook (links and indexes)
+│   ├── pre-commit          # quality hook (links and indexes)
+│   └── install.sh          # checks requirements and enables the hook
 ├── templates/
 │   ├── machine-template.md      # machine template ES
 │   ├── machine-template.en.md   # machine template EN
