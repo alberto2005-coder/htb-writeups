@@ -32,6 +32,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | CrownJewel-1 | DFIR / Active Directory | Medium | Telemetría de DC tras un compromiso | Eventos 4662/4769, correlación | [Ver](crownjewel-1/README.md) |
 | Loggy | Malware / Go | Easy | `Loggy.exe`: keylogger en Go con capturas y exfiltración por FTP | Ghidra, `strings`, CyberChef | [Ver](loggy/README.md) |
 | Bumblebee | DFIR | Easy | Base SQLite de phpBB y `access.log` | `sqlite3`, `grep`, correlación de IPs | [Ver](bumblebee/README.md) |
+| Heartbreaker-Denouement | Cloud / AWS | Medium | SSRF al servicio de metadatos, credenciales de rol y snapshots de RDS compartidos | CloudTrail en JSONL, `grep`, `jq` | [Ver](heartbreaker-denouement/README.md) |
 | Meerkat | SOC | Easy | PCAP y alertas de Suricata | Wireshark, `tshark`, `jq` | [Ver](meerkat/README.md) |
 | Tracer | DFIR | Easy | PsExec nueve veces: `psexesvc.exe`, `.key`, named pipes y host de origen | PECmd, MFTECmd, Timeline Explorer | [Ver](tracer/README.md) |
 | Noted | DFIR | Easy | Artefactos de Notepad++ | `config.xml`, copias de seguridad, OSINT | [Ver](noted/README.md) |
