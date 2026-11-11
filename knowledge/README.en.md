@@ -42,7 +42,6 @@ This index is generated from the repository's versioned writeups.
 | `pwn/null-byte-truncation` | [null-byte-truncation](pwn/null-byte-truncation.en.md) |
 | `pwn/partial-overwrite` | [partial-overwrite](pwn/partial-overwrite.en.md) |
 | `pwn/rop-stack` | [rop-stack](pwn/rop-stack.en.md) |
-| `README` | [README](README.en.md) |
 | `reversing/dotnet-dnspy` | [dotnet-dnspy](reversing/dotnet-dnspy.en.md) |
 | `reversing/prng-keyschedule` | [prng-keyschedule](reversing/prng-keyschedule.en.md) |
 | `stego/images-audio` | [images-audio](stego/images-audio.en.md) |
