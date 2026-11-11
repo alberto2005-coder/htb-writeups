@@ -1,0 +1,35 @@
+#!/bin/sh
+# Verifica enlaces, índices, paridad ES/EN y tablas raíz antes de cada commit.
+set -u
+
+root=$(git rev-parse --show-toplevel) || exit 1
+cd "$root" || exit 1
+
+if command -v python >/dev/null 2>&1; then
+    PY=python
+elif command -v python3 >/dev/null 2>&1; then
+    PY=python3
+else
+    echo "pre-commit: no encuentro python ni python3" >&2
+    exit 1
+fi
+
+status=0
+for script in private/scripts/verify.py private/scripts/audit-indices.py; do
+    if [ ! -f "$script" ]; then
+        echo "pre-commit: falta $script; no se puede validar el commit" >&2
+        status=1
+        continue
+    fi
+    echo "pre-commit: $script"
+    PYTHONIOENCODING=utf-8 "$PY" "$script" || status=1
+done
+
+if [ "$status" -ne 0 ]; then
+    echo "" >&2
+    echo "pre-commit: commit bloqueado; corrige los problemas anteriores." >&2
+    exit 1
+fi
+
+echo "pre-commit: verificación OK"
+exit 0
