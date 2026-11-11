@@ -1,6 +1,4 @@
 #!/bin/sh
-# Antes de publicar (push), ejecuta la tarea completa de verificación.
-set -u
-
-root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 1
-exec "$root/.githooks/pre-publish.sh"
+set -eu
+root=$(git rev-parse --show-toplevel)
+exec "$root/.githooks/pre-push.sh"

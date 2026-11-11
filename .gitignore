@@ -29,3 +29,28 @@ htb/
 
 # material temporal: repos de terceros clonados para comparar
 .tmp/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.p12
+*.pfx
+*.crt
+*.cer
+*.kdbx
+*.sqlite
+*.db
+.aws/
+.ssh/
+
+# Python tooling and build artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
