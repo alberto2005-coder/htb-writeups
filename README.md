@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 51 Sherlocks, 51 retos y 49 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 56 Sherlocks, 56 retos y 51 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -183,6 +183,11 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Fake Boost | Forensics | Easy | **Retired** | PowerShell invertido + base64, AES-CBC y exfiltración HTTP a un `POST` | [Ver](challenges/Fake%20Boost/README.md) | [EN](challenges/Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | **Retired** | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | [Ver](challenges/Impossible%20Password/README.md) | [EN](challenges/Impossible%20Password/README.en.md) |
 | Reg | Pwn | Easy | **Retired** | `gets()` en `run()`, offset `0x38` y ret2win a `winner()` en un binario sin PIE | [Ver](challenges/Reg/README.md) | [EN](challenges/Reg/README.en.md) |
+| Survival of the Fittest | Blockchain | Very Easy | **Retired** | `strongAttack(20)` y `loot()` sin control del estado | [Ver](challenges/Survival%20of%20the%20Fittest/README.md) | [EN](challenges/Survival%20of%20the%20Fittest/README.en.md) |
+| APKrypt | Mobile | Easy | **Retired** | Clave AES y blob en el APK, cifrado ECB | [Ver](challenges/APKrypt/README.md) | [EN](challenges/APKrypt/README.en.md) |
+| Photon Lockdown | Hardware | Very Easy | **Retired** | SquashFS con la contraseña de fábrica en `config_default.xml` | [Ver](challenges/Photon%20Lockdown/README.md) | [EN](challenges/Photon%20Lockdown/README.en.md) |
+| Prometheon | AI/ML | Medium | **Retired** | Inyección de prompt en cinco niveles encadenados | [Ver](challenges/Prometheon/README.md) | [EN](challenges/Prometheon/README.en.md) |
+| Forks and Knives | Pwn | Medium | **Retired** | Off-by-one, format string, canario por `fork()` y ROP con `dup2` | [Ver](challenges/Forks%20and%20Knives/README.md) | [EN](challenges/Forks%20and%20Knives/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -202,6 +207,11 @@ Escenarios de investigación defensiva: no se ataca nada, se responde a pregunta
 | Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | [Ver](sherlocks/liberty/README.md) | [EN](sherlocks/liberty/README.en.md) |
 | Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | [Ver](sherlocks/jinkies/README.md) | [EN](sherlocks/jinkies/README.en.md) |
 | i-like-to | DFIR / MOVEit | Easy | CVE-2023-34362: logs de IIS, `$MFT`, EVTX, memoria y volcado SQL | [Ver](sherlocks/i-like-to/README.md) | [EN](sherlocks/i-like-to/README.en.md) |
+| Pikaptcha | DFIR / Windows | Easy | Captcha falso, portapapeles y PowerShell: PCAP más triaje KAPE | [Ver](sherlocks/pikaptcha/README.md) | [EN](sherlocks/pikaptcha/README.en.md) |
+| Constellation | Threat Intelligence | Medium | PDF con instrucciones a un insider: metadatos y URLs con hora | [Ver](sherlocks/constellation/README.md) | [EN](sherlocks/constellation/README.en.md) |
+| Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` con PowerShell compilado y exfiltración por SFTP | [Ver](sherlocks/heartbreaker-continuum/README.md) | [EN](sherlocks/heartbreaker-continuum/README.en.md) |
+| MisCloud | Cloud / GCP | Medium | Hook de Gitea, cuenta de servicio y bucket: captura más audit logs | [Ver](sherlocks/miscloud/README.md) | [EN](sherlocks/miscloud/README.en.md) |
+| Trent | DFIR / Red | Medium | PCAP de un router: CVE-2024-28353 y reverse shell al C2 | [Ver](sherlocks/trent/README.md) | [EN](sherlocks/trent/README.en.md) |
 
 - Índice, metodología y pendientes: [sherlocks/README.md](sherlocks/README.md) · [EN](sherlocks/README.en.md)
 - Plantilla de ficha: [templates/sherlock-template.md](templates/sherlock-template.md) · [EN](templates/sherlock-template.en.md)
@@ -261,6 +271,8 @@ Notas reutilizables (cada una en español e inglés):
 - [MOVEit CVE-2023-34362: explotación y artefactos para DFIR](knowledge/forensics/moveit-cve-2023-34362.md) · [EN](knowledge/forensics/moveit-cve-2023-34362.en.md)
 - [Carrera de `logrotate` con directorio escribible](knowledge/linux/logrotate-race.md) · [EN](knowledge/linux/logrotate-race.en.md)
 - [TeamViewer 7 y CVE-2019-18988: clave AES compartida](knowledge/windows/teamviewer-cve-2019-18988.md) · [EN](knowledge/windows/teamviewer-cve-2019-18988.en.md)
+- [Inyección de prompt: sacar lo que el modelo no debe decir](knowledge/ai/prompt-injection.md) · [EN](knowledge/ai/prompt-injection.en.md)
+- [Contratos inteligentes: estado, pagos y superficies típicas](knowledge/blockchain/smart-contracts.md) · [EN](knowledge/blockchain/smart-contracts.en.md)
 
 ---
 
