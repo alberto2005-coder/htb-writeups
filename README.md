@@ -355,6 +355,7 @@ Comprueba Python 3.8+, que existan el hook y los dos scripts, y solo entonces co
 - Prueba del hook: `.githooks/test.sh`.
 - Antes de publicar: `.githooks/pre-publish.sh` (el hook `pre-push` lo ejecuta).
 - Desactivarlo: `git config --unset core.hooksPath`.
+- Omitir los hooks: `git commit --no-verify` o `git push --no-verify`. Úsalo solo para una urgencia y ejecuta después `.githooks/pre-publish.sh`; no sirve para saltarse enlaces rotos o índices descuadrados.
 
 La configuración es local y no se versiona.
 
