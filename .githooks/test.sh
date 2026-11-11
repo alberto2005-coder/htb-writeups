@@ -18,7 +18,7 @@ trap cleanup EXIT INT TERM
 # Instalador en un repositorio aislado, sin los scripts privados.
 git -C "$tmp" init -q
 mkdir -p "$tmp/.githooks" "$tmp/private/scripts"
-cp .githooks/install.sh .githooks/pre-commit "$tmp/.githooks/"
+cp .githooks/install.sh .githooks/pre-commit .githooks/pre-push .githooks/pre-publish.sh "$tmp/.githooks/"
 
 if (cd "$tmp" && sh ./.githooks/install.sh) >"$tmp/out1" 2>&1; then
     ko "el instalador debe fallar sin los scripts privados"

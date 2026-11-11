@@ -25,7 +25,7 @@ if ! "$py" -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 8) else
 fi
 
 missing=0
-for f in .githooks/pre-commit private/scripts/verify.py private/scripts/audit-indices.py; do
+for f in .githooks/pre-commit .githooks/pre-push .githooks/pre-publish.sh private/scripts/verify.py private/scripts/audit-indices.py; do
     if [ ! -f "$f" ]; then
         echo "install-hook: falta $f" >&2
         missing=1
@@ -36,7 +36,7 @@ if [ "$missing" -ne 0 ]; then
     exit 1
 fi
 
-chmod +x .githooks/pre-commit 2>/dev/null || true
+chmod +x .githooks/pre-commit .githooks/pre-push .githooks/pre-publish.sh 2>/dev/null || true
 if ! git config core.hooksPath .githooks; then
     echo "install-hook: no se pudo configurar core.hooksPath" >&2
     exit 1
