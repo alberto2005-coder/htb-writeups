@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 56 Sherlocks, 62 retos y 52 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 56 Sherlocks, 64 retos y 52 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -194,6 +194,8 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Watch Tower | ICS | Very Easy | **Retired** | PCAP Modbus/TCP: la flag está en los `reference numbers` de la función 16 | [Ver](challenges/Watch%20Tower/README.md) | [EN](challenges/Watch%20Tower/README.en.md) |
 | Intrusion | ICS | Easy | **Retired** | Planta Modbus: holding registers con `unit id` 52 y lectura automatizada | [Ver](challenges/Intrusion/README.md) | [EN](challenges/Intrusion/README.en.md) |
 | Factory | ICS | Easy | **Retired** | Lógica de escalera: modo manual y `Write Single Coil` para vaciar el tanque | [Ver](challenges/Factory/README.md) | [EN](challenges/Factory/README.en.md) |
+| Shush Protocol | ICS | Very Easy | **Retired** | Función Modbus 102 propietaria: credenciales en claro en el flujo TCP | [Ver](challenges/Shush%20Protocol/README.md) | [EN](challenges/Shush%20Protocol/README.en.md) |
+| Sneak peek | ICS | Easy | **Retired** | Función `0x64`: sobrescribir el MD5 de la contraseña en el bloque de memoria | [Ver](challenges/Sneak%20peek/README.md) | [EN](challenges/Sneak%20peek/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)

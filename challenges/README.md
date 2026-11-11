@@ -70,6 +70,8 @@
 | Watch Tower | ICS | Very Easy | PCAP Modbus/TCP: la flag está en los `reference numbers` de la función 16 | **Retired** | [Ver](Watch%20Tower/README.md) | [EN](Watch%20Tower/README.en.md) |
 | Intrusion | ICS | Easy | Holding registers con `unit id` 52 y lectura automatizada con `umodbus`/`pymodbus` | **Retired** | [Ver](Intrusion/README.md) | [EN](Intrusion/README.en.md) |
 | Factory | ICS | Easy | Lógica de escalera: modo manual y `Write Single Coil` para vaciar el tanque | **Retired** | [Ver](Factory/README.md) | [EN](Factory/README.en.md) |
+| Shush Protocol | ICS | Very Easy | Función Modbus 102 propietaria: usuario y contraseña en claro en el flujo TCP | **Retired** | [Ver](Shush%20Protocol/README.md) | [EN](Shush%20Protocol/README.en.md) |
+| Sneak peek | ICS | Easy | Función `0x64`: reescribir el MD5 de la contraseña en el bloque de memoria | **Retired** | [Ver](Sneak%20peek/README.md) | [EN](Sneak%20peek/README.en.md) |
 
 ## Categorías
 
