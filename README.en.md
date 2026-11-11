@@ -355,6 +355,7 @@ It checks Python 3.8+, the hook and both scripts, and only then sets `core.hooks
 - Hook test: `.githooks/test.sh`.
 - Before publishing: `.githooks/pre-publish.sh` (the `pre-push` hook runs it).
 - Disable it: `git config --unset core.hooksPath`.
+- Skip the hooks: `git commit --no-verify` or `git push --no-verify`. Use it only for an emergency and run `.githooks/pre-publish.sh` afterwards; it is not a way around broken links or mismatched indexes.
 
 The configuration is local and is not versioned.
 
