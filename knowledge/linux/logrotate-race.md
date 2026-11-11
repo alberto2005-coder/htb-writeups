@@ -23,11 +23,13 @@ Se necesitan tres cosas a la vez:
 
 Sin `create`, `logrotate` no crea el fichero nuevo y la carrera no sirve. Con `copytruncate` tampoco.
 
+No hay una versión que lo arregle por sí sola: `logrotten` se ha probado con 3.8.6, 3.11.0, 3.15.0 y 3.18.0, y el fallo es de configuración (propietario del log y directiva `su`).
+
 ## Comprobación
 
 ```bash
 pspy -pf -i 1000            # ver el logrotate y su config
-logrotate --version         # 3.8.0 - 3.16.0 son las versiones con carrera
+logrotate --version         # sin versión corregida universal: depende de la configuración
 ls -ld /ruta/del/log
 cat /etc/logrotate.d/<servicio>
 ```

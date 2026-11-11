@@ -42,7 +42,7 @@ vm.load(address(contract), bytes32(uint256(0)));
 ## Typical flaws
 
 - **Unprotected payout**: `loot()` transferring when state reaches a value the attacker can set.
-- **Missing validation**: subtraction without bounds, wrapping `uint`, division by zero.
+- **Missing validation**: subtraction without bounds, wrapping `uint` (in <0.8 or with `unchecked`), division by zero.
 - **Missing access control**: `initialize()` or `setOwner()` left open.
 - **Reentrancy**: `call{value:}` before zeroing the balance.
 - **Manipulable oracles**: price read from a pool the attacker moves.
