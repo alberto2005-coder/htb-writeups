@@ -8,6 +8,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
+| Authority | Windows | Medium | SMB anónimo, Ansible Vault, PWM, ESC1 (`CorpVPN`) y PassTheCert | [Ver](../machines/windows/authority/README.md) | [EN](../machines/windows/authority/README.en.md) |
 | Sauna | Windows | Easy | AS-REP roasting, credenciales de autologon y DCSync | [Ver](../machines/windows/sauna/README.md) | [EN](../machines/windows/sauna/README.en.md) |
 | Netmon | Windows | Easy | FTP anónimo, PRTG y CVE-2018-9276 | [Ver](../machines/windows/netmon/README.md) | [EN](../machines/windows/netmon/README.en.md) |
 | Servmon | Windows | Easy | NVMS path traversal, NSClient++ y túnel SSH | [Ver](../machines/windows/servmon/README.md) | [EN](../machines/windows/servmon/README.en.md) |
