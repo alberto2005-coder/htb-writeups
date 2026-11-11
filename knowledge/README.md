@@ -63,11 +63,14 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc1` | [adcs-esc1](windows/adcs-esc1.md) |
 | `windows/adcs-esc13` | [adcs-esc13](windows/adcs-esc13.md) |
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.md) |
+| `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
 | `windows/jea` | [jea](windows/jea.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.md) |
+| `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.md) |
+| `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
 | `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.md) |
