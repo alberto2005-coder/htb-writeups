@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 58 Sherlocks, 74 challenges and 56 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 58 Sherlocks, 74 challenges and 59 knowledge topics, each in ES/EN.
 
 ---
 
@@ -298,6 +298,9 @@ Reusable notes (each available in Spanish and English):
 - [PRNG, seeds and key schedules](knowledge/reversing/prng-keyschedule.en.md) · [ES](knowledge/reversing/prng-keyschedule.md)
 - [PyJail: blacklists and escapes](knowledge/misc/pyjail-bypass.en.md) · [ES](knowledge/misc/pyjail-bypass.md)
 - [Threat hunting: hypotheses, pivots and evidence](knowledge/threat-hunting/threat-hunting.en.md) · [ES](knowledge/threat-hunting/threat-hunting.md)
+- [Invisible characters and Unicode backdoors](knowledge/misc/unicode-invisible.en.md) · [ES](knowledge/misc/unicode-invisible.md)
+- [.NET: triage, dnSpy and debugging](knowledge/reversing/dotnet-dnspy.en.md) · [ES](knowledge/reversing/dotnet-dnspy.md)
+- [Context injection and autocompletion in models](knowledge/ai/lm-context-injection.en.md) · [ES](knowledge/ai/lm-context-injection.md)
 
 ---
 
