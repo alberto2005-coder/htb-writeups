@@ -59,6 +59,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Fake Boost | Forensics | Easy | Reversed base64 PowerShell and AES exfiltration in a `POST` | **Retired** | [ES](Fake%20Boost/README.md) | [Ver](Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | Second `strcmp` against `rand()`: equalise `$rdi`/`$rsi` in gdb | **Retired** | [ES](Impossible%20Password/README.md) | [Ver](Impossible%20Password/README.en.md) |
 | Reg | Pwn | Easy | `gets()` in `run()`: `0x38` offset and ret2win into `winner()` with no PIE | **Retired** | [ES](Reg/README.md) | [Ver](Reg/README.en.md) |
+| Survival of the Fittest | Blockchain | Very Easy | `strongAttack(20)` and `loot()` with no state check | **Retired** | [ES](Survival%20of%20the%20Fittest/README.md) | [Ver](Survival%20of%20the%20Fittest/README.en.md) |
+| APKrypt | Mobile | Easy | AES key and blob inside the APK, ECB mode | **Retired** | [ES](APKrypt/README.md) | [Ver](APKrypt/README.en.md) |
+| Photon Lockdown | Hardware | Very Easy | SquashFS with the factory password in `config_default.xml` | **Retired** | [ES](Photon%20Lockdown/README.md) | [Ver](Photon%20Lockdown/README.en.md) |
+| Prometheon | AI/ML | Medium | Prompt injection across five chained levels | **Retired** | [ES](Prometheon/README.md) | [Ver](Prometheon/README.en.md) |
+| Forks and Knives | Pwn | Medium | Off-by-one, format string, `fork()` canary and `dup2` ROP | **Retired** | [ES](Forks%20and%20Knives/README.md) | [Ver](Forks%20and%20Knives/README.en.md) |
 
 ## Categories
 

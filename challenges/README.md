@@ -59,6 +59,11 @@
 | Fake Boost | Forensics | Easy | PowerShell invertido + base64 y exfiltración AES en un `POST` | **Retired** | [Ver](Fake%20Boost/README.md) | [EN](Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | **Retired** | [Ver](Impossible%20Password/README.md) | [EN](Impossible%20Password/README.en.md) |
 | Reg | Pwn | Easy | `gets()` en `run()`: offset `0x38` y ret2win a `winner()` sin PIE | **Retired** | [Ver](Reg/README.md) | [EN](Reg/README.en.md) |
+| Survival of the Fittest | Blockchain | Very Easy | `strongAttack(20)` y `loot()` sin control del estado | **Retired** | [Ver](Survival%20of%20the%20Fittest/README.md) | [EN](Survival%20of%20the%20Fittest/README.en.md) |
+| APKrypt | Mobile | Easy | Clave AES y blob en el APK, modo ECB | **Retired** | [Ver](APKrypt/README.md) | [EN](APKrypt/README.en.md) |
+| Photon Lockdown | Hardware | Very Easy | SquashFS con la contraseña de fábrica en `config_default.xml` | **Retired** | [Ver](Photon%20Lockdown/README.md) | [EN](Photon%20Lockdown/README.en.md) |
+| Prometheon | AI/ML | Medium | Inyección de prompt en cinco niveles encadenados | **Retired** | [Ver](Prometheon/README.md) | [EN](Prometheon/README.en.md) |
+| Forks and Knives | Pwn | Medium | Off-by-one, format string, canario por `fork()` y ROP con `dup2` | **Retired** | [Ver](Forks%20and%20Knives/README.md) | [EN](Forks%20and%20Knives/README.en.md) |
 
 ## Categorías
 
