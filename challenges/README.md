@@ -8,6 +8,7 @@
 
 | Reto | Tipo | Dificultad | Técnica | Estado | ES | EN |
 |---|---|---|---|---|---|---|
+| Oldbridge | Pwn | Medium | Canario por fuerza bruta (`fork`), fuga de PIE y pivot `leave; ret` a ret2libc | **Retired** | [Ver](Oldbridge/README.md) | [EN](Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | Format string en `printf(local_38)`: `%7$hn` convierte `0xdeadbeef` en `0xdead1337` | **Retired** | [Ver](Space%20Pirate%20Entrypoint/README.md) | [EN](Space%20Pirate%20Entrypoint/README.en.md) |
 | Space Pirate: Going Deeper | Pwn | Very Easy | Desbordamiento de 1 byte sin PIE: 56 de relleno y `\x01` al retorno | **Retired** | [Ver](Space%20Pirate%20Going%20Deeper/README.md) | [EN](Space%20Pirate%20Going%20Deeper/README.en.md) |
 | Vault-breaker | Pwn | Very Easy | `strcpy` trunca la clave en el primer nulo; longitudes 31→0 dejan el XOR a cero | **Retired** | [Ver](Vault-breaker/README.md) | [EN](Vault-breaker/README.en.md) |

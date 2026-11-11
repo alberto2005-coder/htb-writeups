@@ -8,6 +8,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
+| Oldbridge | Pwn | Medium | Canary brute force (`fork`), PIE leak and `leave; ret` pivot into ret2libc | **Retired** | [ES](Oldbridge/README.md) | [Ver](Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | Format string in `printf(local_38)`: `%7$hn` turns `0xdeadbeef` into `0xdead1337` | **Retired** | [ES](Space%20Pirate%20Entrypoint/README.md) | [Ver](Space%20Pirate%20Entrypoint/README.en.md) |
 | Space Pirate: Going Deeper | Pwn | Very Easy | One-byte overflow with no PIE: 56 filler bytes and `\x01` over the return address | **Retired** | [ES](Space%20Pirate%20Going%20Deeper/README.md) | [Ver](Space%20Pirate%20Going%20Deeper/README.en.md) |
 | Vault-breaker | Pwn | Very Easy | `strcpy` truncates the key at the first null; lengths 31→0 leave the XOR at zero | **Retired** | [ES](Vault-breaker/README.md) | [Ver](Vault-breaker/README.en.md) |

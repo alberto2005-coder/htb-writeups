@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 58 Sherlocks, 77 challenges and 62 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 58 Sherlocks, 78 challenges and 63 knowledge topics, each in ES/EN.
 
 ---
 
@@ -22,6 +22,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 | Machine | OS | Difficulty | Category | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Oldbridge | Pwn | Medium | **Retired** | XOR `0xd` overflow: canary inherited across `fork`, PIE base and stack pivot into ROP | [ES](challenges/Oldbridge/README.md) | [Ver](challenges/Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` writes `0x1337` into the variable that opens the door | [ES](challenges/Space%20Pirate%20Entrypoint/README.md) | [Ver](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
 | Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` of 57 into a 40-byte buffer; partial overwrite of the return to `0x400b01` | [ES](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
 | Vault-breaker | Pwn | Very Easy | **Retired** | Key generated from 31 down to 0 bytes: `strcpy` empties it and XOR reveals the flag | [ES](challenges/Vault-breaker/README.md) | [Ver](challenges/Vault-breaker/README.en.md) |
@@ -307,6 +308,7 @@ Reusable notes (each available in Spanish and English):
 - [Format strings: reading and writing with printf](knowledge/pwn/format-strings.en.md) · [ES](knowledge/pwn/format-strings.md)
 - [Partial overwrite of return addresses](knowledge/pwn/partial-overwrite.en.md) · [ES](knowledge/pwn/partial-overwrite.md)
 - [C strings and null bytes: silent truncation](knowledge/pwn/null-byte-truncation.en.md) · [ES](knowledge/pwn/null-byte-truncation.md)
+- [Canary, PIE and ROP: from leak to shell](knowledge/pwn/canary-pie-rop.en.md) · [ES](knowledge/pwn/canary-pie-rop.md)
 
 ---
 
