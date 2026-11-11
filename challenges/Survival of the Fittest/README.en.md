@@ -1,7 +1,7 @@
 ---
 challenge: Survival of the Fittest
 category: Challenge
-type: blockchain
+type: Blockchain
 os: Linux
 difficulty: Very Easy
 platform: Hack The Box

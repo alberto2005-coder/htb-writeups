@@ -1,7 +1,7 @@
 ---
 challenge: Vault-breaker
 category: Challenge
-type: pwn
+type: Pwn
 os: Linux
 difficulty: Very Easy
 platform: Hack The Box

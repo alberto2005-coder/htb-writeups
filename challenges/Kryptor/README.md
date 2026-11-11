@@ -1,7 +1,7 @@
 ---
 challenge: Kryptor
 category: Challenge
-type: pwn
+type: Pwn
 os: Linux
 difficulty: Insane
 platform: Hack The Box

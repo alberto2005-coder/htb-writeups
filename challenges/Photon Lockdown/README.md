@@ -1,7 +1,7 @@
 ---
 challenge: Photon Lockdown
 category: Challenge
-type: hardware
+type: Hardware
 os: Linux
 difficulty: Very Easy
 platform: Hack The Box

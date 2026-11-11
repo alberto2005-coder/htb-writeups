@@ -1,7 +1,7 @@
 ---
 challenge: Oddly Even
 category: Challenge
-type: coding
+type: Coding
 os: Linux
 difficulty: Very Easy
 platform: Hack The Box
