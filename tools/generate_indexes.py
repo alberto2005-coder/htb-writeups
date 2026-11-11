@@ -40,7 +40,7 @@ def paired_writeups(files, category):
         if not value.startswith(prefix):
             continue
         if category == "knowledge":
-            if p.suffix != ".md" or p.name.endswith(".en.md"):
+            if p.suffix != ".md" or p.name == "README.md" or p.name.endswith(".en.md"):
                 continue
             en = p.with_name(p.stem + ".en.md").as_posix()
             if en in files:
