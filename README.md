@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 58 Sherlocks, 74 retos y 59 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 58 Sherlocks, 77 retos y 62 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -173,6 +173,9 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 
 | Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|
+| Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` escribe `0x1337` en la variable que abre la puerta | [Ver](challenges/Space%20Pirate%20Entrypoint/README.md) | [EN](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
+| Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` de 57 en un búfer de 40; sobrescritura parcial del retorno a `0x400b01` | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [EN](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
+| Vault-breaker | Pwn | Very Easy | **Retired** | Clave generada de 31 a 0 bytes: `strcpy` la vacía y el XOR revela la flag | [Ver](challenges/Vault-breaker/README.md) | [EN](challenges/Vault-breaker/README.en.md) |
 | Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress` → use-after-free (CVE-2026-109618/109619), leak de ASLR por `Set-Cookie` y `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
 | Emdee five for life | Misc | Very Easy | **Retired** | MD5 contra reloj: sesión HTTP, regex y automatización | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
 | Phonebook | Web | Easy | **Retired** | Inyección LDAP en login y buscador (`*` como comodín) | [Ver](challenges/Phonebook/README.md) | [EN](challenges/Phonebook/README.en.md) |
@@ -301,6 +304,9 @@ Notas reutilizables (cada una en español e inglés):
 - [Caracteres invisibles y puertas traseras Unicode](knowledge/misc/unicode-invisible.md) · [EN](knowledge/misc/unicode-invisible.en.md)
 - [.NET: triaje, dnSpy y depuración](knowledge/reversing/dotnet-dnspy.md) · [EN](knowledge/reversing/dotnet-dnspy.en.md)
 - [Inyección de contexto y autocompletado en modelos](knowledge/ai/lm-context-injection.md) · [EN](knowledge/ai/lm-context-injection.en.md)
+- [Format strings: leer y escribir con printf](knowledge/pwn/format-strings.md) · [EN](knowledge/pwn/format-strings.en.md)
+- [Sobrescritura parcial de direcciones](knowledge/pwn/partial-overwrite.md) · [EN](knowledge/pwn/partial-overwrite.en.md)
+- [Cadenas C y bytes nulos: truncado silencioso](knowledge/pwn/null-byte-truncation.md) · [EN](knowledge/pwn/null-byte-truncation.en.md)
 
 ---
 

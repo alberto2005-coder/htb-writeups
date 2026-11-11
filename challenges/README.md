@@ -8,6 +8,9 @@
 
 | Reto | Tipo | Dificultad | Técnica | Estado | ES | EN |
 |---|---|---|---|---|---|---|
+| Space Pirate: Entrypoint | Pwn | Very Easy | Format string en `printf(local_38)`: `%7$hn` convierte `0xdeadbeef` en `0xdead1337` | **Retired** | [Ver](Space%20Pirate%20Entrypoint/README.md) | [EN](Space%20Pirate%20Entrypoint/README.en.md) |
+| Space Pirate: Going Deeper | Pwn | Very Easy | Desbordamiento de 1 byte sin PIE: 56 de relleno y `\x01` al retorno | **Retired** | [Ver](Space%20Pirate%20Going%20Deeper/README.md) | [EN](Space%20Pirate%20Going%20Deeper/README.en.md) |
+| Vault-breaker | Pwn | Very Easy | `strcpy` trunca la clave en el primer nulo; longitudes 31→0 dejan el XOR a cero | **Retired** | [Ver](Vault-breaker/README.md) | [EN](Vault-breaker/README.en.md) |
 | ropme | Pwn | Hard | Ret2libc con leak de `puts@got`: base de libc y `system("/bin/sh")` | **Retired** | [Ver](ropme/README.md) | [EN](ropme/README.en.md) |
 | Easy Phish | OSINT | Very Easy | SPF con `?all` y DMARC `p=none` en el dominio legítimo | **Retired** | [Ver](Easy%20Phish/README.md) | [EN](Easy%20Phish/README.en.md) |
 | Hidden in Colors | Stego | Hard | Colores hex del PNG: el dato está en el valor de color, no en el LSB | **Retired** | [Ver](Hidden%20in%20Colors/README.md) | [EN](Hidden%20in%20Colors/README.en.md) |
