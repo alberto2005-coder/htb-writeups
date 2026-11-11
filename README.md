@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 57 Sherlocks, 69 retos y 54 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 57 Sherlocks, 74 retos y 55 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -201,6 +201,11 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Shattered Tablet | Reversing | Very Easy | **Retired** | 40 comparaciones `data[i]` mezcladas; reconstruir ordenando por índice | [Ver](challenges/Shattered%20Tablet/README.md) | [EN](challenges/Shattered%20Tablet/README.en.md) |
 | Tear or Dear | Reversing | Medium | **Retired** | .NET WinForms: dnSpy de 32 bits y breakpoint en `this.username == this.o` | [Ver](challenges/Tear%20or%20Dear/README.md) | [EN](challenges/Tear%20or%20Dear/README.en.md) |
 | Snakecode | Reversing | Easy | **Retired** | `.pyc` de Python 2.7 con `marshal`; la flag aparece en la manzana del juego | [Ver](challenges/Snakecode/README.md) | [EN](challenges/Snakecode/README.en.md) |
+| Locked Away | Misc | Easy | **Retired** | PyJail: `blacklist.clear()` y `open_chest()` | [Ver](challenges/Locked%20Away/README.md) | [EN](challenges/Locked%20Away/README.en.md) |
+| Hidden Path | Misc | Easy | **Retired** | Carácter invisible `U+3164` como variable y comando inyectado | [Ver](challenges/Hidden%20Path/README.md) | [EN](challenges/Hidden%20Path/README.en.md) |
+| Aptitude Test | Misc | Very Easy | **Retired** | Cuestionario por socket: diez respuestas y flag | [Ver](challenges/Aptitude%20Test/README.md) | [EN](challenges/Aptitude%20Test/README.en.md) |
+| Chrono Mind | Misc | Easy | **Retired** | Path traversal al contexto del modelo y RCE por autocompletado | [Ver](challenges/Chrono%20Mind/README.md) | [EN](challenges/Chrono%20Mind/README.en.md) |
+| Super-Duper Pwn | Misc | Easy | **Retired** | Plantilla de `/checkout` y escape de `vm2` | [Ver](challenges/Super-Duper%20Pwn/README.md) | [EN](challenges/Super-Duper%20Pwn/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -290,6 +295,7 @@ Notas reutilizables (cada una en español e inglés):
 - [Inyección de prompt: sacar lo que el modelo no debe decir](knowledge/ai/prompt-injection.md) · [EN](knowledge/ai/prompt-injection.en.md)
 - [Contratos inteligentes: estado, pagos y superficies típicas](knowledge/blockchain/smart-contracts.md) · [EN](knowledge/blockchain/smart-contracts.en.md)
 - [PRNG, semillas y esquemas de clave](knowledge/reversing/prng-keyschedule.md) · [EN](knowledge/reversing/prng-keyschedule.en.md)
+- [PyJail: listas negras y escapes](knowledge/misc/pyjail-bypass.md) · [EN](knowledge/misc/pyjail-bypass.en.md)
 
 ---
 

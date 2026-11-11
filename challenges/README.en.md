@@ -77,6 +77,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Shattered Tablet | Reversing | Very Easy | 40 per-index comparisons in Ghidra: retype the buffer as `char[64]` | **Retired** | [ES](Shattered%20Tablet/README.md) | [Ver](Shattered%20Tablet/README.en.md) |
 | Tear or Dear | Reversing | Medium | .NET WinForms with 32-bit dnSpy: breakpoint on the credential comparison | **Retired** | [ES](Tear%20or%20Dear/README.md) | [Ver](Tear%20or%20Dear/README.en.md) |
 | Snakecode | Reversing | Easy | Python 2.7 `.pyc` with `marshal` + zlib; the Snake apple spells the flag | **Retired** | [ES](Snakecode/README.md) | [Ver](Snakecode/README.en.md) |
+| Locked Away | Misc | Easy | PyJail: `blacklist.clear()` dodges the brackets, then `open_chest()` | **Retired** | [ES](Locked%20Away/README.md) | [Ver](Locked%20Away/README.en.md) |
+| Hidden Path | Misc | Easy | `U+3164` (HANGUL FILLER) variable in the command array: `choice=6` runs the injected command | **Retired** | [ES](Hidden%20Path/README.md) | [Ver](Hidden%20Path/README.en.md) |
+| Aptitude Test | Misc | Very Easy | Quiz over `nc`: ten answers, then the role and the flag | **Retired** | [ES](Aptitude%20Test/README.md) | [Ver](Aptitude%20Test/README.en.md) |
+| Chrono Mind | Misc | Easy | `../config.py` path traversal as model context plus autocompletion RCE | **Retired** | [ES](Chrono%20Mind/README.md) | [Ver](Chrono%20Mind/README.en.md) |
+| Super-Duper Pwn | Misc | Easy | Discord bot, `/checkout` template and `vm2` bypass via `Symbol.species` | **Retired** | [ES](Super-Duper%20Pwn/README.md) | [Ver](Super-Duper%20Pwn/README.en.md) |
 
 ## Categories
 
