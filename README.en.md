@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 58 Sherlocks, 78 challenges and 63 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 58 Sherlocks, 79 challenges and 64 knowledge topics, each in ES/EN.
 
 ---
 
@@ -22,6 +22,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 | Machine | OS | Difficulty | Category | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) on kernel 5.9.10: busybox patched in the page cache and `modprobe` as root | [ES](challenges/Kryptor/README.md) | [Ver](challenges/Kryptor/README.en.md) |
 | Oldbridge | Pwn | Medium | **Retired** | XOR `0xd` overflow: canary inherited across `fork`, PIE base and stack pivot into ROP | [ES](challenges/Oldbridge/README.md) | [Ver](challenges/Oldbridge/README.en.md) |
 | Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` writes `0x1337` into the variable that opens the door | [ES](challenges/Space%20Pirate%20Entrypoint/README.md) | [Ver](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
 | Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` of 57 into a 40-byte buffer; partial overwrite of the return to `0x400b01` | [ES](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
@@ -309,6 +310,7 @@ Reusable notes (each available in Spanish and English):
 - [Partial overwrite of return addresses](knowledge/pwn/partial-overwrite.en.md) · [ES](knowledge/pwn/partial-overwrite.md)
 - [C strings and null bytes: silent truncation](knowledge/pwn/null-byte-truncation.en.md) · [ES](knowledge/pwn/null-byte-truncation.md)
 - [Canary, PIE and ROP: from leak to shell](knowledge/pwn/canary-pie-rop.en.md) · [ES](knowledge/pwn/canary-pie-rop.md)
+- [DirtyPipe (CVE-2022-0847): writing into the page cache](knowledge/linux/kernel-dirty-pipe.en.md) · [ES](knowledge/linux/kernel-dirty-pipe.md)
 
 ---
 
