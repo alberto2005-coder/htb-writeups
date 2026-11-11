@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 58 Sherlocks, 74 challenges and 59 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 58 Sherlocks, 77 challenges and 62 knowledge topics, each in ES/EN.
 
 ---
 
@@ -22,6 +22,9 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 | Machine | OS | Difficulty | Category | State | Key techniques | ES | EN |
 |---|---|---|---|---|---|---|---|
+| Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` writes `0x1337` into the variable that opens the door | [ES](challenges/Space%20Pirate%20Entrypoint/README.md) | [Ver](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
+| Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` of 57 into a 40-byte buffer; partial overwrite of the return to `0x400b01` | [ES](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
+| Vault-breaker | Pwn | Very Easy | **Retired** | Key generated from 31 down to 0 bytes: `strcpy` empties it and XOR reveals the flag | [ES](challenges/Vault-breaker/README.md) | [Ver](challenges/Vault-breaker/README.en.md) |
 | Meow | Linux | Very Easy | Starting Point | Available | Unauthenticated FTP/Telnet | [ES](machines/starting-point/meow/README.md) | [Ver](machines/starting-point/meow/README.en.md) |
 | Fawn | Linux | Very Easy | Starting Point | Available | Anonymous FTP | [ES](machines/starting-point/fawn/README.md) | [Ver](machines/starting-point/fawn/README.en.md) |
 | Dancing | Windows | Very Easy | Starting Point | Available | SMB null session | [ES](machines/starting-point/dancing/README.md) | [Ver](machines/starting-point/dancing/README.en.md) |
@@ -301,6 +304,9 @@ Reusable notes (each available in Spanish and English):
 - [Invisible characters and Unicode backdoors](knowledge/misc/unicode-invisible.en.md) · [ES](knowledge/misc/unicode-invisible.md)
 - [.NET: triage, dnSpy and debugging](knowledge/reversing/dotnet-dnspy.en.md) · [ES](knowledge/reversing/dotnet-dnspy.md)
 - [Context injection and autocompletion in models](knowledge/ai/lm-context-injection.en.md) · [ES](knowledge/ai/lm-context-injection.md)
+- [Format strings: reading and writing with printf](knowledge/pwn/format-strings.en.md) · [ES](knowledge/pwn/format-strings.md)
+- [Partial overwrite of return addresses](knowledge/pwn/partial-overwrite.en.md) · [ES](knowledge/pwn/partial-overwrite.md)
+- [C strings and null bytes: silent truncation](knowledge/pwn/null-byte-truncation.en.md) · [ES](knowledge/pwn/null-byte-truncation.md)
 
 ---
 
