@@ -20,7 +20,7 @@ Repositorio personal de writeups, notas técnicas y metodología de **Hack The B
 | Sherlocks | [Índice curado](sherlocks/README.md) · [Índice automático](sherlocks/INDEX.generated.md) |
 | Conocimiento | [Índice por temas](knowledge/README.md) · [Índice automático](knowledge/README.md) |
 | Plantillas | [Templates](templates/) |
-
+ 
 ## Metodología
 
 1. **Reconocimiento y enumeración:** identificar superficie de ataque y servicios.
