@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 56 Sherlocks, 62 challenges and 52 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 56 Sherlocks, 64 challenges and 52 knowledge topics, each in ES/EN.
 
 ---
 
@@ -194,6 +194,8 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 | Watch Tower | ICS | Very Easy | **Retired** | Modbus/TCP PCAP: the flag lives in the function 16 `reference numbers` | [ES](challenges/Watch%20Tower/README.md) | [Ver](challenges/Watch%20Tower/README.en.md) |
 | Intrusion | ICS | Easy | **Retired** | Modbus plant: holding registers with `unit id` 52, automated reads | [ES](challenges/Intrusion/README.md) | [Ver](challenges/Intrusion/README.en.md) |
 | Factory | ICS | Easy | **Retired** | Ladder logic: manual mode and `Write Single Coil` to drain the tank | [ES](challenges/Factory/README.md) | [Ver](challenges/Factory/README.en.md) |
+| Shush Protocol | ICS | Very Easy | **Retired** | Proprietary Modbus function 102: credentials in clear text in the TCP stream | [ES](challenges/Shush%20Protocol/README.md) | [Ver](challenges/Shush%20Protocol/README.en.md) |
+| Sneak peek | ICS | Easy | **Retired** | Function `0x64`: overwrite the password MD5 in the memory block | [ES](challenges/Sneak%20peek/README.md) | [Ver](challenges/Sneak%20peek/README.en.md) |
 
 - Achievement: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Category index and conventions: [challenges/README.en.md](challenges/README.en.md) · [ES](challenges/README.md)

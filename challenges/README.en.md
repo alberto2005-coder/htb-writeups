@@ -70,6 +70,8 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Watch Tower | ICS | Very Easy | Modbus/TCP PCAP: the flag lives in the function 16 `reference numbers` | **Retired** | [ES](Watch%20Tower/README.md) | [Ver](Watch%20Tower/README.en.md) |
 | Intrusion | ICS | Easy | Holding registers with `unit id` 52, read with `umodbus`/`pymodbus` | **Retired** | [ES](Intrusion/README.md) | [Ver](Intrusion/README.en.md) |
 | Factory | ICS | Easy | Ladder logic: manual mode and `Write Single Coil` to drain the tank | **Retired** | [ES](Factory/README.md) | [Ver](Factory/README.en.md) |
+| Shush Protocol | ICS | Very Easy | Proprietary Modbus function 102: user and password in clear text in the TCP stream | **Retired** | [ES](Shush%20Protocol/README.md) | [Ver](Shush%20Protocol/README.en.md) |
+| Sneak peek | ICS | Easy | Function `0x64`: overwrite the password MD5 in the memory block | **Retired** | [ES](Sneak%20peek/README.md) | [Ver](Sneak%20peek/README.en.md) |
 
 ## Categories
 
