@@ -64,10 +64,13 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Photon Lockdown | Hardware | Very Easy | SquashFS with the factory password in `config_default.xml` | **Retired** | [ES](Photon%20Lockdown/README.md) | [Ver](Photon%20Lockdown/README.en.md) |
 | Prometheon | AI/ML | Medium | Prompt injection across five chained levels | **Retired** | [ES](Prometheon/README.md) | [Ver](Prometheon/README.en.md) |
 | Forks and Knives | Pwn | Medium | Off-by-one, format string, `fork()` canary and `dup2` ROP | **Retired** | [ES](Forks%20and%20Knives/README.md) | [Ver](Forks%20and%20Knives/README.en.md) |
+| Evaluative | Coding | Very Easy | Degree-8 polynomial from nine coefficients: Horner with no powers | **Retired** | [ES](Evaluative/README.md) | [Ver](Evaluative/README.en.md) |
+| Oddly Even | Coding | Very Easy | Parity with `% 2`; mind negatives in C | **Retired** | [ES](Oddly%20Even/README.md) | [Ver](Oddly%20Even/README.en.md) |
+| Threat Index | Coding | Very Easy | 18 keywords weighted 1-18; `count` per term | **Retired** | [ES](Threat%20Index/README.md) | [Ver](Threat%20Index/README.en.md) |
 
 ## Categories
 
-HTB groups challenges into twelve categories. Counts are approximate and meant for planning, not as an exact inventory.
+HTB groups challenges into fourteen categories. Counts are approximate and meant for planning, not as an exact inventory.
 
 | Category | Approx. | What it trains | Note |
 |---|---|---|---|
@@ -83,6 +86,8 @@ HTB groups challenges into twelve categories. Counts are approximate and meant f
 | Mobile | 10+ | APK, Frida, smali, root detection | Android Studio |
 | Blockchain | 10+ | Solidity, contracts, DeFi | Foundry/Remix |
 | AI/ML | 5+ | adversarial ML, prompt injection | The newest one |
+| Coding | 6+ | input/output, maths, strings, backtracking | No binaries: stdin/stdout only |
+| ICS | 2+ | Modbus, industrial PCAP, HMI/PLC | ICS/SCADA track; several challenges are tagged Hardware |
 
 ## Conventions
 

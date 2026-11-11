@@ -64,10 +64,13 @@
 | Photon Lockdown | Hardware | Very Easy | SquashFS con la contraseña de fábrica en `config_default.xml` | **Retired** | [Ver](Photon%20Lockdown/README.md) | [EN](Photon%20Lockdown/README.en.md) |
 | Prometheon | AI/ML | Medium | Inyección de prompt en cinco niveles encadenados | **Retired** | [Ver](Prometheon/README.md) | [EN](Prometheon/README.en.md) |
 | Forks and Knives | Pwn | Medium | Off-by-one, format string, canario por `fork()` y ROP con `dup2` | **Retired** | [Ver](Forks%20and%20Knives/README.md) | [EN](Forks%20and%20Knives/README.en.md) |
+| Evaluative | Coding | Very Easy | Polinomio de grado 8 y nueve coeficientes: Horner sin potencias | **Retired** | [Ver](Evaluative/README.md) | [EN](Evaluative/README.en.md) |
+| Oddly Even | Coding | Very Easy | Paridad con `% 2`; cuidado con negativos en C | **Retired** | [Ver](Oddly%20Even/README.md) | [EN](Oddly%20Even/README.en.md) |
+| Threat Index | Coding | Very Easy | 18 palabras con peso 1-18; `count` por término | **Retired** | [Ver](Threat%20Index/README.md) | [EN](Threat%20Index/README.en.md) |
 
 ## Categorías
 
-Los retos de HTB se agrupan en doce categorías. Los números son orientativos y sirven para planificar, no como inventario exacto.
+Los retos de HTB se agrupan en catorce categorías. Los números son orientativos y sirven para planificar, no como inventario exacto.
 
 | Categoría | Aprox. | Qué se practica | Nota |
 |---|---|---|---|
@@ -83,6 +86,8 @@ Los retos de HTB se agrupan en doce categorías. Los números son orientativos y
 | Mobile | 10+ | APK, Frida, smali, root detection | Android Studio |
 | Blockchain | 10+ | Solidity, contratos, DeFi | Foundry/Remix |
 | AI/ML | 5+ | adversarial ML, prompt injection | La más nueva |
+| Coding | 6+ | entrada/salida, matemáticas, cadenas, backtracking | Sin binarios: solo stdin/stdout |
+| ICS | 2+ | Modbus, PCAP industrial, HMI/PLC | Track ICS/SCADA; varios retos se etiquetan Hardware |
 
 ## Convenciones
 

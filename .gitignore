@@ -19,6 +19,10 @@ Thumbs.db
 # writeups de maquinas activas: no se publican
 machines/active/
 
+# writeups de retos y Sherlocks activos: no se publican
+challenges/active/
+sherlocks/active/
+
 # claves y scripts locales del laboratorio
 id_ed25519*
 htb/
