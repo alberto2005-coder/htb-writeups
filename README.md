@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 56 Sherlocks, 59 retos y 51 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 56 Sherlocks, 62 retos y 52 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -191,6 +191,9 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Evaluative | Coding | Very Easy | **Retired** | Evaluación polinómica de grado 8 con Horner | [Ver](challenges/Evaluative/README.md) | [EN](challenges/Evaluative/README.en.md) |
 | Oddly Even | Coding | Very Easy | **Retired** | Paridad con módulo 2, incluidos cero y negativos | [Ver](challenges/Oddly%20Even/README.md) | [EN](challenges/Oddly%20Even/README.en.md) |
 | Threat Index | Coding | Very Easy | **Retired** | Suma ponderada de 18 palabras clave en la cadena | [Ver](challenges/Threat%20Index/README.md) | [EN](challenges/Threat%20Index/README.en.md) |
+| Watch Tower | ICS | Very Easy | **Retired** | PCAP Modbus/TCP: la flag está en los `reference numbers` de la función 16 | [Ver](challenges/Watch%20Tower/README.md) | [EN](challenges/Watch%20Tower/README.en.md) |
+| Intrusion | ICS | Easy | **Retired** | Planta Modbus: holding registers con `unit id` 52 y lectura automatizada | [Ver](challenges/Intrusion/README.md) | [EN](challenges/Intrusion/README.en.md) |
+| Factory | ICS | Easy | **Retired** | Lógica de escalera: modo manual y `Write Single Coil` para vaciar el tanque | [Ver](challenges/Factory/README.md) | [EN](challenges/Factory/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -273,6 +276,7 @@ Notas reutilizables (cada una en español e inglés):
 - [AD Recycle Bin: objetos borrados como fuente de credenciales](knowledge/windows/ad-recycle-bin.md) · [EN](knowledge/windows/ad-recycle-bin.en.md)
 - [MOVEit CVE-2023-34362: explotación y artefactos para DFIR](knowledge/forensics/moveit-cve-2023-34362.md) · [EN](knowledge/forensics/moveit-cve-2023-34362.en.md)
 - [Carrera de `logrotate` con directorio escribible](knowledge/linux/logrotate-race.md) · [EN](knowledge/linux/logrotate-race.en.md)
+- [Modbus/TCP en capturas: registros, funciones y extracción](knowledge/ics/modbus-pcap.md) · [EN](knowledge/ics/modbus-pcap.en.md)
 - [TeamViewer 7 y CVE-2019-18988: clave AES compartida](knowledge/windows/teamviewer-cve-2019-18988.md) · [EN](knowledge/windows/teamviewer-cve-2019-18988.en.md)
 - [Inyección de prompt: sacar lo que el modelo no debe decir](knowledge/ai/prompt-injection.md) · [EN](knowledge/ai/prompt-injection.en.md)
 - [Contratos inteligentes: estado, pagos y superficies típicas](knowledge/blockchain/smart-contracts.md) · [EN](knowledge/blockchain/smart-contracts.en.md)

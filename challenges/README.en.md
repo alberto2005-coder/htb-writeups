@@ -67,6 +67,9 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Evaluative | Coding | Very Easy | Degree-8 polynomial from nine coefficients: Horner with no powers | **Retired** | [ES](Evaluative/README.md) | [Ver](Evaluative/README.en.md) |
 | Oddly Even | Coding | Very Easy | Parity with `% 2`; mind negatives in C | **Retired** | [ES](Oddly%20Even/README.md) | [Ver](Oddly%20Even/README.en.md) |
 | Threat Index | Coding | Very Easy | 18 keywords weighted 1-18; `count` per term | **Retired** | [ES](Threat%20Index/README.md) | [Ver](Threat%20Index/README.en.md) |
+| Watch Tower | ICS | Very Easy | Modbus/TCP PCAP: the flag lives in the function 16 `reference numbers` | **Retired** | [ES](Watch%20Tower/README.md) | [Ver](Watch%20Tower/README.en.md) |
+| Intrusion | ICS | Easy | Holding registers with `unit id` 52, read with `umodbus`/`pymodbus` | **Retired** | [ES](Intrusion/README.md) | [Ver](Intrusion/README.en.md) |
+| Factory | ICS | Easy | Ladder logic: manual mode and `Write Single Coil` to drain the tank | **Retired** | [ES](Factory/README.md) | [Ver](Factory/README.en.md) |
 
 ## Categories
 
@@ -87,7 +90,7 @@ HTB groups challenges into fourteen categories. Counts are approximate and meant
 | Blockchain | 10+ | Solidity, contracts, DeFi | Foundry/Remix |
 | AI/ML | 5+ | adversarial ML, prompt injection | The newest one |
 | Coding | 6+ | input/output, maths, strings, backtracking | No binaries: stdin/stdout only |
-| ICS | 2+ | Modbus, industrial PCAP, HMI/PLC | ICS/SCADA track; several challenges are tagged Hardware |
+| ICS | 11+ | Modbus, OPC UA, S7comm, HMI/PLC | Its own category since 2026; several challenges are also tagged Hardware |
 
 ## Conventions
 
