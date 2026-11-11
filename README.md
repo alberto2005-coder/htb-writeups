@@ -352,6 +352,7 @@ Comprueba Python 3.8+, que existan el hook y los dos scripts, y solo entonces co
 - Requiere **Python 3.8 o posterior**.
 - Los dos scripts viven en `private/scripts/`, que está ignorado por git: cópialos en el clon o el hook bloqueará con `falta ...`.
 - Ejecución manual: `.githooks/pre-commit` (o cada script por separado).
+- Prueba del hook: `.githooks/test.sh`.
 - Desactivarlo: `git config --unset core.hooksPath`.
 
 La configuración es local y no se versiona.
@@ -366,7 +367,8 @@ htb-writeups/
 ├── README.en.md            # Índice (EN)
 ├── .githooks/
 │   ├── pre-commit          # Hook de calidad (enlaces e índices)
-│   └── install.sh          # Comprueba requisitos y activa el hook
+│   ├── install.sh          # Comprueba requisitos y activa el hook
+│   └── test.sh             # Prueba instalador y bloqueo del hook
 ├── templates/
 │   ├── machine-template.md      # Plantilla de máquinas ES
 │   ├── machine-template.en.md   # Plantilla de máquinas EN
