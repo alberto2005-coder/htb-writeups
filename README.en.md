@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 121 machines, 60 Sherlocks, 81 challenges and 65 knowledge topics, each in ES/EN.
+> **Numbers:** 121 machines, 60 Sherlocks, 81 challenges and 66 knowledge topics, each in ES/EN.
 
 ---
 
@@ -284,6 +284,7 @@ Reusable notes (each available in Spanish and English):
 - [Exploiting a CVE: version, PoC and adaptation](knowledge/web/cve-workflow.en.md) · [ES](knowledge/web/cve-workflow.md)
 - [AD CS: ESC13 (issuance policy linked to a group)](knowledge/windows/adcs-esc13.en.md) · [ES](knowledge/windows/adcs-esc13.md)
 - [AD CS: ESC1 (the requester chooses the subject)](knowledge/windows/adcs-esc1.en.md) · [ES](knowledge/windows/adcs-esc1.md)
+- [Shadow credentials, KrbRelay and KrbRelayUp](knowledge/windows/shadow-credentials-krbrelay.en.md) · [ES](knowledge/windows/shadow-credentials-krbrelay.md)
 - [AD CS: ESC4 → ESC1](knowledge/windows/adcs-esc4-esc1.en.md) · [ES](knowledge/windows/adcs-esc4-esc1.md)
 - [gMSA: read the managed password through the group](knowledge/windows/gmsa-read-key.en.md) · [ES](knowledge/windows/gmsa-read-key.md)
 - [JEA: restricted endpoints and PSReadLine](knowledge/windows/jea.en.md) · [ES](knowledge/windows/jea.md)
