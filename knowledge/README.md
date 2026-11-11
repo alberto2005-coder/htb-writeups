@@ -1,0 +1,75 @@
+# Conocimiento
+
+<!-- AUTO-GENERATED FILE. DO NOT EDIT MANUALLY. -->
+
+Este índice se genera a partir de las fichas versionadas del repositorio.
+
+| Ruta | Ficha |
+|---|---|
+| `ai/lm-context-injection` | [lm-context-injection](ai/lm-context-injection.md) |
+| `ai/prompt-injection` | [prompt-injection](ai/prompt-injection.md) |
+| `blockchain/smart-contracts` | [smart-contracts](blockchain/smart-contracts.md) |
+| `clickhouse/cheatsheet` | [cheatsheet](clickhouse/cheatsheet.md) |
+| `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
+| `cloud/s3-misconfiguration` | [s3-misconfiguration](cloud/s3-misconfiguration.md) |
+| `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.md) |
+| `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.md) |
+| `crypto/xor-and-encodings` | [xor-and-encodings](crypto/xor-and-encodings.md) |
+| `forensics/malware-redline` | [malware-redline](forensics/malware-redline.md) |
+| `forensics/moveit-cve-2023-34362` | [moveit-cve-2023-34362](forensics/moveit-cve-2023-34362.md) |
+| `forensics/pcap-triage` | [pcap-triage](forensics/pcap-triage.md) |
+| `forensics/windows-artifacts` | [windows-artifacts](forensics/windows-artifacts.md) |
+| `forensics/wsl2-dfir` | [wsl2-dfir](forensics/wsl2-dfir.md) |
+| `general/kerberos-clock` | [kerberos-clock](general/kerberos-clock.md) |
+| `general/lab-setup` | [lab-setup](general/lab-setup.md) |
+| `general/pivoting` | [pivoting](general/pivoting.md) |
+| `general/remote-access` | [remote-access](general/remote-access.md) |
+| `general/smb-enumeration` | [smb-enumeration](general/smb-enumeration.md) |
+| `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.md) |
+| `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.md) |
+| `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.md) |
+| `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
+| `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.md) |
+| `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.md) |
+| `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.md) |
+| `misc/unicode-invisible` | [unicode-invisible](misc/unicode-invisible.md) |
+| `mobile/apk-analysis` | [apk-analysis](mobile/apk-analysis.md) |
+| `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.md) |
+| `privesc/linux-sudo-suid` | [linux-sudo-suid](privesc/linux-sudo-suid.md) |
+| `privesc/systemd-timers` | [systemd-timers](privesc/systemd-timers.md) |
+| `pwn/canary-pie-rop` | [canary-pie-rop](pwn/canary-pie-rop.md) |
+| `pwn/format-strings` | [format-strings](pwn/format-strings.md) |
+| `pwn/null-byte-truncation` | [null-byte-truncation](pwn/null-byte-truncation.md) |
+| `pwn/partial-overwrite` | [partial-overwrite](pwn/partial-overwrite.md) |
+| `pwn/rop-stack` | [rop-stack](pwn/rop-stack.md) |
+| `README` | [README](README.md) |
+| `reversing/dotnet-dnspy` | [dotnet-dnspy](reversing/dotnet-dnspy.md) |
+| `reversing/prng-keyschedule` | [prng-keyschedule](reversing/prng-keyschedule.md) |
+| `stego/images-audio` | [images-audio](stego/images-audio.md) |
+| `threat-hunting/threat-hunting` | [threat-hunting](threat-hunting/threat-hunting.md) |
+| `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
+| `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.md) |
+| `web/cve-workflow` | [cve-workflow](web/cve-workflow.md) |
+| `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.md) |
+| `web/log4shell` | [log4shell](web/log4shell.md) |
+| `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.md) |
+| `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
+| `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
+| `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.md) |
+| `web/ssti` | [ssti](web/ssti.md) |
+| `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
+| `web/xxe` | [xxe](web/xxe.md) |
+| `windows/ad-acl-chains` | [ad-acl-chains](windows/ad-acl-chains.md) |
+| `windows/ad-recycle-bin` | [ad-recycle-bin](windows/ad-recycle-bin.md) |
+| `windows/adcs-esc1` | [adcs-esc1](windows/adcs-esc1.md) |
+| `windows/adcs-esc13` | [adcs-esc13](windows/adcs-esc13.md) |
+| `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.md) |
+| `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
+| `windows/jea` | [jea](windows/jea.md) |
+| `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
+| `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.md) |
+| `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.md) |
+| `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
+| `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.md) |
+| `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.md) |
+| `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.md) |

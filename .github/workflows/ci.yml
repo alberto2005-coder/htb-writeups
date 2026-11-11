@@ -1,0 +1,28 @@
+name: Repository quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Generate and validate catalogues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify generated indexes
+        run: python tools/generate_indexes.py --check
+      - name: Validate repository
+        run: python tools/repo_check.py
+      - name: Test local hooks
+        run: sh .githooks/test.sh
