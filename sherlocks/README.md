@@ -67,6 +67,11 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | EvtxECmd, MFTECmd | [Ver](liberty/README.md) |
 | Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | Chainsaw, MFTECmd | [Ver](jinkies/README.md) |
 | i-like-to | DFIR / MOVEit | Easy | Triaje KAPE de un servidor MOVEit: IIS logs, `$MFT`, EVTX, memoria y volcado SQL | MFTECmd, EvtxECmd, `strings` | [Ver](i-like-to/README.md) |
+| Pikaptcha | DFIR / Windows | Easy | PCAP y KAPE: captcha falso, portapapeles y PowerShell | Wireshark, regipy | [Ver](pikaptcha/README.md) |
+| Constellation | Threat Intelligence | Medium | PDF con instrucciones a un insider: metadatos y URLs con hora | exiftool, Unfurl | [Ver](constellation/README.md) |
+| Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` con PowerShell compilado y exfiltración SFTP | PEStudio, CyberChef, Ghidra | [Ver](heartbreaker-continuum/README.md) |
+| MisCloud | Cloud / GCP | Medium | Hook `post-receive`, cuenta de servicio y exfiltración desde un bucket | Wireshark, `jq` | [Ver](miscloud/README.md) |
+| Trent | DFIR / Red | Medium | PCAP de un router: CVE-2024-28353 y reverse shell | Wireshark, `tshark` | [Ver](trent/README.md) |
 
 ## Metodología común
 
