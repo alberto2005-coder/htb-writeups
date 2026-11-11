@@ -337,12 +337,33 @@ Notas reutilizables (cada una en español e inglés):
 
 ---
 
+## ✅ Calidad
+
+El hook `.githooks/pre-commit` ejecuta `private/scripts/verify.py` y `private/scripts/audit-indices.py` antes de cada commit. Bloquea el commit si hay enlaces rotos, filas que falten o sobren en los índices, cabeceras de idioma mal o tablas raíz descuadradas.
+
+Para activarlo en un clon nuevo:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+- Requiere **Python 3**.
+- Los dos scripts viven en `private/scripts/`, que está ignorado por git: cópialos en el clon o el hook bloqueará con `falta ...`.
+- Ejecución manual: `.githooks/pre-commit` (o cada script por separado).
+- Desactivarlo: `git config --unset core.hooksPath`.
+
+La configuración es local y no se versiona.
+
+---
+
 ## 📁 Estructura
 
 ```text
 htb-writeups/
 ├── README.md               # Índice (ES)
 ├── README.en.md            # Índice (EN)
+├── .githooks/
+│   └── pre-commit          # Hook de calidad (enlaces e índices)
 ├── templates/
 │   ├── machine-template.md      # Plantilla de máquinas ES
 │   ├── machine-template.en.md   # Plantilla de máquinas EN
