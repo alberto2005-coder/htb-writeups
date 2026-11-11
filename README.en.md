@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 56 Sherlocks, 56 challenges and 51 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 56 Sherlocks, 59 challenges and 51 knowledge topics, each in ES/EN.
 
 ---
 
@@ -188,6 +188,9 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 | Photon Lockdown | Hardware | Very Easy | **Retired** | SquashFS with the factory password in `config_default.xml` | [ES](challenges/Photon%20Lockdown/README.md) | [Ver](challenges/Photon%20Lockdown/README.en.md) |
 | Prometheon | AI/ML | Medium | **Retired** | Prompt injection across five chained levels | [ES](challenges/Prometheon/README.md) | [Ver](challenges/Prometheon/README.en.md) |
 | Forks and Knives | Pwn | Medium | **Retired** | Off-by-one, format string, `fork()` canary and `dup2` ROP | [ES](challenges/Forks%20and%20Knives/README.md) | [Ver](challenges/Forks%20and%20Knives/README.en.md) |
+| Evaluative | Coding | Very Easy | **Retired** | Degree-8 polynomial evaluation with Horner | [ES](challenges/Evaluative/README.md) | [Ver](challenges/Evaluative/README.en.md) |
+| Oddly Even | Coding | Very Easy | **Retired** | Parity with modulo 2, including zero and negatives | [ES](challenges/Oddly%20Even/README.md) | [Ver](challenges/Oddly%20Even/README.en.md) |
+| Threat Index | Coding | Very Easy | **Retired** | Weighted sum of 18 keywords over the string | [ES](challenges/Threat%20Index/README.md) | [Ver](challenges/Threat%20Index/README.en.md) |
 
 - Achievement: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Category index and conventions: [challenges/README.en.md](challenges/README.en.md) · [ES](challenges/README.md)
