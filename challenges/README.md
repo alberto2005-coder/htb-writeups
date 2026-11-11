@@ -72,6 +72,11 @@
 | Factory | ICS | Easy | Lógica de escalera: modo manual y `Write Single Coil` para vaciar el tanque | **Retired** | [Ver](Factory/README.md) | [EN](Factory/README.en.md) |
 | Shush Protocol | ICS | Very Easy | Función Modbus 102 propietaria: usuario y contraseña en claro en el flujo TCP | **Retired** | [Ver](Shush%20Protocol/README.md) | [EN](Shush%20Protocol/README.en.md) |
 | Sneak peek | ICS | Easy | Función `0x64`: reescribir el MD5 de la contraseña en el bloque de memoria | **Retired** | [Ver](Sneak%20peek/README.md) | [EN](Sneak%20peek/README.en.md) |
+| FlagCasino | Reversing | Very Easy | `srand` por carácter contra un array `check`: fuerza bruta de las 95 semillas imprimibles | **Retired** | [Ver](FlagCasino/README.md) | [EN](FlagCasino/README.en.md) |
+| Simple Encryptor | Reversing | Very Easy | Semilla de tiempo en los 4 primeros bytes; XOR con `rand()` y rotación a la izquierda | **Retired** | [Ver](Simple%20Encryptor/README.md) | [EN](Simple%20Encryptor/README.en.md) |
+| Shattered Tablet | Reversing | Very Easy | 40 comparaciones por índice en Ghidra: reasignar el buffer a `char[64]` | **Retired** | [Ver](Shattered%20Tablet/README.md) | [EN](Shattered%20Tablet/README.en.md) |
+| Tear or Dear | Reversing | Medium | .NET WinForms con dnSpy de 32 bits: breakpoint en la comparación de credenciales | **Retired** | [Ver](Tear%20or%20Dear/README.md) | [EN](Tear%20or%20Dear/README.en.md) |
+| Snakecode | Reversing | Easy | `.pyc` de Python 2.7 con `marshal` + zlib; la manzana del Snake escribe la flag | **Retired** | [Ver](Snakecode/README.md) | [EN](Snakecode/README.en.md) |
 
 ## Categorías
 
