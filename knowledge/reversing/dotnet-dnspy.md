@@ -48,7 +48,7 @@ Nombres aleatorios, cadenas cifradas, flujo plano y llamadas encadenadas son rui
 
 ## 6. Límites
 
-- Un assembly firmado o con *anti-tamper* puede negarse a ejecutarse bajo depurador; en un CTF, parchear la comprobación es aceptable, en malware no.
+- Un assembly con *anti-tamper* o un protector comercial puede negarse a ejecutarse bajo depurador; la firma *strong-name* por sí sola no impide depurar. En un CTF, parchear la comprobación es aceptable; en malware, no.
 - `NativeAOT` y `ReadyToRun` ya no son CIL puro: parte del código es nativo y requiere Ghidra/IDA.
 - Los recursos incrustados (`Resources.resx`) pueden contener la clave; revísalos antes de concluir.
 

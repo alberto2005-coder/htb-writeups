@@ -28,12 +28,14 @@ Una alerta de baja confianza, un SOC recién desplegado o un incidente con captu
 | `Security.evtx` (4624/4625/4688) | logons, tipo de logon, procesos | EvtxECmd, Hayabusa |
 | Prefetch | ejecución y primera/última vez | PECmd |
 | Amcache | SHA1 de ejecutables y rutas | AmcacheParser |
-| `Windows.edb` | contenido indexado de documentos | SIDR |
+| `Windows.edb` | contenido indexado de documentos | SIDR (Search Index DB Reporter) |
 | `CryptnetUrlCache` | URLs y contenido descargado por `certutil` | revisión directa |
 | `PSReadLine` | comandos escritos en PowerShell | `ConsoleHost_history.txt` |
 | `NTUser.dat` → UserAssist | programas usados y tiempo de foco | Registry Explorer |
 | `UsrClass.dat` → shellbags | carpetas visitadas | ShellBags Explorer |
 | PCAP | C2, exfiltración, credenciales en claro | Wireshark, `tshark` |
+
+En Windows 11 el índice pasa a SQLite (`Windows.db`); SIDR parsea ambos formatos (ESE y SQLite).
 
 ## 4. Órdenes útiles
 

@@ -48,7 +48,7 @@ Random names, encrypted strings, flattened flow and chained calls are noise. Bef
 
 ## 6. Limits
 
-- A signed assembly or one with anti-tamper may refuse to run under a debugger; in a CTF, patching the check is fine, in malware it is not.
+- An assembly with anti-tamper or a commercial protector may refuse to run under a debugger; a strong-name signature alone does not prevent debugging. In a CTF, patching the check is fine; in malware, it is not.
 - `NativeAOT` and `ReadyToRun` are no longer pure CIL: part of the code is native and needs Ghidra/IDA.
 - Embedded resources (`Resources.resx`) may hold the key; check them before concluding.
 

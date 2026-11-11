@@ -75,4 +75,4 @@ The model completes `os.system(cmd)`. The endpoint's API key usually lives in th
 - **Encrypting the key but leaving it in the same file**: traversal hands it over anyway.
 - **Only trying "malicious" prompts**: the flaw is in the context, not the sentence.
 
-MITRE ATLAS: AML.T0051 (LLM prompt injection). References: OWASP Top 10 for LLM (LLM01, LLM05), CWE-22 and the `languagemodels` documentation.
+MITRE ATLAS: AML.T0051 (LLM prompt injection). References: OWASP Top 10 for LLM (LLM01; LLM05 in the 2025 edition, LLM02 in 2023), CWE-22 and the `languagemodels` documentation.

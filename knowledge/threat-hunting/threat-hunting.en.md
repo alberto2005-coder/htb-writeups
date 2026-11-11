@@ -28,12 +28,14 @@ A low-confidence alert, a freshly deployed SOC, or an incident with an incomplet
 | `Security.evtx` (4624/4625/4688) | logons, logon type, processes | EvtxECmd, Hayabusa |
 | Prefetch | execution and first/last run | PECmd |
 | Amcache | executable SHA1 and paths | AmcacheParser |
-| `Windows.edb` | indexed document content | SIDR |
+| `Windows.edb` | indexed document content | SIDR (Search Index DB Reporter) |
 | `CryptnetUrlCache` | URLs and content fetched by `certutil` | direct review |
 | `PSReadLine` | commands typed in PowerShell | `ConsoleHost_history.txt` |
 | `NTUser.dat` → UserAssist | programs used and focus time | Registry Explorer |
 | `UsrClass.dat` → shellbags | folders visited | ShellBags Explorer |
 | PCAP | C2, exfiltration, cleartext credentials | Wireshark, `tshark` |
+
+Windows 11 moved the index to SQLite (`Windows.db`); SIDR parses both formats (ESE and SQLite).
 
 ## 4. Useful commands
 

