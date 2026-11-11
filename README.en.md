@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 56 Sherlocks, 64 challenges and 52 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 57 Sherlocks, 64 challenges and 53 knowledge topics, each in ES/EN.
 
 ---
 
@@ -219,6 +219,7 @@ Defensive investigation scenarios: nothing is attacked, you answer questions abo
 | Constellation | Threat Intelligence | Medium | Insider instructions in a PDF: metadata and timestamped URLs | [ES](sherlocks/constellation/README.md) | [Ver](sherlocks/constellation/README.en.md) |
 | Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` with compiled PowerShell and SFTP exfiltration | [ES](sherlocks/heartbreaker-continuum/README.md) | [Ver](sherlocks/heartbreaker-continuum/README.en.md) |
 | MisCloud | Cloud / GCP | Medium | Gitea hook, service account and bucket: capture plus audit logs | [ES](sherlocks/miscloud/README.md) | [Ver](sherlocks/miscloud/README.en.md) |
+| Heartbreaker-Denouement | Cloud / AWS | Medium | SSRF to IMDS, role credentials and shared RDS snapshots: CloudTrail as JSONL | [ES](sherlocks/heartbreaker-denouement/README.md) | [Ver](sherlocks/heartbreaker-denouement/README.en.md) |
 | Trent | DFIR / Network | Medium | Router PCAP: CVE-2024-28353 and a reverse shell to the C2 | [ES](sherlocks/trent/README.md) | [Ver](sherlocks/trent/README.en.md) |
 
 - Index, methodology and pending notes: [sherlocks/README.en.md](sherlocks/README.en.md) · [ES](sherlocks/README.md)
@@ -279,6 +280,7 @@ Reusable notes (each available in Spanish and English):
 - [MOVEit CVE-2023-34362: exploitation and DFIR artifacts](knowledge/forensics/moveit-cve-2023-34362.en.md) · [ES](knowledge/forensics/moveit-cve-2023-34362.md)
 - [`logrotate` race with a writable directory](knowledge/linux/logrotate-race.en.md) · [ES](knowledge/linux/logrotate-race.md)
 - [Modbus/TCP in captures: registers, functions and extraction](knowledge/ics/modbus-pcap.en.md) · [ES](knowledge/ics/modbus-pcap.md)
+- [Entra ID and Sentinel: sign-ins, audit and KQL](knowledge/cloud/entra-id-sentinel.en.md) · [ES](knowledge/cloud/entra-id-sentinel.md)
 - [TeamViewer 7 and CVE-2019-18988: shared AES key](knowledge/windows/teamviewer-cve-2019-18988.en.md) · [ES](knowledge/windows/teamviewer-cve-2019-18988.md)
 - [Prompt injection: getting what the model should not say](knowledge/ai/prompt-injection.en.md) · [ES](knowledge/ai/prompt-injection.md)
 - [Smart contracts: state, payments and typical surface](knowledge/blockchain/smart-contracts.en.md) · [ES](knowledge/blockchain/smart-contracts.md)
