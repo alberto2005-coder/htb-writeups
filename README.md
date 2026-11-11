@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 116 máquinas, 57 Sherlocks, 64 retos y 53 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 57 Sherlocks, 69 retos y 54 temas de conocimiento, cada uno en ES/EN.
 
 ---
 
@@ -196,6 +196,11 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 | Factory | ICS | Easy | **Retired** | Lógica de escalera: modo manual y `Write Single Coil` para vaciar el tanque | [Ver](challenges/Factory/README.md) | [EN](challenges/Factory/README.en.md) |
 | Shush Protocol | ICS | Very Easy | **Retired** | Función Modbus 102 propietaria: credenciales en claro en el flujo TCP | [Ver](challenges/Shush%20Protocol/README.md) | [EN](challenges/Shush%20Protocol/README.en.md) |
 | Sneak peek | ICS | Easy | **Retired** | Función `0x64`: sobrescribir el MD5 de la contraseña en el bloque de memoria | [Ver](challenges/Sneak%20peek/README.md) | [EN](challenges/Sneak%20peek/README.en.md) |
+| FlagCasino | Reversing | Very Easy | **Retired** | `srand` sembrado con cada carácter y comparado contra un array de 30 enteros | [Ver](challenges/FlagCasino/README.md) | [EN](challenges/FlagCasino/README.en.md) |
+| Simple Encryptor | Reversing | Very Easy | **Retired** | Semilla de `time()` en los 4 primeros bytes; XOR y `ROL` con `rand()` | [Ver](challenges/Simple%20Encryptor/README.md) | [EN](challenges/Simple%20Encryptor/README.en.md) |
+| Shattered Tablet | Reversing | Very Easy | **Retired** | 40 comparaciones `data[i]` mezcladas; reconstruir ordenando por índice | [Ver](challenges/Shattered%20Tablet/README.md) | [EN](challenges/Shattered%20Tablet/README.en.md) |
+| Tear or Dear | Reversing | Medium | **Retired** | .NET WinForms: dnSpy de 32 bits y breakpoint en `this.username == this.o` | [Ver](challenges/Tear%20or%20Dear/README.md) | [EN](challenges/Tear%20or%20Dear/README.en.md) |
+| Snakecode | Reversing | Easy | **Retired** | `.pyc` de Python 2.7 con `marshal`; la flag aparece en la manzana del juego | [Ver](challenges/Snakecode/README.md) | [EN](challenges/Snakecode/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -284,6 +289,7 @@ Notas reutilizables (cada una en español e inglés):
 - [TeamViewer 7 y CVE-2019-18988: clave AES compartida](knowledge/windows/teamviewer-cve-2019-18988.md) · [EN](knowledge/windows/teamviewer-cve-2019-18988.en.md)
 - [Inyección de prompt: sacar lo que el modelo no debe decir](knowledge/ai/prompt-injection.md) · [EN](knowledge/ai/prompt-injection.en.md)
 - [Contratos inteligentes: estado, pagos y superficies típicas](knowledge/blockchain/smart-contracts.md) · [EN](knowledge/blockchain/smart-contracts.en.md)
+- [PRNG, semillas y esquemas de clave](knowledge/reversing/prng-keyschedule.md) · [EN](knowledge/reversing/prng-keyschedule.en.md)
 
 ---
 

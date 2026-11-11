@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 57 Sherlocks, 64 challenges and 53 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 57 Sherlocks, 69 challenges and 54 knowledge topics, each in ES/EN.
 
 ---
 
@@ -196,6 +196,11 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 | Factory | ICS | Easy | **Retired** | Ladder logic: manual mode and `Write Single Coil` to drain the tank | [ES](challenges/Factory/README.md) | [Ver](challenges/Factory/README.en.md) |
 | Shush Protocol | ICS | Very Easy | **Retired** | Proprietary Modbus function 102: credentials in clear text in the TCP stream | [ES](challenges/Shush%20Protocol/README.md) | [Ver](challenges/Shush%20Protocol/README.en.md) |
 | Sneak peek | ICS | Easy | **Retired** | Function `0x64`: overwrite the password MD5 in the memory block | [ES](challenges/Sneak%20peek/README.md) | [Ver](challenges/Sneak%20peek/README.en.md) |
+| FlagCasino | Reversing | Very Easy | **Retired** | `srand` seeded with each character against a 30-integer array | [ES](challenges/FlagCasino/README.md) | [Ver](challenges/FlagCasino/README.en.md) |
+| Simple Encryptor | Reversing | Very Easy | **Retired** | `time()` seed in the first 4 bytes; XOR and `ROL` with `rand()` | [ES](challenges/Simple%20Encryptor/README.md) | [Ver](challenges/Simple%20Encryptor/README.en.md) |
+| Shattered Tablet | Reversing | Very Easy | **Retired** | 40 shuffled `data[i]` comparisons; rebuild by sorting on the index | [ES](challenges/Shattered%20Tablet/README.md) | [Ver](challenges/Shattered%20Tablet/README.en.md) |
+| Tear or Dear | Reversing | Medium | **Retired** | .NET WinForms: 32-bit dnSpy and a breakpoint on `this.username == this.o` | [ES](challenges/Tear%20or%20Dear/README.md) | [Ver](challenges/Tear%20or%20Dear/README.en.md) |
+| Snakecode | Reversing | Easy | **Retired** | Python 2.7 `.pyc` with `marshal`; the flag shows in the game apple | [ES](challenges/Snakecode/README.md) | [Ver](challenges/Snakecode/README.en.md) |
 
 - Achievement: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Category index and conventions: [challenges/README.en.md](challenges/README.en.md) · [ES](challenges/README.md)
@@ -284,6 +289,7 @@ Reusable notes (each available in Spanish and English):
 - [TeamViewer 7 and CVE-2019-18988: shared AES key](knowledge/windows/teamviewer-cve-2019-18988.en.md) · [ES](knowledge/windows/teamviewer-cve-2019-18988.md)
 - [Prompt injection: getting what the model should not say](knowledge/ai/prompt-injection.en.md) · [ES](knowledge/ai/prompt-injection.md)
 - [Smart contracts: state, payments and typical surface](knowledge/blockchain/smart-contracts.en.md) · [ES](knowledge/blockchain/smart-contracts.md)
+- [PRNG, seeds and key schedules](knowledge/reversing/prng-keyschedule.en.md) · [ES](knowledge/reversing/prng-keyschedule.md)
 
 ---
 

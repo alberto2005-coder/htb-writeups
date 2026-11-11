@@ -72,6 +72,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Factory | ICS | Easy | Ladder logic: manual mode and `Write Single Coil` to drain the tank | **Retired** | [ES](Factory/README.md) | [Ver](Factory/README.en.md) |
 | Shush Protocol | ICS | Very Easy | Proprietary Modbus function 102: user and password in clear text in the TCP stream | **Retired** | [ES](Shush%20Protocol/README.md) | [Ver](Shush%20Protocol/README.en.md) |
 | Sneak peek | ICS | Easy | Function `0x64`: overwrite the password MD5 in the memory block | **Retired** | [ES](Sneak%20peek/README.md) | [Ver](Sneak%20peek/README.en.md) |
+| FlagCasino | Reversing | Very Easy | `srand` per character against a `check` array: brute force over the 95 printable seeds | **Retired** | [ES](FlagCasino/README.md) | [Ver](FlagCasino/README.en.md) |
+| Simple Encryptor | Reversing | Very Easy | Time seed in the first 4 bytes; XOR with `rand()` and a left rotation | **Retired** | [ES](Simple%20Encryptor/README.md) | [Ver](Simple%20Encryptor/README.en.md) |
+| Shattered Tablet | Reversing | Very Easy | 40 per-index comparisons in Ghidra: retype the buffer as `char[64]` | **Retired** | [ES](Shattered%20Tablet/README.md) | [Ver](Shattered%20Tablet/README.en.md) |
+| Tear or Dear | Reversing | Medium | .NET WinForms with 32-bit dnSpy: breakpoint on the credential comparison | **Retired** | [ES](Tear%20or%20Dear/README.md) | [Ver](Tear%20or%20Dear/README.en.md) |
+| Snakecode | Reversing | Easy | Python 2.7 `.pyc` with `marshal` + zlib; the Snake apple spells the flag | **Retired** | [ES](Snakecode/README.md) | [Ver](Snakecode/README.en.md) |
 
 ## Categories
 
