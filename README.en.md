@@ -6,7 +6,7 @@ Personal repository of **Hack The Box** writeups, notes and methodology.
 
 > **Status:** work in progress. **Active** machines are not published until HTB retires them.
 >
-> **Numbers:** 116 machines, 56 Sherlocks, 59 challenges and 51 knowledge topics, each in ES/EN.
+> **Numbers:** 116 machines, 56 Sherlocks, 62 challenges and 52 knowledge topics, each in ES/EN.
 
 ---
 
@@ -191,6 +191,9 @@ Solved challenges. There is no privilege escalation: the goal is the challenge f
 | Evaluative | Coding | Very Easy | **Retired** | Degree-8 polynomial evaluation with Horner | [ES](challenges/Evaluative/README.md) | [Ver](challenges/Evaluative/README.en.md) |
 | Oddly Even | Coding | Very Easy | **Retired** | Parity with modulo 2, including zero and negatives | [ES](challenges/Oddly%20Even/README.md) | [Ver](challenges/Oddly%20Even/README.en.md) |
 | Threat Index | Coding | Very Easy | **Retired** | Weighted sum of 18 keywords over the string | [ES](challenges/Threat%20Index/README.md) | [Ver](challenges/Threat%20Index/README.en.md) |
+| Watch Tower | ICS | Very Easy | **Retired** | Modbus/TCP PCAP: the flag lives in the function 16 `reference numbers` | [ES](challenges/Watch%20Tower/README.md) | [Ver](challenges/Watch%20Tower/README.en.md) |
+| Intrusion | ICS | Easy | **Retired** | Modbus plant: holding registers with `unit id` 52, automated reads | [ES](challenges/Intrusion/README.md) | [Ver](challenges/Intrusion/README.en.md) |
+| Factory | ICS | Easy | **Retired** | Ladder logic: manual mode and `Write Single Coil` to drain the tank | [ES](challenges/Factory/README.md) | [Ver](challenges/Factory/README.en.md) |
 
 - Achievement: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Category index and conventions: [challenges/README.en.md](challenges/README.en.md) · [ES](challenges/README.md)
@@ -273,6 +276,7 @@ Reusable notes (each available in Spanish and English):
 - [AD Recycle Bin: deleted objects as a credential source](knowledge/windows/ad-recycle-bin.en.md) · [ES](knowledge/windows/ad-recycle-bin.md)
 - [MOVEit CVE-2023-34362: exploitation and DFIR artifacts](knowledge/forensics/moveit-cve-2023-34362.en.md) · [ES](knowledge/forensics/moveit-cve-2023-34362.md)
 - [`logrotate` race with a writable directory](knowledge/linux/logrotate-race.en.md) · [ES](knowledge/linux/logrotate-race.md)
+- [Modbus/TCP in captures: registers, functions and extraction](knowledge/ics/modbus-pcap.en.md) · [ES](knowledge/ics/modbus-pcap.md)
 - [TeamViewer 7 and CVE-2019-18988: shared AES key](knowledge/windows/teamviewer-cve-2019-18988.en.md) · [ES](knowledge/windows/teamviewer-cve-2019-18988.md)
 - [Prompt injection: getting what the model should not say](knowledge/ai/prompt-injection.en.md) · [ES](knowledge/ai/prompt-injection.md)
 - [Smart contracts: state, payments and typical surface](knowledge/blockchain/smart-contracts.en.md) · [ES](knowledge/blockchain/smart-contracts.md)
