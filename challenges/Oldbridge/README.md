@@ -1,7 +1,7 @@
 ---
 challenge: Oldbridge
 category: Challenge
-type: pwn
+type: Pwn
 os: Linux
 difficulty: Medium
 platform: Hack The Box

@@ -1,7 +1,7 @@
 ---
 challenge: Factory
 category: Challenge
-type: ics
+type: ICS
 os: Linux
 difficulty: Easy
 platform: Hack The Box

@@ -1,7 +1,7 @@
 ---
 challenge: Reg
 category: Challenge
-type: pwn
+type: Pwn
 os: Linux
 difficulty: Easy
 platform: Hack The Box

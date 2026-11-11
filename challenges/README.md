@@ -54,7 +54,7 @@
 | Ancient Encodings | Crypto | Very Easy | Base64 dentro de hexadecimal, sin clave | **Retired** | [Ver](Ancient%20Encodings/README.md) | [EN](Ancient%20Encodings/README.en.md) |
 | SpookyPass | Reversing | Very Easy | ELF con la contraseña y la flag en `.rodata`; la flag en UTF-32 (`strings -e l`) | **Retired** | [Ver](SpookyPass/README.md) | [EN](SpookyPass/README.en.md) |
 | KORP Terminal | Web | Very Easy | SQLi con error visible y hash bcrypt crackeado | **Retired** | [Ver](KORP%20Terminal/README.md) | [EN](KORP%20Terminal/README.en.md) |
-| TimeKORP | Web | Very Easy | Inyección de comandos en `date` vía `format`: `%H:%M:%S' |cat /flag #` | **Retired** | [Ver](TimeKORP/README.md) | [EN](TimeKORP/README.en.md) |
+| TimeKORP | Web | Very Easy | Inyección de comandos en `date` vía `format`: `%H:%M:%S' \|cat /flag #` | **Retired** | [Ver](TimeKORP/README.md) | [EN](TimeKORP/README.en.md) |
 | Behind the Scenes | Reversing | Very Easy | `UD2` como anti-descompilación y cuatro `strncmp` en GDB | **Retired** | [Ver](Behind%20the%20Scenes/README.md) | [EN](Behind%20the%20Scenes/README.en.md) |
 | OnlyHacks | Web | Very Easy | IDOR en `/chat?rid=3`: el flag está en el chat de otro usuario (el XSS al bot es alternativa) | **Retired** | [Ver](OnlyHacks/README.md) | [EN](OnlyHacks/README.en.md) |
 | Perfect Synchronization | Crypto | Easy | Sustitución por carácter (`char + 15`): análisis de frecuencias, no AES-ECB | **Retired** | [Ver](Perfect%20Synchronization/README.md) | [EN](Perfect%20Synchronization/README.en.md) |

@@ -1,7 +1,7 @@
 ---
 challenge: Prometheon
 category: Challenge
-type: ai
+type: AI/ML
 os: Linux
 difficulty: Medium
 platform: Hack The Box

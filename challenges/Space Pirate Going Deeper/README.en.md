@@ -1,7 +1,7 @@
 ---
 challenge: "Space Pirate: Going Deeper"
 category: Challenge
-type: pwn
+type: Pwn
 os: Linux
 difficulty: Very Easy
 platform: Hack The Box

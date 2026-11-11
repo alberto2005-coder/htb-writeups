@@ -6,7 +6,7 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 
 > **Estado:** borradores en construcción. Las máquinas **activas** no se publican hasta que HTB las retire.
 >
-> **Cifras:** 121 máquinas, 60 Sherlocks, 81 retos y 66 temas de conocimiento, cada uno en ES/EN.
+> **Cifras:** 116 máquinas, 60 Sherlocks, 81 retos y 66 temas de conocimiento (257 fichas), cada uno en ES/EN.
 
 ---
 
@@ -69,11 +69,6 @@ Repositorio personal de writeups, notas y metodología de **Hack The Box**.
 | Base | Linux | Very Easy | Starting Point | **Available** | `strcmp` con arrays, subida sin filtro y `sudo find` | [Ver](machines/starting-point/base/README.md) | [EN](machines/starting-point/base/README.en.md) |
 | Cap | Linux | Easy | Machines | **Retired** | IDOR, análisis de pcap, `cap_setuid` | [Ver](machines/linux/cap/README.md) | [EN](machines/linux/cap/README.en.md) |
 | MakeSense | Linux | Medium | Season 11 | **Retired** | XSS al bot admin, AES-GCM forjado, plugin malicioso, OCR como root | [Ver](machines/linux/makesense/README.md) | [EN](machines/linux/makesense/README.en.md) |
-| DutyBound | Linux | Medium | Season 12 | **Active** | BCBP, SQLi en PostgreSQL, `COPY TO PROGRAM`, X11/XTEST, path unit con `eval` | [Borrador](machines/active/dutybound/README.md) | [EN](machines/active/dutybound/README.en.md) |
-| Stream | Linux | Medium | Season 12 | **Active** | Heapdump, XXE, ClickHouse, Kopia, timer root | [Borrador](machines/active/stream/README.md) | [EN](machines/active/stream/README.en.md) |
-| Layover | Linux | Medium | Season 12 | **Active** | Credenciales WiFi en texto claro, utilidades del CP de Craft (backup de BD + phpinfo), descifrado Yii, CUPS 2.4.16 CVE-2026-34990 | [Borrador](machines/active/layover/README.md) | [EN](machines/active/layover/README.en.md) |
-| Connected | Linux | Easy | Season 11 | **Active** | FreePBX 16: SQLi apilada CVE-2025-57819 + path traversal CVE-2025-61678 hasta webshell, e incron con `init.conf` sourced como root | [Borrador](machines/active/connected/README.md) | [EN](machines/active/connected/README.en.md) |
-| Unclaimed | Windows | Medium | Season 12 | **Active** | Chatbot con SQL: `IMPERSONATE` a sysadmin, `xp_cmdshell`, descifrado DPAPI de un credential, y `SeBackupPrivilege` con `robocopy /B` | [Borrador](machines/active/unclaimed/README.md) | [EN](machines/active/unclaimed/README.en.md) |
 | Armageddon | Linux | Easy | Machines | **Retired** (ref.) | Drupal 7.56, Drupalgeddon2, hook de snap con `sudo` | [Ver](machines/linux/armageddon/README.md) | [EN](machines/linux/armageddon/README.en.md) |
 | Bashed | Linux | Easy | Machines | **Retired** (ref.) | webshell `phpbash`, `sudo -u scriptmanager`, cron de root | [Ver](machines/linux/bashed/README.md) | [EN](machines/linux/bashed/README.en.md) |
 | Bastion | Windows | Easy | Machines | **Retired** (ref.) | backup SMB con VHDX, SAM/SYSTEM, mRemoteNG | [Ver](machines/windows/bastion/README.md) | [EN](machines/windows/bastion/README.en.md) |
@@ -178,46 +173,87 @@ Retos resueltos. No hay escalada: el objetivo es la flag del reto, así que el w
 
 | Reto | Tipo | Dificultad | Estado | Técnicas clave | ES | EN |
 |---|---|---|---|---|---|---|
-| Marshal in the Middle | Forensics | Medium | **Retired** | Logs de Zeek, TLS con `secrets.log`, exfiltración HTTP y frames 5725/7039/9887 | [Ver](challenges/Marshal%20in%20the%20Middle/README.md) | [EN](challenges/Marshal%20in%20the%20Middle/README.en.md) |
-| Lernaean | Web | Easy | **Retired** | Hydra sobre el login y bypass del redirect JavaScript con `curl` | [Ver](challenges/Lernaean/README.md) | [EN](challenges/Lernaean/README.en.md) |
-| Kryptor | Pwn | Insane | **Retired** | DirtyPipe (CVE-2022-0847) en kernel 5.9.10: busybox parcheado en page cache y `modprobe` como root | [Ver](challenges/Kryptor/README.md) | [EN](challenges/Kryptor/README.en.md) |
-| Oldbridge | Pwn | Medium | **Retired** | BOF con XOR `0xd`: canario heredado por `fork`, base de PIE y stack pivot a ROP | [Ver](challenges/Oldbridge/README.md) | [EN](challenges/Oldbridge/README.en.md) |
-| Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string: `%7$hn` escribe `0x1337` en la variable que abre la puerta | [Ver](challenges/Space%20Pirate%20Entrypoint/README.md) | [EN](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
-| Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | `read` de 57 en un búfer de 40; sobrescritura parcial del retorno a `0x400b01` | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [EN](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
-| Vault-breaker | Pwn | Very Easy | **Retired** | Clave generada de 31 a 0 bytes: `strcpy` la vacía y el XOR revela la flag | [Ver](challenges/Vault-breaker/README.md) | [EN](challenges/Vault-breaker/README.en.md) |
-| Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress` → use-after-free (CVE-2026-109618/109619), leak de ASLR por `Set-Cookie` y `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
-| Emdee five for life | Misc | Very Easy | **Retired** | MD5 contra reloj: sesión HTTP, regex y automatización | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
-| Phonebook | Web | Easy | **Retired** | Inyección LDAP en login y buscador (`*` como comodín) | [Ver](challenges/Phonebook/README.md) | [EN](challenges/Phonebook/README.en.md) |
-| Under Construction | Web | Easy | **Retired** | Confusión de algoritmos JWT: firmar HS256 con la clave pública | [Ver](challenges/Under%20Construction/README.md) | [EN](challenges/Under%20Construction/README.en.md) |
-| Gunship | Web | Easy | **Retired** | Prototype pollution en `flat@5.0.0` y AST injection en el motor de plantillas (variantes Handlebars y Pug) | [Ver](challenges/Gunship/README.md) | [EN](challenges/Gunship/README.en.md) |
-| baby interdimensional internet | Web | Easy | **Retired** | `exec()` de Python 2 sobre `ingredient`/`measurements`, sin filtros ni límites | [Ver](challenges/baby%20interdimensional%20internet/README.md) | [EN](challenges/baby%20interdimensional%20internet/README.en.md) |
-| Interdimensional Internet | Web | Medium | **Retired** | WAF de `[ ( _ .` evadido con `\x5b\x28\x5f\x2e` y exfiltración por `flask.session` | [Ver](challenges/Interdimensional%20Internet/README.md) | [EN](challenges/Interdimensional%20Internet/README.en.md) |
-| Fake Boost | Forensics | Easy | **Retired** | PowerShell invertido + base64, AES-CBC y exfiltración HTTP a un `POST` | [Ver](challenges/Fake%20Boost/README.md) | [EN](challenges/Fake%20Boost/README.en.md) |
+| Marshal in the Middle | Forensics | Medium | **Retired** | Logs de Zeek, descifrado TLS y exfiltración HTTP | [Ver](challenges/Marshal%20in%20the%20Middle/README.md) | [EN](challenges/Marshal%20in%20the%20Middle/README.en.md) |
+| Lernaean | Web | Easy | **Retired** | Hydra, contraseña débil y redirect JavaScript evitable | [Ver](challenges/Lernaean/README.md) | [EN](challenges/Lernaean/README.en.md) |
+| Kryptor | Pwn | Insane | **Retired** | Kernel 5.9.10: DirtyPipe (CVE-2022-0847) sobre la entry de busybox y disparo por `modprobe` | [Ver](challenges/Kryptor/README.md) | [EN](challenges/Kryptor/README.en.md) |
+| Oldbridge | Pwn | Medium | **Retired** | Canario por fuerza bruta (`fork`), fuga de PIE y pivot `leave; ret` a ret2libc | [Ver](challenges/Oldbridge/README.md) | [EN](challenges/Oldbridge/README.en.md) |
+| Space Pirate: Entrypoint | Pwn | Very Easy | **Retired** | Format string en `printf(local_38)`: `%7$hn` convierte `0xdeadbeef` en `0xdead1337` | [Ver](challenges/Space%20Pirate%20Entrypoint/README.md) | [EN](challenges/Space%20Pirate%20Entrypoint/README.en.md) |
+| Space Pirate: Going Deeper | Pwn | Very Easy | **Retired** | Desbordamiento de 1 byte sin PIE: 56 de relleno y `\x01` al retorno | [Ver](challenges/Space%20Pirate%20Going%20Deeper/README.md) | [EN](challenges/Space%20Pirate%20Going%20Deeper/README.en.md) |
+| Vault-breaker | Pwn | Very Easy | **Retired** | `strcpy` trunca la clave en el primer nulo; longitudes 31→0 dejan el XOR a cero | [Ver](challenges/Vault-breaker/README.md) | [EN](challenges/Vault-breaker/README.en.md) |
+| ropme | Pwn | Hard | **Retired** | Ret2libc con leak de `puts@got`: base de libc y `system("/bin/sh")` | [Ver](challenges/ropme/README.md) | [EN](challenges/ropme/README.en.md) |
+| Easy Phish | OSINT | Very Easy | **Retired** | SPF con `?all` y DMARC `p=none` en el dominio legítimo | [Ver](challenges/Easy%20Phish/README.md) | [EN](challenges/Easy%20Phish/README.en.md) |
+| Hidden in Colors | Stego | Hard | **Retired** | Colores hex del PNG: el dato está en el valor de color, no en el LSB | [Ver](challenges/Hidden%20in%20Colors/README.md) | [EN](challenges/Hidden%20in%20Colors/README.en.md) |
+| Bare Metal | Hardware | Easy | **Retired** | UART a 3.3 V, U-Boot y extracción del rootfs con `binwalk` | [Ver](challenges/Bare%20Metal/README.md) | [EN](challenges/Bare%20Metal/README.en.md) |
+| Cryptohorrific | Mobile | Easy | **Retired** | App iOS: blob base64 en el plist y clave AES en el binario Mach-O | [Ver](challenges/Cryptohorrific/README.md) | [EN](challenges/Cryptohorrific/README.en.md) |
+| Dark Embargo | Web / Pwn | Medium | **Retired** | PHP 8.4.26: OOM en `session.upload_progress`, use-after-free, leak de ASLR por `Set-Cookie`, `pDestructor` → `system()` | [Ver](challenges/Dark%20Embargo/README.md) | [EN](challenges/Dark%20Embargo/README.en.md) |
+| Emdee five for life | Misc | Very Easy | **Retired** | MD5 contra reloj: sesión, regex y cálculo del hash en un script | [Ver](challenges/Emdee%20five%20for%20life/README.md) | [EN](challenges/Emdee%20five%20for%20life/README.en.md) |
+| Phonebook | Web | Easy | **Retired** | Inyección LDAP ciega: el flag es la contraseña de `reese`, no el bypass `*` | [Ver](challenges/Phonebook/README.md) | [EN](challenges/Phonebook/README.en.md) |
+| Under Construction | Web | Easy | **Retired** | JWT `alg` confusion RS256→HS256 firmando con `/public.pem` | [Ver](challenges/Under%20Construction/README.md) | [EN](challenges/Under%20Construction/README.en.md) |
+| Toxic | Web | Very Easy | **Retired** | Deserialización PHP en la cookie → `PageModel::__destruct` → LFI + log poisoning | [Ver](challenges/Toxic/README.md) | [EN](challenges/Toxic/README.en.md) |
+| LoveTok | Web | Easy | **Retired** | `eval` sobre el formato de fecha; `addslashes` no frena `${}` | [Ver](challenges/LoveTok/README.md) | [EN](challenges/LoveTok/README.en.md) |
+| Templated | Web | Easy | **Retired** | SSTI de Jinja2 en `/<nombre>`: `{{7*7}}` → 49 y RCE por `__globals__` | [Ver](challenges/Templated/README.md) | [EN](challenges/Templated/README.en.md) |
+| baby ninja jinja | Web | Easy | **Retired** | SSTI con blacklist: `{%print%}`, filtro `attr` y `replace` | [Ver](challenges/baby%20ninja%20jinja/README.md) | [EN](challenges/baby%20ninja%20jinja/README.en.md) |
+| Spookifier | Web | Very Easy | **Retired** | SSTI de Mako vía `font4`: `${self.module.cache.util.os.popen(...).read()}` | [Ver](challenges/Spookifier/README.md) | [EN](challenges/Spookifier/README.en.md) |
+| Flag Command | Web | Very Easy | **Retired** | Bundle JS con endpoints ocultos; comando secreto por API | [Ver](challenges/Flag%20Command/README.md) | [EN](challenges/Flag%20Command/README.en.md) |
+| Labyrinth Linguist | Web | Easy | **Retired** | SSTI de Velocity: `#set` y reflexión de Java | [Ver](challenges/Labyrinth%20Linguist/README.md) | [EN](challenges/Labyrinth%20Linguist/README.en.md) |
+| breaking grad | Web | Easy | **Retired** | Contaminación de prototipos en Node hasta `child_process` | [Ver](challenges/breaking%20grad/README.md) | [EN](challenges/breaking%20grad/README.en.md) |
+| Weather App | Web | Easy | **Retired** | SSRF con *response splitting* y SQLi en el servicio interno hasta la toma de la cuenta admin | [Ver](challenges/Weather%20App/README.md) | [EN](challenges/Weather%20App/README.en.md) |
+| Freelancer | Web | Easy | **Retired** | SQLi en `portfolio.php?id=` y panel `/admin` hallado por fuzzing | [Ver](challenges/Freelancer/README.md) | [EN](challenges/Freelancer/README.en.md) |
+| Passman | Web | Easy | **Retired** | GraphQL: `UpdatePassword` sin autorización; el flag está en el gestor del admin | [Ver](challenges/Passman/README.md) | [EN](challenges/Passman/README.en.md) |
+| Cartographer | Web | Easy | **Retired** | SQLi en el login y `panel.php?info=flag` | [Ver](challenges/Cartographer/README.md) | [EN](challenges/Cartographer/README.en.md) |
+| Dynastic | Crypto | Very Easy | **Retired** | Cifrado de Trithemius: el desplazamiento es el índice | [Ver](challenges/Dynastic/README.md) | [EN](challenges/Dynastic/README.en.md) |
+| Makeshift | Crypto | Very Easy | **Retired** | Inversión y permutación de bloques de tres | [Ver](challenges/Makeshift/README.md) | [EN](challenges/Makeshift/README.en.md) |
+| Primary Knowledge | Crypto | Very Easy | **Retired** | RSA con `n` primo: `φ(n) = n − 1`, sin factorizar nada | [Ver](challenges/Primary%20Knowledge/README.md) | [EN](challenges/Primary%20Knowledge/README.en.md) |
+| Iced Tea | Crypto | Easy | **Retired** | TEA de 32 rondas con `delta` y máscara de 32 bits | [Ver](challenges/Iced%20Tea/README.md) | [EN](challenges/Iced%20Tea/README.en.md) |
+| Illumination | Forensics | Easy | **Retired** | `.git` filtrado: el token sigue en el historial y en base64 | [Ver](challenges/Illumination/README.md) | [EN](challenges/Illumination/README.en.md) |
+| MarketDump | Forensics | Easy | **Retired** | Exportar objetos HTTP y decodificar el outlier en base58 | [Ver](challenges/MarketDump/README.md) | [EN](challenges/MarketDump/README.en.md) |
+| Took the Byte | Forensics | Easy | **Retired** | XOR de un byte (`0xFF`) sobre `password` → ZIP con `password.txt` | [Ver](challenges/Took%20the%20Byte/README.md) | [EN](challenges/Took%20the%20Byte/README.en.md) |
+| Deadly Arthropod | Forensics | Medium | **Retired** | Reconstruir pulsaciones desde informes HID de un teclado USB | [Ver](challenges/Deadly%20Arthropod/README.md) | [EN](challenges/Deadly%20Arthropod/README.en.md) |
+| Obscure | Forensics | Easy | **Retired** | Webshell ofuscado, PCAP con comandos y `.kdbx` crackeado con john | [Ver](challenges/Obscure/README.md) | [EN](challenges/Obscure/README.en.md) |
+| Keep Tryin' | Forensics | Medium | **Retired** | Exfiltración por DNS en base64url y RC4 con clave débil | [Ver](challenges/Keep%20Tryin'/README.md) | [EN](challenges/Keep%20Tryin'/README.en.md) |
+| Alien Cradle | Forensics | Very Easy | **Retired** | Desofuscar un *download cradle* de PowerShell por concatenación | [Ver](challenges/Alien%20Cradle/README.md) | [EN](challenges/Alien%20Cradle/README.en.md) |
+| Extraterrestrial Persistence | Forensics | Very Easy | **Retired** | Unidad systemd en base64 como mecanismo de persistencia | [Ver](challenges/Extraterrestrial%20Persistence/README.md) | [EN](challenges/Extraterrestrial%20Persistence/README.en.md) |
+| Plaintext Tleasure | Forensics | Very Easy | **Retired** | PCAP con HTTP en claro: credenciales y transferencia legibles sin descifrar | [Ver](challenges/Plaintext%20Tleasure/README.md) | [EN](challenges/Plaintext%20Tleasure/README.en.md) |
+| Urgent | Forensics | Very Easy | **Retired** | `.eml` de phishing: MIME en base64/quoted-printable, URL encoding y adjunto VBS | [Ver](challenges/Urgent/README.md) | [EN](challenges/Urgent/README.en.md) |
+| BabyEncryption | Crypto | Very Easy | **Retired** | Función afín módulo 256 e inverso modular | [Ver](challenges/BabyEncryption/README.md) | [EN](challenges/BabyEncryption/README.en.md) |
+| Ancient Encodings | Crypto | Very Easy | **Retired** | Base64 dentro de hexadecimal, sin clave | [Ver](challenges/Ancient%20Encodings/README.md) | [EN](challenges/Ancient%20Encodings/README.en.md) |
+| SpookyPass | Reversing | Very Easy | **Retired** | ELF con la contraseña y la flag en `.rodata`; la flag en UTF-32 (`strings -e l`) | [Ver](challenges/SpookyPass/README.md) | [EN](challenges/SpookyPass/README.en.md) |
+| KORP Terminal | Web | Very Easy | **Retired** | SQLi con error visible y hash bcrypt crackeado | [Ver](challenges/KORP%20Terminal/README.md) | [EN](challenges/KORP%20Terminal/README.en.md) |
+| TimeKORP | Web | Very Easy | **Retired** | Inyección de comandos en `date` vía `format`: `%H:%M:%S' \|cat /flag #` | [Ver](challenges/TimeKORP/README.md) | [EN](challenges/TimeKORP/README.en.md) |
+| Behind the Scenes | Reversing | Very Easy | **Retired** | `UD2` como anti-descompilación y cuatro `strncmp` en GDB | [Ver](challenges/Behind%20the%20Scenes/README.md) | [EN](challenges/Behind%20the%20Scenes/README.en.md) |
+| OnlyHacks | Web | Very Easy | **Retired** | IDOR en `/chat?rid=3`: el flag está en el chat de otro usuario (el XSS al bot es alternativa) | [Ver](challenges/OnlyHacks/README.md) | [EN](challenges/OnlyHacks/README.en.md) |
+| Perfect Synchronization | Crypto | Easy | **Retired** | Sustitución por carácter (`char + 15`): análisis de frecuencias, no AES-ECB | [Ver](challenges/Perfect%20Synchronization/README.md) | [EN](challenges/Perfect%20Synchronization/README.en.md) |
+| xorxorxor | Crypto | Easy | **Retired** | XOR con clave repetida y prefijo conocido | [Ver](challenges/xorxorxor/README.md) | [EN](challenges/xorxorxor/README.en.md) |
+| Baby Time Capsule | Crypto | Very Easy | **Retired** | RSA con módulos pequeños: factorizar y descifrar | [Ver](challenges/Baby%20Time%20Capsule/README.md) | [EN](challenges/Baby%20Time%20Capsule/README.en.md) |
+| Gunship | Web | Easy | **Retired** | Prototype pollution en `flat@5.0.0` + AST injection en el motor de plantillas | [Ver](challenges/Gunship/README.md) | [EN](challenges/Gunship/README.en.md) |
+| baby interdimensional internet | Web | Easy | **Retired** | `exec()` de Python 2 sobre `ingredient`/`measurements`, sin filtros | [Ver](challenges/baby%20interdimensional%20internet/README.md) | [EN](challenges/baby%20interdimensional%20internet/README.en.md) |
+| Interdimensional Internet | Web | Medium | **Retired** | WAF de `[ ( _ .` evadido con `\x` y exfiltración por `flask.session` | [Ver](challenges/Interdimensional%20Internet/README.md) | [EN](challenges/Interdimensional%20Internet/README.en.md) |
+| Fake Boost | Forensics | Easy | **Retired** | PowerShell invertido + base64 y exfiltración AES en un `POST` | [Ver](challenges/Fake%20Boost/README.md) | [EN](challenges/Fake%20Boost/README.en.md) |
 | Impossible Password | Reversing | Easy | **Retired** | Segundo `strcmp` contra `rand()`: igualar `$rdi`/`$rsi` en gdb | [Ver](challenges/Impossible%20Password/README.md) | [EN](challenges/Impossible%20Password/README.en.md) |
-| Reg | Pwn | Easy | **Retired** | `gets()` en `run()`, offset `0x38` y ret2win a `winner()` en un binario sin PIE | [Ver](challenges/Reg/README.md) | [EN](challenges/Reg/README.en.md) |
+| Reg | Pwn | Easy | **Retired** | `gets()` en `run()`: offset `0x38` y ret2win a `winner()` sin PIE | [Ver](challenges/Reg/README.md) | [EN](challenges/Reg/README.en.md) |
 | Survival of the Fittest | Blockchain | Very Easy | **Retired** | `strongAttack(20)` y `loot()` sin control del estado | [Ver](challenges/Survival%20of%20the%20Fittest/README.md) | [EN](challenges/Survival%20of%20the%20Fittest/README.en.md) |
-| APKrypt | Mobile | Easy | **Retired** | Clave AES y blob en el APK, cifrado ECB | [Ver](challenges/APKrypt/README.md) | [EN](challenges/APKrypt/README.en.md) |
+| APKrypt | Mobile | Easy | **Retired** | Clave AES y blob en el APK, modo ECB | [Ver](challenges/APKrypt/README.md) | [EN](challenges/APKrypt/README.en.md) |
 | Photon Lockdown | Hardware | Very Easy | **Retired** | SquashFS con la contraseña de fábrica en `config_default.xml` | [Ver](challenges/Photon%20Lockdown/README.md) | [EN](challenges/Photon%20Lockdown/README.en.md) |
 | Prometheon | AI/ML | Medium | **Retired** | Inyección de prompt en cinco niveles encadenados | [Ver](challenges/Prometheon/README.md) | [EN](challenges/Prometheon/README.en.md) |
 | Forks and Knives | Pwn | Medium | **Retired** | Off-by-one, format string, canario por `fork()` y ROP con `dup2` | [Ver](challenges/Forks%20and%20Knives/README.md) | [EN](challenges/Forks%20and%20Knives/README.en.md) |
-| Evaluative | Coding | Very Easy | **Retired** | Evaluación polinómica de grado 8 con Horner | [Ver](challenges/Evaluative/README.md) | [EN](challenges/Evaluative/README.en.md) |
-| Oddly Even | Coding | Very Easy | **Retired** | Paridad con módulo 2, incluidos cero y negativos | [Ver](challenges/Oddly%20Even/README.md) | [EN](challenges/Oddly%20Even/README.en.md) |
-| Threat Index | Coding | Very Easy | **Retired** | Suma ponderada de 18 palabras clave en la cadena | [Ver](challenges/Threat%20Index/README.md) | [EN](challenges/Threat%20Index/README.en.md) |
+| Evaluative | Coding | Very Easy | **Retired** | Polinomio de grado 8 y nueve coeficientes: Horner sin potencias | [Ver](challenges/Evaluative/README.md) | [EN](challenges/Evaluative/README.en.md) |
+| Oddly Even | Coding | Very Easy | **Retired** | Paridad con `% 2`; cuidado con negativos en C | [Ver](challenges/Oddly%20Even/README.md) | [EN](challenges/Oddly%20Even/README.en.md) |
+| Threat Index | Coding | Very Easy | **Retired** | 18 palabras con peso 1-18; `count` por término | [Ver](challenges/Threat%20Index/README.md) | [EN](challenges/Threat%20Index/README.en.md) |
 | Watch Tower | ICS | Very Easy | **Retired** | PCAP Modbus/TCP: la flag está en los `reference numbers` de la función 16 | [Ver](challenges/Watch%20Tower/README.md) | [EN](challenges/Watch%20Tower/README.en.md) |
-| Intrusion | ICS | Easy | **Retired** | Planta Modbus: holding registers con `unit id` 52 y lectura automatizada | [Ver](challenges/Intrusion/README.md) | [EN](challenges/Intrusion/README.en.md) |
+| Intrusion | ICS | Easy | **Retired** | Holding registers con `unit id` 52 y lectura automatizada con `umodbus`/`pymodbus` | [Ver](challenges/Intrusion/README.md) | [EN](challenges/Intrusion/README.en.md) |
 | Factory | ICS | Easy | **Retired** | Lógica de escalera: modo manual y `Write Single Coil` para vaciar el tanque | [Ver](challenges/Factory/README.md) | [EN](challenges/Factory/README.en.md) |
-| Shush Protocol | ICS | Very Easy | **Retired** | Función Modbus 102 propietaria: credenciales en claro en el flujo TCP | [Ver](challenges/Shush%20Protocol/README.md) | [EN](challenges/Shush%20Protocol/README.en.md) |
-| Sneak peek | ICS | Easy | **Retired** | Función `0x64`: sobrescribir el MD5 de la contraseña en el bloque de memoria | [Ver](challenges/Sneak%20peek/README.md) | [EN](challenges/Sneak%20peek/README.en.md) |
-| FlagCasino | Reversing | Very Easy | **Retired** | `srand` sembrado con cada carácter y comparado contra un array de 30 enteros | [Ver](challenges/FlagCasino/README.md) | [EN](challenges/FlagCasino/README.en.md) |
-| Simple Encryptor | Reversing | Very Easy | **Retired** | Semilla de `time()` en los 4 primeros bytes; XOR y `ROL` con `rand()` | [Ver](challenges/Simple%20Encryptor/README.md) | [EN](challenges/Simple%20Encryptor/README.en.md) |
-| Shattered Tablet | Reversing | Very Easy | **Retired** | 40 comparaciones `data[i]` mezcladas; reconstruir ordenando por índice | [Ver](challenges/Shattered%20Tablet/README.md) | [EN](challenges/Shattered%20Tablet/README.en.md) |
-| Tear or Dear | Reversing | Medium | **Retired** | .NET WinForms: dnSpy de 32 bits y breakpoint en `this.username == this.o` | [Ver](challenges/Tear%20or%20Dear/README.md) | [EN](challenges/Tear%20or%20Dear/README.en.md) |
-| Snakecode | Reversing | Easy | **Retired** | `.pyc` de Python 2.7 con `marshal`; la flag aparece en la manzana del juego | [Ver](challenges/Snakecode/README.md) | [EN](challenges/Snakecode/README.en.md) |
-| Locked Away | Misc | Easy | **Retired** | PyJail: `blacklist.clear()` y `open_chest()` | [Ver](challenges/Locked%20Away/README.md) | [EN](challenges/Locked%20Away/README.en.md) |
-| Hidden Path | Misc | Easy | **Retired** | Carácter invisible `U+3164` como variable y comando inyectado | [Ver](challenges/Hidden%20Path/README.md) | [EN](challenges/Hidden%20Path/README.en.md) |
-| Aptitude Test | Misc | Very Easy | **Retired** | Cuestionario por socket: diez respuestas y flag | [Ver](challenges/Aptitude%20Test/README.md) | [EN](challenges/Aptitude%20Test/README.en.md) |
-| Chrono Mind | Misc | Easy | **Retired** | Path traversal al contexto del modelo y RCE por autocompletado | [Ver](challenges/Chrono%20Mind/README.md) | [EN](challenges/Chrono%20Mind/README.en.md) |
-| Super-Duper Pwn | Misc | Easy | **Retired** | Plantilla de `/checkout` y escape de `vm2` | [Ver](challenges/Super-Duper%20Pwn/README.md) | [EN](challenges/Super-Duper%20Pwn/README.en.md) |
+| Shush Protocol | ICS | Very Easy | **Retired** | Función Modbus 102 propietaria: usuario y contraseña en claro en el flujo TCP | [Ver](challenges/Shush%20Protocol/README.md) | [EN](challenges/Shush%20Protocol/README.en.md) |
+| Sneak peek | ICS | Easy | **Retired** | Función `0x64`: reescribir el MD5 de la contraseña en el bloque de memoria | [Ver](challenges/Sneak%20peek/README.md) | [EN](challenges/Sneak%20peek/README.en.md) |
+| FlagCasino | Reversing | Very Easy | **Retired** | `srand` por carácter contra un array `check`: fuerza bruta de las 95 semillas imprimibles | [Ver](challenges/FlagCasino/README.md) | [EN](challenges/FlagCasino/README.en.md) |
+| Simple Encryptor | Reversing | Very Easy | **Retired** | Semilla de tiempo en los 4 primeros bytes; XOR con `rand()` y rotación a la izquierda | [Ver](challenges/Simple%20Encryptor/README.md) | [EN](challenges/Simple%20Encryptor/README.en.md) |
+| Shattered Tablet | Reversing | Very Easy | **Retired** | 40 comparaciones por índice en Ghidra: reasignar el buffer a `char[64]` | [Ver](challenges/Shattered%20Tablet/README.md) | [EN](challenges/Shattered%20Tablet/README.en.md) |
+| Tear or Dear | Reversing | Medium | **Retired** | .NET WinForms con dnSpy de 32 bits: breakpoint en la comparación de credenciales | [Ver](challenges/Tear%20or%20Dear/README.md) | [EN](challenges/Tear%20or%20Dear/README.en.md) |
+| Snakecode | Reversing | Easy | **Retired** | `.pyc` de Python 2.7 con `marshal` + zlib; la manzana del Snake escribe la flag | [Ver](challenges/Snakecode/README.md) | [EN](challenges/Snakecode/README.en.md) |
+| Locked Away | Misc | Easy | **Retired** | PyJail: `blacklist.clear()` esquiva los corchetes y luego `open_chest()` | [Ver](challenges/Locked%20Away/README.md) | [EN](challenges/Locked%20Away/README.en.md) |
+| Hidden Path | Misc | Easy | **Retired** | Variable `U+3164` (HANGUL FILLER) en el array de comandos: `choice=6` ejecuta la orden inyectada | [Ver](challenges/Hidden%20Path/README.md) | [EN](challenges/Hidden%20Path/README.en.md) |
+| Aptitude Test | Misc | Very Easy | **Retired** | Cuestionario por `nc`: diez respuestas y el rol con la flag | [Ver](challenges/Aptitude%20Test/README.md) | [EN](challenges/Aptitude%20Test/README.en.md) |
+| Chrono Mind | Misc | Easy | **Retired** | Path traversal `../config.py` como contexto del modelo y RCE por autocompletado | [Ver](challenges/Chrono%20Mind/README.md) | [EN](challenges/Chrono%20Mind/README.en.md) |
+| Super-Duper Pwn | Misc | Easy | **Retired** | Bot de Discord, plantilla de `/checkout` y bypass de `vm2` con `Symbol.species` | [Ver](challenges/Super-Duper%20Pwn/README.md) | [EN](challenges/Super-Duper%20Pwn/README.en.md) |
 
 - Logro: https://labs.hackthebox.com/achievement/challenge/4187928/1926
 - Índice de categorías y convenciones: [challenges/README.md](challenges/README.md) · [EN](challenges/README.en.md)
@@ -230,22 +266,66 @@ Escenarios de investigación defensiva: no se ataca nada, se responde a pregunta
 
 | Sherlock | Dominio | Dificultad | Evidencia | ES | EN |
 |---|---|---|---|---|---|
-| Phantom Check | DFIR | Very Easy | Dos EVTX de PowerShell: consultas WMI y script anti-VM | [Ver](sherlocks/phantom-check/README.md) | [EN](sherlocks/phantom-check/README.en.md) |
-| TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell, Defender y evento 4616 | [Ver](sherlocks/ticktock/README.md) | [EN](sherlocks/ticktock/README.en.md) |
-| Litter | SOC | Easy | PCAP con túnel DNS (dnscat2) y ZIP del host | [Ver](sherlocks/litter/README.md) | [EN](sherlocks/litter/README.en.md) |
-| Jugglin | DFIR / WSL2 | Medium | Capturas de API de `wsl.exe`: exfiltración y `lsassy` sin rastro en logs de Windows | [Ver](sherlocks/jugglin/README.md) | [EN](sherlocks/jugglin/README.en.md) |
-| Heist | DFIR / Malware | Hard | `Partnership.pdf.exe` → RedLine, PCAP, Prefetch y SRUM | [Ver](sherlocks/heist/README.md) | [EN](sherlocks/heist/README.en.md) |
-| BOughT | DFIR / Malware | Hard | Memoria + AD1, persistencia en `StartUp`, mutex, DGA de 59.049 dominios y DDoS | [Ver](sherlocks/bought/README.md) | [EN](sherlocks/bought/README.en.md) |
+| Phantom Check | DFIR | Very Easy | Dos EVTX de PowerShell: WMI y anti-VM | [Ver](sherlocks/phantom-check/README.md) | [EN](sherlocks/phantom-check/README.en.md) |
+| TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell y Defender | [Ver](sherlocks/ticktock/README.md) | [EN](sherlocks/ticktock/README.en.md) |
+| CrownJewel-2 | DFIR / Active Directory | Medium | Logs de DC con pass-the-hash y acceso a `C$` | [Ver](sherlocks/crownjewel-2/README.md) | [EN](sherlocks/crownjewel-2/README.en.md) |
+| Campfire-2 | DFIR / Active Directory | Easy | 4768 sin preautenticación (AS-REP) y uso posterior | [Ver](sherlocks/campfire-2/README.md) | [EN](sherlocks/campfire-2/README.en.md) |
+| Safecracker | DFIR / Malware | Medium | Ransomware en un ZIP para Autopsy: cuentas, cifrado y borrado con `NtSetInformationFile` | [Ver](sherlocks/safecracker/README.md) | [EN](sherlocks/safecracker/README.en.md) |
+| JenkreadD | DFIR / Web | Easy | Jenkins CVE-2024-23897: `POST /cli` con `@ruta` | [Ver](sherlocks/jenkreadd/README.md) | [EN](sherlocks/jenkreadd/README.en.md) |
+| Subatomic | Malware / DFIR | Medium | Instalador falso de juego: `app.asar` de Electron, robo del token de Discord y `openAtLogin` | [Ver](sherlocks/subatomic/README.md) | [EN](sherlocks/subatomic/README.en.md) |
+| Litter | SOC | Easy | PCAP + ZIP de un host de pruebas | [Ver](sherlocks/litter/README.md) | [EN](sherlocks/litter/README.en.md) |
+| PhantomRing | Malware Analysis | Very Easy | ELF sin `strip` en `/var/tmp`: `nm` da los nombres y el puerto de C2 es un inmediato | [Ver](sherlocks/phantomring/README.md) | [EN](sherlocks/phantomring/README.en.md) |
+| Opportunist | DFIR / Malware | Medium | Memoria + triaje de un equipo corporativo | [Ver](sherlocks/opportunist/README.md) | [EN](sherlocks/opportunist/README.en.md) |
+| dOOMs Day | DFIR | Easy | Logs web de un servidor PHP comprometido | [Ver](sherlocks/dooms-day/README.md) | [EN](sherlocks/dooms-day/README.en.md) |
+| Brutus | DFIR | Very Easy | Logs de autenticación | [Ver](sherlocks/brutus/README.md) | [EN](sherlocks/brutus/README.en.md) |
+| MangoBleed | DFIR / Linux | Very Easy | Triage UAC de MongoDB: CVE-2025-14847 y exfiltración de `/var/lib/mongodb` | [Ver](sherlocks/mangobleed/README.md) | [EN](sherlocks/mangobleed/README.en.md) |
+| NeuroSync-D | DFIR / Web | Easy | Next.js CVE-2025-29927 → SSRF, LFI y Redis hasta RCE | [Ver](sherlocks/neurosync-d/README.md) | [EN](sherlocks/neurosync-d/README.en.md) |
+| Campfire-1 | DFIR / Active Directory | Very Easy | Logs de eventos de un dominio | [Ver](sherlocks/campfire-1/README.md) | [EN](sherlocks/campfire-1/README.en.md) |
+| CrownJewel-1 | DFIR / Active Directory | Medium | Telemetría de DC tras un compromiso | [Ver](sherlocks/crownjewel-1/README.md) | [EN](sherlocks/crownjewel-1/README.en.md) |
+| Loggy | Malware / Go | Easy | `Loggy.exe`: keylogger en Go con capturas y exfiltración por FTP | [Ver](sherlocks/loggy/README.md) | [EN](sherlocks/loggy/README.en.md) |
+| Bumblebee | DFIR | Easy | Base SQLite de phpBB y `access.log` | [Ver](sherlocks/bumblebee/README.md) | [EN](sherlocks/bumblebee/README.en.md) |
+| Heartbreaker-Denouement | Cloud / AWS | Medium | SSRF al servicio de metadatos, credenciales de rol y snapshots de RDS compartidos | [Ver](sherlocks/heartbreaker-denouement/README.md) | [EN](sherlocks/heartbreaker-denouement/README.en.md) |
+| Meerkat | SOC | Easy | PCAP y alertas de Suricata | [Ver](sherlocks/meerkat/README.md) | [EN](sherlocks/meerkat/README.en.md) |
+| Tracer | DFIR | Easy | PsExec nueve veces: `psexesvc.exe`, `.key`, named pipes y host de origen | [Ver](sherlocks/tracer/README.md) | [EN](sherlocks/tracer/README.en.md) |
+| Noted | DFIR | Easy | Artefactos de Notepad++ | [Ver](sherlocks/noted/README.md) | [EN](sherlocks/noted/README.en.md) |
+| Logjammer | Log Analysis | Easy | Cinco canales EVTX de un host | [Ver](sherlocks/logjammer/README.md) | [EN](sherlocks/logjammer/README.en.md) |
+| Unit42 | DFIR | Very Easy | Sysmon y Dropbox en un host Windows | [Ver](sherlocks/unit42/README.md) | [EN](sherlocks/unit42/README.en.md) |
+| BFT | DFIR | Very Easy | `$MFT` de un ZIP troyanizado | [Ver](sherlocks/bft/README.md) | [EN](sherlocks/bft/README.en.md) |
+| Noxious | DFIR | Medium | PCAP con envenenamiento LLMNR/NBT-NS | [Ver](sherlocks/noxious/README.md) | [EN](sherlocks/noxious/README.en.md) |
+| Reaper | DFIR | Very Easy | NTLM relay tras un nombre mal escrito: LLMNR, 4624 con IP y equipo que no cuadran, 5140 | [Ver](sherlocks/reaper/README.md) | [EN](sherlocks/reaper/README.en.md) |
+| Knock Knock | DFIR | Medium | PCAP de *password spray* y *port knocking* | [Ver](sherlocks/knock-knock/README.md) | [EN](sherlocks/knock-knock/README.en.md) |
+| RogueOne | DFIR / Memoria | Easy | `svchost.exe` falso en `Downloads` con C2 a 13.127.155.166:8888 y `cmd.exe` hijo | [Ver](sherlocks/rogueone/README.md) | [EN](sherlocks/rogueone/README.en.md) |
+| SSHole | DFIR / Unix | Very Easy | Bypass de `sshd` en Alpine (`*` de `crypt()`) en un jumpbox usado para escanear `192.168.18.0/24` | [Ver](sherlocks/sshole/README.md) | [EN](sherlocks/sshole/README.en.md) |
+| ShadowBait | DFIR / Windows | Easy | Documento de Office de Steven → PowerShell → C2 `192.168.204.152:8899` → DPAPI y persistencia | [Ver](sherlocks/shadowbait/README.md) | [EN](sherlocks/shadowbait/README.en.md) |
+| Compromised | DFIR / Red | Easy | PCAP de una red corporativa | [Ver](sherlocks/compromised/README.md) | [EN](sherlocks/compromised/README.en.md) |
+| Packet Puzzle | DFIR / Red | Medium | PCAP de una empresa japonesa de criptomonedas: CVE-2024-4577 en PHP 8.1.25 vía POST, `cristo`, `nc64.exe`, GodPotato y `Win32Error:2` (`[CORREGIDO]` con cyb3rloud y FinalBreach) | [Ver](sherlocks/packet-puzzle/README.md) | [EN](sherlocks/packet-puzzle/README.en.md) |
+| Jingle Bell | DFIR / Windows | Easy | Base de notificaciones de Windows de un puesto | [Ver](sherlocks/jingle-bell/README.md) | [EN](sherlocks/jingle-bell/README.en.md) |
+| Ultimatum | DFIR / Web | Easy | CVE-2023-3460 en Ultimate Member: admin `secragon`, web shell y shell remota | [Ver](sherlocks/ultimatum/README.md) | [EN](sherlocks/ultimatum/README.en.md) |
+| ProcNet | DFIR / Endpoint | Hard | C2 de código abierto: JA3, API Monitor (Vault) y Sysmon de empleado y DC | [Ver](sherlocks/procnet/README.md) | [EN](sherlocks/procnet/README.en.md) |
+| PCAP Analysis | DFIR / Red | Very Easy | Captura de P13: chat en claro en TCP/250 y subida HTTP de ~107 KB a otra subred | [Ver](sherlocks/pcap-analysis/README.md) | [EN](sherlocks/pcap-analysis/README.en.md) |
+| Vantage | DFIR / Red | Very Easy | PCAP de servidor web y controlador de nube | [Ver](sherlocks/vantage/README.md) | [EN](sherlocks/vantage/README.en.md) |
+| Lockpick | Malware / Ransomware | Easy | Muestra de ransomware y ficheros cifrados | [Ver](sherlocks/lockpick/README.md) | [EN](sherlocks/lockpick/README.en.md) |
+| Lockpick 2.0 | Malware / Ransomware | Easy | Recurso compartido cifrado y muestra con nota | [Ver](sherlocks/lockpick-2/README.md) | [EN](sherlocks/lockpick-2/README.en.md) |
+| Payload | Malware / Windows | Easy | `func_pointer.exe` (MinGW) que descifra el payload en runtime | [Ver](sherlocks/payload/README.md) | [EN](sherlocks/payload/README.en.md) |
+| Takedown | Red / DFIR | Easy | PCAP con SMB2 → `.vbs` → PowerShell → C2, más `NTLMSSP_AUTH` para pass-the-hash | [Ver](sherlocks/takedown/README.md) | [EN](sherlocks/takedown/README.en.md) |
+| Interceptor | SOC / Red | Easy | PCAP de una infección SSLoad con C2 en RC4 | [Ver](sherlocks/interceptor/README.md) | [EN](sherlocks/interceptor/README.en.md) |
+| Nubilum-1 | Cloud / AWS | Medium | CloudTrail, EC2 comprometida y copia de S3 | [Ver](sherlocks/nubilum-1/README.md) | [EN](sherlocks/nubilum-1/README.en.md) |
+| Nubilum-2 | Cloud / AWS | Medium (fuentes: Easy) | S3 con lectura anónima de un CSV de claves IAM y autoescalada con `PutUserPolicy` | [Ver](sherlocks/nubilum-2/README.md) | [EN](sherlocks/nubilum-2/README.en.md) |
+| Hyperfiletable | DFIR / Windows | Easy | Sólo la MFT de un equipo con phishing | [Ver](sherlocks/hyperfiletable/README.md) | [EN](sherlocks/hyperfiletable/README.en.md) |
+| WorkFromHome | DFIR / Windows | Medium | Phishing → RDP → `SeManageVolumePrivilege` → `PrintConfig.dll` y persistencia WMI | [Ver](sherlocks/workfromhome/README.md) | [EN](sherlocks/workfromhome/README.en.md) |
+| Lockpick 3.0 | Malware / Linux | Hard | Binario con XOR y clave por argumento, memoria y unidad systemd | [Ver](sherlocks/lockpick-3/README.md) | [EN](sherlocks/lockpick-3/README.en.md) |
+| Jugglin | DFIR / WSL2 | Medium | Capturas de API de `wsl.exe`: exfiltración y volcado con `lsassy` sin rastro en logs de Windows | [Ver](sherlocks/jugglin/README.md) | [EN](sherlocks/jugglin/README.en.md) |
+| Heist | DFIR / Malware | Hard | Phishing → `Partnership.pdf.exe` → RedLine; PCAP, Prefetch y SRUM | [Ver](sherlocks/heist/README.md) | [EN](sherlocks/heist/README.en.md) |
+| BOughT | DFIR / Malware | Hard | Memoria + AD1: persistencia en `StartUp`, mutex, DGA de 59.049 dominios y DDoS | [Ver](sherlocks/bought/README.md) | [EN](sherlocks/bought/README.en.md) |
 | Liberty | DFIR / Windows | Medium | Spray → RDP, robo de Net-NTLMv2 con un `.url` y PowerShell Web Access | [Ver](sherlocks/liberty/README.md) | [EN](sherlocks/liberty/README.en.md) |
 | Jinkies | DFIR / Windows | Medium | SMB con credenciales, backup `bk_db.ibd` y reutilización hasta el hash local | [Ver](sherlocks/jinkies/README.md) | [EN](sherlocks/jinkies/README.en.md) |
-| i-like-to | DFIR / MOVEit | Easy | CVE-2023-34362: logs de IIS, `$MFT`, EVTX, memoria y volcado SQL | [Ver](sherlocks/i-like-to/README.md) | [EN](sherlocks/i-like-to/README.en.md) |
-| Pikaptcha | DFIR / Windows | Easy | Captcha falso, portapapeles y PowerShell: PCAP más triaje KAPE | [Ver](sherlocks/pikaptcha/README.md) | [EN](sherlocks/pikaptcha/README.en.md) |
+| i-like-to | DFIR / MOVEit | Easy | Triaje KAPE de un servidor MOVEit: IIS logs, `$MFT`, EVTX, memoria y volcado SQL | [Ver](sherlocks/i-like-to/README.md) | [EN](sherlocks/i-like-to/README.en.md) |
+| Pikaptcha | DFIR / Windows | Easy | PCAP y KAPE: captcha falso, portapapeles y PowerShell | [Ver](sherlocks/pikaptcha/README.md) | [EN](sherlocks/pikaptcha/README.en.md) |
 | Constellation | Threat Intelligence | Medium | PDF con instrucciones a un insider: metadatos y URLs con hora | [Ver](sherlocks/constellation/README.md) | [EN](sherlocks/constellation/README.en.md) |
-| Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` con PowerShell compilado y exfiltración por SFTP | [Ver](sherlocks/heartbreaker-continuum/README.md) | [EN](sherlocks/heartbreaker-continuum/README.en.md) |
-| MisCloud | Cloud / GCP | Medium | Hook de Gitea, cuenta de servicio y bucket: captura más audit logs | [Ver](sherlocks/miscloud/README.md) | [EN](sherlocks/miscloud/README.en.md) |
-| Hunter | Threat Hunting | Insane | Servicio 7045, PDF recuperado del índice de Windows, KeePass y CVE-2023-32784 hasta la exfiltración FTP | [Ver](sherlocks/hunter/README.md) | [EN](sherlocks/hunter/README.en.md) |
-| Heartbreaker-Denouement | Cloud / AWS | Medium | SSRF a IMDS, credenciales de rol y snapshots de RDS compartidos: CloudTrail en JSONL | [Ver](sherlocks/heartbreaker-denouement/README.md) | [EN](sherlocks/heartbreaker-denouement/README.en.md) |
-| Trent | DFIR / Red | Medium | PCAP de un router: CVE-2024-28353 y reverse shell al C2 | [Ver](sherlocks/trent/README.md) | [EN](sherlocks/trent/README.en.md) |
+| Heartbreaker-Continuum | DFIR / Malware | Easy | `.tiff.exe` con PowerShell compilado y exfiltración SFTP | [Ver](sherlocks/heartbreaker-continuum/README.md) | [EN](sherlocks/heartbreaker-continuum/README.en.md) |
+| MisCloud | Cloud / GCP | Medium | Hook `post-receive`, cuenta de servicio y exfiltración desde un bucket | [Ver](sherlocks/miscloud/README.md) | [EN](sherlocks/miscloud/README.en.md) |
+| Hunter | Threat Hunting | Insane | Triaje de endpoint y PCAP parcial: servicio 7045, Amcache, Prefetch, `Windows.edb` y FileZilla | [Ver](sherlocks/hunter/README.md) | [EN](sherlocks/hunter/README.en.md) |
+| Trent | DFIR / Red | Medium | PCAP de un router: CVE-2024-28353 y reverse shell | [Ver](sherlocks/trent/README.md) | [EN](sherlocks/trent/README.en.md) |
 
 - Índice, metodología y pendientes: [sherlocks/README.md](sherlocks/README.md) · [EN](sherlocks/README.en.md)
 - Plantilla de ficha: [templates/sherlock-template.md](templates/sherlock-template.md) · [EN](templates/sherlock-template.en.md)
@@ -458,6 +538,12 @@ htb-writeups/
 │   ├── stego/
 │   ├── mobile/
 │   ├── hardware/
+│   ├── ics/
+│   ├── ai/
+│   ├── blockchain/
+│   ├── misc/
+│   ├── reversing/
+│   ├── threat-hunting/
 │   └── clickhouse/
 └── private/             # ignorado por git: credenciales y flags reales
 ```

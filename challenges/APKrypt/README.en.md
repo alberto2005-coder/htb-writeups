@@ -1,7 +1,7 @@
 ---
 challenge: APKrypt
 category: Challenge
-type: mobile
+type: Mobile
 os: Android
 difficulty: Easy
 platform: Hack The Box

@@ -1,7 +1,7 @@
 ---
 challenge: Watch Tower
 category: Challenge
-type: ics
+type: ICS
 os: Linux
 difficulty: Very Easy
 platform: Hack The Box
