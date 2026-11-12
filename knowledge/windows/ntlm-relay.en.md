@@ -1,5 +1,7 @@
 # NTLM Relay
 
+**English** | [🇪🇸 Español](ntlm-relay.md)
+
 ## Overview
 
 NTLM relay is a technique in which an intermediary forwards an NTLM authentication exchange in real time between a victim and a target service. The operator does not need the plaintext password or to crack the hash: the attack relies on the target accepting relayed authentication and on missing protections such as SMB signing, LDAP signing/channel binding, or Extended Protection for Authentication (EPA), depending on the protocol.

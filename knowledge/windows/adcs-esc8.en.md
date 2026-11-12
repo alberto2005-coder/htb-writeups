@@ -1,5 +1,7 @@
 # AD CS ESC8 — NTLM Relay to Web Enrollment
 
+**English** | [🇪🇸 Español](adcs-esc8.md)
+
 ## Overview
 
 ESC8 is an Active Directory Certificate Services (AD CS) abuse condition in which an HTTP Certificate Authority Web Enrollment endpoint (or equivalent web enrollment service) accepts NTLM authentication and can be targeted by an NTLM relay. Rather than learning the victim's password or cracking an NTLM hash, an operator induces an NTLM authentication to a controlled listener and relays the exchange to the vulnerable enrollment endpoint.

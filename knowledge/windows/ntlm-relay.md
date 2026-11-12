@@ -1,5 +1,7 @@
 # NTLM Relay
 
+[🇬🇧 English](ntlm-relay.en.md) | **Español**
+
 ## Resumen
 
 NTLM Relay es una técnica en la que un intermediario retransmite en tiempo real un intercambio de autenticación NTLM entre una víctima y un servicio de destino. El operador no necesita conocer la contraseña en texto claro ni romper el hash: aprovecha que el destino acepta la autenticación retransmitida y que faltan protecciones como firma SMB, LDAP signing/channel binding o Extended Protection for Authentication (EPA), según el protocolo.
