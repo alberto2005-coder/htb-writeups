@@ -6,6 +6,7 @@ This index is generated from the repository's versioned writeups.
 
 | Path | Writeup |
 |---|---|
+| `aptnightmare` | [aptnightmare](aptnightmare/README.md) |
 | `bft` | [bft](bft/README.md) |
 | `bought` | [bought](bought/README.md) |
 | `brutus` | [brutus](brutus/README.md) |
@@ -17,12 +18,14 @@ This index is generated from the repository's versioned writeups.
 | `constellation` | [constellation](constellation/README.md) |
 | `crownjewel-1` | [crownjewel-1](crownjewel-1/README.md) |
 | `crownjewel-2` | [crownjewel-2](crownjewel-2/README.md) |
+| `detroit-becomes-human` | [detroit-becomes-human](detroit-becomes-human/README.md) |
 | `dooms-day` | [dooms-day](dooms-day/README.md) |
 | `droidphish` | [droidphish](droidphish/README.md) |
 | `einladen` | [einladen](einladen/README.md) |
 | `exitiabilis` | [exitiabilis](exitiabilis/README.md) |
 | `heartbreaker-continuum` | [heartbreaker-continuum](heartbreaker-continuum/README.md) |
 | `heartbreaker-denouement` | [heartbreaker-denouement](heartbreaker-denouement/README.md) |
+| `heartbreaker` | [heartbreaker](heartbreaker/README.md) |
 | `heist` | [heist](heist/README.md) |
 | `hunter` | [hunter](hunter/README.md) |
 | `hyperfiletable` | [hyperfiletable](hyperfiletable/README.md) |
@@ -52,6 +55,11 @@ This index is generated from the repository's versioned writeups.
 | `nubilum-2` | [nubilum-2](nubilum-2/README.md) |
 | `nuts` | [nuts](nuts/README.md) |
 | `opportunist` | [opportunist](opportunist/README.md) |
+| `optinseltrace-1` | [optinseltrace-1](optinseltrace-1/README.md) |
+| `optinseltrace-2` | [optinseltrace-2](optinseltrace-2/README.md) |
+| `optinseltrace-3` | [optinseltrace-3](optinseltrace-3/README.md) |
+| `optinseltrace-4` | [optinseltrace-4](optinseltrace-4/README.md) |
+| `optinseltrace-5` | [optinseltrace-5](optinseltrace-5/README.md) |
 | `ore` | [ore](ore/README.md) |
 | `packet-puzzle` | [packet-puzzle](packet-puzzle/README.md) |
 | `payload` | [payload](payload/README.md) |

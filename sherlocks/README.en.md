@@ -86,6 +86,14 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Exitiabilis | SOC / Windows | Medium | HELK and AnyConnect VPN: logon, execution and persistence correlation | Kibana, EvtxECmd | [Ver](exitiabilis/README.en.md) |
 | DroidPhish | DFIR / Android | Easy | ext4 image, Proton Mail, sideloaded APK and base64 C2 | `debugfs`, `sqlite3`, Androguard | [Ver](droidphish/README.en.md) |
 | Unsupervised | DFIR / Windows | Medium | USB, `USBSTOR`, jump lists and thumbcache in an exfiltration | Registry Explorer, JLECmd | [Ver](unsupervised/README.en.md) |
+| Heartbreaker | DFIR / Windows | Medium | KAPE triage, Outlook OST, MFT and WinSCP | libpff, MFTECmd, Timeline Explorer | [Ver](heartbreaker/README.en.md) |
+| APTNightmare | DFIR / Network and memory | Medium | PCAP, reverse shell, memory and Cobalt Strike beacon | Wireshark, strings, 1768.py | [Ver](aptnightmare/README.en.md) |
+| Detroit becomes Human | DFIR / Windows | Hard | Fake MSI, PowerShell script and Chrome extension | MFTECmd, Chainsaw, Timeline Explorer | [Ver](detroit-becomes-human/README.en.md) |
+| OpTinselTrace-1 | DFIR / Insider | Easy | eM Client, sent email, ZIP and MFT/USN | eM Client, JLECmd, MFTECmd | [Ver](optinseltrace-1/README.en.md) |
+| OpTinselTrace-2 | DFIR / AWS | Easy | CloudTrail, IAM keys and S3 access | `jq`, AWS CLI | [Ver](optinseltrace-2/README.en.md) |
+| OpTinselTrace-3 | DFIR / Memory | Medium | Windows memory, LNK, obfuscated PowerShell and Defender | Volatility 3, CyberChef, IDA | [Ver](optinseltrace-3/README.en.md) |
+| OpTinselTrace-4 | DFIR / Network | Easy | Print-server PCAP, PJL and SSH; AES ZIP | 7-Zip, Wireshark, `tshark` | [Ver](optinseltrace-4/README.en.md) |
+| OpTinselTrace-5 | DFIR / Windows | Hard | EVTX, 7045 services, propagation and ransomware | Chainsaw, Sigma | [Ver](optinseltrace-5/README.en.md) |
 
 ## Shared methodology
 

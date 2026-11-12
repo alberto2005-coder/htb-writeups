@@ -98,6 +98,14 @@
 | Insider | Forensics | Easy | Perfil de Firefox: `logins.json` + `key4.db` y descifrado con `firepwd` | **Retired** | [Ver](Insider/README.md) | [EN](Insider/README.en.md) |
 | Missing in Action | OSINT | Easy | LinkedIn → Twitter → Foursquare y dorks con nombre y empresa | **Retired** | [Ver](Missing%20in%20Action/README.md) | [EN](Missing%20in%20Action/README.en.md) |
 | Spooky Time | Pwn | Medium | Format string en offset 8, fugas de PIE/libc y overwrite de `puts@got` | **Retired** | [Ver](Spooky%20Time/README.md) | [EN](Spooky%20Time/README.en.md) |
+| Lost Modulus | Crypto | Very Easy | RSA con exponente 3 y módulo pequeño: raíz cúbica entera del ciphertext | **Retired** | [Ver](Lost%20Modulus/README.md) | [EN](Lost%20Modulus/README.en.md) |
+| You Cant C Me | Reversing | Very Easy | `ltrace` revela el `strcmp` en claro; la flag estaba en el binario | **Retired** | [Ver](You%20Cant%20C%20Me/README.md) | [EN](You%20Cant%20C%20Me/README.en.md) |
+| No Place To Hide | Forensics | Easy | Caché de mapas de bits RDP y reconstrucción con `bmc-tools` | **Retired** | [Ver](No%20Place%20To%20Hide/README.md) | [EN](No%20Place%20To%20Hide/README.en.md) |
+| 0ld is g0ld | Misc | Easy | PDF protegido, crackeo con `pdf2john` y Morse desde el texto extraído | **Retired** | [Ver](0ld%20is%20g0ld/README.md) | [EN](0ld%20is%20g0ld/README.en.md) |
+| Teleport | Reversing | Easy | `setjmp`/`longjmp`, comparaciones por offset y reconstrucción desde Ghidra | **Retired** | [Ver](Teleport/README.md) | [EN](Teleport/README.en.md) |
+| I know Mag1k | Crypto | Easy | DES-CBC con padding oracle: descifrar la cookie y forjar `role=admin` | **Retired** | [Ver](I%20know%20Mag1k/README.md) | [EN](I%20know%20Mag1k/README.en.md) |
+| Event Horizon | Forensics | Easy | EVTX operacionales tras borrar los logs de PowerShell | **Retired** | [Ver](Event%20Horizon/README.md) | [EN](Event%20Horizon/README.en.md) |
+| misDIRection | Misc | Very Easy | ZIP con directorios por carácter y ficheros por posición; base64 | **Retired** | [Ver](misDIRection/README.md) | [EN](misDIRection/README.en.md) |
 
 ## Categorías
 

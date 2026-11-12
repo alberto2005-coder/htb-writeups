@@ -13,12 +13,14 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
 | `cloud/s3-misconfiguration` | [s3-misconfiguration](cloud/s3-misconfiguration.md) |
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.md) |
+| `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.md) |
 | `crypto/xor-and-encodings` | [xor-and-encodings](crypto/xor-and-encodings.md) |
 | `forensics/html-smuggling-hta` | [html-smuggling-hta](forensics/html-smuggling-hta.md) |
 | `forensics/malware-redline` | [malware-redline](forensics/malware-redline.md) |
 | `forensics/moveit-cve-2023-34362` | [moveit-cve-2023-34362](forensics/moveit-cve-2023-34362.md) |
 | `forensics/pcap-triage` | [pcap-triage](forensics/pcap-triage.md) |
+| `forensics/rdp-bitmap-cache` | [rdp-bitmap-cache](forensics/rdp-bitmap-cache.md) |
 | `forensics/volatility-memory` | [volatility-memory](forensics/volatility-memory.md) |
 | `forensics/windows-artifacts` | [windows-artifacts](forensics/windows-artifacts.md) |
 | `forensics/wsl2-dfir` | [wsl2-dfir](forensics/wsl2-dfir.md) |
@@ -68,6 +70,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc13` | [adcs-esc13](windows/adcs-esc13.md) |
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.md) |
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
+| `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
 | `windows/jea` | [jea](windows/jea.md) |
@@ -83,3 +86,4 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.md) |
+| `windows/zerologon` | [zerologon](windows/zerologon.md) |

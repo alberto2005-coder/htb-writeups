@@ -108,6 +108,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | BroScience | Linux | Medium | LFI `img.php?path=`, doble URL-encode, `AvatarInterface` y hashcat `-m 20` | [Ver](../machines/linux/broscience/README.md) | [EN](../machines/linux/broscience/README.en.md) |
 | Outdated | Windows | Medium | Follina CVE-2022-30190, shadow credentials y abuso de WSUS | [Ver](../machines/windows/outdated/README.md) | [EN](../machines/windows/outdated/README.en.md) |
 | Scrambled | Windows | Medium | Kerberoast `sqlsvc`, silver ticket y `BinaryFormatter` en `ScrambleClient.exe` | [Ver](../machines/windows/scrambled/README.md) | [EN](../machines/windows/scrambled/README.en.md) |
+| Baby | Windows | Easy | Credencial en LDAP, spray, `Backup Operators` y volcado de NTDS | [Ver](../machines/windows/baby/README.md) | [EN](../machines/windows/baby/README.en.md) |
+| Voleur | Windows | Medium | Excel de accesos, Kerberoast dirigido con `WriteSPN` y tombstone | [Ver](../machines/windows/voleur/README.md) | [EN](../machines/windows/voleur/README.en.md) |
+| Rainbow | Windows | Medium | FTP anónimo, reinicio del servicio y bypass de UAC con `fodhelper` | [Ver](../machines/windows/rainbow/README.md) | [EN](../machines/windows/rainbow/README.en.md) |
+| RetroTwo | Windows | Easy | Macro en Access, cuentas Pre-Windows 2000 y ZeroLogon | [Ver](../machines/windows/retrotwo/README.md) | [EN](../machines/windows/retrotwo/README.en.md) |
+| Certified | Windows | Medium | `WriteOwner`/`GenericAll` y AD CS ESC9 | [Ver](../machines/windows/certified/README.md) | [EN](../machines/windows/certified/README.en.md) |
+| Era | Linux | Medium | IDOR en backups, módulo SSH y binario firmado ejecutado por cron | [Ver](../machines/linux/era/README.md) | [EN](../machines/linux/era/README.en.md) |
+| Build | Linux | Medium | Backup de Jenkins por rsync, pipeline de Gitea y rlogin | [Ver](../machines/linux/build/README.md) | [EN](../machines/linux/build/README.en.md) |
+| Forgotten | Linux | Easy | Instalador de LimeSurvey, plugin malicioso y reutilización de secretos | [Ver](../machines/linux/forgotten/README.md) | [EN](../machines/linux/forgotten/README.en.md) |
 
 ## Pendientes
 
@@ -128,7 +136,7 @@ Un volcado en español de 164 directorios de máquina, 140 con PDF (448 PDF y 73
 
 ## Starting Point (disponibles)
 
-Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 125 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
+Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 133 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
