@@ -93,6 +93,11 @@
 | BitsNBytes | Stego | Hard | Dos PNG, StegSolve `SUB`, bits en una línea y Base64 | **Retired** | [Ver](BitsNBytes/README.md) | [EN](BitsNBytes/README.en.md) |
 | Call | Crypto | Unknown | Audio DTMF y sustitución por números primos | **Retired** | [Ver](Call/README.md) | [EN](Call/README.en.md) |
 | HDC | Web | Easy | Credenciales Base64 en JavaScript, bypass cliente y correo | **Retired** | [Ver](HDC/README.md) | [EN](HDC/README.en.md) |
+| Weak RSA | Crypto | Very Easy | Módulo RSA débil o Wiener: recuperar la clave y descifrar `flag.enc` | **Retired** | [Ver](Weak%20RSA/README.md) | [EN](Weak%20RSA/README.en.md) |
+| Baby Crypt | Reversing | Easy | XOR de 26 bytes con clave de 3 bytes y known plaintext del prefijo de flag | **Retired** | [Ver](Baby%20Crypt/README.md) | [EN](Baby%20Crypt/README.en.md) |
+| Insider | Forensics | Easy | Perfil de Firefox: `logins.json` + `key4.db` y descifrado con `firepwd` | **Retired** | [Ver](Insider/README.md) | [EN](Insider/README.en.md) |
+| Missing in Action | OSINT | Easy | LinkedIn → Twitter → Foursquare y dorks con nombre y empresa | **Retired** | [Ver](Missing%20in%20Action/README.md) | [EN](Missing%20in%20Action/README.en.md) |
+| Spooky Time | Pwn | Medium | Format string en offset 8, fugas de PIE/libc y overwrite de `puts@got` | **Retired** | [Ver](Spooky%20Time/README.md) | [EN](Spooky%20Time/README.en.md) |
 
 ## Categorías
 

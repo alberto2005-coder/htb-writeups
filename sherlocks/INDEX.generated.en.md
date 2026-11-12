@@ -13,11 +13,14 @@ This index is generated from the repository's versioned writeups.
 | `campfire-1` | [campfire-1](campfire-1/README.md) |
 | `campfire-2` | [campfire-2](campfire-2/README.md) |
 | `compromised` | [compromised](compromised/README.md) |
+| `conned-again` | [conned-again](conned-again/README.md) |
 | `constellation` | [constellation](constellation/README.md) |
 | `crownjewel-1` | [crownjewel-1](crownjewel-1/README.md) |
 | `crownjewel-2` | [crownjewel-2](crownjewel-2/README.md) |
 | `dooms-day` | [dooms-day](dooms-day/README.md) |
+| `droidphish` | [droidphish](droidphish/README.md) |
 | `einladen` | [einladen](einladen/README.md) |
+| `exitiabilis` | [exitiabilis](exitiabilis/README.md) |
 | `heartbreaker-continuum` | [heartbreaker-continuum](heartbreaker-continuum/README.md) |
 | `heartbreaker-denouement` | [heartbreaker-denouement](heartbreaker-denouement/README.md) |
 | `heist` | [heist](heist/README.md) |
@@ -30,6 +33,7 @@ This index is generated from the repository's versioned writeups.
 | `jinkies` | [jinkies](jinkies/README.md) |
 | `jugglin` | [jugglin](jugglin/README.md) |
 | `knock-knock` | [knock-knock](knock-knock/README.md) |
+| `kuber` | [kuber](kuber/README.md) |
 | `liberty` | [liberty](liberty/README.md) |
 | `litter` | [litter](litter/README.md) |
 | `lockpick-2` | [lockpick-2](lockpick-2/README.md) |
@@ -69,5 +73,6 @@ This index is generated from the repository's versioned writeups.
 | `trent` | [trent](trent/README.md) |
 | `ultimatum` | [ultimatum](ultimatum/README.md) |
 | `unit42` | [unit42](unit42/README.md) |
+| `unsupervised` | [unsupervised](unsupervised/README.md) |
 | `vantage` | [vantage](vantage/README.md) |
 | `workfromhome` | [workfromhome](workfromhome/README.md) |
