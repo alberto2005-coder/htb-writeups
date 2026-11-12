@@ -6,6 +6,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 
 | Ruta | Ficha |
 |---|---|
+| `allegretto` | [allegretto](allegretto/README.md) |
 | `aptnightmare` | [aptnightmare](aptnightmare/README.md) |
 | `bft` | [bft](bft/README.md) |
 | `bought` | [bought](bought/README.md) |
@@ -13,6 +14,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `bumblebee` | [bumblebee](bumblebee/README.md) |
 | `campfire-1` | [campfire-1](campfire-1/README.md) |
 | `campfire-2` | [campfire-2](campfire-2/README.md) |
+| `cinder` | [cinder](cinder/README.md) |
 | `compromised` | [compromised](compromised/README.md) |
 | `conned-again` | [conned-again](conned-again/README.md) |
 | `constellation` | [constellation](constellation/README.md) |
@@ -23,6 +25,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `droidphish` | [droidphish](droidphish/README.md) |
 | `einladen` | [einladen](einladen/README.md) |
 | `exitiabilis` | [exitiabilis](exitiabilis/README.md) |
+| `fleet` | [fleet](fleet/README.md) |
+| `grabber` | [grabber](grabber/README.md) |
+| `hat-trick` | [hat-trick](hat-trick/README.md) |
 | `heartbreaker-continuum` | [heartbreaker-continuum](heartbreaker-continuum/README.md) |
 | `heartbreaker-denouement` | [heartbreaker-denouement](heartbreaker-denouement/README.md) |
 | `heartbreaker` | [heartbreaker](heartbreaker/README.md) |
@@ -30,6 +35,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `hunter` | [hunter](hunter/README.md) |
 | `hyperfiletable` | [hyperfiletable](hyperfiletable/README.md) |
 | `i-like-to` | [i-like-to](i-like-to/README.md) |
+| `infiltrate` | [infiltrate](infiltrate/README.md) |
 | `interceptor` | [interceptor](interceptor/README.md) |
 | `jenkreadd` | [jenkreadd](jenkreadd/README.md) |
 | `jingle-bell` | [jingle-bell](jingle-bell/README.md) |
@@ -72,7 +78,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `recollection` | [recollection](recollection/README.md) |
 | `rogueone` | [rogueone](rogueone/README.md) |
 | `safecracker` | [safecracker](safecracker/README.md) |
+| `salsa-dance` | [salsa-dance](salsa-dance/README.md) |
 | `shadowbait` | [shadowbait](shadowbait/README.md) |
+| `smartypants` | [smartypants](smartypants/README.md) |
 | `sshole` | [sshole](sshole/README.md) |
 | `subatomic` | [subatomic](subatomic/README.md) |
 | `takedown` | [takedown](takedown/README.md) |

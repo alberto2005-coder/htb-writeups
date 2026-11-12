@@ -106,6 +106,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | I know Mag1k | Crypto | Easy | DES-CBC padding oracle: decrypt the cookie and forge `role=admin` | **Retired** | [ES](I%20know%20Mag1k/README.md) | [Ver](I%20know%20Mag1k/README.en.md) |
 | Event Horizon | Forensics | Easy | Operational EVTX after PowerShell logs were cleared | **Retired** | [ES](Event%20Horizon/README.md) | [Ver](Event%20Horizon/README.en.md) |
 | misDIRection | Misc | Very Easy | ZIP with per-character directories and per-position files; base64 | **Retired** | [ES](misDIRection/README.md) | [Ver](misDIRection/README.en.md) |
+| Debugging Interface | Hardware | Very Easy | Saleae `.sal`, UART at 31250 baud and serial decoding | **Retired** | [ES](Debugging%20Interface/README.md) | [Ver](Debugging%20Interface/README.en.md) |
+| Digital Cube | Stego | Easy | Binary data rendered as a QR code and scanned | **Retired** | [ES](Digital%20Cube/README.md) | [Ver](Digital%20Cube/README.en.md) |
+| Infiltration | OSINT | Easy | LinkedIn, Instagram and a badge visible in a photo | **Retired** | [ES](Infiltration/README.md) | [Ver](Infiltration/README.en.md) |
+| Restaurant | Pwn | Easy | Stack overflow, `puts@got` leak and ret2libc | **Retired** | [ES](Restaurant/README.md) | [Ver](Restaurant/README.en.md) |
+| RSAisEasy | Crypto | Easy | Non-coprime RSA moduli: `gcd` and block decryption | **Retired** | [ES](RSAisEasy/README.md) | [Ver](RSAisEasy/README.en.md) |
+| Confidentiality | Blockchain | Medium | ERC-721 and ECDSA signature malleability | **Retired** | [ES](Confidentiality/README.md) | [Ver](Confidentiality/README.en.md) |
+| Android in the Middle | Crypto | Very Easy | Unauthenticated Diffie-Hellman and man-in-the-middle | **Retired** | [ES](Android%20in%20the%20Middle/README.md) | [Ver](Android%20in%20the%20Middle/README.en.md) |
+| Free Services | Forensics | Easy | `.eml` email, MIME and attachment extraction | **Retired** | [ES](Free%20Services/README.md) | [Ver](Free%20Services/README.en.md) |
 
 ## Categories
 

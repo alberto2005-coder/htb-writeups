@@ -55,8 +55,11 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.md) |
+| `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
+| `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.md) |
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.md) |
 | `web/log4shell` | [log4shell](web/log4shell.md) |
+| `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
@@ -71,6 +74,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.md) |
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.md) |
+| `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
 | `windows/jea` | [jea](windows/jea.md) |

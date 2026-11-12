@@ -116,6 +116,14 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Era | Linux | Medium | IDOR in backups, SSH module and a signed cron binary | [Ver](../machines/linux/era/README.md) | [EN](../machines/linux/era/README.en.md) |
 | Build | Linux | Medium | Jenkins backup over rsync, Gitea pipeline and rlogin | [Ver](../machines/linux/build/README.md) | [EN](../machines/linux/build/README.en.md) |
 | Forgotten | Linux | Easy | LimeSurvey installer, malicious plugin and secret reuse | [Ver](../machines/linux/forgotten/README.md) | [EN](../machines/linux/forgotten/README.en.md) |
+| Analytics | Linux | Easy | Metabase CVE-2023-38646, container credentials and overlayfs | [Ver](../machines/linux/analytics/README.md) | [EN](../machines/linux/analytics/README.en.md) |
+| Devvortex | Linux | Easy | Joomla API CVE-2023-23752, PHP template and `apport-cli` | [Ver](../machines/linux/devvortex/README.md) | [EN](../machines/linux/devvortex/README.en.md) |
+| Horizontall | Linux | Easy | Strapi CVE-2019-19609 and Laravel Ignition CVE-2021-3129 over a tunnel | [Ver](../machines/linux/horizontall/README.md) | [EN](../machines/linux/horizontall/README.en.md) |
+| Photobomb | Linux | Easy | Credentials in JavaScript, `filetype` injection and PATH hijack | [Ver](../machines/linux/photobomb/README.md) | [EN](../machines/linux/photobomb/README.en.md) |
+| Granny | Windows | Easy | WebDAV `PUT`/`MOVE`, ASPX webshell and Churrasco | [Ver](../machines/windows/granny/README.md) | [EN](../machines/windows/granny/README.en.md) |
+| Grandpa | Windows | Easy | IIS 6.0 CVE-2017-7269 and Churrasco escalation | [Ver](../machines/windows/grandpa/README.md) | [EN](../machines/windows/grandpa/README.en.md) |
+| SecNotes | Windows | Medium | CSRF to admin, SMB webshell and WSL `bash.exe` | [Ver](../machines/windows/secnotes/README.md) | [EN](../machines/windows/secnotes/README.en.md) |
+| Monteverde | Windows | Medium | Anonymous LDAP, `azure.xml` and Azure AD Connect credentials | [Ver](../machines/windows/monteverde/README.md) | [EN](../machines/windows/monteverde/README.en.md) |
 
 ## Pending
 
@@ -138,7 +146,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 133 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 141 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|

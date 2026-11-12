@@ -9,6 +9,7 @@ This index is generated from the repository's versioned writeups.
 | `0ld is g0ld` | [0ld is g0ld](0ld%20is%20g0ld/README.md) |
 | `Alien Cradle` | [Alien Cradle](Alien%20Cradle/README.md) |
 | `Ancient Encodings` | [Ancient Encodings](Ancient%20Encodings/README.md) |
+| `Android in the Middle` | [Android in the Middle](Android%20in%20the%20Middle/README.md) |
 | `APKrypt` | [APKrypt](APKrypt/README.md) |
 | `Aptitude Test` | [Aptitude Test](Aptitude%20Test/README.md) |
 | `Baby Crypt` | [Baby Crypt](Baby%20Crypt/README.md) |
@@ -23,9 +24,12 @@ This index is generated from the repository's versioned writeups.
 | `Call` | [Call](Call/README.md) |
 | `Cartographer` | [Cartographer](Cartographer/README.md) |
 | `Chrono Mind` | [Chrono Mind](Chrono%20Mind/README.md) |
+| `Confidentiality` | [Confidentiality](Confidentiality/README.md) |
 | `Cryptohorrific` | [Cryptohorrific](Cryptohorrific/README.md) |
 | `Dark Embargo` | [Dark Embargo](Dark%20Embargo/README.md) |
 | `Deadly Arthropod` | [Deadly Arthropod](Deadly%20Arthropod/README.md) |
+| `Debugging Interface` | [Debugging Interface](Debugging%20Interface/README.md) |
+| `Digital Cube` | [Digital Cube](Digital%20Cube/README.md) |
 | `Dynastic` | [Dynastic](Dynastic/README.md) |
 | `Easy Phish` | [Easy Phish](Easy%20Phish/README.md) |
 | `Emdee five for life` | [Emdee five for life](Emdee%20five%20for%20life/README.md) |
@@ -37,6 +41,7 @@ This index is generated from the repository's versioned writeups.
 | `Flag Command` | [Flag Command](Flag%20Command/README.md) |
 | `FlagCasino` | [FlagCasino](FlagCasino/README.md) |
 | `Forks and Knives` | [Forks and Knives](Forks%20and%20Knives/README.md) |
+| `Free Services` | [Free Services](Free%20Services/README.md) |
 | `Freelancer` | [Freelancer](Freelancer/README.md) |
 | `Gunship` | [Gunship](Gunship/README.md) |
 | `HDC` | [HDC](HDC/README.md) |
@@ -46,6 +51,7 @@ This index is generated from the repository's versioned writeups.
 | `Iced Tea` | [Iced Tea](Iced%20Tea/README.md) |
 | `Illumination` | [Illumination](Illumination/README.md) |
 | `Impossible Password` | [Impossible Password](Impossible%20Password/README.md) |
+| `Infiltration` | [Infiltration](Infiltration/README.md) |
 | `Insider` | [Insider](Insider/README.md) |
 | `Interdimensional Internet` | [Interdimensional Internet](Interdimensional%20Internet/README.md) |
 | `Intrusion` | [Intrusion](Intrusion/README.md) |
@@ -75,7 +81,9 @@ This index is generated from the repository's versioned writeups.
 | `Primary Knowledge` | [Primary Knowledge](Primary%20Knowledge/README.md) |
 | `Prometheon` | [Prometheon](Prometheon/README.md) |
 | `Reg` | [Reg](Reg/README.md) |
+| `Restaurant` | [Restaurant](Restaurant/README.md) |
 | `ropme` | [ropme](ropme/README.md) |
+| `RSAisEasy` | [RSAisEasy](RSAisEasy/README.md) |
 | `Shattered Tablet` | [Shattered Tablet](Shattered%20Tablet/README.md) |
 | `Shush Protocol` | [Shush Protocol](Shush%20Protocol/README.md) |
 | `Simple Encryptor` | [Simple Encryptor](Simple%20Encryptor/README.md) |
