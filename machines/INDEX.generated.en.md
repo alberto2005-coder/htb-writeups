@@ -43,6 +43,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/helix` | [helix](linux/helix/README.md) |
 | `linux/horizontall` | [horizontall](linux/horizontall/README.md) |
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
+| `linux/keeper` | [keeper](linux/keeper/README.md) |
 | `linux/kobold` | [kobold](linux/kobold/README.md) |
 | `linux/lame` | [lame](linux/lame/README.md) |
 | `linux/makesense` | [makesense](linux/makesense/README.md) |
@@ -50,6 +51,8 @@ This index is generated from the repository's versioned writeups.
 | `linux/nibbles` | [nibbles](linux/nibbles/README.md) |
 | `linux/nineveh` | [nineveh](linux/nineveh/README.md) |
 | `linux/openadmin` | [openadmin](linux/openadmin/README.md) |
+| `linux/pandora` | [pandora](linux/pandora/README.md) |
+| `linux/paper` | [paper](linux/paper/README.md) |
 | `linux/photobomb` | [photobomb](linux/photobomb/README.md) |
 | `linux/pilgrimage` | [pilgrimage](linux/pilgrimage/README.md) |
 | `linux/pterodactyl` | [pterodactyl](linux/pterodactyl/README.md) |
@@ -66,6 +69,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
 | `linux/trick` | [trick](linux/trick/README.md) |
 | `linux/valentine` | [valentine](linux/valentine/README.md) |
+| `linux/validation` | [validation](linux/validation/README.md) |
 | `linux/variatype` | [variatype](linux/variatype/README.md) |
 | `linux/vault` | [vault](linux/vault/README.md) |
 | `solaris/sunday` | [sunday](solaris/sunday/README.md) |
@@ -110,6 +114,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/certified` | [certified](windows/certified/README.md) |
 | `windows/chatterbox` | [chatterbox](windows/chatterbox/README.md) |
 | `windows/cicada` | [cicada](windows/cicada/README.md) |
+| `windows/conceal` | [conceal](windows/conceal/README.md) |
 | `windows/devel` | [devel](windows/devel/README.md) |
 | `windows/eighteen` | [eighteen](windows/eighteen/README.md) |
 | `windows/escape` | [escape](windows/escape/README.md) |
@@ -117,6 +122,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/fluffy` | [fluffy](windows/fluffy/README.md) |
 | `windows/forest` | [forest](windows/forest/README.md) |
 | `windows/garfield` | [garfield](windows/garfield/README.md) |
+| `windows/giddy` | [giddy](windows/giddy/README.md) |
 | `windows/grandpa` | [grandpa](windows/grandpa/README.md) |
 | `windows/granny` | [granny](windows/granny/README.md) |
 | `windows/heist` | [heist](windows/heist/README.md) |
@@ -144,6 +150,8 @@ This index is generated from the repository's versioned writeups.
 | `windows/secnotes` | [secnotes](windows/secnotes/README.md) |
 | `windows/servmon` | [servmon](windows/servmon/README.md) |
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |
+| `windows/sniper` | [sniper](windows/sniper/README.md) |
+| `windows/streamio` | [streamio](windows/streamio/README.md) |
 | `windows/support` | [support](windows/support/README.md) |
 | `windows/timelapse` | [timelapse](windows/timelapse/README.md) |
 | `windows/voleur` | [voleur](windows/voleur/README.md) |

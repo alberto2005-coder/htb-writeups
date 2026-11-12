@@ -124,6 +124,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Grandpa | Windows | Easy | IIS 6.0 CVE-2017-7269 y elevación con Churrasco | [Ver](../machines/windows/grandpa/README.md) | [EN](../machines/windows/grandpa/README.en.md) |
 | SecNotes | Windows | Medium | CSRF al admin, webshell por SMB y WSL `bash.exe` | [Ver](../machines/windows/secnotes/README.md) | [EN](../machines/windows/secnotes/README.en.md) |
 | Monteverde | Windows | Medium | LDAP anónimo, `azure.xml` y credenciales de Azure AD Connect | [Ver](../machines/windows/monteverde/README.md) | [EN](../machines/windows/monteverde/README.en.md) |
+| Keeper | Linux | Easy | Request Tracker por defecto, ticket con credenciales y KeePass CVE-2023-32784 | [Ver](../machines/linux/keeper/README.md) | [EN](../machines/linux/keeper/README.en.md) |
+| Validation | Linux | Easy | SQLi de segundo orden, cookies y subida de webshell | [Ver](../machines/linux/validation/README.md) | [EN](../machines/linux/validation/README.en.md) |
+| Paper | Linux | Medium | Borrador de WordPress, Rocket.Chat CVE-2019-17671 y polkit | [Ver](../machines/linux/paper/README.md) | [EN](../machines/linux/paper/README.en.md) |
+| Pandora | Linux | Medium | SNMP, SQLi en Pandora FMS y PATH hijack con SUID | [Ver](../machines/linux/pandora/README.md) | [EN](../machines/linux/pandora/README.en.md) |
+| Giddy | Windows | Medium | SQLi en IIS, WinRM y UniFi Video como SYSTEM | [Ver](../machines/windows/giddy/README.md) | [EN](../machines/windows/giddy/README.en.md) |
+| Sniper | Windows | Medium | LFI/RFI, SMB y `runas /savecred` | [Ver](../machines/windows/sniper/README.md) | [EN](../machines/windows/sniper/README.en.md) |
+| StreamIO | Windows | Medium | SQLi MSSQL, LFI/RFI, Firefox y LAPS | [Ver](../machines/windows/streamio/README.md) | [EN](../machines/windows/streamio/README.en.md) |
+| Conceal | Windows | Hard | SNMP/IPsec, FTP anónimo con webshell y JuicyPotato | [Ver](../machines/windows/conceal/README.md) | [EN](../machines/windows/conceal/README.en.md) |
 
 ## Pendientes
 

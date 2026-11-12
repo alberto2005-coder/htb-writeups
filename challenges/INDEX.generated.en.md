@@ -28,6 +28,7 @@ This index is generated from the repository's versioned writeups.
 | `Cryptohorrific` | [Cryptohorrific](Cryptohorrific/README.md) |
 | `Dark Embargo` | [Dark Embargo](Dark%20Embargo/README.md) |
 | `Deadly Arthropod` | [Deadly Arthropod](Deadly%20Arthropod/README.md) |
+| `Debug` | [Debug](Debug/README.md) |
 | `Debugging Interface` | [Debugging Interface](Debugging%20Interface/README.md) |
 | `Digital Cube` | [Digital Cube](Digital%20Cube/README.md) |
 | `Dynastic` | [Dynastic](Dynastic/README.md) |
@@ -66,8 +67,12 @@ This index is generated from the repository's versioned writeups.
 | `Makeshift` | [Makeshift](Makeshift/README.md) |
 | `MarketDump` | [MarketDump](MarketDump/README.md) |
 | `Marshal in the Middle` | [Marshal in the Middle](Marshal%20in%20the%20Middle/README.md) |
+| `MetaVault` | [MetaVault](MetaVault/README.md) |
+| `Mini Line` | [Mini Line](Mini%20Line/README.md) |
 | `misDIRection` | [misDIRection](misDIRection/README.md) |
 | `Missing in Action` | [Missing in Action](Missing%20in%20Action/README.md) |
+| `Money Flowz` | [Money Flowz](Money%20Flowz/README.md) |
+| `Monstrosity` | [Monstrosity](Monstrosity/README.md) |
 | `No Place To Hide` | [No Place To Hide](No%20Place%20To%20Hide/README.md) |
 | `Obscure` | [Obscure](Obscure/README.md) |
 | `Oddly Even` | [Oddly Even](Oddly%20Even/README.md) |
@@ -80,10 +85,12 @@ This index is generated from the repository's versioned writeups.
 | `Plaintext Tleasure` | [Plaintext Tleasure](Plaintext%20Tleasure/README.md) |
 | `Primary Knowledge` | [Primary Knowledge](Primary%20Knowledge/README.md) |
 | `Prometheon` | [Prometheon](Prometheon/README.md) |
+| `Recruitment` | [Recruitment](Recruitment/README.md) |
 | `Reg` | [Reg](Reg/README.md) |
 | `Restaurant` | [Restaurant](Restaurant/README.md) |
 | `ropme` | [ropme](ropme/README.md) |
 | `RSAisEasy` | [RSAisEasy](RSAisEasy/README.md) |
+| `Secure Digital` | [Secure Digital](Secure%20Digital/README.md) |
 | `Shattered Tablet` | [Shattered Tablet](Shattered%20Tablet/README.md) |
 | `Shush Protocol` | [Shush Protocol](Shush%20Protocol/README.md) |
 | `Simple Encryptor` | [Simple Encryptor](Simple%20Encryptor/README.md) |
@@ -107,6 +114,7 @@ This index is generated from the repository's versioned writeups.
 | `Under Construction` | [Under Construction](Under%20Construction/README.md) |
 | `Urgent` | [Urgent](Urgent/README.md) |
 | `Vault-breaker` | [Vault-breaker](Vault-breaker/README.md) |
+| `VHDLock` | [VHDLock](VHDLock/README.md) |
 | `Watch Tower` | [Watch Tower](Watch%20Tower/README.md) |
 | `Weak RSA` | [Weak RSA](Weak%20RSA/README.md) |
 | `Weather App` | [Weather App](Weather%20App/README.md) |

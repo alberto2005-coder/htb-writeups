@@ -114,6 +114,14 @@
 | Confidentiality | Blockchain | Medium | ERC-721 y maleabilidad de firmas ECDSA | **Retired** | [Ver](Confidentiality/README.md) | [EN](Confidentiality/README.en.md) |
 | Android in the Middle | Crypto | Very Easy | Diffie-Hellman sin autenticar y ataque de intermediario | **Retired** | [Ver](Android%20in%20the%20Middle/README.md) | [EN](Android%20in%20the%20Middle/README.en.md) |
 | Free Services | Forensics | Easy | Correo `.eml`, MIME y extracción de adjuntos | **Retired** | [Ver](Free%20Services/README.md) | [EN](Free%20Services/README.en.md) |
+| Secure Digital | Hardware | Easy | SPI de microSD, analizador lógico y carving | **Retired** | [Ver](Secure%20Digital/README.md) | [EN](Secure%20Digital/README.en.md) |
+| Mini Line | Hardware | Medium | Intel HEX, firmware y reversing | **Retired** | [Ver](Mini%20Line/README.md) | [EN](Mini%20Line/README.en.md) |
+| VHDLock | Hardware | Medium | VHDL, XOR y simulación con GHDL | **Retired** | [Ver](VHDLock/README.md) | [EN](VHDLock/README.en.md) |
+| Debug | Hardware | Easy | UART a 115200 baudios y decodificación serie | **Retired** | [Ver](Debug/README.md) | [EN](Debug/README.en.md) |
+| Money Flowz | OSINT | Medium | Reddit, Ropsten y `input data` de una transacción | **Retired** | [Ver](Money%20Flowz/README.md) | [EN](Money%20Flowz/README.en.md) |
+| Monstrosity | OSINT | Medium | Twitter/X, metadatos y geolocalización | **Retired** | [Ver](Monstrosity/README.md) | [EN](Monstrosity/README.en.md) |
+| Recruitment | Blockchain | Very Easy | RPC, contrato y restricciones de transacción | **Retired** | [Ver](Recruitment/README.md) | [EN](Recruitment/README.en.md) |
+| MetaVault | Blockchain | Easy | Metadata de Solidity y función de emergencia | **Retired** | [Ver](MetaVault/README.md) | [EN](MetaVault/README.en.md) |
 
 ## Categorías
 
