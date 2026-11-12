@@ -12,6 +12,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/academy` | [academy](linux/academy/README.md) |
 | `linux/admirer` | [admirer](linux/admirer/README.md) |
 | `linux/airtouch` | [airtouch](linux/airtouch/README.md) |
+| `linux/ambassador` | [ambassador](linux/ambassador/README.md) |
 | `linux/analytics` | [analytics](linux/analytics/README.md) |
 | `linux/apocalyst` | [apocalyst](linux/apocalyst/README.md) |
 | `linux/armageddon` | [armageddon](linux/armageddon/README.md) |
@@ -43,10 +44,12 @@ This index is generated from the repository's versioned writeups.
 | `linux/helix` | [helix](linux/helix/README.md) |
 | `linux/horizontall` | [horizontall](linux/horizontall/README.md) |
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
+| `linux/jarvis` | [jarvis](linux/jarvis/README.md) |
 | `linux/keeper` | [keeper](linux/keeper/README.md) |
 | `linux/kobold` | [kobold](linux/kobold/README.md) |
 | `linux/lame` | [lame](linux/lame/README.md) |
 | `linux/makesense` | [makesense](linux/makesense/README.md) |
+| `linux/meta` | [meta](linux/meta/README.md) |
 | `linux/networked` | [networked](linux/networked/README.md) |
 | `linux/nibbles` | [nibbles](linux/nibbles/README.md) |
 | `linux/nineveh` | [nineveh](linux/nineveh/README.md) |
@@ -57,6 +60,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/pilgrimage` | [pilgrimage](linux/pilgrimage/README.md) |
 | `linux/pterodactyl` | [pterodactyl](linux/pterodactyl/README.md) |
 | `linux/retired` | [retired](linux/retired/README.md) |
+| `linux/sandworm` | [sandworm](linux/sandworm/README.md) |
 | `linux/sau` | [sau](linux/sau/README.md) |
 | `linux/sea` | [sea](linux/sea/README.md) |
 | `linux/shocker` | [shocker](linux/shocker/README.md) |
@@ -64,6 +68,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/soccer` | [soccer](linux/soccer/README.md) |
 | `linux/solidstate` | [solidstate](linux/solidstate/README.md) |
 | `linux/sorcery` | [sorcery](linux/sorcery/README.md) |
+| `linux/squashed` | [squashed](linux/squashed/README.md) |
 | `linux/swagshop` | [swagshop](linux/swagshop/README.md) |
 | `linux/tabby` | [tabby](linux/tabby/README.md) |
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
@@ -111,6 +116,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/bounty` | [bounty](windows/bounty/README.md) |
 | `windows/buff` | [buff](windows/buff/README.md) |
 | `windows/cascade` | [cascade](windows/cascade/README.md) |
+| `windows/certificate` | [certificate](windows/certificate/README.md) |
 | `windows/certified` | [certified](windows/certified/README.md) |
 | `windows/chatterbox` | [chatterbox](windows/chatterbox/README.md) |
 | `windows/cicada` | [cicada](windows/cicada/README.md) |
@@ -129,6 +135,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/jeeves` | [jeeves](windows/jeeves/README.md) |
 | `windows/jerry` | [jerry](windows/jerry/README.md) |
 | `windows/legacy` | [legacy](windows/legacy/README.md) |
+| `windows/mailing` | [mailing](windows/mailing/README.md) |
 | `windows/mantis` | [mantis](windows/mantis/README.md) |
 | `windows/monitorsfour` | [monitorsfour](windows/monitorsfour/README.md) |
 | `windows/monteverde` | [monteverde](windows/monteverde/README.md) |
@@ -147,6 +154,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/return` | [return](windows/return/README.md) |
 | `windows/sauna` | [sauna](windows/sauna/README.md) |
 | `windows/scrambled` | [scrambled](windows/scrambled/README.md) |
+| `windows/search` | [search](windows/search/README.md) |
 | `windows/secnotes` | [secnotes](windows/secnotes/README.md) |
 | `windows/servmon` | [servmon](windows/servmon/README.md) |
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |
