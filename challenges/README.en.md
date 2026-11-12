@@ -122,6 +122,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Monstrosity | OSINT | Medium | Twitter/X, metadata and geolocation | **Retired** | [ES](Monstrosity/README.md) | [Ver](Monstrosity/README.en.md) |
 | Recruitment | Blockchain | Very Easy | RPC, contract and transaction constraints | **Retired** | [ES](Recruitment/README.md) | [Ver](Recruitment/README.en.md) |
 | MetaVault | Blockchain | Easy | Solidity metadata and emergency function | **Retired** | [ES](MetaVault/README.md) | [Ver](MetaVault/README.en.md) |
+| Baby nginxatsu | Web | Easy | nginx alias and path traversal | **Retired** | [ES](Baby%20nginxatsu/README.md) | [Ver](Baby%20nginxatsu/README.en.md) |
+| Spiky Tamagotchi | Web | Easy | JavaScript injection and authentication bypass | **Retired** | [ES](Spiky%20Tamagotchi/README.md) | [Ver](Spiky%20Tamagotchi/README.en.md) |
+| ProxyAsAService | Web | Medium | SSRF and localhost blacklist bypass | **Retired** | [ES](ProxyAsAService/README.md) | [Ver](ProxyAsAService/README.en.md) |
+| Neonify | Web | Easy | Ruby SSTI, CRLF and regex bypass | **Retired** | [ES](Neonify/README.md) | [Ver](Neonify/README.en.md) |
+| Intergalactic Post | Web | Easy | SQLite SQLi and PHP-writing RCE | **Retired** | [ES](Intergalactic%20Post/README.md) | [Ver](Intergalactic%20Post/README.en.md) |
+| Red Island | Web | Medium | SSRF with gopher to Redis and RCE | **Retired** | [ES](Red%20Island/README.md) | [Ver](Red%20Island/README.en.md) |
+| Mutation Lab | Web | Easy | SVG file read and session forgery | **Retired** | [ES](Mutation%20Lab/README.md) | [Ver](Mutation%20Lab/README.en.md) |
+| Slippy | Web | Medium | TAR path traversal and SSTI | **Retired** | [ES](Slippy/README.md) | [Ver](Slippy/README.en.md) |
 
 ## Categories
 

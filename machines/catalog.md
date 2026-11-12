@@ -132,6 +132,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Sniper | Windows | Medium | LFI/RFI, SMB y `runas /savecred` | [Ver](../machines/windows/sniper/README.md) | [EN](../machines/windows/sniper/README.en.md) |
 | StreamIO | Windows | Medium | SQLi MSSQL, LFI/RFI, Firefox y LAPS | [Ver](../machines/windows/streamio/README.md) | [EN](../machines/windows/streamio/README.en.md) |
 | Conceal | Windows | Hard | SNMP/IPsec, FTP anónimo con webshell y JuicyPotato | [Ver](../machines/windows/conceal/README.md) | [EN](../machines/windows/conceal/README.en.md) |
+| Jarvis | Linux | Medium | SQLi, phpMyAdmin CVE-2018-12613 y `systemctl` SUID | [Ver](../machines/linux/jarvis/README.md) | [EN](../machines/linux/jarvis/README.en.md) |
+| Meta | Linux | Medium | ExifTool CVE-2021-22204 y cron editable | [Ver](../machines/linux/meta/README.md) | [EN](../machines/linux/meta/README.en.md) |
+| Sandworm | Linux | Medium | SSTI, Firejail, crate Rust y CVE-2022-31214 | [Ver](../machines/linux/sandworm/README.md) | [EN](../machines/linux/sandworm/README.en.md) |
+| Ambassador | Linux | Medium | Grafana CVE-2021-43798, `grafana.db` y Consul | [Ver](../machines/linux/ambassador/README.md) | [EN](../machines/linux/ambassador/README.en.md) |
+| Squashed | Linux | Easy | NFS con UID spoofing, X11 y `.Xauthority` | [Ver](../machines/linux/squashed/README.md) | [EN](../machines/linux/squashed/README.en.md) |
+| Mailing | Windows | Easy | LFI a hMailServer, MonikerLink y macro | [Ver](../machines/windows/mailing/README.md) | [EN](../machines/windows/mailing/README.en.md) |
+| Certificate | Windows | Hard | ADCS ESC3, Golden Certificate y EFS | [Ver](../machines/windows/certificate/README.md) | [EN](../machines/windows/certificate/README.en.md) |
+| Search | Windows | Hard | Credenciales en imagen, WDigest, gMSA y NTDS | [Ver](../machines/windows/search/README.md) | [EN](../machines/windows/search/README.en.md) |
 
 ## Pendientes
 

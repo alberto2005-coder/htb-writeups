@@ -122,6 +122,14 @@
 | Monstrosity | OSINT | Medium | Twitter/X, metadatos y geolocalización | **Retired** | [Ver](Monstrosity/README.md) | [EN](Monstrosity/README.en.md) |
 | Recruitment | Blockchain | Very Easy | RPC, contrato y restricciones de transacción | **Retired** | [Ver](Recruitment/README.md) | [EN](Recruitment/README.en.md) |
 | MetaVault | Blockchain | Easy | Metadata de Solidity y función de emergencia | **Retired** | [Ver](MetaVault/README.md) | [EN](MetaVault/README.en.md) |
+| Baby nginxatsu | Web | Easy | Alias de nginx y traversal de rutas | **Retired** | [Ver](Baby%20nginxatsu/README.md) | [EN](Baby%20nginxatsu/README.en.md) |
+| Spiky Tamagotchi | Web | Easy | Inyección de JavaScript y bypass de autenticación | **Retired** | [Ver](Spiky%20Tamagotchi/README.md) | [EN](Spiky%20Tamagotchi/README.en.md) |
+| ProxyAsAService | Web | Medium | SSRF y bypass de lista negra de localhost | **Retired** | [Ver](ProxyAsAService/README.md) | [EN](ProxyAsAService/README.en.md) |
+| Neonify | Web | Easy | SSTI en Ruby, CRLF y bypass de regex | **Retired** | [Ver](Neonify/README.md) | [EN](Neonify/README.en.md) |
+| Intergalactic Post | Web | Easy | SQLi en SQLite y RCE escribiendo PHP | **Retired** | [Ver](Intergalactic%20Post/README.md) | [EN](Intergalactic%20Post/README.en.md) |
+| Red Island | Web | Medium | SSRF con gopher hacia Redis y RCE | **Retired** | [Ver](Red%20Island/README.md) | [EN](Red%20Island/README.en.md) |
+| Mutation Lab | Web | Easy | SVG con lectura de archivos y forja de sesión | **Retired** | [Ver](Mutation%20Lab/README.md) | [EN](Mutation%20Lab/README.en.md) |
+| Slippy | Web | Medium | TAR con path traversal y SSTI | **Retired** | [Ver](Slippy/README.md) | [EN](Slippy/README.en.md) |
 
 ## Categorías
 

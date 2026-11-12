@@ -110,6 +110,14 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Artifact | DFIR / Windows | Easy | MFT, archives and exfiltration | MFTECmd, PECmd | [Ver](artifact/README.en.md) |
 | Oxide | DFIR / Windows | Medium | Memory, process injection and C2 | Volatility, MemProcFS | [Ver](oxide/README.en.md) |
 | Pwned | DFIR / Windows | Easy | Ransomware and shadow-copy deletion | EvtxECmd, MFTECmd | [Ver](pwned/README.en.md) |
+| Fragility | DFIR | Easy | Exfiltrated file, metadata and encoding | 7-Zip, ExifTool, CyberChef | [Ver](fragility/README.en.md) |
+| LATUS | DFIR / Windows | Medium | EVTX, MFT, registry and timeline | EvtxECmd, MFTECmd | [Ver](latus/README.en.md) |
+| TrainingDay | Malware Analysis | Easy | Macro, dropper and persistence | oletools, Procmon | [Ver](trainingday/README.en.md) |
+| SecretPictures | Malware Analysis | Easy | Go worm, USB, Run and C2 | DIE, Registry Explorer | [Ver](secretpictures/README.en.md) |
+| Kawmikaze | Malware Analysis | Medium | Loader, injection and C2 | CAPA, Volatility | [Ver](kawmikaze/README.en.md) |
+| SalineBreeze-2 | DFIR | Easy | Logs, PCAP and lateral movement | Zeek, Wireshark | [Ver](salinebreeze-2/README.en.md) |
+| ElectricBreeze-2 | Malware Analysis | Easy | JAR, webshell and credentials | jadx, YARA | [Ver](electricbreeze-2/README.en.md) |
+| ShadowStream | Malware Analysis | Medium | Multi-stage loader and persistence | CAPA, Volatility | [Ver](shadowstream/README.en.md) |
 
 ## Shared methodology
 

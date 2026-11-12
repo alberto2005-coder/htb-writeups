@@ -110,6 +110,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Artifact | DFIR / Windows | Easy | MFT, archivos comprimidos y exfiltración | MFTECmd, PECmd | [Ver](artifact/README.md) |
 | Oxide | DFIR / Windows | Medium | Memoria, inyección de procesos y C2 | Volatility, MemProcFS | [Ver](oxide/README.md) |
 | Pwned | DFIR / Windows | Easy | Ransomware y borrado de copias de sombra | EvtxECmd, MFTECmd | [Ver](pwned/README.md) |
+| Fragility | DFIR | Easy | Archivo exfiltrado, metadatos y codificación | 7-Zip, ExifTool, CyberChef | [Ver](fragility/README.md) |
+| LATUS | DFIR / Windows | Medium | EVTX, MFT, registro y línea temporal | EvtxECmd, MFTECmd | [Ver](latus/README.md) |
+| TrainingDay | Malware Analysis | Easy | Macro, dropper y persistencia | oletools, Procmon | [Ver](trainingday/README.md) |
+| SecretPictures | Malware Analysis | Easy | Gusano Go, USB, Run y C2 | DIE, Registry Explorer | [Ver](secretpictures/README.md) |
+| Kawmikaze | Malware Analysis | Medium | Loader, inyección y C2 | CAPA, Volatility | [Ver](kawmikaze/README.md) |
+| SalineBreeze-2 | DFIR | Easy | Logs, PCAP y movimiento lateral | Zeek, Wireshark | [Ver](salinebreeze-2/README.md) |
+| ElectricBreeze-2 | Malware Analysis | Easy | JAR, webshell y credenciales | jadx, YARA | [Ver](electricbreeze-2/README.md) |
+| ShadowStream | Malware Analysis | Medium | Loader multicapa y persistencia | CAPA, Volatility | [Ver](shadowstream/README.md) |
 
 ## Metodología común
 

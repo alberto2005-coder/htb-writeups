@@ -14,6 +14,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Aptitude Test` | [Aptitude Test](Aptitude%20Test/README.md) |
 | `Baby Crypt` | [Baby Crypt](Baby%20Crypt/README.md) |
 | `baby interdimensional internet` | [baby interdimensional internet](baby%20interdimensional%20internet/README.md) |
+| `Baby nginxatsu` | [Baby nginxatsu](Baby%20nginxatsu/README.md) |
 | `baby ninja jinja` | [baby ninja jinja](baby%20ninja%20jinja/README.md) |
 | `Baby Time Capsule` | [Baby Time Capsule](Baby%20Time%20Capsule/README.md) |
 | `BabyEncryption` | [BabyEncryption](BabyEncryption/README.md) |
@@ -55,6 +56,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Infiltration` | [Infiltration](Infiltration/README.md) |
 | `Insider` | [Insider](Insider/README.md) |
 | `Interdimensional Internet` | [Interdimensional Internet](Interdimensional%20Internet/README.md) |
+| `Intergalactic Post` | [Intergalactic Post](Intergalactic%20Post/README.md) |
 | `Intrusion` | [Intrusion](Intrusion/README.md) |
 | `Keep Tryin'` | [Keep Tryin'](Keep%20Tryin%27/README.md) |
 | `KORP Terminal` | [KORP Terminal](KORP%20Terminal/README.md) |
@@ -73,6 +75,8 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Missing in Action` | [Missing in Action](Missing%20in%20Action/README.md) |
 | `Money Flowz` | [Money Flowz](Money%20Flowz/README.md) |
 | `Monstrosity` | [Monstrosity](Monstrosity/README.md) |
+| `Mutation Lab` | [Mutation Lab](Mutation%20Lab/README.md) |
+| `Neonify` | [Neonify](Neonify/README.md) |
 | `No Place To Hide` | [No Place To Hide](No%20Place%20To%20Hide/README.md) |
 | `Obscure` | [Obscure](Obscure/README.md) |
 | `Oddly Even` | [Oddly Even](Oddly%20Even/README.md) |
@@ -85,7 +89,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Plaintext Tleasure` | [Plaintext Tleasure](Plaintext%20Tleasure/README.md) |
 | `Primary Knowledge` | [Primary Knowledge](Primary%20Knowledge/README.md) |
 | `Prometheon` | [Prometheon](Prometheon/README.md) |
+| `ProxyAsAService` | [ProxyAsAService](ProxyAsAService/README.md) |
 | `Recruitment` | [Recruitment](Recruitment/README.md) |
+| `Red Island` | [Red Island](Red%20Island/README.md) |
 | `Reg` | [Reg](Reg/README.md) |
 | `Restaurant` | [Restaurant](Restaurant/README.md) |
 | `ropme` | [ropme](ropme/README.md) |
@@ -94,10 +100,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Shattered Tablet` | [Shattered Tablet](Shattered%20Tablet/README.md) |
 | `Shush Protocol` | [Shush Protocol](Shush%20Protocol/README.md) |
 | `Simple Encryptor` | [Simple Encryptor](Simple%20Encryptor/README.md) |
+| `Slippy` | [Slippy](Slippy/README.md) |
 | `Snakecode` | [Snakecode](Snakecode/README.md) |
 | `Sneak peek` | [Sneak peek](Sneak%20peek/README.md) |
 | `Space Pirate Entrypoint` | [Space Pirate Entrypoint](Space%20Pirate%20Entrypoint/README.md) |
 | `Space Pirate Going Deeper` | [Space Pirate Going Deeper](Space%20Pirate%20Going%20Deeper/README.md) |
+| `Spiky Tamagotchi` | [Spiky Tamagotchi](Spiky%20Tamagotchi/README.md) |
 | `Spookifier` | [Spookifier](Spookifier/README.md) |
 | `Spooky Time` | [Spooky Time](Spooky%20Time/README.md) |
 | `SpookyPass` | [SpookyPass](SpookyPass/README.md) |
