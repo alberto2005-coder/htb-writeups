@@ -86,6 +86,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Exitiabilis | SOC / Windows | Medium | HELK y VPN AnyConnect: correlación de logon, ejecución y persistencia | Kibana, EvtxECmd | [Ver](exitiabilis/README.md) |
 | DroidPhish | DFIR / Android | Easy | Imagen ext4, Proton Mail, APK sideloaded y C2 en base64 | `debugfs`, `sqlite3`, Androguard | [Ver](droidphish/README.md) |
 | Unsupervised | DFIR / Windows | Medium | USB, `USBSTOR`, jump lists y thumbcache en una exfiltración | Registry Explorer, JLECmd | [Ver](unsupervised/README.md) |
+| Heartbreaker | DFIR / Windows | Medium | Triaje KAPE, OST de Outlook, MFT y WinSCP | libpff, MFTECmd, Timeline Explorer | [Ver](heartbreaker/README.md) |
+| APTNightmare | DFIR / Red y memoria | Medium | PCAP, reverse shell, memoria y beacon de Cobalt Strike | Wireshark, strings, 1768.py | [Ver](aptnightmare/README.md) |
+| Detroit becomes Human | DFIR / Windows | Hard | MSI falso, script de PowerShell y extensión de Chrome | MFTECmd, Chainsaw, Timeline Explorer | [Ver](detroit-becomes-human/README.md) |
+| OpTinselTrace-1 | DFIR / Insider | Easy | eM Client, correo enviado, ZIP y MFT/USN | eM Client, JLECmd, MFTECmd | [Ver](optinseltrace-1/README.md) |
+| OpTinselTrace-2 | DFIR / AWS | Easy | CloudTrail, claves IAM y acceso a S3 | `jq`, AWS CLI | [Ver](optinseltrace-2/README.md) |
+| OpTinselTrace-3 | DFIR / Memoria | Medium | Memoria Windows, LNK, PowerShell ofuscado y Defender | Volatility 3, CyberChef, IDA | [Ver](optinseltrace-3/README.md) |
+| OpTinselTrace-4 | DFIR / Red | Easy | PCAP de impresión, PJL y SSH; ZIP con AES | 7-Zip, Wireshark, `tshark` | [Ver](optinseltrace-4/README.md) |
+| OpTinselTrace-5 | DFIR / Windows | Hard | EVTX, servicios 7045, propagación y ransomware | Chainsaw, Sigma | [Ver](optinseltrace-5/README.md) |
 
 ## Metodología común
 

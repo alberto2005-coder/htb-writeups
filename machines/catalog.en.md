@@ -108,6 +108,14 @@ Reference notes for machines used to study techniques. The main table covers **r
 | BroScience | Linux | Medium | `img.php?path=` LFI, double URL-encoding, `AvatarInterface` and hashcat `-m 20` | [Ver](../machines/linux/broscience/README.md) | [EN](../machines/linux/broscience/README.en.md) |
 | Outdated | Windows | Medium | Follina CVE-2022-30190, shadow credentials and WSUS abuse | [Ver](../machines/windows/outdated/README.md) | [EN](../machines/windows/outdated/README.en.md) |
 | Scrambled | Windows | Medium | Kerberoast `sqlsvc`, silver ticket and `BinaryFormatter` in `ScrambleClient.exe` | [Ver](../machines/windows/scrambled/README.md) | [EN](../machines/windows/scrambled/README.en.md) |
+| Baby | Windows | Easy | LDAP credential, spray, `Backup Operators` and NTDS dump | [Ver](../machines/windows/baby/README.md) | [EN](../machines/windows/baby/README.en.md) |
+| Voleur | Windows | Medium | Access spreadsheet, targeted Kerberoast with `WriteSPN` and tombstone | [Ver](../machines/windows/voleur/README.md) | [EN](../machines/windows/voleur/README.en.md) |
+| Rainbow | Windows | Medium | Anonymous FTP, service restart and `fodhelper` UAC bypass | [Ver](../machines/windows/rainbow/README.md) | [EN](../machines/windows/rainbow/README.en.md) |
+| RetroTwo | Windows | Easy | Access macro, Pre-Windows 2000 computer accounts and ZeroLogon | [Ver](../machines/windows/retrotwo/README.md) | [EN](../machines/windows/retrotwo/README.en.md) |
+| Certified | Windows | Medium | `WriteOwner`/`GenericAll` and AD CS ESC9 | [Ver](../machines/windows/certified/README.md) | [EN](../machines/windows/certified/README.en.md) |
+| Era | Linux | Medium | IDOR in backups, SSH module and a signed cron binary | [Ver](../machines/linux/era/README.md) | [EN](../machines/linux/era/README.en.md) |
+| Build | Linux | Medium | Jenkins backup over rsync, Gitea pipeline and rlogin | [Ver](../machines/linux/build/README.md) | [EN](../machines/linux/build/README.en.md) |
+| Forgotten | Linux | Easy | LimeSurvey installer, malicious plugin and secret reuse | [Ver](../machines/linux/forgotten/README.md) | [EN](../machines/linux/forgotten/README.en.md) |
 
 ## Pending
 
@@ -130,7 +138,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 125 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 133 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|

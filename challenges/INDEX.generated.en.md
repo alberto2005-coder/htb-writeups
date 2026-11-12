@@ -6,6 +6,7 @@ This index is generated from the repository's versioned writeups.
 
 | Path | Writeup |
 |---|---|
+| `0ld is g0ld` | [0ld is g0ld](0ld%20is%20g0ld/README.md) |
 | `Alien Cradle` | [Alien Cradle](Alien%20Cradle/README.md) |
 | `Ancient Encodings` | [Ancient Encodings](Ancient%20Encodings/README.md) |
 | `APKrypt` | [APKrypt](APKrypt/README.md) |
@@ -29,6 +30,7 @@ This index is generated from the repository's versioned writeups.
 | `Easy Phish` | [Easy Phish](Easy%20Phish/README.md) |
 | `Emdee five for life` | [Emdee five for life](Emdee%20five%20for%20life/README.md) |
 | `Evaluative` | [Evaluative](Evaluative/README.md) |
+| `Event Horizon` | [Event Horizon](Event%20Horizon/README.md) |
 | `Extraterrestrial Persistence` | [Extraterrestrial Persistence](Extraterrestrial%20Persistence/README.md) |
 | `Factory` | [Factory](Factory/README.md) |
 | `Fake Boost` | [Fake Boost](Fake%20Boost/README.md) |
@@ -40,6 +42,7 @@ This index is generated from the repository's versioned writeups.
 | `HDC` | [HDC](HDC/README.md) |
 | `Hidden in Colors` | [Hidden in Colors](Hidden%20in%20Colors/README.md) |
 | `Hidden Path` | [Hidden Path](Hidden%20Path/README.md) |
+| `I know Mag1k` | [I know Mag1k](I%20know%20Mag1k/README.md) |
 | `Iced Tea` | [Iced Tea](Iced%20Tea/README.md) |
 | `Illumination` | [Illumination](Illumination/README.md) |
 | `Impossible Password` | [Impossible Password](Impossible%20Password/README.md) |
@@ -52,11 +55,14 @@ This index is generated from the repository's versioned writeups.
 | `Labyrinth Linguist` | [Labyrinth Linguist](Labyrinth%20Linguist/README.md) |
 | `Lernaean` | [Lernaean](Lernaean/README.md) |
 | `Locked Away` | [Locked Away](Locked%20Away/README.md) |
+| `Lost Modulus` | [Lost Modulus](Lost%20Modulus/README.md) |
 | `LoveTok` | [LoveTok](LoveTok/README.md) |
 | `Makeshift` | [Makeshift](Makeshift/README.md) |
 | `MarketDump` | [MarketDump](MarketDump/README.md) |
 | `Marshal in the Middle` | [Marshal in the Middle](Marshal%20in%20the%20Middle/README.md) |
+| `misDIRection` | [misDIRection](misDIRection/README.md) |
 | `Missing in Action` | [Missing in Action](Missing%20in%20Action/README.md) |
+| `No Place To Hide` | [No Place To Hide](No%20Place%20To%20Hide/README.md) |
 | `Obscure` | [Obscure](Obscure/README.md) |
 | `Oddly Even` | [Oddly Even](Oddly%20Even/README.md) |
 | `Oldbridge` | [Oldbridge](Oldbridge/README.md) |
@@ -83,6 +89,7 @@ This index is generated from the repository's versioned writeups.
 | `Super-Duper Pwn` | [Super-Duper Pwn](Super-Duper%20Pwn/README.md) |
 | `Survival of the Fittest` | [Survival of the Fittest](Survival%20of%20the%20Fittest/README.md) |
 | `Tear or Dear` | [Tear or Dear](Tear%20or%20Dear/README.md) |
+| `Teleport` | [Teleport](Teleport/README.md) |
 | `Templated` | [Templated](Templated/README.md) |
 | `The Suspicious Reviewer` | [The Suspicious Reviewer](The%20Suspicious%20Reviewer/README.md) |
 | `Threat Index` | [Threat Index](Threat%20Index/README.md) |
@@ -96,3 +103,4 @@ This index is generated from the repository's versioned writeups.
 | `Weak RSA` | [Weak RSA](Weak%20RSA/README.md) |
 | `Weather App` | [Weather App](Weather%20App/README.md) |
 | `xorxorxor` | [xorxorxor](xorxorxor/README.md) |
+| `You Cant C Me` | [You Cant C Me](You%20Cant%20C%20Me/README.md) |

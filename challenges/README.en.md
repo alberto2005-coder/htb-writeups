@@ -98,6 +98,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Insider | Forensics | Easy | Firefox profile: `logins.json` + `key4.db` decrypted with `firepwd` | **Retired** | [ES](Insider/README.md) | [Ver](Insider/README.en.md) |
 | Missing in Action | OSINT | Easy | LinkedIn → Twitter → Foursquare and dorks with name and company | **Retired** | [ES](Missing%20in%20Action/README.md) | [Ver](Missing%20in%20Action/README.en.md) |
 | Spooky Time | Pwn | Medium | Format string at offset 8, PIE/libc leaks and `puts@got` overwrite | **Retired** | [ES](Spooky%20Time/README.md) | [Ver](Spooky%20Time/README.en.md) |
+| Lost Modulus | Crypto | Very Easy | RSA with exponent 3 and a small modulus: integer cube root of the ciphertext | **Retired** | [ES](Lost%20Modulus/README.md) | [Ver](Lost%20Modulus/README.en.md) |
+| You Cant C Me | Reversing | Very Easy | `ltrace` reveals the cleartext `strcmp`; the flag was in the binary | **Retired** | [ES](You%20Cant%20C%20Me/README.md) | [Ver](You%20Cant%20C%20Me/README.en.md) |
+| No Place To Hide | Forensics | Easy | RDP bitmap cache rebuilt with `bmc-tools` | **Retired** | [ES](No%20Place%20To%20Hide/README.md) | [Ver](No%20Place%20To%20Hide/README.en.md) |
+| 0ld is g0ld | Misc | Easy | Protected PDF, `pdf2john` cracking and Morse from the extracted text | **Retired** | [ES](0ld%20is%20g0ld/README.md) | [Ver](0ld%20is%20g0ld/README.en.md) |
+| Teleport | Reversing | Easy | `setjmp`/`longjmp`, per-offset comparisons and Ghidra reconstruction | **Retired** | [ES](Teleport/README.md) | [Ver](Teleport/README.en.md) |
+| I know Mag1k | Crypto | Easy | DES-CBC padding oracle: decrypt the cookie and forge `role=admin` | **Retired** | [ES](I%20know%20Mag1k/README.md) | [Ver](I%20know%20Mag1k/README.en.md) |
+| Event Horizon | Forensics | Easy | Operational EVTX after PowerShell logs were cleared | **Retired** | [ES](Event%20Horizon/README.md) | [Ver](Event%20Horizon/README.en.md) |
+| misDIRection | Misc | Very Easy | ZIP with per-character directories and per-position files; base64 | **Retired** | [ES](misDIRection/README.md) | [Ver](misDIRection/README.en.md) |
 
 ## Categories
 

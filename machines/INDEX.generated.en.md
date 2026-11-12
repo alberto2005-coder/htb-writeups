@@ -22,6 +22,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/boardlight` | [boardlight](linux/boardlight/README.md) |
 | `linux/book` | [book](linux/book/README.md) |
 | `linux/broscience` | [broscience](linux/broscience/README.md) |
+| `linux/build` | [build](linux/build/README.md) |
 | `linux/busqueda` | [busqueda](linux/busqueda/README.md) |
 | `linux/cap` | [cap](linux/cap/README.md) |
 | `linux/cobblestone` | [cobblestone](linux/cobblestone/README.md) |
@@ -32,7 +33,9 @@ This index is generated from the repository's versioned writeups.
 | `linux/delivery` | [delivery](linux/delivery/README.md) |
 | `linux/devoops` | [devoops](linux/devoops/README.md) |
 | `linux/doctor` | [doctor](linux/doctor/README.md) |
+| `linux/era` | [era](linux/era/README.md) |
 | `linux/facts` | [facts](linux/facts/README.md) |
+| `linux/forgotten` | [forgotten](linux/forgotten/README.md) |
 | `linux/friendzone` | [friendzone](linux/friendzone/README.md) |
 | `linux/frolic` | [frolic](linux/frolic/README.md) |
 | `linux/helix` | [helix](linux/helix/README.md) |
@@ -92,6 +95,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/administrator` | [administrator](windows/administrator/README.md) |
 | `windows/arctic` | [arctic](windows/arctic/README.md) |
 | `windows/authority` | [authority](windows/authority/README.md) |
+| `windows/baby` | [baby](windows/baby/README.md) |
 | `windows/bastard` | [bastard](windows/bastard/README.md) |
 | `windows/bastion` | [bastion](windows/bastion/README.md) |
 | `windows/blackfield` | [blackfield](windows/blackfield/README.md) |
@@ -99,6 +103,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/bounty` | [bounty](windows/bounty/README.md) |
 | `windows/buff` | [buff](windows/buff/README.md) |
 | `windows/cascade` | [cascade](windows/cascade/README.md) |
+| `windows/certified` | [certified](windows/certified/README.md) |
 | `windows/chatterbox` | [chatterbox](windows/chatterbox/README.md) |
 | `windows/cicada` | [cicada](windows/cicada/README.md) |
 | `windows/devel` | [devel](windows/devel/README.md) |
@@ -121,9 +126,11 @@ This index is generated from the repository's versioned writeups.
 | `windows/pingpong` | [pingpong](windows/pingpong/README.md) |
 | `windows/pirate` | [pirate](windows/pirate/README.md) |
 | `windows/querier` | [querier](windows/querier/README.md) |
+| `windows/rainbow` | [rainbow](windows/rainbow/README.md) |
 | `windows/reel` | [reel](windows/reel/README.md) |
 | `windows/remote` | [remote](windows/remote/README.md) |
 | `windows/resolute` | [resolute](windows/resolute/README.md) |
+| `windows/retrotwo` | [retrotwo](windows/retrotwo/README.md) |
 | `windows/return` | [return](windows/return/README.md) |
 | `windows/sauna` | [sauna](windows/sauna/README.md) |
 | `windows/scrambled` | [scrambled](windows/scrambled/README.md) |
@@ -131,3 +138,4 @@ This index is generated from the repository's versioned writeups.
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |
 | `windows/support` | [support](windows/support/README.md) |
 | `windows/timelapse` | [timelapse](windows/timelapse/README.md) |
+| `windows/voleur` | [voleur](windows/voleur/README.md) |
