@@ -36,6 +36,7 @@ Requirements: Git and Python 3.8 or later. No third-party Python dependencies ar
 ```bash
 python tools/generate_indexes.py
 python tools/repo_check.py
+python tools/audit-indices.py
 ```
 
 Install local Git hooks:
