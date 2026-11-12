@@ -17,6 +17,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `crownjewel-1` | [crownjewel-1](crownjewel-1/README.md) |
 | `crownjewel-2` | [crownjewel-2](crownjewel-2/README.md) |
 | `dooms-day` | [dooms-day](dooms-day/README.md) |
+| `einladen` | [einladen](einladen/README.md) |
 | `heartbreaker-continuum` | [heartbreaker-continuum](heartbreaker-continuum/README.md) |
 | `heartbreaker-denouement` | [heartbreaker-denouement](heartbreaker-denouement/README.md) |
 | `heist` | [heist](heist/README.md) |
@@ -38,13 +39,16 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `logjammer` | [logjammer](logjammer/README.md) |
 | `mangobleed` | [mangobleed](mangobleed/README.md) |
 | `meerkat` | [meerkat](meerkat/README.md) |
+| `mellitus` | [mellitus](mellitus/README.md) |
 | `miscloud` | [miscloud](miscloud/README.md) |
 | `neurosync-d` | [neurosync-d](neurosync-d/README.md) |
 | `noted` | [noted](noted/README.md) |
 | `noxious` | [noxious](noxious/README.md) |
 | `nubilum-1` | [nubilum-1](nubilum-1/README.md) |
 | `nubilum-2` | [nubilum-2](nubilum-2/README.md) |
+| `nuts` | [nuts](nuts/README.md) |
 | `opportunist` | [opportunist](opportunist/README.md) |
+| `ore` | [ore](ore/README.md) |
 | `packet-puzzle` | [packet-puzzle](packet-puzzle/README.md) |
 | `payload` | [payload](payload/README.md) |
 | `pcap-analysis` | [pcap-analysis](pcap-analysis/README.md) |
@@ -53,6 +57,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `pikaptcha` | [pikaptcha](pikaptcha/README.md) |
 | `procnet` | [procnet](procnet/README.md) |
 | `reaper` | [reaper](reaper/README.md) |
+| `recollection` | [recollection](recollection/README.md) |
 | `rogueone` | [rogueone](rogueone/README.md) |
 | `safecracker` | [safecracker](safecracker/README.md) |
 | `shadowbait` | [shadowbait](shadowbait/README.md) |

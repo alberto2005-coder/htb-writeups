@@ -16,7 +16,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `BabyEncryption` | [BabyEncryption](BabyEncryption/README.md) |
 | `Bare Metal` | [Bare Metal](Bare%20Metal/README.md) |
 | `Behind the Scenes` | [Behind the Scenes](Behind%20the%20Scenes/README.md) |
+| `BitsNBytes` | [BitsNBytes](BitsNBytes/README.md) |
 | `breaking grad` | [breaking grad](breaking%20grad/README.md) |
+| `Call` | [Call](Call/README.md) |
 | `Cartographer` | [Cartographer](Cartographer/README.md) |
 | `Chrono Mind` | [Chrono Mind](Chrono%20Mind/README.md) |
 | `Cryptohorrific` | [Cryptohorrific](Cryptohorrific/README.md) |
@@ -34,6 +36,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Forks and Knives` | [Forks and Knives](Forks%20and%20Knives/README.md) |
 | `Freelancer` | [Freelancer](Freelancer/README.md) |
 | `Gunship` | [Gunship](Gunship/README.md) |
+| `HDC` | [HDC](HDC/README.md) |
 | `Hidden in Colors` | [Hidden in Colors](Hidden%20in%20Colors/README.md) |
 | `Hidden Path` | [Hidden Path](Hidden%20Path/README.md) |
 | `Iced Tea` | [Iced Tea](Iced%20Tea/README.md) |
@@ -77,6 +80,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Survival of the Fittest` | [Survival of the Fittest](Survival%20of%20the%20Fittest/README.md) |
 | `Tear or Dear` | [Tear or Dear](Tear%20or%20Dear/README.md) |
 | `Templated` | [Templated](Templated/README.md) |
+| `The Suspicious Reviewer` | [The Suspicious Reviewer](The%20Suspicious%20Reviewer/README.md) |
 | `Threat Index` | [Threat Index](Threat%20Index/README.md) |
 | `TimeKORP` | [TimeKORP](TimeKORP/README.md) |
 | `Took the Byte` | [Took the Byte](Took%20the%20Byte/README.md) |

@@ -76,6 +76,11 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | MisCloud | Cloud / GCP | Medium | `post-receive` hook, service account and bucket exfiltration | Wireshark, `jq` | [Ver](miscloud/README.en.md) |
 | Hunter | Threat Hunting | Insane | Endpoint triage and partial PCAP: 7045 service, Amcache, Prefetch, `Windows.edb` and FileZilla | EvtxECmd, PECmd, SIDR, Wireshark | [Ver](hunter/README.en.md) |
 | Trent | DFIR / Network | Medium | Router PCAP: CVE-2024-28353 and a reverse shell | Wireshark, `tshark` | [Ver](trent/README.en.md) |
+| Einladen | DFIR / Windows | Medium | HTML smuggling → HTA → DLL side-loading and C2 | Procmon, Wireshark, CyberChef | [Ver](einladen/README.en.md) |
+| Recollection | DFIR / Memory | Easy | Memory dump with obfuscated PowerShell and injection | Volatility 3 | [Ver](recollection/README.en.md) |
+| Mellitus | DFIR / Memory | Medium | Memory, Chrome history, local hashes and an inverted image | Volatility 3, `sqlite3`, Pillow | [Ver](mellitus/README.en.md) |
+| Nuts | DFIR / Windows | Medium | NuGet typosquat, `init.ps1`, persistence and Defender | NuGet, PECmd, EvtxECmd | [Ver](nuts/README.en.md) |
+| Ore | DFIR / Linux | Medium | Grafana CVE-2021-43798, credentials and the `xmrig` miner | `sqlite3`, `ps`, `ss` | [Ver](ore/README.en.md) |
 
 ## Shared methodology
 

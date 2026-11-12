@@ -99,6 +99,10 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Querier | Windows | Medium | Credentials in a macro, `xp_dirtree`, NetNTLMv2 and GPP | [Ver](../machines/windows/querier/README.md) | [EN](../machines/windows/querier/README.en.md) |
 | Remote | Windows | Medium | NFS with the Umbraco backup, SHA1, XSLT RCE and TeamViewer | [Ver](../machines/windows/remote/README.md) | [EN](../machines/windows/remote/README.en.md) |
 | Luke | FreeBSD | Medium | Cleartext `config.php`, an API with JWT and Ajenti as root | [Ver](../machines/freebsd/luke/README.md) | [EN](../machines/freebsd/luke/README.en.md) |
+| Mantis | Windows | Hard | Orchard CMS, MSSQL and MS14-068 (forged PAC) | [Ver](../machines/windows/mantis/README.md) | [EN](../machines/windows/mantis/README.en.md) |
+| Return | Windows | Easy | Printer panel, LDAP bind, WinRM and `Server Operators` | [Ver](../machines/windows/return/README.md) | [EN](../machines/windows/return/README.en.md) |
+| Retired | Linux | Medium | File read, ROP, backup symlink and `binfmt_misc` | [Ver](../machines/linux/retired/README.md) | [EN](../machines/linux/retired/README.en.md) |
+| Vault | Linux | Medium | PHP upload, OpenVPN, source-port firewall bypass and GPG | [Ver](../machines/linux/vault/README.md) | [EN](../machines/linux/vault/README.en.md) |
 
 ## Pending
 
@@ -121,7 +125,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 121 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 120 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|

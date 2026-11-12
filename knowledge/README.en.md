@@ -15,9 +15,11 @@ This index is generated from the repository's versioned writeups.
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.en.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.en.md) |
 | `crypto/xor-and-encodings` | [xor-and-encodings](crypto/xor-and-encodings.en.md) |
+| `forensics/html-smuggling-hta` | [html-smuggling-hta](forensics/html-smuggling-hta.en.md) |
 | `forensics/malware-redline` | [malware-redline](forensics/malware-redline.en.md) |
 | `forensics/moveit-cve-2023-34362` | [moveit-cve-2023-34362](forensics/moveit-cve-2023-34362.en.md) |
 | `forensics/pcap-triage` | [pcap-triage](forensics/pcap-triage.en.md) |
+| `forensics/volatility-memory` | [volatility-memory](forensics/volatility-memory.en.md) |
 | `forensics/windows-artifacts` | [windows-artifacts](forensics/windows-artifacts.en.md) |
 | `forensics/wsl2-dfir` | [wsl2-dfir](forensics/wsl2-dfir.en.md) |
 | `general/kerberos-clock` | [kerberos-clock](general/kerberos-clock.en.md) |
@@ -27,6 +29,7 @@ This index is generated from the repository's versioned writeups.
 | `general/smb-enumeration` | [smb-enumeration](general/smb-enumeration.en.md) |
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.en.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.en.md) |
+| `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.en.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.en.md) |
@@ -67,11 +70,13 @@ This index is generated from the repository's versioned writeups.
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.en.md) |
 | `windows/jea` | [jea](windows/jea.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
+| `windows/ms14-068` | [ms14-068](windows/ms14-068.en.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.en.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.en.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.en.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.en.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.en.md) |
 | `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.en.md) |
+| `windows/server-operators` | [server-operators](windows/server-operators.en.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.en.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.en.md) |
