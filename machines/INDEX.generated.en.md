@@ -45,6 +45,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/openadmin` | [openadmin](linux/openadmin/README.md) |
 | `linux/pilgrimage` | [pilgrimage](linux/pilgrimage/README.md) |
 | `linux/pterodactyl` | [pterodactyl](linux/pterodactyl/README.md) |
+| `linux/retired` | [retired](linux/retired/README.md) |
 | `linux/sau` | [sau](linux/sau/README.md) |
 | `linux/sea` | [sea](linux/sea/README.md) |
 | `linux/shocker` | [shocker](linux/shocker/README.md) |
@@ -57,6 +58,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
 | `linux/valentine` | [valentine](linux/valentine/README.md) |
 | `linux/variatype` | [variatype](linux/variatype/README.md) |
+| `linux/vault` | [vault](linux/vault/README.md) |
 | `solaris/sunday` | [sunday](solaris/sunday/README.md) |
 | `starting-point/appointment` | [appointment](starting-point/appointment/README.md) |
 | `starting-point/archetype` | [archetype](starting-point/archetype/README.md) |
@@ -107,6 +109,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/jeeves` | [jeeves](windows/jeeves/README.md) |
 | `windows/jerry` | [jerry](windows/jerry/README.md) |
 | `windows/legacy` | [legacy](windows/legacy/README.md) |
+| `windows/mantis` | [mantis](windows/mantis/README.md) |
 | `windows/monitorsfour` | [monitorsfour](windows/monitorsfour/README.md) |
 | `windows/multimaster` | [multimaster](windows/multimaster/README.md) |
 | `windows/netmon` | [netmon](windows/netmon/README.md) |
@@ -117,6 +120,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/reel` | [reel](windows/reel/README.md) |
 | `windows/remote` | [remote](windows/remote/README.md) |
 | `windows/resolute` | [resolute](windows/resolute/README.md) |
+| `windows/return` | [return](windows/return/README.md) |
 | `windows/sauna` | [sauna](windows/sauna/README.md) |
 | `windows/servmon` | [servmon](windows/servmon/README.md) |
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |

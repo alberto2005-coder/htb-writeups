@@ -89,6 +89,10 @@
 | Aptitude Test | Misc | Very Easy | Cuestionario por `nc`: diez respuestas y el rol con la flag | **Retired** | [Ver](Aptitude%20Test/README.md) | [EN](Aptitude%20Test/README.en.md) |
 | Chrono Mind | Misc | Easy | Path traversal `../config.py` como contexto del modelo y RCE por autocompletado | **Retired** | [Ver](Chrono%20Mind/README.md) | [EN](Chrono%20Mind/README.en.md) |
 | Super-Duper Pwn | Misc | Easy | Bot de Discord, plantilla de `/checkout` y bypass de `vm2` con `Symbol.species` | **Retired** | [Ver](Super-Duper%20Pwn/README.md) | [EN](Super-Duper%20Pwn/README.en.md) |
+| The Suspicious Reviewer | OSINT | Very Easy | Perfil público: About y metadatos de commits para el correo | **Retired** | [Ver](The%20Suspicious%20Reviewer/README.md) | [EN](The%20Suspicious%20Reviewer/README.en.md) |
+| BitsNBytes | Stego | Hard | Dos PNG, StegSolve `SUB`, bits en una línea y Base64 | **Retired** | [Ver](BitsNBytes/README.md) | [EN](BitsNBytes/README.en.md) |
+| Call | Crypto | Unknown | Audio DTMF y sustitución por números primos | **Retired** | [Ver](Call/README.md) | [EN](Call/README.en.md) |
+| HDC | Web | Easy | Credenciales Base64 en JavaScript, bypass cliente y correo | **Retired** | [Ver](HDC/README.md) | [EN](HDC/README.en.md) |
 
 ## Categorías
 

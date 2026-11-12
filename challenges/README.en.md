@@ -89,6 +89,10 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Aptitude Test | Misc | Very Easy | Quiz over `nc`: ten answers, then the role and the flag | **Retired** | [ES](Aptitude%20Test/README.md) | [Ver](Aptitude%20Test/README.en.md) |
 | Chrono Mind | Misc | Easy | `../config.py` path traversal as model context plus autocompletion RCE | **Retired** | [ES](Chrono%20Mind/README.md) | [Ver](Chrono%20Mind/README.en.md) |
 | Super-Duper Pwn | Misc | Easy | Discord bot, `/checkout` template and `vm2` bypass via `Symbol.species` | **Retired** | [ES](Super-Duper%20Pwn/README.md) | [Ver](Super-Duper%20Pwn/README.en.md) |
+| The Suspicious Reviewer | OSINT | Very Easy | Public profile: About section and commit metadata for the email | **Retired** | [ES](The%20Suspicious%20Reviewer/README.md) | [Ver](The%20Suspicious%20Reviewer/README.en.md) |
+| BitsNBytes | Stego | Hard | Two PNGs, StegSolve `SUB`, bits on one line and Base64 | **Retired** | [ES](BitsNBytes/README.md) | [Ver](BitsNBytes/README.en.md) |
+| Call | Crypto | Unknown | DTMF audio and prime-number substitution | **Retired** | [ES](Call/README.md) | [Ver](Call/README.en.md) |
+| HDC | Web | Easy | Base64 credentials in JavaScript, client-side bypass and email | **Retired** | [ES](HDC/README.md) | [Ver](HDC/README.en.md) |
 
 ## Categories
 
