@@ -6,9 +6,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 
 | Ruta | Ficha |
 |---|---|
+| `alchemy` | [alchemy](alchemy/README.md) |
 | `allegretto` | [allegretto](allegretto/README.md) |
 | `aptnightmare` | [aptnightmare](aptnightmare/README.md) |
+| `artifact` | [artifact](artifact/README.md) |
+| `backdoor` | [backdoor](backdoor/README.md) |
 | `bft` | [bft](bft/README.md) |
+| `blackenergy` | [blackenergy](blackenergy/README.md) |
 | `bought` | [bought](bought/README.md) |
 | `brutus` | [brutus](brutus/README.md) |
 | `bumblebee` | [bumblebee](bumblebee/README.md) |
@@ -44,6 +48,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `knock-knock` | [knock-knock](knock-knock/README.md) |
 | `kuber` | [kuber](kuber/README.md) |
 | `liberty` | [liberty](liberty/README.md) |
+| `lit` | [lit](lit/README.md) |
 | `litter` | [litter](litter/README.md) |
 | `lockpick-2` | [lockpick-2](lockpick-2/README.md) |
 | `lockpick-3` | [lockpick-3](lockpick-3/README.md) |
@@ -54,6 +59,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `meerkat` | [meerkat](meerkat/README.md) |
 | `mellitus` | [mellitus](mellitus/README.md) |
 | `miscloud` | [miscloud](miscloud/README.md) |
+| `mysterious` | [mysterious](mysterious/README.md) |
 | `neurosync-d` | [neurosync-d](neurosync-d/README.md) |
 | `noted` | [noted](noted/README.md) |
 | `noxious` | [noxious](noxious/README.md) |
@@ -67,6 +73,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `optinseltrace-4` | [optinseltrace-4](optinseltrace-4/README.md) |
 | `optinseltrace-5` | [optinseltrace-5](optinseltrace-5/README.md) |
 | `ore` | [ore](ore/README.md) |
+| `oxide` | [oxide](oxide/README.md) |
 | `packet-puzzle` | [packet-puzzle](packet-puzzle/README.md) |
 | `payload` | [payload](payload/README.md) |
 | `pcap-analysis` | [pcap-analysis](pcap-analysis/README.md) |
@@ -74,6 +81,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `phantomring` | [phantomring](phantomring/README.md) |
 | `pikaptcha` | [pikaptcha](pikaptcha/README.md) |
 | `procnet` | [procnet](procnet/README.md) |
+| `pwned` | [pwned](pwned/README.md) |
 | `reaper` | [reaper](reaper/README.md) |
 | `recollection` | [recollection](recollection/README.md) |
 | `rogueone` | [rogueone](rogueone/README.md) |

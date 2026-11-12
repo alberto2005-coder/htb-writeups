@@ -63,6 +63,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
+| `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
@@ -78,6 +79,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
 | `windows/jea` | [jea](windows/jea.md) |
+| `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.md) |
@@ -86,8 +88,10 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
 | `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.md) |
+| `windows/runas-saved-credentials` | [runas-saved-credentials](windows/runas-saved-credentials.md) |
 | `windows/server-operators` | [server-operators](windows/server-operators.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.md) |
+| `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.md) |
 | `windows/zerologon` | [zerologon](windows/zerologon.md) |

@@ -124,6 +124,14 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Grandpa | Windows | Easy | IIS 6.0 CVE-2017-7269 and Churrasco escalation | [Ver](../machines/windows/grandpa/README.md) | [EN](../machines/windows/grandpa/README.en.md) |
 | SecNotes | Windows | Medium | CSRF to admin, SMB webshell and WSL `bash.exe` | [Ver](../machines/windows/secnotes/README.md) | [EN](../machines/windows/secnotes/README.en.md) |
 | Monteverde | Windows | Medium | Anonymous LDAP, `azure.xml` and Azure AD Connect credentials | [Ver](../machines/windows/monteverde/README.md) | [EN](../machines/windows/monteverde/README.en.md) |
+| Keeper | Linux | Easy | Default Request Tracker, ticket credentials and KeePass CVE-2023-32784 | [Ver](../machines/linux/keeper/README.md) | [EN](../machines/linux/keeper/README.en.md) |
+| Validation | Linux | Easy | Second-order SQLi, cookies and webshell upload | [Ver](../machines/linux/validation/README.md) | [EN](../machines/linux/validation/README.en.md) |
+| Paper | Linux | Medium | WordPress draft, Rocket.Chat CVE-2019-17671 and polkit | [Ver](../machines/linux/paper/README.md) | [EN](../machines/linux/paper/README.en.md) |
+| Pandora | Linux | Medium | SNMP, Pandora FMS SQLi and SUID PATH hijack | [Ver](../machines/linux/pandora/README.md) | [EN](../machines/linux/pandora/README.en.md) |
+| Giddy | Windows | Medium | IIS SQLi, WinRM and UniFi Video as SYSTEM | [Ver](../machines/windows/giddy/README.md) | [EN](../machines/windows/giddy/README.en.md) |
+| Sniper | Windows | Medium | LFI/RFI, SMB and `runas /savecred` | [Ver](../machines/windows/sniper/README.md) | [EN](../machines/windows/sniper/README.en.md) |
+| StreamIO | Windows | Medium | MSSQL SQLi, LFI/RFI, Firefox and LAPS | [Ver](../machines/windows/streamio/README.md) | [EN](../machines/windows/streamio/README.en.md) |
+| Conceal | Windows | Hard | SNMP/IPsec, anonymous FTP webshell and JuicyPotato | [Ver](../machines/windows/conceal/README.md) | [EN](../machines/windows/conceal/README.en.md) |
 
 ## Pending
 

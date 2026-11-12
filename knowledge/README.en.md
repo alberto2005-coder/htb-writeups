@@ -63,6 +63,7 @@ This index is generated from the repository's versioned writeups.
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.en.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.en.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.en.md) |
+| `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.en.md) |
 | `web/ssti` | [ssti](web/ssti.en.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.en.md) |
@@ -78,6 +79,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.en.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.en.md) |
 | `windows/jea` | [jea](windows/jea.en.md) |
+| `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.en.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.en.md) |
@@ -86,8 +88,10 @@ This index is generated from the repository's versioned writeups.
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.en.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.en.md) |
 | `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.en.md) |
+| `windows/runas-saved-credentials` | [runas-saved-credentials](windows/runas-saved-credentials.en.md) |
 | `windows/server-operators` | [server-operators](windows/server-operators.en.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.en.md) |
+| `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.en.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.en.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.en.md) |
 | `windows/zerologon` | [zerologon](windows/zerologon.en.md) |

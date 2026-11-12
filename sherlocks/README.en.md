@@ -102,6 +102,14 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Grabber | Malware Analysis | Medium | Infostealer, browsers/wallets and C2 | PEStudio, Procmon, Wireshark | [Ver](grabber/README.en.md) |
 | Hat Trick | DFIR / Windows | Easy | Scheduled tasks and credential access | EvtxECmd, Autoruns | [Ver](hat-trick/README.en.md) |
 | Infiltrate | DFIR / Network | Easy | PCAP, SMB/WinRM and EVTX correlation | Wireshark, Zeek, EvtxECmd | [Ver](infiltrate/README.en.md) |
+| Backdoor | DFIR / Windows | Easy | IIS, webshell and persistence | EvtxECmd, MFTECmd, PECmd | [Ver](backdoor/README.en.md) |
+| BlackEnergy | Malware Analysis | Medium | Dropper, persistence and C2 | DIE, CAPA, Procmon | [Ver](blackenergy/README.en.md) |
+| Mysterious | DFIR / Windows | Easy | USB, LNK and scheduled tasks | Registry Explorer, JLECmd | [Ver](mysterious/README.en.md) |
+| Lit | DFIR / Windows | Easy | RDP brute force and 4625/4624 events | EvtxECmd, Timeline Explorer | [Ver](lit/README.en.md) |
+| Alchemy | DFIR / Windows | Medium | Obfuscated PowerShell and credential access | EvtxECmd, Volatility | [Ver](alchemy/README.en.md) |
+| Artifact | DFIR / Windows | Easy | MFT, archives and exfiltration | MFTECmd, PECmd | [Ver](artifact/README.en.md) |
+| Oxide | DFIR / Windows | Medium | Memory, process injection and C2 | Volatility, MemProcFS | [Ver](oxide/README.en.md) |
+| Pwned | DFIR / Windows | Easy | Ransomware and shadow-copy deletion | EvtxECmd, MFTECmd | [Ver](pwned/README.en.md) |
 
 ## Shared methodology
 
