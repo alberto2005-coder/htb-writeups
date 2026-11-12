@@ -106,6 +106,14 @@
 | I know Mag1k | Crypto | Easy | DES-CBC con padding oracle: descifrar la cookie y forjar `role=admin` | **Retired** | [Ver](I%20know%20Mag1k/README.md) | [EN](I%20know%20Mag1k/README.en.md) |
 | Event Horizon | Forensics | Easy | EVTX operacionales tras borrar los logs de PowerShell | **Retired** | [Ver](Event%20Horizon/README.md) | [EN](Event%20Horizon/README.en.md) |
 | misDIRection | Misc | Very Easy | ZIP con directorios por carácter y ficheros por posición; base64 | **Retired** | [Ver](misDIRection/README.md) | [EN](misDIRection/README.en.md) |
+| Debugging Interface | Hardware | Very Easy | `.sal` de Saleae, UART a 31250 baudios y decodificación serie | **Retired** | [Ver](Debugging%20Interface/README.md) | [EN](Debugging%20Interface/README.en.md) |
+| Digital Cube | Stego | Easy | Datos binarios renderizados como QR y escaneo | **Retired** | [Ver](Digital%20Cube/README.md) | [EN](Digital%20Cube/README.en.md) |
+| Infiltration | OSINT | Easy | LinkedIn, Instagram y una etiqueta visible en una foto | **Retired** | [Ver](Infiltration/README.md) | [EN](Infiltration/README.en.md) |
+| Restaurant | Pwn | Easy | Desbordamiento de pila, fuga de `puts@got` y ret2libc | **Retired** | [Ver](Restaurant/README.md) | [EN](Restaurant/README.en.md) |
+| RSAisEasy | Crypto | Easy | Módulos RSA no coprimos: `gcd` y descifrado por bloques | **Retired** | [Ver](RSAisEasy/README.md) | [EN](RSAisEasy/README.en.md) |
+| Confidentiality | Blockchain | Medium | ERC-721 y maleabilidad de firmas ECDSA | **Retired** | [Ver](Confidentiality/README.md) | [EN](Confidentiality/README.en.md) |
+| Android in the Middle | Crypto | Very Easy | Diffie-Hellman sin autenticar y ataque de intermediario | **Retired** | [Ver](Android%20in%20the%20Middle/README.md) | [EN](Android%20in%20the%20Middle/README.en.md) |
+| Free Services | Forensics | Easy | Correo `.eml`, MIME y extracción de adjuntos | **Retired** | [Ver](Free%20Services/README.md) | [EN](Free%20Services/README.en.md) |
 
 ## Categorías
 

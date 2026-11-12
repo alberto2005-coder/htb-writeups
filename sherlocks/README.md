@@ -94,6 +94,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | OpTinselTrace-3 | DFIR / Memoria | Medium | Memoria Windows, LNK, PowerShell ofuscado y Defender | Volatility 3, CyberChef, IDA | [Ver](optinseltrace-3/README.md) |
 | OpTinselTrace-4 | DFIR / Red | Easy | PCAP de impresión, PJL y SSH; ZIP con AES | 7-Zip, Wireshark, `tshark` | [Ver](optinseltrace-4/README.md) |
 | OpTinselTrace-5 | DFIR / Windows | Hard | EVTX, servicios 7045, propagación y ransomware | Chainsaw, Sigma | [Ver](optinseltrace-5/README.md) |
+| SmartyPants | DFIR / Windows | Very Easy | EVTX de RDP (1149), SmartScreen y borrado de logs (1102) | EvtxECmd, Timeline Explorer | [Ver](smartypants/README.md) |
+| Allegretto | DFIR / Windows | Medium | Imagen EWF con BitLocker, Thunderbird y papelera | ewfmount, dissect, RECmd | [Ver](allegretto/README.md) |
+| Salsa Dance | DFIR / Windows | Medium | EVTX, MFT, PowerShell y línea temporal | EvtxECmd, MFTECmd, Chainsaw | [Ver](salsa-dance/README.md) |
+| Cinder | DFIR / Windows | Easy | Persistencia en registro/servicios y ejecución | Registry Explorer, PECmd | [Ver](cinder/README.md) |
+| Fleet | DFIR / Windows | Easy | Correlación multi-host y movimiento lateral | EvtxECmd, Timeline Explorer | [Ver](fleet/README.md) |
+| Grabber | Malware Analysis | Medium | Infostealer, navegadores/wallets y C2 | PEStudio, Procmon, Wireshark | [Ver](grabber/README.md) |
+| Hat Trick | DFIR / Windows | Easy | Tareas programadas y acceso a credenciales | EvtxECmd, Autoruns | [Ver](hat-trick/README.md) |
+| Infiltrate | DFIR / Red | Easy | PCAP, SMB/WinRM y correlación con EVTX | Wireshark, Zeek, EvtxECmd | [Ver](infiltrate/README.md) |
 
 ## Metodología común
 
