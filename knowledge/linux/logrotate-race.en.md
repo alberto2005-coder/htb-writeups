@@ -1,5 +1,5 @@
 ---
-topic: Carrera de logrotate: directorio escribible y opción create
+topic: "Carrera de logrotate: directorio escribible y opción create"
 tags: [linux, privesc, logrotate, race-condition, symlink]
 ---
 

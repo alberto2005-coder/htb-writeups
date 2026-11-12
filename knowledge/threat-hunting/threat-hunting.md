@@ -1,5 +1,5 @@
 ---
-title: Threat hunting: hipótesis, pivotes y evidencia
+title: "Threat hunting: hipótesis, pivotes y evidencia"
 tags: [threat-hunting, dfir, evtx, sysmon, pcap, mitre]
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: PyJail: listas negras y escapes
+title: "PyJail: listas negras y escapes"
 tags: [misc, pyjail, python, sandbox, exec, ctf]
 ---
 

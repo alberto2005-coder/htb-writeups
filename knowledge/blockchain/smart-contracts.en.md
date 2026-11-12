@@ -1,5 +1,5 @@
 ---
-topic: Contratos inteligentes: estado, pagos y superficies típicas
+topic: "Contratos inteligentes: estado, pagos y superficies típicas"
 tags: [blockchain, solidity, evm, smart-contract, foundry]
 ---
 

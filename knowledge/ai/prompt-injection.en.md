@@ -1,5 +1,5 @@
 ---
-topic: Inyección de prompt: sacar lo que el modelo no debe decir
+topic: "Inyección de prompt: sacar lo que el modelo no debe decir"
 tags: [ai, llm, prompt-injection, jailbreak, owasp]
 ---
 

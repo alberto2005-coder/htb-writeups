@@ -3,7 +3,7 @@ sherlock: Vantage
 domain: DFIR / Red
 difficulty: Very Easy
 platform: Hack The Box
-evidence: Dos capturas: servidor web y controlador de una nube privada
+evidence: "Dos capturas: servidor web y controlador de una nube privada"
 tools: [Wireshark, tshark, CyberChef]
 state: Retired
 tags: [dfir, dfir-/-red]
