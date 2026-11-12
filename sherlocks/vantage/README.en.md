@@ -3,7 +3,7 @@ sherlock: Vantage
 domain: DFIR / Network
 difficulty: Very Easy
 platform: Hack The Box
-evidence: Two captures: web server and private-cloud controller
+evidence: "Two captures: web server and private-cloud controller"
 tools: [Wireshark, tshark, CyberChef]
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Cadenas C y bytes nulos: truncado silencioso
+title: "Cadenas C y bytes nulos: truncado silencioso"
 tags: [pwn, c-strings, strcpy, null-byte, crypto, logic-bug]
 ---
 

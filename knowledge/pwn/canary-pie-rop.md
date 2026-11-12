@@ -1,5 +1,5 @@
 ---
-title: Canario, PIE y ROP: de la fuga al shell
+title: "Canario, PIE y ROP: de la fuga al shell"
 tags: [pwn, canary, pie, stack-pivot, ret2libc, aslr]
 ---
 

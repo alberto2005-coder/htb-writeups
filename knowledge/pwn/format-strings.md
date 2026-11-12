@@ -1,5 +1,5 @@
 ---
-title: Format strings: leer y escribir con printf
+title: "Format strings: leer y escribir con printf"
 tags: [pwn, format-string, printf, cwe-134, x86-64]
 ---
 

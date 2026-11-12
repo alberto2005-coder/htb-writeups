@@ -1,5 +1,5 @@
 ---
-topic: Entra ID y Sentinel: inicios de sesión, auditoría y KQL
+topic: "Entra ID y Sentinel: inicios de sesión, auditoría y KQL"
 tags: [cloud, azure, entra-id, sentinel, kql, identity, dfir]
 ---
 

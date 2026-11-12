@@ -1,5 +1,5 @@
 ---
-topic: Entra ID and Sentinel: sign-ins, audit and KQL
+topic: "Entra ID and Sentinel: sign-ins, audit and KQL"
 tags: [cloud, azure, entra-id, sentinel, kql, identity, dfir]
 ---
 
