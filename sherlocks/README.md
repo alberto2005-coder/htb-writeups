@@ -81,6 +81,11 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Mellitus | DFIR / Memoria | Medium | Memoria, historial de Chrome, hashes locales e imagen invertida | Volatility 3, `sqlite3`, Pillow | [Ver](mellitus/README.md) |
 | Nuts | DFIR / Windows | Medium | Typosquat de NuGet, `init.ps1`, persistencia y Defender | NuGet, PECmd, EvtxECmd | [Ver](nuts/README.md) |
 | Ore | DFIR / Linux | Medium | Grafana CVE-2021-43798, credenciales y minero `xmrig` | `sqlite3`, `ps`, `ss` | [Ver](ore/README.md) |
+| Conned-Again | DFIR / Linux | Easy | Triaje CatScale de Confluence: CVE-2023-22515 y CVE-2023-22527 | `grep`, análisis de logs | [Ver](conned-again/README.md) |
+| Kuber | DFIR / Kubernetes | Easy | NodePort SSH, secretos en base64 y pod falso en `kube-system` | `grep`, YAML, `base64` | [Ver](kuber/README.md) |
+| Exitiabilis | SOC / Windows | Medium | HELK y VPN AnyConnect: correlación de logon, ejecución y persistencia | Kibana, EvtxECmd | [Ver](exitiabilis/README.md) |
+| DroidPhish | DFIR / Android | Easy | Imagen ext4, Proton Mail, APK sideloaded y C2 en base64 | `debugfs`, `sqlite3`, Androguard | [Ver](droidphish/README.md) |
+| Unsupervised | DFIR / Windows | Medium | USB, `USBSTOR`, jump lists y thumbcache en una exfiltración | Registry Explorer, JLECmd | [Ver](unsupervised/README.md) |
 
 ## Metodología común
 

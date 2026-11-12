@@ -103,6 +103,11 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Return | Windows | Easy | Panel de impresora, bind LDAP, WinRM y `Server Operators` | [Ver](../machines/windows/return/README.md) | [EN](../machines/windows/return/README.en.md) |
 | Retired | Linux | Medium | File read, ROP, symlink en backup y `binfmt_misc` | [Ver](../machines/linux/retired/README.md) | [EN](../machines/linux/retired/README.en.md) |
 | Vault | Linux | Medium | Upload PHP, OpenVPN, firewall por puerto origen y GPG | [Ver](../machines/linux/vault/README.md) | [EN](../machines/linux/vault/README.en.md) |
+| Flight | Windows | Hard | LFI en `school.flight.htb`, Responder, share SMB y DCSync con Rubeus | [Ver](../machines/windows/flight/README.md) | [EN](../machines/windows/flight/README.en.md) |
+| Trick | Linux | Easy | AXFR, CVE-2022-28468, LFI con `....//` y abuso de fail2ban | [Ver](../machines/linux/trick/README.md) | [EN](../machines/linux/trick/README.en.md) |
+| BroScience | Linux | Medium | LFI `img.php?path=`, doble URL-encode, `AvatarInterface` y hashcat `-m 20` | [Ver](../machines/linux/broscience/README.md) | [EN](../machines/linux/broscience/README.en.md) |
+| Outdated | Windows | Medium | Follina CVE-2022-30190, shadow credentials y abuso de WSUS | [Ver](../machines/windows/outdated/README.md) | [EN](../machines/windows/outdated/README.en.md) |
+| Scrambled | Windows | Medium | Kerberoast `sqlsvc`, silver ticket y `BinaryFormatter` en `ScrambleClient.exe` | [Ver](../machines/windows/scrambled/README.md) | [EN](../machines/windows/scrambled/README.en.md) |
 
 ## Pendientes
 
@@ -123,7 +128,7 @@ Un volcado en español de 164 directorios de máquina, 140 con PDF (448 PDF y 73
 
 ## Starting Point (disponibles)
 
-Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 120 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
+Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 125 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|

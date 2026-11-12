@@ -103,6 +103,11 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Return | Windows | Easy | Printer panel, LDAP bind, WinRM and `Server Operators` | [Ver](../machines/windows/return/README.md) | [EN](../machines/windows/return/README.en.md) |
 | Retired | Linux | Medium | File read, ROP, backup symlink and `binfmt_misc` | [Ver](../machines/linux/retired/README.md) | [EN](../machines/linux/retired/README.en.md) |
 | Vault | Linux | Medium | PHP upload, OpenVPN, source-port firewall bypass and GPG | [Ver](../machines/linux/vault/README.md) | [EN](../machines/linux/vault/README.en.md) |
+| Flight | Windows | Hard | LFI on `school.flight.htb`, Responder, SMB share and DCSync with Rubeus | [Ver](../machines/windows/flight/README.md) | [EN](../machines/windows/flight/README.en.md) |
+| Trick | Linux | Easy | AXFR, CVE-2022-28468, LFI with `....//` and fail2ban abuse | [Ver](../machines/linux/trick/README.md) | [EN](../machines/linux/trick/README.en.md) |
+| BroScience | Linux | Medium | `img.php?path=` LFI, double URL-encoding, `AvatarInterface` and hashcat `-m 20` | [Ver](../machines/linux/broscience/README.md) | [EN](../machines/linux/broscience/README.en.md) |
+| Outdated | Windows | Medium | Follina CVE-2022-30190, shadow credentials and WSUS abuse | [Ver](../machines/windows/outdated/README.md) | [EN](../machines/windows/outdated/README.en.md) |
+| Scrambled | Windows | Medium | Kerberoast `sqlsvc`, silver ticket and `BinaryFormatter` in `ScrambleClient.exe` | [Ver](../machines/windows/scrambled/README.md) | [EN](../machines/windows/scrambled/README.en.md) |
 
 ## Pending
 
@@ -125,7 +130,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 120 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 125 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|

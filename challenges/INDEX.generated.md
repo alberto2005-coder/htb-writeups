@@ -10,6 +10,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Ancient Encodings` | [Ancient Encodings](Ancient%20Encodings/README.md) |
 | `APKrypt` | [APKrypt](APKrypt/README.md) |
 | `Aptitude Test` | [Aptitude Test](Aptitude%20Test/README.md) |
+| `Baby Crypt` | [Baby Crypt](Baby%20Crypt/README.md) |
 | `baby interdimensional internet` | [baby interdimensional internet](baby%20interdimensional%20internet/README.md) |
 | `baby ninja jinja` | [baby ninja jinja](baby%20ninja%20jinja/README.md) |
 | `Baby Time Capsule` | [Baby Time Capsule](Baby%20Time%20Capsule/README.md) |
@@ -42,6 +43,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Iced Tea` | [Iced Tea](Iced%20Tea/README.md) |
 | `Illumination` | [Illumination](Illumination/README.md) |
 | `Impossible Password` | [Impossible Password](Impossible%20Password/README.md) |
+| `Insider` | [Insider](Insider/README.md) |
 | `Interdimensional Internet` | [Interdimensional Internet](Interdimensional%20Internet/README.md) |
 | `Intrusion` | [Intrusion](Intrusion/README.md) |
 | `Keep Tryin'` | [Keep Tryin'](Keep%20Tryin%27/README.md) |
@@ -54,6 +56,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Makeshift` | [Makeshift](Makeshift/README.md) |
 | `MarketDump` | [MarketDump](MarketDump/README.md) |
 | `Marshal in the Middle` | [Marshal in the Middle](Marshal%20in%20the%20Middle/README.md) |
+| `Missing in Action` | [Missing in Action](Missing%20in%20Action/README.md) |
 | `Obscure` | [Obscure](Obscure/README.md) |
 | `Oddly Even` | [Oddly Even](Oddly%20Even/README.md) |
 | `Oldbridge` | [Oldbridge](Oldbridge/README.md) |
@@ -75,6 +78,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Space Pirate Entrypoint` | [Space Pirate Entrypoint](Space%20Pirate%20Entrypoint/README.md) |
 | `Space Pirate Going Deeper` | [Space Pirate Going Deeper](Space%20Pirate%20Going%20Deeper/README.md) |
 | `Spookifier` | [Spookifier](Spookifier/README.md) |
+| `Spooky Time` | [Spooky Time](Spooky%20Time/README.md) |
 | `SpookyPass` | [SpookyPass](SpookyPass/README.md) |
 | `Super-Duper Pwn` | [Super-Duper Pwn](Super-Duper%20Pwn/README.md) |
 | `Survival of the Fittest` | [Survival of the Fittest](Survival%20of%20the%20Fittest/README.md) |
@@ -89,5 +93,6 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Urgent` | [Urgent](Urgent/README.md) |
 | `Vault-breaker` | [Vault-breaker](Vault-breaker/README.md) |
 | `Watch Tower` | [Watch Tower](Watch%20Tower/README.md) |
+| `Weak RSA` | [Weak RSA](Weak%20RSA/README.md) |
 | `Weather App` | [Weather App](Weather%20App/README.md) |
 | `xorxorxor` | [xorxorxor](xorxorxor/README.md) |

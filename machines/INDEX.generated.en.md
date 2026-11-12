@@ -21,6 +21,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/blunder` | [blunder](linux/blunder/README.md) |
 | `linux/boardlight` | [boardlight](linux/boardlight/README.md) |
 | `linux/book` | [book](linux/book/README.md) |
+| `linux/broscience` | [broscience](linux/broscience/README.md) |
 | `linux/busqueda` | [busqueda](linux/busqueda/README.md) |
 | `linux/cap` | [cap](linux/cap/README.md) |
 | `linux/cobblestone` | [cobblestone](linux/cobblestone/README.md) |
@@ -56,6 +57,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/swagshop` | [swagshop](linux/swagshop/README.md) |
 | `linux/tabby` | [tabby](linux/tabby/README.md) |
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
+| `linux/trick` | [trick](linux/trick/README.md) |
 | `linux/valentine` | [valentine](linux/valentine/README.md) |
 | `linux/variatype` | [variatype](linux/variatype/README.md) |
 | `linux/vault` | [vault](linux/vault/README.md) |
@@ -102,6 +104,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/devel` | [devel](windows/devel/README.md) |
 | `windows/eighteen` | [eighteen](windows/eighteen/README.md) |
 | `windows/escape` | [escape](windows/escape/README.md) |
+| `windows/flight` | [flight](windows/flight/README.md) |
 | `windows/fluffy` | [fluffy](windows/fluffy/README.md) |
 | `windows/forest` | [forest](windows/forest/README.md) |
 | `windows/garfield` | [garfield](windows/garfield/README.md) |
@@ -114,6 +117,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/multimaster` | [multimaster](windows/multimaster/README.md) |
 | `windows/netmon` | [netmon](windows/netmon/README.md) |
 | `windows/optimum` | [optimum](windows/optimum/README.md) |
+| `windows/outdated` | [outdated](windows/outdated/README.md) |
 | `windows/pingpong` | [pingpong](windows/pingpong/README.md) |
 | `windows/pirate` | [pirate](windows/pirate/README.md) |
 | `windows/querier` | [querier](windows/querier/README.md) |
@@ -122,6 +126,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/resolute` | [resolute](windows/resolute/README.md) |
 | `windows/return` | [return](windows/return/README.md) |
 | `windows/sauna` | [sauna](windows/sauna/README.md) |
+| `windows/scrambled` | [scrambled](windows/scrambled/README.md) |
 | `windows/servmon` | [servmon](windows/servmon/README.md) |
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |
 | `windows/support` | [support](windows/support/README.md) |

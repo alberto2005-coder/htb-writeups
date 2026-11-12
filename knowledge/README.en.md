@@ -30,6 +30,7 @@ This index is generated from the repository's versioned writeups.
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.en.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.en.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
+| `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.en.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.en.md) |
@@ -67,6 +68,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/adcs-esc13` | [adcs-esc13](windows/adcs-esc13.en.md) |
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.en.md) |
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.en.md) |
+| `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.en.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.en.md) |
 | `windows/jea` | [jea](windows/jea.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
@@ -80,3 +82,4 @@ This index is generated from the repository's versioned writeups.
 | `windows/server-operators` | [server-operators](windows/server-operators.en.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.en.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.en.md) |
+| `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.en.md) |
