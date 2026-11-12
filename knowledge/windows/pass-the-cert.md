@@ -1,5 +1,7 @@
 # PassTheCert
 
+[🇬🇧 English](pass-the-cert.en.md) | **Español**
+
 ## Resumen
 
 PassTheCert es una técnica de abuso de autenticación basada en certificados en Active Directory. Cuando se dispone de un certificado válido y su clave privada para una identidad, ciertos servicios de AD pueden aceptar autenticación mediante certificado (por ejemplo, TLS client authentication en LDAP/LDAPS). La técnica permite utilizar esa identidad para realizar operaciones autorizadas por sus permisos, sin necesitar su contraseña.
