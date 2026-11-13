@@ -6,8 +6,10 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 
 | Ruta | Ficha |
 |---|---|
+| `ai/adversarial-examples` | [adversarial-examples](ai/adversarial-examples.md) |
 | `ai/lm-context-injection` | [lm-context-injection](ai/lm-context-injection.md) |
 | `ai/prompt-injection` | [prompt-injection](ai/prompt-injection.md) |
+| `blockchain/multisig-thresholds` | [multisig-thresholds](blockchain/multisig-thresholds.md) |
 | `blockchain/smart-contracts` | [smart-contracts](blockchain/smart-contracts.md) |
 | `clickhouse/cheatsheet` | [cheatsheet](clickhouse/cheatsheet.md) |
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
@@ -16,6 +18,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.md) |
 | `crypto/xor-and-encodings` | [xor-and-encodings](crypto/xor-and-encodings.md) |
+| `forensics/docker-image-layers` | [docker-image-layers](forensics/docker-image-layers.md) |
 | `forensics/html-smuggling-hta` | [html-smuggling-hta](forensics/html-smuggling-hta.md) |
 | `forensics/malware-redline` | [malware-redline](forensics/malware-redline.md) |
 | `forensics/moveit-cve-2023-34362` | [moveit-cve-2023-34362](forensics/moveit-cve-2023-34362.md) |
@@ -29,6 +32,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `general/pivoting` | [pivoting](general/pivoting.md) |
 | `general/remote-access` | [remote-access](general/remote-access.md) |
 | `general/smb-enumeration` | [smb-enumeration](general/smb-enumeration.md) |
+| `hardware/can-bus` | [can-bus](hardware/can-bus.md) |
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.md) |

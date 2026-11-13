@@ -130,6 +130,11 @@
 | Red Island | Web | Medium | SSRF con gopher hacia Redis y RCE | **Retired** | [Ver](Red%20Island/README.md) | [EN](Red%20Island/README.en.md) |
 | Mutation Lab | Web | Easy | SVG con lectura de archivos y forja de sesión | **Retired** | [Ver](Mutation%20Lab/README.md) | [EN](Mutation%20Lab/README.en.md) |
 | Slippy | Web | Medium | TAR con path traversal y SSTI | **Retired** | [Ver](Slippy/README.md) | [EN](Slippy/README.en.md) |
+| Sigma Technology | AI/ML | Easy | Ejemplo adversario con cinco píxeles | **Retired** | [Ver](Sigma%20Technology/README.md) | [EN](Sigma%20Technology/README.en.md) |
+| Funds Secured | Blockchain | Easy | Multifirma sin umbral y array vacío | **Retired** | [Ver](Funds%20Secured/README.md) | [EN](Funds%20Secured/README.en.md) |
+| Unique | Hardware | Easy | CAN a 125 kbps y VIN | **Retired** | [Ver](Unique/README.md) | [EN](Unique/README.en.md) |
+| Peel Back The Layers | Forensics | Medium | Capas Docker y biblioteca con `LD_PRELOAD` | **Retired** | [Ver](Peel%20Back%20The%20Layers/README.md) | [EN](Peel%20Back%20The%20Layers/README.en.md) |
+| Up a Stream | Reversing | Easy | Streams Java y funciones inversas | **Retired** | [Ver](Up%20a%20Stream/README.md) | [EN](Up%20a%20Stream/README.en.md) |
 
 ## Categorías
 

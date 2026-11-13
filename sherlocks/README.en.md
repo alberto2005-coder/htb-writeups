@@ -118,6 +118,11 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | SalineBreeze-2 | DFIR | Easy | Logs, PCAP and lateral movement | Zeek, Wireshark | [Ver](salinebreeze-2/README.en.md) |
 | ElectricBreeze-2 | Malware Analysis | Easy | JAR, webshell and credentials | jadx, YARA | [Ver](electricbreeze-2/README.en.md) |
 | ShadowStream | Malware Analysis | Medium | Multi-stage loader and persistence | CAPA, Volatility | [Ver](shadowstream/README.en.md) |
+| WhyFind | DFIR | Easy | Prefetch, Amcache and execution from USB | KAPE, Timeline Explorer | [Ver](whyfind/README.en.md) |
+| Cuidado | SOC | Easy | HTTP traffic, UPX binary and C2 | Wireshark, CyberChef | [Ver](cuidado/README.en.md) |
+| PercyPay | Cloud | Easy | Lambda function, credentials and persistence | AWS CLI, CloudTrail | [Ver](percypay/README.en.md) |
+| ReliableThreat | DFIR | Medium | VS Code extension and PowerShell execution | KAPE, Registry Explorer | [Ver](reliablethreat/README.en.md) |
+| GateKeeper | DFIR | Hard | macOS artefacts, LaunchAgents and signed binary | KnockKnock, Plaso | [Ver](gatekeeper/README.en.md) |
 
 ## Shared methodology
 

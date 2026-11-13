@@ -118,6 +118,11 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | SalineBreeze-2 | DFIR | Easy | Logs, PCAP y movimiento lateral | Zeek, Wireshark | [Ver](salinebreeze-2/README.md) |
 | ElectricBreeze-2 | Malware Analysis | Easy | JAR, webshell y credenciales | jadx, YARA | [Ver](electricbreeze-2/README.md) |
 | ShadowStream | Malware Analysis | Medium | Loader multicapa y persistencia | CAPA, Volatility | [Ver](shadowstream/README.md) |
+| WhyFind | DFIR | Easy | Prefetch, Amcache y ejecución desde USB | KAPE, Timeline Explorer | [Ver](whyfind/README.md) |
+| Cuidado | SOC | Easy | Tráfico HTTP, binario UPX y C2 | Wireshark, CyberChef | [Ver](cuidado/README.md) |
+| PercyPay | Cloud | Easy | Función Lambda, credenciales y persistencia | AWS CLI, CloudTrail | [Ver](percypay/README.md) |
+| ReliableThreat | DFIR | Medium | Extensión de VS Code y ejecución de PowerShell | KAPE, Registry Explorer | [Ver](reliablethreat/README.md) |
+| GateKeeper | DFIR | Hard | Artefactos macOS, LaunchAgents y binario firmado | KnockKnock, Plaso | [Ver](gatekeeper/README.md) |
 
 ## Metodología común
 
