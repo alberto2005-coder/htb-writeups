@@ -13,6 +13,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `blockchain/smart-contracts` | [smart-contracts](blockchain/smart-contracts.md) |
 | `clickhouse/cheatsheet` | [cheatsheet](clickhouse/cheatsheet.md) |
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
+| `cloud/gmsa-abuse` | [gmsa-abuse](cloud/gmsa-abuse.md) |
 | `cloud/s3-misconfiguration` | [s3-misconfiguration](cloud/s3-misconfiguration.md) |
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.md) |
@@ -41,8 +42,11 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.md) |
+| `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.md) |
 | `misc/unicode-invisible` | [unicode-invisible](misc/unicode-invisible.md) |
+| `mobile/android-backup-forensics` | [android-backup-forensics](mobile/android-backup-forensics.md) |
+| `mobile/android-certificate-pinning` | [android-certificate-pinning](mobile/android-certificate-pinning.md) |
 | `mobile/apk-analysis` | [apk-analysis](mobile/apk-analysis.md) |
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.md) |
 | `privesc/linux-sudo-suid` | [linux-sudo-suid](privesc/linux-sudo-suid.md) |

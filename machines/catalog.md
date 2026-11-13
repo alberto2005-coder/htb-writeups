@@ -145,6 +145,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | LinkVortex | Linux | Easy | `.git`, Ghost CVE-2023-40028 y TOCTOU | [Ver](../machines/linux/linkvortex/README.md) | [EN](../machines/linux/linkvortex/README.en.md) |
 | EscapeTwo | Windows | Easy | Excel, MSSQL, `WriteOwner` y ADCS ESC4 a ESC1 | [Ver](../machines/windows/escapetwo/README.md) | [EN](../machines/windows/escapetwo/README.en.md) |
 | TombWatcher | Windows | Medium | `WriteSPN`, Kerberoasting, gMSA, Recycle Bin y ESC15 | [Ver](../machines/windows/tombwatcher/README.md) | [EN](../machines/windows/tombwatcher/README.en.md) |
+| Planning | Linux | Easy | Grafana CVE-2024-9264, credenciales y Crontab UI | [Ver](../machines/linux/planning/README.md) | [EN](../machines/linux/planning/README.en.md) |
+| Data | Linux | Easy | Grafana CVE-2021-43798, hash PBKDF2 y Docker privilegiado | [Ver](../machines/linux/data/README.md) | [EN](../machines/linux/data/README.en.md) |
+| Sightless | Linux | Easy | SQLPad CVE-2022-0944, Froxlor y WebDriver | [Ver](../machines/linux/sightless/README.md) | [EN](../machines/linux/sightless/README.en.md) |
+| Editor | Linux | Medium | XWiki CVE-2025-24893 y NetData `ndsudo` | [Ver](../machines/linux/editor/README.md) | [EN](../machines/linux/editor/README.en.md) |
+| Conversor | Linux | Medium | `os.path.join`, cron de scripts y `needrestart` | [Ver](../machines/linux/conversor/README.md) | [EN](../machines/linux/conversor/README.en.md) |
+| Hospital | Windows | Medium | `.phar`, CVE-2023-35001, Ghostscript y XAMPP | [Ver](../machines/windows/hospital/README.md) | [EN](../machines/windows/hospital/README.en.md) |
+| TheFrizz | Windows | Medium | Gibbon CVE-2023-45878, Kerberos y GPO | [Ver](../machines/windows/thefrizz/README.md) | [EN](../machines/windows/thefrizz/README.en.md) |
+| Haze | Windows | Hard | Splunk CVE-2024-36991, gMSA y shadow credentials | [Ver](../machines/windows/haze/README.md) | [EN](../machines/windows/haze/README.en.md) |
 
 ## Pendientes
 

@@ -135,6 +135,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Unique | Hardware | Easy | CAN at 125 kbps and VIN | **Retired** | [ES](Unique/README.md) | [Ver](Unique/README.en.md) |
 | Peel Back The Layers | Forensics | Medium | Docker layers and an `LD_PRELOAD` library | **Retired** | [ES](Peel%20Back%20The%20Layers/README.md) | [Ver](Peel%20Back%20The%20Layers/README.en.md) |
 | Up a Stream | Reversing | Easy | Java streams and inverse functions | **Retired** | [ES](Up%20a%20Stream/README.md) | [Ver](Up%20a%20Stream/README.en.md) |
+| APKey | Mobile | Very Easy | Embedded MD5 and smali patching | **Retired** | [ES](APKey/README.md) | [Ver](APKey/README.en.md) |
+| Don't Overreact | Mobile | Easy | React Native bundle and embedded secret | **Retired** | [ES](Don%27t%20Overreact/README.md) | [Ver](Don%27t%20Overreact/README.en.md) |
+| Cat | Mobile | Easy | `adb backup`, TAR and SQLite | **Retired** | [ES](Cat/README.md) | [Ver](Cat/README.en.md) |
+| SeeTheSharpFlag | Mobile | Easy | Xamarin/.NET assembly | **Retired** | [ES](SeeTheSharpFlag/README.md) | [Ver](SeeTheSharpFlag/README.en.md) |
+| SAW | Mobile | Easy | Root detection and smali patching | **Retired** | [ES](SAW/README.md) | [Ver](SAW/README.en.md) |
+| Pinned | Mobile | Medium | Certificate pinning and Frida | **Retired** | [ES](Pinned/README.md) | [Ver](Pinned/README.en.md) |
+| Manager | Mobile | Medium | IDOR in the vault API | **Retired** | [ES](Manager/README.md) | [Ver](Manager/README.en.md) |
+| Anchored | Mobile | Medium | Native pin and SSL hook | **Retired** | [ES](Anchored/README.md) | [Ver](Anchored/README.en.md) |
 
 ## Categories
 

@@ -145,6 +145,14 @@ Reference notes for machines used to study techniques. The main table covers **r
 | LinkVortex | Linux | Easy | `.git`, Ghost CVE-2023-40028 and TOCTOU | [ES](../machines/linux/linkvortex/README.md) | [Ver](../machines/linux/linkvortex/README.en.md) |
 | EscapeTwo | Windows | Easy | Excel, MSSQL, `WriteOwner` and ADCS ESC4 to ESC1 | [ES](../machines/windows/escapetwo/README.md) | [Ver](../machines/windows/escapetwo/README.en.md) |
 | TombWatcher | Windows | Medium | `WriteSPN`, Kerberoasting, gMSA, Recycle Bin and ESC15 | [ES](../machines/windows/tombwatcher/README.md) | [Ver](../machines/windows/tombwatcher/README.en.md) |
+| Planning | Linux | Easy | Grafana CVE-2024-9264, credentials and Crontab UI | [ES](../machines/linux/planning/README.md) | [Ver](../machines/linux/planning/README.en.md) |
+| Data | Linux | Easy | Grafana CVE-2021-43798, PBKDF2 hash and privileged Docker | [ES](../machines/linux/data/README.md) | [Ver](../machines/linux/data/README.en.md) |
+| Sightless | Linux | Easy | SQLPad CVE-2022-0944, Froxlor and WebDriver | [ES](../machines/linux/sightless/README.md) | [Ver](../machines/linux/sightless/README.en.md) |
+| Editor | Linux | Medium | XWiki CVE-2025-24893 and NetData `ndsudo` | [ES](../machines/linux/editor/README.md) | [Ver](../machines/linux/editor/README.en.md) |
+| Conversor | Linux | Medium | `os.path.join`, script cron and `needrestart` | [ES](../machines/linux/conversor/README.md) | [Ver](../machines/linux/conversor/README.en.md) |
+| Hospital | Windows | Medium | `.phar`, CVE-2023-35001, Ghostscript and XAMPP | [ES](../machines/windows/hospital/README.md) | [Ver](../machines/windows/hospital/README.en.md) |
+| TheFrizz | Windows | Medium | Gibbon CVE-2023-45878, Kerberos and GPO | [ES](../machines/windows/thefrizz/README.md) | [Ver](../machines/windows/thefrizz/README.en.md) |
+| Haze | Windows | Hard | Splunk CVE-2024-36991, gMSA and shadow credentials | [ES](../machines/windows/haze/README.md) | [Ver](../machines/windows/haze/README.en.md) |
 
 ## Pending
 

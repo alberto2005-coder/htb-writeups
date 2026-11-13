@@ -8,8 +8,10 @@ This index is generated from the repository's versioned writeups.
 |---|---|
 | `0ld is g0ld` | [0ld is g0ld](0ld%20is%20g0ld/README.md) |
 | `Alien Cradle` | [Alien Cradle](Alien%20Cradle/README.md) |
+| `Anchored` | [Anchored](Anchored/README.md) |
 | `Ancient Encodings` | [Ancient Encodings](Ancient%20Encodings/README.md) |
 | `Android in the Middle` | [Android in the Middle](Android%20in%20the%20Middle/README.md) |
+| `APKey` | [APKey](APKey/README.md) |
 | `APKrypt` | [APKrypt](APKrypt/README.md) |
 | `Aptitude Test` | [Aptitude Test](Aptitude%20Test/README.md) |
 | `Baby Crypt` | [Baby Crypt](Baby%20Crypt/README.md) |
@@ -24,6 +26,7 @@ This index is generated from the repository's versioned writeups.
 | `breaking grad` | [breaking grad](breaking%20grad/README.md) |
 | `Call` | [Call](Call/README.md) |
 | `Cartographer` | [Cartographer](Cartographer/README.md) |
+| `Cat` | [Cat](Cat/README.md) |
 | `Chrono Mind` | [Chrono Mind](Chrono%20Mind/README.md) |
 | `Confidentiality` | [Confidentiality](Confidentiality/README.md) |
 | `Cryptohorrific` | [Cryptohorrific](Cryptohorrific/README.md) |
@@ -32,6 +35,7 @@ This index is generated from the repository's versioned writeups.
 | `Debug` | [Debug](Debug/README.md) |
 | `Debugging Interface` | [Debugging Interface](Debugging%20Interface/README.md) |
 | `Digital Cube` | [Digital Cube](Digital%20Cube/README.md) |
+| `Don't Overreact` | [Don't Overreact](Don%27t%20Overreact/README.md) |
 | `Dynastic` | [Dynastic](Dynastic/README.md) |
 | `Easy Phish` | [Easy Phish](Easy%20Phish/README.md) |
 | `Emdee five for life` | [Emdee five for life](Emdee%20five%20for%20life/README.md) |
@@ -68,6 +72,7 @@ This index is generated from the repository's versioned writeups.
 | `Lost Modulus` | [Lost Modulus](Lost%20Modulus/README.md) |
 | `LoveTok` | [LoveTok](LoveTok/README.md) |
 | `Makeshift` | [Makeshift](Makeshift/README.md) |
+| `Manager` | [Manager](Manager/README.md) |
 | `MarketDump` | [MarketDump](MarketDump/README.md) |
 | `Marshal in the Middle` | [Marshal in the Middle](Marshal%20in%20the%20Middle/README.md) |
 | `MetaVault` | [MetaVault](MetaVault/README.md) |
@@ -88,6 +93,7 @@ This index is generated from the repository's versioned writeups.
 | `Perfect Synchronization` | [Perfect Synchronization](Perfect%20Synchronization/README.md) |
 | `Phonebook` | [Phonebook](Phonebook/README.md) |
 | `Photon Lockdown` | [Photon Lockdown](Photon%20Lockdown/README.md) |
+| `Pinned` | [Pinned](Pinned/README.md) |
 | `Plaintext Tleasure` | [Plaintext Tleasure](Plaintext%20Tleasure/README.md) |
 | `Primary Knowledge` | [Primary Knowledge](Primary%20Knowledge/README.md) |
 | `Prometheon` | [Prometheon](Prometheon/README.md) |
@@ -98,7 +104,9 @@ This index is generated from the repository's versioned writeups.
 | `Restaurant` | [Restaurant](Restaurant/README.md) |
 | `ropme` | [ropme](ropme/README.md) |
 | `RSAisEasy` | [RSAisEasy](RSAisEasy/README.md) |
+| `SAW` | [SAW](SAW/README.md) |
 | `Secure Digital` | [Secure Digital](Secure%20Digital/README.md) |
+| `SeeTheSharpFlag` | [SeeTheSharpFlag](SeeTheSharpFlag/README.md) |
 | `Shattered Tablet` | [Shattered Tablet](Shattered%20Tablet/README.md) |
 | `Shush Protocol` | [Shush Protocol](Shush%20Protocol/README.md) |
 | `Sigma Technology` | [Sigma Technology](Sigma%20Technology/README.md) |
