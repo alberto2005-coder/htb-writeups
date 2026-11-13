@@ -135,6 +135,14 @@
 | Unique | Hardware | Easy | CAN a 125 kbps y VIN | **Retired** | [Ver](Unique/README.md) | [EN](Unique/README.en.md) |
 | Peel Back The Layers | Forensics | Medium | Capas Docker y biblioteca con `LD_PRELOAD` | **Retired** | [Ver](Peel%20Back%20The%20Layers/README.md) | [EN](Peel%20Back%20The%20Layers/README.en.md) |
 | Up a Stream | Reversing | Easy | Streams Java y funciones inversas | **Retired** | [Ver](Up%20a%20Stream/README.md) | [EN](Up%20a%20Stream/README.en.md) |
+| APKey | Mobile | Very Easy | MD5 embebido y parcheo smali | **Retired** | [Ver](APKey/README.md) | [EN](APKey/README.en.md) |
+| Don't Overreact | Mobile | Easy | Bundle React Native y secreto embebido | **Retired** | [Ver](Don%27t%20Overreact/README.md) | [EN](Don%27t%20Overreact/README.en.md) |
+| Cat | Mobile | Easy | `adb backup`, TAR y SQLite | **Retired** | [Ver](Cat/README.md) | [EN](Cat/README.en.md) |
+| SeeTheSharpFlag | Mobile | Easy | Ensamblado Xamarin/.NET | **Retired** | [Ver](SeeTheSharpFlag/README.md) | [EN](SeeTheSharpFlag/README.en.md) |
+| SAW | Mobile | Easy | Root detection y parcheo smali | **Retired** | [Ver](SAW/README.md) | [EN](SAW/README.en.md) |
+| Pinned | Mobile | Medium | Certificate pinning y Frida | **Retired** | [Ver](Pinned/README.md) | [EN](Pinned/README.en.md) |
+| Manager | Mobile | Medium | IDOR en API de bóveda | **Retired** | [Ver](Manager/README.md) | [EN](Manager/README.en.md) |
+| Anchored | Mobile | Medium | Pin nativo y hook SSL | **Retired** | [Ver](Anchored/README.md) | [EN](Anchored/README.en.md) |
 
 ## Categorías
 

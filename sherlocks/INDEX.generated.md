@@ -18,10 +18,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `bumblebee` | [bumblebee](bumblebee/README.md) |
 | `campfire-1` | [campfire-1](campfire-1/README.md) |
 | `campfire-2` | [campfire-2](campfire-2/README.md) |
+| `caught` | [caught](caught/README.md) |
 | `cinder` | [cinder](cinder/README.md) |
 | `compromised` | [compromised](compromised/README.md) |
 | `conned-again` | [conned-again](conned-again/README.md) |
 | `constellation` | [constellation](constellation/README.md) |
+| `crewcrow` | [crewcrow](crewcrow/README.md) |
 | `crownjewel-1` | [crownjewel-1](crownjewel-1/README.md) |
 | `crownjewel-2` | [crownjewel-2](crownjewel-2/README.md) |
 | `cuidado` | [cuidado](cuidado/README.md) |
@@ -40,6 +42,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `heartbreaker-denouement` | [heartbreaker-denouement](heartbreaker-denouement/README.md) |
 | `heartbreaker` | [heartbreaker](heartbreaker/README.md) |
 | `heist` | [heist](heist/README.md) |
+| `hookflare` | [hookflare](hookflare/README.md) |
 | `hunter` | [hunter](hunter/README.md) |
 | `hyperfiletable` | [hyperfiletable](hyperfiletable/README.md) |
 | `i-like-to` | [i-like-to](i-like-to/README.md) |
@@ -86,13 +89,16 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `percypay` | [percypay](percypay/README.md) |
 | `phantom-check` | [phantom-check](phantom-check/README.md) |
 | `phantomring` | [phantomring](phantomring/README.md) |
+| `phishnet` | [phishnet](phishnet/README.md) |
 | `pikaptcha` | [pikaptcha](pikaptcha/README.md) |
 | `procnet` | [procnet](procnet/README.md) |
+| `psittaciformes` | [psittaciformes](psittaciformes/README.md) |
 | `pwned` | [pwned](pwned/README.md) |
 | `reaper` | [reaper](reaper/README.md) |
 | `recollection` | [recollection](recollection/README.md) |
 | `reliablethreat` | [reliablethreat](reliablethreat/README.md) |
 | `rogueone` | [rogueone](rogueone/README.md) |
+| `romcom` | [romcom](romcom/README.md) |
 | `safecracker` | [safecracker](safecracker/README.md) |
 | `salinebreeze-2` | [salinebreeze-2](salinebreeze-2/README.md) |
 | `salsa-dance` | [salsa-dance](salsa-dance/README.md) |
@@ -111,5 +117,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `unit42` | [unit42](unit42/README.md) |
 | `unsupervised` | [unsupervised](unsupervised/README.md) |
 | `vantage` | [vantage](vantage/README.md) |
+| `whisper` | [whisper](whisper/README.md) |
 | `whyfind` | [whyfind](whyfind/README.md) |
 | `workfromhome` | [workfromhome](workfromhome/README.md) |
+| `zenith` | [zenith](zenith/README.md) |

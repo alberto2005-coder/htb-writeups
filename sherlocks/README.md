@@ -123,6 +123,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | PercyPay | Cloud | Easy | Función Lambda, credenciales y persistencia | AWS CLI, CloudTrail | [Ver](percypay/README.md) |
 | ReliableThreat | DFIR | Medium | Extensión de VS Code y ejecución de PowerShell | KAPE, Registry Explorer | [Ver](reliablethreat/README.md) |
 | GateKeeper | DFIR | Hard | Artefactos macOS, LaunchAgents y binario firmado | KnockKnock, Plaso | [Ver](gatekeeper/README.md) |
+| PhishNet | SOC | Very Easy | Cabeceras, SPF, adjunto base64 y ZIP | Wireshark, CyberChef | [Ver](phishnet/README.md) |
+| RomCom | DFIR | Very Easy | CVE-2025-8088, MFT, USN y USB | MFTECmd, PECmd | [Ver](romcom/README.md) |
+| Whisper | DFIR | Easy | Registro, MFT, Mimikatz y ShellBags | Registry Explorer, MFTECmd | [Ver](whisper/README.md) |
+| Zenith | DFIR | Easy | Correo, EVTX, persistencia y escalada | EvtxECmd, Timeline Explorer | [Ver](zenith/README.md) |
+| Psittaciformes | DFIR | Easy | Logs, `.bash_history` y repositorio Git | Git, Plaso | [Ver](psittaciformes/README.md) |
+| HookFlare | DFIR | Medium | Smishing Android, 2FA y AES-ECB | JADX, Wireshark | [Ver](hookflare/README.md) |
+| CrewCrow | DFIR | Medium | Zoom, DPAPI y hashes NTLM | DPAPI, Hashcat | [Ver](crewcrow/README.md) |
+| Caught | DFIR | Hard | JScript, Sliver, GPO y persistencia WMI | Sysmon, EvtxECmd | [Ver](caught/README.md) |
 
 ## Metodología común
 
