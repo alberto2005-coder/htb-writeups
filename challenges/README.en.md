@@ -130,6 +130,11 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Red Island | Web | Medium | SSRF with gopher to Redis and RCE | **Retired** | [ES](Red%20Island/README.md) | [Ver](Red%20Island/README.en.md) |
 | Mutation Lab | Web | Easy | SVG file read and session forgery | **Retired** | [ES](Mutation%20Lab/README.md) | [Ver](Mutation%20Lab/README.en.md) |
 | Slippy | Web | Medium | TAR path traversal and SSTI | **Retired** | [ES](Slippy/README.md) | [Ver](Slippy/README.en.md) |
+| Sigma Technology | AI/ML | Easy | Five-pixel adversarial example | **Retired** | [ES](Sigma%20Technology/README.md) | [Ver](Sigma%20Technology/README.en.md) |
+| Funds Secured | Blockchain | Easy | Threshold-less multisig and empty array | **Retired** | [ES](Funds%20Secured/README.md) | [Ver](Funds%20Secured/README.en.md) |
+| Unique | Hardware | Easy | CAN at 125 kbps and VIN | **Retired** | [ES](Unique/README.md) | [Ver](Unique/README.en.md) |
+| Peel Back The Layers | Forensics | Medium | Docker layers and an `LD_PRELOAD` library | **Retired** | [ES](Peel%20Back%20The%20Layers/README.md) | [Ver](Peel%20Back%20The%20Layers/README.en.md) |
+| Up a Stream | Reversing | Easy | Java streams and inverse functions | **Retired** | [ES](Up%20a%20Stream/README.md) | [Ver](Up%20a%20Stream/README.en.md) |
 
 ## Categories
 

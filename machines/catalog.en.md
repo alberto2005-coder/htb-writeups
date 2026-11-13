@@ -140,6 +140,11 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Mailing | Windows | Easy | LFI to hMailServer, MonikerLink and macro | [Ver](../machines/windows/mailing/README.md) | [EN](../machines/windows/mailing/README.en.md) |
 | Certificate | Windows | Hard | ADCS ESC3, Golden Certificate and EFS | [Ver](../machines/windows/certificate/README.md) | [EN](../machines/windows/certificate/README.en.md) |
 | Search | Windows | Hard | Image credentials, WDigest, gMSA and NTDS | [Ver](../machines/windows/search/README.md) | [EN](../machines/windows/search/README.en.md) |
+| PermX | Linux | Easy | Chamilo CVE-2023-4220, credentials and `setfacl` symlink | [ES](../machines/linux/permx/README.md) | [Ver](../machines/linux/permx/README.en.md) |
+| GreenHorn | Linux | Easy | Pluck CMS, exposed Gitea and Depix | [ES](../machines/linux/greenhorn/README.md) | [Ver](../machines/linux/greenhorn/README.en.md) |
+| LinkVortex | Linux | Easy | `.git`, Ghost CVE-2023-40028 and TOCTOU | [ES](../machines/linux/linkvortex/README.md) | [Ver](../machines/linux/linkvortex/README.en.md) |
+| EscapeTwo | Windows | Easy | Excel, MSSQL, `WriteOwner` and ADCS ESC4 to ESC1 | [ES](../machines/windows/escapetwo/README.md) | [Ver](../machines/windows/escapetwo/README.en.md) |
+| TombWatcher | Windows | Medium | `WriteSPN`, Kerberoasting, gMSA, Recycle Bin and ESC15 | [ES](../machines/windows/tombwatcher/README.md) | [Ver](../machines/windows/tombwatcher/README.en.md) |
 
 ## Pending
 

@@ -45,6 +45,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Forks and Knives` | [Forks and Knives](Forks%20and%20Knives/README.md) |
 | `Free Services` | [Free Services](Free%20Services/README.md) |
 | `Freelancer` | [Freelancer](Freelancer/README.md) |
+| `Funds Secured` | [Funds Secured](Funds%20Secured/README.md) |
 | `Gunship` | [Gunship](Gunship/README.md) |
 | `HDC` | [HDC](HDC/README.md) |
 | `Hidden in Colors` | [Hidden in Colors](Hidden%20in%20Colors/README.md) |
@@ -83,6 +84,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Oldbridge` | [Oldbridge](Oldbridge/README.md) |
 | `OnlyHacks` | [OnlyHacks](OnlyHacks/README.md) |
 | `Passman` | [Passman](Passman/README.md) |
+| `Peel Back The Layers` | [Peel Back The Layers](Peel%20Back%20The%20Layers/README.md) |
 | `Perfect Synchronization` | [Perfect Synchronization](Perfect%20Synchronization/README.md) |
 | `Phonebook` | [Phonebook](Phonebook/README.md) |
 | `Photon Lockdown` | [Photon Lockdown](Photon%20Lockdown/README.md) |
@@ -99,6 +101,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Secure Digital` | [Secure Digital](Secure%20Digital/README.md) |
 | `Shattered Tablet` | [Shattered Tablet](Shattered%20Tablet/README.md) |
 | `Shush Protocol` | [Shush Protocol](Shush%20Protocol/README.md) |
+| `Sigma Technology` | [Sigma Technology](Sigma%20Technology/README.md) |
 | `Simple Encryptor` | [Simple Encryptor](Simple%20Encryptor/README.md) |
 | `Slippy` | [Slippy](Slippy/README.md) |
 | `Snakecode` | [Snakecode](Snakecode/README.md) |
@@ -120,6 +123,8 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Took the Byte` | [Took the Byte](Took%20the%20Byte/README.md) |
 | `Toxic` | [Toxic](Toxic/README.md) |
 | `Under Construction` | [Under Construction](Under%20Construction/README.md) |
+| `Unique` | [Unique](Unique/README.md) |
+| `Up a Stream` | [Up a Stream](Up%20a%20Stream/README.md) |
 | `Urgent` | [Urgent](Urgent/README.md) |
 | `Vault-breaker` | [Vault-breaker](Vault-breaker/README.md) |
 | `VHDLock` | [VHDLock](VHDLock/README.md) |

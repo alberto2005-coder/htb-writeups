@@ -24,6 +24,7 @@ This index is generated from the repository's versioned writeups.
 | `constellation` | [constellation](constellation/README.md) |
 | `crownjewel-1` | [crownjewel-1](crownjewel-1/README.md) |
 | `crownjewel-2` | [crownjewel-2](crownjewel-2/README.md) |
+| `cuidado` | [cuidado](cuidado/README.md) |
 | `detroit-becomes-human` | [detroit-becomes-human](detroit-becomes-human/README.md) |
 | `dooms-day` | [dooms-day](dooms-day/README.md) |
 | `droidphish` | [droidphish](droidphish/README.md) |
@@ -32,6 +33,7 @@ This index is generated from the repository's versioned writeups.
 | `exitiabilis` | [exitiabilis](exitiabilis/README.md) |
 | `fleet` | [fleet](fleet/README.md) |
 | `fragility` | [fragility](fragility/README.md) |
+| `gatekeeper` | [gatekeeper](gatekeeper/README.md) |
 | `grabber` | [grabber](grabber/README.md) |
 | `hat-trick` | [hat-trick](hat-trick/README.md) |
 | `heartbreaker-continuum` | [heartbreaker-continuum](heartbreaker-continuum/README.md) |
@@ -81,6 +83,7 @@ This index is generated from the repository's versioned writeups.
 | `packet-puzzle` | [packet-puzzle](packet-puzzle/README.md) |
 | `payload` | [payload](payload/README.md) |
 | `pcap-analysis` | [pcap-analysis](pcap-analysis/README.md) |
+| `percypay` | [percypay](percypay/README.md) |
 | `phantom-check` | [phantom-check](phantom-check/README.md) |
 | `phantomring` | [phantomring](phantomring/README.md) |
 | `pikaptcha` | [pikaptcha](pikaptcha/README.md) |
@@ -88,6 +91,7 @@ This index is generated from the repository's versioned writeups.
 | `pwned` | [pwned](pwned/README.md) |
 | `reaper` | [reaper](reaper/README.md) |
 | `recollection` | [recollection](recollection/README.md) |
+| `reliablethreat` | [reliablethreat](reliablethreat/README.md) |
 | `rogueone` | [rogueone](rogueone/README.md) |
 | `safecracker` | [safecracker](safecracker/README.md) |
 | `salinebreeze-2` | [salinebreeze-2](salinebreeze-2/README.md) |
@@ -107,4 +111,5 @@ This index is generated from the repository's versioned writeups.
 | `unit42` | [unit42](unit42/README.md) |
 | `unsupervised` | [unsupervised](unsupervised/README.md) |
 | `vantage` | [vantage](vantage/README.md) |
+| `whyfind` | [whyfind](whyfind/README.md) |
 | `workfromhome` | [workfromhome](workfromhome/README.md) |
