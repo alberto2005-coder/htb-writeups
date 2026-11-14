@@ -60,5 +60,5 @@ lxc start privesc && lxc exec privesc -- /bin/sh
 
 ## References
 
-- <https://linuxcontainers.org/lxd/docs/latest/>
+- <https://linuxcontainers.org/lxd/>
 - <https://attack.mitre.org/techniques/T1611/>

@@ -58,5 +58,5 @@ Una consulta XPath construida concatenando la entrada del usuario permite altera
 
 ## Referencias
 
-- <https://owasp.org/www-community/attacks/XPATH_Injection>
+- <https://community.owasp.org/attacks/XPATH_Injection>
 - <https://attack.mitre.org/techniques/T1190/>

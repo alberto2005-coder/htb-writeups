@@ -58,5 +58,5 @@ An XPath query built by concatenating user input lets an attacker change node se
 
 ## References
 
-- <https://owasp.org/www-community/attacks/XPATH_Injection>
+- <https://community.owasp.org/attacks/XPATH_Injection>
 - <https://attack.mitre.org/techniques/T1190/>

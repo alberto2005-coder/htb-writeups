@@ -60,4 +60,4 @@ securityContext:
 ## Referencias
 
 - <https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/>
-- <https://nvd.nist.gov/vuln/detail/CVE-2022-0811>
+- <https://nvd.nist.gov/vuln/detail/cve-2022-0811>

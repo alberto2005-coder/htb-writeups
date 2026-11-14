@@ -57,5 +57,5 @@ java -jar ysoserial.jar CommonsCollections5 'id' | base64 -w0
 
 ## References
 
-- <https://owasp.org/www-community/vulnerabilities/Deserialization_of_untrusted_data>
+- <https://community.owasp.org/vulnerabilities/Deserialization_of_untrusted_data>
 - <https://attack.mitre.org/techniques/T1190/>

@@ -59,4 +59,4 @@ xlock -help
 ## References
 
 - <https://www.openbsd.org/errata.html>
-- <https://nvd.nist.gov/vuln/detail/CVE-2019-19521>
+- <https://nvd.nist.gov/vuln/detail/cve-2019-19521>

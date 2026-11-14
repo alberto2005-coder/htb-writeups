@@ -61,4 +61,4 @@ curl -s -b cookies.txt -F 'repo_upload_file=@moodle-rce.zip' \
 ## Referencias
 
 - <https://moodle.org/security/>
-- <https://owasp.org/www-community/attacks/xss/>
+- <https://community.owasp.org/attacks/xss/>
