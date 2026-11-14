@@ -176,6 +176,7 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | HTB Console | Pwn | Easy | Stack overflow and `ret2system` | **Retired** | [View](HTB%20Console/README.en.md) | [ES](HTB%20Console/README.md) |
 | Bat Computer | Reversing | Easy | Inverted comparison and binary patch | **Retired** | [View](Bat%20Computer/README.en.md) | [ES](Bat%20Computer/README.md) |
 | It Has Begun | Forensics | Very Easy | EVTX, PowerShell and timeline | **Retired** | [View](It%20Has%20Begun/README.en.md) | [ES](It%20Has%20Begun/README.md) |
+
 ## Categories
 
 HTB groups challenges into fourteen categories. Counts are approximate and meant for planning, not as an exact inventory.

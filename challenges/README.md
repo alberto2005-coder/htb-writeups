@@ -176,6 +176,7 @@
 | HTB Console | Pwn | Easy | Desbordamiento de pila y `ret2system` | **Retired** | [Ver](HTB%20Console/README.md) | [EN](HTB%20Console/README.en.md) |
 | Bat Computer | Reversing | Easy | Comparación invertida y parcheo de binario | **Retired** | [Ver](Bat%20Computer/README.md) | [EN](Bat%20Computer/README.en.md) |
 | It Has Begun | Forensics | Very Easy | EVTX, PowerShell y línea temporal | **Retired** | [Ver](It%20Has%20Begun/README.md) | [EN](It%20Has%20Begun/README.en.md) |
+
 ## Categorías
 
 Los retos de HTB se agrupan en catorce categorías. Los números son orientativos y sirven para planificar, no como inventario exacto.
