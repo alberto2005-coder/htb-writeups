@@ -143,6 +143,14 @@
 | Pinned | Mobile | Medium | Certificate pinning y Frida | **Retired** | [Ver](Pinned/README.md) | [EN](Pinned/README.en.md) |
 | Manager | Mobile | Medium | IDOR en API de bóveda | **Retired** | [Ver](Manager/README.md) | [EN](Manager/README.en.md) |
 | Anchored | Mobile | Medium | Pin nativo y hook SSL | **Retired** | [Ver](Anchored/README.md) | [EN](Anchored/README.en.md) |
+| Trapped Source | Web | Very Easy | PIN embebido en el JavaScript del cliente | **Retired** | [Ver](Trapped%20Source/README.md) | [EN](Trapped%20Source/README.en.md) |
+| sanitize | Web | Easy | `/debug` filtra el código y SQLi `admin'-- -` | **Retired** | [Ver](sanitize/README.md) | [EN](sanitize/README.en.md) |
+| Flippin Bank | Crypto | Medium | Bit flipping en AES-CBC y `bdmin` → `admin` | **Retired** | [Ver](Flippin%20Bank/README.md) | [EN](Flippin%20Bank/README.en.md) |
+| POOF | Forensics | Easy | PCAP, PyInstaller y descifrado AES-CFB | **Retired** | [Ver](POOF/README.md) | [EN](POOF/README.en.md) |
+| Baby RE | Reversing | Very Easy | `ltrace` y comparación con `strcmp` | **Retired** | [Ver](Baby%20RE/README.md) | [EN](Baby%20RE/README.en.md) |
+| Jeeves | Pwn | Easy | `gets`, offset 60 y sobrescritura con `0x1337bab3` | **Retired** | [Ver](Jeeves/README.md) | [EN](Jeeves/README.en.md) |
+| Compressor | Misc | Very Easy | GTFOBins `zip` con `-T -TT 'sh #'` | **Retired** | [Ver](Compressor/README.md) | [EN](Compressor/README.en.md) |
+| Gawk | Hardware | Easy | PJL, PRET y PDF en base64 | **Retired** | [Ver](Gawk/README.md) | [EN](Gawk/README.en.md) |
 
 ## Categorías
 

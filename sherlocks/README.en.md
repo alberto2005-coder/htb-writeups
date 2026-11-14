@@ -131,6 +131,14 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | HookFlare | DFIR | Medium | Android smishing, 2FA and AES-ECB | JADX, Wireshark | [Ver](hookflare/README.en.md) |
 | CrewCrow | DFIR | Medium | Zoom, DPAPI and NTLM hashes | DPAPI, Hashcat | [Ver](crewcrow/README.en.md) |
 | Caught | DFIR | Hard | JScript, Sliver, GPO and WMI persistence | Sysmon, EvtxECmd | [Ver](caught/README.en.md) |
+| ElectricBreeze-1 | Threat Intelligence | Very Easy | MITRE G1017, NTDS and edge exploitation | ATT&CK, CISA | [Ver](electricbreeze-1/README.en.md) |
+| SalineBreeze-1 | Threat Intelligence | Very Easy | Salt Typhoon, JumbledPath and Demodex | ATT&CK, CISA | [Ver](salinebreeze-1/README.en.md) |
+| Origins | SOC | Very Easy | FTP brute force, PCAP and S3 buckets | Wireshark, tshark | [Ver](origins/README.en.md) |
+| ReachKart | DFIR | Medium | Path traversal, JWT, WebSocket and Hardhat | tshark, SQLite | [Ver](reachkart/README.en.md) |
+| Malevolent ModMaker | Malware Analysis | Medium | Dropper, Discord C2 and AES-GCM ransomware | Ghidra, CyberChef | [Ver](malevolent-modmaker/README.en.md) |
+| Lupin | Malware Analysis | Medium | Clipboard hijacker, persistence and C2 | pefile, Capstone | [Ver](lupin/README.en.md) |
+| APTNightmare-2 | DFIR | Hard | Linux memory, `dwarf2json` and Volatility 3 | Volatility 3, dwarf2json | [Ver](aptnightmare-2/README.en.md) |
+| CafePoisoning | DFIR | Medium | ARP/DNS poisoning, screensaver and XOR | Wireshark, KAPE | [Ver](cafepoisoning/README.en.md) |
 
 ## Shared methodology
 

@@ -9,8 +9,8 @@ Personal repository of **Hack The Box** writeups, technical notes and methodolog
 ## Contents
 
 <!-- BEGIN AUTO-GENERATED STATS -->
-- **Writeups:** 420 (170 machines, 135 challenges and 115 Sherlocks; ES/EN writeups).
-- **Knowledge:** 147 topics with ES/EN notes.
+- **Writeups:** 444 (178 machines, 143 challenges and 123 Sherlocks; ES/EN writeups).
+- **Knowledge:** 168 topics with ES/EN notes.
 <!-- END AUTO-GENERATED STATS -->
 
 | Section | Index |
