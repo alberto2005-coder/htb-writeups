@@ -27,8 +27,16 @@ sherlocks/active/
 id_ed25519*
 htb/
 
-# material temporal: repos de terceros clonados para comparar
-.tmp/
+# Temporales de sesión, descargas de referencia y editores
+.tmp*
+*.tmp
+*.temp
+*~
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
 
 # Local environment and credentials
 .env
