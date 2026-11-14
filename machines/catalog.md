@@ -202,6 +202,22 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Fulcrum | Linux | Insane | XXE, SSRF y pivote AD | [Ver](../machines/linux/fulcrum/README.md) | [EN](../machines/linux/fulcrum/README.en.md) |
 | Minion | Windows | Insane | SSRF, ICMP C2, tarea programada y ADS | [Ver](../machines/windows/minion/README.md) | [EN](../machines/windows/minion/README.en.md) |
 | Brainfuck | Linux | Insane | WordPress, bypass, Vigenère y `lxd` | [Ver](../machines/linux/brainfuck/README.md) | [EN](../machines/linux/brainfuck/README.en.md) |
+| Access | Windows | Easy | FTP anónimo, MDB, PST de Outlook, telnet y `runas /savecred` | [Ver](../machines/windows/access/README.md) | [EN](../machines/windows/access/README.en.md) |
+| AdmirerToo | Linux | Hard | SSRF en Adminer, OpenTSDB, OpenCats y fail2ban | [Ver](../machines/linux/admirertoo/README.md) | [EN](../machines/linux/admirertoo/README.en.md) |
+| Alert | Linux | Easy | XSS en Markdown, file read, `.htpasswd` y cron PHP | [Ver](../machines/linux/alert/README.md) | [EN](../machines/linux/alert/README.en.md) |
+| Axlle | Windows | Hard | XLL, archivos `.url`, historial de PowerShell y LOLBIN | [Ver](../machines/windows/axlle/README.md) | [EN](../machines/windows/axlle/README.en.md) |
+| Bitlab | Linux | Medium | GitLab, webshell, túnel PostgreSQL y reversing de `RemoteConnection.exe` | [Ver](../machines/linux/bitlab/README.md) | [EN](../machines/linux/bitlab/README.en.md) |
+| Environment | Linux | Medium | Laravel debug CVE-2024-52301, filemanager, GPG y `BASH_ENV` | [Ver](../machines/linux/environment/README.md) | [EN](../machines/linux/environment/README.en.md) |
+| Extension | Linux | Hard | API de usuarios, reset acumulativo, hash length extension y `docker.sock` | [Ver](../machines/linux/extension/README.md) | [EN](../machines/linux/extension/README.en.md) |
+| Investigation | Linux | Medium | ExifTool CVE-2022-23935, EVTX y binario Perl con sudo | [Ver](../machines/linux/investigation/README.md) | [EN](../machines/linux/investigation/README.en.md) |
+| Knife | Linux | Easy | PHP 8.1.0-dev backdoor y `sudo knife` | [Ver](../machines/linux/knife/README.md) | [EN](../machines/linux/knife/README.en.md) |
+| Laser | Linux | Insane | PRET/PJL, gRPC, Solr y MITM de `sshpass` | [Ver](../machines/linux/laser/README.md) | [EN](../machines/linux/laser/README.en.md) |
+| Mist | Windows | Insane | Pluck CMS, PetitPotam, shadow credentials, ESC13 y Backup Operators | [Ver](../machines/windows/mist/README.md) | [EN](../machines/windows/mist/README.en.md) |
+| OneTwoSeven | Linux | Hard | SFTP con symlinks, bypass de plugin y envenenamiento de apt | [Ver](../machines/linux/onetwoseven/README.md) | [EN](../machines/linux/onetwoseven/README.en.md) |
+| RedCross | Linux | Medium | XSS/cookie, Haraka, PostgreSQL/NSS y BOF en `iptctl` | [Ver](../machines/linux/redcross/README.md) | [EN](../machines/linux/redcross/README.en.md) |
+| Reel2 | Windows | Hard | OWA spray, Responder, bypass de JEA y StickyNotes | [Ver](../machines/windows/reel2/README.md) | [EN](../machines/windows/reel2/README.en.md) |
+| Silentium | Linux | Easy | Flowise reset token, CVE-2025-59528, Docker y Gogs CVE-2025-8110 | [Ver](../machines/linux/silentium/README.md) | [EN](../machines/linux/silentium/README.en.md) |
+| Static | Linux | Hard | TOTP, VPN, xdebug, PHP-FPM CVE-2019-11043 y format string | [Ver](../machines/linux/static/README.md) | [EN](../machines/linux/static/README.en.md) |
 
 ## Pendientes
 

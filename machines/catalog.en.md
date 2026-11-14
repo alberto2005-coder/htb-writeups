@@ -202,6 +202,22 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Fulcrum | Linux | Insane | XXE, SSRF and AD pivot | [ES](../machines/linux/fulcrum/README.md) | [EN](../machines/linux/fulcrum/README.en.md) |
 | Minion | Windows | Insane | SSRF, ICMP C2, scheduled task and ADS | [ES](../machines/windows/minion/README.md) | [EN](../machines/windows/minion/README.en.md) |
 | Brainfuck | Linux | Insane | WordPress, bypass, Vigenère and `lxd` | [ES](../machines/linux/brainfuck/README.md) | [EN](../machines/linux/brainfuck/README.en.md) |
+| Access | Windows | Easy | Anonymous FTP, MDB, Outlook PST, telnet and `runas /savecred` | [ES](../machines/windows/access/README.md) | [EN](../machines/windows/access/README.en.md) |
+| AdmirerToo | Linux | Hard | Adminer SSRF, OpenTSDB, OpenCats and fail2ban | [ES](../machines/linux/admirertoo/README.md) | [EN](../machines/linux/admirertoo/README.en.md) |
+| Alert | Linux | Easy | Markdown XSS, file read, `.htpasswd` and PHP cron | [ES](../machines/linux/alert/README.md) | [EN](../machines/linux/alert/README.en.md) |
+| Axlle | Windows | Hard | XLL, `.url` files, PowerShell history and LOLBIN | [ES](../machines/windows/axlle/README.md) | [EN](../machines/windows/axlle/README.en.md) |
+| Bitlab | Linux | Medium | GitLab, webshell, PostgreSQL tunnel and `RemoteConnection.exe` reversing | [ES](../machines/linux/bitlab/README.md) | [EN](../machines/linux/bitlab/README.en.md) |
+| Environment | Linux | Medium | Laravel debug CVE-2024-52301, filemanager, GPG and `BASH_ENV` | [ES](../machines/linux/environment/README.md) | [EN](../machines/linux/environment/README.en.md) |
+| Extension | Linux | Hard | User API, accumulated resets, hash length extension and `docker.sock` | [ES](../machines/linux/extension/README.md) | [EN](../machines/linux/extension/README.en.md) |
+| Investigation | Linux | Medium | ExifTool CVE-2022-23935, EVTX and sudo Perl binary | [ES](../machines/linux/investigation/README.md) | [EN](../machines/linux/investigation/README.en.md) |
+| Knife | Linux | Easy | PHP 8.1.0-dev backdoor and `sudo knife` | [ES](../machines/linux/knife/README.md) | [EN](../machines/linux/knife/README.en.md) |
+| Laser | Linux | Insane | PRET/PJL, gRPC, Solr and `sshpass` MITM | [ES](../machines/linux/laser/README.md) | [EN](../machines/linux/laser/README.en.md) |
+| Mist | Windows | Insane | Pluck CMS, PetitPotam, shadow credentials, ESC13 and Backup Operators | [ES](../machines/windows/mist/README.md) | [EN](../machines/windows/mist/README.en.md) |
+| OneTwoSeven | Linux | Hard | SFTP symlinks, plugin bypass and apt poisoning | [ES](../machines/linux/onetwoseven/README.md) | [EN](../machines/linux/onetwoseven/README.en.md) |
+| RedCross | Linux | Medium | XSS/cookie, Haraka, PostgreSQL/NSS and `iptctl` BOF | [ES](../machines/linux/redcross/README.md) | [EN](../machines/linux/redcross/README.en.md) |
+| Reel2 | Windows | Hard | OWA spray, Responder, JEA bypass and StickyNotes | [ES](../machines/windows/reel2/README.md) | [EN](../machines/windows/reel2/README.en.md) |
+| Silentium | Linux | Easy | Flowise reset token, CVE-2025-59528, Docker and Gogs CVE-2025-8110 | [ES](../machines/linux/silentium/README.md) | [EN](../machines/linux/silentium/README.en.md) |
+| Static | Linux | Hard | TOTP, VPN, xdebug, PHP-FPM CVE-2019-11043 and format string | [ES](../machines/linux/static/README.md) | [EN](../machines/linux/static/README.en.md) |
 
 ## Pending
 
@@ -224,7 +240,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 202 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 235 machine notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|
