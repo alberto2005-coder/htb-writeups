@@ -153,6 +153,14 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Hospital | Windows | Medium | `.phar`, CVE-2023-35001, Ghostscript and XAMPP | [ES](../machines/windows/hospital/README.md) | [Ver](../machines/windows/hospital/README.en.md) |
 | TheFrizz | Windows | Medium | Gibbon CVE-2023-45878, Kerberos and GPO | [ES](../machines/windows/thefrizz/README.md) | [Ver](../machines/windows/thefrizz/README.en.md) |
 | Haze | Windows | Hard | Splunk CVE-2024-36991, gMSA and shadow credentials | [ES](../machines/windows/haze/README.md) | [Ver](../machines/windows/haze/README.en.md) |
+| Node | Linux | Easy | `/api/users/latest` leaking hashes, backup ZIP, SSH `mark`, MongoDB tasks and a SUID `backup` BOF | [ES](../machines/linux/node/README.md) | [Ver](../machines/linux/node/README.en.md) |
+| Celestial | Linux | Medium | Base64 cookie with `node-serialize`, RCE as `sun` and a cron restoring the script | [ES](../machines/linux/celestial/README.md) | [Ver](../machines/linux/celestial/README.en.md) |
+| Mirai | Linux | Easy | Pi-hole/Plex, default credentials, `sudo ALL` and a deleted flag recovered from USB | [ES](../machines/linux/mirai/README.md) | [Ver](../machines/linux/mirai/README.en.md) |
+| Irked | Linux | Easy | UnrealIRCd 3.2.8.1, `AB;`, steghide, SSH and a SUID `viewuser` | [ES](../machines/linux/irked/README.md) | [Ver](../machines/linux/irked/README.en.md) |
+| Fuse | Windows | Medium | PaperCut, `cewl`/spray, RPC `svc-print`, WinRM and Capcom.sys | [ES](../machines/windows/fuse/README.md) | [Ver](../machines/windows/fuse/README.en.md) |
+| Nest | Windows | Easy | Guest SMB, `RU_config.xml`, VB decryption, `c.smith`, ADS and `psexec` | [ES](../machines/windows/nest/README.md) | [Ver](../machines/windows/nest/README.en.md) |
+| Omni | Windows | Easy | Windows IoT Core, SirepRAT, `reg save`, WDP and `Import-Clixml` | [ES](../machines/windows/omni/README.md) | [Ver](../machines/windows/omni/README.en.md) |
+| Worker | Windows | Medium | SVN history, Azure DevOps, ASPX webshell and the `Setup` pipeline as SYSTEM | [ES](../machines/windows/worker/README.md) | [Ver](../machines/windows/worker/README.en.md) |
 
 ## Pending
 

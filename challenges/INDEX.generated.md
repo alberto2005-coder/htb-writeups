@@ -18,6 +18,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `baby interdimensional internet` | [baby interdimensional internet](baby%20interdimensional%20internet/README.md) |
 | `Baby nginxatsu` | [Baby nginxatsu](Baby%20nginxatsu/README.md) |
 | `baby ninja jinja` | [baby ninja jinja](baby%20ninja%20jinja/README.md) |
+| `Baby RE` | [Baby RE](Baby%20RE/README.md) |
 | `Baby Time Capsule` | [Baby Time Capsule](Baby%20Time%20Capsule/README.md) |
 | `BabyEncryption` | [BabyEncryption](BabyEncryption/README.md) |
 | `Bare Metal` | [Bare Metal](Bare%20Metal/README.md) |
@@ -28,6 +29,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Cartographer` | [Cartographer](Cartographer/README.md) |
 | `Cat` | [Cat](Cat/README.md) |
 | `Chrono Mind` | [Chrono Mind](Chrono%20Mind/README.md) |
+| `Compressor` | [Compressor](Compressor/README.md) |
 | `Confidentiality` | [Confidentiality](Confidentiality/README.md) |
 | `Cryptohorrific` | [Cryptohorrific](Cryptohorrific/README.md) |
 | `Dark Embargo` | [Dark Embargo](Dark%20Embargo/README.md) |
@@ -46,10 +48,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Fake Boost` | [Fake Boost](Fake%20Boost/README.md) |
 | `Flag Command` | [Flag Command](Flag%20Command/README.md) |
 | `FlagCasino` | [FlagCasino](FlagCasino/README.md) |
+| `Flippin Bank` | [Flippin Bank](Flippin%20Bank/README.md) |
 | `Forks and Knives` | [Forks and Knives](Forks%20and%20Knives/README.md) |
 | `Free Services` | [Free Services](Free%20Services/README.md) |
 | `Freelancer` | [Freelancer](Freelancer/README.md) |
 | `Funds Secured` | [Funds Secured](Funds%20Secured/README.md) |
+| `Gawk` | [Gawk](Gawk/README.md) |
 | `Gunship` | [Gunship](Gunship/README.md) |
 | `HDC` | [HDC](HDC/README.md) |
 | `Hidden in Colors` | [Hidden in Colors](Hidden%20in%20Colors/README.md) |
@@ -63,6 +67,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Interdimensional Internet` | [Interdimensional Internet](Interdimensional%20Internet/README.md) |
 | `Intergalactic Post` | [Intergalactic Post](Intergalactic%20Post/README.md) |
 | `Intrusion` | [Intrusion](Intrusion/README.md) |
+| `Jeeves` | [Jeeves](Jeeves/README.md) |
 | `Keep Tryin'` | [Keep Tryin'](Keep%20Tryin%27/README.md) |
 | `KORP Terminal` | [KORP Terminal](KORP%20Terminal/README.md) |
 | `Kryptor` | [Kryptor](Kryptor/README.md) |
@@ -95,6 +100,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Photon Lockdown` | [Photon Lockdown](Photon%20Lockdown/README.md) |
 | `Pinned` | [Pinned](Pinned/README.md) |
 | `Plaintext Tleasure` | [Plaintext Tleasure](Plaintext%20Tleasure/README.md) |
+| `POOF` | [POOF](POOF/README.md) |
 | `Primary Knowledge` | [Primary Knowledge](Primary%20Knowledge/README.md) |
 | `Prometheon` | [Prometheon](Prometheon/README.md) |
 | `ProxyAsAService` | [ProxyAsAService](ProxyAsAService/README.md) |
@@ -104,6 +110,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Restaurant` | [Restaurant](Restaurant/README.md) |
 | `ropme` | [ropme](ropme/README.md) |
 | `RSAisEasy` | [RSAisEasy](RSAisEasy/README.md) |
+| `sanitize` | [sanitize](sanitize/README.md) |
 | `SAW` | [SAW](SAW/README.md) |
 | `Secure Digital` | [Secure Digital](Secure%20Digital/README.md) |
 | `SeeTheSharpFlag` | [SeeTheSharpFlag](SeeTheSharpFlag/README.md) |
@@ -130,6 +137,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `TimeKORP` | [TimeKORP](TimeKORP/README.md) |
 | `Took the Byte` | [Took the Byte](Took%20the%20Byte/README.md) |
 | `Toxic` | [Toxic](Toxic/README.md) |
+| `Trapped Source` | [Trapped Source](Trapped%20Source/README.md) |
 | `Under Construction` | [Under Construction](Under%20Construction/README.md) |
 | `Unique` | [Unique](Unique/README.md) |
 | `Up a Stream` | [Up a Stream](Up%20a%20Stream/README.md) |

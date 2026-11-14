@@ -143,6 +143,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Pinned | Mobile | Medium | Certificate pinning and Frida | **Retired** | [ES](Pinned/README.md) | [Ver](Pinned/README.en.md) |
 | Manager | Mobile | Medium | IDOR in the vault API | **Retired** | [ES](Manager/README.md) | [Ver](Manager/README.en.md) |
 | Anchored | Mobile | Medium | Native pin and SSL hook | **Retired** | [ES](Anchored/README.md) | [Ver](Anchored/README.en.md) |
+| Trapped Source | Web | Very Easy | PIN embedded in client-side JavaScript | **Retired** | [ES](Trapped%20Source/README.md) | [Ver](Trapped%20Source/README.en.md) |
+| sanitize | Web | Easy | `/debug` leaks source and SQLi `admin'-- -` | **Retired** | [ES](sanitize/README.md) | [Ver](sanitize/README.en.md) |
+| Flippin Bank | Crypto | Medium | AES-CBC bit flipping and `bdmin` → `admin` | **Retired** | [ES](Flippin%20Bank/README.md) | [Ver](Flippin%20Bank/README.en.md) |
+| POOF | Forensics | Easy | PCAP, PyInstaller and AES-CFB decryption | **Retired** | [ES](POOF/README.md) | [Ver](POOF/README.en.md) |
+| Baby RE | Reversing | Very Easy | `ltrace` and a `strcmp` comparison | **Retired** | [ES](Baby%20RE/README.md) | [Ver](Baby%20RE/README.en.md) |
+| Jeeves | Pwn | Easy | `gets`, offset 60 and overwrite with `0x1337bab3` | **Retired** | [ES](Jeeves/README.md) | [Ver](Jeeves/README.en.md) |
+| Compressor | Misc | Very Easy | GTFOBins `zip` with `-T -TT 'sh #'` | **Retired** | [ES](Compressor/README.md) | [Ver](Compressor/README.en.md) |
+| Gawk | Hardware | Easy | PJL, PRET and a base64 PDF | **Retired** | [ES](Gawk/README.md) | [Ver](Gawk/README.en.md) |
 
 ## Categories
 

@@ -8,6 +8,7 @@ This index is generated from the repository's versioned writeups.
 |---|---|
 | `alchemy` | [alchemy](alchemy/README.md) |
 | `allegretto` | [allegretto](allegretto/README.md) |
+| `aptnightmare-2` | [aptnightmare-2](aptnightmare-2/README.md) |
 | `aptnightmare` | [aptnightmare](aptnightmare/README.md) |
 | `artifact` | [artifact](artifact/README.md) |
 | `backdoor` | [backdoor](backdoor/README.md) |
@@ -16,6 +17,7 @@ This index is generated from the repository's versioned writeups.
 | `bought` | [bought](bought/README.md) |
 | `brutus` | [brutus](brutus/README.md) |
 | `bumblebee` | [bumblebee](bumblebee/README.md) |
+| `cafepoisoning` | [cafepoisoning](cafepoisoning/README.md) |
 | `campfire-1` | [campfire-1](campfire-1/README.md) |
 | `campfire-2` | [campfire-2](campfire-2/README.md) |
 | `caught` | [caught](caught/README.md) |
@@ -31,6 +33,7 @@ This index is generated from the repository's versioned writeups.
 | `dooms-day` | [dooms-day](dooms-day/README.md) |
 | `droidphish` | [droidphish](droidphish/README.md) |
 | `einladen` | [einladen](einladen/README.md) |
+| `electricbreeze-1` | [electricbreeze-1](electricbreeze-1/README.md) |
 | `electricbreeze-2` | [electricbreeze-2](electricbreeze-2/README.md) |
 | `exitiabilis` | [exitiabilis](exitiabilis/README.md) |
 | `fleet` | [fleet](fleet/README.md) |
@@ -64,6 +67,8 @@ This index is generated from the repository's versioned writeups.
 | `lockpick` | [lockpick](lockpick/README.md) |
 | `loggy` | [loggy](loggy/README.md) |
 | `logjammer` | [logjammer](logjammer/README.md) |
+| `lupin` | [lupin](lupin/README.md) |
+| `malevolent-modmaker` | [malevolent-modmaker](malevolent-modmaker/README.md) |
 | `mangobleed` | [mangobleed](mangobleed/README.md) |
 | `meerkat` | [meerkat](meerkat/README.md) |
 | `mellitus` | [mellitus](mellitus/README.md) |
@@ -82,6 +87,7 @@ This index is generated from the repository's versioned writeups.
 | `optinseltrace-4` | [optinseltrace-4](optinseltrace-4/README.md) |
 | `optinseltrace-5` | [optinseltrace-5](optinseltrace-5/README.md) |
 | `ore` | [ore](ore/README.md) |
+| `origins` | [origins](origins/README.md) |
 | `oxide` | [oxide](oxide/README.md) |
 | `packet-puzzle` | [packet-puzzle](packet-puzzle/README.md) |
 | `payload` | [payload](payload/README.md) |
@@ -94,12 +100,14 @@ This index is generated from the repository's versioned writeups.
 | `procnet` | [procnet](procnet/README.md) |
 | `psittaciformes` | [psittaciformes](psittaciformes/README.md) |
 | `pwned` | [pwned](pwned/README.md) |
+| `reachkart` | [reachkart](reachkart/README.md) |
 | `reaper` | [reaper](reaper/README.md) |
 | `recollection` | [recollection](recollection/README.md) |
 | `reliablethreat` | [reliablethreat](reliablethreat/README.md) |
 | `rogueone` | [rogueone](rogueone/README.md) |
 | `romcom` | [romcom](romcom/README.md) |
 | `safecracker` | [safecracker](safecracker/README.md) |
+| `salinebreeze-1` | [salinebreeze-1](salinebreeze-1/README.md) |
 | `salinebreeze-2` | [salinebreeze-2](salinebreeze-2/README.md) |
 | `salsa-dance` | [salsa-dance](salsa-dance/README.md) |
 | `secretpictures` | [secretpictures](secretpictures/README.md) |
