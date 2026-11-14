@@ -153,7 +153,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Hospital | Windows | Medium | `.phar`, CVE-2023-35001, Ghostscript y XAMPP | [Ver](../machines/windows/hospital/README.md) | [EN](../machines/windows/hospital/README.en.md) |
 | TheFrizz | Windows | Medium | Gibbon CVE-2023-45878, Kerberos y GPO | [Ver](../machines/windows/thefrizz/README.md) | [EN](../machines/windows/thefrizz/README.en.md) |
 | Haze | Windows | Hard | Splunk CVE-2024-36991, gMSA y shadow credentials | [Ver](../machines/windows/haze/README.md) | [EN](../machines/windows/haze/README.en.md) |
-| Node | Linux | Easy | API `/api/users/latest` con hashes, backup ZIP, SSH `mark`, tareas MongoDB y SUID `backup` con BOF | [Ver](../machines/linux/node/README.md) | [EN](../machines/linux/node/README.en.md) |
+| Node | Linux | Medium | API `/api/users/latest` con hashes, backup ZIP, SSH `mark`, tareas MongoDB y SUID `backup` con BOF | [Ver](../machines/linux/node/README.md) | [EN](../machines/linux/node/README.en.md) |
 | Celestial | Linux | Medium | Cookie base64 con `node-serialize`, RCE como `sun` y cron que restaura el script | [Ver](../machines/linux/celestial/README.md) | [EN](../machines/linux/celestial/README.en.md) |
 | Mirai | Linux | Easy | Pi-hole/Plex, credenciales por defecto, `sudo ALL` y flag borrada recuperada del USB | [Ver](../machines/linux/mirai/README.md) | [EN](../machines/linux/mirai/README.en.md) |
 | Irked | Linux | Easy | UnrealIRCd 3.2.8.1, `AB;`, steghide, SSH y SUID `viewuser` | [Ver](../machines/linux/irked/README.md) | [EN](../machines/linux/irked/README.en.md) |

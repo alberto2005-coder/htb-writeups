@@ -1,7 +1,7 @@
 ---
 machine: Nest
 os: Windows
-difficulty: Medium
+difficulty: Easy
 platform: Hack The Box
 state: Retired
 tags: [windows, smb, encrypted-config, vb-net, alternate-data-stream, hqk, psexec]
