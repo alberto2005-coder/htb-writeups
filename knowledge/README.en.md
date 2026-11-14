@@ -86,7 +86,9 @@ This index is generated from the repository's versioned writeups.
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.en.md) |
 | `osint/reconnaissance` | [reconnaissance](osint/reconnaissance.en.md) |
 | `privesc/aslr-brute-force` | [aslr-brute-force](privesc/aslr-brute-force.en.md) |
+| `privesc/docker-cve-2021-41091` | [docker-cve-2021-41091](privesc/docker-cve-2021-41091.en.md) |
 | `privesc/linux-sudo-suid` | [linux-sudo-suid](privesc/linux-sudo-suid.en.md) |
+| `privesc/sudoedit-cve-2023-22809` | [sudoedit-cve-2023-22809](privesc/sudoedit-cve-2023-22809.en.md) |
 | `privesc/systemd-timers` | [systemd-timers](privesc/systemd-timers.en.md) |
 | `pwn/canary-pie-rop` | [canary-pie-rop](pwn/canary-pie-rop.en.md) |
 | `pwn/format-strings` | [format-strings](pwn/format-strings.en.md) |
@@ -103,12 +105,16 @@ This index is generated from the repository's versioned writeups.
 | `threat-hunting/threat-hunting` | [threat-hunting](threat-hunting/threat-hunting.en.md) |
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.en.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.en.md) |
+| `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.en.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.en.md) |
 | `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.en.md) |
 | `web/command-injection` | [command-injection](web/command-injection.en.md) |
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.en.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.en.md) |
+| `web/cypher-injection` | [cypher-injection](web/cypher-injection.en.md) |
 | `web/file-upload` | [file-upload](web/file-upload.en.md) |
+| `web/flask-debug-pin` | [flask-debug-pin](web/flask-debug-pin.en.md) |
+| `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.en.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.en.md) |
 | `web/gitea` | [gitea](web/gitea.en.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.en.md) |
@@ -122,6 +128,7 @@ This index is generated from the repository's versioned writeups.
 | `web/log4shell` | [log4shell](web/log4shell.en.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.en.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.en.md) |
+| `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.en.md) |
 | `web/node-deserialization` | [node-deserialization](web/node-deserialization.en.md) |
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.en.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.en.md) |
@@ -135,6 +142,7 @@ This index is generated from the repository's versioned writeups.
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.en.md) |
 | `web/ssrf` | [ssrf](web/ssrf.en.md) |
 | `web/ssti` | [ssti](web/ssti.en.md) |
+| `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.en.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.en.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.en.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.en.md) |
@@ -178,6 +186,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/sliver-c2` | [sliver-c2](windows/sliver-c2.en.md) |
 | `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.en.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.en.md) |
+| `windows/themebleed` | [themebleed](windows/themebleed.en.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.en.md) |
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.en.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.en.md) |

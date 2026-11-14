@@ -8,6 +8,14 @@
 
 | Reto | Tipo | Dificultad | Técnica | Estado | ES | EN |
 |---|---|---|---|---|---|---|
+| looking glass | Web | Easy | SSTI en Jinja2 y ejecución de comandos | **Retired** | [Ver](looking%20glass/README.md) | [EN](looking%20glass/README.en.md) |
+| Initialization | Crypto | Medium | Alias de claves en AES-CTR y reutilización de keystream | **Retired** | [Ver](Initialization/README.md) | [EN](Initialization/README.en.md) |
+| Artifact Of Dangerous Sighting | Forensics | Medium | VHDX, ADS, PowerShell y EVTX | **Retired** | [Ver](Artifact%20Of%20Dangerous%20Sighting/README.md) | [EN](Artifact%20Of%20Dangerous%20Sighting/README.en.md) |
+| Anti Flag | Reversing | Easy | RC4 embebido y anti-debug | **Retired** | [Ver](Anti%20Flag/README.md) | [EN](Anti%20Flag/README.en.md) |
+| Walkie Hackie | Hardware | Easy | Captura IQ, FM y decodificación | **Retired** | [Ver](Walkie%20Hackie/README.md) | [EN](Walkie%20Hackie/README.en.md) |
+| AI Space | AI/ML | Easy | Embeddings, MDS y detección de outliers | **Retired** | [Ver](AI%20Space/README.md) | [EN](AI%20Space/README.en.md) |
+| Russian Roulette | Blockchain | Very Easy | `blockhash` predecible y contrato atacante | **Retired** | [Ver](Russian%20Roulette/README.md) | [EN](Russian%20Roulette/README.en.md) |
+| The secret of a Queen | Misc | Very Easy | Sustitución monoalfabética y frecuencia | **Retired** | [Ver](The%20secret%20of%20a%20Queen/README.md) | [EN](The%20secret%20of%20a%20Queen/README.en.md) |
 | WIDE | Reversing | Very Easy | Cadenas UTF-16 y comparación directa | **Retired** | [Ver](WIDE/README.md) | [EN](WIDE/README.en.md) |
 | Questionnaire | Pwn | Very Easy | `gets`, offset 40 y ret2win a `gg` | **Retired** | [Ver](Questionnaire/README.md) | [EN](Questionnaire/README.en.md) |
 | HM74 | Hardware | Very Easy | Hamming(7,4) y corrección de errores | **Retired** | [Ver](HM74/README.md) | [EN](HM74/README.en.md) |

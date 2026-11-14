@@ -8,6 +8,14 @@ Reference notes for machines used to study techniques. The main table covers **r
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|
+| Format | Linux | Medium | PHP microblog, Gitea, LFI/write, Redis socket and SSTI | [ES](../machines/linux/format/README.md) | [EN](../machines/linux/format/README.en.md) |
+| Agile | Linux | Medium | Flask debug PIN, Chrome debug and sudoedit CVE-2023-22809 | [ES](../machines/linux/agile/README.md) | [EN](../machines/linux/agile/README.en.md) |
+| OnlyForYou | Linux | Medium | Absolute LFI, `dig` command injection, Cypher and root `pip` | [ES](../machines/linux/onlyforyou/README.md) | [EN](../machines/linux/onlyforyou/README.en.md) |
+| Socket | Linux | Medium | WebSocket SQLite, PyInstaller and root build | [ES](../machines/linux/socket/README.md) | [EN](../machines/linux/socket/README.en.md) |
+| MonitorsTwo | Linux | Easy | Cacti CVE-2022-46169 and Docker escape CVE-2021-41091 | [ES](../machines/linux/monitorstwo/README.md) | [EN](../machines/linux/monitorstwo/README.en.md) |
+| Aero | Windows | Medium | ThemeBleed CVE-2023-38146 and CLFS CVE-2023-28252 | [ES](../machines/windows/aero/README.md) | [EN](../machines/windows/aero/README.en.md) |
+| Chaffinch | Windows | Medium | GeoServer CVE-2024-36401 and CSC service abuse | [ES](../machines/windows/chaffinch/README.md) | [EN](../machines/windows/chaffinch/README.en.md) |
+| Intentions | Linux | Hard | Second-order SQLi, Imagick and `CAP_DAC_READ_SEARCH` | [ES](../machines/linux/intentions/README.md) | [EN](../machines/linux/intentions/README.en.md) |
 | TartarSauce | Linux | Medium | WordPress Gwolle RFI, `tar` wildcard and systemd timer | [ES](../machines/linux/tartarsauce/README.md) | [EN](../machines/linux/tartarsauce/README.en.md) |
 | October | Linux | Medium | October CMS, `.php5` upload and ret2libc with 9-bit ASLR | [ES](../machines/linux/october/README.md) | [EN](../machines/linux/october/README.en.md) |
 | Jewel | Linux | Medium | GitWeb, Rails Redis deserialization; TOTP and `sudo gem` | [ES](../machines/linux/jewel/README.md) | [EN](../machines/linux/jewel/README.en.md) |

@@ -8,6 +8,8 @@ This index is generated from the repository's versioned writeups.
 |---|---|
 | `alchemy` | [alchemy](alchemy/README.md) |
 | `allegretto` | [allegretto](allegretto/README.md) |
+| `aotr-1-a-call-from-the-museum` | [aotr-1-a-call-from-the-museum](aotr-1-a-call-from-the-museum/README.md) |
+| `aotr-2-operation-winter-blackout` | [aotr-2-operation-winter-blackout](aotr-2-operation-winter-blackout/README.md) |
 | `aptnightmare-2` | [aptnightmare-2](aptnightmare-2/README.md) |
 | `aptnightmare` | [aptnightmare](aptnightmare/README.md) |
 | `artifact` | [artifact](artifact/README.md) |
@@ -27,6 +29,7 @@ This index is generated from the repository's versioned writeups.
 | `conned-again` | [conned-again](conned-again/README.md) |
 | `constellation` | [constellation](constellation/README.md) |
 | `cookie-consumption` | [cookie-consumption](cookie-consumption/README.md) |
+| `crashdump` | [crashdump](crashdump/README.md) |
 | `crewcrow` | [crewcrow](crewcrow/README.md) |
 | `crownjewel-1` | [crownjewel-1](crownjewel-1/README.md) |
 | `crownjewel-2` | [crownjewel-2](crownjewel-2/README.md) |
@@ -36,6 +39,7 @@ This index is generated from the repository's versioned writeups.
 | `dream-job-1` | [dream-job-1](dream-job-1/README.md) |
 | `dream-job-2` | [dream-job-2](dream-job-2/README.md) |
 | `droidphish` | [droidphish](droidphish/README.md) |
+| `easymoney` | [easymoney](easymoney/README.md) |
 | `einladen` | [einladen](einladen/README.md) |
 | `electricbreeze-1` | [electricbreeze-1](electricbreeze-1/README.md) |
 | `electricbreeze-2` | [electricbreeze-2](electricbreeze-2/README.md) |
@@ -68,6 +72,7 @@ This index is generated from the repository's versioned writeups.
 | `litter` | [litter](litter/README.md) |
 | `lockpick-2` | [lockpick-2](lockpick-2/README.md) |
 | `lockpick-3` | [lockpick-3](lockpick-3/README.md) |
+| `lockpick-4-0` | [lockpick-4-0](lockpick-4-0/README.md) |
 | `lockpick` | [lockpick](lockpick/README.md) |
 | `loggy` | [loggy](loggy/README.md) |
 | `logjammer` | [logjammer](logjammer/README.md) |
@@ -86,6 +91,8 @@ This index is generated from the repository's versioned writeups.
 | `nubilum-2` | [nubilum-2](nubilum-2/README.md) |
 | `nuts` | [nuts](nuts/README.md) |
 | `opportunist` | [opportunist](opportunist/README.md) |
+| `opsalwarkameez24-1-super-star` | [opsalwarkameez24-1-super-star](opsalwarkameez24-1-super-star/README.md) |
+| `opsalwarkameez24-2-magic-show` | [opsalwarkameez24-2-magic-show](opsalwarkameez24-2-magic-show/README.md) |
 | `optinseltrace-1` | [optinseltrace-1](optinseltrace-1/README.md) |
 | `optinseltrace-2` | [optinseltrace-2](optinseltrace-2/README.md) |
 | `optinseltrace-3` | [optinseltrace-3](optinseltrace-3/README.md) |
@@ -120,6 +127,7 @@ This index is generated from the repository's versioned writeups.
 | `shadowstream` | [shadowstream](shadowstream/README.md) |
 | `smartypants` | [smartypants](smartypants/README.md) |
 | `smoke-and-mirrors` | [smoke-and-mirrors](smoke-and-mirrors/README.md) |
+| `sneakycookies` | [sneakycookies](sneakycookies/README.md) |
 | `sshole` | [sshole](sshole/README.md) |
 | `subatomic` | [subatomic](subatomic/README.md) |
 | `takedown` | [takedown](takedown/README.md) |

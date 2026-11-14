@@ -16,6 +16,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 
 | Sherlock | Dominio | Dificultad | Evidencia principal | Herramientas | Ficha |
 |---|---|---|---|---|---|
+| CrashDump | Malware Analysis | Easy | Volcado de memoria, inyección y C2 | Volatility 3 | [Ver](crashdump/README.md) |
+| AoTR 1: A Call from the Museum | DFIR | Easy | Correo, LNK, PowerShell y `MachineGuid` | LECmd, CyberChef | [Ver](aotr-1-a-call-from-the-museum/README.md) |
+| AoTR 2: Operation Winter Blackout | Threat Intelligence | Medium | Foro privado, perfiles e infraestructura | OSINT, análisis de metadatos | [Ver](aotr-2-operation-winter-blackout/README.md) |
+| OpSalwarKameez24-1: Super-Star | Malware Analysis | Easy | Electron, `app.asar`, WebSocket y shellcode | asar, Ghidra | [Ver](opsalwarkameez24-1-super-star/README.md) |
+| OpSalwarKameez24-2: Magic-Show | DFIR | Medium | KAPE, EVTX, RDP y memoria | Chainsaw, Volatility 3 | [Ver](opsalwarkameez24-2-magic-show/README.md) |
+| Lockpick 4.0 | Malware Analysis | Insane | Ransomware, configuración y C2 | capa, FLOSS, x64dbg | [Ver](lockpick-4-0/README.md) |
+| EasyMoney | Malware Analysis | Medium | LNK, PowerShell, `certutil` y sideloading de Yandex | LECmd, JLECmd | [Ver](easymoney/README.md) |
+| SneakyCookies | DFIR | Medium | LNK, `ssh.exe`, SRUM y persistencia | LECmd, SrumECmd | [Ver](sneakycookies/README.md) |
 | Dream Job-1 | Threat Intelligence | Very Easy | IOC de Lazarus y Operation Dream Job | MITRE ATT&CK, VirusTotal | [Ver](dream-job-1/README.md) |
 | Dream Job-2 | Threat Intelligence | Easy | DRATzarus, Torisma y herramientas de Lazarus | MITRE ATT&CK, análisis estático | [Ver](dream-job-2/README.md) |
 | Smoke & Mirrors | DFIR | Medium | EVTX de PowerShell, Sysmon, AMSI y LSA | EvtxECmd, Chainsaw | [Ver](smoke-and-mirrors/README.md) |

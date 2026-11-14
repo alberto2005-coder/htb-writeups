@@ -9,8 +9,8 @@ Repositorio personal de writeups, notas técnicas y metodología de **Hack The B
 ## Contenido
 
 <!-- BEGIN AUTO-GENERATED STATS -->
-- **Writeups:** 468 (186 máquinas, 151 retos y 131 Sherlocks; fichas ES/EN).
-- **Conocimiento:** 177 temas con fichas ES/EN.
+- **Writeups:** 492 (194 máquinas, 159 retos y 139 Sherlocks; fichas ES/EN).
+- **Conocimiento:** 186 temas con fichas ES/EN.
 <!-- END AUTO-GENERATED STATS -->
 
 | Sección | Índice |

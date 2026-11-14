@@ -86,7 +86,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.md) |
 | `osint/reconnaissance` | [reconnaissance](osint/reconnaissance.md) |
 | `privesc/aslr-brute-force` | [aslr-brute-force](privesc/aslr-brute-force.md) |
+| `privesc/docker-cve-2021-41091` | [docker-cve-2021-41091](privesc/docker-cve-2021-41091.md) |
 | `privesc/linux-sudo-suid` | [linux-sudo-suid](privesc/linux-sudo-suid.md) |
+| `privesc/sudoedit-cve-2023-22809` | [sudoedit-cve-2023-22809](privesc/sudoedit-cve-2023-22809.md) |
 | `privesc/systemd-timers` | [systemd-timers](privesc/systemd-timers.md) |
 | `pwn/canary-pie-rop` | [canary-pie-rop](pwn/canary-pie-rop.md) |
 | `pwn/format-strings` | [format-strings](pwn/format-strings.md) |
@@ -103,12 +105,16 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `threat-hunting/threat-hunting` | [threat-hunting](threat-hunting/threat-hunting.md) |
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.md) |
+| `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.md) |
 | `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.md) |
 | `web/command-injection` | [command-injection](web/command-injection.md) |
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.md) |
+| `web/cypher-injection` | [cypher-injection](web/cypher-injection.md) |
 | `web/file-upload` | [file-upload](web/file-upload.md) |
+| `web/flask-debug-pin` | [flask-debug-pin](web/flask-debug-pin.md) |
+| `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.md) |
 | `web/gitea` | [gitea](web/gitea.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.md) |
@@ -122,6 +128,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/log4shell` | [log4shell](web/log4shell.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.md) |
+| `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.md) |
 | `web/node-deserialization` | [node-deserialization](web/node-deserialization.md) |
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
@@ -135,6 +142,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.md) |
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
+| `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.md) |
@@ -178,6 +186,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/sliver-c2` | [sliver-c2](windows/sliver-c2.md) |
 | `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.md) |
+| `windows/themebleed` | [themebleed](windows/themebleed.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.md) |
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.md) |

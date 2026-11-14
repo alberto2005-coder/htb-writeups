@@ -7,13 +7,16 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | Ruta | Ficha |
 |---|---|
 | `0ld is g0ld` | [0ld is g0ld](0ld%20is%20g0ld/README.md) |
+| `AI Space` | [AI Space](AI%20Space/README.md) |
 | `Alien Cradle` | [Alien Cradle](Alien%20Cradle/README.md) |
 | `Anchored` | [Anchored](Anchored/README.md) |
 | `Ancient Encodings` | [Ancient Encodings](Ancient%20Encodings/README.md) |
 | `Android in the Middle` | [Android in the Middle](Android%20in%20the%20Middle/README.md) |
+| `Anti Flag` | [Anti Flag](Anti%20Flag/README.md) |
 | `APKey` | [APKey](APKey/README.md) |
 | `APKrypt` | [APKrypt](APKrypt/README.md) |
 | `Aptitude Test` | [Aptitude Test](Aptitude%20Test/README.md) |
+| `Artifact Of Dangerous Sighting` | [Artifact Of Dangerous Sighting](Artifact%20Of%20Dangerous%20Sighting/README.md) |
 | `Automation` | [Automation](Automation/README.md) |
 | `Baby Crypt` | [Baby Crypt](Baby%20Crypt/README.md) |
 | `baby interdimensional internet` | [baby interdimensional internet](baby%20interdimensional%20internet/README.md) |
@@ -66,6 +69,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Illumination` | [Illumination](Illumination/README.md) |
 | `Impossible Password` | [Impossible Password](Impossible%20Password/README.md) |
 | `Infiltration` | [Infiltration](Infiltration/README.md) |
+| `Initialization` | [Initialization](Initialization/README.md) |
 | `Insider` | [Insider](Insider/README.md) |
 | `Interdimensional Internet` | [Interdimensional Internet](Interdimensional%20Internet/README.md) |
 | `Intergalactic Post` | [Intergalactic Post](Intergalactic%20Post/README.md) |
@@ -77,6 +81,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Labyrinth Linguist` | [Labyrinth Linguist](Labyrinth%20Linguist/README.md) |
 | `Lernaean` | [Lernaean](Lernaean/README.md) |
 | `Locked Away` | [Locked Away](Locked%20Away/README.md) |
+| `looking glass` | [looking glass](looking%20glass/README.md) |
 | `Lost Modulus` | [Lost Modulus](Lost%20Modulus/README.md) |
 | `LoveTok` | [LoveTok](LoveTok/README.md) |
 | `Makeshift` | [Makeshift](Makeshift/README.md) |
@@ -114,6 +119,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Restaurant` | [Restaurant](Restaurant/README.md) |
 | `ropme` | [ropme](ropme/README.md) |
 | `RSAisEasy` | [RSAisEasy](RSAisEasy/README.md) |
+| `Russian Roulette` | [Russian Roulette](Russian%20Roulette/README.md) |
 | `sanitize` | [sanitize](sanitize/README.md) |
 | `SAW` | [SAW](SAW/README.md) |
 | `Secure Digital` | [Secure Digital](Secure%20Digital/README.md) |
@@ -137,6 +143,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Tear or Dear` | [Tear or Dear](Tear%20or%20Dear/README.md) |
 | `Teleport` | [Teleport](Teleport/README.md) |
 | `Templated` | [Templated](Templated/README.md) |
+| `The secret of a Queen` | [The secret of a Queen](The%20secret%20of%20a%20Queen/README.md) |
 | `The Suspicious Reviewer` | [The Suspicious Reviewer](The%20Suspicious%20Reviewer/README.md) |
 | `The Three-Eyed Oracle` | [The Three-Eyed Oracle](The%20Three-Eyed%20Oracle/README.md) |
 | `Threat Index` | [Threat Index](Threat%20Index/README.md) |
@@ -150,6 +157,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Urgent` | [Urgent](Urgent/README.md) |
 | `Vault-breaker` | [Vault-breaker](Vault-breaker/README.md) |
 | `VHDLock` | [VHDLock](VHDLock/README.md) |
+| `Walkie Hackie` | [Walkie Hackie](Walkie%20Hackie/README.md) |
 | `Watch Tower` | [Watch Tower](Watch%20Tower/README.md) |
 | `Weak RSA` | [Weak RSA](Weak%20RSA/README.md) |
 | `Weather App` | [Weather App](Weather%20App/README.md) |
