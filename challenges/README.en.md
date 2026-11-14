@@ -168,6 +168,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 | Compressor | Misc | Very Easy | GTFOBins `zip` with `-T -TT 'sh #'` | **Retired** | [ES](Compressor/README.md) | [Ver](Compressor/README.en.md) |
 | Gawk | Hardware | Easy | PJL, PRET and a base64 PDF | **Retired** | [ES](Gawk/README.md) | [Ver](Gawk/README.en.md) |
 
+| CandyVault | Web | Easy | NoSQL injection with `$ne` in MongoDB | **Retired** | [View](CandyVault/README.en.md) | [ES](CandyVault/README.md) |
+| Watersnake | Web | Medium | YAML deserialisation with SnakeYAML | **Retired** | [View](Watersnake/README.en.md) | [ES](Watersnake/README.md) |
+| Partial Tenacity | Crypto | Medium | RSA prime recovery from partial bits | **Retired** | [View](Partial%20Tenacity/README.en.md) | [ES](Partial%20Tenacity/README.md) |
+| Tsayaki | Crypto | Hard | AES-CTR nonce reuse | **Retired** | [View](Tsayaki/README.en.md) | [ES](Tsayaki/README.md) |
+| Nightmare | Pwn | Easy | Format string and GOT overwrite | **Retired** | [View](Nightmare/README.en.md) | [ES](Nightmare/README.md) |
+| HTB Console | Pwn | Easy | Stack overflow and `ret2system` | **Retired** | [View](HTB%20Console/README.en.md) | [ES](HTB%20Console/README.md) |
+| Bat Computer | Reversing | Easy | Inverted comparison and binary patch | **Retired** | [View](Bat%20Computer/README.en.md) | [ES](Bat%20Computer/README.md) |
+| It Has Begun | Forensics | Very Easy | EVTX, PowerShell and timeline | **Retired** | [View](It%20Has%20Begun/README.en.md) | [ES](It%20Has%20Begun/README.md) |
 ## Categories
 
 HTB groups challenges into fourteen categories. Counts are approximate and meant for planning, not as an exact inventory.

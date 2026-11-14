@@ -168,6 +168,14 @@
 | Compressor | Misc | Very Easy | GTFOBins `zip` con `-T -TT 'sh #'` | **Retired** | [Ver](Compressor/README.md) | [EN](Compressor/README.en.md) |
 | Gawk | Hardware | Easy | PJL, PRET y PDF en base64 | **Retired** | [Ver](Gawk/README.md) | [EN](Gawk/README.en.md) |
 
+| CandyVault | Web | Easy | Inyección NoSQL con `$ne` en MongoDB | **Retired** | [Ver](CandyVault/README.md) | [EN](CandyVault/README.en.md) |
+| Watersnake | Web | Medium | Deserialización YAML con SnakeYAML | **Retired** | [Ver](Watersnake/README.md) | [EN](Watersnake/README.en.md) |
+| Partial Tenacity | Crypto | Medium | Recuperación de primos RSA con bits parciales | **Retired** | [Ver](Partial%20Tenacity/README.md) | [EN](Partial%20Tenacity/README.en.md) |
+| Tsayaki | Crypto | Hard | Reutilización de nonce en AES-CTR | **Retired** | [Ver](Tsayaki/README.md) | [EN](Tsayaki/README.en.md) |
+| Nightmare | Pwn | Easy | Format string y sobrescritura de GOT | **Retired** | [Ver](Nightmare/README.md) | [EN](Nightmare/README.en.md) |
+| HTB Console | Pwn | Easy | Desbordamiento de pila y `ret2system` | **Retired** | [Ver](HTB%20Console/README.md) | [EN](HTB%20Console/README.en.md) |
+| Bat Computer | Reversing | Easy | Comparación invertida y parcheo de binario | **Retired** | [Ver](Bat%20Computer/README.md) | [EN](Bat%20Computer/README.en.md) |
+| It Has Begun | Forensics | Very Easy | EVTX, PowerShell y línea temporal | **Retired** | [Ver](It%20Has%20Begun/README.md) | [EN](It%20Has%20Begun/README.en.md) |
 ## Categorías
 
 Los retos de HTB se agrupan en catorce categorías. Los números son orientativos y sirven para planificar, no como inventario exacto.

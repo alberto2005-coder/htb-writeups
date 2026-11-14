@@ -8,12 +8,14 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 |---|---|
 | `alchemy` | [alchemy](alchemy/README.md) |
 | `allegretto` | [allegretto](allegretto/README.md) |
+| `anpu` | [anpu](anpu/README.md) |
 | `aotr-1-a-call-from-the-museum` | [aotr-1-a-call-from-the-museum](aotr-1-a-call-from-the-museum/README.md) |
 | `aotr-2-operation-winter-blackout` | [aotr-2-operation-winter-blackout](aotr-2-operation-winter-blackout/README.md) |
 | `aptnightmare-2` | [aptnightmare-2](aptnightmare-2/README.md) |
 | `aptnightmare` | [aptnightmare](aptnightmare/README.md) |
 | `artifact` | [artifact](artifact/README.md) |
 | `backdoor` | [backdoor](backdoor/README.md) |
+| `baggage` | [baggage](baggage/README.md) |
 | `bft` | [bft](bft/README.md) |
 | `blackenergy` | [blackenergy](blackenergy/README.md) |
 | `bling-bling` | [bling-bling](bling-bling/README.md) |
@@ -21,6 +23,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `brutus` | [brutus](brutus/README.md) |
 | `bumblebee` | [bumblebee](bumblebee/README.md) |
 | `cafepoisoning` | [cafepoisoning](cafepoisoning/README.md) |
+| `camouflage` | [camouflage](camouflage/README.md) |
 | `campfire-1` | [campfire-1](campfire-1/README.md) |
 | `campfire-2` | [campfire-2](campfire-2/README.md) |
 | `caught` | [caught](caught/README.md) |
@@ -47,6 +50,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `fleet` | [fleet](fleet/README.md) |
 | `fragility` | [fragility](fragility/README.md) |
 | `gatekeeper` | [gatekeeper](gatekeeper/README.md) |
+| `ghost-thread` | [ghost-thread](ghost-thread/README.md) |
 | `grabber` | [grabber](grabber/README.md) |
 | `hat-trick` | [hat-trick](hat-trick/README.md) |
 | `heartbreaker-continuum` | [heartbreaker-continuum](heartbreaker-continuum/README.md) |
@@ -125,17 +129,21 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `secretpictures` | [secretpictures](secretpictures/README.md) |
 | `shadowbait` | [shadowbait](shadowbait/README.md) |
 | `shadowstream` | [shadowstream](shadowstream/README.md) |
+| `sillyeli` | [sillyeli](sillyeli/README.md) |
 | `smartypants` | [smartypants](smartypants/README.md) |
 | `smoke-and-mirrors` | [smoke-and-mirrors](smoke-and-mirrors/README.md) |
 | `sneakycookies` | [sneakycookies](sneakycookies/README.md) |
 | `sshole` | [sshole](sshole/README.md) |
+| `streamer` | [streamer](streamer/README.md) |
 | `subatomic` | [subatomic](subatomic/README.md) |
 | `takedown` | [takedown](takedown/README.md) |
+| `teamwork` | [teamwork](teamwork/README.md) |
 | `telly` | [telly](telly/README.md) |
 | `ticktock` | [ticktock](ticktock/README.md) |
 | `tracer` | [tracer](tracer/README.md) |
 | `trainingday` | [trainingday](trainingday/README.md) |
 | `trent` | [trent](trent/README.md) |
+| `trojan` | [trojan](trojan/README.md) |
 | `ufo-1` | [ufo-1](ufo-1/README.md) |
 | `ultimatum` | [ultimatum](ultimatum/README.md) |
 | `unit42` | [unit42](unit42/README.md) |

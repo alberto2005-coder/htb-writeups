@@ -178,6 +178,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Omni | Windows | Easy | Windows IoT Core, SirepRAT, `reg save`, WDP y `Import-Clixml` | [Ver](../machines/windows/omni/README.md) | [EN](../machines/windows/omni/README.en.md) |
 | Worker | Windows | Medium | Historial SVN, Azure DevOps, webshell ASPX y pipeline `Setup` como SYSTEM | [Ver](../machines/windows/worker/README.md) | [EN](../machines/windows/worker/README.en.md) |
 
+| Precious | Linux | Easy | PDFKit SSRF, lectura de archivos y YAML con `sudo` | [Ver](../machines/linux/precious/README.md) | [EN](../machines/linux/precious/README.en.md) |
+| UpDown | Linux | Medium | SSRF, `.git` expuesto, vhosts y `sudo` | [Ver](../machines/linux/updown/README.md) | [EN](../machines/linux/updown/README.en.md) |
+| Zipping | Linux | Medium | ZIP con symlink, SQLi, webshell y binario con `sudo` | [Ver](../machines/linux/zipping/README.md) | [EN](../machines/linux/zipping/README.en.md) |
+| Health | Linux | Medium | Redirección SSRF, Gogs con SQLi y cron como root | [Ver](../machines/linux/health/README.md) | [EN](../machines/linux/health/README.en.md) |
+| SneakyMailer | Linux | Medium | SMTP, phishing, IMAP, FTP y paquete PyPI | [Ver](../machines/linux/sneakymailer/README.md) | [EN](../machines/linux/sneakymailer/README.en.md) |
+| Catch | Linux | Medium | APK, secretos en Gitea y Let's Chat | [Ver](../machines/linux/catch/README.md) | [EN](../machines/linux/catch/README.en.md) |
+| Driver | Windows | Easy | `.scf`/Responder, WinRM y PrintNightmare | [Ver](../machines/windows/driver/README.md) | [EN](../machines/windows/driver/README.en.md) |
+| Anubis | Windows | Insane | ASP, Jamovi, ADCS ESC y PKINIT | [Ver](../machines/windows/anubis/README.md) | [EN](../machines/windows/anubis/README.en.md) |
 ## Pendientes
 
 1 máquina retirada con material localizado y todavía sin ficha propia.

@@ -17,11 +17,14 @@ This index is generated from the repository's versioned writeups.
 | `cloud/cloudtrail` | [cloudtrail](cloud/cloudtrail.en.md) |
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.en.md) |
 | `cloud/gmsa-abuse` | [gmsa-abuse](cloud/gmsa-abuse.en.md) |
+| `cloud/openstack-forensics` | [openstack-forensics](cloud/openstack-forensics.en.md) |
 | `cloud/s3-misconfiguration` | [s3-misconfiguration](cloud/s3-misconfiguration.en.md) |
+| `crypto/aes-ctr-nonce-reuse` | [aes-ctr-nonce-reuse](crypto/aes-ctr-nonce-reuse.en.md) |
 | `crypto/aes-ecb` | [aes-ecb](crypto/aes-ecb.en.md) |
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.en.md) |
 | `crypto/cbc-bit-flipping` | [cbc-bit-flipping](crypto/cbc-bit-flipping.en.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.en.md) |
+| `crypto/rsa-partial-key` | [rsa-partial-key](crypto/rsa-partial-key.en.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.en.md) |
 | `crypto/xor-and-encodings` | [xor-and-encodings](crypto/xor-and-encodings.en.md) |
 | `forensics/arp-dns-poisoning` | [arp-dns-poisoning](forensics/arp-dns-poisoning.en.md) |
@@ -38,6 +41,8 @@ This index is generated from the repository's versioned writeups.
 | `forensics/pyinstaller-extraction` | [pyinstaller-extraction](forensics/pyinstaller-extraction.en.md) |
 | `forensics/ransomware-triage` | [ransomware-triage](forensics/ransomware-triage.en.md) |
 | `forensics/rdp-bitmap-cache` | [rdp-bitmap-cache](forensics/rdp-bitmap-cache.en.md) |
+| `forensics/shellbags` | [shellbags](forensics/shellbags.en.md) |
+| `forensics/srum-ese` | [srum-ese](forensics/srum-ese.en.md) |
 | `forensics/volatility-memory` | [volatility-memory](forensics/volatility-memory.en.md) |
 | `forensics/windows-artifacts` | [windows-artifacts](forensics/windows-artifacts.en.md) |
 | `forensics/windows-triage` | [windows-triage](forensics/windows-triage.en.md) |
@@ -70,6 +75,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.en.md) |
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.en.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.en.md) |
+| `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.en.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.en.md) |
@@ -91,6 +97,7 @@ This index is generated from the repository's versioned writeups.
 | `privesc/sudoedit-cve-2023-22809` | [sudoedit-cve-2023-22809](privesc/sudoedit-cve-2023-22809.en.md) |
 | `privesc/systemd-timers` | [systemd-timers](privesc/systemd-timers.en.md) |
 | `pwn/canary-pie-rop` | [canary-pie-rop](pwn/canary-pie-rop.en.md) |
+| `pwn/format-string-got-overwrite` | [format-string-got-overwrite](pwn/format-string-got-overwrite.en.md) |
 | `pwn/format-strings` | [format-strings](pwn/format-strings.en.md) |
 | `pwn/null-byte-truncation` | [null-byte-truncation](pwn/null-byte-truncation.en.md) |
 | `pwn/partial-overwrite` | [partial-overwrite](pwn/partial-overwrite.en.md) |
@@ -131,12 +138,15 @@ This index is generated from the repository's versioned writeups.
 | `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.en.md) |
 | `web/node-deserialization` | [node-deserialization](web/node-deserialization.en.md) |
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.en.md) |
+| `web/nosql-injection` | [nosql-injection](web/nosql-injection.en.md) |
+| `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.en.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.en.md) |
 | `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.en.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.en.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.en.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
+| `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.en.md) |
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.en.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.en.md) |
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.en.md) |
@@ -154,6 +164,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.en.md) |
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.en.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.en.md) |
+| `windows/adcs-pkinit` | [adcs-pkinit](windows/adcs-pkinit.en.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.en.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.en.md) |
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.en.md) |
@@ -175,6 +186,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.en.md) |
 | `windows/oracle-odat` | [oracle-odat](windows/oracle-odat.en.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.en.md) |
+| `windows/printnightmare` | [printnightmare](windows/printnightmare.en.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.en.md) |
 | `windows/psexec` | [psexec](windows/psexec.en.md) |
 | `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.en.md) |

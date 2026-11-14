@@ -26,10 +26,12 @@ This index is generated from the repository's versioned writeups.
 | `Baby Time Capsule` | [Baby Time Capsule](Baby%20Time%20Capsule/README.md) |
 | `BabyEncryption` | [BabyEncryption](BabyEncryption/README.md) |
 | `Bare Metal` | [Bare Metal](Bare%20Metal/README.md) |
+| `Bat Computer` | [Bat Computer](Bat%20Computer/README.md) |
 | `Behind the Scenes` | [Behind the Scenes](Behind%20the%20Scenes/README.md) |
 | `BitsNBytes` | [BitsNBytes](BitsNBytes/README.md) |
 | `breaking grad` | [breaking grad](breaking%20grad/README.md) |
 | `Call` | [Call](Call/README.md) |
+| `CandyVault` | [CandyVault](CandyVault/README.md) |
 | `Cartographer` | [Cartographer](Cartographer/README.md) |
 | `Cat` | [Cat](Cat/README.md) |
 | `Chrono Mind` | [Chrono Mind](Chrono%20Mind/README.md) |
@@ -64,6 +66,7 @@ This index is generated from the repository's versioned writeups.
 | `Hidden in Colors` | [Hidden in Colors](Hidden%20in%20Colors/README.md) |
 | `Hidden Path` | [Hidden Path](Hidden%20Path/README.md) |
 | `HM74` | [HM74](HM74/README.md) |
+| `HTB Console` | [HTB Console](HTB%20Console/README.md) |
 | `I know Mag1k` | [I know Mag1k](I%20know%20Mag1k/README.md) |
 | `Iced Tea` | [Iced Tea](Iced%20Tea/README.md) |
 | `Illumination` | [Illumination](Illumination/README.md) |
@@ -74,6 +77,7 @@ This index is generated from the repository's versioned writeups.
 | `Interdimensional Internet` | [Interdimensional Internet](Interdimensional%20Internet/README.md) |
 | `Intergalactic Post` | [Intergalactic Post](Intergalactic%20Post/README.md) |
 | `Intrusion` | [Intrusion](Intrusion/README.md) |
+| `It Has Begun` | [It Has Begun](It%20Has%20Begun/README.md) |
 | `Jeeves` | [Jeeves](Jeeves/README.md) |
 | `Keep Tryin'` | [Keep Tryin'](Keep%20Tryin%27/README.md) |
 | `KORP Terminal` | [KORP Terminal](KORP%20Terminal/README.md) |
@@ -96,11 +100,13 @@ This index is generated from the repository's versioned writeups.
 | `Monstrosity` | [Monstrosity](Monstrosity/README.md) |
 | `Mutation Lab` | [Mutation Lab](Mutation%20Lab/README.md) |
 | `Neonify` | [Neonify](Neonify/README.md) |
+| `Nightmare` | [Nightmare](Nightmare/README.md) |
 | `No Place To Hide` | [No Place To Hide](No%20Place%20To%20Hide/README.md) |
 | `Obscure` | [Obscure](Obscure/README.md) |
 | `Oddly Even` | [Oddly Even](Oddly%20Even/README.md) |
 | `Oldbridge` | [Oldbridge](Oldbridge/README.md) |
 | `OnlyHacks` | [OnlyHacks](OnlyHacks/README.md) |
+| `Partial Tenacity` | [Partial Tenacity](Partial%20Tenacity/README.md) |
 | `Passman` | [Passman](Passman/README.md) |
 | `Peel Back The Layers` | [Peel Back The Layers](Peel%20Back%20The%20Layers/README.md) |
 | `Perfect Synchronization` | [Perfect Synchronization](Perfect%20Synchronization/README.md) |
@@ -151,6 +157,7 @@ This index is generated from the repository's versioned writeups.
 | `Took the Byte` | [Took the Byte](Took%20the%20Byte/README.md) |
 | `Toxic` | [Toxic](Toxic/README.md) |
 | `Trapped Source` | [Trapped Source](Trapped%20Source/README.md) |
+| `Tsayaki` | [Tsayaki](Tsayaki/README.md) |
 | `Under Construction` | [Under Construction](Under%20Construction/README.md) |
 | `Unique` | [Unique](Unique/README.md) |
 | `Up a Stream` | [Up a Stream](Up%20a%20Stream/README.md) |
@@ -159,6 +166,7 @@ This index is generated from the repository's versioned writeups.
 | `VHDLock` | [VHDLock](VHDLock/README.md) |
 | `Walkie Hackie` | [Walkie Hackie](Walkie%20Hackie/README.md) |
 | `Watch Tower` | [Watch Tower](Watch%20Tower/README.md) |
+| `Watersnake` | [Watersnake](Watersnake/README.md) |
 | `Weak RSA` | [Weak RSA](Weak%20RSA/README.md) |
 | `Weather App` | [Weather App](Weather%20App/README.md) |
 | `WIDE` | [WIDE](WIDE/README.md) |
