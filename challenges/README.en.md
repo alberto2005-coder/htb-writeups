@@ -8,6 +8,14 @@ Index of solved challenges plus a category map to pick the next one. Each challe
 
 | Challenge | Type | Difficulty | Technique | State | ES | EN |
 |---|---|---|---|---|---|---|
+| WIDE | Reversing | Very Easy | UTF-16 strings and direct comparison | **Retired** | [ES](WIDE/README.md) | [Ver](WIDE/README.en.md) |
+| Questionnaire | Pwn | Very Easy | `gets`, offset 40 and ret2win to `gg` | **Retired** | [ES](Questionnaire/README.md) | [Ver](Questionnaire/README.en.md) |
+| HM74 | Hardware | Very Easy | Hamming(7,4) and error correction | **Retired** | [ES](HM74/README.md) | [Ver](HM74/README.en.md) |
+| sekur julius | Crypto | Easy | Caesar and 26-shift brute force | **Retired** | [ES](sekur%20julius/README.md) | [Ver](sekur%20julius/README.en.md) |
+| The Three-Eyed Oracle | Crypto | Easy | AES-ECB and byte-at-a-time attack | **Retired** | [ES](The%20Three-Eyed%20Oracle/README.md) | [Ver](The%20Three-Eyed%20Oracle/README.en.md) |
+| Find The Easy Pass | Reversing | Very Easy | .NET, dnSpy and password comparison | **Retired** | [ES](Find%20The%20Easy%20Pass/README.md) | [Ver](Find%20The%20Easy%20Pass/README.en.md) |
+| Wrong Spooky Season | Forensics | Easy | PCAP and cleartext reverse shell | **Retired** | [ES](Wrong%20Spooky%20Season/README.md) | [Ver](Wrong%20Spooky%20Season/README.en.md) |
+| Automation | Forensics | Easy | Obfuscated PowerShell and base64 | **Retired** | [ES](Automation/README.md) | [Ver](Automation/README.en.md) |
 | Marshal in the Middle | Forensics | Medium | Zeek logs, TLS decryption and HTTP exfiltration | **Retired** | [ES](Marshal%20in%20the%20Middle/README.md) | [Ver](Marshal%20in%20the%20Middle/README.en.md) |
 | Lernaean | Web | Easy | Hydra, weak password and avoidable JavaScript redirect | **Retired** | [ES](Lernaean/README.md) | [Ver](Lernaean/README.en.md) |
 | Kryptor | Pwn | Insane | Kernel 5.9.10: DirtyPipe (CVE-2022-0847) over busybox's entry point, triggered through `modprobe` | **Retired** | [ES](Kryptor/README.md) | [Ver](Kryptor/README.en.md) |

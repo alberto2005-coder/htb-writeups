@@ -8,6 +8,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
+| TartarSauce | Linux | Medium | WordPress Gwolle RFI, `tar` con comodín y timer systemd | [Ver](../machines/linux/tartarsauce/README.md) | [EN](../machines/linux/tartarsauce/README.en.md) |
+| October | Linux | Medium | October CMS, subida `.php5` y ret2libc con ASLR de 9 bits | [Ver](../machines/linux/october/README.md) | [EN](../machines/linux/october/README.en.md) |
+| Jewel | Linux | Medium | GitWeb, Rails y deserialización Redis; TOTP y `sudo gem` | [Ver](../machines/linux/jewel/README.md) | [EN](../machines/linux/jewel/README.en.md) |
+| Sneaky | Linux | Medium | SNMP, IPv6, SQLi de login y SUID con overflow | [Ver](../machines/linux/sneaky/README.md) | [EN](../machines/linux/sneaky/README.en.md) |
+| Stratosphere | Linux | Medium | Struts CVE-2017-5638, MySQL y secuestro de módulo Python | [Ver](../machines/linux/stratosphere/README.md) | [EN](../machines/linux/stratosphere/README.en.md) |
+| Silo | Windows | Medium | Oracle 11g XE, ODAT y ejecución como SYSTEM | [Ver](../machines/windows/silo/README.md) | [EN](../machines/windows/silo/README.en.md) |
+| Bart | Windows | Medium | IIS, vhosts, log poisoning y autologon | [Ver](../machines/windows/bart/README.md) | [EN](../machines/windows/bart/README.en.md) |
+| Love | Windows | Easy | SSRF, subida PHP y AlwaysInstallElevated | [Ver](../machines/windows/love/README.md) | [EN](../machines/windows/love/README.en.md) |
 | Sizzle | Windows | Insane | SCF/Responder, ADCS, Kerberoasting y DCSync | [Ver](../machines/windows/sizzle/README.md) | [EN](../machines/windows/sizzle/README.en.md) |
 | Reel | Windows | Hard | RTF CVE-2017-0199, ACL WriteOwner/WriteDacl y script de backup | [Ver](../machines/windows/reel/README.md) | [EN](../machines/windows/reel/README.en.md) |
 | Absolute | Windows | Insane | AS-REP, shadow credentials, KrbRelay y DCSync | [Ver](../machines/windows/absolute/README.md) | [EN](../machines/windows/absolute/README.en.md) |

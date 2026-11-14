@@ -47,6 +47,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `general/default-credentials` | [default-credentials](general/default-credentials.md) |
 | `general/dns-enumeration` | [dns-enumeration](general/dns-enumeration.md) |
 | `general/ftp-enumeration` | [ftp-enumeration](general/ftp-enumeration.md) |
+| `general/ipv6-enumeration` | [ipv6-enumeration](general/ipv6-enumeration.md) |
 | `general/kerberos-clock` | [kerberos-clock](general/kerberos-clock.md) |
 | `general/lab-setup` | [lab-setup](general/lab-setup.md) |
 | `general/pivoting` | [pivoting](general/pivoting.md) |
@@ -70,6 +71,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
+| `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.md) |
@@ -83,6 +85,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `mobile/xamarin-analysis` | [xamarin-analysis](mobile/xamarin-analysis.md) |
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.md) |
 | `osint/reconnaissance` | [reconnaissance](osint/reconnaissance.md) |
+| `privesc/aslr-brute-force` | [aslr-brute-force](privesc/aslr-brute-force.md) |
 | `privesc/linux-sudo-suid` | [linux-sudo-suid](privesc/linux-sudo-suid.md) |
 | `privesc/systemd-timers` | [systemd-timers](privesc/systemd-timers.md) |
 | `pwn/canary-pie-rop` | [canary-pie-rop](pwn/canary-pie-rop.md) |
@@ -101,6 +104,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.md) |
+| `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.md) |
 | `web/command-injection` | [command-injection](web/command-injection.md) |
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.md) |
@@ -121,14 +125,17 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/node-deserialization` | [node-deserialization](web/node-deserialization.md) |
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
+| `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
+| `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.md) |
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.md) |
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
+| `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.md) |
 | `web/xxe` | [xxe](web/xxe.md) |
@@ -140,6 +147,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.md) |
+| `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.md) |
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.md) |
 | `windows/dpapi` | [dpapi](windows/dpapi.md) |
@@ -157,6 +165,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.md) |
+| `windows/oracle-odat` | [oracle-odat](windows/oracle-odat.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
 | `windows/psexec` | [psexec](windows/psexec.md) |

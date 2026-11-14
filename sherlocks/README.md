@@ -16,6 +16,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 
 | Sherlock | Dominio | Dificultad | Evidencia principal | Herramientas | Ficha |
 |---|---|---|---|---|---|
+| Dream Job-1 | Threat Intelligence | Very Easy | IOC de Lazarus y Operation Dream Job | MITRE ATT&CK, VirusTotal | [Ver](dream-job-1/README.md) |
+| Dream Job-2 | Threat Intelligence | Easy | DRATzarus, Torisma y herramientas de Lazarus | MITRE ATT&CK, análisis estático | [Ver](dream-job-2/README.md) |
+| Smoke & Mirrors | DFIR | Medium | EVTX de PowerShell, Sysmon, AMSI y LSA | EvtxECmd, Chainsaw | [Ver](smoke-and-mirrors/README.md) |
+| UFO-1 | Threat Intelligence | Easy | Sandworm/APT44 y campañas ICS | MITRE ATT&CK, Navigator | [Ver](ufo-1/README.md) |
+| Bling Bling | SOC | Easy | Neo4j de cuentas, tarjetas y direcciones | Cypher, Neo4j | [Ver](bling-bling/README.md) |
+| Cookie Consumption | SOC | Easy | Kubernetes, service accounts y secretos | `kubectl`, `yq` | [Ver](cookie-consumption/README.md) |
+| Neural Noel | SOC | Easy | Chatbot de IA, prompts y tráfico HTTP | análisis de logs, OWASP LLM | [Ver](neural-noel/README.md) |
+| Telly | SOC | Very Easy | PCAP Telnet, CVE-2026-24061 y exfiltración | Wireshark, `tshark` | [Ver](telly/README.md) |
 | Phantom Check | DFIR | Very Easy | Dos EVTX de PowerShell: WMI y anti-VM | EvtxECmd, KAPE | [Ver](phantom-check/README.md) |
 | TickTock | DFIR / Windows | Medium | MFT, TeamViewer, PowerShell y Defender | MFTECmd, Chainsaw, EvtxECmd | [Ver](ticktock/README.md) |
 | CrownJewel-2 | DFIR / Active Directory | Medium | Logs de DC con pass-the-hash y acceso a `C$` | EvtxECmd, Timeline Explorer | [Ver](crownjewel-2/README.md) |

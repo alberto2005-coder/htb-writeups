@@ -14,6 +14,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `APKey` | [APKey](APKey/README.md) |
 | `APKrypt` | [APKrypt](APKrypt/README.md) |
 | `Aptitude Test` | [Aptitude Test](Aptitude%20Test/README.md) |
+| `Automation` | [Automation](Automation/README.md) |
 | `Baby Crypt` | [Baby Crypt](Baby%20Crypt/README.md) |
 | `baby interdimensional internet` | [baby interdimensional internet](baby%20interdimensional%20internet/README.md) |
 | `Baby nginxatsu` | [Baby nginxatsu](Baby%20nginxatsu/README.md) |
@@ -46,6 +47,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Extraterrestrial Persistence` | [Extraterrestrial Persistence](Extraterrestrial%20Persistence/README.md) |
 | `Factory` | [Factory](Factory/README.md) |
 | `Fake Boost` | [Fake Boost](Fake%20Boost/README.md) |
+| `Find The Easy Pass` | [Find The Easy Pass](Find%20The%20Easy%20Pass/README.md) |
 | `Flag Command` | [Flag Command](Flag%20Command/README.md) |
 | `FlagCasino` | [FlagCasino](FlagCasino/README.md) |
 | `Flippin Bank` | [Flippin Bank](Flippin%20Bank/README.md) |
@@ -58,6 +60,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `HDC` | [HDC](HDC/README.md) |
 | `Hidden in Colors` | [Hidden in Colors](Hidden%20in%20Colors/README.md) |
 | `Hidden Path` | [Hidden Path](Hidden%20Path/README.md) |
+| `HM74` | [HM74](HM74/README.md) |
 | `I know Mag1k` | [I know Mag1k](I%20know%20Mag1k/README.md) |
 | `Iced Tea` | [Iced Tea](Iced%20Tea/README.md) |
 | `Illumination` | [Illumination](Illumination/README.md) |
@@ -104,6 +107,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Primary Knowledge` | [Primary Knowledge](Primary%20Knowledge/README.md) |
 | `Prometheon` | [Prometheon](Prometheon/README.md) |
 | `ProxyAsAService` | [ProxyAsAService](ProxyAsAService/README.md) |
+| `Questionnaire` | [Questionnaire](Questionnaire/README.md) |
 | `Recruitment` | [Recruitment](Recruitment/README.md) |
 | `Red Island` | [Red Island](Red%20Island/README.md) |
 | `Reg` | [Reg](Reg/README.md) |
@@ -114,6 +118,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `SAW` | [SAW](SAW/README.md) |
 | `Secure Digital` | [Secure Digital](Secure%20Digital/README.md) |
 | `SeeTheSharpFlag` | [SeeTheSharpFlag](SeeTheSharpFlag/README.md) |
+| `sekur julius` | [sekur julius](sekur%20julius/README.md) |
 | `Shattered Tablet` | [Shattered Tablet](Shattered%20Tablet/README.md) |
 | `Shush Protocol` | [Shush Protocol](Shush%20Protocol/README.md) |
 | `Sigma Technology` | [Sigma Technology](Sigma%20Technology/README.md) |
@@ -133,6 +138,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Teleport` | [Teleport](Teleport/README.md) |
 | `Templated` | [Templated](Templated/README.md) |
 | `The Suspicious Reviewer` | [The Suspicious Reviewer](The%20Suspicious%20Reviewer/README.md) |
+| `The Three-Eyed Oracle` | [The Three-Eyed Oracle](The%20Three-Eyed%20Oracle/README.md) |
 | `Threat Index` | [Threat Index](Threat%20Index/README.md) |
 | `TimeKORP` | [TimeKORP](TimeKORP/README.md) |
 | `Took the Byte` | [Took the Byte](Took%20the%20Byte/README.md) |
@@ -147,5 +153,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `Watch Tower` | [Watch Tower](Watch%20Tower/README.md) |
 | `Weak RSA` | [Weak RSA](Weak%20RSA/README.md) |
 | `Weather App` | [Weather App](Weather%20App/README.md) |
+| `WIDE` | [WIDE](WIDE/README.md) |
+| `Wrong Spooky Season` | [Wrong Spooky Season](Wrong%20Spooky%20Season/README.md) |
 | `xorxorxor` | [xorxorxor](xorxorxor/README.md) |
 | `You Cant C Me` | [You Cant C Me](You%20Cant%20C%20Me/README.md) |
