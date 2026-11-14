@@ -8,6 +8,14 @@
 
 | Reto | Tipo | Dificultad | Técnica | Estado | ES | EN |
 |---|---|---|---|---|---|---|
+| WIDE | Reversing | Very Easy | Cadenas UTF-16 y comparación directa | **Retired** | [Ver](WIDE/README.md) | [EN](WIDE/README.en.md) |
+| Questionnaire | Pwn | Very Easy | `gets`, offset 40 y ret2win a `gg` | **Retired** | [Ver](Questionnaire/README.md) | [EN](Questionnaire/README.en.md) |
+| HM74 | Hardware | Very Easy | Hamming(7,4) y corrección de errores | **Retired** | [Ver](HM74/README.md) | [EN](HM74/README.en.md) |
+| sekur julius | Crypto | Easy | César y fuerza bruta de 26 desplazamientos | **Retired** | [Ver](sekur%20julius/README.md) | [EN](sekur%20julius/README.en.md) |
+| The Three-Eyed Oracle | Crypto | Easy | AES-ECB y ataque byte a byte | **Retired** | [Ver](The%20Three-Eyed%20Oracle/README.md) | [EN](The%20Three-Eyed%20Oracle/README.en.md) |
+| Find The Easy Pass | Reversing | Very Easy | .NET, dnSpy y comparación de contraseña | **Retired** | [Ver](Find%20The%20Easy%20Pass/README.md) | [EN](Find%20The%20Easy%20Pass/README.en.md) |
+| Wrong Spooky Season | Forensics | Easy | PCAP y reverse shell en claro | **Retired** | [Ver](Wrong%20Spooky%20Season/README.md) | [EN](Wrong%20Spooky%20Season/README.en.md) |
+| Automation | Forensics | Easy | PowerShell ofuscado y base64 | **Retired** | [Ver](Automation/README.md) | [EN](Automation/README.en.md) |
 | Marshal in the Middle | Forensics | Medium | Logs de Zeek, descifrado TLS y exfiltración HTTP | **Retired** | [Ver](Marshal%20in%20the%20Middle/README.md) | [EN](Marshal%20in%20the%20Middle/README.en.md) |
 | Lernaean | Web | Easy | Hydra, contraseña débil y redirect JavaScript evitable | **Retired** | [Ver](Lernaean/README.md) | [EN](Lernaean/README.en.md) |
 | Kryptor | Pwn | Insane | Kernel 5.9.10: DirtyPipe (CVE-2022-0847) sobre la entry de busybox y disparo por `modprobe` | **Retired** | [Ver](Kryptor/README.md) | [EN](Kryptor/README.en.md) |

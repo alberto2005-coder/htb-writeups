@@ -51,6 +51,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
 | `linux/irked` | [irked](linux/irked/README.md) |
 | `linux/jarvis` | [jarvis](linux/jarvis/README.md) |
+| `linux/jewel` | [jewel](linux/jewel/README.md) |
 | `linux/keeper` | [keeper](linux/keeper/README.md) |
 | `linux/kobold` | [kobold](linux/kobold/README.md) |
 | `linux/lame` | [lame](linux/lame/README.md) |
@@ -62,6 +63,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/nibbles` | [nibbles](linux/nibbles/README.md) |
 | `linux/nineveh` | [nineveh](linux/nineveh/README.md) |
 | `linux/node` | [node](linux/node/README.md) |
+| `linux/october` | [october](linux/october/README.md) |
 | `linux/openadmin` | [openadmin](linux/openadmin/README.md) |
 | `linux/pandora` | [pandora](linux/pandora/README.md) |
 | `linux/paper` | [paper](linux/paper/README.md) |
@@ -77,12 +79,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/shocker` | [shocker](linux/shocker/README.md) |
 | `linux/sightless` | [sightless](linux/sightless/README.md) |
 | `linux/sink` | [sink](linux/sink/README.md) |
+| `linux/sneaky` | [sneaky](linux/sneaky/README.md) |
 | `linux/soccer` | [soccer](linux/soccer/README.md) |
 | `linux/solidstate` | [solidstate](linux/solidstate/README.md) |
 | `linux/sorcery` | [sorcery](linux/sorcery/README.md) |
 | `linux/squashed` | [squashed](linux/squashed/README.md) |
+| `linux/stratosphere` | [stratosphere](linux/stratosphere/README.md) |
 | `linux/swagshop` | [swagshop](linux/swagshop/README.md) |
 | `linux/tabby` | [tabby](linux/tabby/README.md) |
+| `linux/tartarsauce` | [tartarsauce](linux/tartarsauce/README.md) |
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
 | `linux/trick` | [trick](linux/trick/README.md) |
 | `linux/valentine` | [valentine](linux/valentine/README.md) |
@@ -121,6 +126,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/arctic` | [arctic](windows/arctic/README.md) |
 | `windows/authority` | [authority](windows/authority/README.md) |
 | `windows/baby` | [baby](windows/baby/README.md) |
+| `windows/bart` | [bart](windows/bart/README.md) |
 | `windows/bastard` | [bastard](windows/bastard/README.md) |
 | `windows/bastion` | [bastion](windows/bastion/README.md) |
 | `windows/blackfield` | [blackfield](windows/blackfield/README.md) |
@@ -151,6 +157,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/jeeves` | [jeeves](windows/jeeves/README.md) |
 | `windows/jerry` | [jerry](windows/jerry/README.md) |
 | `windows/legacy` | [legacy](windows/legacy/README.md) |
+| `windows/love` | [love](windows/love/README.md) |
 | `windows/mailing` | [mailing](windows/mailing/README.md) |
 | `windows/mantis` | [mantis](windows/mantis/README.md) |
 | `windows/monitorsfour` | [monitorsfour](windows/monitorsfour/README.md) |
@@ -175,6 +182,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/search` | [search](windows/search/README.md) |
 | `windows/secnotes` | [secnotes](windows/secnotes/README.md) |
 | `windows/servmon` | [servmon](windows/servmon/README.md) |
+| `windows/silo` | [silo](windows/silo/README.md) |
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |
 | `windows/sniper` | [sniper](windows/sniper/README.md) |
 | `windows/streamio` | [streamio](windows/streamio/README.md) |
