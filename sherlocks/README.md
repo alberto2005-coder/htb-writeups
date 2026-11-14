@@ -156,6 +156,14 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | APTNightmare-2 | DFIR | Hard | Memoria Linux, `dwarf2json` y Volatility 3 | Volatility 3, dwarf2json | [Ver](aptnightmare-2/README.md) |
 | CafePoisoning | DFIR | Medium | ARP/DNS poisoning, screensaver y XOR | Wireshark, KAPE | [Ver](cafepoisoning/README.md) |
 
+| Baggage | DFIR | Very Easy | Shellbags, USB y KAPE | SBECmd, MFTECmd | [Ver](baggage/README.md) |
+| CAMouflage | DFIR | Easy | Ejecutables camuflados, prefetch y MFT | PECmd, MFTECmd | [Ver](camouflage/README.md) |
+| Ghost Thread | DFIR | Easy | API Monitor, inyección de procesos y shellcode | API Monitor, IDA | [Ver](ghost-thread/README.md) |
+| Trojan | DFIR | Easy | Instalador, memoria y C2 | Volatility 3, PECmd | [Ver](trojan/README.md) |
+| TeamWork | Threat Intelligence | Easy | NFT falso, certificados e infraestructura | whois, crt.sh | [Ver](teamwork/README.md) |
+| Anpu | DFIR | Medium | Troyano Android, overlays y ransomware | apktool, jadx | [Ver](anpu/README.md) |
+| Streamer | DFIR | Hard | WebCache, Amcache y shellbags | WECmd, SBECmd | [Ver](streamer/README.md) |
+| SillyEli | DFIR | Hard | SRUM, ESE y tareas programadas | SrumECmd, PECmd | [Ver](sillyeli/README.md) |
 ## Metodología común
 
 1. **Inventario**: listar ficheros, tamaños y hashes antes de abrir nada. Anotar qué es original y qué se ha generado.
