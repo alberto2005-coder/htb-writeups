@@ -186,6 +186,7 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Catch | Linux | Medium | APK, secrets in Gitea and Let's Chat | [View](../machines/linux/catch/README.en.md) | [ES](../machines/linux/catch/README.md) |
 | Driver | Windows | Easy | `.scf`/Responder, WinRM and PrintNightmare | [View](../machines/windows/driver/README.en.md) | [ES](../machines/windows/driver/README.md) |
 | Anubis | Windows | Insane | ASP, Jamovi, ADCS ESC and PKINIT | [View](../machines/windows/anubis/README.en.md) | [ES](../machines/windows/anubis/README.md) |
+
 ## Pending
 
 1 retired machine with material located but no writeup yet.
@@ -207,7 +208,7 @@ A Spanish-language dump with 164 machine directories, 140 of them holding PDFs (
 
 ## Starting Point (available)
 
-These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 141 notes in the repository. Details, with tier and service, live in the section index.
+These 25 machines are not retired —they are still available on the platform— but they are catalogued here so the index covers all 202 notes in the repository. Details, with tier and service, live in the section index.
 
 | Machine | OS | Difficulty | Main technique | ES | EN |
 |---|---|---|---|---|---|

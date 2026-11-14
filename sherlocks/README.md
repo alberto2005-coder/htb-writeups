@@ -164,6 +164,7 @@ Los artefactos pueden contener malware real: se trabaja en una VM aislada y sin 
 | Anpu | DFIR | Medium | Troyano Android, overlays y ransomware | apktool, jadx | [Ver](anpu/README.md) |
 | Streamer | DFIR | Hard | WebCache, Amcache y shellbags | WECmd, SBECmd | [Ver](streamer/README.md) |
 | SillyEli | DFIR | Hard | SRUM, ESE y tareas programadas | SrumECmd, PECmd | [Ver](sillyeli/README.md) |
+
 ## Metodología común
 
 1. **Inventario**: listar ficheros, tamaños y hashes antes de abrir nada. Anotar qué es original y qué se ha generado.

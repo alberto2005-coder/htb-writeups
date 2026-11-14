@@ -164,6 +164,7 @@ Artifacts may contain real malware: work in an isolated VM with no network.
 | Anpu | DFIR | Medium | Android trojan, overlays and ransomware | apktool, jadx | [View](anpu/README.en.md) |
 | Streamer | DFIR | Hard | WebCache, Amcache and shellbags | WECmd, SBECmd | [View](streamer/README.en.md) |
 | SillyEli | DFIR | Hard | SRUM, ESE and scheduled tasks | SrumECmd, PECmd | [View](sillyeli/README.en.md) |
+
 ## Shared methodology
 
 1. **Inventory**: list files, sizes and hashes before opening anything. Note what is original and what you generated.

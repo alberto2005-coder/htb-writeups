@@ -186,6 +186,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Catch | Linux | Medium | APK, secretos en Gitea y Let's Chat | [Ver](../machines/linux/catch/README.md) | [EN](../machines/linux/catch/README.en.md) |
 | Driver | Windows | Easy | `.scf`/Responder, WinRM y PrintNightmare | [Ver](../machines/windows/driver/README.md) | [EN](../machines/windows/driver/README.en.md) |
 | Anubis | Windows | Insane | ASP, Jamovi, ADCS ESC y PKINIT | [Ver](../machines/windows/anubis/README.md) | [EN](../machines/windows/anubis/README.en.md) |
+
 ## Pendientes
 
 1 máquina retirada con material localizado y todavía sin ficha propia.
@@ -205,7 +206,7 @@ Un volcado en español de 164 directorios de máquina, 140 con PDF (448 PDF y 73
 
 ## Starting Point (disponibles)
 
-Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 141 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
+Estas 25 máquinas no están retiradas —siguen disponibles en la plataforma— pero se catalogan aquí para que el índice cubra las 202 fichas del repositorio. El detalle, con tier y servicio, está en el índice de la sección.
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
