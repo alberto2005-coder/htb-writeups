@@ -8,6 +8,14 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
+| Format | Linux | Medium | Microblog PHP, Gitea, LFI/escritura, Redis por socket y SSTI | [Ver](../machines/linux/format/README.md) | [EN](../machines/linux/format/README.en.md) |
+| Agile | Linux | Medium | Flask debug PIN, Chrome debug y sudoedit CVE-2023-22809 | [Ver](../machines/linux/agile/README.md) | [EN](../machines/linux/agile/README.en.md) |
+| OnlyForYou | Linux | Medium | LFI absoluto, inyección de comandos con `dig`, Cypher y `pip` como root | [Ver](../machines/linux/onlyforyou/README.md) | [EN](../machines/linux/onlyforyou/README.en.md) |
+| Socket | Linux | Medium | WebSocket con SQLite, PyInstaller y build como root | [Ver](../machines/linux/socket/README.md) | [EN](../machines/linux/socket/README.en.md) |
+| MonitorsTwo | Linux | Easy | Cacti CVE-2022-46169 y escape Docker CVE-2021-41091 | [Ver](../machines/linux/monitorstwo/README.md) | [EN](../machines/linux/monitorstwo/README.en.md) |
+| Aero | Windows | Medium | ThemeBleed CVE-2023-38146 y CLFS CVE-2023-28252 | [Ver](../machines/windows/aero/README.md) | [EN](../machines/windows/aero/README.en.md) |
+| Chaffinch | Windows | Medium | GeoServer CVE-2024-36401 y abuso del servicio CSC | [Ver](../machines/windows/chaffinch/README.md) | [EN](../machines/windows/chaffinch/README.en.md) |
+| Intentions | Linux | Hard | SQLi de segundo orden, Imagick y `CAP_DAC_READ_SEARCH` | [Ver](../machines/linux/intentions/README.md) | [EN](../machines/linux/intentions/README.en.md) |
 | TartarSauce | Linux | Medium | WordPress Gwolle RFI, `tar` con comodín y timer systemd | [Ver](../machines/linux/tartarsauce/README.md) | [EN](../machines/linux/tartarsauce/README.en.md) |
 | October | Linux | Medium | October CMS, subida `.php5` y ret2libc con ASLR de 9 bits | [Ver](../machines/linux/october/README.md) | [EN](../machines/linux/october/README.en.md) |
 | Jewel | Linux | Medium | GitWeb, Rails y deserialización Redis; TOTP y `sudo gem` | [Ver](../machines/linux/jewel/README.md) | [EN](../machines/linux/jewel/README.en.md) |
