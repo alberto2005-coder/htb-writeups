@@ -177,7 +177,6 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Nest | Windows | Easy | Guest SMB, `RU_config.xml`, VB decryption, `c.smith`, ADS and `psexec` | [ES](../machines/windows/nest/README.md) | [Ver](../machines/windows/nest/README.en.md) |
 | Omni | Windows | Easy | Windows IoT Core, SirepRAT, `reg save`, WDP and `Import-Clixml` | [ES](../machines/windows/omni/README.md) | [Ver](../machines/windows/omni/README.en.md) |
 | Worker | Windows | Medium | SVN history, Azure DevOps, ASPX webshell and the `Setup` pipeline as SYSTEM | [ES](../machines/windows/worker/README.md) | [Ver](../machines/windows/worker/README.en.md) |
-
 | Precious | Linux | Easy | PDFKit SSRF, file read and YAML with `sudo` | [View](../machines/linux/precious/README.en.md) | [ES](../machines/linux/precious/README.md) |
 | UpDown | Linux | Medium | SSRF, exposed `.git`, vhosts and `sudo` | [View](../machines/linux/updown/README.en.md) | [ES](../machines/linux/updown/README.md) |
 | Zipping | Linux | Medium | ZIP symlink, SQLi, webshell and `sudo` binary | [View](../machines/linux/zipping/README.en.md) | [ES](../machines/linux/zipping/README.md) |
@@ -186,6 +185,23 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Catch | Linux | Medium | APK, secrets in Gitea and Let's Chat | [View](../machines/linux/catch/README.en.md) | [ES](../machines/linux/catch/README.md) |
 | Driver | Windows | Easy | `.scf`/Responder, WinRM and PrintNightmare | [View](../machines/windows/driver/README.en.md) | [ES](../machines/windows/driver/README.md) |
 | Anubis | Windows | Insane | ASP, Jamovi, ADCS ESC and PKINIT | [View](../machines/windows/anubis/README.en.md) | [ES](../machines/windows/anubis/README.md) |
+| Schooled | FreeBSD | Medium | Moodle, XSS/CVE-2020-25627, plugin and `pkg` package | [ES](../machines/freebsd/schooled/README.md) | [EN](../machines/freebsd/schooled/README.en.md) |
+| Reddish | Linux | Insane | Node-RED, Docker pivot, Redis and privileged container | [ES](../machines/linux/reddish/README.md) | [EN](../machines/linux/reddish/README.en.md) |
+| Dab | Linux | Hard | Memcached through a proxy, MD5 hashes and `ldconfig` | [ES](../machines/linux/dab/README.md) | [EN](../machines/linux/dab/README.en.md) |
+| Arkham | Windows | Medium | LUKS, JSF ViewState and Java deserialization | [ES](../machines/windows/arkham/README.md) | [EN](../machines/windows/arkham/README.en.md) |
+| Jail | Linux | Insane | BOF, NFS without squash, `rvim` and RSA | [ES](../machines/linux/jail/README.md) | [EN](../machines/linux/jail/README.en.md) |
+| Ypuffy | OpenBSD | Medium | Anonymous LDAP, pass-the-hash and SSH CA | [ES](../machines/openbsd/ypuffy/README.md) | [EN](../machines/openbsd/ypuffy/README.en.md) |
+| OpenKeyS | OpenBSD | Medium | CVE-2019-19521, `xlock` and S/Key | [ES](../machines/openbsd/openkeys/README.md) | [EN](../machines/openbsd/openkeys/README.en.md) |
+| Attended | OpenBSD | Insane | OpenSMTPD, Vim modeline and ROP | [ES](../machines/openbsd/attended/README.md) | [EN](../machines/openbsd/attended/README.en.md) |
+| CrossFitTwo | OpenBSD | Insane | WebSocket SQLi, Node modules and Yubikey | [ES](../machines/openbsd/crossfittwo/README.md) | [EN](../machines/openbsd/crossfittwo/README.en.md) |
+| Fortune | FreeBSD | Insane | Injection, client CA, `authpf` and NFS | [ES](../machines/freebsd/fortune/README.md) | [EN](../machines/freebsd/fortune/README.en.md) |
+| Unbalanced | Linux | Hard | EncFS, Squid, XPath and Pi-hole | [ES](../machines/linux/unbalanced/README.md) | [EN](../machines/linux/unbalanced/README.en.md) |
+| Explore | Android | Easy | ES File Explorer CVE-2019-6447 and ADB | [ES](../machines/android/explore/README.md) | [EN](../machines/android/explore/README.en.md) |
+| Luanne | NetBSD | Easy | Supervisor, Lua, `doas` and PGP | [ES](../machines/netbsd/luanne/README.md) | [EN](../machines/netbsd/luanne/README.en.md) |
+| PikaTwoo | Linux | Insane | SQLi, APISIX, Kubernetes and cr8escape | [ES](../machines/linux/pikatwoo/README.md) | [EN](../machines/linux/pikatwoo/README.en.md) |
+| Fulcrum | Linux | Insane | XXE, SSRF and AD pivot | [ES](../machines/linux/fulcrum/README.md) | [EN](../machines/linux/fulcrum/README.en.md) |
+| Minion | Windows | Insane | SSRF, ICMP C2, scheduled task and ADS | [ES](../machines/windows/minion/README.md) | [EN](../machines/windows/minion/README.en.md) |
+| Brainfuck | Linux | Insane | WordPress, bypass, Vigenère and `lxd` | [ES](../machines/linux/brainfuck/README.md) | [EN](../machines/linux/brainfuck/README.en.md) |
 
 ## Pending
 
