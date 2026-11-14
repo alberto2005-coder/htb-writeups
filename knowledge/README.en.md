@@ -25,6 +25,7 @@ This index is generated from the repository's versioned writeups.
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.en.md) |
 | `crypto/cbc-bit-flipping` | [cbc-bit-flipping](crypto/cbc-bit-flipping.en.md) |
 | `crypto/classical-ciphers` | [classical-ciphers](crypto/classical-ciphers.en.md) |
+| `crypto/hash-length-extension` | [hash-length-extension](crypto/hash-length-extension.en.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.en.md) |
 | `crypto/rsa-partial-key` | [rsa-partial-key](crypto/rsa-partial-key.en.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.en.md) |
@@ -38,6 +39,7 @@ This index is generated from the repository's versioned writeups.
 | `forensics/html-smuggling-hta` | [html-smuggling-hta](forensics/html-smuggling-hta.en.md) |
 | `forensics/linux-artifacts` | [linux-artifacts](forensics/linux-artifacts.en.md) |
 | `forensics/malware-redline` | [malware-redline](forensics/malware-redline.en.md) |
+| `forensics/mdb-pst-credential-extraction` | [mdb-pst-credential-extraction](forensics/mdb-pst-credential-extraction.en.md) |
 | `forensics/moveit-cve-2023-34362` | [moveit-cve-2023-34362](forensics/moveit-cve-2023-34362.en.md) |
 | `forensics/pcap-triage` | [pcap-triage](forensics/pcap-triage.en.md) |
 | `forensics/pyinstaller-extraction` | [pyinstaller-extraction](forensics/pyinstaller-extraction.en.md) |
@@ -65,11 +67,14 @@ This index is generated from the repository's versioned writeups.
 | `hardware/printer-pjl` | [printer-pjl](hardware/printer-pjl.en.md) |
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.en.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.en.md) |
+| `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.en.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
+| `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.en.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.en.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.en.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.en.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.en.md) |
+| `linux/exiftool-filename-injection` | [exiftool-filename-injection](linux/exiftool-filename-injection.en.md) |
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
@@ -80,6 +85,8 @@ This index is generated from the repository's versioned writeups.
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.en.md) |
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.en.md) |
 | `linux/nfs-no-root-squash` | [nfs-no-root-squash](linux/nfs-no-root-squash.en.md) |
+| `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.en.md) |
+| `linux/php-cron-writable-include` | [php-cron-writable-include](linux/php-cron-writable-include.en.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.en.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
@@ -97,6 +104,7 @@ This index is generated from the repository's versioned writeups.
 | `mobile/apk-analysis` | [apk-analysis](mobile/apk-analysis.en.md) |
 | `mobile/react-native-analysis` | [react-native-analysis](mobile/react-native-analysis.en.md) |
 | `mobile/xamarin-analysis` | [xamarin-analysis](mobile/xamarin-analysis.en.md) |
+| `network/grpc-protobuf-enumeration` | [grpc-protobuf-enumeration](network/grpc-protobuf-enumeration.en.md) |
 | `network/ssh-certificate-authority` | [ssh-certificate-authority](network/ssh-certificate-authority.en.md) |
 | `openbsd/authentication-bypass` | [authentication-bypass](openbsd/authentication-bypass.en.md) |
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.en.md) |
@@ -122,6 +130,7 @@ This index is generated from the repository's versioned writeups.
 | `threat-hunting/mitre-attack-mapping` | [mitre-attack-mapping](threat-hunting/mitre-attack-mapping.en.md) |
 | `threat-hunting/threat-hunting` | [threat-hunting](threat-hunting/threat-hunting.en.md) |
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.en.md) |
+| `web/adminer-ssrf` | [adminer-ssrf](web/adminer-ssrf.en.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.en.md) |
 | `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.en.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.en.md) |
@@ -135,6 +144,8 @@ This index is generated from the repository's versioned writeups.
 | `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.en.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.en.md) |
 | `web/gitea` | [gitea](web/gitea.en.md) |
+| `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.en.md) |
+| `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.en.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.en.md) |
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.en.md) |
 | `web/idor` | [idor](web/idor.en.md) |
@@ -142,6 +153,7 @@ This index is generated from the repository's versioned writeups.
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.en.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.en.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.en.md) |
+| `web/laravel-env-injection` | [laravel-env-injection](web/laravel-env-injection.en.md) |
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.en.md) |
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.en.md) |
 | `web/log4shell` | [log4shell](web/log4shell.en.md) |
@@ -155,6 +167,7 @@ This index is generated from the repository's versioned writeups.
 | `web/nosql-injection` | [nosql-injection](web/nosql-injection.en.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.en.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.en.md) |
+| `web/php-fpm-cve-2019-11043` | [php-fpm-cve-2019-11043](web/php-fpm-cve-2019-11043.en.md) |
 | `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.en.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.en.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.en.md) |
@@ -201,7 +214,9 @@ This index is generated from the repository's versioned writeups.
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.en.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.en.md) |
 | `windows/oracle-odat` | [oracle-odat](windows/oracle-odat.en.md) |
+| `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.en.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.en.md) |
+| `windows/petitpotam-coercion` | [petitpotam-coercion](windows/petitpotam-coercion.en.md) |
 | `windows/printnightmare` | [printnightmare](windows/printnightmare.en.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.en.md) |
 | `windows/psexec` | [psexec](windows/psexec.en.md) |
@@ -219,4 +234,5 @@ This index is generated from the repository's versioned writeups.
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.en.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.en.md) |
 | `windows/xampp-privesc` | [xampp-privesc](windows/xampp-privesc.en.md) |
+| `windows/xll-phishing` | [xll-phishing](windows/xll-phishing.en.md) |
 | `windows/zerologon` | [zerologon](windows/zerologon.en.md) |

@@ -25,6 +25,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.md) |
 | `crypto/cbc-bit-flipping` | [cbc-bit-flipping](crypto/cbc-bit-flipping.md) |
 | `crypto/classical-ciphers` | [classical-ciphers](crypto/classical-ciphers.md) |
+| `crypto/hash-length-extension` | [hash-length-extension](crypto/hash-length-extension.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.md) |
 | `crypto/rsa-partial-key` | [rsa-partial-key](crypto/rsa-partial-key.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.md) |
@@ -38,6 +39,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `forensics/html-smuggling-hta` | [html-smuggling-hta](forensics/html-smuggling-hta.md) |
 | `forensics/linux-artifacts` | [linux-artifacts](forensics/linux-artifacts.md) |
 | `forensics/malware-redline` | [malware-redline](forensics/malware-redline.md) |
+| `forensics/mdb-pst-credential-extraction` | [mdb-pst-credential-extraction](forensics/mdb-pst-credential-extraction.md) |
 | `forensics/moveit-cve-2023-34362` | [moveit-cve-2023-34362](forensics/moveit-cve-2023-34362.md) |
 | `forensics/pcap-triage` | [pcap-triage](forensics/pcap-triage.md) |
 | `forensics/pyinstaller-extraction` | [pyinstaller-extraction](forensics/pyinstaller-extraction.md) |
@@ -65,11 +67,14 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `hardware/printer-pjl` | [printer-pjl](hardware/printer-pjl.md) |
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.md) |
+| `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.md) |
+| `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.md) |
+| `linux/exiftool-filename-injection` | [exiftool-filename-injection](linux/exiftool-filename-injection.md) |
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.md) |
@@ -80,6 +85,8 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.md) |
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.md) |
 | `linux/nfs-no-root-squash` | [nfs-no-root-squash](linux/nfs-no-root-squash.md) |
+| `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.md) |
+| `linux/php-cron-writable-include` | [php-cron-writable-include](linux/php-cron-writable-include.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
@@ -97,6 +104,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `mobile/apk-analysis` | [apk-analysis](mobile/apk-analysis.md) |
 | `mobile/react-native-analysis` | [react-native-analysis](mobile/react-native-analysis.md) |
 | `mobile/xamarin-analysis` | [xamarin-analysis](mobile/xamarin-analysis.md) |
+| `network/grpc-protobuf-enumeration` | [grpc-protobuf-enumeration](network/grpc-protobuf-enumeration.md) |
 | `network/ssh-certificate-authority` | [ssh-certificate-authority](network/ssh-certificate-authority.md) |
 | `openbsd/authentication-bypass` | [authentication-bypass](openbsd/authentication-bypass.md) |
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.md) |
@@ -122,6 +130,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `threat-hunting/mitre-attack-mapping` | [mitre-attack-mapping](threat-hunting/mitre-attack-mapping.md) |
 | `threat-hunting/threat-hunting` | [threat-hunting](threat-hunting/threat-hunting.md) |
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
+| `web/adminer-ssrf` | [adminer-ssrf](web/adminer-ssrf.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.md) |
 | `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.md) |
@@ -135,6 +144,8 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.md) |
 | `web/gitea` | [gitea](web/gitea.md) |
+| `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.md) |
+| `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.md) |
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.md) |
 | `web/idor` | [idor](web/idor.md) |
@@ -142,6 +153,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.md) |
+| `web/laravel-env-injection` | [laravel-env-injection](web/laravel-env-injection.md) |
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.md) |
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.md) |
 | `web/log4shell` | [log4shell](web/log4shell.md) |
@@ -155,6 +167,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/nosql-injection` | [nosql-injection](web/nosql-injection.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
+| `web/php-fpm-cve-2019-11043` | [php-fpm-cve-2019-11043](web/php-fpm-cve-2019-11043.md) |
 | `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
@@ -201,7 +214,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.md) |
 | `windows/oracle-odat` | [oracle-odat](windows/oracle-odat.md) |
+| `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.md) |
+| `windows/petitpotam-coercion` | [petitpotam-coercion](windows/petitpotam-coercion.md) |
 | `windows/printnightmare` | [printnightmare](windows/printnightmare.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
 | `windows/psexec` | [psexec](windows/psexec.md) |
@@ -219,4 +234,5 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.md) |
 | `windows/xampp-privesc` | [xampp-privesc](windows/xampp-privesc.md) |
+| `windows/xll-phishing` | [xll-phishing](windows/xll-phishing.md) |
 | `windows/zerologon` | [zerologon](windows/zerologon.md) |
