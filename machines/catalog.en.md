@@ -267,6 +267,22 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Sharp | Windows | Hard | PortableKanban, .NET Remoting and WCF | [View](../machines/windows/sharp/README.en.md) | [ES](../machines/windows/sharp/README.md) |
 | Stocker | Linux | Easy | NoSQL injection, PDF file read and `sudo node` | [View](../machines/linux/stocker/README.en.md) | [ES](../machines/linux/stocker/README.md) |
 | Travel | Linux | Hard | Exposed `.git`, memcached PHP object and LDAP | [View](../machines/linux/travel/README.en.md) | [ES](../machines/linux/travel/README.md) |
+| BountyHunter | Linux | Easy | XXE, password in `db.php` and Python eval with sudo | [View](../machines/linux/bountyhunter/README.en.md) | [ES](../machines/linux/bountyhunter/README.md) |
+| Bucket | Linux | Medium | Writable S3 bucket, DynamoDB and root PDF generator | [View](../machines/linux/bucket/README.en.md) | [ES](../machines/linux/bucket/README.md) |
+| Caption | Linux | Hard | h2c smuggling, cookie theft, CopyParty and log handler | [View](../machines/linux/caption/README.en.md) | [ES](../machines/linux/caption/README.md) |
+| Cereal | Windows | Hard | `.git`, forged JWT, .NET deserialization and GenericPotato | [View](../machines/windows/cereal/README.en.md) | [ES](../machines/windows/cereal/README.md) |
+| Compiled | Windows | Medium | Git CVE-2024-32002, Gitea hashes and Visual Studio | [View](../machines/windows/compiled/README.en.md) | [ES](../machines/windows/compiled/README.md) |
+| FluxCapacitor | Linux | Medium | WAF command injection and sudo over `.monit` | [View](../machines/linux/fluxcapacitor/README.en.md) | [ES](../machines/linux/fluxcapacitor/README.md) |
+| FormulaX | Linux | Hard | Chat XSS, simple-git CVE-2022-25912, Mongo and LibreNMS | [View](../machines/linux/formulax/README.en.md) | [ES](../machines/linux/formulax/README.md) |
+| Magic | Linux | Medium | SQLi, `.php.jpg` upload, SUID and PATH hijack | [View](../machines/linux/magic/README.en.md) | [ES](../machines/linux/magic/README.md) |
+| MetaTwo | Linux | Easy | BookingPress SQLi, XXE, FTP and Passpie | [View](../machines/linux/metatwo/README.en.md) | [ES](../machines/linux/metatwo/README.md) |
+| Patents | Linux | Hard | LibreOffice XXE, log poisoning and binary service | [View](../machines/linux/patents/README.en.md) | [ES](../machines/linux/patents/README.md) |
+| Rebound | Windows | Insane | AD, Kerberoasting, shadow credentials, GMSA and RBCD | [View](../machines/windows/rebound/README.en.md) | [ES](../machines/windows/rebound/README.md) |
+| Response | Linux | Insane | HMAC SSRF, rogue LDAP, TLS traversal and PCAP forensics | [View](../machines/linux/response/README.en.md) | [ES](../machines/linux/response/README.md) |
+| Shibboleth | Linux | Medium | IPMI RAKP, Zabbix and MariaDB UDF | [View](../machines/linux/shibboleth/README.en.md) | [ES](../machines/linux/shibboleth/README.md) |
+| Tally | Windows | Hard | SharePoint, KeePass, MSSQL and SeImpersonate | [View](../machines/windows/tally/README.en.md) | [ES](../machines/windows/tally/README.md) |
+| Teacher | Linux | Easy | PNG clue, Moodle PHP injection and backup cron | [View](../machines/linux/teacher/README.en.md) | [ES](../machines/linux/teacher/README.md) |
+| Unobtainium | Linux | Hard | Electron/ASAR, LFI, prototype pollution and Kubernetes | [View](../machines/linux/unobtainium/README.en.md) | [ES](../machines/linux/unobtainium/README.md) |
 
 ## Pending
 

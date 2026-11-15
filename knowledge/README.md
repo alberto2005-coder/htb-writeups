@@ -16,6 +16,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `clickhouse/cheatsheet` | [cheatsheet](clickhouse/cheatsheet.md) |
 | `cloud/azure-devops-pipeline-abuse` | [azure-devops-pipeline-abuse](cloud/azure-devops-pipeline-abuse.md) |
 | `cloud/cloudtrail` | [cloudtrail](cloud/cloudtrail.md) |
+| `cloud/dynamodb-credential-access` | [dynamodb-credential-access](cloud/dynamodb-credential-access.md) |
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
 | `cloud/gmsa-abuse` | [gmsa-abuse](cloud/gmsa-abuse.md) |
 | `cloud/kubernetes-cr8escape` | [kubernetes-cr8escape](cloud/kubernetes-cr8escape.md) |
@@ -28,6 +29,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `crypto/classical-ciphers` | [classical-ciphers](crypto/classical-ciphers.md) |
 | `crypto/hash-length-extension` | [hash-length-extension](crypto/hash-length-extension.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.md) |
+| `crypto/passpie-pgp-cracking` | [passpie-pgp-cracking](crypto/passpie-pgp-cracking.md) |
 | `crypto/rsa-partial-key` | [rsa-partial-key](crypto/rsa-partial-key.md) |
 | `crypto/rsa-small-modulus` | [rsa-small-modulus](crypto/rsa-small-modulus.md) |
 | `crypto/xor-and-encodings` | [xor-and-encodings](crypto/xor-and-encodings.md) |
@@ -76,11 +78,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/cap-sys-module-escape` | [cap-sys-module-escape](linux/cap-sys-module-escape.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.md) |
+| `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.md) |
 | `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.md) |
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.md) |
+| `linux/electron-ipc-rce` | [electron-ipc-rce](linux/electron-ipc-rce.md) |
 | `linux/erlang-ssh-cve-2025-32433` | [erlang-ssh-cve-2025-32433](linux/erlang-ssh-cve-2025-32433.md) |
 | `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.md) |
 | `linux/exiftool-cve-2021-22204` | [exiftool-cve-2021-22204](linux/exiftool-cve-2021-22204.md) |
@@ -90,10 +94,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.md) |
+| `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.md) |
+| `linux/libreoffice-xxe` | [libreoffice-xxe](linux/libreoffice-xxe.md) |
 | `linux/login-script-append` | [login-script-append](linux/login-script-append.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.md) |
 | `linux/memcached-enumeration` | [memcached-enumeration](linux/memcached-enumeration.md) |
@@ -113,6 +119,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.md) |
 | `linux/pycache-poisoning` | [pycache-poisoning](linux/pycache-poisoning.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.md) |
+| `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.md) |
@@ -179,7 +186,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.md) |
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.md) |
+| `web/hmac-oracle-ssrf` | [hmac-oracle-ssrf](web/hmac-oracle-ssrf.md) |
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.md) |
+| `web/http2-request-smuggling` | [http2-request-smuggling](web/http2-request-smuggling.md) |
 | `web/idor` | [idor](web/idor.md) |
 | `web/jenkins` | [jenkins](web/jenkins.md) |
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
@@ -208,6 +217,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
+| `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.md) |
 | `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.md) |
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.md) |
@@ -215,6 +225,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.md) |
+| `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
@@ -236,10 +247,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.md) |
+| `windows/dotnet-deserialization` | [dotnet-deserialization](windows/dotnet-deserialization.md) |
 | `windows/dotnet-remoting-wcf` | [dotnet-remoting-wcf](windows/dotnet-remoting-wcf.md) |
 | `windows/dpapi` | [dpapi](windows/dpapi.md) |
 | `windows/electron-updater-signature-bypass` | [electron-updater-signature-bypass](windows/electron-updater-signature-bypass.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.md) |
+| `windows/gitea-sqlite-hash-extraction` | [gitea-sqlite-hash-extraction](windows/gitea-sqlite-hash-extraction.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
 | `windows/gpo-abuse` | [gpo-abuse](windows/gpo-abuse.md) |
 | `windows/icingaweb2-cve-2022-24715` | [icingaweb2-cve-2022-24715](windows/icingaweb2-cve-2022-24715.md) |
@@ -266,11 +279,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
 | `windows/psexec` | [psexec](windows/psexec.md) |
 | `windows/rbcd-s4u2proxy` | [rbcd-s4u2proxy](windows/rbcd-s4u2proxy.md) |
+| `windows/remote-potato0-relay` | [remote-potato0-relay](windows/remote-potato0-relay.md) |
 | `windows/runas-saved-credentials` | [runas-saved-credentials](windows/runas-saved-credentials.md) |
 | `windows/screensaver-persistence` | [screensaver-persistence](windows/screensaver-persistence.md) |
 | `windows/seloaddriver-privesc` | [seloaddriver-privesc](windows/seloaddriver-privesc.md) |
 | `windows/server-operators` | [server-operators](windows/server-operators.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.md) |
+| `windows/sharepoint-credential-leak` | [sharepoint-credential-leak](windows/sharepoint-credential-leak.md) |
 | `windows/sliver-c2` | [sliver-c2](windows/sliver-c2.md) |
 | `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.md) |
 | `windows/sqlite-wal-forensics` | [sqlite-wal-forensics](windows/sqlite-wal-forensics.md) |

