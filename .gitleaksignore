@@ -1,0 +1,25 @@
+# False positives verified manually: HTB placeholders, challenge keys and documentation hashes.
+e36cd85c61562168d01932275ca8f715fb64e02e:challenges/APKrypt/README.en.md:generic-api-key:61
+a80b7b5a514bcfc9d19d419d446fa0a3ac90b8c1:challenges/Illumination/README.en.md:generic-api-key:52
+a80b7b5a514bcfc9d19d419d446fa0a3ac90b8c1:challenges/Illumination/README.md:generic-api-key:52
+dbecc5cf3913a04e75e8f19435a48b827bfc5b46:challenges/Intergalactic Post/README.en.md:curl-auth-user:27
+dbecc5cf3913a04e75e8f19435a48b827bfc5b46:challenges/Intergalactic Post/README.md:curl-auth-user:27
+cfc860f91fe6ec93683fce2f11081b18ea9a7a25:machines/freebsd/luke/README.en.md:curl-auth-user:86
+cfc860f91fe6ec93683fce2f11081b18ea9a7a25:machines/freebsd/luke/README.en.md:curl-auth-user:98
+cfc860f91fe6ec93683fce2f11081b18ea9a7a25:machines/freebsd/luke/README.md:curl-auth-user:86
+cfc860f91fe6ec93683fce2f11081b18ea9a7a25:machines/freebsd/luke/README.md:curl-auth-user:98
+44fb536cf75681f23169696d519e5691feb7d4ca:machines/linux/blunder/README.en.md:generic-api-key:97
+44fb536cf75681f23169696d519e5691feb7d4ca:machines/linux/blunder/README.md:generic-api-key:97
+cfc860f91fe6ec93683fce2f11081b18ea9a7a25:machines/linux/craft/README.en.md:curl-auth-user:64
+cfc860f91fe6ec93683fce2f11081b18ea9a7a25:machines/linux/craft/README.md:curl-auth-user:64
+aa38b4eb1afb4484289802a949419f34cc85c26b:machines/windows/blazorized/README.en.md:curl-auth-user:24
+aa38b4eb1afb4484289802a949419f34cc85c26b:machines/windows/blazorized/README.md:curl-auth-user:24
+f5a9b5473b5973bd3059100c18a2774c763c510b:machines/windows/breadcrumbs/README.en.md:curl-auth-user:26
+f5a9b5473b5973bd3059100c18a2774c763c510b:machines/windows/breadcrumbs/README.md:curl-auth-user:26
+9fba0d33cd9437fcd376cb5ee5e1c04fc977b5d3:machines/windows/haze/README.en.md:curl-auth-user:73
+9fba0d33cd9437fcd376cb5ee5e1c04fc977b5d3:machines/windows/haze/README.md:curl-auth-user:73
+739cb17e507be67dc133da76773e10d8057bae24:machines/windows/netmon/README.en.md:curl-auth-user:45
+739cb17e507be67dc133da76773e10d8057bae24:machines/windows/netmon/README.md:curl-auth-user:45
+739cb17e507be67dc133da76773e10d8057bae24:machines/windows/servmon/README.en.md:curl-auth-user:67
+739cb17e507be67dc133da76773e10d8057bae24:machines/windows/servmon/README.md:curl-auth-user:67
+b775aebe7ed230ad3a724125bdd726b0459f50de:sherlocks/interceptor/README.en.md:generic-api-key:47
