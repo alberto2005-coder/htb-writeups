@@ -46,12 +46,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/build` | [build](linux/build/README.md) |
 | `linux/builder` | [builder](linux/builder/README.md) |
 | `linux/busqueda` | [busqueda](linux/busqueda/README.md) |
+| `linux/cache` | [cache](linux/cache/README.md) |
 | `linux/calamity` | [calamity](linux/calamity/README.md) |
 | `linux/cap` | [cap](linux/cap/README.md) |
 | `linux/caption` | [caption](linux/caption/README.md) |
 | `linux/carpediem` | [carpediem](linux/carpediem/README.md) |
 | `linux/catch` | [catch](linux/catch/README.md) |
+| `linux/cctv` | [cctv](linux/cctv/README.md) |
 | `linux/celestial` | [celestial](linux/celestial/README.md) |
+| `linux/chainsaw` | [chainsaw](linux/chainsaw/README.md) |
 | `linux/cobblestone` | [cobblestone](linux/cobblestone/README.md) |
 | `linux/code` | [code](linux/code/README.md) |
 | `linux/conversor` | [conversor](linux/conversor/README.md) |
@@ -77,6 +80,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/flujab` | [flujab](linux/flujab/README.md) |
 | `linux/fluxcapacitor` | [fluxcapacitor](linux/fluxcapacitor/README.md) |
 | `linux/forge` | [forge](linux/forge/README.md) |
+| `linux/forgot` | [forgot](linux/forgot/README.md) |
 | `linux/forgotten` | [forgotten](linux/forgotten/README.md) |
 | `linux/format` | [format](linux/format/README.md) |
 | `linux/formulax` | [formulax](linux/formulax/README.md) |
@@ -84,6 +88,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/friendzone` | [friendzone](linux/friendzone/README.md) |
 | `linux/frolic` | [frolic](linux/frolic/README.md) |
 | `linux/fulcrum` | [fulcrum](linux/fulcrum/README.md) |
+| `linux/ghoul` | [ghoul](linux/ghoul/README.md) |
 | `linux/greenhorn` | [greenhorn](linux/greenhorn/README.md) |
 | `linux/health` | [health](linux/health/README.md) |
 | `linux/helix` | [helix](linux/helix/README.md) |
@@ -111,6 +116,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/magicgardens` | [magicgardens](linux/magicgardens/README.md) |
 | `linux/makesense` | [makesense](linux/makesense/README.md) |
 | `linux/mango` | [mango](linux/mango/README.md) |
+| `linux/mentor` | [mentor](linux/mentor/README.md) |
 | `linux/meta` | [meta](linux/meta/README.md) |
 | `linux/metatwo` | [metatwo](linux/metatwo/README.md) |
 | `linux/mirai` | [mirai](linux/mirai/README.md) |
@@ -126,6 +132,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/onlyforyou` | [onlyforyou](linux/onlyforyou/README.md) |
 | `linux/oouch` | [oouch](linux/oouch/README.md) |
 | `linux/openadmin` | [openadmin](linux/openadmin/README.md) |
+| `linux/opensource` | [opensource](linux/opensource/README.md) |
 | `linux/ouija` | [ouija](linux/ouija/README.md) |
 | `linux/overflow` | [overflow](linux/overflow/README.md) |
 | `linux/oz` | [oz](linux/oz/README.md) |
@@ -135,6 +142,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/permx` | [permx](linux/permx/README.md) |
 | `linux/phoenix` | [phoenix](linux/phoenix/README.md) |
 | `linux/photobomb` | [photobomb](linux/photobomb/README.md) |
+| `linux/pikaboo` | [pikaboo](linux/pikaboo/README.md) |
 | `linux/pikatwoo` | [pikatwoo](linux/pikatwoo/README.md) |
 | `linux/pilgrimage` | [pilgrimage](linux/pilgrimage/README.md) |
 | `linux/planning` | [planning](linux/planning/README.md) |
@@ -156,6 +164,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/sightless` | [sightless](linux/sightless/README.md) |
 | `linux/silentium` | [silentium](linux/silentium/README.md) |
 | `linux/sink` | [sink](linux/sink/README.md) |
+| `linux/skyfall` | [skyfall](linux/skyfall/README.md) |
 | `linux/sneaky` | [sneaky](linux/sneaky/README.md) |
 | `linux/sneakymailer` | [sneakymailer](linux/sneakymailer/README.md) |
 | `linux/soccer` | [soccer](linux/soccer/README.md) |
@@ -174,8 +183,10 @@ This index is generated from the repository's versioned writeups.
 | `linux/talkative` | [talkative](linux/talkative/README.md) |
 | `linux/tartarsauce` | [tartarsauce](linux/tartarsauce/README.md) |
 | `linux/teacher` | [teacher](linux/teacher/README.md) |
+| `linux/tenet` | [tenet](linux/tenet/README.md) |
 | `linux/tentacle` | [tentacle](linux/tentacle/README.md) |
 | `linux/titanic` | [titanic](linux/titanic/README.md) |
+| `linux/topology` | [topology](linux/topology/README.md) |
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
 | `linux/travel` | [travel](linux/travel/README.md) |
 | `linux/trick` | [trick](linux/trick/README.md) |
@@ -187,6 +198,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/variatype` | [variatype](linux/variatype/README.md) |
 | `linux/vault` | [vault](linux/vault/README.md) |
 | `linux/vessel` | [vessel](linux/vessel/README.md) |
+| `linux/yummy` | [yummy](linux/yummy/README.md) |
 | `linux/zipping` | [zipping](linux/zipping/README.md) |
 | `netbsd/luanne` | [luanne](netbsd/luanne/README.md) |
 | `openbsd/attended` | [attended](openbsd/attended/README.md) |
@@ -225,6 +237,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/administrator` | [administrator](windows/administrator/README.md) |
 | `windows/aero` | [aero](windows/aero/README.md) |
 | `windows/anubis` | [anubis](windows/anubis/README.md) |
+| `windows/apt` | [apt](windows/apt/README.md) |
 | `windows/arctic` | [arctic](windows/arctic/README.md) |
 | `windows/arkham` | [arkham](windows/arkham/README.md) |
 | `windows/atom` | [atom](windows/atom/README.md) |
@@ -253,6 +266,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/conceal` | [conceal](windows/conceal/README.md) |
 | `windows/control` | [control](windows/control/README.md) |
 | `windows/crafty` | [crafty](windows/crafty/README.md) |
+| `windows/darkzero` | [darkzero](windows/darkzero/README.md) |
 | `windows/devel` | [devel](windows/devel/README.md) |
 | `windows/driver` | [driver](windows/driver/README.md) |
 | `windows/eighteen` | [eighteen](windows/eighteen/README.md) |
@@ -270,6 +284,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/heist` | [heist](windows/heist/README.md) |
 | `windows/hospital` | [hospital](windows/hospital/README.md) |
 | `windows/intelligence` | [intelligence](windows/intelligence/README.md) |
+| `windows/jab` | [jab](windows/jab/README.md) |
 | `windows/jeeves` | [jeeves](windows/jeeves/README.md) |
 | `windows/jerry` | [jerry](windows/jerry/README.md) |
 | `windows/legacy` | [legacy](windows/legacy/README.md) |
@@ -318,6 +333,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/thefrizz` | [thefrizz](windows/thefrizz/README.md) |
 | `windows/timelapse` | [timelapse](windows/timelapse/README.md) |
 | `windows/tombwatcher` | [tombwatcher](windows/tombwatcher/README.md) |
+| `windows/university` | [university](windows/university/README.md) |
 | `windows/vintage` | [vintage](windows/vintage/README.md) |
 | `windows/voleur` | [voleur](windows/voleur/README.md) |
 | `windows/worker` | [worker](windows/worker/README.md) |

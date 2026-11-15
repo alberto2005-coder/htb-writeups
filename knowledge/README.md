@@ -20,6 +20,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
 | `cloud/gmsa-abuse` | [gmsa-abuse](cloud/gmsa-abuse.md) |
 | `cloud/kubernetes-cr8escape` | [kubernetes-cr8escape](cloud/kubernetes-cr8escape.md) |
+| `cloud/minio-cve-2023-28432` | [minio-cve-2023-28432](cloud/minio-cve-2023-28432.md) |
 | `cloud/openstack-forensics` | [openstack-forensics](cloud/openstack-forensics.md) |
 | `cloud/s3-misconfiguration` | [s3-misconfiguration](cloud/s3-misconfiguration.md) |
 | `crypto/aes-ctr-nonce-reuse` | [aes-ctr-nonce-reuse](crypto/aes-ctr-nonce-reuse.md) |
@@ -105,6 +106,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.md) |
+| `linux/latex-injection` | [latex-injection](linux/latex-injection.md) |
 | `linux/libreoffice-xxe` | [libreoffice-xxe](linux/libreoffice-xxe.md) |
 | `linux/login-script-append` | [login-script-append](linux/login-script-append.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.md) |
@@ -128,6 +130,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.md) |
+| `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.md) |
 | `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.md) |
@@ -186,6 +189,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.md) |
 | `web/cypher-injection` | [cypher-injection](web/cypher-injection.md) |
 | `web/file-upload` | [file-upload](web/file-upload.md) |
+| `web/flask-absolute-path-upload` | [flask-absolute-path-upload](web/flask-absolute-path-upload.md) |
 | `web/flask-debug-pin` | [flask-debug-pin](web/flask-debug-pin.md) |
 | `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.md) |
@@ -195,6 +199,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.md) |
 | `web/hmac-oracle-ssrf` | [hmac-oracle-ssrf](web/hmac-oracle-ssrf.md) |
+| `web/host-header-password-reset` | [host-header-password-reset](web/host-header-password-reset.md) |
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.md) |
 | `web/http2-request-smuggling` | [http2-request-smuggling](web/http2-request-smuggling.md) |
 | `web/idor` | [idor](web/idor.md) |
@@ -203,6 +208,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.md) |
+| `web/jwt-rsa-key-recovery` | [jwt-rsa-key-recovery](web/jwt-rsa-key-recovery.md) |
 | `web/laravel-env-injection` | [laravel-env-injection](web/laravel-env-injection.md) |
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.md) |
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.md) |
@@ -210,24 +216,29 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.md) |
+| `web/nginx-off-by-slash` | [nginx-off-by-slash](web/nginx-off-by-slash.md) |
 | `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.md) |
 | `web/node-deserialization` | [node-deserialization](web/node-deserialization.md) |
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.md) |
 | `web/node-red-rce` | [node-red-rce](web/node-red-rce.md) |
 | `web/nosql-injection` | [nosql-injection](web/nosql-injection.md) |
 | `web/oauth-csrf-state` | [oauth-csrf-state](web/oauth-csrf-state.md) |
+| `web/openemr-auth-bypass-sqli` | [openemr-auth-bypass-sqli](web/openemr-auth-bypass-sqli.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
 | `web/php-fpm-cve-2019-11043` | [php-fpm-cve-2019-11043](web/php-fpm-cve-2019-11043.md) |
 | `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.md) |
+| `web/php-object-injection` | [php-object-injection](web/php-object-injection.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.md) |
 | `web/php-preg-replace-e` | [php-preg-replace-e](web/php-preg-replace-e.md) |
 | `web/php-type-juggling-auth` | [php-type-juggling-auth](web/php-type-juggling-auth.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.md) |
+| `web/reportlab-cve-2023-33733` | [reportlab-cve-2023-33733](web/reportlab-cve-2023-33733.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.md) |
 | `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.md) |
+| `web/solidity-smart-contract-command-injection` | [solidity-smart-contract-command-injection](web/solidity-smart-contract-command-injection.md) |
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.md) |
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.md) |
@@ -243,6 +254,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/xpath-injection` | [xpath-injection](web/xpath-injection.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.md) |
 | `web/xxe` | [xxe](web/xxe.md) |
+| `web/zipslip` | [zipslip](web/zipslip.md) |
 | `windows/ad-acl-chains` | [ad-acl-chains](windows/ad-acl-chains.md) |
 | `windows/ad-recycle-bin` | [ad-recycle-bin](windows/ad-recycle-bin.md) |
 | `windows/adcs-esc1` | [adcs-esc1](windows/adcs-esc1.md) |
@@ -271,6 +283,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/icingaweb2-cve-2022-24715` | [icingaweb2-cve-2022-24715](windows/icingaweb2-cve-2022-24715.md) |
 | `windows/icmp-c2` | [icmp-c2](windows/icmp-c2.md) |
 | `windows/iot-core-sirep` | [iot-core-sirep](windows/iot-core-sirep.md) |
+| `windows/ipv6-ad-discovery` | [ipv6-ad-discovery](windows/ipv6-ad-discovery.md) |
 | `windows/jea` | [jea](windows/jea.md) |
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.md) |
 | `windows/keepass` | [keepass](windows/keepass.md) |
@@ -279,10 +292,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.md) |
+| `windows/mssql-linked-server-pivot` | [mssql-linked-server-pivot](windows/mssql-linked-server-pivot.md) |
 | `windows/mssql-pivot-laps` | [mssql-pivot-laps](windows/mssql-pivot-laps.md) |
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.md) |
+| `windows/openfire-cve-2023-32315` | [openfire-cve-2023-32315](windows/openfire-cve-2023-32315.md) |
 | `windows/oracle-odat` | [oracle-odat](windows/oracle-odat.md) |
 | `windows/owa-macro-phishing` | [owa-macro-phishing](windows/owa-macro-phishing.md) |
 | `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.md) |
