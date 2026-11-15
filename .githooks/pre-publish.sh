@@ -5,6 +5,8 @@ cd "$root"
 
 sh .githooks/test.sh
 
+GITLEAKS=".tools/gitleaks.exe"
+
 GITLEAKS_BIN="${GITLEAKS:-gitleaks}"
 if [ -x "$GITLEAKS_BIN" ]; then
     :
