@@ -1,6 +1,6 @@
 ---
 topic: KeePass
-tags: [windows, keepass, kdbx, password-manager, hashcat, key-file, alternate-data-stream]
+tags: [windows, keepass, kdbx, keepassxc, argon2, password-manager, hashcat, key-file, alternate-data-stream]
 ---
 
 # KeePass
@@ -69,8 +69,22 @@ kpcli --kdb database.kdbx --key keyfile.key
 
 Si solo se dispone del hash, `keepass2john` no procesa el keyfile: hay que crackear la contraseña maestra y después abrir la base con el keyfile. Los ADS también aparecen en backups y en archivos descargados desde un servidor Windows.
 
+## Caso Puppy: KeePassXC y Argon2
+
+En Puppy, el share `dev` contiene `recovery.kdbx` y el instalador de KeePassXC. La base usa KDBX 4 con Argon2, así que `keepass2john` clásico puede no generar un hash válido; `john-the-ripper.keepass2john` sí lo procesa. Tras crackear la contraseña maestra, `keepassxc-cli export --format csv` vuelca todas las entradas y esas contraseñas alimentan un spray contra el dominio.
+
+```bash
+john-the-ripper.keepass2john recovery.kdbx > recovery.hash
+john --wordlist=rockyou.txt recovery.hash
+keepassxc-cli export --format csv recovery.kdbx
+```
+
+El mismo patrón aplica a bases encontradas en shares, backups o perfiles de usuario. Si el export incluye TOTP, conviene separar las contraseñas de los códigos y probar primero las cuentas de servicio.
+
 ## Referencias
 
 - <https://keepass.info/help/base/security.html>
 - <https://github.com/openwall/john>
 - <https://attack.mitre.org/techniques/T1555/005/>
+- <https://0xdf.gitlab.io/2025/09/27/htb-puppy.html>
+- <https://keepassxc.org/docs/KeePassXC_UserGuide>

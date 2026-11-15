@@ -76,6 +76,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/7z-wildcard-file-read` | [7z-wildcard-file-read](linux/7z-wildcard-file-read.en.md) |
 | `linux/activemq-cve-2023-46604` | [activemq-cve-2023-46604](linux/activemq-cve-2023-46604.en.md) |
 | `linux/ajenti-ssh-weak-keys` | [ajenti-ssh-weak-keys](linux/ajenti-ssh-weak-keys.en.md) |
+| `linux/ansible-galaxy-command-injection` | [ansible-galaxy-command-injection](linux/ansible-galaxy-command-injection.en.md) |
 | `linux/apache-ofbiz-cve-2023-49070` | [apache-ofbiz-cve-2023-49070](linux/apache-ofbiz-cve-2023-49070.en.md) |
 | `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.en.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
@@ -94,6 +95,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.en.md) |
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.en.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.en.md) |
+| `linux/docker-registry-enumeration` | [docker-registry-enumeration](linux/docker-registry-enumeration.en.md) |
 | `linux/electron-ipc-rce` | [electron-ipc-rce](linux/electron-ipc-rce.en.md) |
 | `linux/erlang-ssh-cve-2025-32433` | [erlang-ssh-cve-2025-32433](linux/erlang-ssh-cve-2025-32433.en.md) |
 | `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.en.md) |
@@ -102,10 +104,12 @@ This index is generated from the repository's versioned writeups.
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
+| `linux/h2-database-alias-rce` | [h2-database-alias-rce](linux/h2-database-alias-rce.en.md) |
 | `linux/hashcat-mask-attack` | [hashcat-mask-attack](linux/hashcat-mask-attack.en.md) |
 | `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.en.md) |
+| `linux/initrd-credential-extraction` | [initrd-credential-extraction](linux/initrd-credential-extraction.en.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.en.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.en.md) |
 | `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.en.md) |
@@ -129,6 +133,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.en.md) |
 | `linux/openssl-capabilities` | [openssl-capabilities](linux/openssl-capabilities.en.md) |
 | `linux/pam-timing-oracle` | [pam-timing-oracle](linux/pam-timing-oracle.en.md) |
+| `linux/perl-env-sudo` | [perl-env-sudo](linux/perl-env-sudo.en.md) |
 | `linux/php-cron-writable-include` | [php-cron-writable-include](linux/php-cron-writable-include.en.md) |
 | `linux/php-extension-integer-overflow` | [php-extension-integer-overflow](linux/php-extension-integer-overflow.en.md) |
 | `linux/php-filter-chain-cve-2024-2961` | [php-filter-chain-cve-2024-2961](linux/php-filter-chain-cve-2024-2961.en.md) |
@@ -157,14 +162,17 @@ This index is generated from the repository's versioned writeups.
 | `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.en.md) |
 | `linux/syslog-pgsql-sql-injection` | [syslog-pgsql-sql-injection](linux/syslog-pgsql-sql-injection.en.md) |
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.en.md) |
+| `linux/tarfile-filter-bypass` | [tarfile-filter-bypass](linux/tarfile-filter-bypass.en.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.en.md) |
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.en.md) |
 | `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.en.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
+| `linux/wasm-go-run-privesc` | [wasm-go-run-privesc](linux/wasm-go-run-privesc.en.md) |
 | `linux/xdebug-dbgp-rce` | [xdebug-dbgp-rce](linux/xdebug-dbgp-rce.en.md) |
 | `linux/zabbix-api-command-injection` | [zabbix-api-command-injection](linux/zabbix-api-command-injection.en.md) |
+| `linux/zip-symlink-cron-write` | [zip-symlink-cron-write](linux/zip-symlink-cron-write.en.md) |
 | `linux/zoneminder-command-injection` | [zoneminder-command-injection](linux/zoneminder-command-injection.en.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.en.md) |
 | `misc/unicode-invisible` | [unicode-invisible](misc/unicode-invisible.en.md) |
@@ -206,6 +214,7 @@ This index is generated from the repository's versioned writeups.
 | `threat-hunting/threat-hunting` | [threat-hunting](threat-hunting/threat-hunting.en.md) |
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.en.md) |
 | `web/adminer-ssrf` | [adminer-ssrf](web/adminer-ssrf.en.md) |
+| `web/angularjs-csti-csp-bypass` | [angularjs-csti-csp-bypass](web/angularjs-csti-csp-bypass.en.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.en.md) |
 | `web/api-invite-command-injection` | [api-invite-command-injection](web/api-invite-command-injection.en.md) |
 | `web/bookstack-cve-2023-6199` | [bookstack-cve-2023-6199](web/bookstack-cve-2023-6199.en.md) |
@@ -215,10 +224,12 @@ This index is generated from the repository's versioned writeups.
 | `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.en.md) |
 | `web/command-injection` | [command-injection](web/command-injection.en.md) |
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.en.md) |
+| `web/curl-file-scheme-ssrf` | [curl-file-scheme-ssrf](web/curl-file-scheme-ssrf.en.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.en.md) |
 | `web/cypher-injection` | [cypher-injection](web/cypher-injection.en.md) |
 | `web/erb-ssti-newline` | [erb-ssti-newline](web/erb-ssti-newline.en.md) |
 | `web/esi-injection-file-write` | [esi-injection-file-write](web/esi-injection-file-write.en.md) |
+| `web/execute-after-redirect` | [execute-after-redirect](web/execute-after-redirect.en.md) |
 | `web/ffmpeg-avi-file-read` | [ffmpeg-avi-file-read](web/ffmpeg-avi-file-read.en.md) |
 | `web/file-upload` | [file-upload](web/file-upload.en.md) |
 | `web/flask-absolute-path-upload` | [flask-absolute-path-upload](web/flask-absolute-path-upload.en.md) |
@@ -245,6 +256,7 @@ This index is generated from the repository's versioned writeups.
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.en.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.en.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.en.md) |
+| `web/jwt-algorithm-confusion` | [jwt-algorithm-confusion](web/jwt-algorithm-confusion.en.md) |
 | `web/jwt-rsa-key-recovery` | [jwt-rsa-key-recovery](web/jwt-rsa-key-recovery.en.md) |
 | `web/laravel-env-injection` | [laravel-env-injection](web/laravel-env-injection.en.md) |
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.en.md) |
@@ -340,6 +352,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.en.md) |
 | `windows/keepass` | [keepass](windows/keepass.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
+| `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.en.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.en.md) |
 | `windows/mof-wmi-self-install` | [mof-wmi-self-install](windows/mof-wmi-self-install.en.md) |
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.en.md) |

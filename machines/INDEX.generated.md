@@ -64,6 +64,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/charon` | [charon](linux/charon/README.md) |
 | `linux/checker` | [checker](linux/checker/README.md) |
 | `linux/chemistry` | [chemistry](linux/chemistry/README.md) |
+| `linux/clicker` | [clicker](linux/clicker/README.md) |
 | `linux/cobblestone` | [cobblestone](linux/cobblestone/README.md) |
 | `linux/code` | [code](linux/code/README.md) |
 | `linux/codify` | [codify](linux/codify/README.md) |
@@ -73,7 +74,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/craft` | [craft](linux/craft/README.md) |
 | `linux/crimestoppers` | [crimestoppers](linux/crimestoppers/README.md) |
 | `linux/cronos` | [cronos](linux/cronos/README.md) |
+| `linux/crossfit` | [crossfit](linux/crossfit/README.md) |
 | `linux/curling` | [curling](linux/curling/README.md) |
+| `linux/cybermonday` | [cybermonday](linux/cybermonday/README.md) |
 | `linux/dab` | [dab](linux/dab/README.md) |
 | `linux/data` | [data](linux/data/README.md) |
 | `linux/delivery` | [delivery](linux/delivery/README.md) |
@@ -81,6 +84,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/devvortex` | [devvortex](linux/devvortex/README.md) |
 | `linux/doctor` | [doctor](linux/doctor/README.md) |
 | `linux/dog` | [dog](linux/dog/README.md) |
+| `linux/down` | [down](linux/down/README.md) |
 | `linux/editor` | [editor](linux/editor/README.md) |
 | `linux/environment` | [environment](linux/environment/README.md) |
 | `linux/era` | [era](linux/era/README.md) |
@@ -110,6 +114,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/guardian` | [guardian](linux/guardian/README.md) |
 | `linux/hacknet` | [hacknet](linux/hacknet/README.md) |
 | `linux/haircut` | [haircut](linux/haircut/README.md) |
+| `linux/hawk` | [hawk](linux/hawk/README.md) |
 | `linux/health` | [health](linux/health/README.md) |
 | `linux/helix` | [helix](linux/helix/README.md) |
 | `linux/holiday` | [holiday](linux/holiday/README.md) |
@@ -117,6 +122,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/intense` | [intense](linux/intense/README.md) |
 | `linux/intentions` | [intentions](linux/intentions/README.md) |
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
+| `linux/intuition` | [intuition](linux/intuition/README.md) |
 | `linux/investigation` | [investigation](linux/investigation/README.md) |
 | `linux/irked` | [irked](linux/irked/README.md) |
 | `linux/jail` | [jail](linux/jail/README.md) |
@@ -159,6 +165,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/oouch` | [oouch](linux/oouch/README.md) |
 | `linux/openadmin` | [openadmin](linux/openadmin/README.md) |
 | `linux/opensource` | [opensource](linux/opensource/README.md) |
+| `linux/ophiuchi` | [ophiuchi](linux/ophiuchi/README.md) |
 | `linux/ouija` | [ouija](linux/ouija/README.md) |
 | `linux/outbound` | [outbound](linux/outbound/README.md) |
 | `linux/overflow` | [overflow](linux/overflow/README.md) |
@@ -179,11 +186,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/pollution` | [pollution](linux/pollution/README.md) |
 | `linux/postman` | [postman](linux/postman/README.md) |
 | `linux/precious` | [precious](linux/precious/README.md) |
+| `linux/previse` | [previse](linux/previse/README.md) |
 | `linux/pterodactyl` | [pterodactyl](linux/pterodactyl/README.md) |
 | `linux/quick` | [quick](linux/quick/README.md) |
 | `linux/rainyday` | [rainyday](linux/rainyday/README.md) |
 | `linux/redcross` | [redcross](linux/redcross/README.md) |
 | `linux/reddish` | [reddish](linux/reddish/README.md) |
+| `linux/registry` | [registry](linux/registry/README.md) |
 | `linux/response` | [response](linux/response/README.md) |
 | `linux/retired` | [retired](linux/retired/README.md) |
 | `linux/rope` | [rope](linux/rope/README.md) |
@@ -233,6 +242,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/trick` | [trick](linux/trick/README.md) |
 | `linux/trickster` | [trickster](linux/trickster/README.md) |
 | `linux/twomillion` | [twomillion](linux/twomillion/README.md) |
+| `linux/unattended` | [unattended](linux/unattended/README.md) |
 | `linux/unbalanced` | [unbalanced](linux/unbalanced/README.md) |
 | `linux/underpass` | [underpass](linux/underpass/README.md) |
 | `linux/unobtainium` | [unobtainium](linux/unobtainium/README.md) |
@@ -244,6 +254,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/vault` | [vault](linux/vault/README.md) |
 | `linux/vessel` | [vessel](linux/vessel/README.md) |
 | `linux/whiterabbit` | [whiterabbit](linux/whiterabbit/README.md) |
+| `linux/wingdata` | [wingdata](linux/wingdata/README.md) |
 | `linux/yummy` | [yummy](linux/yummy/README.md) |
 | `linux/zetta` | [zetta](linux/zetta/README.md) |
 | `linux/zipper` | [zipper](linux/zipper/README.md) |
@@ -323,6 +334,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/driver` | [driver](windows/driver/README.md) |
 | `windows/dropzone` | [dropzone](windows/dropzone/README.md) |
 | `windows/eighteen` | [eighteen](windows/eighteen/README.md) |
+| `windows/eloquia` | [eloquia](windows/eloquia/README.md) |
 | `windows/escape` | [escape](windows/escape/README.md) |
 | `windows/escapetwo` | [escapetwo](windows/escapetwo/README.md) |
 | `windows/flight` | [flight](windows/flight/README.md) |
@@ -338,6 +350,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/hancliffe` | [hancliffe](windows/hancliffe/README.md) |
 | `windows/haze` | [haze](windows/haze/README.md) |
 | `windows/heist` | [heist](windows/heist/README.md) |
+| `windows/helpline` | [helpline](windows/helpline/README.md) |
 | `windows/hospital` | [hospital](windows/hospital/README.md) |
 | `windows/intelligence` | [intelligence](windows/intelligence/README.md) |
 | `windows/jab` | [jab](windows/jab/README.md) |
@@ -365,6 +378,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/pirate` | [pirate](windows/pirate/README.md) |
 | `windows/pivotapi` | [pivotapi](windows/pivotapi/README.md) |
 | `windows/pov` | [pov](windows/pov/README.md) |
+| `windows/puppy` | [puppy](windows/puppy/README.md) |
 | `windows/querier` | [querier](windows/querier/README.md) |
 | `windows/rabbit` | [rabbit](windows/rabbit/README.md) |
 | `windows/rainbow` | [rainbow](windows/rainbow/README.md) |
