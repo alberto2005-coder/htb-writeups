@@ -23,3 +23,15 @@ f5a9b5473b5973bd3059100c18a2774c763c510b:machines/windows/breadcrumbs/README.md:
 739cb17e507be67dc133da76773e10d8057bae24:machines/windows/servmon/README.en.md:curl-auth-user:67
 739cb17e507be67dc133da76773e10d8057bae24:machines/windows/servmon/README.md:curl-auth-user:67
 b775aebe7ed230ad3a724125bdd726b0459f50de:sherlocks/interceptor/README.en.md:generic-api-key:47
+
+# Refreshed after later edits changed the introducing commit of the same verified false positives.
+3be897086ffb409983eb442ca02cb54e165dfb3d:challenges/APKrypt/README.en.md:generic-api-key:61
+a7708bb3717f5d133efe569c30e561101568d3b2:machines/freebsd/luke/README.en.md:curl-auth-user:86
+a7708bb3717f5d133efe569c30e561101568d3b2:machines/freebsd/luke/README.en.md:curl-auth-user:98
+a7708bb3717f5d133efe569c30e561101568d3b2:machines/freebsd/luke/README.md:curl-auth-user:86
+a7708bb3717f5d133efe569c30e561101568d3b2:machines/freebsd/luke/README.md:curl-auth-user:98
+a7708bb3717f5d133efe569c30e561101568d3b2:machines/linux/craft/README.en.md:curl-auth-user:64
+a7708bb3717f5d133efe569c30e561101568d3b2:machines/linux/craft/README.md:curl-auth-user:64
+b088f80294a3ef1780867ec12e6028e77ac3f421:challenges/Illumination/README.en.md:generic-api-key:52
+b088f80294a3ef1780867ec12e6028e77ac3f421:challenges/Illumination/README.md:generic-api-key:52
+47f8fd1b57ecbc665beae83f7e2cc76f1a5e64cd:sherlocks/interceptor/README.en.md:generic-api-key:47

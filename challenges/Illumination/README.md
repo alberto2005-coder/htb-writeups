@@ -49,8 +49,8 @@ El historial tiene cuatro commits: el inicial crea el token real, y uno posterio
 
 ```bash
 git show 47241a4:config.json        # o el commit donde se elimina
-# "-       "token": "SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=","
-echo 'SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=' | base64 -d
+# "-       "token": "<FLAG_BASE64>","
+echo '<FLAG_BASE64>' | base64 -d
 ```
 
 ```text

@@ -49,8 +49,8 @@ The history has four commits: the initial one creates the real token, a later on
 
 ```bash
 git show 47241a4:config.json        # or whichever commit removes it
-# "-       "token": "SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=","
-echo 'SFRCe3YzcnNpMG5fYzBudHIwbF9hbV9JX3JpZ2h0P30=' | base64 -d
+# "-       "token": "<FLAG_BASE64>","
+echo '<FLAG_BASE64>' | base64 -d
 ```
 
 ```text
