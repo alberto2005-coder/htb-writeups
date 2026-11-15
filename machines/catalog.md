@@ -219,6 +219,23 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Silentium | Linux | Easy | Flowise reset token, CVE-2025-59528, Docker y Gogs CVE-2025-8110 | [Ver](../machines/linux/silentium/README.md) | [EN](../machines/linux/silentium/README.en.md) |
 | Static | Linux | Hard | TOTP, VPN, xdebug, PHP-FPM CVE-2019-11043 y format string | [Ver](../machines/linux/static/README.md) | [EN](../machines/linux/static/README.en.md) |
 
+| Artificial | Linux | Easy | TensorFlow Lambda, backup de Backrest y hooks root | [Ver](../machines/linux/artificial/README.md) | [EN](../machines/linux/artificial/README.en.md) |
+| BigBang | Linux | Hard | BuddyForms, cadenas de filtros PHP y CVE-2024-2961 | [Ver](../machines/linux/bigbang/README.md) | [EN](../machines/linux/bigbang/README.en.md) |
+| Blazorized | Windows | Hard | JWT de Blazor, SQLi y cadena de ACL hasta DCSync | [Ver](../machines/windows/blazorized/README.md) | [EN](../machines/windows/blazorized/README.en.md) |
+| Blurry | Linux | Medium | ClearML pickle y evasión de Fickling en PyTorch | [Ver](../machines/linux/blurry/README.md) | [EN](../machines/linux/blurry/README.en.md) |
+| Crafty | Windows | Easy | Log4Shell en Minecraft, plugin JAR y RCON | [Ver](../machines/windows/crafty/README.md) | [EN](../machines/windows/crafty/README.en.md) |
+| Europa | Linux | Medium | SQLi de login, preg_replace /e y cron escribible | [Ver](../machines/linux/europa/README.md) | [EN](../machines/linux/europa/README.en.md) |
+| Falafel | Linux | Hard | Type juggling, subida PHP, framebuffer y debugfs | [Ver](../machines/linux/falafel/README.md) | [EN](../machines/linux/falafel/README.en.md) |
+| Jupiter | Linux | Medium | Grafana/PostgreSQL COPY PROGRAM, Jupyter y sattrack | [Ver](../machines/linux/jupiter/README.md) | [EN](../machines/linux/jupiter/README.en.md) |
+| Laboratory | Linux | Easy | GitLab CVE-2020-10977 y PATH hijacking SUID | [Ver](../machines/linux/laboratory/README.md) | [EN](../machines/linux/laboratory/README.en.md) |
+| MagicGardens | Linux | Insane | XSS en QR, overflow IPv6, Docker y CAP_SYS_MODULE | [Ver](../machines/linux/magicgardens/README.md) | [EN](../machines/linux/magicgardens/README.en.md) |
+| Oouch | Linux | Hard | OAuth CSRF, uWSGI y D-Bus | [Ver](../machines/linux/oouch/README.md) | [EN](../machines/linux/oouch/README.en.md) |
+| Perspective | Windows | Insane | SHTML, machineKey/ViewState y padding oracle | [Ver](../machines/windows/perspective/README.md) | [EN](../machines/windows/perspective/README.en.md) |
+| Runner | Linux | Medium | TeamCity CVE-2023-42793, Portainer y runc CVE-2024-21626 | [Ver](../machines/linux/runner/README.md) | [EN](../machines/linux/runner/README.en.md) |
+| RustyKey | Windows | Hard | Timeroasting, extensión 7-Zip y RBCD | [Ver](../machines/windows/rustykey/README.md) | [EN](../machines/windows/rustykey/README.en.md) |
+| Soulmate | Linux | Easy | CrushFTP CVE-2025-31161 y Erlang SSH CVE-2025-32433 | [Ver](../machines/linux/soulmate/README.md) | [EN](../machines/linux/soulmate/README.en.md) |
+| Talkative | Linux | Hard | jamovi RCE, pivote Docker y CAP_DAC_READ_SEARCH | [Ver](../machines/linux/talkative/README.md) | [EN](../machines/linux/talkative/README.en.md) |
+
 ## Pendientes
 
 1 máquina retirada con material localizado y todavía sin ficha propia.

@@ -22,12 +22,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/analytics` | [analytics](linux/analytics/README.md) |
 | `linux/apocalyst` | [apocalyst](linux/apocalyst/README.md) |
 | `linux/armageddon` | [armageddon](linux/armageddon/README.md) |
+| `linux/artificial` | [artificial](linux/artificial/README.md) |
 | `linux/bank` | [bank](linux/bank/README.md) |
 | `linux/bashed` | [bashed](linux/bashed/README.md) |
 | `linux/beep` | [beep](linux/beep/README.md) |
+| `linux/bigbang` | [bigbang](linux/bigbang/README.md) |
 | `linux/bitlab` | [bitlab](linux/bitlab/README.md) |
 | `linux/blocky` | [blocky](linux/blocky/README.md) |
 | `linux/blunder` | [blunder](linux/blunder/README.md) |
+| `linux/blurry` | [blurry](linux/blurry/README.md) |
 | `linux/boardlight` | [boardlight](linux/boardlight/README.md) |
 | `linux/book` | [book](linux/book/README.md) |
 | `linux/brainfuck` | [brainfuck](linux/brainfuck/README.md) |
@@ -52,8 +55,10 @@ This index is generated from the repository's versioned writeups.
 | `linux/editor` | [editor](linux/editor/README.md) |
 | `linux/environment` | [environment](linux/environment/README.md) |
 | `linux/era` | [era](linux/era/README.md) |
+| `linux/europa` | [europa](linux/europa/README.md) |
 | `linux/extension` | [extension](linux/extension/README.md) |
 | `linux/facts` | [facts](linux/facts/README.md) |
+| `linux/falafel` | [falafel](linux/falafel/README.md) |
 | `linux/forgotten` | [forgotten](linux/forgotten/README.md) |
 | `linux/format` | [format](linux/format/README.md) |
 | `linux/friendzone` | [friendzone](linux/friendzone/README.md) |
@@ -70,12 +75,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/jail` | [jail](linux/jail/README.md) |
 | `linux/jarvis` | [jarvis](linux/jarvis/README.md) |
 | `linux/jewel` | [jewel](linux/jewel/README.md) |
+| `linux/jupiter` | [jupiter](linux/jupiter/README.md) |
 | `linux/keeper` | [keeper](linux/keeper/README.md) |
 | `linux/knife` | [knife](linux/knife/README.md) |
 | `linux/kobold` | [kobold](linux/kobold/README.md) |
+| `linux/laboratory` | [laboratory](linux/laboratory/README.md) |
 | `linux/lame` | [lame](linux/lame/README.md) |
 | `linux/laser` | [laser](linux/laser/README.md) |
 | `linux/linkvortex` | [linkvortex](linux/linkvortex/README.md) |
+| `linux/magicgardens` | [magicgardens](linux/magicgardens/README.md) |
 | `linux/makesense` | [makesense](linux/makesense/README.md) |
 | `linux/meta` | [meta](linux/meta/README.md) |
 | `linux/mirai` | [mirai](linux/mirai/README.md) |
@@ -87,6 +95,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/october` | [october](linux/october/README.md) |
 | `linux/onetwoseven` | [onetwoseven](linux/onetwoseven/README.md) |
 | `linux/onlyforyou` | [onlyforyou](linux/onlyforyou/README.md) |
+| `linux/oouch` | [oouch](linux/oouch/README.md) |
 | `linux/openadmin` | [openadmin](linux/openadmin/README.md) |
 | `linux/pandora` | [pandora](linux/pandora/README.md) |
 | `linux/paper` | [paper](linux/paper/README.md) |
@@ -100,6 +109,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/redcross` | [redcross](linux/redcross/README.md) |
 | `linux/reddish` | [reddish](linux/reddish/README.md) |
 | `linux/retired` | [retired](linux/retired/README.md) |
+| `linux/runner` | [runner](linux/runner/README.md) |
 | `linux/sandworm` | [sandworm](linux/sandworm/README.md) |
 | `linux/sau` | [sau](linux/sau/README.md) |
 | `linux/sea` | [sea](linux/sea/README.md) |
@@ -113,11 +123,13 @@ This index is generated from the repository's versioned writeups.
 | `linux/socket` | [socket](linux/socket/README.md) |
 | `linux/solidstate` | [solidstate](linux/solidstate/README.md) |
 | `linux/sorcery` | [sorcery](linux/sorcery/README.md) |
+| `linux/soulmate` | [soulmate](linux/soulmate/README.md) |
 | `linux/squashed` | [squashed](linux/squashed/README.md) |
 | `linux/static` | [static](linux/static/README.md) |
 | `linux/stratosphere` | [stratosphere](linux/stratosphere/README.md) |
 | `linux/swagshop` | [swagshop](linux/swagshop/README.md) |
 | `linux/tabby` | [tabby](linux/tabby/README.md) |
+| `linux/talkative` | [talkative](linux/talkative/README.md) |
 | `linux/tartarsauce` | [tartarsauce](linux/tartarsauce/README.md) |
 | `linux/traceback` | [traceback](linux/traceback/README.md) |
 | `linux/trick` | [trick](linux/trick/README.md) |
@@ -174,6 +186,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/bastard` | [bastard](windows/bastard/README.md) |
 | `windows/bastion` | [bastion](windows/bastion/README.md) |
 | `windows/blackfield` | [blackfield](windows/blackfield/README.md) |
+| `windows/blazorized` | [blazorized](windows/blazorized/README.md) |
 | `windows/blue` | [blue](windows/blue/README.md) |
 | `windows/bounty` | [bounty](windows/bounty/README.md) |
 | `windows/buff` | [buff](windows/buff/README.md) |
@@ -184,6 +197,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/chatterbox` | [chatterbox](windows/chatterbox/README.md) |
 | `windows/cicada` | [cicada](windows/cicada/README.md) |
 | `windows/conceal` | [conceal](windows/conceal/README.md) |
+| `windows/crafty` | [crafty](windows/crafty/README.md) |
 | `windows/devel` | [devel](windows/devel/README.md) |
 | `windows/driver` | [driver](windows/driver/README.md) |
 | `windows/eighteen` | [eighteen](windows/eighteen/README.md) |
@@ -216,6 +230,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/omni` | [omni](windows/omni/README.md) |
 | `windows/optimum` | [optimum](windows/optimum/README.md) |
 | `windows/outdated` | [outdated](windows/outdated/README.md) |
+| `windows/perspective` | [perspective](windows/perspective/README.md) |
 | `windows/pingpong` | [pingpong](windows/pingpong/README.md) |
 | `windows/pirate` | [pirate](windows/pirate/README.md) |
 | `windows/querier` | [querier](windows/querier/README.md) |
@@ -226,6 +241,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/resolute` | [resolute](windows/resolute/README.md) |
 | `windows/retrotwo` | [retrotwo](windows/retrotwo/README.md) |
 | `windows/return` | [return](windows/return/README.md) |
+| `windows/rustykey` | [rustykey](windows/rustykey/README.md) |
 | `windows/sauna` | [sauna](windows/sauna/README.md) |
 | `windows/scrambled` | [scrambled](windows/scrambled/README.md) |
 | `windows/search` | [search](windows/search/README.md) |

@@ -9,6 +9,7 @@ This index is generated from the repository's versioned writeups.
 | `ai/adversarial-examples` | [adversarial-examples](ai/adversarial-examples.en.md) |
 | `ai/lm-context-injection` | [lm-context-injection](ai/lm-context-injection.en.md) |
 | `ai/prompt-injection` | [prompt-injection](ai/prompt-injection.en.md) |
+| `ai/pytorch-pickle-evasion` | [pytorch-pickle-evasion](ai/pytorch-pickle-evasion.en.md) |
 | `blockchain/hardhat-rpc` | [hardhat-rpc](blockchain/hardhat-rpc.en.md) |
 | `blockchain/multisig-thresholds` | [multisig-thresholds](blockchain/multisig-thresholds.en.md) |
 | `blockchain/smart-contracts` | [smart-contracts](blockchain/smart-contracts.en.md) |
@@ -69,11 +70,14 @@ This index is generated from the repository's versioned writeups.
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.en.md) |
 | `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.en.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
+| `linux/cap-dac-read-search` | [cap-dac-read-search](linux/cap-dac-read-search.en.md) |
+| `linux/cap-sys-module-escape` | [cap-sys-module-escape](linux/cap-sys-module-escape.en.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.en.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.en.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.en.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.en.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.en.md) |
+| `linux/erlang-ssh-cve-2025-32433` | [erlang-ssh-cve-2025-32433](linux/erlang-ssh-cve-2025-32433.en.md) |
 | `linux/exiftool-filename-injection` | [exiftool-filename-injection](linux/exiftool-filename-injection.en.md) |
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
@@ -87,11 +91,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/nfs-no-root-squash` | [nfs-no-root-squash](linux/nfs-no-root-squash.en.md) |
 | `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.en.md) |
 | `linux/php-cron-writable-include` | [php-cron-writable-include](linux/php-cron-writable-include.en.md) |
+| `linux/php-filter-chain-cve-2024-2961` | [php-filter-chain-cve-2024-2961](linux/php-filter-chain-cve-2024-2961.en.md) |
+| `linux/postgres-copy-program` | [postgres-copy-program](linux/postgres-copy-program.en.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.en.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
+| `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.en.md) |
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.en.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.en.md) |
+| `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.en.md) |
@@ -144,6 +152,7 @@ This index is generated from the repository's versioned writeups.
 | `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.en.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.en.md) |
 | `web/gitea` | [gitea](web/gitea.en.md) |
+| `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.en.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.en.md) |
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.en.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.en.md) |
@@ -165,11 +174,14 @@ This index is generated from the repository's versioned writeups.
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.en.md) |
 | `web/node-red-rce` | [node-red-rce](web/node-red-rce.en.md) |
 | `web/nosql-injection` | [nosql-injection](web/nosql-injection.en.md) |
+| `web/oauth-csrf-state` | [oauth-csrf-state](web/oauth-csrf-state.en.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.en.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.en.md) |
 | `web/php-fpm-cve-2019-11043` | [php-fpm-cve-2019-11043](web/php-fpm-cve-2019-11043.en.md) |
 | `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.en.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.en.md) |
+| `web/php-preg-replace-e` | [php-preg-replace-e](web/php-preg-replace-e.en.md) |
+| `web/php-type-juggling-auth` | [php-type-juggling-auth](web/php-type-juggling-auth.en.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.en.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
@@ -195,7 +207,9 @@ This index is generated from the repository's versioned writeups.
 | `windows/adcs-pkinit` | [adcs-pkinit](windows/adcs-pkinit.en.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.en.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.en.md) |
+| `windows/aspnet-viewstate-machinekey` | [aspnet-viewstate-machinekey](windows/aspnet-viewstate-machinekey.en.md) |
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.en.md) |
+| `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.en.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.en.md) |
 | `windows/dpapi` | [dpapi](windows/dpapi.en.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.en.md) |
@@ -207,6 +221,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.en.md) |
 | `windows/keepass` | [keepass](windows/keepass.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
+| `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.en.md) |
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.en.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.en.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.en.md) |
@@ -230,6 +245,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.en.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.en.md) |
 | `windows/themebleed` | [themebleed](windows/themebleed.en.md) |
+| `windows/timeroasting` | [timeroasting](windows/timeroasting.en.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.en.md) |
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.en.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.en.md) |
