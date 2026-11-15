@@ -26,6 +26,7 @@ sherlocks/active/
 # claves y scripts locales del laboratorio
 id_ed25519*
 htb/
+.tools/
 
 # Temporales de sesión, descargas de referencia y editores
 .tmp*
