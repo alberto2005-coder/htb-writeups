@@ -75,13 +75,20 @@ This index is generated from the repository's versioned writeups.
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.en.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.en.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.en.md) |
+| `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.en.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.en.md) |
+| `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.en.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.en.md) |
 | `linux/erlang-ssh-cve-2025-32433` | [erlang-ssh-cve-2025-32433](linux/erlang-ssh-cve-2025-32433.en.md) |
+| `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.en.md) |
+| `linux/exiftool-cve-2021-22204` | [exiftool-cve-2021-22204](linux/exiftool-cve-2021-22204.en.md) |
 | `linux/exiftool-filename-injection` | [exiftool-filename-injection](linux/exiftool-filename-injection.en.md) |
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
+| `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
+| `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.en.md) |
+| `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.en.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.en.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.en.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.en.md) |
@@ -97,9 +104,13 @@ This index is generated from the repository's versioned writeups.
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.en.md) |
+| `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.en.md) |
+| `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.en.md) |
+| `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.en.md) |
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.en.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.en.md) |
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.en.md) |
+| `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.en.md) |
@@ -191,6 +202,7 @@ This index is generated from the repository's versioned writeups.
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.en.md) |
 | `web/ssrf` | [ssrf](web/ssrf.en.md) |
 | `web/ssti` | [ssti](web/ssti.en.md) |
+| `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.en.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.en.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.en.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.en.md) |
@@ -201,6 +213,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/ad-recycle-bin` | [ad-recycle-bin](windows/ad-recycle-bin.en.md) |
 | `windows/adcs-esc1` | [adcs-esc1](windows/adcs-esc1.en.md) |
 | `windows/adcs-esc13` | [adcs-esc13](windows/adcs-esc13.en.md) |
+| `windows/adcs-esc14` | [adcs-esc14](windows/adcs-esc14.en.md) |
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.en.md) |
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.en.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.en.md) |
@@ -212,6 +225,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.en.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.en.md) |
 | `windows/dpapi` | [dpapi](windows/dpapi.en.md) |
+| `windows/electron-updater-signature-bypass` | [electron-updater-signature-bypass](windows/electron-updater-signature-bypass.en.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.en.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.en.md) |
 | `windows/gpo-abuse` | [gpo-abuse](windows/gpo-abuse.en.md) |
@@ -225,6 +239,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.en.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.en.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.en.md) |
+| `windows/mssql-pivot-laps` | [mssql-pivot-laps](windows/mssql-pivot-laps.en.md) |
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.en.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.en.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.en.md) |
@@ -243,6 +258,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.en.md) |
 | `windows/sliver-c2` | [sliver-c2](windows/sliver-c2.en.md) |
 | `windows/snmp-enumeration` | [snmp-enumeration](windows/snmp-enumeration.en.md) |
+| `windows/sqlite-wal-forensics` | [sqlite-wal-forensics](windows/sqlite-wal-forensics.en.md) |
 | `windows/teamviewer-cve-2019-18988` | [teamviewer-cve-2019-18988](windows/teamviewer-cve-2019-18988.en.md) |
 | `windows/themebleed` | [themebleed](windows/themebleed.en.md) |
 | `windows/timeroasting` | [timeroasting](windows/timeroasting.en.md) |

@@ -235,6 +235,22 @@ Reference notes for machines used to study techniques. The main table covers **r
 | RustyKey | Windows | Hard | Timeroasting, 7-Zip extension and RBCD | [View](../machines/windows/rustykey/README.md) | [EN](../machines/windows/rustykey/README.en.md) |
 | Soulmate | Linux | Easy | CrushFTP CVE-2025-31161 and Erlang SSH CVE-2025-32433 | [View](../machines/linux/soulmate/README.md) | [EN](../machines/linux/soulmate/README.en.md) |
 | Talkative | Linux | Hard | jamovi RCE, Docker pivot and CAP_DAC_READ_SEARCH | [View](../machines/linux/talkative/README.md) | [EN](../machines/linux/talkative/README.en.md) |
+| Atom | Windows | Medium | Electron updater, writable SMB share and PortableKanban in Redis | [View](../machines/windows/atom/README.en.md) | [ES](../machines/windows/atom/README.md) |
+| Backdoor | Linux | Easy | WordPress plugin traversal, `gdbserver` and root `screen` | [View](../machines/linux/backdoor/README.en.md) | [ES](../machines/linux/backdoor/README.md) |
+| BlockBlock | Linux | Hard | Chat XSS, Ethereum JSON-RPC and `forge`/`pacman` | [View](../machines/linux/blockblock/README.en.md) | [ES](../machines/linux/blockblock/README.md) |
+| Bolt | Linux | Medium | Docker layers with secrets, Flask SSTI and Passbolt | [View](../machines/linux/bolt/README.en.md) | [ES](../machines/linux/bolt/README.md) |
+| Breadcrumbs | Windows | Hard | PHP traversal, forged cookie, SQLite WAL and AES SQLi | [View](../machines/windows/breadcrumbs/README.en.md) | [ES](../machines/windows/breadcrumbs/README.md) |
+| EvilCUPS | Linux | Medium | Attacker-controlled CUPS printer, Foomatic-RIP and spool | [View](../machines/linux/evilcups/README.en.md) | [ES](../machines/linux/evilcups/README.md) |
+| Feline | Linux | Hard | Tomcat CVE-2020-9484, SaltStack and `docker.sock` | [View](../machines/linux/feline/README.en.md) | [ES](../machines/linux/feline/README.md) |
+| LaCasaDePapel | Linux | Easy | Backdoored vsftpd, client certificate and Supervisor | [View](../machines/linux/lacasadepapel/README.en.md) | [ES](../machines/linux/lacasadepapel/README.md) |
+| Lazy | Linux | Medium | Cookie padding oracle and SUID `backup` PATH hijacking | [View](../machines/linux/lazy/README.en.md) | [ES](../machines/linux/lazy/README.md) |
+| Mischief | Linux | Insane | SNMP/IPv6, command injection and `systemd-run` | [View](../machines/linux/mischief/README.en.md) | [ES](../machines/linux/mischief/README.md) |
+| Overflow | Linux | Hard | Padding oracle, SQLi, ExifTool CVE-2021-22204 and TOCTOU | [View](../machines/linux/overflow/README.en.md) | [ES](../machines/linux/overflow/README.md) |
+| PivotAPI | Windows | Insane | FTP/metadata, AS-REP, reversing, MSSQL and LAPS | [View](../machines/windows/pivotapi/README.en.md) | [ES](../machines/windows/pivotapi/README.md) |
+| Scepter | Windows | Hard | NFS with PFX, ADCS ESC14 and DCSync | [View](../machines/windows/scepter/README.en.md) | [ES](../machines/windows/scepter/README.md) |
+| Seal | Linux | Medium | GitBucket, Nginx/Tomcat differential and Ansible | [View](../machines/linux/seal/README.en.md) | [ES](../machines/linux/seal/README.md) |
+| Spectra | Linux | Easy | WordPress plugin, auto-login and `initctl` | [View](../machines/linux/spectra/README.en.md) | [ES](../machines/linux/spectra/README.md) |
+| Tentacle | Linux | Hard | Squid/WPAD, OpenSMTPD, Kerberos and keytab | [View](../machines/linux/tentacle/README.en.md) | [ES](../machines/linux/tentacle/README.md) |
 
 ## Pending
 
