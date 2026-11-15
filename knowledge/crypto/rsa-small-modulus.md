@@ -77,3 +77,21 @@ Si el resultado no es texto, prueba `long_to_bytes` de `pycryptodome`, revisa en
 - En CTF, documenta el ataque y la matemática; el valor está en reconocer el supuesto roto.
 
 MITRE: T1553 (subversión de confianza), T1600 (debilidad criptográfica).
+
+## 7. Caso real: Charon (HTB)
+
+Charon deja en `/home/decoder` una clave pública RSA y `pass.crypt`, el cifrado de la contraseña de SSH. El módulo es de 256 bits y se factoriza al instante; el archivo se descifra con la clave privada reconstruida.
+
+```python
+from Crypto.PublicKey import RSA
+from sympy import factorint
+from Crypto.Util.number import long_to_bytes
+
+pub = RSA.import_key(open("decoder.pub").read())
+p, q = list(factorint(pub.n))[:2]
+d = pow(pub.e, -1, (p - 1) * (q - 1))
+ct = int.from_bytes(open("pass.crypt", "rb").read(), "big")
+print(long_to_bytes(pow(ct, d, pub.n)).decode())
+```
+
+La contraseña resultante se reutiliza en SSH. La lección es doble: un módulo pequeño se rompe en segundos y un secreto cifrado con RSA de libro no tiene padding ni integridad, así que la clave privada reconstruida lo abre directamente. Referencia: [0xdf — Charon](https://0xdf.gitlab.io/2021/02/16/htb-charon.html).

@@ -77,3 +77,21 @@ If the output is not text, try `long_to_bytes` from `pycryptodome`, check `c`'s 
 - In CTFs, document the attack and the maths; the value is recognising the broken assumption.
 
 MITRE: T1553 (subvert trust controls), T1600 (weaken encryption).
+
+## 7. Real case: Charon (HTB)
+
+Charon leaves a small RSA public key and `pass.crypt`, the encrypted SSH password, in `/home/decoder`. The modulus is 256 bits and factors instantly; the file decrypts with the rebuilt private key.
+
+```python
+from Crypto.PublicKey import RSA
+from sympy import factorint
+from Crypto.Util.number import long_to_bytes
+
+pub = RSA.import_key(open("decoder.pub").read())
+p, q = list(factorint(pub.n))[:2]
+d = pow(pub.e, -1, (p - 1) * (q - 1))
+ct = int.from_bytes(open("pass.crypt", "rb").read(), "big")
+print(long_to_bytes(pow(ct, d, pub.n)).decode())
+```
+
+The recovered password is reused over SSH. The lesson is twofold: a small modulus falls in seconds, and a secret encrypted with textbook RSA has no padding or integrity, so the rebuilt private key opens it directly. Reference: [0xdf — Charon](https://0xdf.gitlab.io/2021/02/16/htb-charon.html).

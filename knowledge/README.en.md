@@ -112,7 +112,9 @@ This index is generated from the repository's versioned writeups.
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.en.md) |
 | `linux/memcached-enumeration` | [memcached-enumeration](linux/memcached-enumeration.en.md) |
 | `linux/memcached-php-injection` | [memcached-php-injection](linux/memcached-php-injection.en.md) |
+| `linux/mmap-cred-overwrite` | [mmap-cred-overwrite](linux/mmap-cred-overwrite.en.md) |
 | `linux/mpdf-file-read` | [mpdf-file-read](linux/mpdf-file-read.en.md) |
+| `linux/nagios-xi-cve-2023-40931` | [nagios-xi-cve-2023-40931](linux/nagios-xi-cve-2023-40931.en.md) |
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.en.md) |
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.en.md) |
 | `linux/nfs-no-root-squash` | [nfs-no-root-squash](linux/nfs-no-root-squash.en.md) |
@@ -129,12 +131,14 @@ This index is generated from the repository's versioned writeups.
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.en.md) |
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
+| `linux/runc-cve-2019-5736` | [runc-cve-2019-5736](linux/runc-cve-2019-5736.en.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.en.md) |
 | `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.en.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.en.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.en.md) |
 | `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.en.md) |
 | `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.en.md) |
+| `linux/syslog-pgsql-sql-injection` | [syslog-pgsql-sql-injection](linux/syslog-pgsql-sql-injection.en.md) |
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.en.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.en.md) |
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.en.md) |
@@ -188,6 +192,7 @@ This index is generated from the repository's versioned writeups.
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.en.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.en.md) |
 | `web/cypher-injection` | [cypher-injection](web/cypher-injection.en.md) |
+| `web/ffmpeg-avi-file-read` | [ffmpeg-avi-file-read](web/ffmpeg-avi-file-read.en.md) |
 | `web/file-upload` | [file-upload](web/file-upload.en.md) |
 | `web/flask-absolute-path-upload` | [flask-absolute-path-upload](web/flask-absolute-path-upload.en.md) |
 | `web/flask-debug-pin` | [flask-debug-pin](web/flask-debug-pin.en.md) |
@@ -197,6 +202,7 @@ This index is generated from the repository's versioned writeups.
 | `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.en.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.en.md) |
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.en.md) |
+| `web/gopher-ssrf-smtp` | [gopher-ssrf-smtp](web/gopher-ssrf-smtp.en.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.en.md) |
 | `web/hmac-oracle-ssrf` | [hmac-oracle-ssrf](web/hmac-oracle-ssrf.en.md) |
 | `web/host-header-password-reset` | [host-header-password-reset](web/host-header-password-reset.en.md) |
@@ -222,6 +228,7 @@ This index is generated from the repository's versioned writeups.
 | `web/node-jwt-prototype` | [node-jwt-prototype](web/node-jwt-prototype.en.md) |
 | `web/node-red-rce` | [node-red-rce](web/node-red-rce.en.md) |
 | `web/nosql-injection` | [nosql-injection](web/nosql-injection.en.md) |
+| `web/nostromo-cve-2019-16278` | [nostromo-cve-2019-16278](web/nostromo-cve-2019-16278.en.md) |
 | `web/oauth-csrf-state` | [oauth-csrf-state](web/oauth-csrf-state.en.md) |
 | `web/openemr-auth-bypass-sqli` | [openemr-auth-bypass-sqli](web/openemr-auth-bypass-sqli.en.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.en.md) |
@@ -231,11 +238,15 @@ This index is generated from the repository's versioned writeups.
 | `web/php-object-injection` | [php-object-injection](web/php-object-injection.en.md) |
 | `web/php-phar-upload` | [php-phar-upload](web/php-phar-upload.en.md) |
 | `web/php-preg-replace-e` | [php-preg-replace-e](web/php-preg-replace-e.en.md) |
+| `web/php-runkit-rule-injection` | [php-runkit-rule-injection](web/php-runkit-rule-injection.en.md) |
 | `web/php-type-juggling-auth` | [php-type-juggling-auth](web/php-type-juggling-auth.en.md) |
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.en.md) |
+| `web/pymatgen-cve-2024-23346` | [pymatgen-cve-2024-23346](web/pymatgen-cve-2024-23346.en.md) |
+| `web/python-pickle-deserialization` | [python-pickle-deserialization](web/python-pickle-deserialization.en.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.en.md) |
 | `web/reportlab-cve-2023-33733` | [reportlab-cve-2023-33733](web/reportlab-cve-2023-33733.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
+| `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.en.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.en.md) |
 | `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.en.md) |
 | `web/solidity-smart-contract-command-injection` | [solidity-smart-contract-command-injection](web/solidity-smart-contract-command-injection.en.md) |
@@ -252,6 +263,7 @@ This index is generated from the repository's versioned writeups.
 | `web/wordpress-totp-seed-recovery` | [wordpress-totp-seed-recovery](web/wordpress-totp-seed-recovery.en.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.en.md) |
 | `web/xpath-injection` | [xpath-injection](web/xpath-injection.en.md) |
+| `web/xss-cookie-exfiltration` | [xss-cookie-exfiltration](web/xss-cookie-exfiltration.en.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.en.md) |
 | `web/xxe` | [xxe](web/xxe.en.md) |
 | `web/zipslip` | [zipslip](web/zipslip.en.md) |
@@ -285,10 +297,12 @@ This index is generated from the repository's versioned writeups.
 | `windows/iot-core-sirep` | [iot-core-sirep](windows/iot-core-sirep.en.md) |
 | `windows/ipv6-ad-discovery` | [ipv6-ad-discovery](windows/ipv6-ad-discovery.en.md) |
 | `windows/jea` | [jea](windows/jea.en.md) |
+| `windows/json-net-deserialization` | [json-net-deserialization](windows/json-net-deserialization.en.md) |
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.en.md) |
 | `windows/keepass` | [keepass](windows/keepass.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.en.md) |
+| `windows/mof-wmi-self-install` | [mof-wmi-self-install](windows/mof-wmi-self-install.en.md) |
 | `windows/ms14-068` | [ms14-068](windows/ms14-068.en.md) |
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.en.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.en.md) |
