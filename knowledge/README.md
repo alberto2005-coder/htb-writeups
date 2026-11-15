@@ -27,6 +27,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.md) |
 | `crypto/cbc-bit-flipping` | [cbc-bit-flipping](crypto/cbc-bit-flipping.md) |
 | `crypto/classical-ciphers` | [classical-ciphers](crypto/classical-ciphers.md) |
+| `crypto/custom-cipher-known-plaintext` | [custom-cipher-known-plaintext](crypto/custom-cipher-known-plaintext.md) |
 | `crypto/hash-length-extension` | [hash-length-extension](crypto/hash-length-extension.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.md) |
 | `crypto/passpie-pgp-cracking` | [passpie-pgp-cracking](crypto/passpie-pgp-cracking.md) |
@@ -70,14 +71,17 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `hardware/printer-pjl` | [printer-pjl](hardware/printer-pjl.md) |
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.md) |
+| `linux/activemq-cve-2023-46604` | [activemq-cve-2023-46604](linux/activemq-cve-2023-46604.md) |
 | `linux/ajenti-ssh-weak-keys` | [ajenti-ssh-weak-keys](linux/ajenti-ssh-weak-keys.md) |
 | `linux/apache-ofbiz-cve-2023-49070` | [apache-ofbiz-cve-2023-49070](linux/apache-ofbiz-cve-2023-49070.md) |
 | `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.md) |
 | `linux/cap-dac-read-search` | [cap-dac-read-search](linux/cap-dac-read-search.md) |
 | `linux/cap-sys-module-escape` | [cap-sys-module-escape](linux/cap-sys-module-escape.md) |
+| `linux/cgroup-release-agent-escape` | [cgroup-release-agent-escape](linux/cgroup-release-agent-escape.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.md) |
+| `linux/crio-pinns-cve-2022-0811` | [crio-pinns-cve-2022-0811](linux/crio-pinns-cve-2022-0811.md) |
 | `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.md) |
 | `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.md) |
@@ -92,10 +96,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.md) |
+| `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.md) |
+| `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.md) |
@@ -132,6 +138,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.md) |
+| `linux/zoneminder-command-injection` | [zoneminder-command-injection](linux/zoneminder-command-injection.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.md) |
 | `misc/unicode-invisible` | [unicode-invisible](misc/unicode-invisible.md) |
 | `mobile/adb-exploitation` | [adb-exploitation](mobile/adb-exploitation.md) |
@@ -159,6 +166,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `pwn/null-byte-truncation` | [null-byte-truncation](pwn/null-byte-truncation.md) |
 | `pwn/partial-overwrite` | [partial-overwrite](pwn/partial-overwrite.md) |
 | `pwn/pwntools` | [pwntools](pwn/pwntools.md) |
+| `pwn/remote-format-string-service` | [remote-format-string-service](pwn/remote-format-string-service.md) |
 | `pwn/rop-stack` | [rop-stack](pwn/rop-stack.md) |
 | `pwn/stack-variable-overwrite` | [stack-variable-overwrite](pwn/stack-variable-overwrite.md) |
 | `reversing/dotnet-dnspy` | [dotnet-dnspy](reversing/dotnet-dnspy.md) |
@@ -190,6 +198,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.md) |
 | `web/http2-request-smuggling` | [http2-request-smuggling](web/http2-request-smuggling.md) |
 | `web/idor` | [idor](web/idor.md) |
+| `web/ispconfig-cve-2023-46818` | [ispconfig-cve-2023-46818](web/ispconfig-cve-2023-46818.md) |
 | `web/jenkins` | [jenkins](web/jenkins.md) |
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.md) |
@@ -222,12 +231,14 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.md) |
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.md) |
+| `web/ssrf-redirect-bypass` | [ssrf-redirect-bypass](web/ssrf-redirect-bypass.md) |
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.md) |
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
+| `web/wordpress-totp-seed-recovery` | [wordpress-totp-seed-recovery](web/wordpress-totp-seed-recovery.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
 | `web/xpath-injection` | [xpath-injection](web/xpath-injection.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.md) |
@@ -247,9 +258,11 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.md) |
+| `windows/dns-responder-credential-capture` | [dns-responder-credential-capture](windows/dns-responder-credential-capture.md) |
 | `windows/dotnet-deserialization` | [dotnet-deserialization](windows/dotnet-deserialization.md) |
 | `windows/dotnet-remoting-wcf` | [dotnet-remoting-wcf](windows/dotnet-remoting-wcf.md) |
 | `windows/dpapi` | [dpapi](windows/dpapi.md) |
+| `windows/edge-dpapi-credential-extraction` | [edge-dpapi-credential-extraction](windows/edge-dpapi-credential-extraction.md) |
 | `windows/electron-updater-signature-bypass` | [electron-updater-signature-bypass](windows/electron-updater-signature-bypass.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.md) |
 | `windows/gitea-sqlite-hash-extraction` | [gitea-sqlite-hash-extraction](windows/gitea-sqlite-hash-extraction.md) |
@@ -275,6 +288,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.md) |
 | `windows/petitpotam-coercion` | [petitpotam-coercion](windows/petitpotam-coercion.md) |
+| `windows/pre-windows-2000-machine-password` | [pre-windows-2000-machine-password](windows/pre-windows-2000-machine-password.md) |
 | `windows/printnightmare` | [printnightmare](windows/printnightmare.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |
 | `windows/psexec` | [psexec](windows/psexec.md) |
@@ -284,6 +298,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/screensaver-persistence` | [screensaver-persistence](windows/screensaver-persistence.md) |
 | `windows/seloaddriver-privesc` | [seloaddriver-privesc](windows/seloaddriver-privesc.md) |
 | `windows/server-operators` | [server-operators](windows/server-operators.md) |
+| `windows/service-imagepath-hijack` | [service-imagepath-hijack](windows/service-imagepath-hijack.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.md) |
 | `windows/sharepoint-credential-leak` | [sharepoint-credential-leak](windows/sharepoint-credential-leak.md) |
 | `windows/sliver-c2` | [sliver-c2](windows/sliver-c2.md) |

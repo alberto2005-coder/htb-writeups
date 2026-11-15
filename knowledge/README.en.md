@@ -27,6 +27,7 @@ This index is generated from the repository's versioned writeups.
 | `crypto/block-ciphers` | [block-ciphers](crypto/block-ciphers.en.md) |
 | `crypto/cbc-bit-flipping` | [cbc-bit-flipping](crypto/cbc-bit-flipping.en.md) |
 | `crypto/classical-ciphers` | [classical-ciphers](crypto/classical-ciphers.en.md) |
+| `crypto/custom-cipher-known-plaintext` | [custom-cipher-known-plaintext](crypto/custom-cipher-known-plaintext.en.md) |
 | `crypto/hash-length-extension` | [hash-length-extension](crypto/hash-length-extension.en.md) |
 | `crypto/padding-oracle` | [padding-oracle](crypto/padding-oracle.en.md) |
 | `crypto/passpie-pgp-cracking` | [passpie-pgp-cracking](crypto/passpie-pgp-cracking.en.md) |
@@ -70,14 +71,17 @@ This index is generated from the repository's versioned writeups.
 | `hardware/printer-pjl` | [printer-pjl](hardware/printer-pjl.en.md) |
 | `hardware/uart-firmware` | [uart-firmware](hardware/uart-firmware.en.md) |
 | `ics/modbus-pcap` | [modbus-pcap](ics/modbus-pcap.en.md) |
+| `linux/activemq-cve-2023-46604` | [activemq-cve-2023-46604](linux/activemq-cve-2023-46604.en.md) |
 | `linux/ajenti-ssh-weak-keys` | [ajenti-ssh-weak-keys](linux/ajenti-ssh-weak-keys.en.md) |
 | `linux/apache-ofbiz-cve-2023-49070` | [apache-ofbiz-cve-2023-49070](linux/apache-ofbiz-cve-2023-49070.en.md) |
 | `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.en.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
 | `linux/cap-dac-read-search` | [cap-dac-read-search](linux/cap-dac-read-search.en.md) |
 | `linux/cap-sys-module-escape` | [cap-sys-module-escape](linux/cap-sys-module-escape.en.md) |
+| `linux/cgroup-release-agent-escape` | [cgroup-release-agent-escape](linux/cgroup-release-agent-escape.en.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.en.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.en.md) |
+| `linux/crio-pinns-cve-2022-0811` | [crio-pinns-cve-2022-0811](linux/crio-pinns-cve-2022-0811.en.md) |
 | `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.en.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.en.md) |
 | `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.en.md) |
@@ -92,10 +96,12 @@ This index is generated from the repository's versioned writeups.
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
+| `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.en.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.en.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.en.md) |
+| `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.en.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.en.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.en.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.en.md) |
@@ -132,6 +138,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
+| `linux/zoneminder-command-injection` | [zoneminder-command-injection](linux/zoneminder-command-injection.en.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.en.md) |
 | `misc/unicode-invisible` | [unicode-invisible](misc/unicode-invisible.en.md) |
 | `mobile/adb-exploitation` | [adb-exploitation](mobile/adb-exploitation.en.md) |
@@ -159,6 +166,7 @@ This index is generated from the repository's versioned writeups.
 | `pwn/null-byte-truncation` | [null-byte-truncation](pwn/null-byte-truncation.en.md) |
 | `pwn/partial-overwrite` | [partial-overwrite](pwn/partial-overwrite.en.md) |
 | `pwn/pwntools` | [pwntools](pwn/pwntools.en.md) |
+| `pwn/remote-format-string-service` | [remote-format-string-service](pwn/remote-format-string-service.en.md) |
 | `pwn/rop-stack` | [rop-stack](pwn/rop-stack.en.md) |
 | `pwn/stack-variable-overwrite` | [stack-variable-overwrite](pwn/stack-variable-overwrite.en.md) |
 | `reversing/dotnet-dnspy` | [dotnet-dnspy](reversing/dotnet-dnspy.en.md) |
@@ -190,6 +198,7 @@ This index is generated from the repository's versioned writeups.
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.en.md) |
 | `web/http2-request-smuggling` | [http2-request-smuggling](web/http2-request-smuggling.en.md) |
 | `web/idor` | [idor](web/idor.en.md) |
+| `web/ispconfig-cve-2023-46818` | [ispconfig-cve-2023-46818](web/ispconfig-cve-2023-46818.en.md) |
 | `web/jenkins` | [jenkins](web/jenkins.en.md) |
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.en.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.en.md) |
@@ -222,12 +231,14 @@ This index is generated from the repository's versioned writeups.
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.en.md) |
 | `web/sqli-auth-bypass` | [sqli-auth-bypass](web/sqli-auth-bypass.en.md) |
 | `web/sqlpad-cve-2022-0944` | [sqlpad-cve-2022-0944](web/sqlpad-cve-2022-0944.en.md) |
+| `web/ssrf-redirect-bypass` | [ssrf-redirect-bypass](web/ssrf-redirect-bypass.en.md) |
 | `web/ssrf` | [ssrf](web/ssrf.en.md) |
 | `web/ssti` | [ssti](web/ssti.en.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.en.md) |
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.en.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.en.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.en.md) |
+| `web/wordpress-totp-seed-recovery` | [wordpress-totp-seed-recovery](web/wordpress-totp-seed-recovery.en.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.en.md) |
 | `web/xpath-injection` | [xpath-injection](web/xpath-injection.en.md) |
 | `web/xwiki-cve-2025-24893` | [xwiki-cve-2025-24893](web/xwiki-cve-2025-24893.en.md) |
@@ -247,9 +258,11 @@ This index is generated from the repository's versioned writeups.
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.en.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.en.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.en.md) |
+| `windows/dns-responder-credential-capture` | [dns-responder-credential-capture](windows/dns-responder-credential-capture.en.md) |
 | `windows/dotnet-deserialization` | [dotnet-deserialization](windows/dotnet-deserialization.en.md) |
 | `windows/dotnet-remoting-wcf` | [dotnet-remoting-wcf](windows/dotnet-remoting-wcf.en.md) |
 | `windows/dpapi` | [dpapi](windows/dpapi.en.md) |
+| `windows/edge-dpapi-credential-extraction` | [edge-dpapi-credential-extraction](windows/edge-dpapi-credential-extraction.en.md) |
 | `windows/electron-updater-signature-bypass` | [electron-updater-signature-bypass](windows/electron-updater-signature-bypass.en.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.en.md) |
 | `windows/gitea-sqlite-hash-extraction` | [gitea-sqlite-hash-extraction](windows/gitea-sqlite-hash-extraction.en.md) |
@@ -275,6 +288,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.en.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.en.md) |
 | `windows/petitpotam-coercion` | [petitpotam-coercion](windows/petitpotam-coercion.en.md) |
+| `windows/pre-windows-2000-machine-password` | [pre-windows-2000-machine-password](windows/pre-windows-2000-machine-password.en.md) |
 | `windows/printnightmare` | [printnightmare](windows/printnightmare.en.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.en.md) |
 | `windows/psexec` | [psexec](windows/psexec.en.md) |
@@ -284,6 +298,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/screensaver-persistence` | [screensaver-persistence](windows/screensaver-persistence.en.md) |
 | `windows/seloaddriver-privesc` | [seloaddriver-privesc](windows/seloaddriver-privesc.en.md) |
 | `windows/server-operators` | [server-operators](windows/server-operators.en.md) |
+| `windows/service-imagepath-hijack` | [service-imagepath-hijack](windows/service-imagepath-hijack.en.md) |
 | `windows/shadow-credentials-krbrelay` | [shadow-credentials-krbrelay](windows/shadow-credentials-krbrelay.en.md) |
 | `windows/sharepoint-credential-leak` | [sharepoint-credential-leak](windows/sharepoint-credential-leak.en.md) |
 | `windows/sliver-c2` | [sliver-c2](windows/sliver-c2.en.md) |

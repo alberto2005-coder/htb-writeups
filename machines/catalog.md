@@ -8,6 +8,22 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 
 | Máquina | OS | Dificultad | Técnica principal | ES | EN |
 |---|---|---|---|---|---|
+| Broker | Linux | Easy | ActiveMQ CVE-2023-46604, XML Spring y `ld.so.preload` con `sudo nginx` | [Ver](../machines/linux/broker/README.md) | [EN](../machines/linux/broker/README.en.md) |
+| Builder | Linux | Medium | Jenkins CVE-2024-23897, hash bcrypt y credencial SSH por SSH Agent | [Ver](../machines/linux/builder/README.md) | [EN](../machines/linux/builder/README.en.md) |
+| Carpediem | Linux | Hard | Mass assignment, webshell, Trudesk, `tcpdump` y CVE-2022-0492 | [Ver](../machines/linux/carpediem/README.md) | [EN](../machines/linux/carpediem/README.en.md) |
+| Control | Windows | Hard | `X-Forwarded-For`, SQLi con `FILE`, webshell IIS y `ImagePath` de servicio | [Ver](../machines/windows/control/README.md) | [EN](../machines/windows/control/README.en.md) |
+| Forge | Linux | Medium | SSRF con redirect, FTP interno, clave SSH y `pdb.post_mortem` | [Ver](../machines/linux/forge/README.md) | [EN](../machines/linux/forge/README.en.md) |
+| ForwardSlash | Linux | Hard | LFI/XXE, backup binario, cifrado casero, LUKS y clave root | [Ver](../machines/linux/forwardslash/README.md) | [EN](../machines/linux/forwardslash/README.en.md) |
+| Intelligence | Windows | Medium | PDFs con metadatos, password spray, DNS `web*`, Responder, GMSA y RBCD | [Ver](../machines/windows/intelligence/README.md) | [EN](../machines/windows/intelligence/README.en.md) |
+| Mango | Linux | Medium | NoSQL `$ne`/`$regex`, SSH y SUID `jjs` | [Ver](../machines/linux/mango/README.md) | [EN](../machines/linux/mango/README.en.md) |
+| Nocturnal | Linux | Easy | IDOR, backup con inyección, SQLite MD5 e ISPConfig CVE-2023-46818 | [Ver](../machines/linux/nocturnal/README.md) | [EN](../machines/linux/nocturnal/README.en.md) |
+| Phoenix | Linux | Hard | WordPress/Asgaros SQLi, TOTP, PAM y comodín `rsync` | [Ver](../machines/linux/phoenix/README.md) | [EN](../machines/linux/phoenix/README.en.md) |
+| Rope | Linux | Insane | Format string remota, GOT overwrite y ROP con canary/PIE | [Ver](../machines/linux/rope/README.md) | [EN](../machines/linux/rope/README.en.md) |
+| Sekhmet | Windows | Insane | Node.js deserialization, `bkcrack`, inyección LDAP y DPAPI | [Ver](../machines/windows/sekhmet/README.md) | [EN](../machines/windows/sekhmet/README.en.md) |
+| Surveillance | Linux | Medium | Craft CMS CVE-2023-41892, backup SQL y ZoneMinder CVE-2023-26035 | [Ver](../machines/linux/surveillance/README.md) | [EN](../machines/linux/surveillance/README.en.md) |
+| Titanic | Linux | Easy | Path traversal, Gitea SQLite, hash y ImageMagick CVE-2024-41817 | [Ver](../machines/linux/titanic/README.md) | [EN](../machines/linux/titanic/README.en.md) |
+| Vessel | Linux | Hard | `.git`, type confusion en mysqljs, OWA CVE-2022-24637 y `pinns` | [Ver](../machines/linux/vessel/README.md) | [EN](../machines/linux/vessel/README.en.md) |
+| Vintage | Windows | Hard | Pre-Windows 2000, GMSA, Kerberoast, DPAPI, RBCD y DCSync | [Ver](../machines/windows/vintage/README.md) | [EN](../machines/windows/vintage/README.en.md) |
 | Format | Linux | Medium | Microblog PHP, Gitea, LFI/escritura, Redis por socket y SSTI | [Ver](../machines/linux/format/README.md) | [EN](../machines/linux/format/README.en.md) |
 | Agile | Linux | Medium | Flask debug PIN, Chrome debug y sudoedit CVE-2023-22809 | [Ver](../machines/linux/agile/README.md) | [EN](../machines/linux/agile/README.en.md) |
 | OnlyForYou | Linux | Medium | LFI absoluto, inyección de comandos con `dig`, Cypher y `pip` como root | [Ver](../machines/linux/onlyforyou/README.md) | [EN](../machines/linux/onlyforyou/README.en.md) |
