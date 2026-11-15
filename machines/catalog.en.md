@@ -251,6 +251,22 @@ Reference notes for machines used to study techniques. The main table covers **r
 | Seal | Linux | Medium | GitBucket, Nginx/Tomcat differential and Ansible | [View](../machines/linux/seal/README.en.md) | [ES](../machines/linux/seal/README.md) |
 | Spectra | Linux | Easy | WordPress plugin, auto-login and `initctl` | [View](../machines/linux/spectra/README.en.md) | [ES](../machines/linux/spectra/README.md) |
 | Tentacle | Linux | Hard | Squid/WPAD, OpenSMTPD, Kerberos and keytab | [View](../machines/linux/tentacle/README.en.md) | [ES](../machines/linux/tentacle/README.md) |
+| Bizness | Linux | Easy | Apache OFBiz CVE-2023-49070 and Derby hash | [View](../machines/linux/bizness/README.en.md) | [ES](../machines/linux/bizness/README.md) |
+| Browsed | Linux | Medium | Chrome logs, SSRF extension and `__pycache__` poisoning | [View](../machines/linux/browsed/README.en.md) | [ES](../machines/linux/browsed/README.md) |
+| Calamity | Linux | Hard | Arbitrary PHP, audio steganography and SUID overflow | [View](../machines/linux/calamity/README.en.md) | [ES](../machines/linux/calamity/README.md) |
+| Cerberus | Windows | Hard | IcingaWeb2, Firejail, SSSD and ADSelfService Plus | [View](../machines/windows/cerberus/README.en.md) | [ES](../machines/windows/cerberus/README.md) |
+| Checkpoint | Windows | Medium | AD Recycle Bin, VS Code extension and `vmkatz` | [View](../machines/windows/checkpoint/README.en.md) | [ES](../machines/windows/checkpoint/README.md) |
+| Faculty | Linux | Medium | SQLi, mPDF file read, `meta-git` and GDB ptrace | [View](../machines/linux/faculty/README.en.md) | [ES](../machines/linux/faculty/README.md) |
+| FluJab | Linux | Hard | Vhosts, SQLi, Ajenti, weak SSH keys and `screen` | [View](../machines/linux/flujab/README.en.md) | [ES](../machines/linux/flujab/README.md) |
+| Late | Linux | Easy | OCR SSTI and writable login script | [View](../machines/linux/late/README.en.md) | [ES](../machines/linux/late/README.md) |
+| Lightweight | Linux | Medium | Cleartext LDAP, backup and OpenSSL capabilities | [View](../machines/linux/lightweight/README.en.md) | [ES](../machines/linux/lightweight/README.md) |
+| Ouija | Linux | Insane | Request smuggling, hash length extension and PHP extension | [View](../machines/linux/ouija/README.en.md) | [ES](../machines/linux/ouija/README.md) |
+| Oz | Linux | Hard | SQLi, SSTI, port knocking and Portainer | [View](../machines/linux/oz/README.en.md) | [ES](../machines/linux/oz/README.md) |
+| Rabbit | Windows | Insane | SQLi, OWA, macro phishing and SYSTEM webshell | [View](../machines/windows/rabbit/README.en.md) | [ES](../machines/windows/rabbit/README.md) |
+| Shared | Linux | Medium | Cookie SQLi, IPython CVE-2022-21699 and Redis Lua | [View](../machines/linux/shared/README.en.md) | [ES](../machines/linux/shared/README.md) |
+| Sharp | Windows | Hard | PortableKanban, .NET Remoting and WCF | [View](../machines/windows/sharp/README.en.md) | [ES](../machines/windows/sharp/README.md) |
+| Stocker | Linux | Easy | NoSQL injection, PDF file read and `sudo node` | [View](../machines/linux/stocker/README.en.md) | [ES](../machines/linux/stocker/README.md) |
+| Travel | Linux | Hard | Exposed `.git`, memcached PHP object and LDAP | [View](../machines/linux/travel/README.en.md) | [ES](../machines/linux/travel/README.md) |
 
 ## Pending
 
