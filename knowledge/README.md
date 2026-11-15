@@ -87,6 +87,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.md) |
 | `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.md) |
+| `linux/daloradius-default-creds` | [daloradius-default-creds](linux/daloradius-default-creds.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.md) |
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.md) |
@@ -98,6 +99,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.md) |
+| `linux/hashcat-mask-attack` | [hashcat-mask-attack](linux/hashcat-mask-attack.md) |
 | `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.md) |
@@ -114,6 +116,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/memcached-enumeration` | [memcached-enumeration](linux/memcached-enumeration.md) |
 | `linux/memcached-php-injection` | [memcached-php-injection](linux/memcached-php-injection.md) |
 | `linux/mmap-cred-overwrite` | [mmap-cred-overwrite](linux/mmap-cred-overwrite.md) |
+| `linux/mosh-server-privesc` | [mosh-server-privesc](linux/mosh-server-privesc.md) |
 | `linux/mpdf-file-read` | [mpdf-file-read](linux/mpdf-file-read.md) |
 | `linux/nagios-xi-cve-2023-40931` | [nagios-xi-cve-2023-40931](linux/nagios-xi-cve-2023-40931.md) |
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.md) |
@@ -122,6 +125,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/node-sudo-privesc` | [node-sudo-privesc](linux/node-sudo-privesc.md) |
 | `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.md) |
 | `linux/openssl-capabilities` | [openssl-capabilities](linux/openssl-capabilities.md) |
+| `linux/pam-timing-oracle` | [pam-timing-oracle](linux/pam-timing-oracle.md) |
 | `linux/php-cron-writable-include` | [php-cron-writable-include](linux/php-cron-writable-include.md) |
 | `linux/php-extension-integer-overflow` | [php-extension-integer-overflow](linux/php-extension-integer-overflow.md) |
 | `linux/php-filter-chain-cve-2024-2961` | [php-filter-chain-cve-2024-2961](linux/php-filter-chain-cve-2024-2961.md) |
@@ -132,6 +136,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/pyload-cve-2023-0297` | [pyload-cve-2023-0297](linux/pyload-cve-2023-0297.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.md) |
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.md) |
+| `linux/python-path-hijack` | [python-path-hijack](linux/python-path-hijack.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
 | `linux/runc-cve-2019-5736` | [runc-cve-2019-5736](linux/runc-cve-2019-5736.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.md) |
@@ -145,6 +150,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.md) |
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.md) |
+| `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.md) |
@@ -200,12 +206,15 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.md) |
 | `web/cypher-injection` | [cypher-injection](web/cypher-injection.md) |
+| `web/erb-ssti-newline` | [erb-ssti-newline](web/erb-ssti-newline.md) |
+| `web/esi-injection-file-write` | [esi-injection-file-write](web/esi-injection-file-write.md) |
 | `web/ffmpeg-avi-file-read` | [ffmpeg-avi-file-read](web/ffmpeg-avi-file-read.md) |
 | `web/file-upload` | [file-upload](web/file-upload.md) |
 | `web/flask-absolute-path-upload` | [flask-absolute-path-upload](web/flask-absolute-path-upload.md) |
 | `web/flask-debug-pin` | [flask-debug-pin](web/flask-debug-pin.md) |
 | `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.md) |
+| `web/gitea-cve-2024-6886` | [gitea-cve-2024-6886](web/gitea-cve-2024-6886.md) |
 | `web/gitea` | [gitea](web/gitea.md) |
 | `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.md) |
@@ -229,6 +238,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.md) |
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.md) |
 | `web/log4shell` | [log4shell](web/log4shell.md) |
+| `web/mass-assignment-role` | [mass-assignment-role](web/mass-assignment-role.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.md) |
@@ -254,6 +264,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.md) |
 | `web/pymatgen-cve-2024-23346` | [pymatgen-cve-2024-23346](web/pymatgen-cve-2024-23346.md) |
 | `web/python-pickle-deserialization` | [python-pickle-deserialization](web/python-pickle-deserialization.md) |
+| `web/quic-http3-enumeration` | [quic-http3-enumeration](web/quic-http3-enumeration.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.md) |
 | `web/reportlab-cve-2023-33733` | [reportlab-cve-2023-33733](web/reportlab-cve-2023-33733.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
@@ -272,6 +283,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
+| `web/wordpress-theme-webshell` | [wordpress-theme-webshell](web/wordpress-theme-webshell.md) |
 | `web/wordpress-totp-seed-recovery` | [wordpress-totp-seed-recovery](web/wordpress-totp-seed-recovery.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.md) |
 | `web/xpath-injection` | [xpath-injection](web/xpath-injection.md) |
@@ -289,6 +301,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.md) |
 | `windows/adcs-pkinit` | [adcs-pkinit](windows/adcs-pkinit.md) |
+| `windows/adidns-record-spoofing` | [adidns-record-spoofing](windows/adidns-record-spoofing.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.md) |
 | `windows/aspnet-viewstate-machinekey` | [aspnet-viewstate-machinekey](windows/aspnet-viewstate-machinekey.md) |
@@ -351,6 +364,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/themebleed` | [themebleed](windows/themebleed.md) |
 | `windows/timeroasting` | [timeroasting](windows/timeroasting.md) |
 | `windows/vscode-extension-privesc` | [vscode-extension-privesc](windows/vscode-extension-privesc.md) |
+| `windows/wcf-soap-command-injection` | [wcf-soap-command-injection](windows/wcf-soap-command-injection.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.md) |
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.md) |

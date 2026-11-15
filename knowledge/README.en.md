@@ -87,6 +87,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.en.md) |
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.en.md) |
 | `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.en.md) |
+| `linux/daloradius-default-creds` | [daloradius-default-creds](linux/daloradius-default-creds.en.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.en.md) |
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.en.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.en.md) |
@@ -98,6 +99,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
+| `linux/hashcat-mask-attack` | [hashcat-mask-attack](linux/hashcat-mask-attack.en.md) |
 | `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.en.md) |
@@ -114,6 +116,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/memcached-enumeration` | [memcached-enumeration](linux/memcached-enumeration.en.md) |
 | `linux/memcached-php-injection` | [memcached-php-injection](linux/memcached-php-injection.en.md) |
 | `linux/mmap-cred-overwrite` | [mmap-cred-overwrite](linux/mmap-cred-overwrite.en.md) |
+| `linux/mosh-server-privesc` | [mosh-server-privesc](linux/mosh-server-privesc.en.md) |
 | `linux/mpdf-file-read` | [mpdf-file-read](linux/mpdf-file-read.en.md) |
 | `linux/nagios-xi-cve-2023-40931` | [nagios-xi-cve-2023-40931](linux/nagios-xi-cve-2023-40931.en.md) |
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.en.md) |
@@ -122,6 +125,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/node-sudo-privesc` | [node-sudo-privesc](linux/node-sudo-privesc.en.md) |
 | `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.en.md) |
 | `linux/openssl-capabilities` | [openssl-capabilities](linux/openssl-capabilities.en.md) |
+| `linux/pam-timing-oracle` | [pam-timing-oracle](linux/pam-timing-oracle.en.md) |
 | `linux/php-cron-writable-include` | [php-cron-writable-include](linux/php-cron-writable-include.en.md) |
 | `linux/php-extension-integer-overflow` | [php-extension-integer-overflow](linux/php-extension-integer-overflow.en.md) |
 | `linux/php-filter-chain-cve-2024-2961` | [php-filter-chain-cve-2024-2961](linux/php-filter-chain-cve-2024-2961.en.md) |
@@ -132,6 +136,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/pyload-cve-2023-0297` | [pyload-cve-2023-0297](linux/pyload-cve-2023-0297.en.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.en.md) |
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.en.md) |
+| `linux/python-path-hijack` | [python-path-hijack](linux/python-path-hijack.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
 | `linux/runc-cve-2019-5736` | [runc-cve-2019-5736](linux/runc-cve-2019-5736.en.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.en.md) |
@@ -145,6 +150,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.en.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.en.md) |
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.en.md) |
+| `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.en.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
@@ -200,12 +206,15 @@ This index is generated from the repository's versioned writeups.
 | `web/craft-cms-cp-utilities` | [craft-cms-cp-utilities](web/craft-cms-cp-utilities.en.md) |
 | `web/cve-workflow` | [cve-workflow](web/cve-workflow.en.md) |
 | `web/cypher-injection` | [cypher-injection](web/cypher-injection.en.md) |
+| `web/erb-ssti-newline` | [erb-ssti-newline](web/erb-ssti-newline.en.md) |
+| `web/esi-injection-file-write` | [esi-injection-file-write](web/esi-injection-file-write.en.md) |
 | `web/ffmpeg-avi-file-read` | [ffmpeg-avi-file-read](web/ffmpeg-avi-file-read.en.md) |
 | `web/file-upload` | [file-upload](web/file-upload.en.md) |
 | `web/flask-absolute-path-upload` | [flask-absolute-path-upload](web/flask-absolute-path-upload.en.md) |
 | `web/flask-debug-pin` | [flask-debug-pin](web/flask-debug-pin.en.md) |
 | `web/geoserver-cve-2024-36401` | [geoserver-cve-2024-36401](web/geoserver-cve-2024-36401.en.md) |
 | `web/gibbon-cve-2023-45878` | [gibbon-cve-2023-45878](web/gibbon-cve-2023-45878.en.md) |
+| `web/gitea-cve-2024-6886` | [gitea-cve-2024-6886](web/gitea-cve-2024-6886.en.md) |
 | `web/gitea` | [gitea](web/gitea.en.md) |
 | `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.en.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.en.md) |
@@ -229,6 +238,7 @@ This index is generated from the repository's versioned writeups.
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.en.md) |
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.en.md) |
 | `web/log4shell` | [log4shell](web/log4shell.en.md) |
+| `web/mass-assignment-role` | [mass-assignment-role](web/mass-assignment-role.en.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.en.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.en.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.en.md) |
@@ -254,6 +264,7 @@ This index is generated from the repository's versioned writeups.
 | `web/prototype-pollution-ast` | [prototype-pollution-ast](web/prototype-pollution-ast.en.md) |
 | `web/pymatgen-cve-2024-23346` | [pymatgen-cve-2024-23346](web/pymatgen-cve-2024-23346.en.md) |
 | `web/python-pickle-deserialization` | [python-pickle-deserialization](web/python-pickle-deserialization.en.md) |
+| `web/quic-http3-enumeration` | [quic-http3-enumeration](web/quic-http3-enumeration.en.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.en.md) |
 | `web/reportlab-cve-2023-33733` | [reportlab-cve-2023-33733](web/reportlab-cve-2023-33733.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
@@ -272,6 +283,7 @@ This index is generated from the repository's versioned writeups.
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.en.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.en.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.en.md) |
+| `web/wordpress-theme-webshell` | [wordpress-theme-webshell](web/wordpress-theme-webshell.en.md) |
 | `web/wordpress-totp-seed-recovery` | [wordpress-totp-seed-recovery](web/wordpress-totp-seed-recovery.en.md) |
 | `web/wp-admin-bot-xss` | [wp-admin-bot-xss](web/wp-admin-bot-xss.en.md) |
 | `web/xpath-injection` | [xpath-injection](web/xpath-injection.en.md) |
@@ -289,6 +301,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.en.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.en.md) |
 | `windows/adcs-pkinit` | [adcs-pkinit](windows/adcs-pkinit.en.md) |
+| `windows/adidns-record-spoofing` | [adidns-record-spoofing](windows/adidns-record-spoofing.en.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.en.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.en.md) |
 | `windows/aspnet-viewstate-machinekey` | [aspnet-viewstate-machinekey](windows/aspnet-viewstate-machinekey.en.md) |
@@ -351,6 +364,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/themebleed` | [themebleed](windows/themebleed.en.md) |
 | `windows/timeroasting` | [timeroasting](windows/timeroasting.en.md) |
 | `windows/vscode-extension-privesc` | [vscode-extension-privesc](windows/vscode-extension-privesc.en.md) |
+| `windows/wcf-soap-command-injection` | [wcf-soap-command-injection](windows/wcf-soap-command-injection.en.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.en.md) |
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.en.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.en.md) |

@@ -346,6 +346,22 @@ Reference notes for machines used to study techniques. The main table covers **r
 | TwoMillion | Linux | Easy | Invite API, `is_admin`, command injection and overlayfs CVE-2023-0386 | [View](../machines/linux/twomillion/README.en.md) | [ES](../machines/linux/twomillion/README.md) |
 | Zipper | Linux | Hard | Zabbix API, SUID `zabbix-service` and writable systemd service | [View](../machines/linux/zipper/README.en.md) | [ES](../machines/linux/zipper/README.md) |
 
+| Ariekei | Linux | Insane | vhost Shellshock, ImageTragick and Dockerfiles | [View](../machines/linux/ariekei/README.en.md) | [ES](../machines/linux/ariekei/README.md) |
+| Cat | Linux | Medium | `.git`, XSS, `ATTACH` SQLi and Gitea CVE-2024-6886 | [View](../machines/linux/cat/README.en.md) | [ES](../machines/linux/cat/README.md) |
+| Coder | Windows | Insane | SMB, KeePass, TeamCity and Certifried | [View](../machines/windows/coder/README.en.md) | [ES](../machines/windows/coder/README.md) |
+| Compromised | Linux | Hard | LiteCart backup, MySQL UDF, `strace` and PAM | [View](../machines/linux/compromised/README.en.md) | [ES](../machines/linux/compromised/README.md) |
+| Curling | Linux | Easy | Joomla backup, webshell and `curl` cron | [View](../machines/linux/curling/README.en.md) | [ES](../machines/linux/curling/README.md) |
+| Fries | Windows | Hard | Gitea, pgAdmin CVE-2025-2945 and AD CS ESC | [View](../machines/windows/fries/README.en.md) | [ES](../machines/windows/fries/README.md) |
+| HackNet | Linux | Medium | Django SSTI, pickle and GPG | [View](../machines/linux/hacknet/README.en.md) | [ES](../machines/linux/hacknet/README.md) |
+| Holiday | Linux | Hard | SQLi, XSS, command injection and `npm` | [View](../machines/linux/holiday/README.en.md) | [ES](../machines/linux/holiday/README.md) |
+| Obscurity | Linux | Medium | Python server, homemade cipher and BetterSSH | [View](../machines/linux/obscurity/README.en.md) | [ES](../machines/linux/obscurity/README.md) |
+| Overwatch | Windows | Medium | Anonymous SMB, MSSQL, ADIDNS and WCF | [View](../machines/windows/overwatch/README.en.md) | [ES](../machines/windows/overwatch/README.md) |
+| Perfection | Linux | Easy | ERB SSTI, newline bypass and Hashcat mask | [View](../machines/linux/perfection/README.en.md) | [ES](../machines/linux/perfection/README.md) |
+| Quick | Linux | Hard | QUIC/HTTP3, ESI and a file race | [View](../machines/linux/quick/README.en.md) | [ES](../machines/linux/quick/README.md) |
+| Timing | Linux | Medium | LFI, timing attack, mass assignment and `netutils` | [View](../machines/linux/timing/README.en.md) | [ES](../machines/linux/timing/README.md) |
+| Toby | Linux | Insane | Theme webshell, Gogs and PAM timing | [View](../machines/linux/toby/README.en.md) | [ES](../machines/linux/toby/README.md) |
+| UnderPass | Linux | Easy | SNMP, daloRADIUS and `mosh-server` | [View](../machines/linux/underpass/README.en.md) | [ES](../machines/linux/underpass/README.md) |
+
 ## Pending
 
 1 retired machine with material located but no writeup yet.
