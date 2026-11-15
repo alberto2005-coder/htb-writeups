@@ -20,6 +20,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `cloud/entra-id-sentinel` | [entra-id-sentinel](cloud/entra-id-sentinel.md) |
 | `cloud/gmsa-abuse` | [gmsa-abuse](cloud/gmsa-abuse.md) |
 | `cloud/kubernetes-cr8escape` | [kubernetes-cr8escape](cloud/kubernetes-cr8escape.md) |
+| `cloud/localstack-lambda-rce` | [localstack-lambda-rce](cloud/localstack-lambda-rce.md) |
 | `cloud/minio-cve-2023-28432` | [minio-cve-2023-28432](cloud/minio-cve-2023-28432.md) |
 | `cloud/openstack-forensics` | [openstack-forensics](cloud/openstack-forensics.md) |
 | `cloud/s3-misconfiguration` | [s3-misconfiguration](cloud/s3-misconfiguration.md) |
@@ -128,11 +129,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/postgres-copy-program` | [postgres-copy-program](linux/postgres-copy-program.md) |
 | `linux/proc-credential-capture` | [proc-credential-capture](linux/proc-credential-capture.md) |
 | `linux/pycache-poisoning` | [pycache-poisoning](linux/pycache-poisoning.md) |
+| `linux/pyload-cve-2023-0297` | [pyload-cve-2023-0297](linux/pyload-cve-2023-0297.md) |
 | `linux/pypi-package-abuse` | [pypi-package-abuse](linux/pypi-package-abuse.md) |
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
 | `linux/runc-cve-2019-5736` | [runc-cve-2019-5736](linux/runc-cve-2019-5736.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.md) |
+| `linux/safeapache2ctl-bypass` | [safeapache2ctl-bypass](linux/safeapache2ctl-bypass.md) |
 | `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.md) |
@@ -145,6 +148,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.md) |
+| `linux/zabbix-api-command-injection` | [zabbix-api-command-injection](linux/zabbix-api-command-injection.md) |
 | `linux/zoneminder-command-injection` | [zoneminder-command-injection](linux/zoneminder-command-injection.md) |
 | `misc/pyjail-bypass` | [pyjail-bypass](misc/pyjail-bypass.md) |
 | `misc/unicode-invisible` | [unicode-invisible](misc/unicode-invisible.md) |
@@ -156,6 +160,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `mobile/apk-analysis` | [apk-analysis](mobile/apk-analysis.md) |
 | `mobile/react-native-analysis` | [react-native-analysis](mobile/react-native-analysis.md) |
 | `mobile/xamarin-analysis` | [xamarin-analysis](mobile/xamarin-analysis.md) |
+| `network/bgp-hijack` | [bgp-hijack](network/bgp-hijack.md) |
 | `network/grpc-protobuf-enumeration` | [grpc-protobuf-enumeration](network/grpc-protobuf-enumeration.md) |
 | `network/ssh-certificate-authority` | [ssh-certificate-authority](network/ssh-certificate-authority.md) |
 | `openbsd/authentication-bypass` | [authentication-bypass](openbsd/authentication-bypass.md) |
@@ -185,7 +190,10 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
 | `web/adminer-ssrf` | [adminer-ssrf](web/adminer-ssrf.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.md) |
+| `web/api-invite-command-injection` | [api-invite-command-injection](web/api-invite-command-injection.md) |
+| `web/bookstack-cve-2023-6199` | [bookstack-cve-2023-6199](web/bookstack-cve-2023-6199.md) |
 | `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.md) |
+| `web/cacti-cve-2024-25642` | [cacti-cve-2024-25642](web/cacti-cve-2024-25642.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.md) |
 | `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.md) |
 | `web/command-injection` | [command-injection](web/command-injection.md) |
@@ -201,6 +209,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/gitea` | [gitea](web/gitea.md) |
 | `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.md) |
+| `web/givewp-cve-2024-5932` | [givewp-cve-2024-5932](web/givewp-cve-2024-5932.md) |
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.md) |
 | `web/gopher-ssrf-smtp` | [gopher-ssrf-smtp](web/gopher-ssrf-smtp.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.md) |
@@ -210,6 +219,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/http2-request-smuggling` | [http2-request-smuggling](web/http2-request-smuggling.md) |
 | `web/idor` | [idor](web/idor.md) |
 | `web/ispconfig-cve-2023-46818` | [ispconfig-cve-2023-46818](web/ispconfig-cve-2023-46818.md) |
+| `web/jackson-cve-2019-12384` | [jackson-cve-2019-12384](web/jackson-cve-2019-12384.md) |
 | `web/jenkins` | [jenkins](web/jenkins.md) |
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.md) |
@@ -233,6 +243,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/openemr-auth-bypass-sqli` | [openemr-auth-bypass-sqli](web/openemr-auth-bypass-sqli.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
+| `web/php-filter-injection` | [php-filter-injection](web/php-filter-injection.md) |
 | `web/php-fpm-cve-2019-11043` | [php-fpm-cve-2019-11043](web/php-fpm-cve-2019-11043.md) |
 | `web/php-log-poisoning` | [php-log-poisoning](web/php-log-poisoning.md) |
 | `web/php-object-injection` | [php-object-injection](web/php-object-injection.md) |
@@ -257,6 +268,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.md) |
+| `web/vm2-sandbox-escape` | [vm2-sandbox-escape](web/vm2-sandbox-escape.md) |
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
@@ -273,6 +285,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc13` | [adcs-esc13](windows/adcs-esc13.md) |
 | `windows/adcs-esc14` | [adcs-esc14](windows/adcs-esc14.md) |
 | `windows/adcs-esc4-esc1` | [adcs-esc4-esc1](windows/adcs-esc4-esc1.md) |
+| `windows/adcs-esc7` | [adcs-esc7](windows/adcs-esc7.md) |
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.md) |
 | `windows/adcs-pkinit` | [adcs-pkinit](windows/adcs-pkinit.md) |
@@ -307,6 +320,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/mssql-credentials-sebackup` | [mssql-credentials-sebackup](windows/mssql-credentials-sebackup.md) |
 | `windows/mssql-exec` | [mssql-exec](windows/mssql-exec.md) |
 | `windows/mssql-linked-server-pivot` | [mssql-linked-server-pivot](windows/mssql-linked-server-pivot.md) |
+| `windows/mssql-password-reuse` | [mssql-password-reuse](windows/mssql-password-reuse.md) |
 | `windows/mssql-pivot-laps` | [mssql-pivot-laps](windows/mssql-pivot-laps.md) |
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.md) |

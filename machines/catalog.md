@@ -330,6 +330,21 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Tally | Windows | Hard | SharePoint, KeePass, MSSQL y SeImpersonate | [Ver](../machines/windows/tally/README.md) | [EN](../machines/windows/tally/README.en.md) |
 | Teacher | Linux | Easy | Pista en PNG, inyección PHP en Moodle y cron de backup | [Ver](../machines/linux/teacher/README.md) | [EN](../machines/linux/teacher/README.en.md) |
 | Unobtainium | Linux | Hard | Electron/ASAR, LFI, prototype pollution y Kubernetes | [Ver](../machines/linux/unobtainium/README.md) | [EN](../machines/linux/unobtainium/README.en.md) |
+| BigHead | Windows | Insane | Dev vhost, backup en GitHub, buffer overflow egghunter, TestLink y KeePass con keyfile en ADS | [Ver](../machines/windows/bighead/README.md) | [EN](../machines/windows/bighead/README.en.md) |
+| Carrier | Linux | Medium | SNMP, RCE en router, secuestro BGP, captura FTP y root | [Ver](../machines/linux/carrier/README.md) | [EN](../machines/linux/carrier/README.en.md) |
+| Checker | Linux | Hard | Teampass CVE-2023-1545, BookStack CVE-2023-6199 y race en `check_leak` | [Ver](../machines/linux/checker/README.md) | [EN](../machines/linux/checker/README.en.md) |
+| Codify | Linux | Easy | vm2 3.9.16, SQLite bcrypt y glob en `mysql-backup.sh` | [Ver](../machines/linux/codify/README.md) | [EN](../machines/linux/codify/README.en.md) |
+| Freelancer | Windows | Hard | SQLi, `xp_cmdshell`, spray y RBCD | [Ver](../machines/windows/freelancer/README.md) | [EN](../machines/windows/freelancer/README.en.md) |
+| Giveback | Linux | Medium | GiveWP CVE-2024-5932, PHP-CGI CVE-2024-4577 y runc CVE-2024-21626 | [Ver](../machines/linux/giveback/README.md) | [EN](../machines/linux/giveback/README.en.md) |
+| Guardian | Linux | Hard | IDOR, PhpSpreadsheet XSS, LFI y bypass de `safeapache2ctl` | [Ver](../machines/linux/guardian/README.md) | [EN](../machines/linux/guardian/README.en.md) |
+| Manager | Windows | Medium | Spray usuario:contraseña, `xp_dirtree`, ADCS ESC7 y WinRM | [Ver](../machines/windows/manager/README.md) | [EN](../machines/windows/manager/README.en.md) |
+| MonitorsThree | Linux | Medium | SQLi en reset, Cacti CVE-2024-25642 y Duplicati | [Ver](../machines/linux/monitorsthree/README.md) | [EN](../machines/linux/monitorsthree/README.en.md) |
+| PC | Linux | Easy | gRPC reflection, SQLi SQLite y pyLoad CVE-2023-0297 | [Ver](../machines/linux/pc/README.md) | [EN](../machines/linux/pc/README.en.md) |
+| Pollution | Linux | Hard | XXE, sesiones Redis, filter injection y prototype pollution | [Ver](../machines/linux/pollution/README.md) | [EN](../machines/linux/pollution/README.en.md) |
+| Stacked | Linux | Insane | XSS, LocalStack Lambda y socket Docker | [Ver](../machines/linux/stacked/README.md) | [EN](../machines/linux/stacked/README.en.md) |
+| Time | Linux | Medium | Jackson CVE-2019-12384 y timer de systemd escribible | [Ver](../machines/linux/time/README.md) | [EN](../machines/linux/time/README.en.md) |
+| TwoMillion | Linux | Easy | API de invitación, `is_admin`, command injection y overlayfs CVE-2023-0386 | [Ver](../machines/linux/twomillion/README.md) | [EN](../machines/linux/twomillion/README.en.md) |
+| Zipper | Linux | Hard | Zabbix API, SUID `zabbix-service` y servicio systemd escribible | [Ver](../machines/linux/zipper/README.md) | [EN](../machines/linux/zipper/README.en.md) |
 
 ## Pendientes
 

@@ -1,6 +1,6 @@
 ---
 topic: KeePass
-tags: [windows, keepass, kdbx, password-manager, hashcat, key-file]
+tags: [windows, keepass, kdbx, password-manager, hashcat, key-file, alternate-data-stream]
 ---
 
 # KeePass
@@ -53,6 +53,21 @@ kpcli --kdb database.kdbx
 - Store the key file separately.
 - Restrict access to `.kdbx` and backups.
 - Alert on bulk access to managers and credential files.
+
+## Real case: keyfile in an alternate data stream (BigHead)
+
+On BigHead the `.kdbx` database and its keyfile are not separate files: the keyfile lives in an *alternate data stream* (ADS) of the `.kdbx` itself. PowerShell lists and extracts it without cracking the master password.
+
+```powershell
+Get-Item .\*.kdbx -Stream *
+Get-Content .\database.kdbx -Stream keyfile -Encoding Byte -TotalCount 32 | Set-Content .\keyfile.key -Encoding Byte
+```
+
+```bash
+kpcli --kdb database.kdbx --key keyfile.key
+```
+
+With only the hash, `keepass2john` does not process the keyfile: crack the master password first and then open the database with the keyfile. ADS also show up in backups and in files downloaded from a Windows server.
 
 ## References
 
