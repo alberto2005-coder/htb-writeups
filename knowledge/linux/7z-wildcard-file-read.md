@@ -1,6 +1,6 @@
 ---
 topic: 7-Zip — wildcard y listas @ para leer archivos
-tags: [linux, 7z, wildcard, file-read, privesc]
+tags: [linux, 7z, wildcard, listfile, file-read, privesc]
 ---
 
 # 7-Zip — wildcard y listas @ para leer archivos
@@ -56,8 +56,22 @@ sudo usage_management
 - Errores de `7za` con contenido de archivos.
 - Ejecuciones de backup fuera de horario.
 
+## Caso CTF: listfile en un backup periódico
+
+En CTF, `/backup/backup.sh` ejecuta cada minuto `7za a /backup/$filename.zip -t7z -snl -p$pass -- *` desde un directorio escribible. Se crea un archivo `@0xdf` y un symlink `0xdf` a `/root/root.txt`; el wildcard expande `@0xdf`, `7za` lo interpreta como lista y el error incluye el contenido del destino. El script borra el log al terminar, así que conviene seguirlo con `tail -f` desde otra sesión.
+
+```bash
+touch @0xdf
+ln -fs /root/root.txt 0xdf
+# esperar la ejecución del cron y revisar el log antes de que se borre
+```
+
+La misma idea funciona si el script comprime un directorio completo con `*` y el atacante puede crear archivos allí. La clave está en que `@` se procesa incluso después de `--`.
+
 ## Referencias
 
 - [HackTricks — 7z wildcard](https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/wildcards-spare-tricks.html)
 - [0xdf — Usage](https://0xdf.gitlab.io/2024/08/10/htb-usage.html)
 - [p7zip — command line](https://p7zip.sourceforge.net/)
+- [0xdf — CTF](https://0xdf.gitlab.io/2019/07/20/htb-ctf.html)
+- [7-Zip — command line](https://7-zip.org/)

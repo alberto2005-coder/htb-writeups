@@ -77,8 +77,10 @@ This index is generated from the repository's versioned writeups.
 | `linux/activemq-cve-2023-46604` | [activemq-cve-2023-46604](linux/activemq-cve-2023-46604.en.md) |
 | `linux/ajenti-ssh-weak-keys` | [ajenti-ssh-weak-keys](linux/ajenti-ssh-weak-keys.en.md) |
 | `linux/ansible-galaxy-command-injection` | [ansible-galaxy-command-injection](linux/ansible-galaxy-command-injection.en.md) |
+| `linux/apache-module-backdoor` | [apache-module-backdoor](linux/apache-module-backdoor.en.md) |
 | `linux/apache-ofbiz-cve-2023-49070` | [apache-ofbiz-cve-2023-49070](linux/apache-ofbiz-cve-2023-49070.en.md) |
 | `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.en.md) |
+| `linux/bash-unquoted-glob-leak` | [bash-unquoted-glob-leak](linux/bash-unquoted-glob-leak.en.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.en.md) |
 | `linux/calibre-symlink-write` | [calibre-symlink-write](linux/calibre-symlink-write.en.md) |
 | `linux/cap-dac-read-search` | [cap-dac-read-search](linux/cap-dac-read-search.en.md) |
@@ -86,6 +88,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/cgroup-release-agent-escape` | [cgroup-release-agent-escape](linux/cgroup-release-agent-escape.en.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.en.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.en.md) |
+| `linux/consul-service-registration-rce` | [consul-service-registration-rce](linux/consul-service-registration-rce.en.md) |
 | `linux/container-jail-cwd-escape` | [container-jail-cwd-escape](linux/container-jail-cwd-escape.en.md) |
 | `linux/crio-pinns-cve-2022-0811` | [crio-pinns-cve-2022-0811](linux/crio-pinns-cve-2022-0811.en.md) |
 | `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.en.md) |
@@ -150,6 +153,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/rbash-escape` | [rbash-escape](linux/rbash-escape.en.md) |
 | `linux/redis-authorized-keys-write` | [redis-authorized-keys-write](linux/redis-authorized-keys-write.en.md) |
 | `linux/restic-password-command` | [restic-password-command](linux/restic-password-command.en.md) |
+| `linux/run-parts-path-hijack` | [run-parts-path-hijack](linux/run-parts-path-hijack.en.md) |
 | `linux/runc-cve-2019-5736` | [runc-cve-2019-5736](linux/runc-cve-2019-5736.en.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.en.md) |
 | `linux/safeapache2ctl-bypass` | [safeapache2ctl-bypass](linux/safeapache2ctl-bypass.en.md) |
@@ -157,6 +161,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.en.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.en.md) |
 | `linux/snmp-write-rce` | [snmp-write-rce](linux/snmp-write-rce.en.md) |
+| `linux/squid-tftp-proxy-pivot` | [squid-tftp-proxy-pivot](linux/squid-tftp-proxy-pivot.en.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.en.md) |
 | `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.en.md) |
 | `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.en.md) |
@@ -168,6 +173,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.en.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
+| `linux/usbcreator-dbus-arbitrary-write` | [usbcreator-dbus-arbitrary-write](linux/usbcreator-dbus-arbitrary-write.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
 | `linux/wasm-go-run-privesc` | [wasm-go-run-privesc](linux/wasm-go-run-privesc.en.md) |
 | `linux/xdebug-dbgp-rce` | [xdebug-dbgp-rce](linux/xdebug-dbgp-rce.en.md) |
@@ -241,6 +247,7 @@ This index is generated from the repository's versioned writeups.
 | `web/gitea` | [gitea](web/gitea.en.md) |
 | `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.en.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.en.md) |
+| `web/gitpython-cve-2022-24439` | [gitpython-cve-2022-24439](web/gitpython-cve-2022-24439.en.md) |
 | `web/givewp-cve-2024-5932` | [givewp-cve-2024-5932](web/givewp-cve-2024-5932.en.md) |
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.en.md) |
 | `web/gopher-ssrf-smtp` | [gopher-ssrf-smtp](web/gopher-ssrf-smtp.en.md) |
@@ -265,6 +272,7 @@ This index is generated from the repository's versioned writeups.
 | `web/mass-assignment-role` | [mass-assignment-role](web/mass-assignment-role.en.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.en.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.en.md) |
+| `web/neo4j-apoc-command-injection` | [neo4j-apoc-command-injection](web/neo4j-apoc-command-injection.en.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.en.md) |
 | `web/nginx-off-by-slash` | [nginx-off-by-slash](web/nginx-off-by-slash.en.md) |
 | `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.en.md) |
@@ -291,7 +299,9 @@ This index is generated from the repository's versioned writeups.
 | `web/python-pickle-deserialization` | [python-pickle-deserialization](web/python-pickle-deserialization.en.md) |
 | `web/quic-http3-enumeration` | [quic-http3-enumeration](web/quic-http3-enumeration.en.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.en.md) |
+| `web/react2shell-rsc-rce` | [react2shell-rsc-rce](web/react2shell-rsc-rce.en.md) |
 | `web/reportlab-cve-2023-33733` | [reportlab-cve-2023-33733](web/reportlab-cve-2023-33733.en.md) |
+| `web/reverse-tabnabbing` | [reverse-tabnabbing](web/reverse-tabnabbing.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.en.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.en.md) |
@@ -339,6 +349,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/dpapi` | [dpapi](windows/dpapi.en.md) |
 | `windows/edge-dpapi-credential-extraction` | [edge-dpapi-credential-extraction](windows/edge-dpapi-credential-extraction.en.md) |
 | `windows/electron-updater-signature-bypass` | [electron-updater-signature-bypass](windows/electron-updater-signature-bypass.en.md) |
+| `windows/esc10-upn-mapping` | [esc10-upn-mapping](windows/esc10-upn-mapping.en.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.en.md) |
 | `windows/gitea-sqlite-hash-extraction` | [gitea-sqlite-hash-extraction](windows/gitea-sqlite-hash-extraction.en.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.en.md) |
@@ -352,6 +363,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.en.md) |
 | `windows/keepass` | [keepass](windows/keepass.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
+| `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.en.md) |
 | `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.en.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.en.md) |
 | `windows/mof-wmi-self-install` | [mof-wmi-self-install](windows/mof-wmi-self-install.en.md) |
@@ -361,6 +373,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/mssql-linked-server-pivot` | [mssql-linked-server-pivot](windows/mssql-linked-server-pivot.en.md) |
 | `windows/mssql-password-reuse` | [mssql-password-reuse](windows/mssql-password-reuse.en.md) |
 | `windows/mssql-pivot-laps` | [mssql-pivot-laps](windows/mssql-pivot-laps.en.md) |
+| `windows/mssql-silver-ticket` | [mssql-silver-ticket](windows/mssql-silver-ticket.en.md) |
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.en.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.en.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.en.md) |

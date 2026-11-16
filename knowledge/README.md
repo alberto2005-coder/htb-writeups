@@ -77,8 +77,10 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/activemq-cve-2023-46604` | [activemq-cve-2023-46604](linux/activemq-cve-2023-46604.md) |
 | `linux/ajenti-ssh-weak-keys` | [ajenti-ssh-weak-keys](linux/ajenti-ssh-weak-keys.md) |
 | `linux/ansible-galaxy-command-injection` | [ansible-galaxy-command-injection](linux/ansible-galaxy-command-injection.md) |
+| `linux/apache-module-backdoor` | [apache-module-backdoor](linux/apache-module-backdoor.md) |
 | `linux/apache-ofbiz-cve-2023-49070` | [apache-ofbiz-cve-2023-49070](linux/apache-ofbiz-cve-2023-49070.md) |
 | `linux/apt-proxy-package-poisoning` | [apt-proxy-package-poisoning](linux/apt-proxy-package-poisoning.md) |
+| `linux/bash-unquoted-glob-leak` | [bash-unquoted-glob-leak](linux/bash-unquoted-glob-leak.md) |
 | `linux/binfmt-misc` | [binfmt-misc](linux/binfmt-misc.md) |
 | `linux/calibre-symlink-write` | [calibre-symlink-write](linux/calibre-symlink-write.md) |
 | `linux/cap-dac-read-search` | [cap-dac-read-search](linux/cap-dac-read-search.md) |
@@ -86,6 +88,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/cgroup-release-agent-escape` | [cgroup-release-agent-escape](linux/cgroup-release-agent-escape.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.md) |
+| `linux/consul-service-registration-rce` | [consul-service-registration-rce](linux/consul-service-registration-rce.md) |
 | `linux/container-jail-cwd-escape` | [container-jail-cwd-escape](linux/container-jail-cwd-escape.md) |
 | `linux/crio-pinns-cve-2022-0811` | [crio-pinns-cve-2022-0811](linux/crio-pinns-cve-2022-0811.md) |
 | `linux/cron-backup-privesc` | [cron-backup-privesc](linux/cron-backup-privesc.md) |
@@ -150,6 +153,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/rbash-escape` | [rbash-escape](linux/rbash-escape.md) |
 | `linux/redis-authorized-keys-write` | [redis-authorized-keys-write](linux/redis-authorized-keys-write.md) |
 | `linux/restic-password-command` | [restic-password-command](linux/restic-password-command.md) |
+| `linux/run-parts-path-hijack` | [run-parts-path-hijack](linux/run-parts-path-hijack.md) |
 | `linux/runc-cve-2019-5736` | [runc-cve-2019-5736](linux/runc-cve-2019-5736.md) |
 | `linux/runc-cve-2024-21626` | [runc-cve-2024-21626](linux/runc-cve-2024-21626.md) |
 | `linux/safeapache2ctl-bypass` | [safeapache2ctl-bypass](linux/safeapache2ctl-bypass.md) |
@@ -157,6 +161,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.md) |
 | `linux/snmp-write-rce` | [snmp-write-rce](linux/snmp-write-rce.md) |
+| `linux/squid-tftp-proxy-pivot` | [squid-tftp-proxy-pivot](linux/squid-tftp-proxy-pivot.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.md) |
 | `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.md) |
 | `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.md) |
@@ -168,6 +173,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.md) |
+| `linux/usbcreator-dbus-arbitrary-write` | [usbcreator-dbus-arbitrary-write](linux/usbcreator-dbus-arbitrary-write.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.md) |
 | `linux/wasm-go-run-privesc` | [wasm-go-run-privesc](linux/wasm-go-run-privesc.md) |
 | `linux/xdebug-dbgp-rce` | [xdebug-dbgp-rce](linux/xdebug-dbgp-rce.md) |
@@ -241,6 +247,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/gitea` | [gitea](web/gitea.md) |
 | `web/gitlab-cve-2020-10977` | [gitlab-cve-2020-10977](web/gitlab-cve-2020-10977.md) |
 | `web/gitlab-webshell` | [gitlab-webshell](web/gitlab-webshell.md) |
+| `web/gitpython-cve-2022-24439` | [gitpython-cve-2022-24439](web/gitpython-cve-2022-24439.md) |
 | `web/givewp-cve-2024-5932` | [givewp-cve-2024-5932](web/givewp-cve-2024-5932.md) |
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.md) |
 | `web/gopher-ssrf-smtp` | [gopher-ssrf-smtp](web/gopher-ssrf-smtp.md) |
@@ -265,6 +272,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/mass-assignment-role` | [mass-assignment-role](web/mass-assignment-role.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.md) |
+| `web/neo4j-apoc-command-injection` | [neo4j-apoc-command-injection](web/neo4j-apoc-command-injection.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.md) |
 | `web/nginx-off-by-slash` | [nginx-off-by-slash](web/nginx-off-by-slash.md) |
 | `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.md) |
@@ -291,7 +299,9 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/python-pickle-deserialization` | [python-pickle-deserialization](web/python-pickle-deserialization.md) |
 | `web/quic-http3-enumeration` | [quic-http3-enumeration](web/quic-http3-enumeration.md) |
 | `web/rails-redis-deserialization` | [rails-redis-deserialization](web/rails-redis-deserialization.md) |
+| `web/react2shell-rsc-rce` | [react2shell-rsc-rce](web/react2shell-rsc-rce.md) |
 | `web/reportlab-cve-2023-33733` | [reportlab-cve-2023-33733](web/reportlab-cve-2023-33733.md) |
+| `web/reverse-tabnabbing` | [reverse-tabnabbing](web/reverse-tabnabbing.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.md) |
@@ -339,6 +349,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/dpapi` | [dpapi](windows/dpapi.md) |
 | `windows/edge-dpapi-credential-extraction` | [edge-dpapi-credential-extraction](windows/edge-dpapi-credential-extraction.md) |
 | `windows/electron-updater-signature-bypass` | [electron-updater-signature-bypass](windows/electron-updater-signature-bypass.md) |
+| `windows/esc10-upn-mapping` | [esc10-upn-mapping](windows/esc10-upn-mapping.md) |
 | `windows/follina-msdt` | [follina-msdt](windows/follina-msdt.md) |
 | `windows/gitea-sqlite-hash-extraction` | [gitea-sqlite-hash-extraction](windows/gitea-sqlite-hash-extraction.md) |
 | `windows/gmsa-read-key` | [gmsa-read-key](windows/gmsa-read-key.md) |
@@ -352,6 +363,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.md) |
 | `windows/keepass` | [keepass](windows/keepass.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
+| `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.md) |
 | `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.md) |
 | `windows/mof-wmi-self-install` | [mof-wmi-self-install](windows/mof-wmi-self-install.md) |
@@ -361,6 +373,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/mssql-linked-server-pivot` | [mssql-linked-server-pivot](windows/mssql-linked-server-pivot.md) |
 | `windows/mssql-password-reuse` | [mssql-password-reuse](windows/mssql-password-reuse.md) |
 | `windows/mssql-pivot-laps` | [mssql-pivot-laps](windows/mssql-pivot-laps.md) |
+| `windows/mssql-silver-ticket` | [mssql-silver-ticket](windows/mssql-silver-ticket.md) |
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.md) |
