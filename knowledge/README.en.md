@@ -104,6 +104,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.en.md) |
 | `linux/exiftool-cve-2021-22204` | [exiftool-cve-2021-22204](linux/exiftool-cve-2021-22204.en.md) |
 | `linux/exiftool-filename-injection` | [exiftool-filename-injection](linux/exiftool-filename-injection.en.md) |
+| `linux/exim-cve-2019-10149` | [exim-cve-2019-10149](linux/exim-cve-2019-10149.en.md) |
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.en.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.en.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.en.md) |
@@ -115,6 +116,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/initrd-credential-extraction` | [initrd-credential-extraction](linux/initrd-credential-extraction.en.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.en.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.en.md) |
+| `linux/jdwp-debug-rce` | [jdwp-debug-rce](linux/jdwp-debug-rce.en.md) |
 | `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.en.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.en.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.en.md) |
@@ -150,6 +152,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.en.md) |
 | `linux/python-path-hijack` | [python-path-hijack](linux/python-path-hijack.en.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.en.md) |
+| `linux/qpdf-attachment-file-read` | [qpdf-attachment-file-read](linux/qpdf-attachment-file-read.en.md) |
 | `linux/rbash-escape` | [rbash-escape](linux/rbash-escape.en.md) |
 | `linux/redis-authorized-keys-write` | [redis-authorized-keys-write](linux/redis-authorized-keys-write.en.md) |
 | `linux/restic-password-command` | [restic-password-command](linux/restic-password-command.en.md) |
@@ -172,10 +175,12 @@ This index is generated from the repository's versioned writeups.
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.en.md) |
 | `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.en.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.en.md) |
+| `linux/tty-pushback-tiocsti` | [tty-pushback-tiocsti](linux/tty-pushback-tiocsti.en.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.en.md) |
 | `linux/usbcreator-dbus-arbitrary-write` | [usbcreator-dbus-arbitrary-write](linux/usbcreator-dbus-arbitrary-write.en.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.en.md) |
 | `linux/wasm-go-run-privesc` | [wasm-go-run-privesc](linux/wasm-go-run-privesc.en.md) |
+| `linux/wget-cve-2016-4971` | [wget-cve-2016-4971](linux/wget-cve-2016-4971.en.md) |
 | `linux/xdebug-dbgp-rce` | [xdebug-dbgp-rce](linux/xdebug-dbgp-rce.en.md) |
 | `linux/zabbix-api-command-injection` | [zabbix-api-command-injection](linux/zabbix-api-command-injection.en.md) |
 | `linux/zip-symlink-cron-write` | [zip-symlink-cron-write](linux/zip-symlink-cron-write.en.md) |
@@ -192,6 +197,7 @@ This index is generated from the repository's versioned writeups.
 | `mobile/xamarin-analysis` | [xamarin-analysis](mobile/xamarin-analysis.en.md) |
 | `network/bgp-hijack` | [bgp-hijack](network/bgp-hijack.en.md) |
 | `network/grpc-protobuf-enumeration` | [grpc-protobuf-enumeration](network/grpc-protobuf-enumeration.en.md) |
+| `network/ike-aggressive-psk` | [ike-aggressive-psk](network/ike-aggressive-psk.en.md) |
 | `network/ssh-certificate-authority` | [ssh-certificate-authority](network/ssh-certificate-authority.en.md) |
 | `openbsd/authentication-bypass` | [authentication-bypass](openbsd/authentication-bypass.en.md) |
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.en.md) |
@@ -221,6 +227,7 @@ This index is generated from the repository's versioned writeups.
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.en.md) |
 | `web/adminer-ssrf` | [adminer-ssrf](web/adminer-ssrf.en.md) |
 | `web/angularjs-csti-csp-bypass` | [angularjs-csti-csp-bypass](web/angularjs-csti-csp-bypass.en.md) |
+| `web/apache-cxf-mtom-ssrf` | [apache-cxf-mtom-ssrf](web/apache-cxf-mtom-ssrf.en.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.en.md) |
 | `web/api-invite-command-injection` | [api-invite-command-injection](web/api-invite-command-injection.en.md) |
 | `web/bookstack-cve-2023-6199` | [bookstack-cve-2023-6199](web/bookstack-cve-2023-6199.en.md) |
@@ -261,6 +268,7 @@ This index is generated from the repository's versioned writeups.
 | `web/jackson-cve-2019-12384` | [jackson-cve-2019-12384](web/jackson-cve-2019-12384.en.md) |
 | `web/jenkins` | [jenkins](web/jenkins.en.md) |
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.en.md) |
+| `web/jpeg-metadata-xxe` | [jpeg-metadata-xxe](web/jpeg-metadata-xxe.en.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.en.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.en.md) |
 | `web/jwt-algorithm-confusion` | [jwt-algorithm-confusion](web/jwt-algorithm-confusion.en.md) |
@@ -304,6 +312,7 @@ This index is generated from the repository's versioned writeups.
 | `web/reverse-tabnabbing` | [reverse-tabnabbing](web/reverse-tabnabbing.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.en.md) |
+| `web/seeddms-cve-2019-12744` | [seeddms-cve-2019-12744](web/seeddms-cve-2019-12744.en.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.en.md) |
 | `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.en.md) |
 | `web/solidity-smart-contract-command-injection` | [solidity-smart-contract-command-injection](web/solidity-smart-contract-command-injection.en.md) |
@@ -313,9 +322,11 @@ This index is generated from the repository's versioned writeups.
 | `web/ssrf-redirect-bypass` | [ssrf-redirect-bypass](web/ssrf-redirect-bypass.en.md) |
 | `web/ssrf` | [ssrf](web/ssrf.en.md) |
 | `web/ssti` | [ssti](web/ssti.en.md) |
+| `web/unicode-normalization-path-traversal` | [unicode-normalization-path-traversal](web/unicode-normalization-path-traversal.en.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.en.md) |
 | `web/vm2-sandbox-escape` | [vm2-sandbox-escape](web/vm2-sandbox-escape.en.md) |
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.en.md) |
+| `web/wasm-buffer-overflow-xss` | [wasm-buffer-overflow-xss](web/wasm-buffer-overflow-xss.en.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.en.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.en.md) |
 | `web/wordpress-theme-webshell` | [wordpress-theme-webshell](web/wordpress-theme-webshell.en.md) |
@@ -339,6 +350,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/adidns-record-spoofing` | [adidns-record-spoofing](windows/adidns-record-spoofing.en.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.en.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.en.md) |
+| `windows/applocker-msbuild-bypass` | [applocker-msbuild-bypass](windows/applocker-msbuild-bypass.en.md) |
 | `windows/aspnet-viewstate-machinekey` | [aspnet-viewstate-machinekey](windows/aspnet-viewstate-machinekey.en.md) |
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.en.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.en.md) |
@@ -363,6 +375,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.en.md) |
 | `windows/keepass` | [keepass](windows/keepass.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
+| `windows/library-ms-ntlm-leak` | [library-ms-ntlm-leak](windows/library-ms-ntlm-leak.en.md) |
 | `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.en.md) |
 | `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.en.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.en.md) |

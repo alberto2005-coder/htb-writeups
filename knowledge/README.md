@@ -104,6 +104,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.md) |
 | `linux/exiftool-cve-2021-22204` | [exiftool-cve-2021-22204](linux/exiftool-cve-2021-22204.md) |
 | `linux/exiftool-filename-injection` | [exiftool-filename-injection](linux/exiftool-filename-injection.md) |
+| `linux/exim-cve-2019-10149` | [exim-cve-2019-10149](linux/exim-cve-2019-10149.md) |
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.md) |
@@ -115,6 +116,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/initrd-credential-extraction` | [initrd-credential-extraction](linux/initrd-credential-extraction.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.md) |
+| `linux/jdwp-debug-rce` | [jdwp-debug-rce](linux/jdwp-debug-rce.md) |
 | `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
@@ -150,6 +152,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/python-eval-injection` | [python-eval-injection](linux/python-eval-injection.md) |
 | `linux/python-path-hijack` | [python-path-hijack](linux/python-path-hijack.md) |
 | `linux/python-path-join-upload` | [python-path-join-upload](linux/python-path-join-upload.md) |
+| `linux/qpdf-attachment-file-read` | [qpdf-attachment-file-read](linux/qpdf-attachment-file-read.md) |
 | `linux/rbash-escape` | [rbash-escape](linux/rbash-escape.md) |
 | `linux/redis-authorized-keys-write` | [redis-authorized-keys-write](linux/redis-authorized-keys-write.md) |
 | `linux/restic-password-command` | [restic-password-command](linux/restic-password-command.md) |
@@ -172,10 +175,12 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/tensorflow-lambda-deserialization` | [tensorflow-lambda-deserialization](linux/tensorflow-lambda-deserialization.md) |
 | `linux/tmp-race-shadow-read` | [tmp-race-shadow-read](linux/tmp-race-shadow-read.md) |
 | `linux/tomcat-session-deserialization` | [tomcat-session-deserialization](linux/tomcat-session-deserialization.md) |
+| `linux/tty-pushback-tiocsti` | [tty-pushback-tiocsti](linux/tty-pushback-tiocsti.md) |
 | `linux/unrealircd-backdoor` | [unrealircd-backdoor](linux/unrealircd-backdoor.md) |
 | `linux/usbcreator-dbus-arbitrary-write` | [usbcreator-dbus-arbitrary-write](linux/usbcreator-dbus-arbitrary-write.md) |
 | `linux/vim-modeline-rce` | [vim-modeline-rce](linux/vim-modeline-rce.md) |
 | `linux/wasm-go-run-privesc` | [wasm-go-run-privesc](linux/wasm-go-run-privesc.md) |
+| `linux/wget-cve-2016-4971` | [wget-cve-2016-4971](linux/wget-cve-2016-4971.md) |
 | `linux/xdebug-dbgp-rce` | [xdebug-dbgp-rce](linux/xdebug-dbgp-rce.md) |
 | `linux/zabbix-api-command-injection` | [zabbix-api-command-injection](linux/zabbix-api-command-injection.md) |
 | `linux/zip-symlink-cron-write` | [zip-symlink-cron-write](linux/zip-symlink-cron-write.md) |
@@ -192,6 +197,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `mobile/xamarin-analysis` | [xamarin-analysis](mobile/xamarin-analysis.md) |
 | `network/bgp-hijack` | [bgp-hijack](network/bgp-hijack.md) |
 | `network/grpc-protobuf-enumeration` | [grpc-protobuf-enumeration](network/grpc-protobuf-enumeration.md) |
+| `network/ike-aggressive-psk` | [ike-aggressive-psk](network/ike-aggressive-psk.md) |
 | `network/ssh-certificate-authority` | [ssh-certificate-authority](network/ssh-certificate-authority.md) |
 | `openbsd/authentication-bypass` | [authentication-bypass](openbsd/authentication-bypass.md) |
 | `osint/phishing-infrastructure` | [phishing-infrastructure](osint/phishing-infrastructure.md) |
@@ -221,6 +227,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/actuator-heapdump` | [actuator-heapdump](web/actuator-heapdump.md) |
 | `web/adminer-ssrf` | [adminer-ssrf](web/adminer-ssrf.md) |
 | `web/angularjs-csti-csp-bypass` | [angularjs-csti-csp-bypass](web/angularjs-csti-csp-bypass.md) |
+| `web/apache-cxf-mtom-ssrf` | [apache-cxf-mtom-ssrf](web/apache-cxf-mtom-ssrf.md) |
 | `web/api-data-exposure` | [api-data-exposure](web/api-data-exposure.md) |
 | `web/api-invite-command-injection` | [api-invite-command-injection](web/api-invite-command-injection.md) |
 | `web/bookstack-cve-2023-6199` | [bookstack-cve-2023-6199](web/bookstack-cve-2023-6199.md) |
@@ -261,6 +268,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/jackson-cve-2019-12384` | [jackson-cve-2019-12384](web/jackson-cve-2019-12384.md) |
 | `web/jenkins` | [jenkins](web/jenkins.md) |
 | `web/joomla-cve-2023-23752` | [joomla-cve-2023-23752](web/joomla-cve-2023-23752.md) |
+| `web/jpeg-metadata-xxe` | [jpeg-metadata-xxe](web/jpeg-metadata-xxe.md) |
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.md) |
 | `web/jwt-algorithm-confusion` | [jwt-algorithm-confusion](web/jwt-algorithm-confusion.md) |
@@ -304,6 +312,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/reverse-tabnabbing` | [reverse-tabnabbing](web/reverse-tabnabbing.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.md) |
+| `web/seeddms-cve-2019-12744` | [seeddms-cve-2019-12744](web/seeddms-cve-2019-12744.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.md) |
 | `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.md) |
 | `web/solidity-smart-contract-command-injection` | [solidity-smart-contract-command-injection](web/solidity-smart-contract-command-injection.md) |
@@ -313,9 +322,11 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/ssrf-redirect-bypass` | [ssrf-redirect-bypass](web/ssrf-redirect-bypass.md) |
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
+| `web/unicode-normalization-path-traversal` | [unicode-normalization-path-traversal](web/unicode-normalization-path-traversal.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.md) |
 | `web/vm2-sandbox-escape` | [vm2-sandbox-escape](web/vm2-sandbox-escape.md) |
 | `web/waf-command-injection-bypass` | [waf-command-injection-bypass](web/waf-command-injection-bypass.md) |
+| `web/wasm-buffer-overflow-xss` | [wasm-buffer-overflow-xss](web/wasm-buffer-overflow-xss.md) |
 | `web/websocket-sqli` | [websocket-sqli](web/websocket-sqli.md) |
 | `web/wordpress-plugin-rfi` | [wordpress-plugin-rfi](web/wordpress-plugin-rfi.md) |
 | `web/wordpress-theme-webshell` | [wordpress-theme-webshell](web/wordpress-theme-webshell.md) |
@@ -339,6 +350,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adidns-record-spoofing` | [adidns-record-spoofing](windows/adidns-record-spoofing.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.md) |
+| `windows/applocker-msbuild-bypass` | [applocker-msbuild-bypass](windows/applocker-msbuild-bypass.md) |
 | `windows/aspnet-viewstate-machinekey` | [aspnet-viewstate-machinekey](windows/aspnet-viewstate-machinekey.md) |
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.md) |
@@ -363,6 +375,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.md) |
 | `windows/keepass` | [keepass](windows/keepass.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
+| `windows/library-ms-ntlm-leak` | [library-ms-ntlm-leak](windows/library-ms-ntlm-leak.md) |
 | `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.md) |
 | `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.md) |

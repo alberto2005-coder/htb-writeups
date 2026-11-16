@@ -16,6 +16,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/admirer` | [admirer](linux/admirer/README.md) |
 | `linux/admirertoo` | [admirertoo](linux/admirertoo/README.md) |
 | `linux/agile` | [agile](linux/agile/README.md) |
+| `linux/ai` | [ai](linux/ai/README.md) |
 | `linux/airtouch` | [airtouch](linux/airtouch/README.md) |
 | `linux/alert` | [alert](linux/alert/README.md) |
 | `linux/ambassador` | [ambassador](linux/ambassador/README.md) |
@@ -82,18 +83,22 @@ This index is generated from the repository's versioned writeups.
 | `linux/dab` | [dab](linux/dab/README.md) |
 | `linux/data` | [data](linux/data/README.md) |
 | `linux/delivery` | [delivery](linux/delivery/README.md) |
+| `linux/derailed` | [derailed](linux/derailed/README.md) |
+| `linux/devarea` | [devarea](linux/devarea/README.md) |
 | `linux/developer` | [developer](linux/developer/README.md) |
 | `linux/devoops` | [devoops](linux/devoops/README.md) |
 | `linux/devvortex` | [devvortex](linux/devvortex/README.md) |
 | `linux/doctor` | [doctor](linux/doctor/README.md) |
 | `linux/dog` | [dog](linux/dog/README.md) |
 | `linux/down` | [down](linux/down/README.md) |
+| `linux/download` | [download](linux/download/README.md) |
 | `linux/editor` | [editor](linux/editor/README.md) |
 | `linux/editorial` | [editorial](linux/editorial/README.md) |
 | `linux/environment` | [environment](linux/environment/README.md) |
 | `linux/era` | [era](linux/era/README.md) |
 | `linux/europa` | [europa](linux/europa/README.md) |
 | `linux/evilcups` | [evilcups](linux/evilcups/README.md) |
+| `linux/expressway` | [expressway](linux/expressway/README.md) |
 | `linux/extension` | [extension](linux/extension/README.md) |
 | `linux/facts` | [facts](linux/facts/README.md) |
 | `linux/faculty` | [faculty](linux/faculty/README.md) |
@@ -124,6 +129,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/helix` | [helix](linux/helix/README.md) |
 | `linux/holiday` | [holiday](linux/holiday/README.md) |
 | `linux/horizontall` | [horizontall](linux/horizontall/README.md) |
+| `linux/iclean` | [iclean](linux/iclean/README.md) |
 | `linux/intense` | [intense](linux/intense/README.md) |
 | `linux/intentions` | [intentions](linux/intentions/README.md) |
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
@@ -138,6 +144,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/keeper` | [keeper](linux/keeper/README.md) |
 | `linux/knife` | [knife](linux/knife/README.md) |
 | `linux/kobold` | [kobold](linux/kobold/README.md) |
+| `linux/kotarak` | [kotarak](linux/kotarak/README.md) |
 | `linux/laboratory` | [laboratory](linux/laboratory/README.md) |
 | `linux/lacasadepapel` | [lacasadepapel](linux/lacasadepapel/README.md) |
 | `linux/lame` | [lame](linux/lame/README.md) |
@@ -188,6 +195,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/pikaboo` | [pikaboo](linux/pikaboo/README.md) |
 | `linux/pikatwoo` | [pikatwoo](linux/pikatwoo/README.md) |
 | `linux/pilgrimage` | [pilgrimage](linux/pilgrimage/README.md) |
+| `linux/pit` | [pit](linux/pit/README.md) |
 | `linux/planning` | [planning](linux/planning/README.md) |
 | `linux/player` | [player](linux/player/README.md) |
 | `linux/pollution` | [pollution](linux/pollution/README.md) |
@@ -200,6 +208,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/reactor` | [reactor](linux/reactor/README.md) |
 | `linux/redcross` | [redcross](linux/redcross/README.md) |
 | `linux/reddish` | [reddish](linux/reddish/README.md) |
+| `linux/redpanda` | [redpanda](linux/redpanda/README.md) |
 | `linux/registry` | [registry](linux/registry/README.md) |
 | `linux/resource` | [resource](linux/resource/README.md) |
 | `linux/response` | [response](linux/response/README.md) |
@@ -208,6 +217,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/runner` | [runner](linux/runner/README.md) |
 | `linux/sandworm` | [sandworm](linux/sandworm/README.md) |
 | `linux/sau` | [sau](linux/sau/README.md) |
+| `linux/scavenger` | [scavenger](linux/scavenger/README.md) |
 | `linux/sea` | [sea](linux/sea/README.md) |
 | `linux/seal` | [seal](linux/seal/README.md) |
 | `linux/shared` | [shared](linux/shared/README.md) |
@@ -255,6 +265,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/unbalanced` | [unbalanced](linux/unbalanced/README.md) |
 | `linux/underpass` | [underpass](linux/underpass/README.md) |
 | `linux/undetected` | [undetected](linux/undetected/README.md) |
+| `linux/unicode` | [unicode](linux/unicode/README.md) |
 | `linux/unobtainium` | [unobtainium](linux/unobtainium/README.md) |
 | `linux/updown` | [updown](linux/updown/README.md) |
 | `linux/usage` | [usage](linux/usage/README.md) |
@@ -349,6 +360,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/escape` | [escape](windows/escape/README.md) |
 | `windows/escapetwo` | [escapetwo](windows/escapetwo/README.md) |
 | `windows/ethereal` | [ethereal](windows/ethereal/README.md) |
+| `windows/fighter` | [fighter](windows/fighter/README.md) |
 | `windows/flight` | [flight](windows/flight/README.md) |
 | `windows/fluffy` | [fluffy](windows/fluffy/README.md) |
 | `windows/forest` | [forest](windows/forest/README.md) |
@@ -380,6 +392,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/monitorsfour` | [monitorsfour](windows/monitorsfour/README.md) |
 | `windows/monteverde` | [monteverde](windows/monteverde/README.md) |
 | `windows/multimaster` | [multimaster](windows/multimaster/README.md) |
+| `windows/nanocorp` | [nanocorp](windows/nanocorp/README.md) |
 | `windows/nest` | [nest](windows/nest/README.md) |
 | `windows/netmon` | [netmon](windows/netmon/README.md) |
 | `windows/omni` | [omni](windows/omni/README.md) |
@@ -415,6 +428,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/silo` | [silo](windows/silo/README.md) |
 | `windows/sizzle` | [sizzle](windows/sizzle/README.md) |
 | `windows/sniper` | [sniper](windows/sniper/README.md) |
+| `windows/solarlab` | [solarlab](windows/solarlab/README.md) |
 | `windows/streamio` | [streamio](windows/streamio/README.md) |
 | `windows/support` | [support](windows/support/README.md) |
 | `windows/tally` | [tally](windows/tally/README.md) |
