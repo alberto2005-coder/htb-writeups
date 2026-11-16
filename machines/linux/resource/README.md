@@ -15,7 +15,7 @@ tags: [linux, web, phar, deserialization, ssh-certificates, har, bash, glob, pri
 
 ## TL;DR
 
-El centro de tickets permite adjuntar un ZIP y acceder a un archivo mediante un filtro PHAR, lo que ejecuta una webshell incluida en el ZIP. La base de datos y un `.har` filtran credenciales de `msainristil`; su home contiene la CA SSH antigua todavía confiada, con la que se firma una clave para root en el contenedor ITRC. En el host principal, la API de firma y un script con sudo permiten obtener principals y, mediante una comparación Bash sin comillas, filtrar la clave privada de la CA de IT y firmar una clave `root_user`.
+El centro de tickets permite adjuntar un ZIP y acceder a un archivo mediante un filtro PHAR, lo que ejecuta una webshell incluida en el ZIP. La base de datos y un `.har` filtran credenciales de `msainristil`; el contenedor ITRC contiene la CA SSH antigua todavía confiada, con la que se firma una clave para root. En el host principal, la API de firma y un script con sudo permiten obtener principals y, mediante una comparación Bash sin comillas, filtrar la clave privada de la CA de IT y firmar una clave `root_user`.
 
 ## Reconocimiento
 
@@ -38,10 +38,11 @@ Las credenciales de `msainristil` funcionan en el contenedor por SSH (22) y por 
 ```bash
 # PHAR en ticket
 curl 'http://itrc.ssg.htb/ticket.php?id=<ID>&page=phar://uploads/<HASH>.zip/shell'
-# firma local
-sudo /opt/sign_key.sh /dev/shm/file /etc/passwd <USER> <PRINCIPAL> 1
+# oráculo de comparación; /dev/shm/file contiene el candidato a CA
+sudo /opt/sign_key.sh /dev/shm/file /etc/passwd <USER> <USER> 1
 # certificado root
-ssh-keygen -s ca-it -z 223 -I <USER> -V -5m:forever -n root_user key.pub```
+ssh-keygen -s ca_it -z 223 -I <USER> -V -5m:forever -n root_user key.pub
+```
 
 ## Movimiento lateral
 
@@ -49,7 +50,7 @@ Como root del contenedor se lee `/home/zzinter/sign_key_api.sh`, que usa un toke
 
 ## Escalada de privilegios
 
-`zzinter` puede ejecutar `/opt/sign_key.sh` con sudo. El script compara `[[ $itca == $ca ]]` sin comillas; un archivo con wildcard hace que Bash expanda el patrón y la comparación tenga éxito solo si el prefijo coincide. Se fuerza carácter a carácter la clave privada de `ca-it`, se firma una clave con principal `root_user` y se entra como root en el host principal.
+`zzinter` puede ejecutar `/opt/sign_key.sh` con sudo. El script compara `[[ $itca == $ca ]]` sin comillas; un archivo con wildcard hace que Bash expanda el patrón y la comparación tenga éxito solo si el prefijo coincide. Se fuerza carácter a carácter la clave privada de `ca_it`, se firma una clave con principal `root_user` y se entra como root en el host principal.
 
 ## Evidencia
 

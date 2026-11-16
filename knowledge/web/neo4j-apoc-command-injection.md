@@ -29,6 +29,9 @@ Una extensión APOC personalizada puede exponer procedimientos que reciben una U
 ```bash
 unzip -l custom-apoc-extension.jar
 # descompilar la clase del procedimiento
+```
+
+```cypher
 CALL custom.getUrlStatusCode("neo4j.local; id; ") YIELD statusCode RETURN statusCode;
 ```
 

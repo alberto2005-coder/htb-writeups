@@ -61,4 +61,4 @@ sudo /opt/check.sh /dev/shm/file
 
 - [0xdf — Resource](https://0xdf.gitlab.io/2024/11/23/htb-resource.html)
 - [Bash — pattern matching](https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html)
-- [CWE-1333 — Inefficient pattern](https://cwe.mitre.org/data/definitions/1333.html)
+- [CWE-697 — Incorrect Comparison](https://cwe.mitre.org/data/definitions/697.html)

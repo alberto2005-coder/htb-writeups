@@ -41,7 +41,8 @@ The admin enters credentials in the fake login. Use them for `/admin` and Sentry
 # pickle cookie with the leaked SECRET_KEY
 python2 django_pickle.py '<CMD>'
 # Django hash crack
-hashcat -m 10000 karl.hash rockyou.txt```
+hashcat -m 10000 karl.hash rockyou.txt
+```
 
 ## Lateral movement
 

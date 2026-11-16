@@ -29,6 +29,9 @@ A custom APOC extension may expose procedures that take a URL and concatenate it
 ```bash
 unzip -l custom-apoc-extension.jar
 # decompile the procedure class
+```
+
+```cypher
 CALL custom.getUrlStatusCode("neo4j.local; id; ") YIELD statusCode RETURN statusCode;
 ```
 

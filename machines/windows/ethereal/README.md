@@ -33,7 +33,7 @@ Se monta la imagen FAT y se abre la base con el cliente Linux de PasswordBox. La
 
 ## Foothold
 
-El panel ejecuta `ping -n 2 <host>`; se inyecta con `&` y se confirma con `tcpdump`. PowerShell no está disponible, pero `nslookup` y `certutil` sí; se construye un shell por DNS para ejecutar comandos. Después se descubre OpenSSL en `C:\Program~2` y se usa un doble `s_client` con `cmd.exe` entre ambos para un shell interactivo.
+El panel ejecuta `ping -n 2 <host>`; se inyecta con `&` y se confirma con `tcpdump`. PowerShell no está disponible, pero `nslookup` y `certutil` sí; se construye un shell por DNS para ejecutar comandos. Después se descubre OpenSSL en `C:\Progra~2\OpenSS~1.0\bin\openssl.exe` y se usa un doble `s_client` con `cmd.exe` entre ambos para un shell interactivo.
 
 ```bash
 # inyección en el panel de ping
@@ -41,7 +41,8 @@ El panel ejecuta `ping -n 2 <host>`; se inyecta con `&` y se confirma con `tcpdu
 # LNK envenenado
 python LNKUp/generate.py --host localhost --type ntlm --out vs.lnk --execute 'cmd /c ...'
 # MSI firmado
-signtool sign /f MySPC.pfx /fd sha256 Ethereal.msi```
+signtool sign /f MySPC.pfx /fd sha256 Ethereal.msi
+```
 
 ## Movimiento lateral
 

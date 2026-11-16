@@ -15,7 +15,7 @@ tags: [linux, web, phar, deserialization, ssh-certificates, har, bash, glob, pri
 
 ## TL;DR
 
-The ticket center allows a ZIP attachment and accesses a file through a PHAR filter, executing a webshell inside the ZIP. The database and a `.har` leak `msainristil` credentials; his home contains the old SSH CA still trusted, used to sign a key for root in the ITRC container. On the main host, the signing API and a script run with sudo grant principals and, through an unquoted Bash comparison, leak IT's private CA key and sign a `root_user` certificate.
+The ticket center allows a ZIP attachment and accesses a file through a PHAR filter, executing a webshell inside the ZIP. The database and a `.har` leak `msainristil` credentials; the ITRC container holds the old SSH CA still trusted, used to sign a key for root. On the main host, the signing API and a script run with sudo grant principals and, through an unquoted Bash comparison, leak IT's private CA key and sign a `root_user` certificate.
 
 ## Recon
 
@@ -38,10 +38,11 @@ Create a ticket with a ZIP containing `shell.php`. The app checks existence with
 ```bash
 # PHAR in ticket
 curl 'http://itrc.ssg.htb/ticket.php?id=<ID>&page=phar://uploads/<HASH>.zip/shell'
-# local signing
-sudo /opt/sign_key.sh /dev/shm/file /etc/passwd <USER> <PRINCIPAL> 1
+# comparison oracle; /dev/shm/file holds the CA candidate
+sudo /opt/sign_key.sh /dev/shm/file /etc/passwd <USER> <USER> 1
 # root certificate
-ssh-keygen -s ca-it -z 223 -I <USER> -V -5m:forever -n root_user key.pub```
+ssh-keygen -s ca_it -z 223 -I <USER> -V -5m:forever -n root_user key.pub
+```
 
 ## Lateral movement
 
@@ -49,7 +50,7 @@ As root in the container, read `/home/zzinter/sign_key_api.sh`, which uses a tok
 
 ## Privilege escalation
 
-`zzinter` can run `/opt/sign_key.sh` with sudo. The script compares `[[ $itca == $ca ]]` unquoted; a file with a wildcard makes Bash expand the pattern and the comparison succeeds only if the prefix matches. Brute-force `ca-it`'s private key character by character, sign a key with the `root_user` principal and log in as root on the main host.
+`zzinter` can run `/opt/sign_key.sh` with sudo. The script compares `[[ $itca == $ca ]]` unquoted; a file with a wildcard makes Bash expand the pattern and the comparison succeeds only if the prefix matches. Brute-force `ca_it`'s private key character by character, sign a key with the `root_user` principal and log in as root on the main host.
 
 ## Evidence
 

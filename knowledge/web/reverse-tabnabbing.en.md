@@ -26,7 +26,7 @@ A link with `target="_blank"` and no `rel="noopener"` gives the opened page acce
 
 ## Commands
 
-```bash
+```html
 <script>
 window.opener.location = 'https://attacker.example/login';
 </script>

