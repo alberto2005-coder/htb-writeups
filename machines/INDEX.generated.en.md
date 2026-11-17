@@ -22,6 +22,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/ambassador` | [ambassador](linux/ambassador/README.md) |
 | `linux/analytics` | [analytics](linux/analytics/README.md) |
 | `linux/apocalyst` | [apocalyst](linux/apocalyst/README.md) |
+| `linux/aragog` | [aragog](linux/aragog/README.md) |
 | `linux/ariekei` | [ariekei](linux/ariekei/README.md) |
 | `linux/armageddon` | [armageddon](linux/armageddon/README.md) |
 | `linux/artificial` | [artificial](linux/artificial/README.md) |
@@ -86,12 +87,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/derailed` | [derailed](linux/derailed/README.md) |
 | `linux/devarea` | [devarea](linux/devarea/README.md) |
 | `linux/developer` | [developer](linux/developer/README.md) |
+| `linux/devhub` | [devhub](linux/devhub/README.md) |
 | `linux/devoops` | [devoops](linux/devoops/README.md) |
 | `linux/devvortex` | [devvortex](linux/devvortex/README.md) |
 | `linux/doctor` | [doctor](linux/doctor/README.md) |
 | `linux/dog` | [dog](linux/dog/README.md) |
 | `linux/down` | [down](linux/down/README.md) |
 | `linux/download` | [download](linux/download/README.md) |
+| `linux/drive` | [drive](linux/drive/README.md) |
+| `linux/dyplesher` | [dyplesher](linux/dyplesher/README.md) |
 | `linux/editor` | [editor](linux/editor/README.md) |
 | `linux/editorial` | [editorial](linux/editorial/README.md) |
 | `linux/environment` | [environment](linux/environment/README.md) |
@@ -124,12 +128,14 @@ This index is generated from the repository's versioned writeups.
 | `linux/hacknet` | [hacknet](linux/hacknet/README.md) |
 | `linux/haircut` | [haircut](linux/haircut/README.md) |
 | `linux/hawk` | [hawk](linux/hawk/README.md) |
+| `linux/haystack` | [haystack](linux/haystack/README.md) |
 | `linux/heal` | [heal](linux/heal/README.md) |
 | `linux/health` | [health](linux/health/README.md) |
 | `linux/helix` | [helix](linux/helix/README.md) |
 | `linux/holiday` | [holiday](linux/holiday/README.md) |
 | `linux/horizontall` | [horizontall](linux/horizontall/README.md) |
 | `linux/iclean` | [iclean](linux/iclean/README.md) |
+| `linux/imagery` | [imagery](linux/imagery/README.md) |
 | `linux/intense` | [intense](linux/intense/README.md) |
 | `linux/intentions` | [intentions](linux/intentions/README.md) |
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
@@ -148,6 +154,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/laboratory` | [laboratory](linux/laboratory/README.md) |
 | `linux/lacasadepapel` | [lacasadepapel](linux/lacasadepapel/README.md) |
 | `linux/lame` | [lame](linux/lame/README.md) |
+| `linux/lantern` | [lantern](linux/lantern/README.md) |
 | `linux/laser` | [laser](linux/laser/README.md) |
 | `linux/late` | [late](linux/late/README.md) |
 | `linux/lazy` | [lazy](linux/lazy/README.md) |
@@ -199,6 +206,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/planning` | [planning](linux/planning/README.md) |
 | `linux/player` | [player](linux/player/README.md) |
 | `linux/pollution` | [pollution](linux/pollution/README.md) |
+| `linux/popcorn` | [popcorn](linux/popcorn/README.md) |
 | `linux/postman` | [postman](linux/postman/README.md) |
 | `linux/precious` | [precious](linux/precious/README.md) |
 | `linux/previse` | [previse](linux/previse/README.md) |
@@ -215,11 +223,13 @@ This index is generated from the repository's versioned writeups.
 | `linux/retired` | [retired](linux/retired/README.md) |
 | `linux/rope` | [rope](linux/rope/README.md) |
 | `linux/runner` | [runner](linux/runner/README.md) |
+| `linux/safe` | [safe](linux/safe/README.md) |
 | `linux/sandworm` | [sandworm](linux/sandworm/README.md) |
 | `linux/sau` | [sau](linux/sau/README.md) |
 | `linux/scavenger` | [scavenger](linux/scavenger/README.md) |
 | `linux/sea` | [sea](linux/sea/README.md) |
 | `linux/seal` | [seal](linux/seal/README.md) |
+| `linux/seventeen` | [seventeen](linux/seventeen/README.md) |
 | `linux/shared` | [shared](linux/shared/README.md) |
 | `linux/shibboleth` | [shibboleth](linux/shibboleth/README.md) |
 | `linux/shocker` | [shocker](linux/shocker/README.md) |
@@ -274,6 +284,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/variatype` | [variatype](linux/variatype/README.md) |
 | `linux/vault` | [vault](linux/vault/README.md) |
 | `linux/vessel` | [vessel](linux/vessel/README.md) |
+| `linux/waldo` | [waldo](linux/waldo/README.md) |
 | `linux/whiterabbit` | [whiterabbit](linux/whiterabbit/README.md) |
 | `linux/wingdata` | [wingdata](linux/wingdata/README.md) |
 | `linux/writeup` | [writeup](linux/writeup/README.md) |
@@ -368,6 +379,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/fries` | [fries](windows/fries/README.md) |
 | `windows/fuse` | [fuse](windows/fuse/README.md) |
 | `windows/garfield` | [garfield](windows/garfield/README.md) |
+| `windows/ghost` | [ghost](windows/ghost/README.md) |
 | `windows/giddy` | [giddy](windows/giddy/README.md) |
 | `windows/grandpa` | [grandpa](windows/grandpa/README.md) |
 | `windows/granny` | [granny](windows/granny/README.md) |
@@ -393,6 +405,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/monteverde` | [monteverde](windows/monteverde/README.md) |
 | `windows/multimaster` | [multimaster](windows/multimaster/README.md) |
 | `windows/nanocorp` | [nanocorp](windows/nanocorp/README.md) |
+| `windows/napper` | [napper](windows/napper/README.md) |
 | `windows/nest` | [nest](windows/nest/README.md) |
 | `windows/netmon` | [netmon](windows/netmon/README.md) |
 | `windows/omni` | [omni](windows/omni/README.md) |
@@ -437,5 +450,6 @@ This index is generated from the repository's versioned writeups.
 | `windows/tombwatcher` | [tombwatcher](windows/tombwatcher/README.md) |
 | `windows/university` | [university](windows/university/README.md) |
 | `windows/vintage` | [vintage](windows/vintage/README.md) |
+| `windows/visual` | [visual](windows/visual/README.md) |
 | `windows/voleur` | [voleur](windows/voleur/README.md) |
 | `windows/worker` | [worker](windows/worker/README.md) |

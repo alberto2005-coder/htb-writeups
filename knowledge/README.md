@@ -95,6 +95,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/crontab-ui` | [crontab-ui](linux/crontab-ui.md) |
 | `linux/cups-foomatic-rip-injection` | [cups-foomatic-rip-injection](linux/cups-foomatic-rip-injection.md) |
 | `linux/daloradius-default-creds` | [daloradius-default-creds](linux/daloradius-default-creds.md) |
+| `linux/dirty-cow` | [dirty-cow](linux/dirty-cow.md) |
 | `linux/doas-privesc` | [doas-privesc](linux/doas-privesc.md) |
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.md) |
@@ -121,10 +122,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.md) |
+| `linux/kibana-cve-2018-17246` | [kibana-cve-2018-17246](linux/kibana-cve-2018-17246.md) |
 | `linux/latex-injection` | [latex-injection](linux/latex-injection.md) |
 | `linux/libreoffice-xxe` | [libreoffice-xxe](linux/libreoffice-xxe.md) |
 | `linux/login-script-append` | [login-script-append](linux/login-script-append.md) |
 | `linux/logrotate-race` | [logrotate-race](linux/logrotate-race.md) |
+| `linux/malicious-npm-module` | [malicious-npm-module](linux/malicious-npm-module.md) |
+| `linux/memcached-binary-auth` | [memcached-binary-auth](linux/memcached-binary-auth.md) |
 | `linux/memcached-enumeration` | [memcached-enumeration](linux/memcached-enumeration.md) |
 | `linux/memcached-php-injection` | [memcached-php-injection](linux/memcached-php-injection.md) |
 | `linux/mmap-cred-overwrite` | [mmap-cred-overwrite](linux/mmap-cred-overwrite.md) |
@@ -164,11 +168,13 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.md) |
 | `linux/snmp-write-rce` | [snmp-write-rce](linux/snmp-write-rce.md) |
+| `linux/sqlite-load-extension` | [sqlite-load-extension](linux/sqlite-load-extension.md) |
 | `linux/squid-tftp-proxy-pivot` | [squid-tftp-proxy-pivot](linux/squid-tftp-proxy-pivot.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.md) |
 | `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.md) |
 | `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.md) |
 | `linux/syslog-pgsql-sql-injection` | [syslog-pgsql-sql-injection](linux/syslog-pgsql-sql-injection.md) |
+| `linux/tac-capability-file-read` | [tac-capability-file-read](linux/tac-capability-file-read.md) |
 | `linux/tar-wildcard-injection` | [tar-wildcard-injection](linux/tar-wildcard-injection.md) |
 | `linux/tarfile-filter-bypass` | [tarfile-filter-bypass](linux/tarfile-filter-bypass.md) |
 | `linux/task-scheduler-hijack` | [task-scheduler-hijack](linux/task-scheduler-hijack.md) |
@@ -215,6 +221,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `pwn/partial-overwrite` | [partial-overwrite](pwn/partial-overwrite.md) |
 | `pwn/pwntools` | [pwntools](pwn/pwntools.md) |
 | `pwn/remote-format-string-service` | [remote-format-string-service](pwn/remote-format-string-service.md) |
+| `pwn/ret2libc-64bit` | [ret2libc-64bit](pwn/ret2libc-64bit.md) |
 | `pwn/rop-stack` | [rop-stack](pwn/rop-stack.md) |
 | `pwn/socket-reuse` | [socket-reuse](pwn/socket-reuse.md) |
 | `pwn/stack-variable-overwrite` | [stack-variable-overwrite](pwn/stack-variable-overwrite.md) |
@@ -278,6 +285,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/lfi-to-rce` | [lfi-to-rce](web/lfi-to-rce.md) |
 | `web/log4shell` | [log4shell](web/log4shell.md) |
 | `web/mass-assignment-role` | [mass-assignment-role](web/mass-assignment-role.md) |
+| `web/mcp-server-command-injection` | [mcp-server-command-injection](web/mcp-server-command-injection.md) |
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.md) |
 | `web/neo4j-apoc-command-injection` | [neo4j-apoc-command-injection](web/neo4j-apoc-command-injection.md) |
@@ -314,6 +322,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.md) |
 | `web/seeddms-cve-2019-12744` | [seeddms-cve-2019-12744](web/seeddms-cve-2019-12744.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.md) |
+| `web/skipper-proxy-ssrf` | [skipper-proxy-ssrf](web/skipper-proxy-ssrf.md) |
 | `web/snakeyaml-deserialization` | [snakeyaml-deserialization](web/snakeyaml-deserialization.md) |
 | `web/solidity-smart-contract-command-injection` | [solidity-smart-contract-command-injection](web/solidity-smart-contract-command-injection.md) |
 | `web/splunk-cve-2024-36991` | [splunk-cve-2024-36991](web/splunk-cve-2024-36991.md) |
@@ -322,6 +331,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/ssrf-redirect-bypass` | [ssrf-redirect-bypass](web/ssrf-redirect-bypass.md) |
 | `web/ssrf` | [ssrf](web/ssrf.md) |
 | `web/ssti` | [ssti](web/ssti.md) |
+| `web/stored-xss-admin-cookie` | [stored-xss-admin-cookie](web/stored-xss-admin-cookie.md) |
 | `web/unicode-normalization-path-traversal` | [unicode-normalization-path-traversal](web/unicode-normalization-path-traversal.md) |
 | `web/url-parser-differential` | [url-parser-differential](web/url-parser-differential.md) |
 | `web/vm2-sandbox-escape` | [vm2-sandbox-escape](web/vm2-sandbox-escape.md) |
@@ -347,6 +357,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/adcs-esc8` | [adcs-esc8](windows/adcs-esc8.md) |
 | `windows/adcs-esc9` | [adcs-esc9](windows/adcs-esc9.md) |
 | `windows/adcs-pkinit` | [adcs-pkinit](windows/adcs-pkinit.md) |
+| `windows/adfs-golden-saml` | [adfs-golden-saml](windows/adfs-golden-saml.md) |
 | `windows/adidns-record-spoofing` | [adidns-record-spoofing](windows/adidns-record-spoofing.md) |
 | `windows/alternate-data-streams` | [alternate-data-streams](windows/alternate-data-streams.md) |
 | `windows/alwaysinstallelevated` | [alwaysinstallelevated](windows/alwaysinstallelevated.md) |
@@ -387,6 +398,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/mssql-password-reuse` | [mssql-password-reuse](windows/mssql-password-reuse.md) |
 | `windows/mssql-pivot-laps` | [mssql-pivot-laps](windows/mssql-pivot-laps.md) |
 | `windows/mssql-silver-ticket` | [mssql-silver-ticket](windows/mssql-silver-ticket.md) |
+| `windows/naplistener-iis-backdoor` | [naplistener-iis-backdoor](windows/naplistener-iis-backdoor.md) |
 | `windows/ntds-extraction` | [ntds-extraction](windows/ntds-extraction.md) |
 | `windows/ntlm-authentication` | [ntlm-authentication](windows/ntlm-authentication.md) |
 | `windows/ntlm-relay` | [ntlm-relay](windows/ntlm-relay.md) |
@@ -416,6 +428,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/themebleed` | [themebleed](windows/themebleed.md) |
 | `windows/timeroasting` | [timeroasting](windows/timeroasting.md) |
 | `windows/upn-spoofing` | [upn-spoofing](windows/upn-spoofing.md) |
+| `windows/visual-studio-build-rce` | [visual-studio-build-rce](windows/visual-studio-build-rce.md) |
 | `windows/vscode-extension-privesc` | [vscode-extension-privesc](windows/vscode-extension-privesc.md) |
 | `windows/wcf-soap-command-injection` | [wcf-soap-command-injection](windows/wcf-soap-command-injection.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.md) |

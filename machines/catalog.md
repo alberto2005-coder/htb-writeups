@@ -25,6 +25,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Anubis | Windows | Insane | ASP, Jamovi, ADCS ESC y PKINIT | [Ver](../machines/windows/anubis/README.md) | [EN](../machines/windows/anubis/README.en.md) |
 | Apocalyst | Linux | Medium | WordPress, `cewl` y `steghide`, hydra, plugin PHP y `/etc/passwd` escribible | [Ver](../machines/linux/apocalyst/README.md) | [EN](../machines/linux/apocalyst/README.en.md) |
 | Apt | Windows | Insane | IPv6/RPC, backup `ntds.dit`, NTLMv1 y RoguePotato/relay | [Ver](../machines/windows/apt/README.md) | [EN](../machines/windows/apt/README.en.md) |
+| Aragog | Linux | Medium | FTP anónimo, XXE en `hosts.php`, clave SSH de `florian` y credenciales de WordPress hacia root | [Ver](../machines/linux/aragog/README.md) | [EN](../machines/linux/aragog/README.en.md) |
 | Arctic | Windows | Easy | ColdFusion 8 + FCKeditor, JuicyPotato | [Ver](../machines/windows/arctic/README.md) | [EN](../machines/windows/arctic/README.en.md) |
 | Ariekei | Linux | Insane | Shellshock en vhost, ImageTragick y Dockerfiles | [Ver](../machines/linux/ariekei/README.md) | [EN](../machines/linux/ariekei/README.en.md) |
 | Arkham | Windows | Medium | LUKS, JSF ViewState y deserialización Java | [Ver](../machines/windows/arkham/README.md) | [EN](../machines/windows/arkham/README.en.md) |
@@ -125,14 +126,17 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | DevArea | Linux | Medium | FTP anónimo, CXF MTOM SSRF y doble symlink con `syswatch` | [Ver](../machines/linux/devarea/README.md) | [EN](../machines/linux/devarea/README.en.md) |
 | Devel | Windows | Easy | FTP anónimo escribible sobre IIS, webshell ASPX, MS10-015 / `SeImpersonate` | [Ver](../machines/windows/devel/README.md) | [EN](../machines/windows/devel/README.en.md) |
 | Developer | Linux | Hard | Reverse tab-nabbing, Django pickle y binario privilegiado | [Ver](../machines/linux/developer/README.md) | [EN](../machines/linux/developer/README.en.md) |
+| DevHub | Linux | Medium | MCPJam 1.4.2 CVE-2026-23744, Jupyter con token y API OPSMCP como root | [Ver](../machines/linux/devhub/README.md) | [EN](../machines/linux/devhub/README.en.md) |
 | DevOops | Linux | Medium | XXE en la subida de XML y clave de root en el historial de git | [Ver](../machines/linux/devoops/README.md) | [EN](../machines/linux/devoops/README.en.md) |
 | Devvortex | Linux | Easy | API de Joomla CVE-2023-23752, plantilla PHP y `apport-cli` | [Ver](../machines/linux/devvortex/README.md) | [EN](../machines/linux/devvortex/README.en.md) |
 | Doctor | Linux | Easy | SSTI con Jinja2 en un vhost, Splunk 8.0.x | [Ver](../machines/linux/doctor/README.md) | [EN](../machines/linux/doctor/README.en.md) |
 | Dog | Linux | Easy | `.git` expuesto, módulo Backdrop y `bee eval` | [Ver](../machines/linux/dog/README.md) | [EN](../machines/linux/dog/README.en.md) |
 | Down | Linux | Easy | SSRF con `curl`/`file://`, inyección en `nc` y `pswm` | [Ver](../machines/linux/down/README.md) | [EN](../machines/linux/down/README.en.md) |
 | Download | Linux | Hard | Traversal con `%2f`, oráculo de hash, PostgreSQL y TIOCSTI | [Ver](../machines/linux/download/README.md) | [EN](../machines/linux/download/README.en.md) |
+| Drive | Linux | Hard | IDOR, Gitea, backups `.7z`, hashes Django y setuid `doodleGrive-cli` con SQLite `load_extension` | [Ver](../machines/linux/drive/README.md) | [EN](../machines/linux/drive/README.en.md) |
 | Driver | Windows | Easy | `.scf`/Responder, WinRM y PrintNightmare | [Ver](../machines/windows/driver/README.md) | [EN](../machines/windows/driver/README.en.md) |
 | Dropzone | Windows | Hard | TFTP sobre `C:\`, MOF en WMI y SYSTEM | [Ver](../machines/windows/dropzone/README.md) | [EN](../machines/windows/dropzone/README.en.md) |
+| Dyplesher | Linux | Insane | `.git` expuesto, memcached SASL binario, Gogs, plugin Bukkit y RabbitMQ | [Ver](../machines/linux/dyplesher/README.md) | [EN](../machines/linux/dyplesher/README.en.md) |
 | Editor | Linux | Medium | XWiki CVE-2025-24893 y NetData `ndsudo` | [Ver](../machines/linux/editor/README.md) | [EN](../machines/linux/editor/README.en.md) |
 | Editorial | Linux | Easy | SSRF, Git expuesto y GitPython CVE-2022-24439 | [Ver](../machines/linux/editorial/README.md) | [EN](../machines/linux/editorial/README.en.md) |
 | Eighteen | Windows | Hard | `IMPERSONATE`, Werkzeug, CVE-2025-53779 | [Ver](../machines/windows/eighteen/README.md) | [EN](../machines/windows/eighteen/README.en.md) |
@@ -172,6 +176,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Fuse | Windows | Medium | PaperCut, `cewl`/spray, RPC `svc-print`, WinRM y Capcom.sys | [Ver](../machines/windows/fuse/README.md) | [EN](../machines/windows/fuse/README.en.md) |
 | Garfield | Windows | Hard | RODC, ticket dorado con KeyList, secretsdump, pass-the-hash | [Ver](../machines/windows/garfield/README.md) | [EN](../machines/windows/garfield/README.en.md) |
 | Gavel | Linux | Medium | `.git`, inyección PDO, reglas PHP con runkit y `php.ini` | [Ver](../machines/linux/gavel/README.md) | [EN](../machines/linux/gavel/README.en.md) |
+| Ghost | Windows | Insane | LDAP injection, Gitea, command injection, NetNTLMv2, gMSA, Golden SAML y trust | [Ver](../machines/windows/ghost/README.md) | [EN](../machines/windows/ghost/README.en.md) |
 | Ghoul | Linux | Hard | ZipSlip, webshell, Gogs y SSH agent hijack | [Ver](../machines/linux/ghoul/README.md) | [EN](../machines/linux/ghoul/README.en.md) |
 | Giddy | Windows | Medium | SQLi en IIS, WinRM y UniFi Video como SYSTEM | [Ver](../machines/windows/giddy/README.md) | [EN](../machines/windows/giddy/README.en.md) |
 | Giveback | Linux | Medium | GiveWP CVE-2024-5932, PHP-CGI CVE-2024-4577 y runc CVE-2024-21626 | [Ver](../machines/linux/giveback/README.md) | [EN](../machines/linux/giveback/README.en.md) |
@@ -184,6 +189,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Haircut | Linux | Medium | Inyección de opciones en `curl` y `screen` CVE-2017-5618 | [Ver](../machines/linux/haircut/README.md) | [EN](../machines/linux/haircut/README.en.md) |
 | Hancliffe | Windows | Hard | URI parsing, SSTI en Nuxeo y buffer overflow con socket reuse | [Ver](../machines/windows/hancliffe/README.md) | [EN](../machines/windows/hancliffe/README.en.md) |
 | Hawk | Linux | Medium | FTP, OpenSSL, Drupal y H2 `CREATE ALIAS` | [Ver](../machines/linux/hawk/README.md) | [EN](../machines/linux/hawk/README.en.md) |
+| Haystack | Linux | Easy | Pista en imagen, Elasticsearch, Kibana CVE-2018-17246 y Logstash como root | [Ver](../machines/linux/haystack/README.md) | [EN](../machines/linux/haystack/README.en.md) |
 | Haze | Windows | Hard | Splunk CVE-2024-36991, gMSA y shadow credentials | [Ver](../machines/windows/haze/README.md) | [EN](../machines/windows/haze/README.en.md) |
 | Heal | Linux | Medium | Traversal, LimeSurvey y Consul | [Ver](../machines/linux/heal/README.md) | [EN](../machines/linux/heal/README.en.md) |
 | Health | Linux | Medium | Redirección SSRF, Gogs con SQLi y cron como root | [Ver](../machines/linux/health/README.md) | [EN](../machines/linux/health/README.en.md) |
@@ -194,6 +200,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Horizontall | Linux | Easy | Strapi CVE-2019-19609 y Laravel Ignition CVE-2021-3129 por túnel | [Ver](../machines/linux/horizontall/README.md) | [EN](../machines/linux/horizontall/README.en.md) |
 | Hospital | Windows | Medium | `.phar`, CVE-2023-35001, Ghostscript y XAMPP | [Ver](../machines/windows/hospital/README.md) | [EN](../machines/windows/hospital/README.en.md) |
 | IClean | Linux | Medium | XSS, SSTI de Jinja, crack de SHA-256 y `qpdf` con sudo | [Ver](../machines/linux/iclean/README.md) | [EN](../machines/linux/iclean/README.en.md) |
+| Imagery | Linux | Medium | XSS almacenado, traversal, command injection, backup pyAesCrypt y `charcol` | [Ver](../machines/linux/imagery/README.md) | [EN](../machines/linux/imagery/README.en.md) |
 | Intelligence | Windows | Medium | PDFs con metadatos, password spray, DNS `web*`, Responder, GMSA y RBCD | [Ver](../machines/windows/intelligence/README.md) | [EN](../machines/windows/intelligence/README.en.md) |
 | Intense | Linux | Hard | SQLi, extensión de hash, SNMP RW y ROP con canario | [Ver](../machines/linux/intense/README.md) | [EN](../machines/linux/intense/README.en.md) |
 | Intentions | Linux | Hard | SQLi de segundo orden, Imagick y `CAP_DAC_READ_SEARCH` | [Ver](../machines/linux/intentions/README.md) | [EN](../machines/linux/intentions/README.en.md) |
@@ -217,6 +224,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Laboratory | Linux | Easy | GitLab CVE-2020-10977 y PATH hijacking SUID | [Ver](../machines/linux/laboratory/README.md) | [EN](../machines/linux/laboratory/README.en.md) |
 | LaCasaDePapel | Linux | Easy | vsftpd con backdoor, certificado de cliente y Supervisor | [Ver](../machines/linux/lacasadepapel/README.md) | [EN](../machines/linux/lacasadepapel/README.en.md) |
 | Lame | Linux | Easy | Samba `usermap_script` (CVE-2007-2447) para root directo; `distcc` y `vsftpd` como alternativas | [Ver](../machines/linux/lame/README.md) | [EN](../machines/linux/lame/README.en.md) |
+| Lantern | Linux | Hard | Skipper SSRF CVE-2022-38580, SQLite, escritura arbitraria y DLL Razor | [Ver](../machines/linux/lantern/README.md) | [EN](../machines/linux/lantern/README.en.md) |
 | Laser | Linux | Insane | PRET/PJL, gRPC, Solr y MITM de `sshpass` | [Ver](../machines/linux/laser/README.md) | [EN](../machines/linux/laser/README.en.md) |
 | Late | Linux | Easy | SSTI en OCR y script de login escribible | [Ver](../machines/linux/late/README.md) | [EN](../machines/linux/late/README.en.md) |
 | Lazy | Linux | Medium | Padding oracle de cookie y SUID `backup` con PATH hijacking | [Ver](../machines/linux/lazy/README.md) | [EN](../machines/linux/lazy/README.en.md) |
@@ -248,6 +256,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Monteverde | Windows | Medium | LDAP anónimo, `azure.xml` y credenciales de Azure AD Connect | [Ver](../machines/windows/monteverde/README.md) | [EN](../machines/windows/monteverde/README.en.md) |
 | Multimaster | Windows | Insane | SQLi, CEF debug, GenericWrite/AS-REP y Server Operators | [Ver](../machines/windows/multimaster/README.md) | [EN](../machines/windows/multimaster/README.en.md) |
 | NanoCorp | Windows | Hard | `.library-ms`/NetNTLMv2, ACLs de AD y Checkmk CVE-2024-0670 | [Ver](../machines/windows/nanocorp/README.md) | [EN](../machines/windows/nanocorp/README.en.md) |
+| Napper | Windows | Hard | Blog con credenciales, NAPLISTENER, Elastic LAPS y `RunasCs --bypass-uac` | [Ver](../machines/windows/napper/README.md) | [EN](../machines/windows/napper/README.en.md) |
 | Nest | Windows | Easy | SMB invitado, `RU_config.xml`, descifrado VB, `c.smith`, ADS y `psexec` | [Ver](../machines/windows/nest/README.md) | [EN](../machines/windows/nest/README.en.md) |
 | Netmon | Windows | Easy | FTP anónimo, PRTG y CVE-2018-9276 | [Ver](../machines/windows/netmon/README.md) | [EN](../machines/windows/netmon/README.en.md) |
 | Networked | Linux | Easy | Backup con el código, doble extensión, cron inyectable y `sudo` sin comillas | [Ver](../machines/linux/networked/README.md) | [EN](../machines/linux/networked/README.en.md) |
@@ -294,6 +303,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Player | Linux | Hard | JWT con clave filtrada, ffmpeg AVI, lshell y cron de Codiad | [Ver](../machines/linux/player/README.md) | [EN](../machines/linux/player/README.en.md) |
 | Poison | FreeBSD | Medium | LFI en `browse.php`, base64 en `pwdbackup.txt`, VNC como root con `secret.zip` | [Ver](../machines/freebsd/poison/README.md) | [EN](../machines/freebsd/poison/README.en.md) |
 | Pollution | Linux | Hard | XXE, sesiones Redis, filter injection y prototype pollution | [Ver](../machines/linux/pollution/README.md) | [EN](../machines/linux/pollution/README.en.md) |
+| Popcorn | Linux | Medium | Bypass de subida, webshell PHP, PAM CVE-2010-0832 y Dirty COW | [Ver](../machines/linux/popcorn/README.md) | [EN](../machines/linux/popcorn/README.en.md) |
 | Postman | Linux | Easy | Redis sin auth, cracking SSH y Webmin CVE-2019-12840 | [Ver](../machines/linux/postman/README.md) | [EN](../machines/linux/postman/README.en.md) |
 | Pov | Windows | Medium | File read de `machineKey`, ViewState y `SeDebugPrivilege` | [Ver](../machines/windows/pov/README.md) | [EN](../machines/windows/pov/README.en.md) |
 | Precious | Linux | Easy | PDFKit SSRF, lectura de archivos y YAML con `sudo` | [Ver](../machines/linux/precious/README.md) | [EN](../machines/linux/precious/README.en.md) |
@@ -323,6 +333,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Rope | Linux | Insane | Format string remota, GOT overwrite y ROP con canary/PIE | [Ver](../machines/linux/rope/README.md) | [EN](../machines/linux/rope/README.en.md) |
 | Runner | Linux | Medium | TeamCity CVE-2023-42793, Portainer y runc CVE-2024-21626 | [Ver](../machines/linux/runner/README.md) | [EN](../machines/linux/runner/README.en.md) |
 | RustyKey | Windows | Hard | Timeroasting, extensión 7-Zip y RBCD | [Ver](../machines/windows/rustykey/README.md) | [EN](../machines/windows/rustykey/README.en.md) |
+| Safe | Linux | Easy | Buffer overflow/ROP x86-64, fuga de libc, KeePass y contraseña de root | [Ver](../machines/linux/safe/README.md) | [EN](../machines/linux/safe/README.en.md) |
 | Sandworm | Linux | Medium | SSTI, Firejail, crate Rust y CVE-2022-31214 | [Ver](../machines/linux/sandworm/README.md) | [EN](../machines/linux/sandworm/README.en.md) |
 | Sau | Linux | Easy | SSRF en Request Baskets hacia Maltrail y `sudo systemctl` con escape del pager | [Ver](../machines/linux/sau/README.md) | [EN](../machines/linux/sau/README.en.md) |
 | Sauna | Windows | Easy | AS-REP roasting, credenciales de autologon y DCSync | [Ver](../machines/windows/sauna/README.md) | [EN](../machines/windows/sauna/README.en.md) |
@@ -337,6 +348,7 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Sekhmet | Windows | Insane | Node.js deserialization, `bkcrack`, inyección LDAP y DPAPI | [Ver](../machines/windows/sekhmet/README.md) | [EN](../machines/windows/sekhmet/README.en.md) |
 | Sense | FreeBSD | Easy | pfSense 2.1.3 con credenciales por defecto y CVE-2014-4688 como root | [Ver](../machines/freebsd/sense/README.md) | [EN](../machines/freebsd/sense/README.en.md) |
 | Servmon | Windows | Easy | NVMS path traversal, NSClient++ y túnel SSH | [Ver](../machines/windows/servmon/README.md) | [EN](../machines/windows/servmon/README.en.md) |
+| Seventeen | Linux | Hard | SQLi booleana, SFMS, Roundcube CVE-2020-12640 y npm malicioso en Verdaccio | [Ver](../machines/linux/seventeen/README.md) | [EN](../machines/linux/seventeen/README.en.md) |
 | Shared | Linux | Medium | SQLi en cookie, IPython CVE-2022-21699 y Redis Lua | [Ver](../machines/linux/shared/README.md) | [EN](../machines/linux/shared/README.en.md) |
 | Sharp | Windows | Hard | PortableKanban, .NET Remoting y WCF | [Ver](../machines/windows/sharp/README.md) | [EN](../machines/windows/sharp/README.en.md) |
 | Shibboleth | Linux | Medium | IPMI RAKP, Zabbix y UDF de MariaDB | [Ver](../machines/linux/shibboleth/README.md) | [EN](../machines/linux/shibboleth/README.en.md) |
@@ -406,7 +418,9 @@ Fichas de máquinas que sirven para estudiar técnicas. La tabla principal reún
 | Vault | Linux | Medium | Upload PHP, OpenVPN, firewall por puerto origen y GPG | [Ver](../machines/linux/vault/README.md) | [EN](../machines/linux/vault/README.en.md) |
 | Vessel | Linux | Hard | `.git`, type confusion en mysqljs, OWA CVE-2022-24637 y `pinns` | [Ver](../machines/linux/vessel/README.md) | [EN](../machines/linux/vessel/README.en.md) |
 | Vintage | Windows | Hard | Pre-Windows 2000, GMSA, Kerberoast, DPAPI, RBCD y DCSync | [Ver](../machines/windows/vintage/README.md) | [EN](../machines/windows/vintage/README.en.md) |
+| Visual | Windows | Medium | Proyecto Visual Studio malicioso, webshell XAMPP, FullPowers y GodPotato | [Ver](../machines/windows/visual/README.md) | [EN](../machines/windows/visual/README.en.md) |
 | Voleur | Windows | Medium | Excel de accesos, Kerberoast dirigido con `WriteSPN` y tombstone | [Ver](../machines/windows/voleur/README.md) | [EN](../machines/windows/voleur/README.en.md) |
+| Waldo | Linux | Medium | File read PHP, clave SSH, contenedor, escape de `rbash` y `tac` con capability | [Ver](../machines/linux/waldo/README.md) | [EN](../machines/linux/waldo/README.en.md) |
 | WhiteRabbit | Linux | Insane | Uptime Kuma, SQLi en n8n, restic y PRNG por timestamp | [Ver](../machines/linux/whiterabbit/README.md) | [EN](../machines/linux/whiterabbit/README.en.md) |
 | WingData | Linux | Easy | Wing FTP CVE-2025-47812 y `tarfile` CVE-2025-4517 | [Ver](../machines/linux/wingdata/README.md) | [EN](../machines/linux/wingdata/README.en.md) |
 | Worker | Windows | Medium | Historial SVN, Azure DevOps, webshell ASPX y pipeline `Setup` como SYSTEM | [Ver](../machines/windows/worker/README.md) | [EN](../machines/windows/worker/README.en.md) |
