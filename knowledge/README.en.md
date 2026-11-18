@@ -87,6 +87,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/cap-sys-module-escape` | [cap-sys-module-escape](linux/cap-sys-module-escape.en.md) |
 | `linux/cgroup-release-agent-escape` | [cgroup-release-agent-escape](linux/cgroup-release-agent-escape.en.md) |
 | `linux/chef-knife-privesc` | [chef-knife-privesc](linux/chef-knife-privesc.en.md) |
+| `linux/chown-wildcard-privesc` | [chown-wildcard-privesc](linux/chown-wildcard-privesc.en.md) |
 | `linux/chromedriver-session-hijack` | [chromedriver-session-hijack](linux/chromedriver-session-hijack.en.md) |
 | `linux/consul-service-registration-rce` | [consul-service-registration-rce](linux/consul-service-registration-rce.en.md) |
 | `linux/container-jail-cwd-escape` | [container-jail-cwd-escape](linux/container-jail-cwd-escape.en.md) |
@@ -100,6 +101,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/docker-layer-secret-recovery` | [docker-layer-secret-recovery](linux/docker-layer-secret-recovery.en.md) |
 | `linux/docker-privileged-escape` | [docker-privileged-escape](linux/docker-privileged-escape.en.md) |
 | `linux/docker-registry-enumeration` | [docker-registry-enumeration](linux/docker-registry-enumeration.en.md) |
+| `linux/dompdf-cve-2014-2383` | [dompdf-cve-2014-2383](linux/dompdf-cve-2014-2383.en.md) |
 | `linux/electron-ipc-rce` | [electron-ipc-rce](linux/electron-ipc-rce.en.md) |
 | `linux/erlang-ssh-cve-2025-32433` | [erlang-ssh-cve-2025-32433](linux/erlang-ssh-cve-2025-32433.en.md) |
 | `linux/ethereum-jsonrpc-blockchain` | [ethereum-jsonrpc-blockchain](linux/ethereum-jsonrpc-blockchain.en.md) |
@@ -113,12 +115,15 @@ This index is generated from the repository's versioned writeups.
 | `linux/hashcat-mask-attack` | [hashcat-mask-attack](linux/hashcat-mask-attack.en.md) |
 | `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.en.md) |
 | `linux/imagemagick-file-read` | [imagemagick-file-read](linux/imagemagick-file-read.en.md) |
+| `linux/influxdb-cve-2019-20933` | [influxdb-cve-2019-20933](linux/influxdb-cve-2019-20933.en.md) |
 | `linux/initctl-privesc` | [initctl-privesc](linux/initctl-privesc.en.md) |
 | `linux/initrd-credential-extraction` | [initrd-credential-extraction](linux/initrd-credential-extraction.en.md) |
 | `linux/ipmi-rakp-hash` | [ipmi-rakp-hash](linux/ipmi-rakp-hash.en.md) |
 | `linux/ipython-cve-2022-21699` | [ipython-cve-2022-21699](linux/ipython-cve-2022-21699.en.md) |
+| `linux/java-deserialization-ysoserial` | [java-deserialization-ysoserial](linux/java-deserialization-ysoserial.en.md) |
 | `linux/jdwp-debug-rce` | [jdwp-debug-rce](linux/jdwp-debug-rce.en.md) |
 | `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.en.md) |
+| `linux/keepass-ptrace` | [keepass-ptrace](linux/keepass-ptrace.en.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.en.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.en.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.en.md) |
@@ -134,6 +139,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/mmap-cred-overwrite` | [mmap-cred-overwrite](linux/mmap-cred-overwrite.en.md) |
 | `linux/mosh-server-privesc` | [mosh-server-privesc](linux/mosh-server-privesc.en.md) |
 | `linux/mpdf-file-read` | [mpdf-file-read](linux/mpdf-file-read.en.md) |
+| `linux/msfvenom-apk-cve-2020-7384` | [msfvenom-apk-cve-2020-7384](linux/msfvenom-apk-cve-2020-7384.en.md) |
 | `linux/nagios-xi-cve-2023-40931` | [nagios-xi-cve-2023-40931](linux/nagios-xi-cve-2023-40931.en.md) |
 | `linux/needrestart-privesc` | [needrestart-privesc](linux/needrestart-privesc.en.md) |
 | `linux/netdata-ndsudo` | [netdata-ndsudo](linux/netdata-ndsudo.en.md) |
@@ -240,6 +246,7 @@ This index is generated from the repository's versioned writeups.
 | `web/bookstack-cve-2023-6199` | [bookstack-cve-2023-6199](web/bookstack-cve-2023-6199.en.md) |
 | `web/cacti-cve-2022-46169` | [cacti-cve-2022-46169](web/cacti-cve-2022-46169.en.md) |
 | `web/cacti-cve-2024-25642` | [cacti-cve-2024-25642](web/cacti-cve-2024-25642.en.md) |
+| `web/centreon-cve-2019-13024` | [centreon-cve-2019-13024](web/centreon-cve-2019-13024.en.md) |
 | `web/client-side-source-disclosure` | [client-side-source-disclosure](web/client-side-source-disclosure.en.md) |
 | `web/cms-extension-upload-bypass` | [cms-extension-upload-bypass](web/cms-extension-upload-bypass.en.md) |
 | `web/command-injection` | [command-injection](web/command-injection.en.md) |
@@ -279,6 +286,7 @@ This index is generated from the repository's versioned writeups.
 | `web/jsf-viewstate-deserialization` | [jsf-viewstate-deserialization](web/jsf-viewstate-deserialization.en.md) |
 | `web/jwt-alg-none` | [jwt-alg-none](web/jwt-alg-none.en.md) |
 | `web/jwt-algorithm-confusion` | [jwt-algorithm-confusion](web/jwt-algorithm-confusion.en.md) |
+| `web/jwt-hmac-crack` | [jwt-hmac-crack](web/jwt-hmac-crack.en.md) |
 | `web/jwt-rsa-key-recovery` | [jwt-rsa-key-recovery](web/jwt-rsa-key-recovery.en.md) |
 | `web/laravel-env-injection` | [laravel-env-injection](web/laravel-env-injection.en.md) |
 | `web/laravel-ignition-rce` | [laravel-ignition-rce](web/laravel-ignition-rce.en.md) |
@@ -289,6 +297,7 @@ This index is generated from the repository's versioned writeups.
 | `web/metabase-cve-2023-38646` | [metabase-cve-2023-38646](web/metabase-cve-2023-38646.en.md) |
 | `web/moodle-plugin-rce` | [moodle-plugin-rce](web/moodle-plugin-rce.en.md) |
 | `web/neo4j-apoc-command-injection` | [neo4j-apoc-command-injection](web/neo4j-apoc-command-injection.en.md) |
+| `web/nextjs-cve-2025-29927` | [nextjs-cve-2025-29927](web/nextjs-cve-2025-29927.en.md) |
 | `web/nginx-alias-traversal` | [nginx-alias-traversal](web/nginx-alias-traversal.en.md) |
 | `web/nginx-off-by-slash` | [nginx-off-by-slash](web/nginx-off-by-slash.en.md) |
 | `web/nginx-redis-socket` | [nginx-redis-socket](web/nginx-redis-socket.en.md) |
@@ -320,6 +329,7 @@ This index is generated from the repository's versioned writeups.
 | `web/reverse-tabnabbing` | [reverse-tabnabbing](web/reverse-tabnabbing.en.md) |
 | `web/rocket-chat-cve-2019-17671` | [rocket-chat-cve-2019-17671](web/rocket-chat-cve-2019-17671.en.md) |
 | `web/roundcube-cve-2025-49113` | [roundcube-cve-2025-49113](web/roundcube-cve-2025-49113.en.md) |
+| `web/second-order-sqli` | [second-order-sqli](web/second-order-sqli.en.md) |
 | `web/seeddms-cve-2019-12744` | [seeddms-cve-2019-12744](web/seeddms-cve-2019-12744.en.md) |
 | `web/simple-git-command-injection` | [simple-git-command-injection](web/simple-git-command-injection.en.md) |
 | `web/skipper-proxy-ssrf` | [skipper-proxy-ssrf](web/skipper-proxy-ssrf.en.md) |
@@ -366,6 +376,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.en.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.en.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.en.md) |
+| `windows/diaghub-dll-sideload` | [diaghub-dll-sideload](windows/diaghub-dll-sideload.en.md) |
 | `windows/dns-responder-credential-capture` | [dns-responder-credential-capture](windows/dns-responder-credential-capture.en.md) |
 | `windows/dotnet-deserialization` | [dotnet-deserialization](windows/dotnet-deserialization.en.md) |
 | `windows/dotnet-remoting-wcf` | [dotnet-remoting-wcf](windows/dotnet-remoting-wcf.en.md) |
@@ -387,6 +398,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/keepass` | [keepass](windows/keepass.en.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.en.md) |
 | `windows/library-ms-ntlm-leak` | [library-ms-ntlm-leak](windows/library-ms-ntlm-leak.en.md) |
+| `windows/libreoffice-weblink-rce` | [libreoffice-weblink-rce](windows/libreoffice-weblink-rce.en.md) |
 | `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.en.md) |
 | `windows/manageengine-servicedesk-xxe` | [manageengine-servicedesk-xxe](windows/manageengine-servicedesk-xxe.en.md) |
 | `windows/minecraft-rcon` | [minecraft-rcon](windows/minecraft-rcon.en.md) |
@@ -408,6 +420,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/owa-password-spray` | [owa-password-spray](windows/owa-password-spray.en.md) |
 | `windows/pass-the-cert` | [pass-the-cert](windows/pass-the-cert.en.md) |
 | `windows/petitpotam-coercion` | [petitpotam-coercion](windows/petitpotam-coercion.en.md) |
+| `windows/powershell-web-access` | [powershell-web-access](windows/powershell-web-access.en.md) |
 | `windows/pre-windows-2000-machine-password` | [pre-windows-2000-machine-password](windows/pre-windows-2000-machine-password.en.md) |
 | `windows/printnightmare` | [printnightmare](windows/printnightmare.en.md) |
 | `windows/privesc-windows` | [privesc-windows](windows/privesc-windows.en.md) |
