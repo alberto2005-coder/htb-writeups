@@ -39,3 +39,6 @@ b088f80294a3ef1780867ec12e6028e77ac3f421:challenges/Illumination/README.md:gener
 # Lote 39: placeholders verificados en los comandos curl de OpenPLC.
 1e781c113dc1216d709f62030c7025c10bd8f09f:knowledge/linux/openplc-cve-2021-31630.en.md:curl-auth-user:33
 1e781c113dc1216d709f62030c7025c10bd8f09f:knowledge/linux/openplc-cve-2021-31630.md:curl-auth-user:33
+# Lote 40: placeholder verificado en el comando curl de Eureka.
+f7367a8e333638bc53b336e7e7f14a494b5368e8:machines/linux/eureka/README.en.md:curl-auth-user:60
+f7367a8e333638bc53b336e7e7f14a494b5368e8:machines/linux/eureka/README.md:curl-auth-user:60
