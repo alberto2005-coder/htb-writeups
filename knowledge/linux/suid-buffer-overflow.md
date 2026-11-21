@@ -1,6 +1,6 @@
 ---
 topic: SUID — desbordamiento de buffer por etapas
-tags: [linux, suid, buffer-overflow, canary, aslr]
+tags: [linux, suid, buffer-overflow, canary, aslr, ret2libc, one-gadget, ellingson]
 ---
 
 # SUID — desbordamiento de buffer por etapas
@@ -41,6 +41,10 @@ id
 - ROP con `pop rdi; ret` para `system`.
 - Aprovechar un `gets` o `read` con tamaño incorrecto.
 
+## Caso real: Ellingson
+
+En Ellingson, el SUID `/usr/bin/garbage` pedía una contraseña y desbordaba la pila con una entrada larga. `checksec` mostraba Partial RELRO, sin canary, NX activo y sin PIE, con ASLR completo. La explotación se dividió en dos etapas: primero se usó la PLT para filtrar una dirección de libc, después se calculó la base y se envió un segundo payload con `system` o un `one_gadget`. El binario no tenía PIE, así que las direcciones del código eran fijas; la única aleatorización que había que romper era la de libc. Este caso es un buen ejemplo de que “sin canary” no significa “sin protección”: NX y ASLR obligan a construir un ROP y a filtrar direcciones antes de ejecutar.
+
 ## Limitaciones
 
 - El binario puede estar compilado con PIE y full RELRO.
@@ -61,6 +65,7 @@ id
 
 ## Referencias
 
+- [0xdf — Ellingson](https://0xdf.gitlab.io/2019/10/19/htb-ellingson.html)
 - [0xdf — Calamity](https://0xdf.gitlab.io/2020/08/27/htb-calamity.html)
 - [GDB — Debugging](https://sourceware.org/gdb/documentation/)
 - [CWE-121 — Stack-based Buffer Overflow](https://cwe.mitre.org/data/definitions/121.html)

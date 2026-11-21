@@ -1,6 +1,6 @@
 ---
 topic: SUID — staged buffer overflow
-tags: [linux, suid, buffer-overflow, canary, aslr]
+tags: [linux, suid, buffer-overflow, canary, aslr, ret2libc, one-gadget, ellingson]
 ---
 
 # SUID — staged buffer overflow
@@ -41,6 +41,10 @@ id
 - ROP with `pop rdi; ret` for `system`.
 - Abuse a `gets` or `read` with the wrong size.
 
+## Real case: Ellingson
+
+On Ellingson, the SUID `/usr/bin/garbage` asked for a password and overflowed the stack with long input. `checksec` showed Partial RELRO, no canary, NX enabled and no PIE, with full ASLR. Exploitation was split into two stages: the PLT leaked a libc address, then the base was computed and a second payload used `system` or a `one_gadget`. The binary had no PIE, so code addresses were fixed; the only randomization to defeat was libc's. This case shows that “no canary” does not mean “no protection”: NX and ASLR require a ROP chain and an address leak before execution.
+
 ## Limitations
 
 - The binary may use PIE and full RELRO.
@@ -61,6 +65,7 @@ id
 
 ## References
 
+- [0xdf — Ellingson](https://0xdf.gitlab.io/2019/10/19/htb-ellingson.html)
 - [0xdf — Calamity](https://0xdf.gitlab.io/2020/08/27/htb-calamity.html)
 - [GDB — Debugging](https://sourceware.org/gdb/documentation/)
 - [CWE-121 — Stack-based Buffer Overflow](https://cwe.mitre.org/data/definitions/121.html)

@@ -28,6 +28,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/artificial` | [artificial](linux/artificial/README.md) |
 | `linux/awkward` | [awkward](linux/awkward/README.md) |
 | `linux/backdoor` | [backdoor](linux/backdoor/README.md) |
+| `linux/backfire` | [backfire](linux/backfire/README.md) |
 | `linux/bank` | [bank](linux/bank/README.md) |
 | `linux/bashed` | [bashed](linux/bashed/README.md) |
 | `linux/beep` | [beep](linux/beep/README.md) |
@@ -101,6 +102,8 @@ This index is generated from the repository's versioned writeups.
 | `linux/earlyaccess` | [earlyaccess](linux/earlyaccess/README.md) |
 | `linux/editor` | [editor](linux/editor/README.md) |
 | `linux/editorial` | [editorial](linux/editorial/README.md) |
+| `linux/ellingson` | [ellingson](linux/ellingson/README.md) |
+| `linux/encoding` | [encoding](linux/encoding/README.md) |
 | `linux/environment` | [environment](linux/environment/README.md) |
 | `linux/era` | [era](linux/era/README.md) |
 | `linux/europa` | [europa](linux/europa/README.md) |
@@ -112,6 +115,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/falafel` | [falafel](linux/falafel/README.md) |
 | `linux/fatty` | [fatty](linux/fatty/README.md) |
 | `linux/feline` | [feline](linux/feline/README.md) |
+| `linux/fingerprint` | [fingerprint](linux/fingerprint/README.md) |
 | `linux/flujab` | [flujab](linux/flujab/README.md) |
 | `linux/fluxcapacitor` | [fluxcapacitor](linux/fluxcapacitor/README.md) |
 | `linux/forge` | [forge](linux/forge/README.md) |
@@ -137,11 +141,13 @@ This index is generated from the repository's versioned writeups.
 | `linux/heal` | [heal](linux/heal/README.md) |
 | `linux/health` | [health](linux/health/README.md) |
 | `linux/helix` | [helix](linux/helix/README.md) |
+| `linux/help` | [help](linux/help/README.md) |
 | `linux/holiday` | [holiday](linux/holiday/README.md) |
 | `linux/horizontall` | [horizontall](linux/horizontall/README.md) |
 | `linux/iclean` | [iclean](linux/iclean/README.md) |
 | `linux/imagery` | [imagery](linux/imagery/README.md) |
 | `linux/inception` | [inception](linux/inception/README.md) |
+| `linux/instant` | [instant](linux/instant/README.md) |
 | `linux/intense` | [intense](linux/intense/README.md) |
 | `linux/intentions` | [intentions](linux/intentions/README.md) |
 | `linux/interpreter` | [interpreter](linux/interpreter/README.md) |
@@ -176,6 +182,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/metatwo` | [metatwo](linux/metatwo/README.md) |
 | `linux/mirai` | [mirai](linux/mirai/README.md) |
 | `linux/mischief` | [mischief](linux/mischief/README.md) |
+| `linux/moderators` | [moderators](linux/moderators/README.md) |
 | `linux/monitored` | [monitored](linux/monitored/README.md) |
 | `linux/monitorsthree` | [monitorsthree](linux/monitorsthree/README.md) |
 | `linux/monitorstwo` | [monitorstwo](linux/monitorstwo/README.md) |
@@ -218,6 +225,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/precious` | [precious](linux/precious/README.md) |
 | `linux/previous` | [previous](linux/previous/README.md) |
 | `linux/previse` | [previse](linux/previse/README.md) |
+| `linux/principal` | [principal](linux/principal/README.md) |
 | `linux/pterodactyl` | [pterodactyl](linux/pterodactyl/README.md) |
 | `linux/quick` | [quick](linux/quick/README.md) |
 | `linux/rainyday` | [rainyday](linux/rainyday/README.md) |
@@ -238,6 +246,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/scriptkiddie` | [scriptkiddie](linux/scriptkiddie/README.md) |
 | `linux/sea` | [sea](linux/sea/README.md) |
 | `linux/seal` | [seal](linux/seal/README.md) |
+| `linux/secret` | [secret](linux/secret/README.md) |
 | `linux/seventeen` | [seventeen](linux/seventeen/README.md) |
 | `linux/shared` | [shared](linux/shared/README.md) |
 | `linux/shibboleth` | [shibboleth](linux/shibboleth/README.md) |
@@ -250,6 +259,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/smasher2` | [smasher2](linux/smasher2/README.md) |
 | `linux/sneaky` | [sneaky](linux/sneaky/README.md) |
 | `linux/sneakymailer` | [sneakymailer](linux/sneakymailer/README.md) |
+| `linux/snoopy` | [snoopy](linux/snoopy/README.md) |
 | `linux/soccer` | [soccer](linux/soccer/README.md) |
 | `linux/socket` | [socket](linux/socket/README.md) |
 | `linux/solidstate` | [solidstate](linux/solidstate/README.md) |
@@ -297,6 +307,7 @@ This index is generated from the repository's versioned writeups.
 | `linux/waldo` | [waldo](linux/waldo/README.md) |
 | `linux/wall` | [wall](linux/wall/README.md) |
 | `linux/whiterabbit` | [whiterabbit](linux/whiterabbit/README.md) |
+| `linux/wifinetictwo` | [wifinetictwo](linux/wifinetictwo/README.md) |
 | `linux/wingdata` | [wingdata](linux/wingdata/README.md) |
 | `linux/writeup` | [writeup](linux/writeup/README.md) |
 | `linux/yummy` | [yummy](linux/yummy/README.md) |
@@ -340,6 +351,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/acute` | [acute](windows/acute/README.md) |
 | `windows/administrator` | [administrator](windows/administrator/README.md) |
 | `windows/aero` | [aero](windows/aero/README.md) |
+| `windows/analysis` | [analysis](windows/analysis/README.md) |
 | `windows/anubis` | [anubis](windows/anubis/README.md) |
 | `windows/apt` | [apt](windows/apt/README.md) |
 | `windows/arctic` | [arctic](windows/arctic/README.md) |
@@ -397,6 +409,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/granny` | [granny](windows/granny/README.md) |
 | `windows/hackback` | [hackback](windows/hackback/README.md) |
 | `windows/hancliffe` | [hancliffe](windows/hancliffe/README.md) |
+| `windows/hathor` | [hathor](windows/hathor/README.md) |
 | `windows/haze` | [haze](windows/haze/README.md) |
 | `windows/heist` | [heist](windows/heist/README.md) |
 | `windows/helpline` | [helpline](windows/helpline/README.md) |
@@ -431,6 +444,7 @@ This index is generated from the repository's versioned writeups.
 | `windows/pirate` | [pirate](windows/pirate/README.md) |
 | `windows/pivotapi` | [pivotapi](windows/pivotapi/README.md) |
 | `windows/pov` | [pov](windows/pov/README.md) |
+| `windows/proper` | [proper](windows/proper/README.md) |
 | `windows/puppy` | [puppy](windows/puppy/README.md) |
 | `windows/querier` | [querier](windows/querier/README.md) |
 | `windows/rabbit` | [rabbit](windows/rabbit/README.md) |

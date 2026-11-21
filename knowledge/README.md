@@ -53,6 +53,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `forensics/rdp-bitmap-cache` | [rdp-bitmap-cache](forensics/rdp-bitmap-cache.md) |
 | `forensics/shellbags` | [shellbags](forensics/shellbags.md) |
 | `forensics/srum-ese` | [srum-ese](forensics/srum-ese.md) |
+| `forensics/virtualbox-vdi-luks` | [virtualbox-vdi-luks](forensics/virtualbox-vdi-luks.md) |
 | `forensics/volatility-memory` | [volatility-memory](forensics/volatility-memory.md) |
 | `forensics/windows-artifacts` | [windows-artifacts](forensics/windows-artifacts.md) |
 | `forensics/windows-triage` | [windows-triage](forensics/windows-triage.md) |
@@ -111,6 +112,8 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/fail2ban-privesc` | [fail2ban-privesc](linux/fail2ban-privesc.md) |
 | `linux/gdbserver-screen-root` | [gdbserver-screen-root](linux/gdbserver-screen-root.md) |
 | `linux/ghostscript-cve-2023-36664` | [ghostscript-cve-2023-36664](linux/ghostscript-cve-2023-36664.md) |
+| `linux/git-apply-cve-2023-23946` | [git-apply-cve-2023-23946](linux/git-apply-cve-2023-23946.md) |
+| `linux/git-hooks-privesc` | [git-hooks-privesc](linux/git-hooks-privesc.md) |
 | `linux/h2-database-alias-rce` | [h2-database-alias-rce](linux/h2-database-alias-rce.md) |
 | `linux/hashcat-mask-attack` | [hashcat-mask-attack](linux/hashcat-mask-attack.md) |
 | `linux/imagemagick-cve-2024-41817` | [imagemagick-cve-2024-41817](linux/imagemagick-cve-2024-41817.md) |
@@ -125,6 +128,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/jenkins-cli-file-read` | [jenkins-cli-file-read](linux/jenkins-cli-file-read.md) |
 | `linux/keepass-ptrace` | [keepass-ptrace](linux/keepass-ptrace.md) |
 | `linux/kerberos-keytab` | [kerberos-keytab](linux/kerberos-keytab.md) |
+| `linux/kernel-cve-2017-16995` | [kernel-cve-2017-16995](linux/kernel-cve-2017-16995.md) |
 | `linux/kernel-dirty-pipe` | [kernel-dirty-pipe](linux/kernel-dirty-pipe.md) |
 | `linux/kernel-nftables-privesc` | [kernel-nftables-privesc](linux/kernel-nftables-privesc.md) |
 | `linux/kibana-cve-2018-17246` | [kibana-cve-2018-17246](linux/kibana-cve-2018-17246.md) |
@@ -146,6 +150,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/nfs-no-root-squash` | [nfs-no-root-squash](linux/nfs-no-root-squash.md) |
 | `linux/node-sudo-privesc` | [node-sudo-privesc](linux/node-sudo-privesc.md) |
 | `linux/nss-postgresql-jail` | [nss-postgresql-jail](linux/nss-postgresql-jail.md) |
+| `linux/openplc-cve-2021-31630` | [openplc-cve-2021-31630](linux/openplc-cve-2021-31630.md) |
 | `linux/openssl-capabilities` | [openssl-capabilities](linux/openssl-capabilities.md) |
 | `linux/pam-timing-oracle` | [pam-timing-oracle](linux/pam-timing-oracle.md) |
 | `linux/perl-env-sudo` | [perl-env-sudo](linux/perl-env-sudo.md) |
@@ -174,9 +179,11 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `linux/snmp-community-credential-leak` | [snmp-community-credential-leak](linux/snmp-community-credential-leak.md) |
 | `linux/snmp-ipv6-discovery` | [snmp-ipv6-discovery](linux/snmp-ipv6-discovery.md) |
 | `linux/snmp-write-rce` | [snmp-write-rce](linux/snmp-write-rce.md) |
+| `linux/solarputty-credential-recovery` | [solarputty-credential-recovery](linux/solarputty-credential-recovery.md) |
 | `linux/sqlite-load-extension` | [sqlite-load-extension](linux/sqlite-load-extension.md) |
 | `linux/squid-tftp-proxy-pivot` | [squid-tftp-proxy-pivot](linux/squid-tftp-proxy-pivot.md) |
 | `linux/suid-buffer-overflow` | [suid-buffer-overflow](linux/suid-buffer-overflow.md) |
+| `linux/suid-fd-crashdump` | [suid-fd-crashdump](linux/suid-fd-crashdump.md) |
 | `linux/suid-path-hijack` | [suid-path-hijack](linux/suid-path-hijack.md) |
 | `linux/supervisor-config-directory-replace` | [supervisor-config-directory-replace](linux/supervisor-config-directory-replace.md) |
 | `linux/syslog-pgsql-sql-injection` | [syslog-pgsql-sql-injection](linux/syslog-pgsql-sql-injection.md) |
@@ -273,8 +280,10 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/gogs-symlink-rce` | [gogs-symlink-rce](web/gogs-symlink-rce.md) |
 | `web/gopher-ssrf-smtp` | [gopher-ssrf-smtp](web/gopher-ssrf-smtp.md) |
 | `web/grafana-exploitation` | [grafana-exploitation](web/grafana-exploitation.md) |
+| `web/havoc-ssrf-rce` | [havoc-ssrf-rce](web/havoc-ssrf-rce.md) |
 | `web/hmac-oracle-ssrf` | [hmac-oracle-ssrf](web/hmac-oracle-ssrf.md) |
 | `web/host-header-password-reset` | [host-header-password-reset](web/host-header-password-reset.md) |
+| `web/hql-injection` | [hql-injection](web/hql-injection.md) |
 | `web/http-basic-auth` | [http-basic-auth](web/http-basic-auth.md) |
 | `web/http2-request-smuggling` | [http2-request-smuggling](web/http2-request-smuggling.md) |
 | `web/idor` | [idor](web/idor.md) |
@@ -308,6 +317,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `web/nostromo-cve-2019-16278` | [nostromo-cve-2019-16278](web/nostromo-cve-2019-16278.md) |
 | `web/oauth-csrf-state` | [oauth-csrf-state](web/oauth-csrf-state.md) |
 | `web/openemr-auth-bypass-sqli` | [openemr-auth-bypass-sqli](web/openemr-auth-bypass-sqli.md) |
+| `web/pac4j-jwt-auth-bypass` | [pac4j-jwt-auth-bypass](web/pac4j-jwt-auth-bypass.md) |
 | `web/pdfkit-ssrf` | [pdfkit-ssrf](web/pdfkit-ssrf.md) |
 | `web/php-deserialization` | [php-deserialization](web/php-deserialization.md) |
 | `web/php-filter-injection` | [php-filter-injection](web/php-filter-injection.md) |
@@ -374,6 +384,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/applocker-msbuild-bypass` | [applocker-msbuild-bypass](windows/applocker-msbuild-bypass.md) |
 | `windows/aspnet-viewstate-machinekey` | [aspnet-viewstate-machinekey](windows/aspnet-viewstate-machinekey.md) |
 | `windows/azure-ad-connect-dump` | [azure-ad-connect-dump](windows/azure-ad-connect-dump.md) |
+| `windows/badpasswords-dcsync` | [badpasswords-dcsync](windows/badpasswords-dcsync.md) |
 | `windows/blazor-jwt-forgery` | [blazor-jwt-forgery](windows/blazor-jwt-forgery.md) |
 | `windows/bloodhound` | [bloodhound](windows/bloodhound.md) |
 | `windows/diaghub-dll-sideload` | [diaghub-dll-sideload](windows/diaghub-dll-sideload.md) |
@@ -397,6 +408,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/juicy-potato` | [juicy-potato](windows/juicy-potato.md) |
 | `windows/keepass` | [keepass](windows/keepass.md) |
 | `windows/kerberos-enum` | [kerberos-enum](windows/kerberos-enum.md) |
+| `windows/ldap-injection-ad` | [ldap-injection-ad](windows/ldap-injection-ad.md) |
 | `windows/library-ms-ntlm-leak` | [library-ms-ntlm-leak](windows/library-ms-ntlm-leak.md) |
 | `windows/libreoffice-weblink-rce` | [libreoffice-weblink-rce](windows/libreoffice-weblink-rce.md) |
 | `windows/lnk-msi-lateral-movement` | [lnk-msi-lateral-movement](windows/lnk-msi-lateral-movement.md) |
@@ -444,6 +456,7 @@ Este índice se genera a partir de las fichas versionadas del repositorio.
 | `windows/visual-studio-build-rce` | [visual-studio-build-rce](windows/visual-studio-build-rce.md) |
 | `windows/vscode-extension-privesc` | [vscode-extension-privesc](windows/vscode-extension-privesc.md) |
 | `windows/wcf-soap-command-injection` | [wcf-soap-command-injection](windows/wcf-soap-command-injection.md) |
+| `windows/wertrigger-privesc` | [wertrigger-privesc](windows/wertrigger-privesc.md) |
 | `windows/winrar-cve-2025-8088` | [winrar-cve-2025-8088](windows/winrar-cve-2025-8088.md) |
 | `windows/wmi-persistence` | [wmi-persistence](windows/wmi-persistence.md) |
 | `windows/wsus-abuse` | [wsus-abuse](windows/wsus-abuse.md) |
