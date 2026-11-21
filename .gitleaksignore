@@ -35,3 +35,7 @@ a7708bb3717f5d133efe569c30e561101568d3b2:machines/linux/craft/README.md:curl-aut
 b088f80294a3ef1780867ec12e6028e77ac3f421:challenges/Illumination/README.en.md:generic-api-key:52
 b088f80294a3ef1780867ec12e6028e77ac3f421:challenges/Illumination/README.md:generic-api-key:52
 47f8fd1b57ecbc665beae83f7e2cc76f1a5e64cd:sherlocks/interceptor/README.en.md:generic-api-key:47
+
+# Lote 39: placeholders verificados en los comandos curl de OpenPLC.
+1e781c113dc1216d709f62030c7025c10bd8f09f:knowledge/linux/openplc-cve-2021-31630.en.md:curl-auth-user:33
+1e781c113dc1216d709f62030c7025c10bd8f09f:knowledge/linux/openplc-cve-2021-31630.md:curl-auth-user:33
